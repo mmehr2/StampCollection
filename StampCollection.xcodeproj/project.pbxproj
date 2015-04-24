@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A60DBC711ADBC13600D4959D /* info.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC6F1ADBC13600D4959D /* info.csv */; };
+		A60DBC721ADBC13600D4959D /* inventory.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC701ADBC13600D4959D /* inventory.csv */; };
+		A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC731ADC36D600D4959D /* baitcfg.csv */; };
+		A60DBC771ADC463400D4959D /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBC761ADC463400D4959D /* ImportExport.swift */; };
+		A60DBCAA1ADEEA8F00D4959D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCA91ADEEA8F00D4959D /* Category.swift */; };
+		A60DBCAC1ADEEA9000D4959D /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCAB1ADEEA9000D4959D /* InventoryItem.swift */; };
+		A60DBCAE1ADEEA9000D4959D /* DealerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCAD1ADEEA9000D4959D /* DealerItem.swift */; };
+		A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */ = {isa = PBXBuildFile; fileRef = A60DBCAF1AE19C3B00D4959D /* getCategories.js */; };
+		A60DBCB21AE1A34E00D4959D /* BTCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCB11AE1A34E00D4959D /* BTCategory.swift */; };
+		A60DBCB41AE38AD900D4959D /* BTItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */; };
+		A60DBCB61AE38BDA00D4959D /* BTDealerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */; };
+		A60DBCB81AE38C3400D4959D /* getItems.js in Resources */ = {isa = PBXBuildFile; fileRef = A60DBCB71AE38C3400D4959D /* getItems.js */; };
+		A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115B1AE6DBB400063025 /* BTDealerStore.swift */; };
+		A61C115E1AE6F0F900063025 /* BTMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */; };
+		A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */; };
+		A61C11621AEA219B00063025 /* InfoItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */; };
 		A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */; };
 		A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */; };
 		A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */; };
@@ -14,6 +30,8 @@
 		A6E198521AD6EEEC0090FDB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E198511AD6EEEC0090FDB1 /* Images.xcassets */; };
 		A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */; };
 		A6E198611AD6EEEC0090FDB1 /* StampCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198601AD6EEEC0090FDB1 /* StampCollectionTests.swift */; };
+		A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E198741AD712630090FDB1 /* CHCSVParser.m */; };
+		A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +45,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A60DBC6F1ADBC13600D4959D /* info.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = info.csv; path = ../info.csv; sourceTree = "<group>"; };
+		A60DBC701ADBC13600D4959D /* inventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = inventory.csv; path = ../inventory.csv; sourceTree = "<group>"; };
+		A60DBC731ADC36D600D4959D /* baitcfg.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = baitcfg.csv; path = ../baitcfg.csv; sourceTree = "<group>"; };
+		A60DBC761ADC463400D4959D /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
+		A60DBCA91ADEEA8F00D4959D /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		A60DBCAB1ADEEA9000D4959D /* InventoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
+		A60DBCAD1ADEEA9000D4959D /* DealerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealerItem.swift; sourceTree = "<group>"; };
+		A60DBCAF1AE19C3B00D4959D /* getCategories.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getCategories.js; sourceTree = "<group>"; };
+		A60DBCB11AE1A34E00D4959D /* BTCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCategory.swift; sourceTree = "<group>"; };
+		A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemsTableViewController.swift; sourceTree = "<group>"; };
+		A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDealerItem.swift; sourceTree = "<group>"; };
+		A60DBCB71AE38C3400D4959D /* getItems.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getItems.js; sourceTree = "<group>"; };
+		A61C115B1AE6DBB400063025 /* BTDealerStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDealerStore.swift; sourceTree = "<group>"; };
+		A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTMessageDelegate.swift; sourceTree = "<group>"; };
+		A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemsTableViewController.swift; sourceTree = "<group>"; };
 		A6E198421AD6EEEC0090FDB1 /* StampCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E198461AD6EEEC0090FDB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +72,10 @@
 		A6E1985A1AD6EEEC0090FDB1 /* StampCollectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StampCollectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E1985F1AD6EEEC0090FDB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E198601AD6EEEC0090FDB1 /* StampCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampCollectionTests.swift; sourceTree = "<group>"; };
+		A6E198731AD712630090FDB1 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		A6E198741AD712630090FDB1 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StampCollection-Bridging-Header.h"; sourceTree = "<group>"; };
+		A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoParserDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +96,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A60DBC751ADC459E00D4959D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A61C115B1AE6DBB400063025 /* BTDealerStore.swift */,
+				A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */,
+				A60DBCB11AE1A34E00D4959D /* BTCategory.swift */,
+				A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */,
+				A60DBC761ADC463400D4959D /* ImportExport.swift */,
+				A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */,
+				A60DBCA91ADEEA8F00D4959D /* Category.swift */,
+				A60DBCAD1ADEEA9000D4959D /* DealerItem.swift */,
+				A60DBCAB1ADEEA9000D4959D /* InventoryItem.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A6E198391AD6EEEC0090FDB1 = {
 			isa = PBXGroup;
 			children = (
@@ -79,12 +133,16 @@
 		A6E198441AD6EEEC0090FDB1 /* StampCollection */ = {
 			isa = PBXGroup;
 			children = (
+				A6E1984E1AD6EEEC0090FDB1 /* Main.storyboard */,
 				A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */,
 				A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */,
-				A6E1984E1AD6EEEC0090FDB1 /* Main.storyboard */,
+				A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */,
+				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
+				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
 				A6E198511AD6EEEC0090FDB1 /* Images.xcassets */,
 				A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */,
 				A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */,
+				A60DBC751ADC459E00D4959D /* Model */,
 				A6E198451AD6EEEC0090FDB1 /* Supporting Files */,
 			);
 			path = StampCollection;
@@ -93,6 +151,14 @@
 		A6E198451AD6EEEC0090FDB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A60DBCB71AE38C3400D4959D /* getItems.js */,
+				A60DBCAF1AE19C3B00D4959D /* getCategories.js */,
+				A60DBC731ADC36D600D4959D /* baitcfg.csv */,
+				A60DBC6F1ADBC13600D4959D /* info.csv */,
+				A60DBC701ADBC13600D4959D /* inventory.csv */,
+				A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */,
+				A6E198731AD712630090FDB1 /* CHCSVParser.h */,
+				A6E198741AD712630090FDB1 /* CHCSVParser.m */,
 				A6E198461AD6EEEC0090FDB1 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -195,8 +261,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A60DBCB81AE38C3400D4959D /* getItems.js in Resources */,
+				A60DBC721ADBC13600D4959D /* inventory.csv in Resources */,
+				A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */,
 				A6E198501AD6EEEC0090FDB1 /* Main.storyboard in Resources */,
+				A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */,
 				A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */,
+				A60DBC711ADBC13600D4959D /* info.csv in Resources */,
 				A6E198521AD6EEEC0090FDB1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,9 +286,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A60DBCB41AE38AD900D4959D /* BTItemsTableViewController.swift in Sources */,
+				A60DBCB61AE38BDA00D4959D /* BTDealerItem.swift in Sources */,
+				A60DBC771ADC463400D4959D /* ImportExport.swift in Sources */,
+				A61C115E1AE6F0F900063025 /* BTMessageDelegate.swift in Sources */,
+				A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */,
 				A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */,
+				A60DBCAC1ADEEA9000D4959D /* InventoryItem.swift in Sources */,
 				A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */,
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
+				A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */,
+				A61C11621AEA219B00063025 /* InfoItemsTableViewController.swift in Sources */,
+				A60DBCB21AE1A34E00D4959D /* BTCategory.swift in Sources */,
+				A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */,
+				A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */,
+				A60DBCAE1ADEEA9000D4959D /* DealerItem.swift in Sources */,
+				A60DBCAA1ADEEA8F00D4959D /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +429,7 @@
 				INFOPLIST_FILE = StampCollection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mikemehr/Documents/Projects/StampCollection/StampCollection/StampCollection-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -355,6 +440,7 @@
 				INFOPLIST_FILE = StampCollection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mikemehr/Documents/Projects/StampCollection/StampCollection/StampCollection-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -411,6 +497,7 @@
 				A6E198661AD6EEEC0090FDB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6E198671AD6EEEC0090FDB1 /* Build configuration list for PBXNativeTarget "StampCollectionTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +506,7 @@
 				A6E198691AD6EEEC0090FDB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

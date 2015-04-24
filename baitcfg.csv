@@ -1,0 +1,33 @@
+Code,#,Name,Items,Catalogs,Prices
+*6110o,1,"Israel's On Sale",93,BCS,P
+6110s,2,"Sets, SS, FDC",1010,CS,PUFS
+6110b,3,Booklets,127,BCS,PF
+6110e0,3,"Booklets (var)",0,BCS,PF
+*ec,4,"Cancellations, Event",3037,*,P
+*mc,5,"Cancellations, Military Adm.",220,*,P
+*oc,6,"Cancellations, Post Offices",1188,*,P
+*sc,7,"Cancellations, Slogan",231,*,P
+*ce,8,"Covers, Cachets",2183,S,P
+6110x,9,"Exhibition Show Cards",38,C,PU
+*6110,10,"Forerunners (-1918)",0,*,P
+*6120,11,"Interim Period (Minhelet Ha'am)",11,BCS,P
+ILrc,12,"International Reply Coupons",18,B,PF
+6110j,13,"Joint Issues",36,CS,PF
+6110m,14,"Maximum Cards",30,*,P
+6110d,15,"Ministry of Defense Covers",61,*,P
+6110n,16,"New Year Greeting Cards",31,*,P
+*6110p,17,Packets,30,CS,P
+*6130,18,"Palestine Mandate",2,B,P
+6110pb,19,"Postal Bank Stamps",2,B,P
+ps,20,"Postal Stationery",359,BPS,PF
+6110r,21,"Revenue Stamps",21,BW,P
+6110h,22,"Souvenir Folders",83,*,P
+6110l,23,"Souvenir Leaves",120,CM,P
+6110e1,24,"Special Sheets-Sheetlets-Combination",226,BCSM,PF
+6110e2,25,"Varieties and Variants",108,BCS,PUFS
+6110k,26,"Vending Machine Labels",191,CB,P
+6110y,27,"Year Sets",72,CS,PUFS
+AU,28,"(X)Austria Judaica Tabs",100,*,PF
+fe,29,"(X)Information Folders",100,B,PF
+bu,30,"(X)Information Bulletins",100,B,PF
+6110t,31,"(X)Full Sheets",72,CS,PF

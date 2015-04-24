@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" representedClassName="PRODUCT_MODULE_NAME.Category" syncable="YES">
+        <attribute name="catalogs" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="items" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="prices" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DealerItem" representedClassName="PRODUCT_MODULE_NAME.DealerItem" syncable="YES">
+        <attribute name="buy1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buy2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buy3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buy4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pictid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pictype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="InventoryItem" representedClassName="PRODUCT_MODULE_NAME.InventoryItem" syncable="YES">
+        <attribute name="albumPage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumRef" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumSection" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="baseItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="refItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wantHave" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DealerItem" positionX="-326" positionY="0" width="128" height="358"/>
+        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="208"/>
+        <element name="Category" positionX="-155" positionY="27" width="128" height="133"/>
+    </elements>
 </model>

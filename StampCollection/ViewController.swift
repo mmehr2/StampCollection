@@ -7,19 +7,122 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController {
+// NOTE: WebKit project code from http://www.appcoda.com/webkit-framework-intro/
 
+class ViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var storeModel = BTDealerStore.model
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        title = "Dealer Categories"
+        // reload the BT categories page and continue to populate the data in the background
+        storeModel.loadStore(.Populate) {
+            self.tableView.reloadData()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+        // reload the BT categories page
+        storeModel.loadStore(.JustCategories) {
+            self.tableView.reloadData()
+        }
     }
-
-
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        // NOTE: add section 2 for judaicasales.com (Austria tabs)
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section.
+        return storeModel.categories.count
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("BT Category Cell", forIndexPath: indexPath) as! UITableViewCell
+        
+        // Configure the cell...
+        let category = storeModel.categories[indexPath.row]
+        cell.textLabel?.text = "\(category.number): \(category.name)"
+        cell.detailTextLabel?.text = "(\(category.items) items)"
+        cell.accessoryType = category.items != 0 ? .DisclosureIndicator : .None
+        
+        return cell
+    }
+ 
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "From site www.bait-tov.com"
+        }
+        if section == 1 {
+            return "From site www.judaicasales.com"
+        }
+        return nil
+    }
+    
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Return NO if you do not want the specified item to be editable.
+    return true
+    }
+    */
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            // then delete the row from the table view
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            // if the last visible item was deleted, also clear the editing state of the VC
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            // MLM - not supported at this time
+        }
+    }
+    
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    
+    }
+    */
+    
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Return NO if you do not want the item to be re-orderable.
+    return true
+    }
+    */
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        if segue.identifier == "Show BT Items Segue" {
+            if let dvc = segue.destinationViewController as? BTItemsTableViewController,
+                cell = sender as? UITableViewCell {
+                    // get row number of cell
+                    let indexPath = tableView.indexPathForCell(cell)!
+                    // set the destination category object accordingly
+                    dvc.categoryNumber = storeModel.categories[indexPath.row].number
+            }
+        }
+    }
 }
 
