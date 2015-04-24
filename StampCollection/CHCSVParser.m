@@ -610,6 +610,7 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
         NSMutableCharacterSet *illegalCharacters = [[NSCharacterSet newlineCharacterSet] mutableCopy];
         [illegalCharacters addCharactersInString:delimiterString];
         [illegalCharacters addCharactersInString:@"\""];
+        [illegalCharacters addCharactersInString:@" "]; // MLM-added 4/23/2015
         _illegalCharacters = [illegalCharacters copy];
         
         _firstLineKeys = [NSMutableArray array];
