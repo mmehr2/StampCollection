@@ -10,13 +10,18 @@ import UIKit
 
 class InfoCategoriesTableViewController: UITableViewController {
     
-    lazy var model = ImportExport()
+    lazy var csvFileImporter = ImportExport()
+    
+    var model = CollectionStore.sharedInstance
 
     @IBAction func doImportAction(sender: UIBarButtonItem) {
         // load the data from CSV files
         let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
-        model.importData(sourceType) {
-            // when done, update the UI
+        csvFileImporter.importData(sourceType) {
+            // when done, load the data, then update the UI
+            self.model.fetchAll() {
+                self.updateUI()
+            }
         }
     }
     
@@ -31,43 +36,44 @@ class InfoCategoriesTableViewController: UITableViewController {
         
         // load the data from CSV files
 //        let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
-//        model.importData(sourceType) {
+//        csvFileImporter.importData(sourceType) {
 //            // when done, write it back to other CSV files
-//            self.model.exportData(true) {
+//            self.csvFileImporter.exportData(true) {
 //                println("Completed write test. Time to update the UI!")
 //            }
 //        }
         title = "Info"
+        self.updateUI()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func updateUI() {
+        tableView.reloadData()
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return model.categories.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Info Category Cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
+        let row = indexPath.row
+        let category = model.categories[row]
+        cell.textLabel?.text = category.name
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -104,14 +110,18 @@ class InfoCategoriesTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "Show Info Items Segue" {
+            if let dvc = segue.destinationViewController as? InfoItemsTableViewController,
+                cell = sender as? UITableViewCell {
+                    // get row number of cell
+                    let indexPath = tableView.indexPathForCell(cell)!
+                    // set the destination category object accordingly
+                    //dvc.categoryNumber = storeModel.categories[indexPath.row].number
+            }
+        }
     }
-    */
 
 }

@@ -61,16 +61,13 @@ class Category: NSManagedObject {
     static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Category? {
         // add a new object of this type to the moc
         if let moc = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: moc) as? Category {
+            let entityName = "Category"
+            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? Category {
                 return Category.setDataValuesForObject(newObject, fromData: data)
             } else {
                 // report error creating object in CoreData MOC
                 println("Unable to make CoreData Category from data \(data)")
             }
-        } else {
-            // create the object without using CoreData
-            var newObject = Category()
-            return Category.setDataValuesForObject(newObject, fromData: data)
         }
         return nil
     }

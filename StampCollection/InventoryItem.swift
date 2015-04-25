@@ -70,16 +70,13 @@ class InventoryItem: NSManagedObject {
     static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> InventoryItem? {
         // add a new object of this type to the moc
         if let moc = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName("InventoryItem", inManagedObjectContext: moc) as? InventoryItem {
+            let entityName = "InventoryItem"
+            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? InventoryItem {
                 return InventoryItem.setDataValuesForObject(newObject, fromData: data)
             } else {
                 // report error creating object in CoreData MOC
                 println("Unable to make CoreData InventoryItem from data \(data)")
             }
-        } else {
-            // create the object without using CoreData
-            var newObject = InventoryItem()
-            return InventoryItem.setDataValuesForObject(newObject, fromData: data)
         }
         return nil
     }

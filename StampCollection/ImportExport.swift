@@ -11,7 +11,7 @@ import CoreData
 
 // This class manages the Import/Export process for data using CSV files from the PHP project.
 // NOTE: Sample files are included with the bundle (collection as of late 2014), but this should probably become able to take an arbitrary file triplet, such as from email attachments or AirDrop.
-// Persistence is provided by CoreData when variable persistentStoreCoordinator is set
+// Persistence is provided by CoreData when variable persistentStoreCoordinator is set (this is set by the AppDelegate if no errors occurred)
 //
 // The files are kept in the user's Documents directory. They are:
 //   CATEGORIES.CSV - the CSV version of my PHP project's tab-separated category summary
@@ -41,10 +41,15 @@ All this should be handled automatically when processing the local website files
 class ImportExport: InfoParseable {
     enum Source {
         case Bundle
-        // other cases may be added, such as AirDrop or EmailAttachment
+        // other cases may be added, such as:
+        //case AirDrop
+        //case EmailAttachment
     }
     
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator?
+//    private var persistentStoreCoordinator: NSPersistentStoreCoordinator? {
+//        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
+//        return ad.persistentStoreCoordinator
+//    }
     
     private var mocForThread : NSManagedObjectContext?
 
@@ -56,6 +61,58 @@ class ImportExport: InfoParseable {
 
     private var bundleCategoryURL: NSURL { return  bundleURL.URLByAppendingPathComponent("baitcfg.csv") }
     
+    lazy private var infoParser = InfoParserDelegate(namex: "INFO")
+    
+    lazy private var categoryParser = InfoParserDelegate(namex: "CATEGORY")
+    
+    lazy private var inventoryParser = InfoParserDelegate(namex: "INVENTORY")
+    
+    private var infoURL : NSURL {
+        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("info.csv")
+    }
+    
+    private var inventoryURL : NSURL {
+        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("inventory.csv")
+    }
+    
+    private var categoryURL : NSURL {
+        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("category.csv")
+    }
+
+    // MARK: - InfoParseable protocol implementation
+    internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String]) {
+        // OPTIONAL: create persistent data objects for the parsed info
+        if let mocForThread = mocForThread {
+            if parserDelegate === categoryParser {
+                Category.makeObjectFromData(data, inContext: mocForThread)
+            }
+            else if parserDelegate === infoParser {
+                DealerItem.makeObjectFromData(data, inContext: mocForThread)
+            }
+            else if parserDelegate === inventoryParser {
+                InventoryItem.makeObjectFromData(data, inContext: mocForThread)
+            }
+        }
+    }
+
+    // MARK: - file import front-end
+    private func prepareImportFromSource( source: Source ) -> Bool {
+        switch source {
+        case .Bundle:
+            return prepareImportFromBundle()
+//        case .AirDrop:
+//            return prepareImportFromAirDrop()
+//        case .EmailAttachment:
+//            return prepareImportFromEmailAttachment()
+        default: break
+        }
+    }
+
+    // MARK: - bundle file import front-end
+    // NOTE: copies files from bundle to user's Documents folder
     private func prepareImportFromBundle() -> Bool {
         // this does blocking (synchronous) parsing of the files
         // copy the default data files into the documents dirctory
@@ -87,56 +144,17 @@ class ImportExport: InfoParseable {
         }
         return categoryCopiedSuccessfully && infoCopiedSuccessfully && inventoryCopiedSuccessfully
     }
-    
-    private func prepareImportFromSource( source: Source ) -> Bool {
-        switch source {
-        case .Bundle:
-            return prepareImportFromBundle()
-        }
-    }
-    
-    lazy private var infoParser = InfoParserDelegate(namex: "INFO")
-    
-    lazy private var categoryParser = InfoParserDelegate(namex: "CATEGORY")
-    
-    lazy private var inventoryParser = InfoParserDelegate(namex: "INVENTORY")
-    
-    private var infoURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("info.csv")
-    }
-    
-    private var inventoryURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("inventory.csv")
-    }
-    
-    private var categoryURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("category.csv")
-    }
 
-    // MARK - InfoParseable protocol implementation
-    internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String]) {
-        // OPTIONAL: create persistent data objects for the parsed info
-        if let mocForThread = mocForThread {
-            if parserDelegate === categoryParser {
-                Category.makeObjectFromData(data, inContext: mocForThread)
-            }
-            else if parserDelegate === infoParser {
-                DealerItem.makeObjectFromData(data, inContext: mocForThread)
-            }
-            else if parserDelegate === inventoryParser {
-                InventoryItem.makeObjectFromData(data, inContext: mocForThread)
-            }
-        }
-    }
-
-    // MARK - data import
+    // MARK: - email attachment file import front-end (TBD)
+    
+    // MARK: - AirDrop file import front-end (TBD)
+    
+    // MARK: - data import
+    // NOTE: imports from CSV files in user's Documents folder
     private func loadData( parserDelegate: InfoParserDelegate, fromFile file: NSURL ) {
         // this does blocking (synchronous) parsing of the files
         if let basicParser = CHCSVParser(contentsOfCSVURL: file) {
-            //parserDelegate.dataSink = self
+            parserDelegate.dataSink = self
             basicParser.sanitizesFields = true
             basicParser.delegate = parserDelegate
             basicParser.parse()
@@ -150,15 +168,21 @@ class ImportExport: InfoParseable {
         // do this on a background thread
         NSOperationQueue().addOperationWithBlock({
             // create a ManagedObjectContext here for use by the thread's dataSink
-            if let psc = self.persistentStoreCoordinator {
-                self.mocForThread = NSManagedObjectContext()
-                self.mocForThread?.persistentStoreCoordinator = psc
+            var persistent = false
+            if let moc = CollectionStore.getContextForThread() {
+                // if there is a global PSC, we should be able to get this MOC for local thread-safe usage
+                self.mocForThread = moc
+                persistent = true
             }
             // this does blocking (synchronous) parsing of the files
             if self.prepareImportFromSource(sourceType) {
                 self.loadData(self.categoryParser, fromFile: self.categoryURL)
                 self.loadData(self.infoParser, fromFile: self.infoURL)
                 self.loadData(self.inventoryParser, fromFile: self.inventoryURL)
+                // save the data in CoreData too, if needed
+                if persistent {
+                    CollectionStore.saveContext(self.mocForThread!)
+                }
             }
             // run the completion block, if any, on the main queue
             if let completion = completion {
@@ -168,7 +192,8 @@ class ImportExport: InfoParseable {
         
     }
 
-    // MARK - data export
+    // MARK: - data export
+    // NOTE: exmports to CSV files in user's Documents folder
     private func writeData( data: [[String:String]], toCSVFile file: NSURL,
         withHeaders headers: [String] )
     {

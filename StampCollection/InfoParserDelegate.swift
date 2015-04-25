@@ -19,8 +19,8 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     private var currentRecordNumber = -1
     var fieldCount = 0
     var headers : [String] = []
-    typealias RecordType = [String:String]
-    private var currentRecord : RecordType = [:]
+    //typealias RecordType = [String:String]
+    private var currentRecord : [String:String] = [:]
     var records : [[String:String]] = []
     var dataSink : InfoParseable?
     
@@ -39,7 +39,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
 
     func parser(parser: CHCSVParser!, didBeginLine recordNumber: UInt) {
         currentRecordNumber = Int(recordNumber)
-        currentRecord = RecordType()
+        currentRecord = [:]
     }
     
     func parser(parser: CHCSVParser!, didReadField field: String!, atIndex fieldIndex: Int) {
@@ -49,7 +49,9 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         } else {
             // create the data object (dictionary) one field at a time
             let hname = headers[fieldIndex]
+            println("\(name)[\(currentRecordNumber)].\(hname) <= \(field)")
             currentRecord[hname] = field
+            currentRecord.updateValue(field, forKey: hname)
         }
     }
     
@@ -58,7 +60,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
             println("\(name) Headers: \(headers)")
         } else if !currentRecord.isEmpty {
             records.append(currentRecord)
-            //println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
+            println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
             if let dataSink = dataSink {
                 dataSink.parserDelegate(self, foundData: currentRecord)
             }

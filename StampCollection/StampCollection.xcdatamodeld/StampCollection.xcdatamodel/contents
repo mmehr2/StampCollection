@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Category" representedClassName="PRODUCT_MODULE_NAME.Category" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" representedClassName="StampCollection.Category" syncable="YES">
         <attribute name="catalogs" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="items" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,7 +8,7 @@
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="prices" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="DealerItem" representedClassName="PRODUCT_MODULE_NAME.DealerItem" syncable="YES">
+    <entity name="DealerItem" representedClassName="StampCollection.DealerItem" syncable="YES">
         <attribute name="buy1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buy2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buy3" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +31,7 @@
         <attribute name="price4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="InventoryItem" representedClassName="PRODUCT_MODULE_NAME.InventoryItem" syncable="YES">
+    <entity name="InventoryItem" representedClassName="StampCollection.InventoryItem" syncable="YES">
         <attribute name="albumPage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="albumRef" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="albumSection" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,8 +45,8 @@
         <attribute name="wantHave" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Category" positionX="-155" positionY="27" width="128" height="133"/>
         <element name="DealerItem" positionX="-326" positionY="0" width="128" height="358"/>
         <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="208"/>
-        <element name="Category" positionX="-155" positionY="27" width="128" height="133"/>
     </elements>
 </model>

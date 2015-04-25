@@ -76,16 +76,13 @@ class DealerItem: NSManagedObject {
     static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> DealerItem? {
         // add a new object of this type to the moc
         if let moc = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName("DealerItem", inManagedObjectContext: moc) as? DealerItem {
+            let entityName = "DealerItem"
+           if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? DealerItem {
                 return DealerItem.setDataValuesForObject(newObject, fromData: data)
             } else {
                 // report error creating object in CoreData MOC
                 println("Unable to make CoreData DealerItem from data \(data)")
             }
-        } else {
-            // create the object without using CoreData
-            var newObject = DealerItem()
-            return DealerItem.setDataValuesForObject(newObject, fromData: data)
         }
         return nil
     }
