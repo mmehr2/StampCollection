@@ -59,15 +59,7 @@ class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UI
         // Configure the cell...
         let item = category.dataItems[indexPath.row]
         cell.textLabel?.text = "\(item.descr)"
-        var text = "\(item.code)"
-        if item.catalog1 != "" {
-            text += " [" + item.catalog1
-            if item.catalog2 != "" {
-                text += ", " + item.catalog2
-            }
-            text += "]"
-        }
-        cell.detailTextLabel?.text = "\(text) - \(item.status): \(item.price1) \(item.price2) \(item.price3) \(item.price4)"
+        cell.detailTextLabel?.text = formatBTDetail(item)
         let useDisclosure = false
         cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
 

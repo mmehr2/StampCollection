@@ -49,7 +49,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         } else {
             // create the data object (dictionary) one field at a time
             let hname = headers[fieldIndex]
-            println("\(name)[\(currentRecordNumber)].\(hname) <= \(field)")
+            //println("\(name)[\(currentRecordNumber)].\(hname) <= \(field)")
             currentRecord[hname] = field
             currentRecord.updateValue(field, forKey: hname)
         }
@@ -60,7 +60,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
             println("\(name) Headers: \(headers)")
         } else if !currentRecord.isEmpty {
             records.append(currentRecord)
-            println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
+            //println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
             if let dataSink = dataSink {
                 dataSink.parserDelegate(self, foundData: currentRecord)
             }

@@ -19,9 +19,16 @@ class InfoCategoriesTableViewController: UITableViewController {
         let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
         csvFileImporter.importData(sourceType) {
             // when done, load the data, then update the UI
-            self.model.fetchAll() {
+            self.model.fetchType(.Categories, background: false) {
                 self.updateUI()
             }
+        }
+    }
+    
+    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+        let catcount = model.categories.count
+        model.fetchType(.Categories, background: false) {
+            self.updateUI()
         }
     }
     
@@ -30,6 +37,9 @@ class InfoCategoriesTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+
+        // make sure the toolbar is visible
+        self.navigationController?.toolbarHidden = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -42,7 +52,7 @@ class InfoCategoriesTableViewController: UITableViewController {
 //                println("Completed write test. Time to update the UI!")
 //            }
 //        }
-        title = "Info"
+        title = "Collection Categories"
         self.updateUI()
     }
 
@@ -118,8 +128,12 @@ class InfoCategoriesTableViewController: UITableViewController {
                 cell = sender as? UITableViewCell {
                     // get row number of cell
                     let indexPath = tableView.indexPathForCell(cell)!
+                    let row = indexPath.row
+                    let category = model.categories[row]
                     // set the destination category object accordingly
-                    //dvc.categoryNumber = storeModel.categories[indexPath.row].number
+                    let catnum = Int(category.number)
+                    dvc.category = catnum
+                    dvc.categoryItem = model.fetchCategory(catnum)
             }
         }
     }

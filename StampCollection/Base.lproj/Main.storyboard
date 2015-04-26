@@ -62,17 +62,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="4Nb-OZ-Y8n">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem title="Import" id="eUf-2W-JfK">
-                                    <connections>
-                                        <action selector="doImportAction:" destination="3nh-AM-MfK" id="Vf2-RA-fMr"/>
-                                    </connections>
-                                </barButtonItem>
-                            </items>
-                        </toolbar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Info Category Cell" textLabel="QNS-h2-CYc" detailTextLabel="rkB-Wi-lQ7" style="IBUITableViewCellStyleSubtitle" id="TNe-5y-OH1">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -103,7 +92,21 @@
                             <outlet property="delegate" destination="3nh-AM-MfK" id="Dim-f2-MDq"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Import" style="plain" id="eUf-2W-JfK">
+                            <connections>
+                                <action selector="doImportAction:" destination="3nh-AM-MfK" id="Vf2-RA-fMr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="kcu-kZ-qzz"/>
+                        <barButtonItem systemItem="refresh" id="1bD-TT-rQF">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="3nh-AM-MfK" id="CYM-lU-wYP"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Info" id="Eeq-dM-N4u"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PN4-jR-bOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -193,6 +196,21 @@
                             <outlet property="delegate" destination="ry2-wg-j4p" id="aif-Wh-hwf"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="1XE-UE-BR3"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NDB-4f-cmY"/>
+                        <barButtonItem systemItem="refresh" id="S7M-Yj-9qq">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="ry2-wg-j4p" id="bDV-FG-C2e"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0pU-oK-jgu"/>
+                        <barButtonItem title="Pic" id="WDP-Ae-5Vr">
+                            <connections>
+                                <action selector="picButtonPressed:" destination="ry2-wg-j4p" id="gQQ-RR-GYm"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrI-Fa-4Wy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

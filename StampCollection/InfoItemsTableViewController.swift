@@ -9,6 +9,13 @@
 import UIKit
 
 class InfoItemsTableViewController: UITableViewController {
+    
+    var model = CollectionStore.sharedInstance
+    
+    var category = CollectionStore.CategoryAll
+    var categoryItem : Category!
+    
+    var ftype : CollectionStore.FetchType = .Info
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,36 +25,66 @@ class InfoItemsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        model.fetchType(.Info, category: category) {
+//            self.refreshData()
+//            self.updateUI()
+//        }
+        updateUI() // prelim version
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+        model.fetchType(.Info, category: category, background: false) {
+            self.refreshData()
+            self.updateUI()
+        }
+    }
+    
+    @IBAction func picButtonPressed(sender: UIBarButtonItem) {
+        
+    }
+    
+    func refreshData() {
+        tableView.reloadData()
+    }
+    
+    func updateUI() {
+        let typename = "\(ftype)"
+        let num = model.info.count
+        let numcats = model.categories.count
+        var name = "All Categories"
+        if category != CollectionStore.CategoryAll {
+            //name = "Category \(categoryItem.name)"
+            name = "Category \(category) of \(numcats)"
+        }
+        title = typename + ":" + name + " - \(num) items"
     }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return model.info.count
     }
-
-    /*
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell", forIndexPath: indexPath) as! UITableViewCell
+        
         // Configure the cell...
-
+        let row = indexPath.row
+        let item = model.info[row]
+        cell.textLabel?.text = item.descriptionX
+        cell.detailTextLabel?.text = formatDealerDetail(item)
+        let useDisclosure = false
+        cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
