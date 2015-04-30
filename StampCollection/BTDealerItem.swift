@@ -27,13 +27,27 @@ class BTDealerItem: NSObject {
     var oldprice4 = ""
     var status = ""
     var picref = ""
+
+    func fixupJSItem() {
+        // synthesize a status field for JS data
+        let hasMint = (price1 != "N/A")
+        let hasFDC = (price2 != "N/A")
+        switch (hasMint, hasFDC) {
+        case (false, false): status = "Sold out"
+        case (true, false): status = "Mint only"
+        case (false, true): status = "FDC only"
+        case (true, true): status = "In stock"
+        default: status = "" // never occurs; stupid Swift compiler
+        }
+    }
     
     func createInfoItem(category: BTCategory) -> [String:String] {
         var output : [String:String] = [:]
+        let isJS = (code[0..<2] == "AUI")
         output["id"] = code
         output["descriptionX"] = descr
         output["status"] = status
-        output["pictype"] = "0" // always BT type
+        output["pictype"] = isJS ? "1" : "0" // 1 is JS type, 0 is BT
         output["pictid"] = picref // actually this needs to be processed to get only the ID code
         output["cat1"] = catalog1
         output["cat2"] = catalog2
@@ -43,7 +57,7 @@ class BTDealerItem: NSObject {
         // price columns for a category can be P, PU, PF, or PUFS; pick the appropriate one from the headers array
         var foundPF = find(category.headers, "PriceFDC") != nil
         var foundPS = find(category.headers, "PriceOther") != nil
-        if foundPF && !foundPS {
+        if foundPF && !foundPS && !isJS {
             // this is two-price situation with 2nd as FDC (needs some translation)
             output["price1"] = price1
             output["price2"] = price3
@@ -113,6 +127,25 @@ class BTDealerItem: NSObject {
         case "catalog1": return "Catalog1"
         case "descr": return "Description"
         case "code": return "ItemCode"
+            //        case "xxx": return "xxx"
+        default: return ""
+        }
+    }
+    
+    class func translatePropertyNameJS( pname: String ) -> String {
+        // HEADERS [Item#, Pic, Description, Mint, FDC]
+        switch pname {
+        case "Item#": return "code"
+        case "Description": return "descr"
+        case "Mint": return "price1"
+        case "FDC": return "price2"
+        case "Pic": return "picref"
+            
+        case "picref": return "Pic"
+        case "price2": return "FDC"
+        case "price1": return "Mint"
+         case "descr": return "Description"
+        case "code": return "Item#"
 //        case "xxx": return "xxx"
         default: return ""
         }

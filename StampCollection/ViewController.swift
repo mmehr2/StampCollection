@@ -17,6 +17,10 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make sure the toolbar is visible
+        self.navigationController?.toolbarHidden = false
+
         title = "Dealer Categories"
         // reload the BT categories page and continue to populate the data in the background
         storeModel.loadStore(.Populate) {
@@ -33,15 +37,23 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: - Table view data source
     
+    func getCategoryIndexForIndexPath( indexPath: NSIndexPath ) -> Int {
+        if indexPath.section == 1 {
+            return -1
+        } else {
+            return indexPath.row
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         // NOTE: add section 2 for judaicasales.com (Austria tabs)
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return storeModel.categories.count
+        return section == 0 ? storeModel.categories.count : 1
     }
     
     
@@ -49,7 +61,8 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCellWithIdentifier("BT Category Cell", forIndexPath: indexPath) as! UITableViewCell
         
         // Configure the cell...
-        let category = storeModel.categories[indexPath.row]
+        let catnum = getCategoryIndexForIndexPath(indexPath)
+        let category = storeModel.getCategoryByIndex(catnum)
         cell.textLabel?.text = "\(category.number): \(category.name)"
         cell.detailTextLabel?.text = "(\(category.items) items)"
         cell.accessoryType = category.items != 0 ? .DisclosureIndicator : .None
@@ -120,7 +133,9 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
                     // get row number of cell
                     let indexPath = tableView.indexPathForCell(cell)!
                     // set the destination category object accordingly
-                    dvc.categoryNumber = storeModel.categories[indexPath.row].number
+                    let catnum = getCategoryIndexForIndexPath(indexPath)
+                    let category = storeModel.getCategoryByIndex(catnum)
+                    dvc.categoryNumber = category.number
             }
         }
     }

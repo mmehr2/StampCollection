@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
 // This class manages the Import/Export process for data using CSV files from the PHP project.
 // NOTE: Sample files are included with the bundle (collection as of late 2014), but this should probably become able to take an arbitrary file triplet, such as from email attachments or AirDrop.
@@ -51,8 +51,6 @@ class ImportExport: InfoParseable {
 //        return ad.persistentStoreCoordinator
 //    }
     
-    private var mocForThread : NSManagedObjectContext?
-
     private var bundleURL: NSURL { return NSBundle.mainBundle().bundleURL }
 
     private var bundleInfoURL: NSURL { return bundleURL.URLByAppendingPathComponent("info.csv") }
@@ -85,16 +83,14 @@ class ImportExport: InfoParseable {
     // MARK: - InfoParseable protocol implementation
     internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String]) {
         // OPTIONAL: create persistent data objects for the parsed info
-        if let mocForThread = mocForThread {
-            if parserDelegate === categoryParser {
-                Category.makeObjectFromData(data, inContext: mocForThread)
-            }
-            else if parserDelegate === infoParser {
-                DealerItem.makeObjectFromData(data, inContext: mocForThread)
-            }
-            else if parserDelegate === inventoryParser {
-                InventoryItem.makeObjectFromData(data, inContext: mocForThread)
-            }
+        if parserDelegate === categoryParser {
+            CollectionStore.sharedInstance.addObject(Category.makeObjectFromData(data))
+        }
+        else if parserDelegate === infoParser {
+            CollectionStore.sharedInstance.addObject(DealerItem.makeObjectFromData(data))
+        }
+        else if parserDelegate === inventoryParser {
+            CollectionStore.sharedInstance.addObject(InventoryItem.makeObjectFromData(data))
         }
     }
 
@@ -167,22 +163,12 @@ class ImportExport: InfoParseable {
     {
         // do this on a background thread
         NSOperationQueue().addOperationWithBlock({
-            // create a ManagedObjectContext here for use by the thread's dataSink
-            var persistent = false
-            if let moc = CollectionStore.getContextForThread() {
-                // if there is a global PSC, we should be able to get this MOC for local thread-safe usage
-                self.mocForThread = moc
-                persistent = true
-            }
             // this does blocking (synchronous) parsing of the files
             if self.prepareImportFromSource(sourceType) {
                 self.loadData(self.categoryParser, fromFile: self.categoryURL)
                 self.loadData(self.infoParser, fromFile: self.infoURL)
                 self.loadData(self.inventoryParser, fromFile: self.inventoryURL)
                 // save the data in CoreData too, if needed
-                if persistent {
-                    CollectionStore.saveContext(self.mocForThread!)
-                }
             }
             // run the completion block, if any, on the main queue
             if let completion = completion {

@@ -15,7 +15,7 @@ class InfoItemsTableViewController: UITableViewController {
     var category = CollectionStore.CategoryAll
     var categoryItem : Category!
     
-    var ftype : CollectionStore.FetchType = .Info
+    var ftype : CollectionStore.DataType = .Info
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,22 +25,28 @@ class InfoItemsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        model.fetchType(.Info, category: category) {
-//            self.refreshData()
-//            self.updateUI()
-//        }
-        updateUI() // prelim version
+        
+        // fetch the items under consideration
+        refetchData()
+        //updateUI() // prelim version
     }
     
+    @IBOutlet weak var picButtonItem: UIBarButtonItem!
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
-        model.fetchType(.Info, category: category, background: false) {
-            self.refreshData()
-            self.updateUI()
-        }
+        refetchData()
     }
     
     @IBAction func picButtonPressed(sender: UIBarButtonItem) {
-        
+        if ftype == .Info { ftype = .Inventory }
+        else if ftype == .Inventory { ftype = .Info }
+        refetchData()
+    }
+    
+    func refetchData() {
+        model.fetchType(ftype, category: category, background: false) {
+            self.refreshData()
+            self.updateUI()
+        }
     }
     
     func refreshData() {
@@ -49,14 +55,20 @@ class InfoItemsTableViewController: UITableViewController {
     
     func updateUI() {
         let typename = "\(ftype)"
-        let num = model.info.count
-        let numcats = model.categories.count
+        let num = ftype == .Info ? model.info.count : model.inventory.count
+        //let numcats = model.categories.count // this is less than certain category #s, so best to hide it for now
         var name = "All Categories"
         if category != CollectionStore.CategoryAll {
             //name = "Category \(categoryItem.name)"
-            name = "Category \(category) of \(numcats)"
+            name = "\(categoryItem.name) (#\(category))"
         }
-        title = typename + ":" + name + " - \(num) items"
+        title = typename + ": " + name + " - \(num) items"
+        // set the caption on the type(pic) button
+        if ftype == .Info {
+            picButtonItem.title = "Inv"
+        } else {
+            picButtonItem.title = "Info"
+        }
     }
 
     // MARK: - Table view data source
@@ -68,7 +80,7 @@ class InfoItemsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return model.info.count
+        return ftype == .Info ? model.info.count : model.inventory.count
     }
     
     
@@ -77,10 +89,20 @@ class InfoItemsTableViewController: UITableViewController {
         
         // Configure the cell...
         let row = indexPath.row
-        let item = model.info[row]
-        cell.textLabel?.text = item.descriptionX
-        cell.detailTextLabel?.text = formatDealerDetail(item)
-        let useDisclosure = false
+        var useDisclosure = false
+        if ftype == .Info {
+            // format a DealerItem cell
+            let item = model.info[row]
+            cell.textLabel?.text = item.descriptionX
+            cell.detailTextLabel?.text = formatDealerDetail(item)
+            useDisclosure = false
+        } else {
+            // format an InventoryItem cell
+            let item = model.inventory[row]
+            cell.textLabel?.text = formatInventoryMain(item)
+            cell.detailTextLabel?.text = formatInventoryDetail(item)
+            useDisclosure = false
+        }
         cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
         
         return cell

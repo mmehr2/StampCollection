@@ -32,6 +32,14 @@ class InfoCategoriesTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func doExportAction(sender: UIBarButtonItem) {
+        // TBD: select type of export (email, airdrop, ??)
+        let exporter = EmailAttachmentExporter(forController: self) { error in
+            messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
+        }
+        exporter.sendFiles()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,6 +88,9 @@ class InfoCategoriesTableViewController: UITableViewController {
         let row = indexPath.row
         let category = model.categories[row]
         cell.textLabel?.text = category.name
+        cell.detailTextLabel?.text = "(\(category.items) items)"
+        let allowDisc = (category.code[0] != "*")
+        cell.accessoryType = allowDisc ? .DisclosureIndicator : .None
 
         return cell
     }

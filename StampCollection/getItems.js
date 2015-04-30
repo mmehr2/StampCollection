@@ -123,7 +123,7 @@ function parsePriceData( text ) {
     }
     // then remove all the rest of the HTML tags
     var blines = replaceHTMLTags( lines, "" );
-    return blines.join("");
+    return blines.join("").replace(/&nbsp;/g, "").replace(/&amp;/g, "&");
 }
 
 function getBuyHeaderName( priceHeader ) {

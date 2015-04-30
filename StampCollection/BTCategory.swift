@@ -29,6 +29,8 @@ class BTCategory: NSObject {
         case 6: return -1 // no counterpart (new category added since collection was scraped)
         case 7: return 7 // slogan
         case 8: return 5 // military admin == w.bank & gaza
+        case JSCategoryAll: return 28 // Judaica Sales Austria Tabs category
+        case BTCategoryAll: return catnum // just in case (shouldn't occur)
         default: return catnum - 1
         }
     }

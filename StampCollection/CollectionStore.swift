@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class CollectionStore {
     static let moduleName = "StampCollection" // TBD: get this from proper place
@@ -15,138 +14,135 @@ class CollectionStore {
     
     static var sharedInstance = CollectionStore()
     
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator?
-
+    // the following arrays store items as currently fetched (with filters, sorting)
     var categories : [Category] = []
     var info : [DealerItem] = []
     var inventory : [InventoryItem] = []
     //var loading = false // means well, but ... not thread safe??
     
+    // the following arrays store all imported items (source of objects for non-CoreData version)
+    private var allCategories : [Category] = []
+    private var allInfo : [DealerItem] = []
+    private var allInventory : [InventoryItem] = []
     
-    private var mocForThread : NSManagedObjectContext?
-    
-    init() {
-        // get the PSC from the application delegate
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            psc = ad.persistentStoreCoordinator {
-                persistentStoreCoordinator = psc
-                // populate the arrays with any managed objects found
-                //fetchType(.Categories, background: true)
-        }
-    }
-
-    static func getMainContext() -> NSManagedObjectContext? {
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            context = ad.managedObjectContext {
-                return context
-       }
-        return nil
-    }
-    
-    static func getContextForThread() -> NSManagedObjectContext? {
-        // this should be called on the thread using the context
-        if let psc = sharedInstance.persistentStoreCoordinator {
-            var context = NSManagedObjectContext()
-            context.persistentStoreCoordinator = psc
-            return context
-        }
-        return nil
-    }
-
-    static func saveContext(context: NSManagedObjectContext) {
-        var error : NSError?
-        if !context.save(&error) {
-            println("Error saving CoreData context \(error!)")
-        } else {
-            println("Successful CoreData save")
-        }
-    }
-
-    enum FetchType {
+    enum DataType {
         case Categories
         case Info
         case Inventory
     }
+
+    func addObject(data: AnyObject) {
+        if data is Category {
+            allCategories.append(data as! Category)
+        }
+        if data is DealerItem {
+            allInfo.append(data as! DealerItem)
+        }
+        if data is InventoryItem {
+            allInventory.append(data as! InventoryItem)
+        }
+    }
     
-    func fetchType(type: FetchType, category: Int = CategoryAll, background: Bool = true, completion: (() -> Void)? = nil) {
+    func fetchType(type: DataType, category: Int = CategoryAll, background: Bool = true, completion: (() -> Void)? = nil) {
         // run this on a background thread (does lots of work! approx 10-20K records)
         // do this on a background thread if background flag is set
-        let queue = background ? NSOperationQueue() : NSOperationQueue.mainQueue()
-        queue.addOperationWithBlock({
-            self.mocForThread = CollectionStore.getContextForThread()
-            if let moc = self.mocForThread {
-                //self.loading = true
-                switch type {
-                case .Categories:
-                    self.fetchCategories(moc)
-                    break
-                case .Info:
-                    self.fetchInfo(moc, inCategory: category)
-                    break
-                case .Inventory:
-                    self.fetchInventory(moc, inCategory: category)
-                    break
-                }
-                // run the completion block, if any, on the main queue
-                if let completion = completion {
-                    NSOperationQueue.mainQueue().addOperationWithBlock(completion)
-                }
-                //self.loading = false
+//        let queue = background ? NSOperationQueue() : NSOperationQueue.mainQueue()
+//        queue.addOperationWithBlock({
+            //self.loading = true
+            switch type {
+            case .Categories:
+                self.fetchCategories()
+                break
+            case .Info:
+                self.fetchInfoinCategory(category)
+                break
+            case .Inventory:
+                self.fetchInventoryinCategory(category)
+                break
             }
-        })
+            // run the completion block, if any, on the main queue
+            if let completion = completion {
+                //NSOperationQueue.mainQueue().addOperationWithBlock(completion)
+                completion()
+            }
+            //self.loading = false
+//        })
     }
 
-    func fetchCategory( category: Int ) -> Category? {
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            context = ad.managedObjectContext {
-                // filter: only for given category (catgDisplayNum) unless -1 is passed
-                var rule: NSPredicate? = nil
-                if category != CollectionStore.CategoryAll {
-                    rule = NSPredicate(format: "%K = %@", "number", NSNumber(integer: category))
-                }
-                var items : [Category] = fetch("Category", inContext: context, withFilter: rule)
-                if items.count > 0 {
-                    return items[0]
-                }
+    func fetchCategory(category: Int ) -> Category? {
+        // filter: returns category item with given category number; if -1 or unused cat# is passed, returns nil
+        // i.e., this looks in the prefiltered categories list (no codes starting with '*')
+        var items : [Category] = categories.filter { x in
+            x.number == Int16(category)
+        }
+        if items.count > 0 {
+            return items[0]
         }
         return nil
     }
     
-    private func fetchCategories(context: NSManagedObjectContext) {
-        // filter: remove any objects with code starting with a "*"
-        let rule = NSPredicate(format: "NOT %K BEGINSWITH %@", "code", "*")
+    func fetchInfoItem(code: String ) -> DealerItem? {
+        // filter: returns info item with given unique code string; if -1 or unused cat# is passed, returns nil
+        // i.e., this looks in the prefiltered info list (usually filtered by category)
+        var items : [DealerItem] = info.filter { x in
+            x.id == code
+        }
+        if items.count > 0 {
+            return items[0]
+        }
+        return nil
+    }
+    
+    func fetchInventoryItems(code: String ) -> [InventoryItem] {
+        // filter: returns inventory items with given baseItem code string
+        // NOTE: due to duplicates, this needs to work differently from the INFO and CATEGORY item fetchers
+        // i.e., this looks in the prefiltered info list (usually filtered by category)
+        var items : [InventoryItem] = inventory.filter { x in
+            x.baseItem == code
+        }
+        return items
+    }
+    
+    private func fetchCategories() {
         // sort: by category.number
-        let sort = NSSortDescriptor(key: "number", ascending: true)
-        categories = fetch("Category", inContext: context, withFilter: rule, andSorting: [sort])
+        let temp = allCategories.sorted {
+                $0.number < $1.number
+        }
+        categories = temp
     }
     
-    private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int = -1) {
+    private func fetchInfoinCategory(_ category: Int = -1) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
-        var rule: NSPredicate? = nil
-        if category != CollectionStore.CategoryAll {
-            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(integer: category))
-        }
-        info = fetch("DealerItem", inContext: context, withFilter: rule)
+        let temp = allInfo.filter { x in
+            x.catgDisplayNum == Int16(category)
+        } // unsorted for now, much work to do on that
+        info = temp
     }
     
-    private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int = -1) {
+    private func fetchInventoryinCategory(_ category: Int = -1) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
-        var rule: NSPredicate? = nil
-        if category != CollectionStore.CategoryAll {
-            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(integer: category))
-        }
-        inventory = fetch("InventoryItem", inContext: context, withFilter: rule)
+        let temp = allInventory.filter { x in
+            x.catgDisplayNum == Int16(category)
+        } // unsorted for now, much work to do on that
+        inventory = temp
     }
-    
-    private func fetch<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
-        var output : [T] = []
-        let name = /*CollectionStore.moduleName + "." +*/ entity
-        var fetchRequest = NSFetchRequest(entityName: name)
-        fetchRequest.sortDescriptors = sorters
-        fetchRequest.predicate = filter
-        if let fetchResults = moc.executeFetchRequest(fetchRequest, error: nil) as? [T] {
-            output = fetchResults
-        }
-        return output
-    }
+
+//    private func fetch<T: NSObject>( entity: String, collection: [T], withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
+//        println("fetch with type \(T.self)")
+//        var output : [T] = []
+//        let resultsNS : NSArray
+//        if let filter = filter {
+//            // get the proper list of objects from the proper type array
+//            resultsNS = (collection as NSArray).filteredArrayUsingPredicate(filter)
+//        } else {
+//            resultsNS = collection
+//        }
+//        // NOTE: the following line seems to break XCode 6.3.1 - causes HUGE numbers to be returned and corruption of memory - why??
+//        if let results = resultsNS.sortedArrayUsingDescriptors(sorters) as? [T] {
+//            let ccount = results.count
+//            return results
+//        }
+//        let ocount = output.count
+//        return output
+//    }
 }

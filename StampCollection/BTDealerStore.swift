@@ -9,8 +9,9 @@
 import Foundation
 
 // this class organizes all the data retrieved from external dealer Bait-tov.com's website
+// UPDATE: additional category added for Judaicasales.com's website (Austria tabs)
 
-class BTDealerStore: BTMessageProtocol {
+class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     static let model = BTDealerStore() // singleton/global model item
     
     var categories : [BTCategory] = []
@@ -27,9 +28,15 @@ class BTDealerStore: BTMessageProtocol {
     private var completion : (() -> Void)?
     private var loadMultiple = true
     private var loadingInProgress = false
+    
+    private var JSCategory = BTCategory()
+    private var siteJSHandler = JSMessageDelegate()
 
     init() {
         siteHandler.delegate = self;
+        siteJSHandler.delegate = self;
+        JSCategory.number = JSCategoryAll
+        JSCategory.name = "(X)Austria Judaica Tabs"
     }
 
     enum LoadStoreStyle { case JustCategories, Populate, PopulateAndWait }
@@ -37,6 +44,7 @@ class BTDealerStore: BTMessageProtocol {
     
     func loadStore(type: LoadStoreStyle, whenDone: () -> Void) {
         siteHandler.loadCategoriesFromWeb()
+        siteJSHandler.loadItemsFromWeb()
         progressCounter = 0 // simpler than array of boolean indicators, for now
         lsStyle = type
         completion = whenDone
@@ -47,11 +55,36 @@ class BTDealerStore: BTMessageProtocol {
         completion = whenDone
         loadMultiple = false
         let handler = categoryHandlers[categoryNum]
-        let category = getCategoryByNumber(categoryNum)
+        let category = getCategoryByNumber(categoryNum)!
         handler.loadItemsFromWeb(category.href, forCategory: category.number)
         loadingInProgress = true
     }
     
+    // MARK: - JSMessageProtocol
+    func messageHandler(handler: JSMessageDelegate, willLoadDataForCategory category: Int) {
+        //println("WillLoad Message received for cat=\(category)")
+        JSCategory.dataItems = []
+    }
+    
+    func messageHandler(handler: JSMessageDelegate, receivedData data: BTDealerItem, forCategory category: Int) {
+        //println("Data Message received for cat=\(category) => \(data)")
+        JSCategory.dataItems.append(data)
+    }
+    
+    func messageHandler(handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int) {
+        //println("Update Message received for cat=\(category) => \(data)")
+        JSCategory.number = category
+        JSCategory.name = "(X)Austria Judaica Tabs"
+        JSCategory.headers = data.headers
+        JSCategory.notes = data.notes
+        JSCategory.items = JSCategory.dataItems.count
+    }
+    
+    func messageHandler(handler: JSMessageDelegate, didLoadDataForCategory category: Int) {
+        //println("DidLoad Message received for cat=\(category)")
+    }
+    
+    // MARK: - BTMessageProtocol
     func messageHandler(handler: BTMessageDelegate, willLoadDataForCategory category: Int) {
         //println("WillLoad Message received for cat=\(category)")
         if category == BTCategoryAll {
@@ -135,6 +168,7 @@ class BTDealerStore: BTMessageProtocol {
         }
     }
 
+    // MARK: utility functions
     private func copyCategoryDataToStore(category: Int, basicOnly: Bool) {
         if category == BTCategoryAll {
             for cat in reloadCategories {
@@ -145,7 +179,7 @@ class BTDealerStore: BTMessageProtocol {
             categories.append(rlc)
         } else {
             let rlc = getReloadCategoryByNumber(category)
-            let cat = getCategoryByNumber(category)
+            let cat = getCategoryByNumber(category)!
             if basicOnly && rlc.number == cat.number {
                 BTCategory.copyBasicDataFrom(rlc, toCategoryObject: cat)
             } else {
@@ -158,7 +192,22 @@ class BTDealerStore: BTMessageProtocol {
         return reloadCategories[num-1]
     }
     
-    func getCategoryByNumber( num: Int ) -> BTCategory {
-        return categories[num-1]
+    func getCategoryByNumber( num: Int ) -> BTCategory? {
+        if num == JSCategoryAll {
+            return JSCategory
+        }
+        for category in categories {
+            if category.number == num {
+                return category
+            }
+        }
+        return nil
+    }
+    
+    func getCategoryByIndex( num: Int ) -> BTCategory {
+        if num == -1 {
+            return JSCategory
+        }
+        return categories[num]
     }
 }

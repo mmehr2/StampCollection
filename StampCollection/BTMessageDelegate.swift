@@ -196,3 +196,4 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     }
     
 }
+

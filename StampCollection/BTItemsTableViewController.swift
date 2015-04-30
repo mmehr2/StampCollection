@@ -35,6 +35,10 @@ class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UI
         tableView.reloadData()
     }
     
+    @IBAction func notesButtonPressed(sender: UIBarButtonItem) {
+        messageBoxWithTitle("Notes", andBody: category.notes, forController: self)
+    }
+    
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         // load the BT category items page for scraping
         storeModel.loadStoreCategory(category.number, whenDone: updateUI)
