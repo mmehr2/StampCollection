@@ -16,6 +16,11 @@ class InfoItemsTableViewController: UITableViewController {
     var categoryItem : Category!
     
     var ftype : CollectionStore.DataType = .Info
+    var itype : WantHaveType = .All
+    var startYear = 0
+    var endYear = 0
+    var keywords : [String] = []
+    var useAllKeywords = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +36,108 @@ class InfoItemsTableViewController: UITableViewController {
         //updateUI() // prelim version
     }
     
-    @IBOutlet weak var picButtonItem: UIBarButtonItem!
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         refetchData()
     }
     
+    private func getSearchingArray() -> [SearchType] {
+        var output : [SearchType] = []
+        var names: [String] = []
+        if ftype == .Inventory && itype != .All {
+            let stype = SearchType.WantHave(itype)
+            output.append(stype)
+            names.append("\(stype)")
+        }
+        if startYear != 0 && endYear >= startYear {
+            let stype = SearchType.YearInRange(startYear...endYear)
+            output.append(stype)
+            names.append("\(stype)")
+        }
+        if keywords.count > 0 {
+            let stype = useAllKeywords ? SearchType.KeyWordListAll(keywords) : SearchType.KeyWordListAny(keywords)
+            output.append(stype)
+            names.append("\(stype)")
+        }
+        var caption = "Showing \(categoryItem.name) (#\(category)) \(ftype) Items"
+        if names.count > 0 {
+            caption += " filtered by " + "; ".join(names)
+        }
+        println(caption)
+        return output
+    }
+    
+    private func getNextInvState() -> (CollectionStore.DataType, WantHaveType) {
+        switch (ftype, itype) {
+        case (.Info, .All): return (.Inventory, .All)
+        case (.Inventory, .All): return (.Inventory, .Haves)
+        case (.Inventory, .Haves): return (.Inventory, .Wants)
+        case (.Inventory, .Wants): return (.Info, .All)
+        default: return (.Info, .All) // should never happen tho
+        }
+    }
+    
+    @IBOutlet weak var picButtonItem: UIBarButtonItem!
     @IBAction func picButtonPressed(sender: UIBarButtonItem) {
-        if ftype == .Info { ftype = .Inventory }
-        else if ftype == .Inventory { ftype = .Info }
+        (ftype, itype) = getNextInvState()
         refetchData()
     }
     
+    @IBAction func searchButtonPressed(sender: AnyObject) {
+        // show an action sheet to choose Keyword or YearRange filtering
+        // other action types may be added in the future depending on category
+        var ac = UIAlertController(title: "Choose Search Method", message: nil, preferredStyle: .ActionSheet)
+        var act = UIAlertAction(title: "By Keywords", style: .Default) { x in
+            // action here
+            let kwc = UIQueryAlert(type: .Keyword) { srchType in
+                // put the related data into the master VC's variables
+                switch srchType {
+                case .KeyWordListAll(let words):
+                    self.keywords = words
+                    self.useAllKeywords = true
+                    self.refetchData()
+                    break
+                case .KeyWordListAny(let words):
+                    self.keywords = words
+                    self.useAllKeywords = false
+                    self.refetchData()
+                    break
+                default:
+                    break
+                }
+            }
+            kwc.RunWithViewController(self)
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "By Year Range", style: .Default) { x in
+            // action here
+            let kwc = UIQueryAlert(type: .YearRange) { srchType in
+                // put the related data into the master VC's variables
+                switch srchType {
+                case .YearInRange(let range):
+                    self.startYear = range.start
+                    self.endYear = range.end
+                    self.refetchData()
+                    break
+                default:
+                    break
+                }
+            }
+            kwc.RunWithViewController(self)
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
+            // no action here
+        }
+        ac.addAction(act)
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    @IBAction func sortButtonPressed(sender: AnyObject) {
+        // TBD: implementing sorting functionality
+    }
+    
     func refetchData() {
-        model.fetchType(ftype, category: category, background: false) {
+        model.fetchType(ftype, category: category, searching: getSearchingArray()) {
             self.refreshData()
             self.updateUI()
         }
@@ -56,19 +150,28 @@ class InfoItemsTableViewController: UITableViewController {
     func updateUI() {
         let typename = "\(ftype)"
         let num = ftype == .Info ? model.info.count : model.inventory.count
-        //let numcats = model.categories.count // this is less than certain category #s, so best to hide it for now
         var name = "All Categories"
         if category != CollectionStore.CategoryAll {
-            //name = "Category \(categoryItem.name)"
             name = "\(categoryItem.name) (#\(category))"
         }
-        title = typename + ": " + name + " - \(num) items"
-        // set the caption on the type(pic) button
-        if ftype == .Info {
-            picButtonItem.title = "Inv"
-        } else {
-            picButtonItem.title = "Info"
+        var itemsname = "items"
+        switch (ftype, itype) {
+        case (.Info, _): itemsname = "items"
+        case (.Inventory, .All): itemsname = "items"
+        default: itemsname = "\(itype)";
         }
+        title = typename + ": " + name + " - \(num) \(itemsname)"
+        // set the caption on the type(pic) button according to NEXT state of its variables
+        let (nftype, nitype) = getNextInvState()
+        var exwh = ""
+        switch (nftype, nitype) {
+        case (.Info, _): exwh = "Info"
+        case (.Inventory, .All): exwh = "Inv"
+        case (.Inventory, .Haves),
+            (.Inventory, .Wants): exwh = "Inv" + "\(nitype)"[0]
+        default: break
+        }
+        picButtonItem.title = "To:" + exwh
     }
 
     // MARK: - Table view data source

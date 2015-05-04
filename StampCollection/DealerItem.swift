@@ -87,7 +87,7 @@ class DealerItem: NSObject {
         return DealerItem.setDataValuesForObject(DealerItem(), fromData: data)
     }
 
-    static func filterArray( collection: [DealerItem], byCategory category: Int ) -> [DealerItem] {
+    static func filterArray( collection: [DealerItem], byCategory category: Int16 ) -> [DealerItem] {
         if category == CollectionStore.CategoryAll {
             return collection
         }

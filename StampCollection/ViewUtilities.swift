@@ -131,7 +131,7 @@ private func formatInventoryVarCondition(item: InventoryItem) -> String {
 }
 
 func formatInventoryMain(item: InventoryItem) -> String {
-    if let cat = CollectionStore.sharedInstance.fetchCategory(Int(item.catgDisplayNum))
+    if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum)
         , info = CollectionStore.sharedInstance.fetchInfoItem(item.baseItem) {
             let basedes = makeStringFit(info.descriptionX, 60)
             return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
@@ -140,7 +140,7 @@ func formatInventoryMain(item: InventoryItem) -> String {
 }
 
 func formatInventoryDetail(item: InventoryItem) -> String {
-    if let cat = CollectionStore.sharedInstance.fetchCategory(Int(item.catgDisplayNum))
+    if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum)
         , info = CollectionStore.sharedInstance.fetchInfoItem(item.baseItem) {
             let basedes = makeStringFit(info.descriptionX, 60)
             return "\(item.baseItem) \(formatInventoryValue(item,info,cat)) \(formatInventoryVarCondition(item))"

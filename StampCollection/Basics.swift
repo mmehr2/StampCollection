@@ -13,18 +13,81 @@ Solution for SourceKitService Terminated errors in XCode 6.1.1:
 http://stackoverflow.com/questions/24006206/sourcekitservice-terminated
 which says to run this command line to eliminate some cache data:
     rm -rf ~/Library/Developer/Xcode/DerivedData/ModuleCache
+NOTE: This specific issue doesn't seem to plague XCode 6.3 (MANY OTHER PROBS THO!)
 */
 
-// MARK: random numbers
-// get random integer in between two numbers (+ve or -ve fine, from < to)
-func getRandomFrom(from: Int, #to: Int) -> Int {
-    let arg : UInt32 = UInt32(to - from)
-    return Int(arc4random_uniform(arg)) + from
+// MARK: treat a string as a floating point number if possible
+extension String {
+    func toDouble() -> Double? {
+        return NSNumberFormatter().numberFromString(self)?.doubleValue
+    }
+    func toFloat() -> Float? {
+        return NSNumberFormatter().numberFromString(self)?.floatValue
+    }
 }
 
-func getRandomBool() -> Bool {
-    let numZeroOrOne = getRandomFrom(0, to: 2)
-    return numZeroOrOne == 1
+// Deal with Range (index functionality) vs. ClosedInterval (all else) by forcing ambiguity so user must choose
+// Discussion here: http://airspeedvelocity.net/2014/11/16/which-function-does-swift-call-part-6-tinkering-with-priorities/
+// Since I want to use ClosedInterval<Int> for Year range filtering, I'd like to have 1980...1989 be a ClosedInterval
+// Normally, I'd get a Range<Int> instead because of the indexing capabilities of Int for Array subscripts.
+// So this function makes the equivalent range ambiguous, so now I have to say Range or ClosedInterval specifically.
+func ... <T: Comparable where T: ForwardIndexType>
+    (start: T, end: T) -> ClosedInterval<T> {
+        return ClosedInterval(start, end)
+}
+
+// MARK: string extensions for quick find a la predicate programming: BEGINSWITH, CONTAINS, ENDSWITH
+// NOTE: requires NSRange extension for equality testing (Equatable protocol)
+extension String {
+    static var NotFound : NSRange {
+        return NSRange( location: NSNotFound, length: 0 )
+    }
+    // NOTE: Plain methods use native or bridged functions
+    // check if receiver contains the given string anywhere
+    func contains( str: String ) -> Bool {
+        let res = self.rangeOfString(str) // non-nil version is a Range<String.Index>
+        return (res != nil)
+    }
+    // check if receiver starts with the given string
+    func beginsWith( str: String ) -> Bool {
+        return self.hasPrefix(str)
+    }
+    // check if receiver ends with the given string
+    func endsWith( str: String ) -> Bool {
+        return self.hasSuffix(str)
+    }
+    // CI methods (and maybe DI too?) need to use NSString APIs - didn't try finding bridged versions yet
+    // check if receiver contains the given string anywhere (case insensitive)
+    func containsCI( str: String ) -> Bool {
+        let rcvr = self as NSString
+        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.CaseInsensitiveSearch)
+        return (res != String.NotFound)
+    }
+    // check if receiver starts with the given string
+    func beginsWithCI( str: String ) -> Bool {
+        let rcvr = self as NSString
+        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.CaseInsensitiveSearch)
+        return (res.location == 0)
+    }
+    func endsWithCI( str: String ) -> Bool {
+        let rcvr = self as NSString
+        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.BackwardsSearch | NSStringCompareOptions.CaseInsensitiveSearch)
+        return (res.location == NSNotFound ? false : (res.location + res.length == count(self)))
+    }
+}
+
+// MARK: NSRange Equatable extension for string comparisons
+// WHY DOESN'T APPLE PROVIDE THIS???
+extension NSRange: Equatable {
+    
+}
+
+public func ==( lhs: NSRange, rhs: NSRange ) -> Bool {
+    return lhs.length == rhs.length && lhs.location == rhs.location
+}
+
+public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
+    return !(lhs == rhs)
 }
 
 // MARK: date extensions and helpers
@@ -54,33 +117,6 @@ func >=(d1: NSDate, d2: NSDate) -> Bool {
 
 func <=(d1: NSDate, d2: NSDate) -> Bool {
     return !(d1 > d2)
-}
-
-// func for getting a random date
-func getRandomDateFrom(from: Int, #to: Int) -> NSDate {
-    var date = NSDate()
-    let numToAdd = getRandomFrom(from, to: to)
-    date = date.addDays(numToAdd)
-    return date
-}
-
-// predefined parameter random date function for simulated data
-func getRandomDate() -> NSDate {
-    // generate a randome date over the last year, but not too close to now
-    let from = -365
-    let to = -5
-    return getRandomDateFrom(from, to: to)
-}
-
-// date extension to easily deal with adding days to dates
-
-private let secsPerDay = 24 * 60 * 60
-
-extension NSDate {
-    func addDays(days : Int) -> NSDate {
-        let time = NSTimeInterval(days * secsPerDay)
-        return self.dateByAddingTimeInterval(time)
-    }
 }
 
 // MARK: linear scaling function
@@ -132,24 +168,6 @@ func isValue<T: Comparable>( input: T, inOpenRange range: Range<T>) -> Bool {
         return false
     }
     return true
-}
-
-// MARK: latitude and longitude functions
-private let sexagesimalScaleFactor = 60.0
-func sexagesimalSplit(input: Double) -> (Int, Int, Double) {
-    var result : (D: Int, M: Int, S: Double) = (0,0,0.0)
-    result.D = Int(input)
-    let rem = input - Double(result.D)
-    let r2 = rem * sexagesimalScaleFactor
-    result.M = Int(r2)
-    let rem2 = r2 - Double(result.M)
-    result.S = rem2 * sexagesimalScaleFactor
-    return result
-}
-
-func sexagesimalCombine(input: (Int, Int, Double)) -> Double {
-    let (D, M, S) = input
-    return Double(D) + (Double(M) / sexagesimalScaleFactor) + (S / (sexagesimalScaleFactor * sexagesimalScaleFactor))
 }
 
 // MARK: data paging support class

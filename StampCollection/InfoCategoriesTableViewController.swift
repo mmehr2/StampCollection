@@ -15,11 +15,15 @@ class InfoCategoriesTableViewController: UITableViewController {
     var model = CollectionStore.sharedInstance
 
     @IBAction func doImportAction(sender: UIBarButtonItem) {
+        // wipe the slate
+        // BEWARE - DO NOT USE WITH CORE DATA! See documentation for this function
+        model.removeAllItemsInStore()
+        updateUI()
         // load the data from CSV files
         let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
         csvFileImporter.importData(sourceType) {
             // when done, load the data, then update the UI
-            self.model.fetchType(.Categories, background: false) {
+            self.model.fetchType(.Categories) {
                 self.updateUI()
             }
         }
@@ -27,7 +31,7 @@ class InfoCategoriesTableViewController: UITableViewController {
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         let catcount = model.categories.count
-        model.fetchType(.Categories, background: false) {
+        model.fetchType(.Categories) {
             self.updateUI()
         }
     }
@@ -77,7 +81,7 @@ class InfoCategoriesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return model.categories.count
+        return model.categories.count + 1
     }
 
     
@@ -86,11 +90,20 @@ class InfoCategoriesTableViewController: UITableViewController {
 
         // Configure the cell...
         let row = indexPath.row
-        let category = model.categories[row]
-        cell.textLabel?.text = category.name
-        cell.detailTextLabel?.text = "(\(category.items) items)"
-        let allowDisc = (category.code[0] != "*")
-        cell.accessoryType = allowDisc ? .DisclosureIndicator : .None
+        if row == model.categories.count {
+            // special handling for the AllData row
+            cell.textLabel?.text = "All Categories"
+            let categoryItems = model.getInfoCategoryCount(CollectionStore.CategoryAll)
+            cell.detailTextLabel?.text = "(\(categoryItems) items)"
+            cell.accessoryType = .None
+        } else {
+            let category = model.categories[row]
+            let categoryItems = model.getInfoCategoryCount(category.number)
+            cell.textLabel?.text = category.name
+            cell.detailTextLabel?.text = "(\(categoryItems) items)"
+            let allowDisc = (category.code[0] != "*")
+            cell.accessoryType = allowDisc ? .DisclosureIndicator : .None
+        }
 
         return cell
     }
@@ -140,11 +153,16 @@ class InfoCategoriesTableViewController: UITableViewController {
                     // get row number of cell
                     let indexPath = tableView.indexPathForCell(cell)!
                     let row = indexPath.row
-                    let category = model.categories[row]
-                    // set the destination category object accordingly
-                    let catnum = Int(category.number)
-                    dvc.category = catnum
-                    dvc.categoryItem = model.fetchCategory(catnum)
+                    if row == model.categories.count {
+                        // special handling for the AllData row
+                        dvc.category = CollectionStore.CategoryAll
+                    } else {
+                        let category = model.categories[row]
+                        // set the destination category object accordingly
+                        let catnum = (category.number)
+                        dvc.category = catnum
+                        dvc.categoryItem = model.fetchCategory(catnum)
+                    }
             }
         }
     }

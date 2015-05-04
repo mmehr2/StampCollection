@@ -10,10 +10,16 @@ import UIKit
 
 class CollectionStore {
     static let moduleName = "StampCollection" // TBD: get this from proper place
-    static let CategoryAll = -1
+    static let CategoryAll : Int16 = -1
     
     static var sharedInstance = CollectionStore()
     
+    enum DataType {
+        case Categories
+        case Info
+        case Inventory
+    }
+
     // the following arrays store items as currently fetched (with filters, sorting)
     var categories : [Category] = []
     var info : [DealerItem] = []
@@ -24,26 +30,69 @@ class CollectionStore {
     private var allCategories : [Category] = []
     private var allInfo : [DealerItem] = []
     private var allInventory : [InventoryItem] = []
+    private var categoryItemCounters : [Int16: Int] = [:]
+    private var masterCount = 0
     
-    enum DataType {
-        case Categories
-        case Info
-        case Inventory
+    func removeAllItemsInStore() {
+        // NOTE: BE VERY CAREFUL IN USING THIS FUNCTION
+        /*
+        What we probably want to do with CoreData on Import is:
+        A) Check if each item already exists (via ID check)
+        B) If so, update any changed fields instead of creating duplicates (DOES THIS WORK FOR INV?)
+        C) If not, okay to add the new item
+        D) BE CAREFUL WITH ID CHANGES (possible!) AND BT RENUMBERING CATEGORIES!!
+        */
+        
+        // For now, just wipe the entire reference array set
+        allInventory = [] // Layer 2
+        allInfo = [] // Layer 1
+        allCategories = [] // Layer 0
+        clearInfoCounters()
+        // and wipe the caches
+        inventory = []
+        info = []
+        categories = []
     }
-
+    
+    private func clearInfoCounters() {
+        masterCount = 0
+        categoryItemCounters = [:]
+    }
+    
+    private func incrementInfoCounter( catnum: Int16 ) {
+        if categoryItemCounters[catnum] == nil {
+            categoryItemCounters[catnum] = 0
+        }
+        ++(categoryItemCounters[catnum]!)
+        ++masterCount
+    }
+    
+    func getInfoCategoryCount( catnum: Int16 ) -> Int {
+        if catnum == CollectionStore.CategoryAll {
+            return masterCount
+        } else if let cntr = categoryItemCounters[catnum] {
+            return cntr
+        } else {
+            return 0
+        }
+    }
+    
     func addObject(data: AnyObject) {
-        if data is Category {
-            allCategories.append(data as! Category)
+        if let data = data as? Category {
+            allCategories.append(data)
+            clearInfoCounters() // NOTE: requires all categories to be loaded before any info items
         }
-        if data is DealerItem {
-            allInfo.append(data as! DealerItem)
+        else if let data = data as? DealerItem {
+            allInfo.append(data)
+            let cat = data.catgDisplayNum
+            incrementInfoCounter(cat)
         }
-        if data is InventoryItem {
-            allInventory.append(data as! InventoryItem)
+        else if let data = data as? InventoryItem {
+            allInventory.append(data)
         }
     }
     
-    func fetchType(type: DataType, category: Int = CategoryAll, background: Bool = true, completion: (() -> Void)? = nil) {
+    func fetchType(type: DataType, category: Int16 = CategoryAll, searching: [SearchType] = [], completion: (() -> Void)? = nil) {
         // run this on a background thread (does lots of work! approx 10-20K records)
         // do this on a background thread if background flag is set
 //        let queue = background ? NSOperationQueue() : NSOperationQueue.mainQueue()
@@ -54,10 +103,10 @@ class CollectionStore {
                 self.fetchCategories()
                 break
             case .Info:
-                self.fetchInfoinCategory(category)
+                self.fetchInfoinCategory(category, searching: searching)
                 break
             case .Inventory:
-                self.fetchInventoryinCategory(category)
+                self.fetchInventoryinCategory(category, searching: searching)
                 break
             }
             // run the completion block, if any, on the main queue
@@ -69,11 +118,11 @@ class CollectionStore {
 //        })
     }
 
-    func fetchCategory(category: Int ) -> Category? {
+    func fetchCategory(category: Int16 ) -> Category? {
         // filter: returns category item with given category number; if -1 or unused cat# is passed, returns nil
         // i.e., this looks in the prefiltered categories list (no codes starting with '*')
         var items : [Category] = categories.filter { x in
-            x.number == Int16(category)
+            x.number == category
         }
         if items.count > 0 {
             return items[0]
@@ -82,7 +131,7 @@ class CollectionStore {
     }
     
     func fetchInfoItem(code: String ) -> DealerItem? {
-        // filter: returns info item with given unique code string; if -1 or unused cat# is passed, returns nil
+        // filter: returns info item with given unique code string; if item not found, returns nil
         // i.e., this looks in the prefiltered info list (usually filtered by category)
         var items : [DealerItem] = info.filter { x in
             x.id == code
@@ -104,27 +153,37 @@ class CollectionStore {
     }
     
     private func fetchCategories() {
+        // filter: removed the Booklets (var) category (anomaly of web processing)
         // sort: by category.number
-        let temp = allCategories.sorted {
+        let temp = allCategories.filter {
+                !$0.name.endsWith("(var)")
+            }.sorted {
                 $0.number < $1.number
         }
+//        let temp2 = sortKVOArray(allCategories, ["number"])
         categories = temp
     }
     
-    private func fetchInfoinCategory(_ category: Int = -1) {
+    private func fetchInfoinCategory(_ category: Int16 = CollectionStore.CategoryAll, searching: [SearchType] = []) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
-        let temp = allInfo.filter { x in
+        let temp = category == CollectionStore.CategoryAll ? allInfo : allInfo.filter { x in
             x.catgDisplayNum == Int16(category)
         } // unsorted for now, much work to do on that
-        info = temp
+ //       let temp = category == CollectionStore.CategoryAll ? allInfo : filterInfo(allInfo, [SearchType.Category(category)])
+        let temp2 = filterInfo(temp, searching) // more complex filtering
+        let output = temp2 // do sorting here, after filtering
+        info = output
     }
     
-    private func fetchInventoryinCategory(_ category: Int = -1) {
-        // filter: only for given category (catgDisplayNum) unless -1 is passed
-        let temp = allInventory.filter { x in
+    private func fetchInventoryinCategory(_ category: Int16 = CollectionStore.CategoryAll, searching: [SearchType] = []) {
+//        // filter: only for given category (catgDisplayNum) unless -1 is passed
+        let temp = category == CollectionStore.CategoryAll ? allInventory : allInventory.filter { x in
             x.catgDisplayNum == Int16(category)
         } // unsorted for now, much work to do on that
-        inventory = temp
+//        let temp = category == CollectionStore.CategoryAll ? allInventory : filterInventory(allInventory, [SearchType.Category(category)])
+        let temp2 = filterInventory(temp, searching) // more complex filtering
+        let output = temp2 // do sorting here, after filtering
+        inventory = output
     }
 
 //    private func fetch<T: NSObject>( entity: String, collection: [T], withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {

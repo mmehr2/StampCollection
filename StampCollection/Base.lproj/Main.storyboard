@@ -215,6 +215,18 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="NDB-4f-cmY"/>
+                        <barButtonItem systemItem="search" id="xOb-gK-ERU">
+                            <connections>
+                                <action selector="searchButtonPressed:" destination="ry2-wg-j4p" id="sv0-Kt-hKi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DAK-0G-xl7"/>
+                        <barButtonItem title="Sort" id="ndS-uw-gQ9">
+                            <connections>
+                                <action selector="sortButtonPressed:" destination="ry2-wg-j4p" id="tT7-xS-WxD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rox-sK-uuu"/>
                         <barButtonItem systemItem="refresh" id="S7M-Yj-9qq">
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="ry2-wg-j4p" id="bDV-FG-C2e"/>
