@@ -7,46 +7,47 @@
 //
 
 import Foundation
+import CoreData
 
-class DealerItem: NSObject {
+class DealerItem: NSManagedObject {
 
-    var buy1: String
-    var buy2: String
-    var buy3: String
-    var buy4: String
-    var cat1: String
-    var cat2: String
-    var catgDisplayNum: Int16
-    var descriptionX: String
-    var group: String
-    var id: String
-    var oldprice1: String
-    var oldprice2: String
-    var oldprice3: String
-    var oldprice4: String
-    var pictid: String
-    var pictype: String
-    var price1: String
-    var price2: String
-    var price3: String
-    var price4: String
-    var status: String
+    @NSManaged var buy1: String
+    @NSManaged var buy2: String
+    @NSManaged var buy3: String
+    @NSManaged var buy4: String
+    @NSManaged var cat1: String
+    @NSManaged var cat2: String
+    @NSManaged var catgDisplayNum: Int16
+    @NSManaged var descriptionX: String
+    @NSManaged var group: String
+    @NSManaged var id: String
+    @NSManaged var oldprice1: String
+    @NSManaged var oldprice2: String
+    @NSManaged var oldprice3: String
+    @NSManaged var oldprice4: String
+    @NSManaged var pictid: String
+    @NSManaged var pictype: String
+    @NSManaged var price1: String
+    @NSManaged var price2: String
+    @NSManaged var price3: String
+    @NSManaged var price4: String
+    @NSManaged var status: String
 
     enum ValueType {
         case tInt(NSNumber)
         case tString(String)
     }
     
-    override init() {
-        catgDisplayNum = Int16(CollectionStore.CategoryAll)
-        id = ""; descriptionX = ""; group = ""; status = ""
-        pictid = ""; pictype = "0"
-        cat1 = ""; cat2 = ""
-        price1 = ""; price2 = ""; price3 = ""; price4 = ""
-        buy1 = ""; buy2 = ""; buy3 = ""; buy4 = ""
-        oldprice1 = ""; oldprice2 = ""; oldprice3 = ""; oldprice4 = ""
-        super.init()
-    }
+//    override init() {
+//        catgDisplayNum = Int16(CollectionStore.CategoryAll)
+//        id = ""; descriptionX = ""; group = ""; status = ""
+//        pictid = ""; pictype = "0"
+//        cat1 = ""; cat2 = ""
+//        price1 = ""; price2 = ""; price3 = ""; price4 = ""
+//        buy1 = ""; buy2 = ""; buy3 = ""; buy4 = ""
+//        oldprice1 = ""; oldprice2 = ""; oldprice3 = ""; oldprice4 = ""
+//        super.init()
+//    }
     
     private class func translateKeyName( nameIn: String ) -> String {
         var name = nameIn
@@ -83,29 +84,22 @@ class DealerItem: NSObject {
         return newObject
     }
     
-    static func makeObjectFromData( data: [String : String] ) -> DealerItem {
-        return DealerItem.setDataValuesForObject(DealerItem(), fromData: data)
-    }
-
-    static func filterArray( collection: [DealerItem], byCategory category: Int16 ) -> [DealerItem] {
-        if category == CollectionStore.CategoryAll {
-            return collection
+//    static func makeObjectFromData( data: [String : String] ) -> DealerItem {
+//        return DealerItem.setDataValuesForObject(DealerItem(), fromData: data)
+//    }
+    
+    static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Bool {
+        // add a new object of this type to the moc
+        if let moc = moc {
+            let entityName = "DealerItem"
+            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? DealerItem {
+                DealerItem.setDataValuesForObject(newObject, fromData: data)
+                return true
+            } else {
+                // report error creating object in CoreData MOC
+                println("Unable to make CoreData DealerItem from data \(data)")
+            }
         }
-        return collection.filter { x in
-            x.catgDisplayNum == Int16(category)
-        }
-    }
-    
-    enum SortType {
-        case ByCode, ByDesc, ByPrice, ByDate
-    }
-    
-    static func isOrderedByCode( ob1: DealerItem, ob2: DealerItem ) -> Bool {
-        return true
-    }
-    
-    static func isOrderedByDate( ob1: DealerItem, ob2: DealerItem ) -> Bool {
-        let date1str = extractDateFromDesc(ob1.descriptionX)
-        return true
+        return false
     }
 }

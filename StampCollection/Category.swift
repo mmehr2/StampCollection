@@ -7,22 +7,23 @@
 //
 
 import Foundation
+import CoreData
 
-class Category: NSObject {
+class Category: NSManagedObject {
 
-    var code: String
-    var number: Int16
-    var name: String
-    var items: String
-    var catalogs: String
-    var prices: String
+    @NSManaged var code: String
+    @NSManaged var number: Int16
+    @NSManaged var name: String
+    @NSManaged var items: String
+    @NSManaged var catalogs: String
+    @NSManaged var prices: String
 
-    override init() {
-        number = Int16(CollectionStore.CategoryAll)
-        code = ""; name = ""; catalogs = ""; prices = ""
-        items = "0"
-        super.init()
-    }
+//    override init() {
+//        number = Int16(CollectionStore.CategoryAll)
+//        code = ""; name = ""; catalogs = ""; prices = ""
+//        items = "0"
+//        super.init()
+//    }
     
     enum ValueType {
         case tInt(NSNumber)
@@ -63,7 +64,22 @@ class Category: NSObject {
         return newObject
     }
     
-    static func makeObjectFromData( data: [String : String] ) -> Category {
-        return Category.setDataValuesForObject(Category(), fromData: data)
+//    static func makeObjectFromData( data: [String : String] ) -> Category {
+//        return Category.setDataValuesForObject(Category(), fromData: data)
+//    }
+    
+    static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Bool {
+        // add a new object of this type to the moc
+        if let moc = moc {
+            let entityName = "Category"
+            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? Category {
+                Category.setDataValuesForObject(newObject, fromData: data)
+                return true
+            } else {
+                // report error creating object in CoreData MOC
+                println("Unable to make CoreData Category from data \(data)")
+            }
+        }
+        return false
     }
 }

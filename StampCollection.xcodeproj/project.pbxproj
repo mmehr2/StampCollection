@@ -34,6 +34,7 @@
 		A632CBB91AF35D2A00565686 /* ViewFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBB81AF35D2A00565686 /* ViewFiltering.swift */; };
 		A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBA1AF538FD00565686 /* InfoUtilities.swift */; };
 		A632CBBD1AF6AC8B00565686 /* UIQueryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */; };
+		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
 		A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */; };
 		A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */; };
 		A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */; };
@@ -83,6 +84,7 @@
 		A632CBB81AF35D2A00565686 /* ViewFiltering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFiltering.swift; sourceTree = "<group>"; };
 		A632CBBA1AF538FD00565686 /* InfoUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoUtilities.swift; sourceTree = "<group>"; };
 		A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIQueryAlert.swift; sourceTree = "<group>"; };
+		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
 		A6E198421AD6EEEC0090FDB1 /* StampCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E198461AD6EEEC0090FDB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		A61C11651AEB781B00063025 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A65232E51AF8261900A86FAC /* ViewSorting.swift */,
 				A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */,
 				A61C11661AEB785B00063025 /* ViewUtilities.swift */,
 				A632CBB81AF35D2A00565686 /* ViewFiltering.swift */,
@@ -356,6 +359,7 @@
 				A60DBCB21AE1A34E00D4959D /* BTCategory.swift in Sources */,
 				A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */,
 				A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */,
+				A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */,
 				A632CBAE1AEF2B8800565686 /* JSMessageDelegate.swift in Sources */,
 				A61C11641AEADCD900063025 /* CollectionStore.swift in Sources */,
 				A60DBCAE1ADEEA9000D4959D /* DealerItem.swift in Sources */,

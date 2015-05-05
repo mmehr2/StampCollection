@@ -7,34 +7,35 @@
 //
 
 import Foundation
+import CoreData
 
-class InventoryItem: NSObject {
+class InventoryItem: NSManagedObject {
 
-    var albumPage: String
-    var albumRef: String
-    var albumSection: String
-    var albumType: String
-    var baseItem: String
-    var catgDisplayNum: Int16
-    var desc: String
-    var itemType: String
-    var notes: String
-    var refItem: String
-    var wantHave: String
+    @NSManaged var albumPage: String
+    @NSManaged var albumRef: String
+    @NSManaged var albumSection: String
+    @NSManaged var albumType: String
+    @NSManaged var baseItem: String
+    @NSManaged var catgDisplayNum: Int16
+    @NSManaged var desc: String
+    @NSManaged var itemType: String
+    @NSManaged var notes: String
+    @NSManaged var refItem: String
+    @NSManaged var wantHave: String
     
     enum ValueType {
         case tInt(NSNumber)
         case tString(String)
     }
     
-    override init() {
-        catgDisplayNum = Int16(CollectionStore.CategoryAll)
-        baseItem = ""; desc = ""; notes = ""; refItem = ""
-        wantHave = ""; itemType = "0"
-        wantHave = ""
-        albumPage = ""; albumRef = ""; albumSection = ""; albumType = ""
-        super.init()
-    }
+//    override init() {
+//        catgDisplayNum = Int16(CollectionStore.CategoryAll)
+//        baseItem = ""; desc = ""; notes = ""; refItem = ""
+//        wantHave = ""; itemType = "0"
+//        wantHave = ""
+//        albumPage = ""; albumRef = ""; albumSection = ""; albumType = ""
+//        super.init()
+//    }
     
     private class func translateKeyName( nameIn: String ) -> String {
         var name = nameIn
@@ -75,8 +76,23 @@ class InventoryItem: NSObject {
         return newObject
     }
     
-    static func makeObjectFromData( data: [String : String] ) -> InventoryItem {
-        return InventoryItem.setDataValuesForObject(InventoryItem(), fromData: data)
-    }
+//    static func makeObjectFromData( data: [String : String] ) -> InventoryItem {
+//        return InventoryItem.setDataValuesForObject(InventoryItem(), fromData: data)
+//    }
 
+    
+    static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Bool {
+        // add a new object of this type to the moc
+        if let moc = moc {
+            let entityName = "InventoryItem"
+            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? InventoryItem {
+                InventoryItem.setDataValuesForObject(newObject, fromData: data)
+                return true
+            } else {
+                // report error creating object in CoreData MOC
+                println("Unable to make CoreData InventoryItem from data \(data)")
+            }
+        }
+        return false
+    }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol InfoParseable {
-    func parserDelegate( parserDelegate: CHCSVParserDelegate, foundData data: [String : String])
+    func parserDelegate( parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken)
 }
 
 class InfoParserDelegate: NSObject, CHCSVParserDelegate {
@@ -23,8 +23,9 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     private var currentRecord : [String:String] = [:]
     var records : [[String:String]] = []
     var dataSink : InfoParseable?
+    var contextToken: CollectionStore.ContextToken = 0 // must be set before usage!
     
-    init( namex: String ) {
+    init(name namex: String) {
         name = namex
     }
     
@@ -62,7 +63,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
             records.append(currentRecord)
             //println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
             if let dataSink = dataSink {
-                dataSink.parserDelegate(self, foundData: currentRecord)
+                dataSink.parserDelegate(self, foundData: currentRecord, inContext: contextToken)
             }
             
         }

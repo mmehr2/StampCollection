@@ -58,7 +58,8 @@ class InfoItemsTableViewController: UITableViewController {
             output.append(stype)
             names.append("\(stype)")
         }
-        var caption = "Showing \(categoryItem.name) (#\(category)) \(ftype) Items"
+        let cname = categoryItem?.name ?? "ALL"
+        var caption = "Showing \(cname) (#\(category)) \(ftype) Items"
         if names.count > 0 {
             caption += " filtered by " + "; ".join(names)
         }

@@ -59,11 +59,11 @@ class ImportExport: InfoParseable {
 
     private var bundleCategoryURL: NSURL { return  bundleURL.URLByAppendingPathComponent("baitcfg.csv") }
     
-    lazy private var infoParser = InfoParserDelegate(namex: "INFO")
+    lazy private var infoParser = InfoParserDelegate(name: "INFO")
     
-    lazy private var categoryParser = InfoParserDelegate(namex: "CATEGORY")
+    lazy private var categoryParser = InfoParserDelegate(name: "CATEGORY")
     
-    lazy private var inventoryParser = InfoParserDelegate(namex: "INVENTORY")
+    lazy private var inventoryParser = InfoParserDelegate(name: "INVENTORY")
     
     private var infoURL : NSURL {
         let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
@@ -81,16 +81,16 @@ class ImportExport: InfoParseable {
     }
 
     // MARK: - InfoParseable protocol implementation
-    internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String]) {
+    internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
         // OPTIONAL: create persistent data objects for the parsed info
         if parserDelegate === categoryParser {
-            CollectionStore.sharedInstance.addObject(Category.makeObjectFromData(data))
+            CollectionStore.sharedInstance.addObjectType(.Categories, withData: data, toContext: token)
         }
         else if parserDelegate === infoParser {
-            CollectionStore.sharedInstance.addObject(DealerItem.makeObjectFromData(data))
+            CollectionStore.sharedInstance.addObjectType(.Info, withData: data, toContext: token)
         }
         else if parserDelegate === inventoryParser {
-            CollectionStore.sharedInstance.addObject(InventoryItem.makeObjectFromData(data))
+            CollectionStore.sharedInstance.addObjectType(.Inventory, withData: data, toContext: token)
         }
     }
 
@@ -147,9 +147,10 @@ class ImportExport: InfoParseable {
     
     // MARK: - data import
     // NOTE: imports from CSV files in user's Documents folder
-    private func loadData( parserDelegate: InfoParserDelegate, fromFile file: NSURL ) {
+    private func loadData( parserDelegate: InfoParserDelegate, fromFile file: NSURL, withContext token: CollectionStore.ContextToken ) {
         // this does blocking (synchronous) parsing of the files
         if let basicParser = CHCSVParser(contentsOfCSVURL: file) {
+            parserDelegate.contextToken = token
             parserDelegate.dataSink = self
             basicParser.sanitizesFields = true
             basicParser.delegate = parserDelegate
@@ -165,10 +166,14 @@ class ImportExport: InfoParseable {
         NSOperationQueue().addOperationWithBlock({
             // this does blocking (synchronous) parsing of the files
             if self.prepareImportFromSource(sourceType) {
-                self.loadData(self.categoryParser, fromFile: self.categoryURL)
-                self.loadData(self.infoParser, fromFile: self.infoURL)
-                self.loadData(self.inventoryParser, fromFile: self.inventoryURL)
-                // save the data in CoreData too, if needed
+                // set the context token for this thread
+                let token = CollectionStore.sharedInstance.prepareStorageContext()
+                // load the data using our saved value of the token
+                self.loadData(self.categoryParser, fromFile: self.categoryURL, withContext: token)
+                self.loadData(self.infoParser, fromFile: self.infoURL, withContext: token)
+                self.loadData(self.inventoryParser, fromFile: self.inventoryURL, withContext: token)
+                // finalize the data for this context token
+                CollectionStore.sharedInstance.finalizeStorageContext(token)
             }
             // run the completion block, if any, on the main queue
             if let completion = completion {
@@ -201,6 +206,9 @@ class ImportExport: InfoParseable {
         completion: (() -> Void)? )
     {
         // do this on a background thread
+        // TBD: actually get the real objects from CoreData and convert into [String:String] form for backup by the following
+        // TBD: add usage of context for CoreData
+        // TBD: manage memory footprint by only doing batches of INFO and INVENTORY at a time somehow
         NSOperationQueue().addOperationWithBlock({
             // this does blocking (synchronous) writing of the files
             var categoryFileTmp = self.categoryURL.URLByAppendingPathExtension("tmp")
