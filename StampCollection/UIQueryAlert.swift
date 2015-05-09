@@ -79,7 +79,8 @@ struct UIQueryAlertConfiguration {
             title = "Edit Year Range Filter"
             body = "Specify the years to include. End must be greater than or equal to Start.\n"
                 "Valid years for Israeli stamps are 1948 to present."
-            "To remove all year filtering, enter an invalid year such as 0."
+            "\nTo specify a single year, enter valid Start and blank End."
+            "\nTo remove all year filtering, enter blank in both Start and End."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeStart))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeEnd))
             break
@@ -131,7 +132,11 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     let text2 : String = self.fields[1].text
                     var startYear = text1.toInt() ?? 0
                     var endYear = text2.toInt() ?? 0
-                    let currentYear = 2015 // TBD: this must be derived from NSDate()
+                    // convention: if you only type in the start, the end is set equal to it
+                    if startYear != 0 && endYear == 0 {
+                        endYear = startYear
+                    }
+                    let currentYear = NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: NSDate())
                     if startYear < 1948 || startYear > currentYear || endYear < startYear {
                         // validity check: any invalid causes removal of searching type in question by sending back special data
                         startYear = 0
