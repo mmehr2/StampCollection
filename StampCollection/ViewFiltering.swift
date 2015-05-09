@@ -206,9 +206,10 @@ enum SearchType: Printable {
 
 private func getPredicatesForField( field: String, inKeyWordList words: [String], caseInsensitive cival: Bool = false ) -> [NSPredicate] {
     var output : [NSPredicate] = []
-    let command = cival ? "CONTAINS[c]" : "CONTAINS"
     for word in words {
-        output.append( NSPredicate(format: "%K %s %@", field, command, word) )
+        output.append( cival ?
+            NSPredicate(format: "%K CONTAINS[c] %@", field, word) :
+            NSPredicate(format: "%K CONTAINS %@", field, word) )
     }
     return output
 }
