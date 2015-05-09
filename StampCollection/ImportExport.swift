@@ -38,6 +38,17 @@ There was still a single instance of double-newline at the end of the file that 
 All this should be handled automatically when processing the local website files in the future, OR I could improve things on the website to use these new/better files.
 */
 
+protocol ExportDataSource {
+    func prepareStorageContext(forExport exp: Bool) -> CollectionStore.ContextToken
+    func numberOfItemsOfDataType( dataType: CollectionStore.DataType,
+        withContext token: CollectionStore.ContextToken ) -> Int
+    func headersForItemsOfDataType( dataType: CollectionStore.DataType,
+        withContext token: CollectionStore.ContextToken )  -> [String]
+    func dataType(dataType: CollectionStore.DataType, dataItemAtIndex index: Int,
+        withContext token: CollectionStore.ContextToken ) -> [String:String]
+    func finalizeStorageContext(token: CollectionStore.ContextToken, forExport: Bool)
+}
+
 class ImportExport: InfoParseable {
     enum Source {
         case Bundle
@@ -46,11 +57,8 @@ class ImportExport: InfoParseable {
         //case EmailAttachment
     }
     
-//    private var persistentStoreCoordinator: NSPersistentStoreCoordinator? {
-//        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-//        return ad.persistentStoreCoordinator
-//    }
-    
+    var dataSource: ExportDataSource?
+        
     private var bundleURL: NSURL { return NSBundle.mainBundle().bundleURL }
 
     private var bundleInfoURL: NSURL { return bundleURL.URLByAppendingPathComponent("info.csv") }
@@ -92,6 +100,26 @@ class ImportExport: InfoParseable {
         else if parserDelegate === inventoryParser {
             CollectionStore.sharedInstance.addObjectType(.Inventory, withData: data, toContext: token)
         }
+    }
+
+    internal func parserDelegate( parserDelegate: CHCSVParserDelegate, inout shouldAddSequenceData seqname: String, inout fromCount start: Int, inContext token: CollectionStore.ContextToken) -> Bool {
+        var result = false
+        if parserDelegate === categoryParser {
+            seqname = "exOrder"
+            start = CollectionStore.sharedInstance.getCountForType(.Categories, fromCategory: CollectionStore.CategoryAll, inContext: token)
+            result = true
+        }
+        else if parserDelegate === infoParser {
+            seqname = "exOrder"
+            start = CollectionStore.sharedInstance.getCountForType(.Info, fromCategory: CollectionStore.CategoryAll, inContext: token)
+            result = true
+        }
+        else if parserDelegate === inventoryParser {
+            seqname = "exOrder"
+            start = CollectionStore.sharedInstance.getCountForType(.Inventory, fromCategory: CollectionStore.CategoryAll, inContext: token)
+            result = true
+        }
+        return result
     }
 
     // MARK: - file import front-end
@@ -184,13 +212,18 @@ class ImportExport: InfoParseable {
     }
 
     // MARK: - data export
+    
     // NOTE: exmports to CSV files in user's Documents folder
-    private func writeData( data: [[String:String]], toCSVFile file: NSURL,
-        withHeaders headers: [String] )
+    private func writeDataOfType( dataType: CollectionStore.DataType, toCSVFile file: NSURL,
+        withContext token: CollectionStore.ContextToken )
     {
-        if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
+        if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path),
+            dataSource = dataSource {
+            let headers = dataSource.headersForItemsOfDataType(dataType, withContext: token)
             basicWriter.writeLineOfFields(headers)
-            for dictObject in data {
+            let itemCount = dataSource.numberOfItemsOfDataType(dataType, withContext: token)
+            for index in 0..<itemCount {
+                let dictObject = dataSource.dataType(dataType, dataItemAtIndex: index, withContext: token)
                 var fields: [String] = []
                 for header in headers {
                     if let field = dictObject[header] {
@@ -202,24 +235,27 @@ class ImportExport: InfoParseable {
         }
     }
     
-    func exportData( compare: Bool,
+    func exportData( compare: Bool = false,
         completion: (() -> Void)? )
     {
         // do this on a background thread
-        // TBD: actually get the real objects from CoreData and convert into [String:String] form for backup by the following
-        // TBD: add usage of context for CoreData
-        // TBD: manage memory footprint by only doing batches of INFO and INVENTORY at a time somehow
+        // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
         NSOperationQueue().addOperationWithBlock({
             // this does blocking (synchronous) writing of the files
+            // set the context token for this thread
+            let token = CollectionStore.sharedInstance.prepareStorageContext(forExport: true)
             var categoryFileTmp = self.categoryURL.URLByAppendingPathExtension("tmp")
             var infoFileTmp = self.infoURL.URLByAppendingPathExtension("tmp")
             var inventoryFileTmp = self.inventoryURL.URLByAppendingPathExtension("tmp")
-            self.writeData(self.categoryParser.records, toCSVFile: categoryFileTmp, withHeaders: self.categoryParser.headers)
+            println("Exporting files to \(self.categoryURL.path!)")
+            self.writeDataOfType(.Categories, toCSVFile: categoryFileTmp, withContext: token)
             println("Completed writing \(categoryFileTmp.lastPathComponent!)")
-            self.writeData(self.infoParser.records, toCSVFile: infoFileTmp, withHeaders: self.infoParser.headers)
+            self.writeDataOfType(.Info, toCSVFile: infoFileTmp, withContext: token)
             println("Completed writing \(infoFileTmp.lastPathComponent!)")
-            self.writeData(self.inventoryParser.records, toCSVFile: inventoryFileTmp, withHeaders: self.inventoryParser.headers)
+            self.writeDataOfType(.Inventory, toCSVFile: inventoryFileTmp, withContext: token)
             println("Completed writing \(inventoryFileTmp.lastPathComponent!)")
+            // finalize the data for this context token
+            CollectionStore.sharedInstance.finalizeStorageContext(token, forExport: true)
             // compare files to originals, if needed
             if compare {
                 // compare the temp files to the originals
@@ -239,12 +275,31 @@ class ImportExport: InfoParseable {
             }
             // delete the original files and rename the temp files to be the original files (with error handling - atomic somehow?)
             let fileManager = NSFileManager.defaultManager()
-            fileManager.removeItemAtURL(self.categoryURL, error: nil)
-            fileManager.moveItemAtURL(categoryFileTmp, toURL: self.categoryURL, error: nil)
-            fileManager.removeItemAtURL(self.infoURL, error: nil)
-            fileManager.moveItemAtURL(infoFileTmp, toURL: self.infoURL, error: nil)
-            fileManager.removeItemAtURL(self.inventoryURL, error: nil)
-            fileManager.moveItemAtURL(inventoryFileTmp, toURL: self.inventoryURL, error: nil)
+            var error : NSError?
+            fileManager.removeItemAtURL(self.categoryURL, error: &error)
+            if error != nil {
+                println("Unable to remove CATEGORY original: \(error!.localizedDescription).")
+            }
+            fileManager.moveItemAtURL(categoryFileTmp, toURL: self.categoryURL, error: &error)
+            if error != nil {
+                println("Unable to rename CATEGORY temp copy to original: \(error!.localizedDescription).")
+            }
+            fileManager.removeItemAtURL(self.infoURL, error: &error)
+            if error != nil {
+                println("Unable to remove INFO original: \(error!.localizedDescription).")
+            }
+            fileManager.moveItemAtURL(infoFileTmp, toURL: self.infoURL, error: &error)
+            if error != nil {
+                println("Unable to rename INFO temp copy to original: \(error!.localizedDescription).")
+            }
+            fileManager.removeItemAtURL(self.inventoryURL, error: &error)
+            if error != nil {
+                println("Unable to remove INVENTORY original: \(error!.localizedDescription).")
+            }
+            fileManager.moveItemAtURL(inventoryFileTmp, toURL: self.inventoryURL, error: &error)
+            if error != nil {
+                println("Unable to rename INVENTORY temp copy to original: \(error!.localizedDescription).")
+            }
             // run the completion block, if any, on the main queue
             if let completion = completion {
                 NSOperationQueue.mainQueue().addOperationWithBlock(completion)

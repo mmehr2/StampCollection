@@ -8,9 +8,22 @@
 
 import Foundation
 
+
 protocol InfoParseable {
-    func parserDelegate( parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken)
+    // parser (via its delegate) will call this once for every data item (CSV data line) that has completed parsing
+    func parserDelegate( parserDelegate: CHCSVParserDelegate,
+        foundData data: [String : String],
+        inContext token: CollectionStore.ContextToken)
+    
+    // parser (via its delegate) will call this once at startup to determine if adding sequence info is needed
+    // if so, return true and set the inout properties to reflect the starting count and property name to add to each data record
+    // the automatically advancing sequence number will be added to each object dictionary returned using the property name provided, starting at the provided count
+    func parserDelegate( parserDelegate: CHCSVParserDelegate,
+        inout shouldAddSequenceData seqname: String,
+        inout fromCount start: Int,
+        inContext token: CollectionStore.ContextToken) -> Bool
 }
+
 
 class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     let name : String
@@ -24,6 +37,8 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     var records : [[String:String]] = []
     var dataSink : InfoParseable?
     var contextToken: CollectionStore.ContextToken = 0 // must be set before usage!
+    var sequencePropertyName : String?
+    var sequenceCounter = 0
     
     init(name namex: String) {
         name = namex
@@ -36,6 +51,18 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     func parserDidBeginDocument(parser: CHCSVParser!) {
         recordCount = 0
         fieldCount = 0
+        // set up automatic data sequencing feature if told to
+        if let dataSink = dataSink {
+            var propertyName = ""
+            var seqCountStart = 0
+            let should = dataSink.parserDelegate(self, shouldAddSequenceData: &propertyName, fromCount: &seqCountStart, inContext: contextToken)
+            if should {
+                sequenceCounter = seqCountStart
+                sequencePropertyName = propertyName
+            } else {
+                sequencePropertyName = nil
+            }
+        }
     }
 
     func parser(parser: CHCSVParser!, didBeginLine recordNumber: UInt) {
@@ -60,7 +87,11 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         if currentRecordNumber == 1 {
             println("\(name) Headers: \(headers)")
         } else if !currentRecord.isEmpty {
-            records.append(currentRecord)
+            // add extra (non-input) field for sequence data, if enabled
+            if let propertyName = sequencePropertyName {
+                currentRecord[propertyName] = "\(sequenceCounter++)"
+            }
+            //records.append(currentRecord) // not needed in CoreData version, I believe
             //println("\(name)[\(currentRecordNumber)] = \(currentRecord)")
             if let dataSink = dataSink {
                 dataSink.parserDelegate(self, foundData: currentRecord, inContext: contextToken)

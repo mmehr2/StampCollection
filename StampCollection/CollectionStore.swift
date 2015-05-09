@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CollectionStore {
+class CollectionStore: ExportDataSource {
     static let moduleName = "StampCollection" // TBD: get this from proper place
     static let CategoryAll : Int16 = -1
     
@@ -32,7 +32,18 @@ class CollectionStore {
     
     typealias ContextToken = Int
     private static var nextContextToken = 0
-    static let badContextToken = 0
+    static let badContextToken = -1
+    static let mainContextToken = 0
+    private static let threadContextToken1 = 1
+    private func isThreadContextToken( token: ContextToken ) -> Bool {
+        return token >= CollectionStore.threadContextToken1
+    }
+    private func isBadContextToken( token: ContextToken ) -> Bool {
+        return token == CollectionStore.badContextToken
+    }
+    private func isMainContextToken( token: ContextToken ) -> Bool {
+        return token == CollectionStore.mainContextToken
+    }
     
     private var mocsForThreads : [ContextToken : NSManagedObjectContext] = [:]
     
@@ -67,8 +78,13 @@ class CollectionStore {
     }
     
     func getContextForThread(token: ContextToken) -> NSManagedObjectContext? {
-        // this should be called on the thread using the context
-        return token == CollectionStore.badContextToken ? nil : mocsForThreads[token]
+        // this should properly be called only by the thread using the returned context
+        if isBadContextToken(token) {
+            return nil
+        } else if isMainContextToken(token) {
+            return CollectionStore.getMainContext() // it can also get the main context for you with the proper token
+        }
+        return mocsForThreads[token]
     }
     
     func removeContextForThread(token: ContextToken) {
@@ -108,18 +124,39 @@ class CollectionStore {
         D) BE CAREFUL WITH ID CHANGES (possible!) AND BT RENUMBERING CATEGORIES!!
         */
         
-//        // For now, just wipe the entire reference array set
-//        allInventory = [] // Layer 2
-//        allInfo = [] // Layer 1
-//        allCategories = [] // Layer 0
-//        clearInfoCounters()
-//        // and wipe the caches
-//        inventory = []
-//        info = []
-//        categories = []
+        // For now, just wipe the managed object caches
+        // Then use the CoreData context to wipe the database as well
+        if let context = getContextForThread(CollectionStore.mainContextToken) {
+            // Then remove all INVENTORY objects
+            inventory = fetch("InventoryItem", inContext: context)
+            for obj in inventory {
+                context.deleteObject(obj)
+            }
+            inventory = []
+            //saveMainContext() // commit those changes
+            // Then remove all INFO objects
+            info = fetch("DealerItem", inContext: context)
+            for obj in info {
+                context.deleteObject(obj)
+            }
+            info = []
+            //saveMainContext() // commit those changes
+            // Then remove all CATEGORY objects
+            categories = fetch("Category", inContext: context)
+            for obj in categories {
+                context.deleteObject(obj)
+            }
+            categories = []
+            saveMainContext() // commit those changes
+        }
     }
+
+    // MARK: import/export functions
+    // NOTE: these functions are used by the ImportExport class to perform their jobs
+    // They use a Dictionary [String:String] simple data exchange format
     
-    func prepareStorageContext() -> ContextToken {
+    // to implement exporting data, we subscribe to the ExportDataSource protocol
+    func prepareStorageContext(forExport exporting: Bool = false) -> ContextToken {
         return getContextTokenForThread()
     }
     
@@ -129,24 +166,146 @@ class CollectionStore {
         switch type {
         case .Categories:
             Category.makeObjectFromData(data, inContext: mocForThread)
+            let valstr = ", ".join(data.values)
+            //println("Made Category from \(valstr)")
             break
         case .Info:
-            DealerItem.makeObjectFromData(data, inContext: mocForThread)
+            // get appropriate Category object (all loaded prior) from this thread's moc
+            if let catnum = data["CatgDisplayNum"]?.toInt(),
+                obj = fetchCategory(Int16(catnum), inContext: token)
+            {
+                    // pass the related object(s) in a Dictionary to make the new item in the moc
+                    let relations = ["category": obj]
+                    DealerItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+                    let valstr = ", ".join(data.values)
+                    //println("Made DealerItem from \(valstr)")
+            }
             break
         case .Inventory:
-            InventoryItem.makeObjectFromData(data, inContext: mocForThread)
+            if let code = data["BaseItem"], code2 = data["RefItem"], mocForThread = mocForThread {
+                // need to pass the related dealer item object to construct its relationship on the fly
+                let rule = NSPredicate(format: "%K == %@", "id", code)
+                let rule2 : NSPredicate? = code2 == "" ? nil : NSPredicate(format: "%K == %@", "id", code2)
+                if let catnum = data["CatgDisplayNum"]?.toInt(),
+                    catobj = fetchCategory(Int16(catnum), inContext: token),
+                    obj = fetch("DealerItem", inContext: mocForThread, withFilter: rule).first
+                {
+                    // pass the related object(s) in a Dictionary to make the new item in the moc
+                    var relations = ["dealerItem": obj, "category": catobj]
+                    // deal with the optional RefItem relationship here
+                    if let rule2 = rule2,
+                        robj = fetch("DealerItem", inContext: mocForThread, withFilter: rule2).first
+                    {
+                        relations.updateValue(robj, forKey: "referredItem")
+                    }
+                    InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+                    let valstr = ", ".join(data.values)
+                    //println("Made InventoryItem from \(valstr)")
+                }
+            }
             break
         }
     }
     
-    func getObjectData(type: DataType, fromContext token: ContextToken) -> [[String:String]] {
-        // TBD: get the entire array of objects of this type from CoreData for export, converting them to [:] form first
-        return [[:]]
+    func finalizeStorageContext(token: ContextToken, forExport: Bool = false) {
+        if !forExport {
+            saveContextForThread(token)
+        }
+        removeContextForThread(token) // NOTE: do NOT use token after this point
+    }
+
+    // cached export contents are saved here
+    private var dataArray : [NSManagedObject]  = []
+    
+    func numberOfItemsOfDataType( dataType: CollectionStore.DataType,
+        withContext token: CollectionStore.ContextToken ) -> Int {
+            var output = 0
+            if let context = getContextForThread(token) {
+                let sorts = prepareExportSortingForDataType(dataType)
+                let entityName : String
+                switch dataType {
+                case .Categories:
+                    entityName = "Category"
+                    break
+                case .Info:
+                    entityName = "DealerItem"
+                    break
+                case .Inventory:
+                    entityName = "InventoryItem"
+                    break
+                }
+                // NOTE: this archives the fetch request results, but the batch size should limit the memory footprint
+                dataArray = fetch(entityName, inContext: context, withFilter: nil, andSorting: sorts)
+                output = dataArray.count
+            }
+            return output
     }
     
-    func finalizeStorageContext(token: ContextToken) {
-        saveContextForThread(token)
-        removeContextForThread(token) // NOTE: do NOT use token after this point
+    func headersForItemsOfDataType( dataType: CollectionStore.DataType,
+        withContext token: CollectionStore.ContextToken )  -> [String] {
+            var output : [String] = []
+            switch dataType {
+            case .Categories:
+                output = Category.getExportHeaderNames()
+                break
+            case .Info:
+                output = DealerItem.getExportHeaderNames()
+                break
+            case .Inventory:
+                output = InventoryItem.getExportHeaderNames()
+                break
+            }
+            return output
+    }
+
+    private func prepareExportSortingForDataType( dataType: CollectionStore.DataType ) -> [NSSortDescriptor] {
+        let outputSort : NSSortDescriptor
+        // This should create data that can create a fetchRequest that gets the objects in the proper order
+        switch dataType {
+        case .Categories:
+            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            break
+        case .Info:
+            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            break
+        case .Inventory:
+            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            break
+        }
+        return [outputSort]
+    }
+    
+    func dataType(dataType: CollectionStore.DataType, dataItemAtIndex index: Int,
+        withContext token: CollectionStore.ContextToken ) -> [String:String] {
+            var output : [String:String] = [:]
+            if (0..<dataArray.count).contains(index) {
+                var item = dataArray[index]
+                switch dataType {
+                case .Categories:
+                    if let obj = item as? Category {
+                        output = obj.makeDataFromObject()
+                    }
+                    break
+                case .Info:
+                    if let obj = item as? DealerItem {
+                        output = obj.makeDataFromObject()
+                    }
+                    break
+                case .Inventory:
+                    if let obj = item as? InventoryItem {
+                        output = obj.makeDataFromObject()
+                    }
+                    break
+                }
+            }
+            return output
+    }
+
+    // MARK: main functionality
+    func exportAllData(completion: (() -> Void)? = nil) {
+        var exporter = ImportExport()
+        exporter.dataSource = self
+        exporter.exportData(compare: false, completion: completion)
     }
     
     func fetchType(type: DataType, category: Int16 = CategoryAll, searching: [SearchType] = [], completion: (() -> Void)? = nil) {
@@ -177,7 +336,7 @@ class CollectionStore {
         }
     }
 
-    func fetchCategory(category: Int16 ) -> Category? {
+    func fetchCategory(category: Int16, inContext token: ContextToken = CollectionStore.mainContextToken ) -> Category? {
         // filter: returns category item with given category number; if -1 or unused cat# is passed, returns nil
         // i.e., this looks in the prefiltered categories list (no codes starting with '*')
 //        var items : [Category] = categories.filter { x in
@@ -187,7 +346,7 @@ class CollectionStore {
 //            return items[0]
 //        }
         // filter: go for the objects that have the right number, and ignore the weird Booklets (var) category
-        if let context = CollectionStore.getMainContext() where category != CollectionStore.CategoryAll {
+        if let context = getContextForThread(token) where category != CollectionStore.CategoryAll {
             let rule = NSPredicate(format: "%K == %@ AND NOT %K ENDSWITH %@", "number", NSNumber(short: category), "name", "(var)")
             let cat = fetch("Category", inContext: context, withFilter: rule) as [Category]
             if  cat.count ==  1 {
@@ -196,22 +355,45 @@ class CollectionStore {
         }
         return nil
     }
-    
+
+    // get counts directly from MOC
+    func getCountForType( type: DataType, fromCategory category: Int16 = CollectionStore.CategoryAll, inContext token: ContextToken = CollectionStore.mainContextToken ) -> Int {
+        var total = 0
+        if let context = getContextForThread(token) {
+            var rule: NSPredicate? = nil
+            if category != CollectionStore.CategoryAll {
+                rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
+            }
+            let typeStr : String
+            switch type {
+            case .Categories: typeStr = "Category"
+            case .Info: typeStr = "DealerItem"
+            case .Inventory: typeStr = "InventoryItem"
+            }
+            total = countFetches(typeStr, inContext: context, withFilter: rule)
+        }
+        return total
+    }
+
+    // get counts from local info arrays (deprecated)
     func getInfoCategoryCount( category: Int16 ) -> Int {
         var total = 0
-//        if let context = CollectionStore.getMainContext() {
-//            var rule: NSPredicate? = nil
-//            if category != CollectionStore.CategoryAll {
-//                rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
-//            }
-//            // TBD: add way to convert [SearchType] into predicate on top of this predicate
-//            // TBD: add sorting using its ViewModel types as well
-//            total = count("DealerItem", inContext: context, withFilter: rule)
-//        }
+        if category == CollectionStore.CategoryAll {
+            total = categories.reduce(0) { (sum, this) in
+                sum + this.dealerItems.count
+            }
+        } else {
+            var items : [Category] = categories.filter { x in
+                x.number == category
+            }
+            if items.count > 0 {
+                return items[0].dealerItems.count
+            }
+        }
         return total
     }
     
-    func fetchInfoItem(code: String ) -> DealerItem? {
+    func getInfoItem(code: String ) -> DealerItem? {
         // filter: returns info item with given unique code string; if item not found, returns nil
         // i.e., this looks in the prefiltered info list (usually filtered by category)
         var items : [DealerItem] = info.filter { x in
@@ -223,7 +405,7 @@ class CollectionStore {
         return nil
     }
     
-    func fetchInventoryItems(code: String ) -> [InventoryItem] {
+    func getInventoryItems(code: String ) -> [InventoryItem] {
         // filter: returns inventory items with given baseItem code string
         // NOTE: due to duplicates, this needs to work differently from the INFO and CATEGORY item fetchers
         // i.e., this looks in the prefiltered info list (usually filtered by category)
@@ -233,60 +415,34 @@ class CollectionStore {
         return items
     }
     
-//    private func fetchCategories(moc: NSManagedObjectContext) {
-//        // filter: removed the Booklets (var) category as not useful in current implementation
-//        // sort: by category.number
-//        let temp = allCategories.filter {
-//                !$0.name.endsWith("(var)")
-//            }.sorted {
-//                $0.number < $1.number
-//        }
-////        let temp2 = sortKVOArray(allCategories, ["number"])
-//        categories = temp
-//    }
-//    
-//    private func fetchInfoinCategory(_ category: Int16 = CollectionStore.CategoryAll, searching: [SearchType] = []) {
-//        // filter: only for given category (catgDisplayNum) unless -1 is passed
-//        let temp = category == CollectionStore.CategoryAll ? allInfo : allInfo.filter { x in
-//            x.catgDisplayNum == Int16(category)
-//        } // unsorted for now, much work to do on that
-// //       let temp = category == CollectionStore.CategoryAll ? allInfo : filterInfo(allInfo, [SearchType.Category(category)])
-//        let temp2 = filterInfo(temp, searching) // more complex filtering
-//        let output = temp2 // do sorting here, after filtering
-//        info = output
-//    }
-//    
-//    private func fetchInventoryinCategory(_ category: Int16 = CollectionStore.CategoryAll, searching: [SearchType] = []) {
-////        // filter: only for given category (catgDisplayNum) unless -1 is passed
-//        let temp = category == CollectionStore.CategoryAll ? allInventory : allInventory.filter { x in
-//            x.catgDisplayNum == Int16(category)
-//        } // unsorted for now, much work to do on that
-////        let temp = category == CollectionStore.CategoryAll ? allInventory : filterInventory(allInventory, [SearchType.Category(category)])
-//        let temp2 = filterInventory(temp, searching) // more complex filtering
-//        let output = temp2 // do sorting here, after filtering
-//        inventory = output
-//    }
-    
     private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = []) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
-        var rule: NSPredicate? = nil
-        if category != CollectionStore.CategoryAll {
-            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
-        }
-        // TBD: add way to convert [SearchType] into predicate on top of this predicate
-        // TBD: add sorting using its ViewModel types as well
-        info = fetch("DealerItem", inContext: context, withFilter: rule)
+        //        var rule: NSPredicate? = nil
+        //        if category != CollectionStore.CategoryAll {
+        //            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
+        //        }
+        let firstST = category == CollectionStore.CategoryAll ? SearchType.None : SearchType.Category(category)
+        let allSTs = [firstST] + searching
+        let rule = getPredicateOfType(.Info, forSearchTypes: allSTs)
+        // sort in original archived order
+        let sorts = prepareExportSortingForDataType(.Inventory)
+        // TBD: replace sorting using its ViewModel types as well
+        info = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
     }
     
     private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = []) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
-        var rule: NSPredicate? = nil
-        if category != CollectionStore.CategoryAll {
-            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
-        }
-        // TBD: add way to convert [SearchType] into predicate on top of this predicate
-        // TBD: add sorting using its ViewModel types as well
-        inventory = fetch("InventoryItem", inContext: context, withFilter: rule)
+//        var rule: NSPredicate? = nil
+//        if category != CollectionStore.CategoryAll {
+//            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
+//        }
+        let firstST = category == CollectionStore.CategoryAll ? SearchType.None : SearchType.Category(category)
+        let allSTs = [firstST] + searching
+        let rule = getPredicateOfType(.Inventory, forSearchTypes: allSTs)
+        // sort in original archived order
+        let sorts = prepareExportSortingForDataType(.Inventory)
+        // TBD: replace sorting using its ViewModel types as well
+        inventory = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
     }
     
     private func fetchCategories(context: NSManagedObjectContext) {
@@ -299,10 +455,10 @@ class CollectionStore {
     
     private func fetch<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
         var output : [T] = []
-        let name = /*CollectionStore.moduleName + "." +*/ entity
-        var fetchRequest = NSFetchRequest(entityName: name)
+        var fetchRequest = NSFetchRequest(entityName: entity)
         fetchRequest.sortDescriptors = sorters
         fetchRequest.predicate = filter
+        fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
         var error : NSError?
         if let fetchResults = moc.executeFetchRequest(fetchRequest, error: &error) {
             output = fromNSArray(fetchResults)
@@ -311,36 +467,16 @@ class CollectionStore {
         }
         return output
     }
-//    
-//    private func count<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> Int {
-//        let name = /*CollectionStore.moduleName + "." +*/ entity
-//        var fetchRequest = NSFetchRequest(entityName: name)
-//        fetchRequest.sortDescriptors = sorters
-//        fetchRequest.predicate = filter
-//        var error : NSError?
-//        let fetchResults = moc.countForFetchRequest(fetchRequest, error: &error)
-//        if let error = error {
-//            println("Count error:\(error.localizedDescription)")
-//        }
-//        return fetchResults
-//    }
+    
+    private func countFetches( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil ) -> Int {
+        var fetchRequest = NSFetchRequest(entityName: entity)
+        fetchRequest.predicate = filter
+        var error : NSError?
+        let fetchResults = moc.countForFetchRequest(fetchRequest, error: &error)
+        if let error = error {
+            println("Count error:\(error.localizedDescription)")
+        }
+        return fetchResults
+    }
 
-//    private func fetch<T: NSObject>( entity: String, collection: [T], withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
-//        println("fetch with type \(T.self)")
-//        var output : [T] = []
-//        let resultsNS : NSArray
-//        if let filter = filter {
-//            // get the proper list of objects from the proper type array
-//            resultsNS = (collection as NSArray).filteredArrayUsingPredicate(filter)
-//        } else {
-//            resultsNS = collection
-//        }
-//        // NOTE: the following line seems to break XCode 6.3.1 - causes HUGE numbers to be returned and corruption of memory - why??
-//        if let results = resultsNS.sortedArrayUsingDescriptors(sorters) as? [T] {
-//            let ccount = results.count
-//            return results
-//        }
-//        let ocount = output.count
-//        return output
-//    }
 }
