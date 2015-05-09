@@ -3,10 +3,13 @@
     <entity name="Category" representedClassName="StampCollection.Category" syncable="YES">
         <attribute name="catalogs" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="items" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="prices" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dealerItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DealerItem" inverseName="category" inverseEntity="DealerItem" syncable="YES"/>
+        <relationship name="inventoryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="category" inverseEntity="InventoryItem" syncable="YES"/>
     </entity>
     <entity name="DealerItem" representedClassName="StampCollection.DealerItem" syncable="YES">
         <attribute name="buy1" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,6 +20,7 @@
         <attribute name="cat2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="oldprice1" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,6 +34,9 @@
         <attribute name="price3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="dealerItems" inverseEntity="Category" syncable="YES"/>
+        <relationship name="inventoryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="dealerItem" inverseEntity="InventoryItem" syncable="YES"/>
+        <relationship name="referringItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="referredItem" inverseEntity="InventoryItem" syncable="YES"/>
     </entity>
     <entity name="InventoryItem" representedClassName="StampCollection.InventoryItem" syncable="YES">
         <attribute name="albumPage" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,14 +46,18 @@
         <attribute name="baseItem" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="itemType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="refItem" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wantHave" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="inventoryItems" inverseEntity="Category" syncable="YES"/>
+        <relationship name="dealerItem" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="inventoryItems" inverseEntity="DealerItem" syncable="YES"/>
+        <relationship name="referredItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="referringItems" inverseEntity="DealerItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-155" positionY="27" width="128" height="133"/>
-        <element name="DealerItem" positionX="-326" positionY="0" width="128" height="358"/>
-        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="208"/>
+        <element name="Category" positionX="-155" positionY="-63" width="128" height="180"/>
+        <element name="DealerItem" positionX="-326" positionY="0" width="128" height="420"/>
+        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="270"/>
     </elements>
 </model>
