@@ -2,7 +2,7 @@
 //  DealerItem.swift
 //  StampCollection
 //
-//  Created by Michael L Mehr on 4/15/15.
+//  Created by Michael L Mehr on 5/9/15.
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
@@ -32,74 +32,9 @@ class DealerItem: NSManagedObject {
     @NSManaged var price3: String
     @NSManaged var price4: String
     @NSManaged var status: String
+    @NSManaged var exOrder: Int16
+    @NSManaged var category: Category
+    @NSManaged var inventoryItems: NSOrderedSet
+    @NSManaged var referringItems: NSOrderedSet
 
-    enum ValueType {
-        case tInt(NSNumber)
-        case tString(String)
-    }
-    
-//    override init() {
-//        catgDisplayNum = Int16(CollectionStore.CategoryAll)
-//        id = ""; descriptionX = ""; group = ""; status = ""
-//        pictid = ""; pictype = "0"
-//        cat1 = ""; cat2 = ""
-//        price1 = ""; price2 = ""; price3 = ""; price4 = ""
-//        buy1 = ""; buy2 = ""; buy3 = ""; buy4 = ""
-//        oldprice1 = ""; oldprice2 = ""; oldprice3 = ""; oldprice4 = ""
-//        super.init()
-//    }
-    
-    private class func translateKeyName( nameIn: String ) -> String {
-        var name = nameIn
-        // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-        switch name {
-            case "CatgDisplayNum": name = "catgDisplayNum"
-            case "description": name = name + "X"
-            default: name = name.lowercaseString
-        }
-        return name
-    }
-    
-    private class func typeForKeyName( name: String, withValue value: String ) -> ValueType {
-        var output = ValueType.tString(value)
-        // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-        switch name {
-        case "catgDisplayNum": output = ValueType.tInt(NSNumber(integer: value.toInt()!))
-        default: break
-        }
-        return output
-    }
-    
-    private class func setDataValuesForObject( newObject: DealerItem, fromData  data: [String : String]) -> DealerItem {
-        for (key, value) in data {
-            // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-            let keyName = translateKeyName(key)
-            // set the attributes of the new object (allows Int16 type or String type, for now)
-            let valueType = typeForKeyName( keyName, withValue: value )
-            switch valueType {
-            case .tInt (let val): newObject.setValue(val, forKey: keyName)
-            case .tString: newObject.setValue(value, forKey: keyName)
-            }
-        }
-        return newObject
-    }
-    
-//    static func makeObjectFromData( data: [String : String] ) -> DealerItem {
-//        return DealerItem.setDataValuesForObject(DealerItem(), fromData: data)
-//    }
-    
-    static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Bool {
-        // add a new object of this type to the moc
-        if let moc = moc {
-            let entityName = "DealerItem"
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? DealerItem {
-                DealerItem.setDataValuesForObject(newObject, fromData: data)
-                return true
-            } else {
-                // report error creating object in CoreData MOC
-                println("Unable to make CoreData DealerItem from data \(data)")
-            }
-        }
-        return false
-    }
 }

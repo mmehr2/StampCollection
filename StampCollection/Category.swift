@@ -2,7 +2,7 @@
 //  Category.swift
 //  StampCollection
 //
-//  Created by Michael L Mehr on 4/15/15.
+//  Created by Michael L Mehr on 5/9/15.
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
@@ -11,75 +11,14 @@ import CoreData
 
 class Category: NSManagedObject {
 
-    @NSManaged var code: String
-    @NSManaged var number: Int16
-    @NSManaged var name: String
-    @NSManaged var items: String
     @NSManaged var catalogs: String
+    @NSManaged var code: String
+    @NSManaged var items: String
+    @NSManaged var name: String
+    @NSManaged var number: Int16
     @NSManaged var prices: String
+    @NSManaged var exOrder: Int16
+    @NSManaged var dealerItems: NSOrderedSet
+    @NSManaged var inventoryItems: NSOrderedSet
 
-//    override init() {
-//        number = Int16(CollectionStore.CategoryAll)
-//        code = ""; name = ""; catalogs = ""; prices = ""
-//        items = "0"
-//        super.init()
-//    }
-    
-    enum ValueType {
-        case tInt(NSNumber)
-        case tString(String)
-    }
-    
-    private class func translateKeyName( nameIn: String ) -> String {
-        var name = nameIn
-        // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-        switch name {
-        case "#": name = "number"
-        default: name = name.lowercaseString
-        }
-        return name
-    }
-    
-    private class func typeForKeyName( name: String, withValue value: String ) -> ValueType {
-        var output = ValueType.tString(value)
-        // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-        switch name {
-        case "number": output = ValueType.tInt(NSNumber(integer: value.toInt()!))
-        default: break
-        }
-        return output
-    }
-
-    private class func setDataValuesForObject( newObject: Category, fromData  data: [String : String]) -> Category {
-        for (key, value) in data {
-            // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
-            let keyName = translateKeyName(key)
-            // set the attributes of the new object (allows Int16 type or String type, for now)
-            let valueType = typeForKeyName( keyName, withValue: value )
-            switch valueType {
-            case .tInt (let val): newObject.setValue(val, forKey: keyName)
-            case .tString: newObject.setValue(value, forKey: keyName)
-            }
-        }
-        return newObject
-    }
-    
-//    static func makeObjectFromData( data: [String : String] ) -> Category {
-//        return Category.setDataValuesForObject(Category(), fromData: data)
-//    }
-    
-    static func makeObjectFromData( data: [String : String], inContext moc: NSManagedObjectContext? = nil) -> Bool {
-        // add a new object of this type to the moc
-        if let moc = moc {
-            let entityName = "Category"
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as? Category {
-                Category.setDataValuesForObject(newObject, fromData: data)
-                return true
-            } else {
-                // report error creating object in CoreData MOC
-                println("Unable to make CoreData Category from data \(data)")
-            }
-        }
-        return false
-    }
 }
