@@ -23,11 +23,19 @@ func getFormattedStringFromDate(input: NSDate, withTime: Bool = false) -> String
 }
 
 func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
-    var ac = UIAlertController(title: title, message: body, preferredStyle: .Alert)
-    let act = UIAlertAction(title: "OK", style: .Default) { x in
-        // dismiss but do nothing
+    messageBoxWithTitle(title, andBody: body, forController: vc) { ac in
+        let act = UIAlertAction(title: "OK", style: .Default) { x in
+            // dismiss but do nothing
+        }
+        ac.addAction(act)
     }
-    ac.addAction(act)
+}
+
+func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController, configuration: ((inout UIAlertController) -> Void)? = nil ) {
+    var ac = UIAlertController(title: title, message: body, preferredStyle: .Alert)
+    if let configHandler = configuration {
+        configHandler(&ac)
+    }
     vc.presentViewController(ac, animated: true, completion: nil)
 }
 
@@ -132,7 +140,7 @@ private func formatInventoryVarCondition(item: InventoryItem) -> String {
 
 func formatInventoryMain(item: InventoryItem) -> String {
     if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum)
-        , info = CollectionStore.sharedInstance.fetchInfoItem(item.baseItem) {
+        , info = CollectionStore.sharedInstance.getInfoItem(item.baseItem) {
             let basedes = makeStringFit(info.descriptionX, 60)
             return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
     }
@@ -141,7 +149,7 @@ func formatInventoryMain(item: InventoryItem) -> String {
 
 func formatInventoryDetail(item: InventoryItem) -> String {
     if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum)
-        , info = CollectionStore.sharedInstance.fetchInfoItem(item.baseItem) {
+        , info = CollectionStore.sharedInstance.getInfoItem(item.baseItem) {
             let basedes = makeStringFit(info.descriptionX, 60)
             return "\(item.baseItem) \(formatInventoryValue(item,info,cat)) \(formatInventoryVarCondition(item))"
     }
