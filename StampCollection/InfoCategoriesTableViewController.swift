@@ -15,18 +15,28 @@ class InfoCategoriesTableViewController: UITableViewController {
     var model = CollectionStore.sharedInstance
 
     @IBAction func doImportAction(sender: UIBarButtonItem) {
-        // wipe the slate
-        // BEWARE - DO NOT USE WITH CORE DATA! See documentation for this function
-        model.removeAllItemsInStore()
-        updateUI()
-        // load the data from CSV files
-        let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
-        csvFileImporter.importData(sourceType) {
-            // when done, load the data, then update the UI
-            self.model.fetchType(.Categories) {
-                self.updateUI()
+        
+        messageBoxWithTitle("Import Data from CSV", andBody: "NOTE: Wipes the database first! OK to proceed?", forController: self) { ac in
+            var act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
+                // dismiss but do nothing
             }
+            ac.addAction(act)
+            act = UIAlertAction(title: "OK", style: .Destructive) { x in
+                // wipe the slate
+                self.model.removeAllItemsInStore()
+                self.updateUI()
+                // load the data from CSV files
+                let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
+                self.csvFileImporter.importData(sourceType) {
+                    // when done, load the data, then update the UI
+                    self.model.fetchType(.Categories) {
+                        self.updateUI()
+                    }
+                }
+            }
+            ac.addAction(act)
         }
+
     }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
@@ -38,10 +48,15 @@ class InfoCategoriesTableViewController: UITableViewController {
     
     @IBAction func doExportAction(sender: UIBarButtonItem) {
         // TBD: select type of export (email, airdrop, ??)
-        let exporter = EmailAttachmentExporter(forController: self) { error in
+        let emailer = EmailAttachmentExporter(forController: self) { error in
             messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
         }
-        exporter.sendFiles()
+        // send the data from CoreData to the CSV files
+        model.exportAllData() {
+            // when done, send the CSV files on their way
+            //emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
+            println("Emailing CSV files would go here on real device.")
+        }
     }
     
     override func viewDidLoad() {
@@ -56,16 +71,12 @@ class InfoCategoriesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        // load the data from CSV files
-//        let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
-//        csvFileImporter.importData(sourceType) {
-//            // when done, write it back to other CSV files
-//            self.csvFileImporter.exportData(true) {
-//                println("Completed write test. Time to update the UI!")
-//            }
-//        }
+        // load the category data from CoreData
         title = "Collection Categories"
-        self.updateUI()
+        model.fetchType(.Categories) {
+            // completion block
+            self.updateUI()
+        }
     }
 
     func updateUI() {
