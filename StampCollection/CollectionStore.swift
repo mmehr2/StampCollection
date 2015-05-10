@@ -427,7 +427,9 @@ class CollectionStore: ExportDataSource {
         // sort in original archived order
         let sorts = prepareExportSortingForDataType(.Inventory)
         // TBD: replace sorting using its ViewModel types as well
-        info = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
+        let temp : [DealerItem] = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
+        // run phase 2 filtering, if needed
+        info = filterInfo(temp, searching)
     }
     
     private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = []) {
@@ -442,7 +444,9 @@ class CollectionStore: ExportDataSource {
         // sort in original archived order
         let sorts = prepareExportSortingForDataType(.Inventory)
         // TBD: replace sorting using its ViewModel types as well
-        inventory = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
+        let temp : [InventoryItem] = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
+        // run phase 2 filtering, if needed
+        inventory = filterInventory(temp, searching)
     }
     
     private func fetchCategories(context: NSManagedObjectContext) {

@@ -229,6 +229,7 @@ func getPredicateOfType( dataType: CollectionStore.DataType, forSearchTypes type
     return output
 }
 
+// MARK: predicate operators
 // simple predicate extensions to deal with making compound predicates
 infix operator && {}
 func &&( lhs: NSPredicate, rhs: NSPredicate) -> NSPredicate {
@@ -245,4 +246,94 @@ prefix func !( lhs: NSPredicate) -> NSPredicate {
     return NSCompoundPredicate.notPredicateWithSubpredicate(lhs)
 }
 
+// MARK: in-memory filtering
+
+private func CompareDateInRange( input: String, range: ClosedInterval<Int> ) -> Bool {
+    let (fmt, extractedRange) = extractYearRangeFromDescription(input)
+    if fmt != 0 {
+        let startInside = range.contains(extractedRange.start)
+        let endInside = range.contains(extractedRange.end)
+        if startInside && endInside {
+            // fully contained
+            return true
+        }
+    }
+    return false
+}
+
+// pull out the SearchType objects that we are interested in
+private func getMemorySearchTypes( types: [SearchType] ) -> [SearchType] {
+    return types.filter { x in
+        switch x {
+        case .YearInRange(_): return true
+        default: return false
+        }
+    }
+}
+
+// MARK: search for INFO
+private func CompareInfoSingle( types: [SearchType], item: DealerItem) -> Bool {
+    var result = true
+    for type in types {
+        var eachResult = true
+        switch type {
+        case .YearInRange(let range):
+            eachResult = CompareDateInRange(item.descriptionX, range)
+        default: eachResult = true
+        }
+        if !eachResult {
+            // quit on 1st negative (ALL responses must be true to include item)
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+func filterInfo( coll: [DealerItem], types: [SearchType] ) -> [DealerItem] {
+    let mtypes = getMemorySearchTypes(types)
+    return mtypes.count == 0 ? coll : coll.filter { item in
+        return CompareInfoSingle( mtypes, item )
+    }
+}
+
+// MARK: Individual search type functions - INVENTORY
+//private func CompareInvWantHave( type: SearchType, item: InventoryItem ) -> Bool {
+//    var result = false
+//    switch type {
+//    case .WantHave(let wht):
+//        if wht == .Haves && item.wantHave == "h" { result = true }
+//        if wht == .Wants && item.wantHave == "w" { result = true }
+//        break
+//    default:
+//        break
+//    }
+//    return result
+//}
+
+// MARK: search for INVENTORY
+private func CompareInvSingle( types: [SearchType], item: InventoryItem) -> Bool {
+    var result = true
+    for type in types {
+        var eachResult = true
+        switch type {
+        case .YearInRange(let range):
+            eachResult = CompareDateInRange(item.dealerItem.descriptionX, range) // date extraction only works on baseItem description field
+        default: eachResult = true
+        }
+        if !eachResult {
+            // quit on 1st negative (ALL responses must be true to include item)
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+func filterInventory( coll: [InventoryItem], types: [SearchType] ) -> [InventoryItem] {
+    let mtypes = getMemorySearchTypes(types)
+    return mtypes.count == 0 ? coll : coll.filter { item in
+        return CompareInvSingle( mtypes, item )
+    }
+}
 
