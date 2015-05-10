@@ -166,7 +166,7 @@ class CollectionStore: ExportDataSource {
         switch type {
         case .Categories:
             Category.makeObjectFromData(data, inContext: mocForThread)
-            let valstr = ", ".join(data.values)
+            //let valstr = ", ".join(data.values)
             //println("Made Category from \(valstr)")
             break
         case .Info:
@@ -177,7 +177,7 @@ class CollectionStore: ExportDataSource {
                     // pass the related object(s) in a Dictionary to make the new item in the moc
                     let relations = ["category": obj]
                     DealerItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
-                    let valstr = ", ".join(data.values)
+                    //let valstr = ", ".join(data.values)
                     //println("Made DealerItem from \(valstr)")
             }
             break
@@ -199,7 +199,7 @@ class CollectionStore: ExportDataSource {
                         relations.updateValue(robj, forKey: "referredItem")
                     }
                     InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
-                    let valstr = ", ".join(data.values)
+                    //let valstr = ", ".join(data.values)
                     //println("Made InventoryItem from \(valstr)")
                 }
             }

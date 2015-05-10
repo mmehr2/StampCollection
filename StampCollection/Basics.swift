@@ -14,6 +14,17 @@ http://stackoverflow.com/questions/24006206/sourcekitservice-terminated
 which says to run this command line to eliminate some cache data:
     rm -rf ~/Library/Developer/Xcode/DerivedData/ModuleCache
 NOTE: This specific issue doesn't seem to plague XCode 6.3 (MANY OTHER PROBS THO!)
+
+UPDATE: It turns out that when X6.3 gets really flakey, this also helps fix it.
+There is one more powerful version of the above, that removes the entire directory contents:
+    rm -rf ~/Library/Developer/Xcode/DerivedData/ * (NOTE: remove the space, it is to allow this to exist in a Swift comment!)
+This causes all the caches to be removed, and should only be used when XCode is closed.
+*/
+
+/*
+Git merge and diff using P4MERGE:
+Check this article on how to install it and do a proper 4-pane 3-way merge:
+http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-git-and-tower-dot-app
 */
 
 // MARK: treat a string as a floating point number if possible
