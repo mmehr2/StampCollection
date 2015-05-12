@@ -11,6 +11,15 @@ import Foundation
 // this class organizes all the data retrieved from external dealer Bait-tov.com's website
 // UPDATE: additional category added for Judaicasales.com's website (Austria tabs)
 
+// UPDATE ON PIC IMAGES:
+/*
+I have determined that the pics can be downloaded from BT site using URLs like these: http://www.bait-tov.com/store/products/6110s555.jpg
+The entire user-viewed page comes from URLs like these: http://www.bait-tov.com/store/pic.php?ID= and then append the ID portion (minus the .jpg extension).
+I have already downloaded the pics from the JS website, files of the form ajtXX.jpg
+All I need to learn is how to cache them in CoreData, and then how to provide that properly (Bundle?) as startup data for the initial app setup.
+Only for my private use, of course. This app should never ship.
+*/
+
 class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     static let model = BTDealerStore() // singleton/global model item
     

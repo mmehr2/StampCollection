@@ -77,10 +77,17 @@ class InfoItemsTableViewController: UITableViewController {
         }
     }
     
-    @IBOutlet weak var picButtonItem: UIBarButtonItem!
-    @IBAction func picButtonPressed(sender: UIBarButtonItem) {
+    @IBOutlet weak var infoButtonItem: UIBarButtonItem!
+    @IBAction func infoButtonPressed(sender: UIBarButtonItem) {
         (ftype, itype) = getNextInvState()
         refetchData()
+    }
+    
+    @IBAction func picButtonPressed(sender: UIBarButtonItem) {
+        // TBD: download and show the image identified by the selection's pictid property
+        // URL is http://www.bait-tov.com/store/products/XXX.jpg where XXX is the pictid
+        // NOTE: should probably be a part of a detail controller instead
+        println("Pic button pressed.")
     }
     
     @IBAction func searchButtonPressed(sender: AnyObject) {
@@ -135,10 +142,71 @@ class InfoItemsTableViewController: UITableViewController {
     
     @IBAction func sortButtonPressed(sender: AnyObject) {
         // TBD: implementing sorting functionality
+        var ac = UIAlertController(title: "Choose Info Sort Method", message: nil, preferredStyle: .Alert)
+        var act = UIAlertAction(title: "Unsorted", style: .Default) { x in
+            // TBD resort current info data by exOrder (or category+exOrder if showing ALL)
+            println("Reverting to Unsorted INFO")
+            self.refetchData()
+            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")
+            println("Last: \(self.model.info.last?.normalizedCode)")
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Sort by ID(+)", style: .Default) { x in
+            // TBD resort current info data by id code (depends on category being shown)
+            println("Sorting INFO by ID")
+            let temp = sortCollection(self.model.info, byType: .ByCode(true))
+            self.model.info = temp
+            self.refreshData()
+            self.updateUI()
+            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+            println("Last: \(temp.last?.normalizedCode)")
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Sort by ID(-)", style: .Default) { x in
+            // TBD resort current info data by id code (depends on category being shown)
+            println("Sorting INFO by ID/Dsc")
+            let temp = sortCollection(self.model.info, byType: .ByCode(false))
+            self.model.info = temp
+            self.refreshData()
+            self.updateUI()
+            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+            println("Last: \(temp.last?.normalizedCode)")
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Sort by Import(+)", style: .Default) { x in
+            // TBD resort current info data by id code (depends on category being shown)
+            println("Sorting INFO by Import")
+            let temp = sortCollection(self.model.info, byType: .ByImport(true))
+            self.model.info = temp
+            self.refreshData()
+            self.updateUI()
+            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+            println("Last: \(temp.last?.normalizedCode)")
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Sort by Import(-)", style: .Default) { x in
+            // TBD resort current info data by id code (depends on category being shown)
+            println("Sorting INFO by Import/Dsc")
+            let temp = sortCollection(self.model.info, byType: .ByImport(false))
+            self.model.info = temp
+            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+            println("Last: \(temp.last?.normalizedCode)")
+            self.refreshData()
+            self.updateUI()
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
+            // no action here
+        }
+        ac.addAction(act)
+        presentViewController(ac, animated: true, completion: nil)
     }
     
-    func refetchData() {
+    func refetchData(modifier: (() -> Void)? = nil) {
         model.fetchType(ftype, category: category, searching: getSearchingArray()) {
+            if let modifier = modifier {
+                modifier()
+            }
             self.refreshData()
             self.updateUI()
         }
@@ -172,7 +240,7 @@ class InfoItemsTableViewController: UITableViewController {
             (.Inventory, .Wants): exwh = "Inv" + "\(nitype)"[0]
         default: break
         }
-        picButtonItem.title = "To:" + exwh
+        infoButtonItem.title = "To:" + exwh
     }
 
     // MARK: - Table view data source
@@ -200,12 +268,24 @@ class InfoItemsTableViewController: UITableViewController {
             cell.textLabel?.text = item.descriptionX
             cell.detailTextLabel?.text = formatDealerDetail(item)
             useDisclosure = false
+            var isGTstr = ""
+            if let firstItem = self.model.info.first {
+                let isGT = item.normalizedCode < firstItem.normalizedCode ? "IS" : "IS NOT"
+                isGTstr = "\n\twhich \(isGT) less than 1st INFO item:\(firstItem.normalizedCode) (len=\(count(firstItem.normalizedCode)))"
+            }
+            var isLTstr = ""
+            if let lastItem = self.model.info.last {
+                let isLT = item.normalizedCode < lastItem.normalizedCode ? "IS" : "IS NOT"
+                isLTstr = "\n\twhich \(isLT) less than last INFO item:\(lastItem.normalizedCode) (len=\(count(lastItem.normalizedCode)))"
+            }
+            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)\(isGTstr)\(isLTstr)") // DEBUG
         } else {
             // format an InventoryItem cell
             let item = model.inventory[row]
             cell.textLabel?.text = formatInventoryMain(item)
             cell.detailTextLabel?.text = formatInventoryDetail(item)
             useDisclosure = false
+            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
         }
         cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
         

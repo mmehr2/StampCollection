@@ -415,7 +415,7 @@ class CollectionStore: ExportDataSource {
         return items
     }
     
-    private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = []) {
+    private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
         //        var rule: NSPredicate? = nil
         //        if category != CollectionStore.CategoryAll {
@@ -429,10 +429,12 @@ class CollectionStore: ExportDataSource {
         // TBD: replace sorting using its ViewModel types as well
         let temp : [DealerItem] = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
-        info = filterInfo(temp, searching)
+        let temp2 = filterInfo(temp, searching)
+        // already sorted by default exOrder, so no need for further if specified
+        info = sortCollection(temp2, byType: sortType)
     }
     
-    private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = []) {
+    private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
 //        var rule: NSPredicate? = nil
 //        if category != CollectionStore.CategoryAll {

@@ -42,40 +42,22 @@ enum WantHaveType: Printable {
     }
 }
 
-enum SearchType: Printable {
+enum SearchType {
     case None // includes all items of a particular type (INFO or INVENTORY)
     case Category(Int16) // checks the catgDisplayNum field (-1 is shorthand for all)
     case MultiCategory([Int16]) // same, but includes multiple categories (related in some way)
-    case SubCategory(String) // checks relevant id/code fields to define useful subcategory groupings
-    case Catalog(String) // checks the catalog fields for various kinds of matches
     case YearInRange(ClosedInterval<Int>) // compares extracted date to range of years N...M, where N==M allowed
     case KeyWordListAll([String]) // filters for keyword existence in description fields (all words)
     case KeyWordListAny([String]) // filters for keyword existence in description fields (any word)
+    case SubCategory(String) // checks relevant id/code fields to define useful subcategory groupings
+    case Catalog(String) // checks the catalog fields for various kinds of matches
     // INVENTORY-SPECIFIC QUERIES
     case WantHave(WantHaveType) // INV wantHave field filtering
     case Location(String) // looks at any/all the location fields (type,ref,sec,page)
     case Price(String) // filtering based on price/value comparisons
-    
-//    var requiresBaseLookup : Bool {
-//        switch self {
-//        case Catalog: return true
-//        case YearInRange: return true
-//        case KeyWordListAll: return true
-//        case KeyWordListAny: return true
-//        case Price: return true
-//        default: return false
-//        }
-//    }
-//    
-//    static func anyRequireBaseLookup( types: [SearchType] ) -> Bool {
-//        let result = types.reduce(false) { (total, type) in
-//            total || type.requiresBaseLookup
-//        }
-//        let xxx = result ? "DO" : "DO NOT"
-//        println("Types \(types) \(xxx) require Base Lookup")
-//        return result
-//    }
-    
+}
+
+extension SearchType: Printable {
     var description: String {
         switch self {
         case .None: return "All Items"
@@ -105,7 +87,11 @@ enum SearchType: Printable {
             return "Unknown search type"
         }
     }
-    
+}
+
+extension SearchType {
+    // convert to preicates
+
     func getPredicateForDataType( dataType: CollectionStore.DataType ) -> NSPredicate? {
         var output: NSPredicate?
         let dealerItemPrefix = dataType == .Inventory ? "dealerItem." : ""
@@ -248,6 +234,16 @@ prefix func !( lhs: NSPredicate) -> NSPredicate {
 
 // MARK: in-memory filtering
 
+// pull out the SearchType objects that we are interested in
+private func getMemorySearchTypes( types: [SearchType] ) -> [SearchType] {
+    return types.filter { x in
+        switch x {
+        case .YearInRange(_): return true
+        default: return false
+        }
+    }
+}
+
 private func CompareDateInRange( input: String, range: ClosedInterval<Int> ) -> Bool {
     let (fmt, extractedRange) = extractYearRangeFromDescription(input)
     if fmt != 0 {
@@ -261,17 +257,6 @@ private func CompareDateInRange( input: String, range: ClosedInterval<Int> ) -> 
     return false
 }
 
-// pull out the SearchType objects that we are interested in
-private func getMemorySearchTypes( types: [SearchType] ) -> [SearchType] {
-    return types.filter { x in
-        switch x {
-        case .YearInRange(_): return true
-        default: return false
-        }
-    }
-}
-
-// MARK: search for INFO
 private func CompareInfoSingle( types: [SearchType], item: DealerItem) -> Bool {
     var result = true
     for type in types {

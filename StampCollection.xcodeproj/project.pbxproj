@@ -148,10 +148,10 @@
 		A61C11651AEB781B00063025 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A65232E51AF8261900A86FAC /* ViewSorting.swift */,
 				A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */,
 				A61C11661AEB785B00063025 /* ViewUtilities.swift */,
 				A632CBB81AF35D2A00565686 /* ViewFiltering.swift */,
+				A65232E51AF8261900A86FAC /* ViewSorting.swift */,
 				A632CBAF1AEFE15900565686 /* EmailAttachmentExporter.swift */,
 				A632CBB31AF02C0800565686 /* EmailAttachmentImporter.swift */,
 			);

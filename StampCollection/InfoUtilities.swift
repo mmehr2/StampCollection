@@ -120,19 +120,24 @@ So perhaps RegExps are the way to go here?
 I'll start simple with #1-3 and see how many that works for.
 */
 
+// constants needed
+let startEpoch = 1948 // 1st year of Israel stamps
+let endEpoch = 2047 // last year that this two-digit year scheme will work unambiguously
+let yearsInCentury = 100
+let startCentury = startEpoch / yearsInCentury * yearsInCentury
+let endCentury = endEpoch / yearsInCentury * yearsInCentury
+let startEpochYY = startEpoch - startCentury
+
+func fixupCenturyYY( yy: Int ) -> Int {
+    return yy >= startEpochYY ? startCentury : endCentury
+}
+
 func extractYearRangeFromDescription( descr: String ) -> (Int, ClosedInterval<Int>) {
     var startYear = 0
     var endYear = 0
     var fmtFound = 0
     var found = ""
     var descr2 = "" // DEBUG
-    // constants needed
-    let startEpoch = 1948 // 1st year of Israel stamps
-    let endEpoch = 2047 // last year that this two-digit year scheme will work unambiguously
-    let yearsInCentury = 100
-    let startCentury = startEpoch / yearsInCentury * yearsInCentury
-    let endCentury = endEpoch / yearsInCentury * yearsInCentury
-    let startEpochYY = startEpoch - startCentury
     // begin testing here; order of tests IS IMPORTANT
     if let match = descr.rangeOfString("^[0-9][0-9][0-9][0-9][s ]", options: .RegularExpressionSearch) {
         found = descr.substringWithRange(match)
@@ -166,8 +171,7 @@ func extractYearRangeFromDescription( descr: String ) -> (Int, ClosedInterval<In
         fmtFound = 4 // which is DD.MM.YY - this must follow format 5 YYYY counterpart, so that it doesn't pre-empt that test
         found = descr.substringWithRange(match)
         let yy = found[6...7].toInt()!
-        let cccc = yy >= startEpochYY ? startCentury : endCentury
-        startYear = cccc + yy;
+        startYear = yy + fixupCenturyYY(yy);
         endYear = startYear // but diff days
     }
     else if let match = descr.rangeOfString("^[0-9][0-9]\\-[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9]", options: .RegularExpressionSearch) {
@@ -181,16 +185,14 @@ func extractYearRangeFromDescription( descr: String ) -> (Int, ClosedInterval<In
         fmtFound = 7 // which is DD-DD.MM.YY (same note for YY following YYYY as above)
         found = descr.substringWithRange(match)
         let yy = found[9...10].toInt()!
-        let cccc = yy >= startEpochYY ? startCentury : endCentury
-        startYear = cccc + yy;
+        startYear = yy + fixupCenturyYY(yy);
         endYear = startYear // but diff days
     }
     else if let match = descr.rangeOfString(" \\'[0-9][0-9]", options: .RegularExpressionSearch) {
         fmtFound = 8 // which is 'YY preceded by space, anywhere in string
         found = descr.substringWithRange(match)
         let yy = found[2...3].toInt()!
-        let cccc = yy >= startEpochYY ? startCentury : endCentury
-        startYear = cccc + yy;
+        startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
         //descr2 = descr // DEBUG
     }
@@ -199,8 +201,7 @@ func extractYearRangeFromDescription( descr: String ) -> (Int, ClosedInterval<In
         // NOTE: this will create false positives in Vending Labels, where the strings often contain things like 'Klussendorf 11' or 'Doarmat 23'
         found = descr.substringWithRange(match)
         let yy = found[1...2].toInt()!
-        let cccc = yy >= startEpochYY ? startCentury : endCentury
-        startYear = cccc + yy;
+        startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
         //descr2 = descr // DEBUG
     }
@@ -209,8 +210,7 @@ func extractYearRangeFromDescription( descr: String ) -> (Int, ClosedInterval<In
         // NOTE: this is used by one booklet item that specifies nothing but "print date 100989" for 10 Sep 1989 (Olive Branch booklet reprint)
         found = descr.substringWithRange(match)
         let yy = found[9...10].toInt()!
-        let cccc = yy >= startEpochYY ? startCentury : endCentury
-        startYear = cccc + yy;
+        startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
         //descr2 = descr // DEBUG
     }

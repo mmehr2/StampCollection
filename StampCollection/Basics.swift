@@ -27,6 +27,8 @@ Check this article on how to install it and do a proper 4-pane 3-way merge:
 http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-git-and-tower-dot-app
 */
 
+// 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
+
 // MARK: treat a string as a floating point number if possible
 extension String {
     func toDouble() -> Double? {

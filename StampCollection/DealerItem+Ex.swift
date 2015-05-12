@@ -14,8 +14,22 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
-extension DealerItem {
+extension DealerItem: SortTypeSortable {
 
+    var normalizedCode: String {
+        var postE1K = false
+        if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
+            if id[0...4] == "6110e" {
+                postE1K = exYearStart >= 2000
+            }
+        }
+        return normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
+    }
+    
+    var normalizedDate: String {
+        return "" // TBD
+    }
+    
     var exYearStart: Int16 {
         get {
             let (_, range) = extractYearRangeFromDescription(self.descriptionX)

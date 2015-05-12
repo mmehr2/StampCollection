@@ -14,7 +14,22 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
-extension InventoryItem {
+extension InventoryItem:  SortTypeSortable {
+    
+    var normalizedCode: String {
+        var postE1K = false
+        if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
+            if baseItem[0...4] == "6110e" {
+                postE1K = dealerItem.exYearStart >= 2000
+            }
+        }
+        return normalizeIDCode(baseItem, forCat: catgDisplayNum, isPostE1K: postE1K)
+    }
+    
+    var normalizedDate: String {
+        return "" // TBD
+    }
+    
     enum ValueType {
         case tInt(NSNumber)
         case tString(String)
