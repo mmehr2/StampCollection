@@ -44,18 +44,10 @@ protocol ImportSortable {
     var exOrder: Int16 { get }
 }
 
-private func isOrderedByImport( ob1: ImportSortable, ob2: ImportSortable ) -> Bool {
-    return ob1.exOrder < ob2.exOrder
-}
-
 protocol CodeSortable {
     // compare computed property called normalizedCode
     // this should create a string that is always the same length, contains all hidden assumptions explicitly (missing '1'), and pads all numeric fields with leading zeroes
     var normalizedCode: String { get }
-}
-
-private func isOrderedByCode( ob1: CodeSortable, ob2: CodeSortable ) -> Bool {
-    return ob1.normalizedCode < ob2.normalizedCode
 }
 
 protocol DateSortable {
@@ -65,28 +57,30 @@ protocol DateSortable {
     var normalizedDate: String { get }
 }
 
-private func isOrderedByDate( ob1: DateSortable, ob2: DateSortable ) -> Bool {
-    return ob1.normalizedDate < ob2.normalizedDate
-}
-
 protocol SortTypeSortable : CodeSortable, DateSortable, ImportSortable { }
-
-private func isOrderedBySortType( type: SortType, ob1: SortTypeSortable, ob2: SortTypeSortable ) -> Bool {
-    switch type {
-    case .ByImport(let asc): asc ? isOrderedByImport(ob1, ob2) : isOrderedByImport(ob2, ob1)
-    case .ByCode(let asc): asc ? isOrderedByCode(ob1, ob2) : isOrderedByCode(ob2, ob1)
-    case .ByDate(let asc): asc ? isOrderedByDate(ob1, ob2) : isOrderedByDate(ob2, ob1)
-    default: break
-    }
-    return false
-}
 
 func sortCollection<T: SortTypeSortable>( coll: [T], byType type: SortType) -> [T] {
     switch type {
-    case .None: return coll
+    case .ByImport(let asc):
+        if asc {
+            return coll.sorted{ $0.exOrder < $1.exOrder }
+        } else {
+            return coll.sorted{ $1.exOrder < $0.exOrder }
+        }
+    case .ByCode(let asc):
+        if asc {
+            return coll.sorted{ $0.normalizedCode < $1.normalizedCode }
+        } else {
+            return coll.sorted{ $1.normalizedCode < $0.normalizedCode }
+        }
+    case .ByDate(let asc):
+        if asc {
+            return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
+        } else {
+            return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
+        }
     default: break
     }
-    return coll.sorted{
-        return isOrderedBySortType(type, $0, $1)
-    }
+    return coll
 }
+

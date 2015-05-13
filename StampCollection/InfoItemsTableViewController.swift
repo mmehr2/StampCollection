@@ -147,8 +147,8 @@ class InfoItemsTableViewController: UITableViewController {
             // TBD resort current info data by exOrder (or category+exOrder if showing ALL)
             println("Reverting to Unsorted INFO")
             self.refetchData()
-            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")
-            println("Last: \(self.model.info.last?.normalizedCode)")
+//            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")
+//            println("Last: \(self.model.info.last?.normalizedCode)")
         }
         ac.addAction(act)
         act = UIAlertAction(title: "Sort by ID(+)", style: .Default) { x in
@@ -158,8 +158,8 @@ class InfoItemsTableViewController: UITableViewController {
             self.model.info = temp
             self.refreshData()
             self.updateUI()
-            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-            println("Last: \(temp.last?.normalizedCode)")
+//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+//            println("Last: \(temp.last?.normalizedCode)")
         }
         ac.addAction(act)
         act = UIAlertAction(title: "Sort by ID(-)", style: .Default) { x in
@@ -169,8 +169,8 @@ class InfoItemsTableViewController: UITableViewController {
             self.model.info = temp
             self.refreshData()
             self.updateUI()
-            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-            println("Last: \(temp.last?.normalizedCode)")
+//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+//            println("Last: \(temp.last?.normalizedCode)")
         }
         ac.addAction(act)
         act = UIAlertAction(title: "Sort by Import(+)", style: .Default) { x in
@@ -180,8 +180,8 @@ class InfoItemsTableViewController: UITableViewController {
             self.model.info = temp
             self.refreshData()
             self.updateUI()
-            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-            println("Last: \(temp.last?.normalizedCode)")
+//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+//            println("Last: \(temp.last?.normalizedCode)")
         }
         ac.addAction(act)
         act = UIAlertAction(title: "Sort by Import(-)", style: .Default) { x in
@@ -189,10 +189,10 @@ class InfoItemsTableViewController: UITableViewController {
             println("Sorting INFO by Import/Dsc")
             let temp = sortCollection(self.model.info, byType: .ByImport(false))
             self.model.info = temp
-            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-            println("Last: \(temp.last?.normalizedCode)")
             self.refreshData()
             self.updateUI()
+//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
+//            println("Last: \(temp.last?.normalizedCode)")
         }
         ac.addAction(act)
         act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
@@ -270,12 +270,12 @@ class InfoItemsTableViewController: UITableViewController {
             useDisclosure = false
             var isGTstr = ""
             if let firstItem = self.model.info.first {
-                let isGT = item.normalizedCode < firstItem.normalizedCode ? "IS" : "IS NOT"
+                let isGT = isOrderedBySortType(.ByCode(true), firstItem, item) /*   item.normalizedCode < firstItem.normalizedCode */ ? "IS" : "IS NOT"
                 isGTstr = "\n\twhich \(isGT) less than 1st INFO item:\(firstItem.normalizedCode) (len=\(count(firstItem.normalizedCode)))"
             }
             var isLTstr = ""
             if let lastItem = self.model.info.last {
-                let isLT = item.normalizedCode < lastItem.normalizedCode ? "IS" : "IS NOT"
+                let isLT = isOrderedBySortType(.ByCode(true), lastItem, item) /*  item.normalizedCode < lastItem.normalizedCode */ ? "IS" : "IS NOT"
                 isLTstr = "\n\twhich \(isLT) less than last INFO item:\(lastItem.normalizedCode) (len=\(count(lastItem.normalizedCode)))"
             }
             println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)\(isGTstr)\(isLTstr)") // DEBUG
