@@ -10,5 +10,6 @@
 #define StampCollection_StampCollection_Bridging_Header_h
 
 #import "CHCSVParser.h"
+#import "SSZipArchive.h"
 
 #endif
