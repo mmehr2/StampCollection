@@ -16,14 +16,31 @@ Currently it seems that these generated classes are all @NSManaged properties, a
 
 extension DealerItem: SortTypeSortable {
 
+    func updateDependentVars() {
+        /*
+        NOTE: If regenerating DealerItem automatically, copy the following additional cache fields back:
+        
+        // cached fields - REPLACE AFTER OVERWRITING
+        var _normalizedCode: String?
+        var _exYearRange: ClosedInterval<Int>?
+        */
+        
+        // call this when setting descriptionX so that the dependents can be updated too
+        _normalizedCode = nil
+        _exYearRange = nil
+    }
+    
     var normalizedCode: String {
+        if _normalizedCode == nil {
         var postE1K = false
         if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
             if id[0...4] == "6110e" {
                 postE1K = exYearStart >= 2000
             }
         }
-        return normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
+        _normalizedCode = normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
+        }
+        return _normalizedCode!
     }
     
     var normalizedDate: String {
@@ -32,8 +49,11 @@ extension DealerItem: SortTypeSortable {
     
     var exYearStart: Int16 {
         get {
-            let (_, range) = extractYearRangeFromDescription(self.descriptionX)
-            return Int16(range.start)
+            if _exYearRange == nil {
+                let (_, range) = extractYearRangeFromDescription(self.descriptionX)
+                _exYearRange = range
+            }
+            return Int16(_exYearRange!.start)
         }
 //        set {
 //            
@@ -42,8 +62,11 @@ extension DealerItem: SortTypeSortable {
     
     var exYearEnd: Int16 {
         get {
-            let (_, range) = extractYearRangeFromDescription(self.descriptionX)
-            return Int16(range.end)
+            if _exYearRange == nil {
+                let (_, range) = extractYearRangeFromDescription(self.descriptionX)
+                _exYearRange = range
+            }
+            return Int16(_exYearRange!.end)
         }
     }
     

@@ -37,4 +37,8 @@ class DealerItem: NSManagedObject {
     @NSManaged var inventoryItems: NSOrderedSet
     @NSManaged var referringItems: NSOrderedSet
 
+    // cached fields - REPLACE AFTER OVERWRITING
+    var _normalizedCode: String?
+    var _exYearRange: ClosedInterval<Int>?
+
 }

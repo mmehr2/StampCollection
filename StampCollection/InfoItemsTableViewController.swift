@@ -268,17 +268,17 @@ class InfoItemsTableViewController: UITableViewController {
             cell.textLabel?.text = item.descriptionX
             cell.detailTextLabel?.text = formatDealerDetail(item)
             useDisclosure = false
-            var isGTstr = ""
-            if let firstItem = self.model.info.first {
-                let isGT = isOrderedBySortType(.ByCode(true), firstItem, item) /*   item.normalizedCode < firstItem.normalizedCode */ ? "IS" : "IS NOT"
-                isGTstr = "\n\twhich \(isGT) less than 1st INFO item:\(firstItem.normalizedCode) (len=\(count(firstItem.normalizedCode)))"
-            }
-            var isLTstr = ""
-            if let lastItem = self.model.info.last {
-                let isLT = isOrderedBySortType(.ByCode(true), lastItem, item) /*  item.normalizedCode < lastItem.normalizedCode */ ? "IS" : "IS NOT"
-                isLTstr = "\n\twhich \(isLT) less than last INFO item:\(lastItem.normalizedCode) (len=\(count(lastItem.normalizedCode)))"
-            }
-            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)\(isGTstr)\(isLTstr)") // DEBUG
+//            var isGTstr = ""
+//            if let firstItem = self.model.info.first {
+//                let isGT = isOrderedBySortType(.ByCode(true), firstItem, item) /*   item.normalizedCode < firstItem.normalizedCode */ ? "IS" : "IS NOT"
+//                isGTstr = "\n\twhich \(isGT) less than 1st INFO item:\(firstItem.normalizedCode) (len=\(count(firstItem.normalizedCode)))"
+//            }
+//            var isLTstr = ""
+//            if let lastItem = self.model.info.last {
+//                let isLT = isOrderedBySortType(.ByCode(true), lastItem, item) /*  item.normalizedCode < lastItem.normalizedCode */ ? "IS" : "IS NOT"
+//                isLTstr = "\n\twhich \(isLT) less than last INFO item:\(lastItem.normalizedCode) (len=\(count(lastItem.normalizedCode)))"
+//            }
+//            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)\(isGTstr)\(isLTstr)") // DEBUG
         } else {
             // format an InventoryItem cell
             let item = model.inventory[row]
