@@ -22,6 +22,40 @@ func getFormattedStringFromDate(input: NSDate, withTime: Bool = false) -> String
     return nf.stringFromDate(input) ?? ""
 }
 
+func dateFromComponents( year: Int, month: Int, day: Int ) -> NSDate {
+    let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    var comp = NSDateComponents()
+    comp.year = year
+    comp.month = month
+    comp.day = day
+    return gregorian.dateFromComponents(comp)!
+}
+
+func componentsFromDate( date: NSDate ) -> (Int, Int, Int) { // as Y, M, D
+    let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    let comp = gregorian.components(
+        NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: date)
+    return (comp.year, comp.month, comp.day)
+}
+
+func normalizedStringFromDateComponents( year: Int, month: Int, day: Int ) -> String {
+    if year == 0 || month == 0 || day == 0 {
+        return ""
+    }
+    return String(format: "%4d.%02d.%02d", year, month, day) // as YYYY.MM.DD
+}
+
+func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // as Y, M, D
+    if !date.isEmpty {
+        let yyyy = date[0...3].toInt()!
+        let mm = date[5...6].toInt()!
+        let dd = date[8...9].toInt()!
+        return (yyyy, mm, dd)
+    }
+    return (0, 0, 0)
+}
+
+
 func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
     messageBoxWithTitle(title, andBody: body, forController: vc) { ac in
         let act = UIAlertAction(title: "OK", style: .Default) { x in
@@ -276,7 +310,7 @@ private func getClass( ch: Character ) -> CodeFieldClass {
     return .Alpha
 }
 
-func splitDealerCode( code: String, special: Bool = false ) -> [String] {
+private func splitDealerCode( code: String, special: Bool = false ) -> [String] {
     // accepts code numbers of the following forms:
     //  "6110xNNNyy"
     //  "psNNNyy"
@@ -362,7 +396,7 @@ func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits pl
     return fmt.stringFromNumber(input) ?? ""
 }
 
-func normalizeCatCode( codePart: String, forCat catnum: Int16 ) -> String {
+private func normalizeCatCode( codePart: String, forCat catnum: Int16 ) -> String {
     return "NCAT" + padIntegerString(Int(catnum), toLength: 4)
 }
 

@@ -35,7 +35,7 @@ extension SortType: Printable {
     }
     
     private func decide( asc: Bool, name: String ) -> String {
-        return asc ? name + "Asc" : name + "Dsc"
+        return asc ? name + "+" : name + "-"
     }
 }
 

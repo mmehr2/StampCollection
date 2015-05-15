@@ -40,5 +40,12 @@ class DealerItem: NSManagedObject {
     // cached fields - REPLACE AFTER OVERWRITING
     var _normalizedCode: String?
     var _exYearRange: ClosedInterval<Int>?
+    var _exMonthRange: ClosedInterval<Int>?
+    var _exDayRange: ClosedInterval<Int>?
+    var _exNormalizedStartDate: String?
+    var _exNormalizedEndDate: String?
+    var _exNormalizedDate: String?
+    var _exStartDate: NSDate?
+    var _exEndDate: NSDate?
 
 }

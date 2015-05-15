@@ -16,58 +16,123 @@ Currently it seems that these generated classes are all @NSManaged properties, a
 
 extension DealerItem: SortTypeSortable {
 
-    func updateDependentVars() {
+    func updateDependentVars(keyPath: String) {
         /*
         NOTE: If regenerating DealerItem automatically, copy the following additional cache fields back:
         
         // cached fields - REPLACE AFTER OVERWRITING
         var _normalizedCode: String?
         var _exYearRange: ClosedInterval<Int>?
+        var _exMonthRange: ClosedInterval<Int>?
+        var _exDayRange: ClosedInterval<Int>?
+        var _exNormalizedStartDate: String?
+        var _exNormalizedEndDate: NSDate?
+        var _exNormalizedDate: String?
+        var _exStartDate: NSDate?
+        var _exEndDate: NSDate?
         */
         
         // call this when setting descriptionX so that the dependents can be updated too
-        _normalizedCode = nil
-        _exYearRange = nil
+        if keyPath == "descriptionX" {
+            // Update date range vars from descriptionX
+            // NOTE: if start is set, end is set; if year is set, month and day will also be set; if not recognized, Y=M=D=0
+            let (_, range, mrange, drange) = extractDateRangesFromDescription(self.descriptionX)
+            _exYearRange = range
+            _exMonthRange = mrange
+            _exDayRange = drange
+            // NOTE: this function will turn (0,0,0) into ""
+            var converted = normalizedStringFromDateComponents(range.start, mrange.start, drange.start)
+            // sort items with no date (alpha) AFTER items with date (numeric)
+            if converted.isEmpty {
+                _exNormalizedStartDate = "_NO_DATE__" // follows all numeric date strings
+            } else {
+                _exNormalizedStartDate = converted
+                _exStartDate = dateFromComponents(range.start, mrange.start, drange.start)
+            }
+            converted = normalizedStringFromDateComponents(range.end, mrange.end, drange.end)
+            if converted.isEmpty {
+                _exNormalizedEndDate = "_NO_DATE__"
+            } else {
+                _exNormalizedEndDate = converted
+                _exEndDate = dateFromComponents(range.end, mrange.end, drange.end)
+            }
+            _exNormalizedDate = _exNormalizedStartDate! + "-" + _exNormalizedEndDate!
+        } else if keyPath == "id" {
+            // Update _normalizedCode from id (NOTE: requires date range to be set 1st!)
+            var postE1K = false
+            if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
+                if id[0...4] == "6110e" {
+                    postE1K = exYearStart >= 2000
+                }
+            }
+            //println("Normalizing ID=\(id) catnum=\(catgDisplayNum), E1K=\(postE1K)")
+            _normalizedCode = normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
+        }
+        
     }
     
+    func updateDependentVars() {
+        updateDependentVars("descriptionX")
+        updateDependentVars("id") // requires date, so must be set after descriptionX
+    }
+
+    // KVC extensions to make the above caching scheme work
+    // see solution discussion at http://stackoverflow.com/questions/25717248/swift-custom-setter-for-coredata-nsmanagedobject
+    
+    /*
+    My recommendation would be to use KVC. Maybe not the most elegant solution, but conceptionally a logical application of KVC.
+    
+    Observe a change of the attribute. Register for the change in init(entity:insertIntoManagedObjectContext:) or maybe better in awakeFromFetch and awakeFromInsert, and remove the observer in willTurnIntoFault.
+    */
+//    private func addKVCObservers() {
+//        // add the observers here
+//        addObserver(self, forKeyPath: "descriptionX", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old, context: nil)
+//        addObserver(self, forKeyPath: "id", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old, context: nil)
+//    }
+    
+    override func awakeFromFetch() {
+        super.awakeFromFetch()
+        // update transient variables (non-managed)
+        updateDependentVars()
+    }
+    
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        // update transient variables (non-managed)
+        updateDependentVars()
+    }
+//    
+//    override func willTurnIntoFault() {
+//        super.willTurnIntoFault()
+//        // remove the observers here
+//        removeObserver(self, forKeyPath: "id")
+//        removeObserver(self, forKeyPath: "descriptionX")
+//    }
+//    
+//    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+//        if (keyPath == "descriptionX" || keyPath == "id") {
+//        }
+//        super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+//    }
+//    
     var normalizedCode: String {
-        if _normalizedCode == nil {
-        var postE1K = false
-        if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
-            if id[0...4] == "6110e" {
-                postE1K = exYearStart >= 2000
-            }
-        }
-        _normalizedCode = normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
-        }
+        if _normalizedCode == nil { updateDependentVars() }
         return _normalizedCode!
     }
     
     var normalizedDate: String {
-        return "" // TBD
+        if _exNormalizedDate == nil { updateDependentVars() }
+        return _exNormalizedDate!
     }
     
     var exYearStart: Int16 {
-        get {
-            if _exYearRange == nil {
-                let (_, range) = extractYearRangeFromDescription(self.descriptionX)
-                _exYearRange = range
-            }
-            return Int16(_exYearRange!.start)
-        }
-//        set {
-//            
-//        }
+        if _exYearRange == nil { updateDependentVars() }
+        return Int16(_exYearRange!.start)
     }
     
     var exYearEnd: Int16 {
-        get {
-            if _exYearRange == nil {
-                let (_, range) = extractYearRangeFromDescription(self.descriptionX)
-                _exYearRange = range
-            }
-            return Int16(_exYearRange!.end)
-        }
+        if _exYearRange == nil { updateDependentVars() }
+        return Int16(_exYearRange!.end)
     }
     
     enum ValueType {
@@ -111,10 +176,7 @@ extension DealerItem: SortTypeSortable {
             }
         }
         // create fixups and extracted data properties here
-//        let (_, range) = extractYearRangeFromDescription(newObject.descriptionX)
-//        //if fmtFound != 0 { // no need, will set fields to 0 if fmtFound == 0
-//        newObject.exYearStart = Int16(range.start)
-//        newObject.exYearEnd = Int16(range.end)
+        //newObject.updateDependentVars()
     }
     
     static func makeObjectFromData( data: [String : String], withRelationships relations: [String:NSManagedObject], inContext moc: NSManagedObjectContext? = nil) -> Bool {

@@ -244,8 +244,8 @@ private func getMemorySearchTypes( types: [SearchType] ) -> [SearchType] {
     }
 }
 
-private func CompareDateInRange( input: String, range: ClosedInterval<Int> ) -> Bool {
-    let (fmt, extractedRange) = extractYearRangeFromDescription(input)
+private func CompareYearInRange( input: String, range: ClosedInterval<Int> ) -> Bool {
+    let (fmt, extractedRange, _, _) = extractDateRangesFromDescription(input)
     if fmt != 0 {
         let startInside = range.contains(extractedRange.start)
         let endInside = range.contains(extractedRange.end)
@@ -263,7 +263,7 @@ private func CompareInfoSingle( types: [SearchType], item: DealerItem) -> Bool {
         var eachResult = true
         switch type {
         case .YearInRange(let range):
-            eachResult = CompareDateInRange(item.descriptionX, range)
+            eachResult = CompareYearInRange(item.descriptionX, range)
         default: eachResult = true
         }
         if !eachResult {
@@ -303,7 +303,7 @@ private func CompareInvSingle( types: [SearchType], item: InventoryItem) -> Bool
         var eachResult = true
         switch type {
         case .YearInRange(let range):
-            eachResult = CompareDateInRange(item.dealerItem.descriptionX, range) // date extraction only works on baseItem description field
+            eachResult = CompareYearInRange(item.dealerItem.descriptionX, range) // date extraction only works on baseItem description field
         default: eachResult = true
         }
         if !eachResult {

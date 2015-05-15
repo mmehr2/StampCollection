@@ -139,62 +139,44 @@ class InfoItemsTableViewController: UITableViewController {
         ac.addAction(act)
         presentViewController(ac, animated: true, completion: nil)
     }
+
+    private func addSortAction( type: SortType, forDataType dataType: CollectionStore.DataType, toController ac: UIAlertController ) {
+        let typeName = ftype == .Info ? "INFO" : "INVENTORY"
+        let title = ""
+        var act = UIAlertAction(title: "Sort by \(type)", style: .Default) { x in
+            // resort current info data by id code (depends on category being shown)
+            println("Sorting \(typeName) by \(type)")
+            if dataType == .Info {
+                let temp = sortCollection(self.model.info, byType: type)
+                self.model.info = temp
+            } else {
+                let temp = sortCollection(self.model.inventory, byType: type)
+                self.model.inventory = temp
+            }
+            self.refreshData()
+            self.updateUI()
+            println("Completed sorting \(typeName) by \(type)")
+        }
+        ac.addAction(act)
+    }
     
     @IBAction func sortButtonPressed(sender: AnyObject) {
-        // TBD: implementing sorting functionality
+        // implementing sorting functionality
         var ac = UIAlertController(title: "Choose Info Sort Method", message: nil, preferredStyle: .Alert)
         var act = UIAlertAction(title: "Unsorted", style: .Default) { x in
             // TBD resort current info data by exOrder (or category+exOrder if showing ALL)
-            println("Reverting to Unsorted INFO")
+            println("Reverting to Unsorted data")
             self.refetchData()
 //            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")
 //            println("Last: \(self.model.info.last?.normalizedCode)")
         }
         ac.addAction(act)
-        act = UIAlertAction(title: "Sort by ID(+)", style: .Default) { x in
-            // TBD resort current info data by id code (depends on category being shown)
-            println("Sorting INFO by ID")
-            let temp = sortCollection(self.model.info, byType: .ByCode(true))
-            self.model.info = temp
-            self.refreshData()
-            self.updateUI()
-//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-//            println("Last: \(temp.last?.normalizedCode)")
-        }
-        ac.addAction(act)
-        act = UIAlertAction(title: "Sort by ID(-)", style: .Default) { x in
-            // TBD resort current info data by id code (depends on category being shown)
-            println("Sorting INFO by ID/Dsc")
-            let temp = sortCollection(self.model.info, byType: .ByCode(false))
-            self.model.info = temp
-            self.refreshData()
-            self.updateUI()
-//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-//            println("Last: \(temp.last?.normalizedCode)")
-        }
-        ac.addAction(act)
-        act = UIAlertAction(title: "Sort by Import(+)", style: .Default) { x in
-            // TBD resort current info data by id code (depends on category being shown)
-            println("Sorting INFO by Import")
-            let temp = sortCollection(self.model.info, byType: .ByImport(true))
-            self.model.info = temp
-            self.refreshData()
-            self.updateUI()
-//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-//            println("Last: \(temp.last?.normalizedCode)")
-        }
-        ac.addAction(act)
-        act = UIAlertAction(title: "Sort by Import(-)", style: .Default) { x in
-            // TBD resort current info data by id code (depends on category being shown)
-            println("Sorting INFO by Import/Dsc")
-            let temp = sortCollection(self.model.info, byType: .ByImport(false))
-            self.model.info = temp
-            self.refreshData()
-            self.updateUI()
-//            println("First of \(temp.count): \(temp.first?.normalizedCode)")
-//            println("Last: \(temp.last?.normalizedCode)")
-        }
-        ac.addAction(act)
+        addSortAction(.ByCode(true), forDataType: ftype, toController: ac)
+        addSortAction(.ByCode(false), forDataType: ftype, toController: ac)
+        addSortAction(.ByImport(true), forDataType: ftype, toController: ac)
+        addSortAction(.ByImport(false), forDataType: ftype, toController: ac)
+        addSortAction(.ByDate(true), forDataType: ftype, toController: ac)
+        addSortAction(.ByDate(false), forDataType: ftype, toController: ac)
         act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
             // no action here
         }
@@ -268,24 +250,15 @@ class InfoItemsTableViewController: UITableViewController {
             cell.textLabel?.text = item.descriptionX
             cell.detailTextLabel?.text = formatDealerDetail(item)
             useDisclosure = false
-//            var isGTstr = ""
-//            if let firstItem = self.model.info.first {
-//                let isGT = isOrderedBySortType(.ByCode(true), firstItem, item) /*   item.normalizedCode < firstItem.normalizedCode */ ? "IS" : "IS NOT"
-//                isGTstr = "\n\twhich \(isGT) less than 1st INFO item:\(firstItem.normalizedCode) (len=\(count(firstItem.normalizedCode)))"
-//            }
-//            var isLTstr = ""
-//            if let lastItem = self.model.info.last {
-//                let isLT = isOrderedBySortType(.ByCode(true), lastItem, item) /*  item.normalizedCode < lastItem.normalizedCode */ ? "IS" : "IS NOT"
-//                isLTstr = "\n\twhich \(isLT) less than last INFO item:\(lastItem.normalizedCode) (len=\(count(lastItem.normalizedCode)))"
-//            }
-//            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)\(isGTstr)\(isLTstr)") // DEBUG
+            //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)") // DEBUG
+            println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(item.descriptionX[0...min(count(item.descriptionX)-1,30)])") // DEBUG
         } else {
             // format an InventoryItem cell
             let item = model.inventory[row]
             cell.textLabel?.text = formatInventoryMain(item)
             cell.detailTextLabel?.text = formatInventoryDetail(item)
             useDisclosure = false
-            println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
+            //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
         }
         cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
         

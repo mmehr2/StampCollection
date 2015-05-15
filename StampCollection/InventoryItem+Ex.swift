@@ -21,7 +21,7 @@ extension InventoryItem:  SortTypeSortable {
     }
     
     var normalizedDate: String {
-        return "" // TBD
+        return dealerItem.normalizedDate
     }
     
     enum ValueType {
