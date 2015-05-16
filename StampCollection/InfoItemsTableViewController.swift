@@ -251,7 +251,7 @@ class InfoItemsTableViewController: UITableViewController {
             cell.detailTextLabel?.text = formatDealerDetail(item)
             useDisclosure = false
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)") // DEBUG
-            println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(item.descriptionX[0...min(count(item.descriptionX)-1,30)])") // DEBUG
+            //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.descriptionX, 30))") // DEBUG
         } else {
             // format an InventoryItem cell
             let item = model.inventory[row]
@@ -259,6 +259,7 @@ class InfoItemsTableViewController: UITableViewController {
             cell.detailTextLabel?.text = formatInventoryDetail(item)
             useDisclosure = false
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
+            //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.dealerItem.descriptionX, 30))") // DEBUG
         }
         cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
         

@@ -29,6 +29,51 @@ http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
+func makeStringFit(input: String, length: Int) -> String {
+    if count(input) > length-2 {
+        return input[0..<length-2] + ".."
+    }
+    return input
+}
+
+func padIntegerString( input: Int, toLength outlen: Int, padWith pad: String = "0") -> String {
+    var fmt = NSNumberFormatter()
+    fmt.paddingCharacter = pad
+    fmt.minimumIntegerDigits = outlen
+    fmt.maximumIntegerDigits = outlen
+    fmt.allowsFloats = false
+    fmt.minimumFractionDigits = 0
+    fmt.maximumFractionDigits = 0
+    return fmt.stringFromNumber(input) ?? ""
+}
+
+func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits places: Int = 2, padWith pad: String = "0") -> String {
+    var fmt = NSNumberFormatter()
+    fmt.paddingCharacter = pad
+    fmt.minimumIntegerDigits = outlen
+    fmt.maximumIntegerDigits = outlen
+    fmt.allowsFloats = true
+    fmt.minimumFractionDigits = places
+    fmt.maximumFractionDigits = places
+    return fmt.stringFromNumber(input) ?? ""
+}
+
+// following was stolen from: http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
+extension String {
+    
+    subscript (i: Int) -> Character {
+        return self[advance(self.startIndex, i)]
+    }
+    
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
+    }
+    
+    subscript (r: Range<Int>) -> String {
+        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+    }
+}
+
 // MARK: treat a string as a floating point number if possible
 extension String {
     func toDouble() -> Double? {

@@ -73,8 +73,10 @@ extension SearchType: Printable {
             return "By Years \(range.start):\(range.end)"
         case .WantHave(let whtype):
             return "Only \(whtype)"
-        case .MultiCategory:
-            return "By MultiCategory Unimplemented"
+        case .MultiCategory(let catlist):
+            let catlistX = ", ".join(catlist.map{ cat in
+                "\(cat)" })
+            return "In Categories: \(catlistX)"
         case .SubCategory:
             return "By SubCategory Unimplemented"
         case .Catalog:

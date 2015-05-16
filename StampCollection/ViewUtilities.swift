@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: UI date formatting services
 func getDateFromFormattedString(input: String) -> NSDate {
     let nf = NSDateFormatter()
     nf.dateStyle = .MediumStyle
@@ -56,6 +57,7 @@ func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // 
 }
 
 
+// MARK: message box services
 func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
     messageBoxWithTitle(title, andBody: body, forController: vc) { ac in
         let act = UIAlertAction(title: "OK", style: .Default) { x in
@@ -73,6 +75,7 @@ func messageBoxWithTitle( title: String, andBody body: String, forController vc:
     vc.presentViewController(ac, animated: true, completion: nil)
 }
 
+// MARK: table view cell formatting services
 func formatBTDetail(item: BTDealerItem) -> String {
     var text = "\(item.code)"
     if item.catalog1 != "" {
@@ -131,17 +134,14 @@ private func formatInventoryLocation(item: InventoryItem) -> String {
     return "IN \(item.albumRef)p.\(item.albumPage) (S:\(item.albumSection))"
 }
 
-private func formatInventoryValue(item: InventoryItem) -> String {
+func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
     // determine whether to return
     //  Mint v Used (cat.prices == PU)
     //  Mint(tab) v Used v FDC v Other (PUFS)
     //  Mint v FDC (PF)
     //  "" (P only)
-    var output = "Val"
-    let baseItem = item.dealerItem
-    let cat = baseItem.category
-    let price = baseItem.valueForKey(item.itemType) as! String
-    switch (cat.prices, item.itemType) {
+    var output = ""
+    switch (catPrices, fieldName) {
     case ("P", "price1"): output += ""
     case ("PU", "price1"): output += ":Mint"
     case ("PU", "price2"): output += ":Used"
@@ -153,17 +153,19 @@ private func formatInventoryValue(item: InventoryItem) -> String {
     case ("PUFS", "price4"): output += ":Mint(NT)"
     default: output = ""
     }
-    if !output.isEmpty {
-        output += "=\(price)" // maybe format this better
-    }
     return output
 }
 
-func makeStringFit(input: String, length: Int) -> String {
-    if count(input) > length-2 {
-        return input[0..<length-2] + ".."
+private func formatInventoryValue(item: InventoryItem) -> String {
+    var output = "Val"
+    let baseItem = item.dealerItem
+    let nameExt = formatPriceDescription(baseItem.category.prices, item.itemType)
+    output += nameExt
+    if let price = baseItem.valueForKey(item.itemType) as? String,
+        priceVal = price.toDouble() {
+            output += "=" + padDoubleString(priceVal, toLength: 10, withFractionDigits: 2, padWith: " ")
     }
-    return input
+    return output
 }
 
 private func formatInventoryVarCondition(item: InventoryItem) -> String {
@@ -199,22 +201,7 @@ extension CollectionStore.DataType : Printable {
     
 }
 
-// following was stolen from: http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
-extension String {
-    
-    subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
-    }
-    
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
-    
-    subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
-    }
-}
-
+// MARK: Parsing the ID code field for sorting
 // NOTES ON CODE PARSING SPECIAL CASES BY CATEGORY
 /*
 2/Sets 6110s
@@ -372,28 +359,6 @@ private func splitCatCode( code: String, forCat catnum: Int16 ) -> (String, Stri
     let part1 = code[0..<splitAt]
     let part2 = code[splitAt..<len]
     return (part1, part2)
-}
-
-func padIntegerString( input: Int, toLength outlen: Int) -> String {
-    var fmt = NSNumberFormatter()
-    fmt.paddingCharacter = "0"
-    fmt.minimumIntegerDigits = outlen
-    fmt.maximumIntegerDigits = outlen
-    fmt.allowsFloats = false
-    fmt.minimumFractionDigits = 0
-    fmt.maximumFractionDigits = 0
-    return fmt.stringFromNumber(input) ?? ""
-}
-
-func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits places: Int = 2) -> String {
-    var fmt = NSNumberFormatter()
-    fmt.paddingCharacter = "0"
-    fmt.minimumIntegerDigits = outlen
-    fmt.maximumIntegerDigits = outlen
-    fmt.allowsFloats = true
-    fmt.minimumFractionDigits = places
-    fmt.maximumFractionDigits = places
-    return fmt.stringFromNumber(input) ?? ""
 }
 
 private func normalizeCatCode( codePart: String, forCat catnum: Int16 ) -> String {
@@ -556,14 +521,5 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
         ++fieldnum
         skip = false
     }
-    return output
-}
-
-func extractDateFromDesc( desc: String) -> String {
-    // accepts different description formats:
-    // 1) leading year "NNNN non-space-chars", just returns the year
-    // 2) leading date (Euro) "DD.MM.YY non-space-chars", returns day month and year
-    // 3) trailing date (Euro) "non-space-chars DD.MM.YY", returns day, month, and year
-    var output = ""
     return output
 }
