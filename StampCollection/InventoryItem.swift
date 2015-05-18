@@ -2,7 +2,7 @@
 //  InventoryItem.swift
 //  StampCollection
 //
-//  Created by Michael L Mehr on 5/9/15.
+//  Created by Michael L Mehr on 5/15/15.
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
@@ -23,8 +23,9 @@ class InventoryItem: NSManagedObject {
     @NSManaged var notes: String
     @NSManaged var refItem: String
     @NSManaged var wantHave: String
-    @NSManaged var dealerItem: DealerItem
     @NSManaged var category: Category
+    @NSManaged var dealerItem: DealerItem
     @NSManaged var referredItem: DealerItem
+    @NSManaged var page: AlbumPage
 
 }

@@ -29,6 +29,23 @@ http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
+// splits a string into a numeric suffix and non-numeric prefix
+func splitNumericEndOfString( input: String ) -> (String, String) {
+    var indexSplit = input.endIndex
+    while indexSplit != input.startIndex {
+        // adjust index backwards from end as long as numerics are found; stop at 1st Alpha or start of string
+        let tempIndex = indexSplit.predecessor()
+        if getCharacterClass(input[tempIndex]) == .Numeric {
+            indexSplit = tempIndex
+        } else {
+            break
+        }
+    }
+    let textString = input.substringToIndex(indexSplit)
+    let numberString = input.substringFromIndex(indexSplit)
+    return (textString, numberString)
+}
+
 func makeStringFit(input: String, length: Int) -> String {
     if count(input) > length-2 {
         return input[0..<length-2] + ".."
@@ -150,32 +167,34 @@ public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
 
 // MARK: date extensions and helpers
 // full set of comparison operators for NSDate pairs
-func <(d1: NSDate, d2: NSDate) -> Bool {
+public func <(d1: NSDate, d2: NSDate) -> Bool {
     let res = d1.compare(d2)
     return res == .OrderedAscending
 }
 
-func ==(d1: NSDate, d2: NSDate) -> Bool {
+public func ==(d1: NSDate, d2: NSDate) -> Bool {
     let res = d1.compare(d2)
     return res == .OrderedSame
 }
 
-func >(d1: NSDate, d2: NSDate) -> Bool {
-    let res = d1.compare(d2)
-    return res == .OrderedDescending
-}
-
-func !=(d1: NSDate, d2: NSDate) -> Bool {
-    return !(d1 == d2)
-}
-
-func >=(d1: NSDate, d2: NSDate) -> Bool {
-    return !(d1 < d2)
-}
-
-func <=(d1: NSDate, d2: NSDate) -> Bool {
-    return !(d1 > d2)
-}
+extension NSDate: Equatable, Comparable { }
+// NOTE: the protocols take care of defining the rest...
+//func >(d1: NSDate, d2: NSDate) -> Bool {
+//    let res = d1.compare(d2)
+//    return res == .OrderedDescending
+//}
+//
+//func !=(d1: NSDate, d2: NSDate) -> Bool {
+//    return !(d1 == d2)
+//}
+//
+//func >=(d1: NSDate, d2: NSDate) -> Bool {
+//    return !(d1 < d2)
+//}
+//
+//func <=(d1: NSDate, d2: NSDate) -> Bool {
+//    return !(d1 > d2)
+//}
 
 // MARK: linear scaling function
 func linearScale( input: Double, fromRange: ClosedInterval<Double>, toRange: ClosedInterval<Double> ) -> Double {

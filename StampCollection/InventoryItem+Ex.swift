@@ -14,7 +14,7 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
-extension InventoryItem:  SortTypeSortable {
+extension InventoryItem:  SortTypeSortableEx {
     
     var normalizedCode: String {
         return dealerItem.normalizedCode
@@ -83,6 +83,9 @@ extension InventoryItem:  SortTypeSortable {
                 }
                 if let cobj = relations["category"] as? Category {
                     newObject.category = cobj
+                }
+                if let pobj = relations["page"] as? AlbumPage {
+                    newObject.page = pobj
                 }
                 // set all the other data values here, so it can use related object reference data
                 InventoryItem.setDataValuesForObject(newObject, fromData: data)

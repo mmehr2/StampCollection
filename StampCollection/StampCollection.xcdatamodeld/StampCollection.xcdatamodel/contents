@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AlbumFamily" representedClassName="StampCollection.AlbumFamily" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nextRef" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="refs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumRef" inverseName="family" inverseEntity="AlbumRef" syncable="YES"/>
+        <relationship name="type" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumType" inverseName="families" inverseEntity="AlbumType" syncable="YES"/>
+    </entity>
+    <entity name="AlbumPage" representedClassName="StampCollection.AlbumPage" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="page" inverseEntity="InventoryItem" syncable="YES"/>
+        <relationship name="section" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumSection" inverseName="pages" inverseEntity="AlbumSection" syncable="YES"/>
+    </entity>
+    <entity name="AlbumRef" representedClassName="StampCollection.AlbumRef" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="family" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumFamily" inverseName="refs" inverseEntity="AlbumFamily" syncable="YES"/>
+        <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumSection" inverseName="ref" inverseEntity="AlbumSection" syncable="YES"/>
+    </entity>
+    <entity name="AlbumSection" representedClassName="StampCollection.AlbumSection" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumPage" inverseName="section" inverseEntity="AlbumPage" syncable="YES"/>
+        <relationship name="ref" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumRef" inverseName="sections" inverseEntity="AlbumRef" syncable="YES"/>
+    </entity>
+    <entity name="AlbumType" representedClassName="StampCollection.AlbumType" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="families" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumFamily" inverseName="type" inverseEntity="AlbumFamily" syncable="YES"/>
+    </entity>
     <entity name="Category" representedClassName="StampCollection.Category" syncable="YES">
         <attribute name="catalogs" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -53,11 +86,17 @@
         <attribute name="wantHave" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="inventoryItems" inverseEntity="Category" syncable="YES"/>
         <relationship name="dealerItem" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="inventoryItems" inverseEntity="DealerItem" syncable="YES"/>
+        <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumPage" inverseName="items" inverseEntity="AlbumPage" syncable="YES"/>
         <relationship name="referredItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="referringItems" inverseEntity="DealerItem" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="-155" positionY="-63" width="128" height="180"/>
         <element name="DealerItem" positionX="-326" positionY="0" width="128" height="420"/>
-        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="270"/>
+        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="285"/>
+        <element name="AlbumType" positionX="-225" positionY="90" width="128" height="105"/>
+        <element name="AlbumFamily" positionX="-216" positionY="99" width="128" height="120"/>
+        <element name="AlbumRef" positionX="-207" positionY="108" width="128" height="120"/>
+        <element name="AlbumSection" positionX="-198" positionY="117" width="128" height="120"/>
+        <element name="AlbumPage" positionX="-189" positionY="126" width="128" height="105"/>
     </elements>
 </model>

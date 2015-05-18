@@ -15,10 +15,18 @@ class CollectionStore: ExportDataSource {
     
     static var sharedInstance = CollectionStore()
     
-    enum DataType {
+    enum DataType: Printable  {
         case Categories
         case Info
         case Inventory
+        
+        var description : String {
+            switch self {
+            case .Categories: return "Categories"
+            case .Info: return "Info"
+            case .Inventory: return "Inventory"
+            }
+        }
     }
 
     // the following arrays store items as currently fetched (with filters, sorting)
@@ -129,6 +137,7 @@ class CollectionStore: ExportDataSource {
         if let context = getContextForThread(CollectionStore.mainContextToken) {
             // Then remove all INVENTORY objects
             inventory = fetch("InventoryItem", inContext: context)
+            println("Deleting \(inventory.count) inventory items")
             for obj in inventory {
                 context.deleteObject(obj)
             }
@@ -136,6 +145,7 @@ class CollectionStore: ExportDataSource {
             //saveMainContext() // commit those changes
             // Then remove all INFO objects
             info = fetch("DealerItem", inContext: context)
+            println("Deleting \(info.count) info items")
             for obj in info {
                 context.deleteObject(obj)
             }
@@ -143,10 +153,37 @@ class CollectionStore: ExportDataSource {
             //saveMainContext() // commit those changes
             // Then remove all CATEGORY objects
             categories = fetch("Category", inContext: context)
+            println("Deleting \(categories.count) category items")
             for obj in categories {
                 context.deleteObject(obj)
             }
             categories = []
+            // disassemble the derived Album Location hierarchy, from bottom to top
+            let pages = fetch("AlbumPage", inContext: context)
+            println("Deleting \(pages.count) album pages")
+            for obj in pages {
+                context.deleteObject(obj)
+            }
+            let sections = fetch("AlbumSection", inContext: context)
+            println("Deleting \(sections.count) album sections")
+            for obj in sections {
+                context.deleteObject(obj)
+            }
+            let albums = fetch("AlbumRef", inContext: context)
+            println("Deleting \(albums.count) album refs")
+            for obj in albums {
+                context.deleteObject(obj)
+            }
+            let families = fetch("AlbumFamily", inContext: context)
+            println("Deleting \(families.count) album families")
+            for obj in families {
+                context.deleteObject(obj)
+            }
+            let types = fetch("AlbumType", inContext: context)
+            println("Deleting \(types.count) album types")
+            for obj in types {
+                context.deleteObject(obj)
+            }
             saveMainContext() // commit those changes
         }
     }
@@ -189,9 +226,10 @@ class CollectionStore: ExportDataSource {
                 if let catnum = data["CatgDisplayNum"]?.toInt(),
                     catobj = fetchCategory(Int16(catnum), inContext: token),
                     obj = fetch("DealerItem", inContext: mocForThread, withFilter: rule).first
+                    , pobj = AlbumPage.getObjectInImportData(data, fromContext: mocForThread)
                 {
                     // pass the related object(s) in a Dictionary to make the new item in the moc
-                    var relations = ["dealerItem": obj, "category": catobj]
+                    var relations = ["dealerItem": obj, "category": catobj, "page": pobj]
                     // deal with the optional RefItem relationship here
                     if let rule2 = rule2,
                         robj = fetch("DealerItem", inContext: mocForThread, withFilter: rule2).first
@@ -458,31 +496,33 @@ class CollectionStore: ExportDataSource {
         let sort = NSSortDescriptor(key: "number", ascending: true)
         categories = fetch("Category", inContext: context, withFilter: rule, andSorting: [sort])
     }
-    
-    private func fetch<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
-        var output : [T] = []
-        var fetchRequest = NSFetchRequest(entityName: entity)
-        fetchRequest.sortDescriptors = sorters
-        fetchRequest.predicate = filter
-        fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
-        var error : NSError?
-        if let fetchResults = moc.executeFetchRequest(fetchRequest, error: &error) {
-            output = fromNSArray(fetchResults)
-        } else if let error = error {
-            println("Fetch error:\(error.localizedDescription)")
-        }
-        return output
-    }
-    
-    private func countFetches( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil ) -> Int {
-        var fetchRequest = NSFetchRequest(entityName: entity)
-        fetchRequest.predicate = filter
-        var error : NSError?
-        let fetchResults = moc.countForFetchRequest(fetchRequest, error: &error)
-        if let error = error {
-            println("Count error:\(error.localizedDescription)")
-        }
-        return fetchResults
-    }
 
 }
+
+// global utility funcs for access of CoreData object collections
+func fetch<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
+    var output : [T] = []
+    var fetchRequest = NSFetchRequest(entityName: entity)
+    fetchRequest.sortDescriptors = sorters
+    fetchRequest.predicate = filter
+    fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
+    var error : NSError?
+    if let fetchResults = moc.executeFetchRequest(fetchRequest, error: &error) {
+        output = fromNSArray(fetchResults)
+    } else if let error = error {
+        println("Fetch error:\(error.localizedDescription)")
+    }
+    return output
+}
+
+func countFetches( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil ) -> Int {
+    var fetchRequest = NSFetchRequest(entityName: entity)
+    fetchRequest.predicate = filter
+    var error : NSError?
+    let fetchResults = moc.countForFetchRequest(fetchRequest, error: &error)
+    if let error = error {
+        println("Count error:\(error.localizedDescription)")
+    }
+    return fetchResults
+}
+

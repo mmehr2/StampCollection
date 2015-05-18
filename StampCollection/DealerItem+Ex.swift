@@ -95,13 +95,14 @@ extension DealerItem: SortTypeSortable {
         // update transient variables (non-managed)
         updateDependentVars()
     }
-    
-    override func awakeFromInsert() {
-        super.awakeFromInsert()
-        // update transient variables (non-managed)
-        updateDependentVars()
-    }
-//    
+
+    // WRONG-O! The data has not been set yet on insert, so this makes no sense to do it on insert, just fetch
+//    override func awakeFromInsert() {
+//        super.awakeFromInsert()
+//        // update transient variables (non-managed)
+//        updateDependentVars()
+//    }
+//
 //    override func willTurnIntoFault() {
 //        super.willTurnIntoFault()
 //        // remove the observers here
