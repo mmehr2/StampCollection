@@ -189,18 +189,6 @@ func formatInventoryDetail(item: InventoryItem) -> String {
     return "\(item.baseItem) \(formatInventoryValue(item)) \(formatInventoryVarCondition(item))"
 }
 
-extension CollectionStore.DataType : Printable {
-    
-    var description : String {
-        switch self {
-        case .Categories: return "Categories"
-        case .Info: return "Info"
-        case .Inventory: return "Inventory"
-        }
-    }
-    
-}
-
 // MARK: Parsing the ID code field for sorting
 // NOTES ON CODE PARSING SPECIAL CASES BY CATEGORY
 /*
@@ -289,7 +277,7 @@ extension CodeFieldClass: Printable {
     }
 }
 
-private func getClass( ch: Character ) -> CodeFieldClass {
+func getCharacterClass( ch: Character ) -> CodeFieldClass {
     // assumes old-style ASCII - okay for what I have used so far
     if ch >= "0" && ch <= "9" {
         return .Numeric
@@ -306,7 +294,7 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
     var field = ""
     var state: CodeFieldClass = .Unknown
     for char in code {
-        let charClass = getClass(char)
+        let charClass = getCharacterClass(char)
         if special {
             // detect field == "RC" and wait until "m" is detected, accumulating digits and suffixes into field
             if count(field) >= 2 && field[0...1] == "RC" {
@@ -335,7 +323,7 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
 }
 
 private func splitCatCode( code: String, forCat catnum: Int16 ) -> (String, String) {
-    let firstCharClass = getClass(code[0])
+    let firstCharClass = getCharacterClass(code[0])
     let shorthand = code[0...1]
     let splitAt: Int
     if firstCharClass == .Numeric {
@@ -408,7 +396,7 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
     let finrest = lenrest < 2 ? "  " : rest[lenrest-2...lenrest-1]
     let fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
-        (normcat, catcode, x, getClass(x[0]))
+        (normcat, catcode, x, getCharacterClass(x[0]))
     }
     //println("Data for normID \(data)")
     var output = ""
@@ -522,4 +510,99 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
         skip = false
     }
     return output
+}
+
+// Album-order inventory comparisons, almost like in the PHP code
+func getSectionSortOrder( section: String ) -> Int {
+    if !section.isEmpty {
+        if section[0...0] == "J" { switch section {
+            // special joint issue sorting, figure out order of sections by base ID (j#) instead
+            /*
+            '6110j595 '=>array('JPOLAND','2001','125','2SF'), // SF possibly doesn't exist (?)
+            '6110j682 '=>array('JUSA','3','242','1F'),
+            '6110j693 '=>array('JCZECH','2002','268','4SF'), // SF possibly doesn't exist (?)
+            '6110j708 '=>array('JRUSSIA','2003','285','2SSF'), // SF possibly doesn't exist (?)
+            '6110j752 '=>array('JBELGIUM','2004','333','2SF'), // SF possibly doesn't exist (?)
+            '6110j762 '=>array('JSLOVAKIA','2005','349','4SF'), // SF about to be purchased (pics on eBay)
+            '6110j786 '=>array('JHUNGARY','2006','383','2SF'), // SF possibly doesn't exist (?)
+            '6110j814 '=>array('JGEORGIA','11','415','2SF'),
+            '6110j895 '=>array('JITALY','2007','-474','4SF'), // SL not sold by BT, SF possibly doesn't exist (?)
+            '6110j898 '=>array('JAUS_HUN','12','480','3S'),
+            '6110j935 '=>array('JGERMANY','2008','-516','2SF'), // SL not sold by BT, SF possibly doesn't exist (?)
+            '6110j1004'=>array('JUN_NGV','13','549','4SF'),
+            '6110j1038'=>array('JFRANCE','15','566','4SF'),
+            '6110j1055'=>array('JPOLAND2','16','577','2SSF'),
+            '6110j1070'=>array('JROMANIA','2009','587','1S1FS'), //
+            '6110j1085'=>array('JCANADA','27','596','SCB'),
+            '6110j1089'=>array('JAUSTRIA','2010','599','24SS'), //
+            '6110j1107'=>array('JVATICAN','2011','608','24SS'), //
+            '6110j1164'=>array('JCHINA','2012','623','4S'), //
+            '6110j1179'=>array('JNEPAL','2013','628','2S'), //
+            '6110j1185'=>array('JINDIA','2014','632','4S'), //
+            '6110j1206'=>array('JAUSTRALIA','2015','ne2','4S'), // renumber 'neX' for updated Carmel #s in 2013 by BT site
+            '6110j1214'=>array('JGREENLAND','2016','-neX',''), // info needs to be updated after 5/2013
+            */
+        case "JPOLAND": return 595
+        case "JUSA": return 682
+        case "JCZECH": return 693
+        case "JRUSSIA": return 708
+        case "JEBLGIUM": return 752
+        case "JSLOVAKIA": return 762
+        case "JHUNGARY": return 786
+        case "JGEORGIA": return 814
+        case "JITALY": return 895
+        case "JAUS_HUN": return 898
+        case "JGERMANY": return 935
+        case "JUN_NGV": return 1004
+        case "JFRANCE": return 1038
+        case "JPOLAND2": return 1055
+        case "JROMANIA": return 1070
+        case "JCANADA": return 1085
+        case "JAUSTRIA": return 1089
+        case "JVATICAN": return 1107
+        case "JCHINA": return 1164
+        case "JNEPAL": return 1179
+        case "JINDIA": return 1185
+        case "JAUSTRALIA": return 1206
+        case "JGREENLAND": return 1214
+        default: return 99998
+            }} else { switch section {
+            case "Tab": return 1
+            case "TabD": return 2
+            case "S/S": return 3
+            case "P": return 4
+            case "ILS": return 5
+            case "AS": return 6
+            // needs total expansion here - TBD actually needs to be derived from object instead (user-editable and expandable)
+        default: return 99999
+            }}
+    }
+    return 0
+}
+
+func compareByAlbum( lhs: AlbumSortable, rhs: AlbumSortable ) -> Bool {
+    // first combine Type and Ref, sort by the combo
+    let tr1 = lhs.albumType + lhs.albumRef
+    let tr2 = rhs.albumType + rhs.albumRef
+    if tr1 > tr2 { return false }
+    if tr1 < tr2 { return true }
+    let nemp1 = !lhs.albumSection.isEmpty
+    let nemp2 = !rhs.albumSection.isEmpty
+    let secOrder1 = !nemp1 ? 0 : getSectionSortOrder(lhs.albumSection)
+    let secOrder2 = !nemp2 ? 0 : getSectionSortOrder(rhs.albumSection)
+    if nemp1 && nemp2 && secOrder1 > secOrder2 { return false }
+    if nemp1 && !nemp2 { return false }
+    if !nemp1 && nemp2 { return true }
+    if nemp1 && nemp2 && secOrder1 < secOrder2 { return true }
+    if nemp1 && nemp2 {
+        // sections are both non-empty, sort by alpha instead of ordinal
+        if lhs.albumSection > rhs.albumSection { return false }
+        if lhs.albumSection < rhs.albumSection { return true }
+    }
+    let pgval1 = lhs.albumPage.toFloat() ?? 0.0
+    let pgval2 = rhs.albumPage.toFloat() ?? 0.0
+    if pgval1 > pgval2 { return false }
+    if pgval1 < pgval2 { return true }
+    // on the same page, PHP code compares by extracted dates next (from baseItem.descriptionX, then from self.desc)
+    return false
 }

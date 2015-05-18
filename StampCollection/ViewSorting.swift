@@ -57,7 +57,16 @@ protocol DateSortable {
     var normalizedDate: String { get }
 }
 
+protocol AlbumSortable {
+    // compare existing properties for album location
+    var albumType: String { get }
+    var albumRef: String { get }
+    var albumSection: String { get }
+    var albumPage: String { get }
+}
+
 protocol SortTypeSortable : CodeSortable, DateSortable, ImportSortable { }
+protocol SortTypeSortableEx : SortTypeSortable, AlbumSortable { }
 
 func sortCollection<T: SortTypeSortable>( coll: [T], byType type: SortType) -> [T] {
     switch type {
@@ -78,6 +87,37 @@ func sortCollection<T: SortTypeSortable>( coll: [T], byType type: SortType) -> [
             return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
         } else {
             return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
+        }
+    default: break
+    }
+    return coll
+}
+
+func sortCollectionEx<T: SortTypeSortableEx>( coll: [T], byType type: SortType) -> [T] {
+    switch type {
+    case .ByImport(let asc):
+        if asc {
+            return coll.sorted{ $0.exOrder < $1.exOrder }
+        } else {
+            return coll.sorted{ $1.exOrder < $0.exOrder }
+        }
+    case .ByCode(let asc):
+        if asc {
+            return coll.sorted{ $0.normalizedCode < $1.normalizedCode }
+        } else {
+            return coll.sorted{ $1.normalizedCode < $0.normalizedCode }
+        }
+    case .ByDate(let asc):
+        if asc {
+            return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
+        } else {
+            return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
+        }
+    case .ByAlbum(let asc):
+        if asc {
+            return coll.sorted{ return compareByAlbum($0, $1) }
+        } else {
+            return coll.sorted{ return compareByAlbum($1, $0) }
         }
     default: break
     }

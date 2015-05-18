@@ -12,6 +12,7 @@ import UIKit
 This class will display a UIAlertController modally.
 The controller will have a few text input fields for editing various things, such as keywords or year ranges.
 For now we will customize it to edit SearchType objects' auxiliary data.
+// TBD: needs to remember previous entry for each field - how?
 */
 
 enum UIQueryFieldType {
@@ -136,7 +137,7 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     if startYear != 0 && endYear == 0 {
                         endYear = startYear
                     }
-                    let currentYear = NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: NSDate())
+                    let (currentYear, _, _) = componentsFromDate(NSDate())
                     if startYear < 1948 || startYear > currentYear || endYear < startYear {
                         // validity check: any invalid causes removal of searching type in question by sending back special data
                         startYear = 0

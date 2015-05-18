@@ -150,7 +150,7 @@ class InfoItemsTableViewController: UITableViewController {
                 let temp = sortCollection(self.model.info, byType: type)
                 self.model.info = temp
             } else {
-                let temp = sortCollection(self.model.inventory, byType: type)
+                let temp = sortCollectionEx(self.model.inventory, byType: type)
                 self.model.inventory = temp
             }
             self.refreshData()
@@ -177,6 +177,10 @@ class InfoItemsTableViewController: UITableViewController {
         addSortAction(.ByImport(false), forDataType: ftype, toController: ac)
         addSortAction(.ByDate(true), forDataType: ftype, toController: ac)
         addSortAction(.ByDate(false), forDataType: ftype, toController: ac)
+        if ftype == .Inventory {
+            addSortAction(.ByAlbum(true), forDataType: ftype, toController: ac)
+            addSortAction(.ByAlbum(false), forDataType: ftype, toController: ac)
+        }
         act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
             // no action here
         }
