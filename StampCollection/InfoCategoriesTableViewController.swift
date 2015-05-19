@@ -104,12 +104,12 @@ class InfoCategoriesTableViewController: UITableViewController {
         if row == model.categories.count {
             // special handling for the AllData row
             cell.textLabel?.text = "All Categories"
-            let categoryItems = model.getInfoCategoryCount(CollectionStore.CategoryAll)
+            let categoryItems = model.getCountForType(.Info)
             cell.detailTextLabel?.text = "(\(categoryItems) items)"
             cell.accessoryType = .None
         } else {
             let category = model.categories[row]
-            let categoryItems = model.getInfoCategoryCount(category.number)
+            let categoryItems = category.dealerItems.count
             cell.textLabel?.text = category.name
             cell.detailTextLabel?.text = "(\(categoryItems) items)"
             let allowDisc = (category.code[0] != "*")

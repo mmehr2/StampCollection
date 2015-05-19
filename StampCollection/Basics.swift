@@ -29,6 +29,25 @@ http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
+func trimSpaces( input: String ) -> String {
+    var begin = input.startIndex
+    var end = input.endIndex
+    while begin != input.endIndex {
+        if input[begin] != " " {
+            break
+        }
+        begin = begin.successor()
+    }
+    while begin != end {
+        if input[end.predecessor()] != " " {
+            break
+        }
+        end = end.predecessor()
+    }
+    let range : Range<String.Index> = begin..<end
+    return input[range]
+}
+
 // splits a string into a numeric suffix and non-numeric prefix
 func splitNumericEndOfString( input: String ) -> (String, String) {
     var indexSplit = input.endIndex
@@ -65,14 +84,19 @@ func padIntegerString( input: Int, toLength outlen: Int, padWith pad: String = "
 }
 
 func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits places: Int = 2, padWith pad: String = "0") -> String {
-    var fmt = NSNumberFormatter()
-    fmt.paddingCharacter = pad
-    fmt.minimumIntegerDigits = outlen
-    fmt.maximumIntegerDigits = outlen
-    fmt.allowsFloats = true
-    fmt.minimumFractionDigits = places
-    fmt.maximumFractionDigits = places
-    return fmt.stringFromNumber(input) ?? ""
+    var fmtstr = String(format: "%d.%dlf", (pad.isEmpty ? 1 : outlen), places)
+    fmtstr = "%" + pad + fmtstr
+    let str = String(format:fmtstr, input)
+    return str
+//    var fmt = NSNumberFormatter()
+//    fmt.paddingCharacter = pad
+//    fmt.paddingPosition = .AfterPrefix
+//    fmt.minimumIntegerDigits = outlen
+//    fmt.maximumIntegerDigits = outlen
+//    fmt.allowsFloats = true
+//    fmt.minimumFractionDigits = places
+//    fmt.maximumFractionDigits = places
+//    return fmt.stringFromNumber(input) ?? ""
 }
 
 // following was stolen from: http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language

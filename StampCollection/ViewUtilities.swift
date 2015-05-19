@@ -127,11 +127,13 @@ WANTED vs HAVE-IT:
 var wantHave: String // "w" for want list item, "h" for have it in the collection
 */
 private func formatInventoryWantField(item: InventoryItem) -> String {
-    return item.wantHave == "w" ? "WL/" : ""
+    return item.wantHave == "w" ? "*WANTED*" : ""
 }
 
 private func formatInventoryLocation(item: InventoryItem) -> String {
-    return "IN \(item.albumRef)p.\(item.albumPage) (S:\(item.albumSection))"
+    let section = item.albumSection
+    let sectionStr = section.isEmpty ? "" : " (S:\(section))"
+    return "IN \(item.albumRef) p.\(item.albumPage)\(sectionStr)"
 }
 
 func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
@@ -159,11 +161,11 @@ func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
 private func formatInventoryValue(item: InventoryItem) -> String {
     var output = "Val"
     let baseItem = item.dealerItem
-    let nameExt = formatPriceDescription(baseItem.category.prices, item.itemType)
+    let nameExt = formatPriceDescription(item.category.prices, item.itemType)
     output += nameExt
     if let price = baseItem.valueForKey(item.itemType) as? String,
         priceVal = price.toDouble() {
-            output += "=" + padDoubleString(priceVal, toLength: 10, withFractionDigits: 2, padWith: " ")
+            output += "=" + padDoubleString(priceVal, toLength: 10, withFractionDigits: 2, padWith: "")
     }
     return output
 }
@@ -177,9 +179,8 @@ private func formatInventoryVarCondition(item: InventoryItem) -> String {
 }
 
 func formatInventoryMain(item: InventoryItem) -> String {
-    if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum)
-        , info = CollectionStore.sharedInstance.getInfoItem(item.baseItem) {
-            let basedes = makeStringFit(info.descriptionX, 60)
+    if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum) {
+            let basedes = makeStringFit(item.dealerItem.descriptionX, 60)
             return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
     }
     return "\(formatInventoryWantField(item)) \(formatInventoryLocation(item))"

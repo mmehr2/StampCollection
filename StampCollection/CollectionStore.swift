@@ -34,6 +34,9 @@ class CollectionStore: ExportDataSource {
     var info : [DealerItem] = []
     var inventory : [InventoryItem] = []
     //var loading = false // means well, but ... not thread safe??
+    var albums : [AlbumRef] = []
+    var albumFamilies : [AlbumFamily] = []
+    var albumTypes : [AlbumType] = []
 
     // MARK: basics for CoreData implementation
     var persistentStoreCoordinator: NSPersistentStoreCoordinator?
@@ -362,6 +365,7 @@ class CollectionStore: ExportDataSource {
                 break
             case .Inventory:
                 self.fetchInventory(moc, inCategory: category, withSearching: searching)
+                showLocationStats(moc, inCategory: category)
                 break
             }
             // run the completion block, if any, on the main queue
@@ -374,6 +378,44 @@ class CollectionStore: ExportDataSource {
         }
     }
 
+    private func getUniqueSectionNames(moc: NSManagedObjectContext) {
+        var nameCountDict : [String:Int] = [:]
+        var total = 0
+        let albumSections = fetch("AlbumSection", inContext: moc, withFilter: nil)
+        for section in albumSections as! [AlbumSection] {
+            if nameCountDict[section.code] == nil {
+                nameCountDict[section.code]  = 0
+            }
+            ++(nameCountDict[section.code]!)
+            ++total
+        }
+        var unamelist = Array(nameCountDict.keys)
+        unamelist.sort{ $0 < $1 }
+        let unames = ", ".join(unamelist)
+        println("There are \(nameCountDict.count-1) unique section names out of \(total) in use: \(unames)")
+        //println("Dict of section keys: \(nameCountDict)")
+    }
+    
+    private func showLocationStats(moc: NSManagedObjectContext, inCategory catnum: Int16) {
+        let predTypes = NSPredicate(format: "%K == %@", "", "")
+        let albumTypes : [AlbumType] = fetch("AlbumType", inContext: moc, withFilter: nil)
+        let numAlbumTypes = albumTypes.count
+        let albumTypeNames = albumTypes.map{ x in x.code }
+        let typeList = ", ".join(albumTypeNames)
+        let albumFamilies : [AlbumFamily] = fetch("AlbumFamily", inContext: moc, withFilter: nil)
+        let numAlbumFamilies = albumFamilies.count
+        let albumFamilyNames = albumFamilies.map{ x in x.code }
+        let familyList = ", ".join(albumFamilyNames)
+        let numAlbums = countFetches("AlbumRef", inContext: moc, withFilter: nil)
+        let numAlbumSections = countFetches("AlbumSection", inContext: moc, withFilter: nil)
+        let numAlbumPages = countFetches("AlbumPage", inContext: moc, withFilter: nil)
+        let numItems = countFetches("InventoryItem", inContext: moc, withFilter: nil)
+        println("There are \(numAlbums) albums in \(numAlbumFamilies) families of \(numAlbumTypes) types with \(numAlbumSections) sections holding \(numAlbumPages) pages for \(numItems) items")
+        println("Types: \(typeList)")
+        println("Families: \(familyList)")
+        getUniqueSectionNames(moc)
+    }
+    
     func fetchCategory(category: Int16, inContext token: ContextToken = CollectionStore.mainContextToken ) -> Category? {
         // filter: returns category item with given category number; if -1 or unused cat# is passed, returns nil
         // i.e., this looks in the prefiltered categories list (no codes starting with '*')
@@ -411,46 +453,6 @@ class CollectionStore: ExportDataSource {
             total = countFetches(typeStr, inContext: context, withFilter: rule)
         }
         return total
-    }
-
-    // get counts from local info arrays (deprecated)
-    func getInfoCategoryCount( category: Int16 ) -> Int {
-        var total = 0
-        if category == CollectionStore.CategoryAll {
-            total = categories.reduce(0) { (sum, this) in
-                sum + this.dealerItems.count
-            }
-        } else {
-            var items : [Category] = categories.filter { x in
-                x.number == category
-            }
-            if items.count > 0 {
-                return items[0].dealerItems.count
-            }
-        }
-        return total
-    }
-    
-    func getInfoItem(code: String ) -> DealerItem? {
-        // filter: returns info item with given unique code string; if item not found, returns nil
-        // i.e., this looks in the prefiltered info list (usually filtered by category)
-        var items : [DealerItem] = info.filter { x in
-            x.id == code
-        }
-        if items.count > 0 {
-            return items[0]
-        }
-        return nil
-    }
-    
-    func getInventoryItems(code: String ) -> [InventoryItem] {
-        // filter: returns inventory items with given baseItem code string
-        // NOTE: due to duplicates, this needs to work differently from the INFO and CATEGORY item fetchers
-        // i.e., this looks in the prefiltered info list (usually filtered by category)
-        var items : [InventoryItem] = inventory.filter { x in
-            x.baseItem == code
-        }
-        return items
     }
     
     private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) {
