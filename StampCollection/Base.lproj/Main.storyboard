@@ -215,7 +215,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Dgb-oY-REe"/>
-                        <barButtonItem title="Pic" id="hfl-ct-mvs">
+                        <barButtonItem title="Update" id="hfl-ct-mvs">
                             <connections>
                                 <action selector="picButtonPressed:" destination="ry2-wg-j4p" id="adn-Ux-tac"/>
                             </connections>

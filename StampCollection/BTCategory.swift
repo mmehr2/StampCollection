@@ -20,18 +20,33 @@ class BTCategory: NSObject {
     var headers : [String] = []
     var dataItems : [BTDealerItem] = []
 
-    class func translateNumberToInfoCategory( catnum: Int) -> Int {
+    class func translateNumberToInfoCategory( catnum: Int) -> Int16 {
         // takes the category of current BT site and translates it into the internal category number used in the collection data
         switch catnum {
-        case 1...3: return catnum
+        case 1...3: return Int16(catnum)
         case 4: return 4 // event
         case 5: return 6 // post offices
         case 6: return -1 // no counterpart (new category added since collection was scraped)
         case 7: return 7 // slogan
         case 8: return 5 // military admin == w.bank & gaza
         case JSCategoryAll: return 28 // Judaica Sales Austria Tabs category
-        case BTCategoryAll: return catnum // just in case (shouldn't occur)
-        default: return catnum - 1
+        case BTCategoryAll: return Int16(catnum) // just in case (shouldn't occur)
+        default: return Int16(catnum) - 1
+        }
+    }
+    
+    class func translateNumberFromInfoCategory( catnum: Int16) -> Int {
+        // takes the category of current BT site and translates it into the internal category number used in the collection data
+        switch catnum {
+        case 1...3: return Int(catnum)
+        case 4: return 4 // event
+        case 6: return 5 // post offices
+        //case 6: return -1 // no counterpart (new category added since collection was scraped)
+        case 7: return 7 // slogan
+        case 5: return 8 // military admin == w.bank & gaza
+        case 28: return JSCategoryAll // Judaica Sales Austria Tabs category
+        case CollectionStore.CategoryAll: return Int(catnum) // just in case (shouldn't occur)
+        default: return Int(catnum) + 1
         }
     }
     

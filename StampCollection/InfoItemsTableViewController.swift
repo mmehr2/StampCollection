@@ -87,7 +87,13 @@ class InfoItemsTableViewController: UITableViewController {
         // TBD: download and show the image identified by the selection's pictid property
         // URL is http://www.bait-tov.com/store/products/XXX.jpg where XXX is the pictid
         // NOTE: should probably be a part of a detail controller instead
-        println("Pic button pressed.")
+        //println("Pic button pressed.")
+        // I AM NOW COMMANDEERING THIS TO DO COMPARISON UPDATES!
+        if category == CollectionStore.CategoryAll {
+            println("Cannot compare all items at once; only do this for individual categories (for now)")
+        } else {
+            processComparison(category, 0, model.info)
+        }
     }
     
     @IBAction func searchButtonPressed(sender: AnyObject) {

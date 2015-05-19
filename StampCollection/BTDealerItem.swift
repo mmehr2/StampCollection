@@ -42,18 +42,19 @@ class BTDealerItem: NSObject {
     }
     
     func createInfoItem(category: BTCategory) -> [String:String] {
+        // NOTE: be sure to use export names for all properties (i.e. description NOT descriptionX) to be comparable with the output of makeDataFromObject()
         var output : [String:String] = [:]
         let isJS = (code[0..<2] == "AUI")
         output["id"] = code
-        output["descriptionX"] = descr
-        output["status"] = status
+        output["description"] = trimSpaces(descr)
+        output["status"] = trimSpaces(status)
         output["pictype"] = isJS ? "1" : "0" // 1 is JS type, 0 is BT
-        output["pictid"] = picref // actually this needs to be processed to get only the ID code
+        output["pictid"] = picref.componentsSeparatedByString("=").last ?? ""
         output["cat1"] = catalog1
         output["cat2"] = catalog2
         output["group"] = category.name
         let catnumX = BTCategory.translateNumberToInfoCategory(category.number)
-        output["catgDisplayNum"] = "\(catnumX)" // set to -1 if no corresponding category exists
+        output["CatgDisplayNum"] = "\(catnumX)" // set to -1 if no corresponding category exists
         // price columns for a category can be P, PU, PF, or PUFS; pick the appropriate one from the headers array
         var foundPF = find(category.headers, "PriceFDC") != nil
         var foundPS = find(category.headers, "PriceOther") != nil
