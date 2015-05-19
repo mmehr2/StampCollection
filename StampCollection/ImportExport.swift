@@ -213,7 +213,7 @@ class ImportExport: InfoParseable {
 
     // MARK: - data export
     
-    // NOTE: exmports to CSV files in user's Documents folder
+    // NOTE: exports to CSV files in user's Documents folder
     private func writeDataOfType( dataType: CollectionStore.DataType, toCSVFile file: NSURL,
         withContext token: CollectionStore.ContextToken )
     {
@@ -242,20 +242,22 @@ class ImportExport: InfoParseable {
         // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
         NSOperationQueue().addOperationWithBlock({
             // this does blocking (synchronous) writing of the files
-            // set the context token for this thread
-            let token = CollectionStore.sharedInstance.prepareStorageContext(forExport: true)
             var categoryFileTmp = self.categoryURL.URLByAppendingPathExtension("tmp")
             var infoFileTmp = self.infoURL.URLByAppendingPathExtension("tmp")
             var inventoryFileTmp = self.inventoryURL.URLByAppendingPathExtension("tmp")
-            println("Exporting files to \(self.categoryURL.path!)")
-            self.writeDataOfType(.Categories, toCSVFile: categoryFileTmp, withContext: token)
-            println("Completed writing \(categoryFileTmp.lastPathComponent!)")
-            self.writeDataOfType(.Info, toCSVFile: infoFileTmp, withContext: token)
-            println("Completed writing \(infoFileTmp.lastPathComponent!)")
-            self.writeDataOfType(.Inventory, toCSVFile: inventoryFileTmp, withContext: token)
-            println("Completed writing \(inventoryFileTmp.lastPathComponent!)")
-            // finalize the data for this context token
-            CollectionStore.sharedInstance.finalizeStorageContext(token, forExport: true)
+            if let dataSource = self.dataSource {
+                // set the context token for this thread
+                let token = dataSource.prepareStorageContext(forExport: true)
+                println("Exporting files to \(self.categoryURL.path!)")
+                self.writeDataOfType(.Categories, toCSVFile: categoryFileTmp, withContext: token)
+                println("Completed writing \(categoryFileTmp.lastPathComponent!)")
+                self.writeDataOfType(.Info, toCSVFile: infoFileTmp, withContext: token)
+                println("Completed writing \(infoFileTmp.lastPathComponent!)")
+                self.writeDataOfType(.Inventory, toCSVFile: inventoryFileTmp, withContext: token)
+                println("Completed writing \(inventoryFileTmp.lastPathComponent!)")
+                // finalize the data for this context token
+                dataSource.finalizeStorageContext(token, forExport: true)
+            }
             // compare files to originals, if needed
             if compare {
                 // compare the temp files to the originals
