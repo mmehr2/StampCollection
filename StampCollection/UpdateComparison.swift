@@ -127,6 +127,16 @@ func getCRReport(oldRec: [String:String], newRec: [String:String], comprec: Comp
     return output
 }
 
+enum UpdateComparisonResult {
+    case SameItem // new item matched an existing item entirely
+    case ChangedItem // new item matched an existing item ID with different data
+    case ChangedItemID(String) // new item matched an existing item's essential data but with different ID (includes existing ID)
+    case AddedItem // new item does not match an existing item
+    case RemovedItem // an existing item which did not get a match from any new item
+}
+
+typealias UpdateComparisonTable = [String:UpdateComparisonResult]
+
 // This MONSTER function, translated from the PHP code in BTProcess.PHP, does the magic work of comparing live website data with CoreData model data
 // Currently, it has no output, other than notes to println(); it remains half translated, since the second half makes modifications to the database, which needs major translation work.
 // For the 1st TBD, my plan is to put the FixCatFields() code into the BTDealerItem class itself; for now it will prove that the code is working if it comes up with the list on its own.
@@ -153,251 +163,171 @@ func getCRReport(oldRec: [String:String], newRec: [String:String], comprec: Comp
 //      2. Some L2 items have a RefItem (L1 ID xref) - these are currently set for Folders(fe), Bulletins(bu), and
 //         I'm about to add a referencing system between Joint items, S.Leaves, and S.Folders
 //      3. Check for other uses of the Ref Item field - how? a custom webpage mode?
-func processComparison(category: Int16, oldRecs: [DealerItem]) {
+func processComparison(oldRecs: [DealerItem]) -> UpdateComparisonTable {
+    var output = UpdateComparisonTable()
     if oldRecs.count == 0 {
-        println("No CoreData records to compare in category \(category)")
-        return
+        println("No existing INFO records to compare")
+        return output
     }
-    //var okToWrite = mode > 0
-    //var okToDelete = mode == 3
+    // get the category number from the first item (assume that all are the same for efficiency)
+    let category = oldRecs.first!.catgDisplayNum
     // get the corresponding category and item data from the live BT website (assumed to be done loading)
     let webtcatnum = BTCategory.translateNumberFromInfoCategory(category)
     let webtcat = BTDealerStore.model.getCategoryByNumber(webtcatnum)!
     let newRecs: [BTDealerItem] = webtcat.dataItems
     if newRecs.count == 0 {
         println("No Website records to compare in category \(category) = website category \(webtcatnum)")
-        return
+        return output
     }
-    // comparison loop - Phase 1 scan
-    // This identifies items of new data that are found (in old data) or added (not in old)
-    // The found items are classified into updates (if any changes detected) or identical copies (just counted)
-    println("Comparing \(oldRecs.count) CoreData records with \(newRecs.count) website records.")
-    var added : [String:Int] = [:] // those only found in newRecs, string is ID(NR) and int is index/row in newRecs
-    var updated : [String:(Int, CompRecord)] = [:] // found in both sets, string is ID and int is index in newRecs; w.comprec details
-    var deleted : [String:Int] = [:] // those only found in oldRecs, string is ID(OR) and int is index in oldRecs
-    var found : [String:Int] = [:] // those found in oldRecs; string is id, int is index into newRecs
-    var samecount = 0 // counting records that are identical in both sets
-    for (irow, input) in enumerate(newRecs) {
-        // for each candidate item from the live website, convert it to dictionary form, and get the ID code
-        let irecord = input.createInfoItem(webtcat)
-        let id = irecord["id"]!
-        // check if ID is present in existing supplied CoreData records
-        var (orow, idf): (Int, String) = (-1, "")
-        for (rownum, rec) in enumerate(oldRecs) {
-            if rec.id == id {
-                (orow, idf) = (rownum, id)
-                break
-            }
-        }
-        let foundID = !idf.isEmpty
-        if !foundID {
-            // NO: must be added (we think)
-            added[id] = irow
+    // reimplement this code in modern swift
+    // create mappings between set IDs and data index numbers (into old or new arrays) for efficient usage (reverse ID lookup)
+    // OR we could just map the actual objects here, and dispense with row numbers...
+    var newIndex : [String:BTDealerItem] = [:]
+    for (newRow, newObj) in enumerate(newRecs) {
+        // detect new data integrity (ID uniqueness) here, making sure the entry is nil before we add it
+        if let violationRow = newIndex[newObj.code] {
+            println("Integrity violation (NEW) ID=\(newObj.code) already appears in new data at row \(violationRow)")
         } else {
-            // YES: we have an ID match, send it to the updates table and run the comparison
-            // must be an update
-            // mark it as found (unfound items at end of scan are deletions)
-            found[id] = irow;
-            // compare record to existing record, and if not the same, put it in updates array
-            let orecord = oldRecs[orow].makeDataFromObject()
-            let comprec = compareInfoRecords(orecord, irecord)
-            if (!isEqualCR(comprec, false)) {
-                updated[id] = (irow, comprec) // save both irow# and comparisons array
-            } else {
-                ++samecount
+            newIndex[newObj.code] = newObj
+        }
+    }
+    var oldIndex : [String:DealerItem] = [:]
+    for (oldRow, oldObj) in enumerate(oldRecs) {
+        // detect old data integrity (ID uniqueness) here, making sure the entry is nil before we add it
+        if let violationRow = oldIndex[oldObj.id] {
+            println("Integrity violation (OLD) ID=\(oldObj.id) already appears in old data at row \(violationRow)")
+        } else {
+            oldIndex[oldObj.id] = oldObj
+        }
+    }
+    // create sets of IDs from each collection
+    let newIDs = Set(newIndex.keys) //Set(newRecs.map{$0.code}) // set of all new IDs
+    let oldIDs = Set(oldIndex.keys) //Set(oldRecs.map{$0.id}) // set of all old IDs
+    let foundIDs = newIDs.intersect(oldIDs) // common IDs
+    // we need to classify the found items into same or different; count the same set, compare the different one for updates
+    // to do this we need to run the comparison on the object's dictionary forms
+    // NOTE: this loop is the largest for most normal situations (updating existing database)
+    var samecount = 0
+    var updatedIDs = Set<String>()
+    for id in foundIDs {
+        // get the new and old objects referred by this ID
+        let oldObj = oldIndex[id]!
+        let newObj = newIndex[id]!
+        // run the comparison, and see if it's equal or not
+        let oldData = oldObj.makeDataFromObject()
+        let newData = newObj.createInfoItem(webtcat)
+        let comprec = compareInfoRecords(oldData, newData)
+        let compResult = isEqualCR(comprec, false)
+        // if equal, just bump the equality counter
+        if compResult {
+            ++samecount
+        }
+        // else we should save the ID in the updated set
+        else {
+            updatedIDs.insert(id)
+        }
+    }
+    // Phase 2: determine if added and deleted sets are totally unrelated or if any items have commonality
+    // This commonality test would compare other identity related fields of the object such as description or picID
+    // BT COULD change all of these at once, which is why we need a manual override; for now, just check descriptions
+    let addedIDs = newIDs.subtract(foundIDs) // new but not both
+    let deletedIDs = oldIDs.subtract(foundIDs) // old but not both
+    var realaddedIDs = Set<String>() // should be added to the database
+    var realdeletedIDs = Set<String>() // should be marked in the database somehow to prevent further comparisons here
+    var opcounter = 0
+    var testedIDsByOld = [String:String]() // dictionary of tests, oldID is key, newID is value
+    var realchangedIDsByOld = [String:String]() // dictionary of transforms, oldID is key, newID is value
+    var realchangedIDsByNew = [String:String]() // dictionary of transforms, newID is key, oldID is value
+    // if either of these sets (added, deleted) is empty, the other is all "real"
+    if addedIDs.isEmpty {
+        realdeletedIDs = deletedIDs
+//    } else if deletedIDs.isEmpty {
+//        realaddedIDs = addedIDs
+    } else {
+        // we need to identify added objects that have a common description with an existing/old object
+        // the code above checks each added object and scans the deletion descriptions until the first match is found
+        // if so, the ID is in the set of updates; if no descriptions match, the ID is considered a real addition
+        for addID in addedIDs {
+            let addObj = newIndex[addID]!
+            var matched = false
+            // for each added object, find if any deleted object has the same description and/or other fields in common
+            for delID in deletedIDs {
+                ++opcounter // double check the size of the set; should be half of count(addedIDs) * count(deletedIDs)
+               // get the two objects represented by the two IDs
+                let delObj = oldIndex[delID]!
+                // analyze their similarities:
+                // current rule: descriptions must be equal
+                // TBD: could also look at catalog fields (2), pic ID codes, or combinations)
+                let compResult = delObj.descriptionX == addObj.descr
+                // if this comparison passes, it's an ID change with possible other updates: add to the realchangedX dictionaries
+                if compResult {
+                    realchangedIDsByNew[addID] = delID
+                    realchangedIDsByOld[delID] = addID
+                    matched = true
+                    break
+                }
+            }
+            if !matched {
+                // if it fails the whole loop, add the the new ID to the realadded set
+                realaddedIDs.insert(addID)
             }
         }
+        // once this process is over, any deletions that haven't been matched as updates are really "deletions"
+        // we may only choose to mark them in the DB rather than actually delete, depending on if any inventory uses the item
+        let delsWhichWereUpdates = Set(realchangedIDsByOld.keys)
+        realdeletedIDs = deletedIDs.subtract(delsWhichWereUpdates)
     }
-    // scan for deletions - Phase 1B
-    // The entire old list is compared (by ID) with the found list from above; items not found could be deletions.
-    for (orowX, recX) in enumerate(oldRecs) //foreach ($index as $id => $orow)
-    {
-        // check all existing CoreData records
-        let idf = recX.id
-        // if the ID is not in the found set, it must be a deletion
-        if found[idf] == nil {
-            deleted[idf] = orowX // remember row number of deleted row in index
-        }
+    // create the output table
+    let realIDChangesByNew = Set(realchangedIDsByNew.keys)
+    for id in newIDs {
+        // new IDs could be Added, Removed, Changed (2 types), or same; only existing IDs can be deleted
+        if realaddedIDs.contains(id) { output[id] = .AddedItem }
+        //else if realdeletedIDs.contains(id) { output[id] = .RemovedItem } // see below
+        else if updatedIDs.contains(id) { output[id] = .ChangedItem }
+        else if realIDChangesByNew.contains(id) { output[id] = .ChangedItemID(realchangedIDsByNew[id]!) }
+        else { output[id] = .SameItem }
     }
-    // scan Phase 2 - classify the deletions using the additions, finding obvious ID changes (add,del with common description)
-    // Find deletions and additions that share the same description and treat them as updates with identity/ID change
-    // NOTE: if any changes are also made to the description field, manual override will be required to catch these as ID changes
-    var realadditions : [String:Int] = [:]
-    var realdeletions : [String:Int] = [:]
-    var adddelupdates : [String:(String, Int, String, String, Int, String, CompRecord)] = [:]
-    var adddelupdatesbyd : [String:(String, Int, String, String, Int, String, CompRecord)] = [:]
-    for (id, irow) in added //foreach ($added as $id => $irow)
-    {
-        let record = newRecs[irow].createInfoItem(webtcat) //$input[$irow];
-        let idesc = record["description"]!
-        var matched = false
-        for (idd, drow) in deleted //foreach ($deleted as $idd => $drow)
-        {
-            let drecord = oldRecs[drow].makeDataFromObject()
-            let ddesc = drecord["description"]!
-            if (ddesc == idesc)
-            {
-                let comprec = compareInfoRecords(drecord, record)
-                // save matching corresponding info (idd, drow, id, irow) - index by idd(old) and id(new)
-                let x = (idd, drow, ddesc, id, irow, idesc, comprec)
-                adddelupdates[id] = x
-                adddelupdatesbyd[idd] = x
-                matched = true
-                break
-            }
-        }
-        if matched
-        {
-            // this is an entry for update between the DB record in deleted and the addition row info (new)
-            // array addition has already been made
-            //            $idd = $adddelupdates[$id]['idd'];
-            //            $drow = $adddelupdates[$id]['drow'];
-            //            $ddesc = $adddelupdates[$id]['ddesc'];
-            // later            $message .=  "<h4>Matched add/del ID-change record $irow(ID=$id): $idesc<br />";
-            // later            $message .=  " Corresponds to $drow(ID=$idd): $ddesc<br/></h4>";
-        }
-        else
-        {
-            // this is really an addition, that should go to the real additions table
-            realadditions[id] = irow
-            // later           $message .=  "<h4>Added input record $irow(ID=$id): $idesc<br /></h4>";
-        }
+    // add the deletions to the list
+    for id in realdeletedIDs {
+        output[id] = .RemovedItem
     }
-    // scan for the real deletions (not found in adddelupdates)
-    for (idd, drow) in deleted //foreach ($deleted as $idd => $drow)
-    {
-        if adddelupdatesbyd[idd] == nil //(!array_key_exists($idd, $adddelupdatesbyd))
-        {
-            realdeletions[idd] = drow
-        }
-    }
-    // time to summarize what we've done!
-    let incount = newRecs.count //$incount = count($input);
-    let oldcount = oldRecs.count
-    if incount < oldcount {
-        println("More deletions than insertions.")
-    } else if incount > oldcount {
-        println("More insertions than deletions.")
-    } else if incount == oldcount {
-        println("Same number of deletions and insertions.")
-    }
-    let addcount = count(added)
-    let foundcount = count(found)
-    let deletedcount = count(deleted)
-    let updatedcount = count(updated)
-    let addcount2 = count(realadditions)
-    let updatedcount2 = count(adddelupdates)
-    let deletedcount2 = count(realdeletions)
-    println("Of the \(incount) imported lines, \(foundcount) were FOUND in L1 by ID, leading to \(updatedcount) UPDATES, and \(samecount) PRESERVED.")
-    println("Of the rest (\(addcount) ADDITIONS) vs. \(deletedcount) DELETIONS), there are \(addcount2) REAL ADDITIONS, \(deletedcount2) REAL DELETIONS, and \(updatedcount2) ID CHANGES.")
-    // TBD: function is now half translated; the code then proceeds to actually make the changes to the data, which we REALLY need to translate into CoreData terms
-    println("MORE TO COME ...")
+    printSummaryStats(output)
+    return output
 }
 
-/*
-TEST OUTPUT 5/19/15 - FIRST VERSION
-// NOTE how nothing is preserved. Comparing apples with oranges maybe? Check fieldnames match for comparison function.
-Showing Sets, SS, FDC (#2) Info Items
-Comparing 1041 CoreData records with 1072 website records.
-More insertions than deletions.
-Of the 1072 imported lines, 1041 were FOUND in L1 by ID, leading to 1041 UPDATES, and 0 PRESERVED.
-Of the rest (31 ADDITIONS) vs. 0 DELETIONS), there are 31 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Booklets (#3) Info Items
-Comparing 136 CoreData records with 141 website records.
-More insertions than deletions.
-Of the 141 imported lines, 136 were FOUND in L1 by ID, leading to 136 UPDATES, and 0 PRESERVED.
-Of the rest (5 ADDITIONS) vs. 0 DELETIONS), there are 5 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing International Reply Coupons (#12) Info Items
-Comparing 162 CoreData records with 20 website records.
-More deletions than insertions.
-Of the 20 imported lines, 19 were FOUND in L1 by ID, leading to 19 UPDATES, and 0 PRESERVED.
-Of the rest (1 ADDITIONS) vs. 143 DELETIONS), there are 1 REAL ADDITIONS, 143 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Joint Issues (#13) Info Items
-Comparing 91 CoreData records with 42 website records.
-More deletions than insertions.
-Of the 42 imported lines, 38 were FOUND in L1 by ID, leading to 38 UPDATES, and 0 PRESERVED.
-Of the rest (4 ADDITIONS) vs. 53 DELETIONS), there are 4 REAL ADDITIONS, 53 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Maximum Cards (#14) Info Items
-Comparing 31 CoreData records with 34 website records.
-More insertions than deletions.
-Of the 34 imported lines, 31 were FOUND in L1 by ID, leading to 31 UPDATES, and 0 PRESERVED.
-Of the rest (3 ADDITIONS) vs. 0 DELETIONS), there are 3 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Ministry of Defense Covers (#15) Info Items
-Comparing 61 CoreData records with 64 website records.
-More insertions than deletions.
-Of the 64 imported lines, 61 were FOUND in L1 by ID, leading to 61 UPDATES, and 0 PRESERVED.
-Of the rest (3 ADDITIONS) vs. 0 DELETIONS), there are 3 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing New Year Greeting Cards (#16) Info Items
-Comparing 32 CoreData records with 33 website records.
-More insertions than deletions.
-Of the 33 imported lines, 32 were FOUND in L1 by ID, leading to 32 UPDATES, and 0 PRESERVED.
-Of the rest (1 ADDITIONS) vs. 0 DELETIONS), there are 1 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Postal Bank Stamps (#19) Info Items
-Comparing 2 CoreData records with 2 website records.
-Same number of deletions and insertions.
-Of the 2 imported lines, 2 were FOUND in L1 by ID, leading to 2 UPDATES, and 0 PRESERVED.
-Of the rest (0 ADDITIONS) vs. 0 DELETIONS), there are 0 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Postal Stationery (#20) Info Items
-Comparing 379 CoreData records with 397 website records.
-More insertions than deletions.
-Of the 397 imported lines, 378 were FOUND in L1 by ID, leading to 378 UPDATES, and 0 PRESERVED.
-Of the rest (19 ADDITIONS) vs. 1 DELETIONS), there are 18 REAL ADDITIONS, 0 REAL DELETIONS, and 1 ID CHANGES.
-MORE TO COME ...
-Showing Revenue Stamps (#21) Info Items
-Comparing 21 CoreData records with 22 website records.
-More insertions than deletions.
-Of the 22 imported lines, 21 were FOUND in L1 by ID, leading to 21 UPDATES, and 0 PRESERVED.
-Of the rest (1 ADDITIONS) vs. 0 DELETIONS), there are 1 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Souvenir Folders (#22) Info Items
-Comparing 98 CoreData records with 83 website records.
-More deletions than insertions.
-Of the 83 imported lines, 83 were FOUND in L1 by ID, leading to 83 UPDATES, and 0 PRESERVED.
-Of the rest (0 ADDITIONS) vs. 15 DELETIONS), there are 0 REAL ADDITIONS, 15 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Souvenir Leaves (#23) Info Items
-Comparing 137 CoreData records with 142 website records.
-More insertions than deletions.
-Of the 142 imported lines, 135 were FOUND in L1 by ID, leading to 135 UPDATES, and 0 PRESERVED.
-Of the rest (7 ADDITIONS) vs. 2 DELETIONS), there are 7 REAL ADDITIONS, 2 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Special Sheets-Sheetlets-Combination (#24) Info Items
-Comparing 262 CoreData records with 300 website records.
-More insertions than deletions.
-Of the 300 imported lines, 261 were FOUND in L1 by ID, leading to 261 UPDATES, and 0 PRESERVED.
-Of the rest (39 ADDITIONS) vs. 1 DELETIONS), there are 39 REAL ADDITIONS, 1 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Varieties and Variants (#25) Info Items
-Comparing 125 CoreData records with 130 website records.
-More insertions than deletions.
-Of the 130 imported lines, 123 were FOUND in L1 by ID, leading to 123 UPDATES, and 0 PRESERVED.
-Of the rest (7 ADDITIONS) vs. 2 DELETIONS), there are 5 REAL ADDITIONS, 0 REAL DELETIONS, and 2 ID CHANGES.
-MORE TO COME ...
-Showing Vending Machine Labels (#26) Info Items
-Comparing 496 CoreData records with 226 website records.
-More deletions than insertions.
-Of the 226 imported lines, 211 were FOUND in L1 by ID, leading to 211 UPDATES, and 0 PRESERVED.
-Of the rest (15 ADDITIONS) vs. 285 DELETIONS), there are 15 REAL ADDITIONS, 285 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing Year Sets (#27) Info Items
-Comparing 72 CoreData records with 74 website records.
-More insertions than deletions.
-Of the 74 imported lines, 72 were FOUND in L1 by ID, leading to 72 UPDATES, and 0 PRESERVED.
-Of the rest (2 ADDITIONS) vs. 0 DELETIONS), there are 2 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-Showing (X)Austria Judaica Tabs (#28) Info Items
-Comparing 68 CoreData records with 68 website records.
-Same number of deletions and insertions.
-Of the 68 imported lines, 68 were FOUND in L1 by ID, leading to 68 UPDATES, and 0 PRESERVED.
-Of the rest (0 ADDITIONS) vs. 0 DELETIONS), there are 0 REAL ADDITIONS, 0 REAL DELETIONS, and 0 ID CHANGES.
-MORE TO COME ...
-
-*/
+func printSummaryStats(table: UpdateComparisonTable) {
+    var incount = 0
+    var samecount = 0
+    var addcount = 0
+    var foundcount = 0
+    var deletedcount = 0
+    var updatedcount = 0
+    var addcount2 = 0
+    var updatedcount2 = 0
+    var deletedcount2 = 0
+    for (id, result) in table {
+        ++incount
+        switch result {
+        case .SameItem:
+            ++foundcount
+            ++samecount
+        case .ChangedItem:
+            ++foundcount
+            ++updatedcount
+        case .ChangedItemID:
+            ++updatedcount2
+            ++deletedcount
+            ++addcount
+        case .AddedItem:
+            ++addcount
+            ++addcount2
+        case .RemovedItem:
+            ++deletedcount2
+            ++deletedcount
+            --incount // not a NEW item
+        }
+    }
+    println("Summary of Comparison Table Results")
+    println("Of the \(incount) imported lines, \(foundcount) were FOUND in L1 by ID, leading to \(updatedcount) UPDATES, and \(samecount) PRESERVED.")
+    println("Of the rest (\(addcount) ADDITIONS) vs. \(deletedcount) DELETIONS), there are \(addcount2) REAL ADDITIONS, \(deletedcount2) REAL DELETIONS, and \(updatedcount2) ID CHANGES.")
+}
