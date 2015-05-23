@@ -219,4 +219,26 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         }
         return categories[num]
     }
+    
+    func exportData( completion: (() -> Void)? = nil ) {
+        let exporter = BTExporter()
+        let data = categories + [JSCategory]
+        exporter.exportData(data, completion: completion)
+    }
+    
+    func importData( completion: (() -> Void)? = nil ) {
+        println("Importing data from CSV files")
+        let importer = BTImporter()
+        importer.importData() {
+            // when it's done, we need to copy the data out
+            self.categories = importer.getBTCategories()
+            if let jsc = importer.getJSCategory() {
+                self.JSCategory = jsc
+            }
+            // and then call the completion routine
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
 }

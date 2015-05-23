@@ -33,13 +33,15 @@ func trimSpaces( input: String ) -> String {
     var begin = input.startIndex
     var end = input.endIndex
     while begin != input.endIndex {
-        if input[begin] != " " {
+        let char = input[begin]
+        if char != " " {
             break
         }
         begin = begin.successor()
     }
     while begin != end {
-        if input[end.predecessor()] != " " {
+        let char = input[end.predecessor()]
+        if char != " " && char != "\n" {
             break
         }
         end = end.predecessor()

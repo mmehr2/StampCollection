@@ -153,13 +153,13 @@ func getCRReport(oldRec: [String:String], newRec: [String:String], comprec: Comp
 //      2. Some L2 items have a RefItem (L1 ID xref) - these are currently set for Folders(fe), Bulletins(bu), and
 //         I'm about to add a referencing system between Joint items, S.Leaves, and S.Folders
 //      3. Check for other uses of the Ref Item field - how? a custom webpage mode?
-func processComparison(category: Int16, mode: Int, oldRecs: [DealerItem]) {
+func processComparison(category: Int16, oldRecs: [DealerItem]) {
     if oldRecs.count == 0 {
         println("No CoreData records to compare in category \(category)")
         return
     }
-    var okToWrite = mode > 0
-    var okToDelete = mode == 3
+    //var okToWrite = mode > 0
+    //var okToDelete = mode == 3
     // get the corresponding category and item data from the live BT website (assumed to be done loading)
     let webtcatnum = BTCategory.translateNumberFromInfoCategory(category)
     let webtcat = BTDealerStore.model.getCategoryByNumber(webtcatnum)!
@@ -168,19 +168,19 @@ func processComparison(category: Int16, mode: Int, oldRecs: [DealerItem]) {
         println("No Website records to compare in category \(category) = website category \(webtcatnum)")
         return
     }
-    // comparison loop
+    // comparison loop - Phase 1 scan
+    // This identifies items of new data that are found (in old data) or added (not in old)
+    // The found items are classified into updates (if any changes detected) or identical copies (just counted)
     println("Comparing \(oldRecs.count) CoreData records with \(newRecs.count) website records.")
-    var added : [String:Int] = [:]
-    var updated : [String:(Int, CompRecord)] = [:]
-    var deleted : [String:Int] = [:]
-    var found : [String:Int] = [:]
-    var samecount = 0
+    var added : [String:Int] = [:] // those only found in newRecs, string is ID(NR) and int is index/row in newRecs
+    var updated : [String:(Int, CompRecord)] = [:] // found in both sets, string is ID and int is index in newRecs; w.comprec details
+    var deleted : [String:Int] = [:] // those only found in oldRecs, string is ID(OR) and int is index in oldRecs
+    var found : [String:Int] = [:] // those found in oldRecs; string is id, int is index into newRecs
+    var samecount = 0 // counting records that are identical in both sets
     for (irow, input) in enumerate(newRecs) {
         // for each candidate item from the live website, convert it to dictionary form, and get the ID code
         let irecord = input.createInfoItem(webtcat)
         let id = irecord["id"]!
-        // TBD: also need to convert the cat1 and cat2 catalog fields in category 2 (Sets,...) to fix data issues with the input
-        // (LEGACY PHP CODE DETECTED THIS - ARTIFACT OF CONVERSION PROCESS OR OUTRIGHT TYPOS IN BT DATA!)
         // check if ID is present in existing supplied CoreData records
         var (orow, idf): (Int, String) = (-1, "")
         for (rownum, rec) in enumerate(oldRecs) {
@@ -208,7 +208,8 @@ func processComparison(category: Int16, mode: Int, oldRecs: [DealerItem]) {
             }
         }
     }
-    // scan for deletions
+    // scan for deletions - Phase 1B
+    // The entire old list is compared (by ID) with the found list from above; items not found could be deletions.
     for (orowX, recX) in enumerate(oldRecs) //foreach ($index as $id => $orow)
     {
         // check all existing CoreData records
@@ -218,7 +219,9 @@ func processComparison(category: Int16, mode: Int, oldRecs: [DealerItem]) {
             deleted[idf] = orowX // remember row number of deleted row in index
         }
     }
-    // now find deletions and additions that share the same description and treat them as updates with identity change
+    // scan Phase 2 - classify the deletions using the additions, finding obvious ID changes (add,del with common description)
+    // Find deletions and additions that share the same description and treat them as updates with identity/ID change
+    // NOTE: if any changes are also made to the description field, manual override will be required to catch these as ID changes
     var realadditions : [String:Int] = [:]
     var realdeletions : [String:Int] = [:]
     var adddelupdates : [String:(String, Int, String, String, Int, String, CompRecord)] = [:]

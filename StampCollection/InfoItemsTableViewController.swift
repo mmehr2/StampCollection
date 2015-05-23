@@ -92,7 +92,7 @@ class InfoItemsTableViewController: UITableViewController {
         if category == CollectionStore.CategoryAll {
             println("Cannot compare all items at once; only do this for individual categories (for now)")
         } else {
-            processComparison(category, 0, model.info)
+            processComparison(category, model.info)
         }
     }
     

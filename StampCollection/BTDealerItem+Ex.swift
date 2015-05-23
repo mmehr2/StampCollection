@@ -1,34 +1,16 @@
 //
-//  BTDealerItem.swift
+//  BTDealerItem+Ex.swift
 //  StampCollection
 //
-//  Created by Michael L Mehr on 4/19/15.
+//  Created by Michael L Mehr on 5/19/15.
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
 import Foundation
 
-private let CATNUM_SETS = 2 // belongs in constants list somewhere else
+private let CATNUM_SETS = 2
 
-class BTDealerItem: NSObject {
-    var code = ""
-    var descr = ""
-    var catalog1 = ""
-    var catalog2 = ""
-    var price1 = ""
-    var price2 = ""
-    var price3 = ""
-    var price4 = ""
-    var buy1 = ""
-    var buy2 = ""
-    var buy3 = ""
-    var buy4 = ""
-    var oldprice1 = ""
-    var oldprice2 = ""
-    var oldprice3 = ""
-    var oldprice4 = ""
-    var status = ""
-    var picref = ""
+extension BTDealerItem {
     
     func fixupJSItem() {
         // synthesize a status field for JS data
@@ -54,7 +36,7 @@ class BTDealerItem: NSObject {
             }
         }
     }
-    
+
     
     func fixCatField(catfieldx: String, Named fname: String, WithID id: String) -> String
     {
@@ -130,7 +112,7 @@ class BTDealerItem: NSObject {
         descr = trimSpaces(descr)
         status = trimSpaces(status)
     }
-    
+
     func createInfoItem(category: BTCategory) -> [String:String] {
         // NOTE: be sure to use export names for all properties (i.e. description NOT descriptionX) to be comparable with the output of makeDataFromObject()
         var output : [String:String] = [:]
@@ -332,4 +314,5 @@ class BTDealerItem: NSObject {
         if let inputNum = data["catgDisplayNum"]?.toInt() { catnum = inputNum }
         return catnum
     }
+    
 }

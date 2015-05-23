@@ -15,6 +15,24 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
     
     var storeModel = BTDealerStore.model
     
+    var spinner: UIActivityIndicatorView? {
+        didSet {
+            self.tableView.tableHeaderView = spinner
+        }
+    }
+    
+    func setSpinnerView(_ onOff: Bool = false) {
+        if !onOff {
+            spinner?.stopAnimating()
+            spinner = nil
+            return
+        }
+        let sp = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        sp.hidesWhenStopped = true
+        sp.startAnimating()
+        spinner = sp
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,18 +41,46 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
 
         title = "Dealer Categories"
         // reload the BT categories page and continue to populate the data in the background
-        storeModel.loadStore(.Populate) {
+//        storeModel.loadStore(.Populate) {
+//            self.tableView.reloadData()
+//        }
+        // use persisted copy with manual updates from web
+        setSpinnerView(true)
+        storeModel.importData() {
             self.tableView.reloadData()
+            self.setSpinnerView(false)
         }
     }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         // reload the BT categories page
+        setSpinnerView(true)
         storeModel.loadStore(.JustCategories) {
             self.tableView.reloadData()
+            self.setSpinnerView(false)
         }
     }
     
+    @IBAction func reloadButtonPressed(sender: UIBarButtonItem) {
+        setSpinnerView(true)
+        storeModel.loadStore(.Populate) {
+            self.tableView.reloadData()
+            self.setSpinnerView(false)
+        }
+    }
+    
+    @IBAction func exportButtonPressed(sender: UIBarButtonItem) {
+        storeModel.exportData()
+    }
+    
+    @IBAction func importButtonPressed(sender: UIBarButtonItem) {
+        setSpinnerView(true)
+        storeModel.importData() {
+            self.tableView.reloadData()
+            self.setSpinnerView(false)
+        }
+    }
+
     // MARK: - Table view data source
     
     func getCategoryIndexForIndexPath( indexPath: NSIndexPath ) -> Int {

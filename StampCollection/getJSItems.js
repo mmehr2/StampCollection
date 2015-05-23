@@ -105,7 +105,7 @@ function parseNotes( row ) {
 }
 
 function parsePicData( text ) {
-    // Typical Pic =
+    // Typical Pic = austrian_pic_detail.asp?index=17023
     var matches = text.match(/\'austrian_pic[^\']*\'/);
     if (matches == null) return "";
     var output = matches[0].replace(/\'/g, "");
@@ -126,9 +126,10 @@ function parseData( row, headers ) {
         } else {
             // regular data field
             data = removeHTMLTags(text);
-            // need to remove leading whitespace from the description column (j == 2)
+            // need to remove leading and trailing whitespace from the description column (j == 2)
             // prob okay to process all though
-            data = data.replace(/^\s*(\S)/, "$1");
+            // EXPLAIN: ^\s* is leading white space, the (...) groups any pattern of either any characters between non-WS or a single non-WS, and \s*$ is trailing WS
+            data = data.replace(/^\s*(\S.*\S|\S)\s*$/, "$1");
             // also need to remove leading $ from price data
             data = data.replace(/^\$/, "")
         }

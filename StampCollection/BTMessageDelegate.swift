@@ -130,15 +130,12 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                             if let delegate = delegate {
                                 delegate.messageHandler(self, receivedData: category, forCategory: categoryNumber)
                             }
-                            //storeModel.categories.append(category)
                             //println("Category \(category.number): \(category.name) - \(category.items) items @ \(category.href)")
                         }
                     }
                     if let delegate = delegate {
                         delegate.messageHandler(self, didLoadDataForCategory: categoryNumber)
                     }
-                    // update the UI here with new contents
-                    //tableView.reloadData()
             }
         }
     }
@@ -177,10 +174,11 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                                     dealerItem.setValue(value, forKey: BTDealerItem.translatePropertyName(propName))
                                 }
                             }
+                            // add any fixup of item property fields here
+                            dealerItem.fixupBTItem(categoryNumber)
                             if let delegate = delegate {
                                 delegate.messageHandler(self, receivedData: dealerItem, forCategory: categoryNumber)
                             }
-                            //category.dataItems.append(dealerItem)
                         }
                     }
                     if let delegate = delegate {
@@ -189,7 +187,6 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                     if let delegate = delegate {
                         delegate.messageHandler(self, didLoadDataForCategory: categoryNumber)
                     }
-                    //updateUI()
                 }
             }
         }

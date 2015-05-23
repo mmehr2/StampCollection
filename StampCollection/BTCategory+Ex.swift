@@ -1,24 +1,14 @@
 //
-//  BTCategory.swift
+//  BTCategory+Ex.swift
 //  StampCollection
 //
-//  Created by Michael L Mehr on 4/17/15.
+//  Created by Michael L Mehr on 5/19/15.
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
 import Foundation
 
-class BTCategory: NSObject {
-    // the following is basic data populated by the getCategories message
-    //var raw = ""
-    var name = ""
-    var href = ""
-    var number = -1
-    var items = 0
-    // the following is data added by the getItems message for the individual category
-    var notes = ""
-    var headers : [String] = []
-    var dataItems : [BTDealerItem] = []
+extension BTCategory {
     
     class func translateNumberToInfoCategory( catnum: Int) -> Int16 {
         // takes the category of current BT site and translates it into the internal category number used in the collection data
@@ -101,4 +91,5 @@ class BTCategory: NSObject {
         if let notes = data["notes"] { refObj.notes = notes } // maybe needs unescaping then
         if let headers = data["headers"] { refObj.headers = headers.componentsSeparatedByString(";") }
     }
+    
 }
