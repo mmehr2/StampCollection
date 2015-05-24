@@ -89,11 +89,11 @@ class InfoItemsTableViewController: UITableViewController {
         // NOTE: should probably be a part of a detail controller instead
         //println("Pic button pressed.")
         // I AM NOW COMMANDEERING THIS TO DO COMPARISON UPDATES!
-        if category == CollectionStore.CategoryAll {
-            println("Cannot compare all items at once; only do this for individual categories (for now)")
-        } else {
-            processComparison(category, model.info)
-        }
+//        if category == CollectionStore.CategoryAll {
+//            println("Cannot compare all items at once; only do this for individual categories (for now)")
+//        } else {
+//            processComparison(model.info)
+//        }
     }
     
     @IBAction func searchButtonPressed(sender: AnyObject) {
@@ -311,14 +311,19 @@ class InfoItemsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == "Show Updates Segue" {
+            if let dvc = segue.destinationViewController as? UpdatesTableViewController {
+                dvc.category = category
+            }
+        }
     }
-    */
+    
 
 }

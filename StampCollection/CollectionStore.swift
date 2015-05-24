@@ -492,13 +492,52 @@ class CollectionStore: ExportDataSource {
     }
     
     private func fetchCategories(context: NSManagedObjectContext) {
-        // filter: remove any objects with code starting with a "*"
+        // filter: remove any objects with name ending in "(var)" - that extra booklets category kludge
         let rule = NSPredicate(format: "NOT %K ENDSWITH %@", "name", "(var)")
         // sort: by category.number
         let sort = NSSortDescriptor(key: "number", ascending: true)
         categories = fetch("Category", inContext: context, withFilter: rule, andSorting: [sort])
     }
-
+    
+    private func fetchCategoryEx(category: Int16, inContext context: NSManagedObjectContext) -> [Category] {
+        let rule: NSPredicate
+        if category == CollectionStore.CategoryAll {
+            rule = NSPredicate(format: "NOT %K ENDSWITH %@", "name", "(var)")
+        } else {
+            rule = NSPredicate(format: "%K == %@ AND NOT %K ENDSWITH %@", "number", NSNumber(short: category), "name", "(var)")
+        }
+        let sort = NSSortDescriptor(key: "number", ascending: true)
+        return fetch("Category", inContext: context, withFilter: rule, andSorting: [sort]) as [Category]
+    }
+    
+    func updateCategory( catnum: Int16, completion: ((UpdateComparisonTable) -> Void)? = nil ) {
+        // do this on a background thread
+        NSOperationQueue().addOperationWithBlock({
+            // if doing all categories, load each one's data, get the comparison table, and add it to the master table
+            // if only doing one category, load its data, get the comparison table, and add that to the master table
+            var output = UpdateComparisonTable()
+            let token = self.getContextTokenForThread()
+            if let context = self.getContextForThread(token) {
+                let cats = self.fetchCategoryEx(catnum, inContext: context)
+                for cat in cats {
+                    // filter out cats who are not of the proper type
+                    // for now this means ignoring numbers after the Austria/JS one (all generated info, not directly from BT or JS sites)
+                    // TBD: later we need postprocessing to enter generated info items too (SIMA sets, JOINT items, sheets from sets, etc.)
+                    if cat.updateable {
+                        var temp = processUpdateComparison(cat)
+                        output.merge(temp)
+                    }
+                }
+            }
+            self.removeContextForThread(token)
+            // and then call the completion routine
+            if let completion = completion {
+                NSOperationQueue.mainQueue().addOperationWithBlock{
+                    completion(output)
+                }
+            }
+        })
+    }
 }
 
 // global utility funcs for access of CoreData object collections

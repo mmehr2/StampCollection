@@ -27,6 +27,7 @@ func <(lhs: CompareStatus, rhs: CompareStatus) -> Bool {
 
 extension CompareStatus: Comparable { }
 
+typealias InfoRecord = [String:String]
 typealias CompRecord = [String:CompareStatus]
 
 private func compareWithTC( lhs: String, rhs: String ) -> Bool {
@@ -55,8 +56,8 @@ private func compareWithTC( lhs: String, rhs: String ) -> Bool {
 // first param oldRec is a data array created from the existinc CoreData model, as a dictionary of String/String key/value pairs
 // second param newRec is the candidate data array created from the comparison target, such as the live BT data candidate
 // output is a detailed field-by-field comparison evaluation using the above comparison function and the String == operator
-func compareInfoRecords( oldRec: [String:String], newRec: [String:String] ) -> CompRecord {
-    var output : CompRecord = [:]
+private func compareInfoRecords( oldRec: InfoRecord, newRec: InfoRecord ) -> CompRecord {
+    var output = CompRecord()
     let akeys = Set(oldRec.keys)
     let bkeys = Set(newRec.keys)
     let abkeys = akeys.union(bkeys)
@@ -103,7 +104,7 @@ func isEqualCR(comprec: CompRecord, strict: Bool) -> Bool  {
     return result
 }
 
-func getCRReport(oldRec: [String:String], newRec: [String:String], comprec: CompRecord) -> String {
+func getCRReport(oldRec: InfoRecord, newRec: InfoRecord, comprec: CompRecord) -> String {
     var output = ""
     for (fname, status) in comprec {
         if status >= .EqualIfTC {
@@ -128,14 +129,37 @@ func getCRReport(oldRec: [String:String], newRec: [String:String], comprec: Comp
 }
 
 enum UpdateComparisonResult {
-    case SameItem // new item matched an existing item entirely
-    case ChangedItem // new item matched an existing item ID with different data
-    case ChangedItemID(String) // new item matched an existing item's essential data but with different ID (includes existing ID)
-    case AddedItem // new item does not match an existing item
-    case RemovedItem // an existing item which did not get a match from any new item
+    case SameItem(String)
+    // new item matched an existing item entirely (old ID)
+    case ChangedItem(DealerItem, BTDealerItem, BTCategory, CompRecord)
+    // new item matched an existing item ID with different data (old item, new item, inp.category, comp.record)
+    case ChangedIDItem(DealerItem, BTDealerItem, BTCategory, CompRecord)
+    // new item matched an existing item's essential data but with different ID (old item, new item, cat item, comp.record)
+    case AddedItem(BTDealerItem, BTCategory)
+    // new item does not match an existing item (new item, cat item)
+    case RemovedItem(DealerItem)
+    // an existing item which did not get a match from any new item (old ID)
 }
 
-typealias UpdateComparisonTable = [String:UpdateComparisonResult]
+class UpdateComparisonTable {
+    var sameItems: [UpdateComparisonResult] = []
+    var removedItems: [UpdateComparisonResult] = []
+    var addedItems: [UpdateComparisonResult] = []
+    var changedItems: [UpdateComparisonResult] = []
+    var changedIDItems: [UpdateComparisonResult] = []
+
+    var count: Int {
+        return removedItems.count + addedItems.count + changedItems.count + changedIDItems.count
+    }
+    
+    func merge( other: UpdateComparisonTable ) {
+        sameItems += other.sameItems
+        removedItems += other.removedItems
+        addedItems += other.addedItems
+        changedItems += other.changedItems
+        changedIDItems += other.changedIDItems
+    }
+}
 
 // This MONSTER function, translated from the PHP code in BTProcess.PHP, does the magic work of comparing live website data with CoreData model data
 // Currently, it has no output, other than notes to println(); it remains half translated, since the second half makes modifications to the database, which needs major translation work.
@@ -163,8 +187,9 @@ typealias UpdateComparisonTable = [String:UpdateComparisonResult]
 //      2. Some L2 items have a RefItem (L1 ID xref) - these are currently set for Folders(fe), Bulletins(bu), and
 //         I'm about to add a referencing system between Joint items, S.Leaves, and S.Folders
 //      3. Check for other uses of the Ref Item field - how? a custom webpage mode?
-func processComparison(oldRecs: [DealerItem]) -> UpdateComparisonTable {
+func processUpdateComparison(category: Category) -> UpdateComparisonTable {
     var output = UpdateComparisonTable()
+    let oldRecs = Array(category.dealerItems) as! [DealerItem]
     if oldRecs.count == 0 {
         println("No existing INFO records to compare")
         return output
@@ -216,15 +241,17 @@ func processComparison(oldRecs: [DealerItem]) -> UpdateComparisonTable {
         // run the comparison, and see if it's equal or not
         let oldData = oldObj.makeDataFromObject()
         let newData = newObj.createInfoItem(webtcat)
-        let comprec = compareInfoRecords(oldData, newData)
-        let compResult = isEqualCR(comprec, false)
+        let compRec = compareInfoRecords(oldData, newData)
+        let compResult = isEqualCR(compRec, false)
         // if equal, just bump the equality counter
         if compResult {
             ++samecount
+            output.sameItems.append(.SameItem(id))
         }
         // else we should save the ID in the updated set
         else {
             updatedIDs.insert(id)
+            output.changedItems.append(.ChangedItem(oldObj, newObj, webtcat, compRec))
         }
     }
     // Phase 2: determine if added and deleted sets are totally unrelated or if any items have commonality
@@ -264,12 +291,19 @@ func processComparison(oldRecs: [DealerItem]) -> UpdateComparisonTable {
                     realchangedIDsByNew[addID] = delID
                     realchangedIDsByOld[delID] = addID
                     matched = true
+                    // add a copy to the output dictionary, creating the auxiliary info items needed
+                    let delRec = delObj.makeDataFromObject()
+                    let addRec = addObj.createInfoItem(webtcat)
+                    let compRec = compareInfoRecords(delRec, addRec)
+                    output.changedIDItems.append(.ChangedIDItem(delObj, addObj, webtcat, compRec))
                     break
                 }
             }
             if !matched {
                 // if it fails the whole loop, add the the new ID to the realadded set
                 realaddedIDs.insert(addID)
+                // and add a copy of the object to the output
+                output.addedItems.append(.AddedItem(addObj, webtcat))
             }
         }
         // once this process is over, any deletions that haven't been matched as updates are really "deletions"
@@ -277,19 +311,9 @@ func processComparison(oldRecs: [DealerItem]) -> UpdateComparisonTable {
         let delsWhichWereUpdates = Set(realchangedIDsByOld.keys)
         realdeletedIDs = deletedIDs.subtract(delsWhichWereUpdates)
     }
-    // create the output table
-    let realIDChangesByNew = Set(realchangedIDsByNew.keys)
-    for id in newIDs {
-        // new IDs could be Added, Removed, Changed (2 types), or same; only existing IDs can be deleted
-        if realaddedIDs.contains(id) { output[id] = .AddedItem }
-        //else if realdeletedIDs.contains(id) { output[id] = .RemovedItem } // see below
-        else if updatedIDs.contains(id) { output[id] = .ChangedItem }
-        else if realIDChangesByNew.contains(id) { output[id] = .ChangedItemID(realchangedIDsByNew[id]!) }
-        else { output[id] = .SameItem }
-    }
-    // add the deletions to the list
-    for id in realdeletedIDs {
-        output[id] = .RemovedItem
+    // add deleted items to output
+    for delID in realdeletedIDs {
+        output.removedItems.append(.RemovedItem(oldIndex[delID]!))
     }
     printSummaryStats(output)
     return output
@@ -305,7 +329,8 @@ func printSummaryStats(table: UpdateComparisonTable) {
     var addcount2 = 0
     var updatedcount2 = 0
     var deletedcount2 = 0
-    for (id, result) in table {
+    let combinedTable = table.sameItems + table.addedItems + table.removedItems + table.changedItems + table.changedIDItems
+    for result in combinedTable {
         ++incount
         switch result {
         case .SameItem:
@@ -314,7 +339,7 @@ func printSummaryStats(table: UpdateComparisonTable) {
         case .ChangedItem:
             ++foundcount
             ++updatedcount
-        case .ChangedItemID:
+        case .ChangedIDItem:
             ++updatedcount2
             ++deletedcount
             ++addcount

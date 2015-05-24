@@ -101,6 +101,16 @@ func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits pl
 //    return fmt.stringFromNumber(input) ?? ""
 }
 
+// code stolen from: http://stackoverflow.com/questions/26728477/swift-how-to-combine-two-dictionary-arrays
+extension Dictionary {
+    mutating func merge<K, V>(dict: [K: V]){
+        for (k, v) in dict {
+            self.updateValue(v as! Value, forKey: k as! Key)
+        }
+    }
+}
+
+
 // following was stolen from: http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
 extension String {
     

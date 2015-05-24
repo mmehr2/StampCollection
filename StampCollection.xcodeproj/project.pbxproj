@@ -54,6 +54,7 @@
 		A6856E6A1B071691004B506E /* AlbumRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E691B071691004B506E /* AlbumRef.swift */; };
 		A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */; };
 		A6856E721B0EAB40004B506E /* BTImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E711B0EAB40004B506E /* BTImportExport.swift */; };
+		A6856E741B111AB6004B506E /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
 		A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */; };
 		A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */; };
@@ -132,6 +133,7 @@
 		A6856E691B071691004B506E /* AlbumRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumRef.swift; sourceTree = "<group>"; };
 		A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateComparison.swift; sourceTree = "<group>"; };
 		A6856E711B0EAB40004B506E /* BTImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTImportExport.swift; sourceTree = "<group>"; };
+		A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
 		A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DealerItem+Ex.swift"; sourceTree = "<group>"; };
 		A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InventoryItem+Ex.swift"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */,
 				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
 				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
+				A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */,
 				A6E198511AD6EEEC0090FDB1 /* Images.xcassets */,
 				A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */,
 				A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */,
@@ -436,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6856E741B111AB6004B506E /* UpdatesTableViewController.swift in Sources */,
 				A632CBB21AEFE8F800565686 /* Basics.swift in Sources */,
 				A6856E5A1B06FE78004B506E /* AlbumPage+Ex.swift in Sources */,
 				A60DBCB41AE38AD900D4959D /* BTItemsTableViewController.swift in Sources */,
