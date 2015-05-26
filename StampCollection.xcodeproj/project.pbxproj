@@ -31,6 +31,7 @@
 		A632CBB91AF35D2A00565686 /* ViewFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBB81AF35D2A00565686 /* ViewFiltering.swift */; };
 		A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBA1AF538FD00565686 /* InfoUtilities.swift */; };
 		A632CBBD1AF6AC8B00565686 /* UIQueryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */; };
+		A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */; };
 		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
 		A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */ = {isa = PBXBuildFile; fileRef = A662C1C21AFDFD520067792F /* inventory.corrupt.csv */; };
 		A662C1CB1AFEAB010067792F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662C1CA1AFEAB010067792F /* Category.swift */; };
@@ -104,6 +105,7 @@
 		A632CBB81AF35D2A00565686 /* ViewFiltering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFiltering.swift; sourceTree = "<group>"; };
 		A632CBBA1AF538FD00565686 /* InfoUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoUtilities.swift; sourceTree = "<group>"; };
 		A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIQueryAlert.swift; sourceTree = "<group>"; };
+		A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTableViewDoubleCell.swift; sourceTree = "<group>"; };
 		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
 		A662C1C21AFDFD520067792F /* inventory.corrupt.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inventory.corrupt.csv; sourceTree = "<group>"; };
 		A662C1CA1AFEAB010067792F /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
 				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
 				A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */,
+				A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */,
 				A6E198511AD6EEEC0090FDB1 /* Images.xcassets */,
 				A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */,
 				A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */,
@@ -475,6 +478,7 @@
 				A61C11621AEA219B00063025 /* InfoItemsTableViewController.swift in Sources */,
 				A662C1E31B049D600067792F /* SSZipArchive.m in Sources */,
 				A6856E621B070D56004B506E /* AlbumFamily.swift in Sources */,
+				A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */,
 				A61C11671AEB785B00063025 /* ViewUtilities.swift in Sources */,
 				A60DBCB21AE1A34E00D4959D /* BTCategory.swift in Sources */,
 				A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */,

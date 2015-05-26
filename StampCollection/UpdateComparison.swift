@@ -131,13 +131,13 @@ func getCRReport(oldRec: InfoRecord, newRec: InfoRecord, comprec: CompRecord) ->
 enum UpdateComparisonResult {
     case SameItem(String)
     // new item matched an existing item entirely (old ID)
-    case ChangedItem(DealerItem, BTDealerItem, BTCategory, CompRecord)
-    // new item matched an existing item ID with different data (old item, new item, inp.category, comp.record)
-    case ChangedIDItem(DealerItem, BTDealerItem, BTCategory, CompRecord)
-    // new item matched an existing item's essential data but with different ID (old item, new item, cat item, comp.record)
+    case ChangedItem(String, BTDealerItem, BTCategory, CompRecord)
+    // new item matched an existing item ID with different data (old ID, new item, inp.category, comp.record)
+    case ChangedIDItem(String, BTDealerItem, BTCategory, CompRecord)
+    // new item matched an existing item's essential data but with different ID (old ID, new item, cat item, comp.record)
     case AddedItem(BTDealerItem, BTCategory)
     // new item does not match an existing item (new item, cat item)
-    case RemovedItem(DealerItem)
+    case RemovedItem(String)
     // an existing item which did not get a match from any new item (old ID)
 }
 
@@ -150,6 +150,61 @@ class UpdateComparisonTable {
 
     var count: Int {
         return removedItems.count + addedItems.count + changedItems.count + changedIDItems.count
+    }
+
+    func sort() {
+        //sameItems = sortCollection(sameItems, byType: .ByImport(true))
+        struct Sorter: SortTypeSortable {
+            var id: String
+            var exVars: InfoDependentVars
+            var exOrder: Int16
+            var result: UpdateComparisonResult
+            var normalizedDate: String { return exVars._exNormalizedDate! }
+            var normalizedCode: String { return exVars._normalizedCode! }
+            init(_ res: UpdateComparisonResult) {
+                result = res
+                var itemID = ""
+                switch result {
+                case .ChangedItem(let dealerItemID, _, _, _ ):
+                    itemID = dealerItemID
+                case .ChangedIDItem(let dealerItemID, _, _, _ ):
+                    itemID = dealerItemID
+                case .SameItem(let dealerItemID):
+                    itemID = dealerItemID
+                case .RemovedItem(let dealerItemID):
+                    itemID = dealerItemID
+                case .AddedItem(let item, let categ):
+                    let catNum = BTCategory.translateNumberToInfoCategory(categ.number)
+                    id = item.code
+                    exVars = InfoDependentVars(descr: item.descr, id: id, cat: catNum)
+                    exOrder = 0 // not supported for BT items (live from website, haven't been ordered on import yet)
+                    return
+                default:
+                    break
+                }
+                let item = CollectionStore.sharedInstance.fetchInfoItemByID(itemID)!
+                id = item.id
+                exVars = InfoDependentVars(descr: item.descriptionX, id: id, cat: item.catgDisplayNum)
+                exOrder = item.exOrder
+            }
+        }
+    
+        var sortables : [Sorter] = []
+        sortables = removedItems.map { Sorter($0) }
+        sortables = sortCollection(sortables, byType: .ByImport(true))
+        removedItems = sortables.map { $0.result }
+        //addedItems = sortCollection(addedItems, byType: .ByCode(true))
+        sortables = addedItems.map { Sorter($0) }
+        sortables = sortCollection(sortables, byType: .ByCode(true))
+        addedItems = sortables.map { $0.result }
+        //changedItems = sortCollection(changedItems, byType: .ByCode(true))
+        sortables = changedItems.map { Sorter($0) }
+        sortables = sortCollection(sortables, byType: .ByCode(true))
+        changedItems = sortables.map { $0.result }
+       //changedIDItems = sortCollection(changedIDItems, byType: .ByCode(true))
+        sortables = changedIDItems.map { Sorter($0) }
+        sortables = sortCollection(sortables, byType: .ByCode(true))
+        changedIDItems = sortables.map { $0.result }
     }
     
     func merge( other: UpdateComparisonTable ) {
@@ -251,7 +306,7 @@ func processUpdateComparison(category: Category) -> UpdateComparisonTable {
         // else we should save the ID in the updated set
         else {
             updatedIDs.insert(id)
-            output.changedItems.append(.ChangedItem(oldObj, newObj, webtcat, compRec))
+            output.changedItems.append(.ChangedItem(id, newObj, webtcat, compRec))
         }
     }
     // Phase 2: determine if added and deleted sets are totally unrelated or if any items have commonality
@@ -295,7 +350,7 @@ func processUpdateComparison(category: Category) -> UpdateComparisonTable {
                     let delRec = delObj.makeDataFromObject()
                     let addRec = addObj.createInfoItem(webtcat)
                     let compRec = compareInfoRecords(delRec, addRec)
-                    output.changedIDItems.append(.ChangedIDItem(delObj, addObj, webtcat, compRec))
+                    output.changedIDItems.append(.ChangedIDItem(delID, addObj, webtcat, compRec))
                     break
                 }
             }
@@ -313,8 +368,10 @@ func processUpdateComparison(category: Category) -> UpdateComparisonTable {
     }
     // add deleted items to output
     for delID in realdeletedIDs {
-        output.removedItems.append(.RemovedItem(oldIndex[delID]!))
+        output.removedItems.append(.RemovedItem(delID))
     }
+    // sort the various output tables
+    output.sort()
     printSummaryStats(output)
     return output
 }

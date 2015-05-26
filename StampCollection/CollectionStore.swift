@@ -300,20 +300,21 @@ class CollectionStore: ExportDataSource {
     }
 
     private func prepareExportSortingForDataType( dataType: CollectionStore.DataType ) -> [NSSortDescriptor] {
-        let outputSort : NSSortDescriptor
+        var outputSorts : [NSSortDescriptor] = []
         // This should create data that can create a fetchRequest that gets the objects in the proper order
         switch dataType {
         case .Categories:
-            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            outputSorts.append(NSSortDescriptor(key: "exOrder", ascending: true))
             break
         case .Info:
-            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            outputSorts.append(NSSortDescriptor(key: "category.number", ascending: true))
+            outputSorts.append(NSSortDescriptor(key: "exOrder", ascending: true))
             break
         case .Inventory:
-            outputSort = NSSortDescriptor(key: "exOrder", ascending: true)
+            outputSorts.append(NSSortDescriptor(key: "exOrder", ascending: true))
             break
         }
-        return [outputSort]
+        return outputSorts
     }
     
     func dataType(dataType: CollectionStore.DataType, dataItemAtIndex index: Int,
@@ -361,10 +362,10 @@ class CollectionStore: ExportDataSource {
                 self.fetchCategories(moc)
                 break
             case .Info:
-                self.fetchInfo(moc, inCategory: category, withSearching: searching)
+                info = self.fetchInfo(moc, inCategory: category, withSearching: searching)
                 break
             case .Inventory:
-                self.fetchInventory(moc, inCategory: category, withSearching: searching)
+                inventory = self.fetchInventory(moc, inCategory: category, withSearching: searching)
                 showLocationStats(moc, inCategory: category)
                 break
             }
@@ -415,22 +416,25 @@ class CollectionStore: ExportDataSource {
         println("Families: \(familyList)")
         getUniqueSectionNames(moc)
     }
-    
+
+    // get a particular category object from CoreData
     func fetchCategory(category: Int16, inContext token: ContextToken = CollectionStore.mainContextToken ) -> Category? {
-        // filter: returns category item with given category number; if -1 or unused cat# is passed, returns nil
-        // i.e., this looks in the prefiltered categories list (no codes starting with '*')
-//        var items : [Category] = categories.filter { x in
-//            x.number == category
-//        }
-//        if items.count > 0 {
-//            return items[0]
-//        }
-        // filter: go for the objects that have the right number, and ignore the weird Booklets (var) category
         if let context = getContextForThread(token) where category != CollectionStore.CategoryAll {
-            let rule = NSPredicate(format: "%K == %@ AND NOT %K ENDSWITH %@", "number", NSNumber(short: category), "name", "(var)")
-            let cat = fetch("Category", inContext: context, withFilter: rule) as [Category]
+            let cat = fetchCategoriesEx(category, inContext: context)
             if  cat.count ==  1 {
                 return cat[0]
+            }
+        }
+        return nil
+    }
+    
+    // get a particular info object from CoreData
+    func fetchInfoItemByID(id: String, inContext token: ContextToken = CollectionStore.mainContextToken ) -> DealerItem? {
+        if let context = getContextForThread(token) where !id.isEmpty {
+            let type = SearchType.SubCategory("^\(id)$")
+            let data = fetchInfo(context, inCategory: CollectionStore.CategoryAll, withSearching: [type], andSorting: .None)
+            if  data.count ==  1 {
+                return data[0]
             }
         }
         return nil
@@ -455,7 +459,7 @@ class CollectionStore: ExportDataSource {
         return total
     }
     
-    private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) {
+    private func fetchInfo(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) -> [DealerItem] {
         // filter: only for given category (catgDisplayNum) unless -1 is passed
         //        var rule: NSPredicate? = nil
         //        if category != CollectionStore.CategoryAll {
@@ -465,21 +469,16 @@ class CollectionStore: ExportDataSource {
         let allSTs = [firstST] + searching
         let rule = getPredicateOfType(.Info, forSearchTypes: allSTs)
         // sort in original archived order
-        let sorts = prepareExportSortingForDataType(.Inventory)
+        let sorts = prepareExportSortingForDataType(.Info)
         // TBD: replace sorting using its ViewModel types as well
         let temp : [DealerItem] = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
         let temp2 = filterInfo(temp, searching)
         // already sorted by default exOrder, so no need for further if specified
-        info = sortCollection(temp2, byType: sortType)
+        return sortCollection(temp2, byType: sortType)
     }
     
-    private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) {
-        // filter: only for given category (catgDisplayNum) unless -1 is passed
-//        var rule: NSPredicate? = nil
-//        if category != CollectionStore.CategoryAll {
-//            rule = NSPredicate(format: "%K = %@", "catgDisplayNum", NSNumber(short: category))
-//        }
+    private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) -> [InventoryItem] {
         let firstST = category == CollectionStore.CategoryAll ? SearchType.None : SearchType.Category(category)
         let allSTs = [firstST] + searching
         let rule = getPredicateOfType(.Inventory, forSearchTypes: allSTs)
@@ -488,18 +487,14 @@ class CollectionStore: ExportDataSource {
         // TBD: replace sorting using its ViewModel types as well
         let temp : [InventoryItem] = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
-        inventory = filterInventory(temp, searching)
+        return filterInventory(temp, searching)
     }
     
     private func fetchCategories(context: NSManagedObjectContext) {
-        // filter: remove any objects with name ending in "(var)" - that extra booklets category kludge
-        let rule = NSPredicate(format: "NOT %K ENDSWITH %@", "name", "(var)")
-        // sort: by category.number
-        let sort = NSSortDescriptor(key: "number", ascending: true)
-        categories = fetch("Category", inContext: context, withFilter: rule, andSorting: [sort])
+        categories = fetchCategoriesEx(CollectionStore.CategoryAll, inContext: context)
     }
     
-    private func fetchCategoryEx(category: Int16, inContext context: NSManagedObjectContext) -> [Category] {
+    private func fetchCategoriesEx(category: Int16, inContext context: NSManagedObjectContext) -> [Category] {
         let rule: NSPredicate
         if category == CollectionStore.CategoryAll {
             rule = NSPredicate(format: "NOT %K ENDSWITH %@", "name", "(var)")
@@ -518,7 +513,7 @@ class CollectionStore: ExportDataSource {
             var output = UpdateComparisonTable()
             let token = self.getContextTokenForThread()
             if let context = self.getContextForThread(token) {
-                let cats = self.fetchCategoryEx(catnum, inContext: context)
+                let cats = self.fetchCategoriesEx(catnum, inContext: context)
                 for cat in cats {
                     // filter out cats who are not of the proper type
                     // for now this means ignoring numbers after the Austria/JS one (all generated info, not directly from BT or JS sites)

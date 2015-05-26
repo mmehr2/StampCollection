@@ -14,29 +14,39 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
-extension DealerItem: SortTypeSortable {
-
-    func updateDependentVars(keyPath: String) {
+class InfoDependentVars {
+    var _normalizedCode: String?
+    var _exYearRange: ClosedInterval<Int>?
+    var _exMonthRange: ClosedInterval<Int>?
+    var _exDayRange: ClosedInterval<Int>?
+    var _exNormalizedStartDate: String?
+    var _exNormalizedEndDate: String?
+    var _exNormalizedDate: String?
+    var _exStartDate: NSDate?
+    var _exEndDate: NSDate?
+    
+    init(descr: String = "", id: String = "", cat: Int16 = (-1)) {
+        update(descr: descr, id: id, cat: cat)
+    }
+    
+    func update(descr: String = "", id: String = "", cat: Int16 = (-1)) {
+        updateKey("descriptionX", value: descr)
+        updateKey("id", value: id, extra: cat)
+    }
+    
+    private func updateKey(keyPath: String, value: String, extra: Int16 = 0) {
         /*
         NOTE: If regenerating DealerItem automatically, copy the following additional cache fields back:
         
         // cached fields - REPLACE AFTER OVERWRITING
-        var _normalizedCode: String?
-        var _exYearRange: ClosedInterval<Int>?
-        var _exMonthRange: ClosedInterval<Int>?
-        var _exDayRange: ClosedInterval<Int>?
-        var _exNormalizedStartDate: String?
-        var _exNormalizedEndDate: NSDate?
-        var _exNormalizedDate: String?
-        var _exStartDate: NSDate?
-        var _exEndDate: NSDate?
+        var _transientVars: InfoDependentVars?
         */
         
         // call this when setting descriptionX so that the dependents can be updated too
         if keyPath == "descriptionX" {
             // Update date range vars from descriptionX
             // NOTE: if start is set, end is set; if year is set, month and day will also be set; if not recognized, Y=M=D=0
-            let (_, range, mrange, drange) = extractDateRangesFromDescription(self.descriptionX)
+            let (_, range, mrange, drange) = extractDateRangesFromDescription(value)
             _exYearRange = range
             _exMonthRange = mrange
             _exDayRange = drange
@@ -60,80 +70,50 @@ extension DealerItem: SortTypeSortable {
         } else if keyPath == "id" {
             // Update _normalizedCode from id (NOTE: requires date range to be set 1st!)
             var postE1K = false
+            let catgDisplayNum = extra
+            let id = value
             if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
                 if id[0...4] == "6110e" {
-                    postE1K = exYearStart >= 2000
+                    postE1K = _exYearRange!.start >= 2000
                 }
             }
             //println("Normalizing ID=\(id) catnum=\(catgDisplayNum), E1K=\(postE1K)")
-            _normalizedCode = normalizeIDCode(id, forCat: catgDisplayNum, isPostE1K: postE1K)
+            _normalizedCode = normalizeIDCode(value, forCat: catgDisplayNum, isPostE1K: postE1K)
         }
         
     }
+}
+
+extension DealerItem: SortTypeSortable {
     
     func updateDependentVars() {
-        updateDependentVars("descriptionX")
-        updateDependentVars("id") // requires date, so must be set after descriptionX
+        _transientVars = InfoDependentVars(descr: descriptionX, id: id, cat: catgDisplayNum)
     }
 
-    // KVC extensions to make the above caching scheme work
-    // see solution discussion at http://stackoverflow.com/questions/25717248/swift-custom-setter-for-coredata-nsmanagedobject
-    
-    /*
-    My recommendation would be to use KVC. Maybe not the most elegant solution, but conceptionally a logical application of KVC.
-    
-    Observe a change of the attribute. Register for the change in init(entity:insertIntoManagedObjectContext:) or maybe better in awakeFromFetch and awakeFromInsert, and remove the observer in willTurnIntoFault.
-    */
-//    private func addKVCObservers() {
-//        // add the observers here
-//        addObserver(self, forKeyPath: "descriptionX", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old, context: nil)
-//        addObserver(self, forKeyPath: "id", options: NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old, context: nil)
-//    }
-    
     override func awakeFromFetch() {
         super.awakeFromFetch()
         // update transient variables (non-managed)
         updateDependentVars()
     }
 
-    // WRONG-O! The data has not been set yet on insert, so this makes no sense to do it on insert, just fetch
-//    override func awakeFromInsert() {
-//        super.awakeFromInsert()
-//        // update transient variables (non-managed)
-//        updateDependentVars()
-//    }
-//
-//    override func willTurnIntoFault() {
-//        super.willTurnIntoFault()
-//        // remove the observers here
-//        removeObserver(self, forKeyPath: "id")
-//        removeObserver(self, forKeyPath: "descriptionX")
-//    }
-//    
-//    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-//        if (keyPath == "descriptionX" || keyPath == "id") {
-//        }
-//        super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-//    }
-//    
     var normalizedCode: String {
-        if _normalizedCode == nil { updateDependentVars() }
-        return _normalizedCode!
+        if _transientVars == nil { updateDependentVars() }
+        return _transientVars!._normalizedCode!
     }
     
     var normalizedDate: String {
-        if _exNormalizedDate == nil { updateDependentVars() }
-        return _exNormalizedDate!
+        if _transientVars == nil { updateDependentVars() }
+        return _transientVars!._exNormalizedDate!
     }
     
     var exYearStart: Int16 {
-        if _exYearRange == nil { updateDependentVars() }
-        return Int16(_exYearRange!.start)
+        if _transientVars == nil { updateDependentVars() }
+        return Int16(_transientVars!._exYearRange!.start)
     }
     
     var exYearEnd: Int16 {
-        if _exYearRange == nil { updateDependentVars() }
-        return Int16(_exYearRange!.end)
+        if _transientVars == nil { updateDependentVars() }
+        return Int16(_transientVars!._exYearRange!.end)
     }
     
     enum ValueType {

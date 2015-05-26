@@ -15,6 +15,20 @@ class UpdatesTableViewController: UITableViewController {
     var category = CollectionStore.CategoryAll
     
     private var output: UpdateComparisonTable?
+    private var showSection = 0
+    private let NUM_SECTIONS = 4
+    private var showTable: [UpdateComparisonResult]? {
+        if let table = output {
+            switch showSection {
+            case 0: return table.addedItems
+            case 1: return table.removedItems
+            case 2: return table.changedIDItems
+            case 3: return table.changedItems
+            default: break
+            }
+        }
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +43,17 @@ class UpdatesTableViewController: UITableViewController {
         // (re)run the update analysis for this category or group
         // then reload the data display
         refetchData()
+        showSection = NUM_SECTIONS
         // and make sure we're current 1st thing
         updateUI()
+    }
+    
+    @IBAction func nextButtonPressed(sender: AnyObject) {
+        ++showSection
+        if showSection > NUM_SECTIONS {
+            showSection = 0
+        }
+        refreshData()
     }
     
     func updateUI() {
@@ -47,6 +70,10 @@ class UpdatesTableViewController: UITableViewController {
         }
         let text = "\(count) Updates for \(name)"
         title = text
+        
+        // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = showSection < 2 ? 50.0 : 150.0
     }
     
     func refetchData() {
@@ -58,25 +85,24 @@ class UpdatesTableViewController: UITableViewController {
             self.updateUI()
         }
     }
+    
+    func refreshData() {
+        tableView.reloadData()
+        updateUI()
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
-        return 4
+        return NUM_SECTIONS
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-//        if let table = output {
-//            switch section {
-//            case 0: return table.addedItems.count
-//            case 1: return table.removedItems.count
-//            case 2: return table.changedIDItems.count
-//            case 3: return table.changedItems.count
-//            default: break
-//            }
-//        }
+        if let table = showTable where section == showSection {
+            return table.count
+        }
         return 0
     }
     
@@ -95,21 +121,44 @@ class UpdatesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Cell", forIndexPath: indexPath) as! UITableViewCell
+        let item = showTable![indexPath.row]
+        switch item {
+        case .AddedItem(let btitem , let btcat ):
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) as! UITableViewCell
+            cell.textLabel?.text = "\(btitem.descr)"
+            cell.detailTextLabel?.text = formatBTDetail(btitem)
+            return cell
+        case .RemovedItem(let dlritemID):
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) as! UITableViewCell
+            let dlritem = model.fetchInfoItemByID(dlritemID)!
+            cell.textLabel?.text = dlritem.descriptionX
+            cell.detailTextLabel?.text = formatDealerDetail(dlritem)
+            return cell
+        case .ChangedItem(let dlritemID, let btitem, let btcat, let comprec ):
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Double Cell", forIndexPath: indexPath) as! UpdateTableViewDoubleCell
+            let dlritem = model.fetchInfoItemByID(dlritemID)!
+            cell.textLabelTop?.text = dlritem.descriptionX
+            cell.detailTextLabelTop?.text = formatDealerDetail(dlritem)
+            cell.textLabelBottom?.text = "\(btitem.descr)"
+            cell.detailTextLabelBottom?.text = formatBTDetail(btitem)
+            return cell
+        case .ChangedIDItem(let dlritemID, let btitem, let btcat, let comprec ):
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Double Cell", forIndexPath: indexPath) as! UpdateTableViewDoubleCell
+            let dlritem = model.fetchInfoItemByID(dlritemID)!
+            cell.textLabelTop?.text = dlritem.descriptionX
+            cell.detailTextLabelTop?.text = formatDealerDetail(dlritem)
+            cell.textLabelBottom?.text = "\(btitem.descr)"
+            cell.detailTextLabelBottom?.text = formatBTDetail(btitem)
+            return cell
+        default:
+            break
+        }
 
         // Configure the cell...
 
-        return cell
+        return UITableViewCell() // should never happen
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     /*
     // Override to support editing the table view.

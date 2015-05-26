@@ -77,8 +77,8 @@ extension SearchType: Printable {
             let catlistX = ", ".join(catlist.map{ cat in
                 "\(cat)" })
             return "In Categories: \(catlistX)"
-        case .SubCategory:
-            return "By SubCategory Unimplemented"
+        case .SubCategory(let pattern):
+            return "In SubCategory Defined By \(pattern)"
         case .Catalog:
             return "By Catalog Unimplemented"
         case .Location:
@@ -172,9 +172,11 @@ extension SearchType {
                 output = NSCompoundPredicate.orPredicateWithSubpredicates(preds)
             }
             break
-//        case .SubCategory:
-//            output = NSPredicate(format: "TRUEPREDICATE")
-//            break
+        case .SubCategory(let pattern):
+            // works with either INFO or INV
+            let target = dealerItemPrefix + "id"
+            output = NSPredicate(format: "%K MATCHES %@", target, pattern)
+            break
 //        case .Catalog:
 //            output = NSPredicate(format: "TRUEPREDICATE")
 //            break
