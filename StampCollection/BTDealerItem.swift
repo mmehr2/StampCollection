@@ -136,7 +136,7 @@ class BTDealerItem: NSObject {
         var output : [String:String] = [:]
         let isJS = (code[0...2] == "AUI")
         output["id"] = code
-        output["description"] = descr
+        output["description"] = trimSpaces(descr)//descr // TBD: needed to fix bug in initial download of data, but can be eliminated once fixupBTItem() is refreshed again 6/8/2015
         output["status"] = status
         output["pictype"] = isJS ? "1" : "0" // 1 is JS type, 0 is BT
         output["pictid"] = picref.componentsSeparatedByString("=").last ?? ""

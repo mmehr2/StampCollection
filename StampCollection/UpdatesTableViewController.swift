@@ -73,7 +73,7 @@ class UpdatesTableViewController: UITableViewController {
         
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = showSection < 2 ? 50.0 : 150.0
+        tableView.estimatedRowHeight = showSection < 2 ? 50.0 : 160.0
     }
     
     func refetchData() {
@@ -141,6 +141,7 @@ class UpdatesTableViewController: UITableViewController {
             cell.detailTextLabelTop?.text = formatDealerDetail(dlritem)
             cell.textLabelBottom?.text = "\(btitem.descr)"
             cell.detailTextLabelBottom?.text = formatBTDetail(btitem)
+            cell.changeLabel?.text = formatComparisonRecord(comprec)
             return cell
         case .ChangedIDItem(let dlritemID, let btitem, let btcat, let comprec ):
             let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Double Cell", forIndexPath: indexPath) as! UpdateTableViewDoubleCell

@@ -42,6 +42,9 @@
 		A662C1EF1B049DD90067792F /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = A662C1E81B049DD90067792F /* mztools.c */; };
 		A662C1F01B049DD90067792F /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = A662C1EA1B049DD90067792F /* unzip.c */; };
 		A662C1F11B049DD90067792F /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = A662C1EC1B049DD90067792F /* zip.c */; };
+		A66348111B20DAB900A4D225 /* InfoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66348101B20DAB900A4D225 /* InfoItemViewController.swift */; };
+		A66348131B21384B00A4D225 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = A66348121B21384B00A4D225 /* noimage.png */; };
+		A66348151B236FDA00A4D225 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66348141B236FDA00A4D225 /* Regex.swift */; };
 		A6856E521B06FDF8004B506E /* AlbumType+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */; };
 		A6856E541B06FE1B004B506E /* AlbumFamily+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */; };
 		A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */; };
@@ -122,6 +125,9 @@
 		A662C1EB1B049DD90067792F /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		A662C1EC1B049DD90067792F /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
 		A662C1ED1B049DD90067792F /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		A66348101B20DAB900A4D225 /* InfoItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemViewController.swift; sourceTree = "<group>"; };
+		A66348121B21384B00A4D225 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		A66348141B236FDA00A4D225 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumType+Ex.swift"; sourceTree = "<group>"; };
 		A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumFamily+Ex.swift"; sourceTree = "<group>"; };
 		A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumRef+Ex.swift"; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */,
 				A632CBBA1AF538FD00565686 /* InfoUtilities.swift */,
 				A632CBB11AEFE8F800565686 /* Basics.swift */,
+				A66348141B236FDA00A4D225 /* Regex.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -284,9 +291,11 @@
 				A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */,
 				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
 				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
+				A66348101B20DAB900A4D225 /* InfoItemViewController.swift */,
 				A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */,
 				A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */,
 				A6E198511AD6EEEC0090FDB1 /* Images.xcassets */,
+				A66348121B21384B00A4D225 /* noimage.png */,
 				A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */,
 				A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */,
 				A61C11651AEB781B00063025 /* ViewModel */,
@@ -419,6 +428,7 @@
 				A632CBAC1AEEDBDD00565686 /* getJSItems.js in Resources */,
 				A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */,
 				A60DBC721ADBC13600D4959D /* inventory.csv in Resources */,
+				A66348131B21384B00A4D225 /* noimage.png in Resources */,
 				A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */,
 				A6E198501AD6EEEC0090FDB1 /* Main.storyboard in Resources */,
 				A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */,
@@ -449,6 +459,7 @@
 				A6856E521B06FDF8004B506E /* AlbumType+Ex.swift in Sources */,
 				A60DBCB61AE38BDA00D4959D /* BTDealerItem.swift in Sources */,
 				A632CBBD1AF6AC8B00565686 /* UIQueryAlert.swift in Sources */,
+				A66348111B20DAB900A4D225 /* InfoItemViewController.swift in Sources */,
 				A6856E581B06FE5C004B506E /* AlbumSection+Ex.swift in Sources */,
 				A6856E541B06FE1B004B506E /* AlbumFamily+Ex.swift in Sources */,
 				A60DBC771ADC463400D4959D /* ImportExport.swift in Sources */,
@@ -464,6 +475,7 @@
 				A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */,
 				A662C1CB1AFEAB010067792F /* Category.swift in Sources */,
 				A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */,
+				A66348151B236FDA00A4D225 /* Regex.swift in Sources */,
 				A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */,
 				A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */,
 				A632CBB71AF2E96F00565686 /* Filtering.swift in Sources */,

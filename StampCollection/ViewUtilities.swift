@@ -85,7 +85,11 @@ func formatBTDetail(item: BTDealerItem) -> String {
         }
         text += "]"
     }
-    var output = "\(text) - \(item.status): \(item.price1) \(item.price2) \(item.price3) \(item.price4)"
+    let price1 = item.price1.isEmpty ? "-0-" : item.price1
+    let price2 = item.price2.isEmpty ? "-0-" : item.price2
+    let price3 = item.price3.isEmpty ? "-0-" : item.price3
+    let price4 = item.price4.isEmpty ? "-0-" : item.price4
+    var output = "\(text) - \(item.status): \(price1) FDC-\(price2) Used-\(price3) M/nt-\(price4)"
     return output
 }
 
@@ -98,7 +102,34 @@ func formatDealerDetail(item: DealerItem) -> String {
         }
         text += "]"
     }
-    var output = "\(text) - \(item.status): \(item.price1) \(item.price2) \(item.price3) \(item.price4)"
+    let price1 = item.price1.isEmpty ? "-0-" : item.price1
+    let price2 = item.price2.isEmpty ? "-0-" : item.price2
+    let price3 = item.price3.isEmpty ? "-0-" : item.price3
+    let price4 = item.price4.isEmpty ? "-0-" : item.price4
+    var output = "\(text) - \(item.status): \(price1) Used-\(price2) FDC-\(price3) M/nt-\(price4)"
+//    let pufs = item.category.prices
+//    switch pufs {
+//    case "P":
+//        output = "\(text) - \(item.status): \(price1)"
+//    case "PU":
+//        output = "\(text) - \(item.status): \(price1) Used-\(price2)"
+//    case "PF":
+//        output = "\(text) - \(item.status): \(price1) FDC-\(price2)"
+//    default: break
+//    }
+    return output
+}
+
+func formatComparisonRecord( comprec: CompRecord ) -> String {
+    var output = "Changes:"
+    for (fieldName, status) in comprec {
+        switch status {
+        case .Equal: continue
+        case .EqualIfTC: continue
+        default:
+            output += " \(fieldName)"
+        }
+    }
     return output
 }
 

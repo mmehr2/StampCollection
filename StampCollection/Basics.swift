@@ -30,24 +30,32 @@ http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
 func trimSpaces( input: String ) -> String {
-    var begin = input.startIndex
-    var end = input.endIndex
-    while begin != input.endIndex {
-        let char = input[begin]
-        if char != " " {
-            break
-        }
-        begin = begin.successor()
-    }
-    while begin != end {
-        let char = input[end.predecessor()]
-        if char != " " && char != "\n" {
-            break
-        }
-        end = end.predecessor()
-    }
-    let range : Range<String.Index> = begin..<end
-    return input[range]
+//    var begin = input.startIndex
+//    var end = input.endIndex
+//    while begin != input.endIndex {
+//        let char = input[begin]
+//        if char != " " {
+//            break
+//        }
+//        begin = begin.successor()
+//    }
+//    while begin != end {
+//        let char = input[end.predecessor()]
+//        if char != " " && char != "\n" {
+//            break
+//        }
+//        end = end.predecessor()
+//    }
+//    let range : Range<String.Index> = begin..<end
+//    return input[range]
+    // new version using Regex
+    // step 1 - replace all whitespace runs with a single space
+    let temp = input.replace("\\s+", withTemplate: " ")
+    // step 2 - eliminate the possible leading space
+    let temp2 = temp.replace("^\\s", withTemplate: "")
+    // step 3 - eliminate the possible trailing space
+    let temp3 = temp2.replace("\\s$", withTemplate: "")
+    return temp3
 }
 
 // splits a string into a numeric suffix and non-numeric prefix

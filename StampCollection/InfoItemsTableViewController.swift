@@ -259,7 +259,7 @@ class InfoItemsTableViewController: UITableViewController {
             let item = model.info[row]
             cell.textLabel?.text = item.descriptionX
             cell.detailTextLabel?.text = formatDealerDetail(item)
-            useDisclosure = false
+            useDisclosure = true
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)") // DEBUG
             //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.descriptionX, 30))") // DEBUG
         } else {
@@ -271,7 +271,7 @@ class InfoItemsTableViewController: UITableViewController {
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
             //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.dealerItem.descriptionX, 30))") // DEBUG
         }
-        cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
+        cell.accessoryType = useDisclosure ? .DetailButton : .None
         
         return cell
     }
@@ -321,6 +321,15 @@ class InfoItemsTableViewController: UITableViewController {
         if segue.identifier == "Show Updates Segue" {
             if let dvc = segue.destinationViewController as? UpdatesTableViewController {
                 dvc.category = category
+            }
+        }
+        if segue.identifier == "Show Info Item Segue" {
+            if let dvc = segue.destinationViewController as? InfoItemViewController,
+                cell = sender as? UITableViewCell where ftype == .Info  {
+                    // Info only (for now)
+                    let indexPath = tableView.indexPathForCell(cell)!
+                    let row = indexPath.row
+                    dvc.item = model.info[row]
             }
         }
     }

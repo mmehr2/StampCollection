@@ -14,6 +14,7 @@ class UpdateTableViewDoubleCell: UITableViewCell {
     @IBOutlet weak var detailTextLabelTop: UILabel!
     @IBOutlet weak var textLabelBottom: UILabel!
     @IBOutlet weak var detailTextLabelBottom: UILabel!
+    @IBOutlet weak var changeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
