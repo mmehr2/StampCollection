@@ -205,12 +205,15 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         if num == JSCategoryAll {
             return JSCategory
         }
-        for category in categories {
-            if category.number == num {
-                return category
-            }
-        }
-        return nil
+//        for category in categories {
+//            if category.number == num {
+//                return category
+//            }
+//        }
+//        return nil
+        return categories.filter{
+            $0.number == num
+        }.first
     }
     
     func getCategoryByIndex( num: Int ) -> BTCategory {

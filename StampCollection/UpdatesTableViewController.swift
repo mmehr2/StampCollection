@@ -16,7 +16,7 @@ class UpdatesTableViewController: UITableViewController {
     
     private var output: UpdateComparisonTable?
     private var showSection = 0
-    private let NUM_SECTIONS = 4
+    private let NUM_SECTIONS = 5
     private var showTable: [UpdateComparisonResult]? {
         if let table = output {
             switch showSection {
@@ -24,6 +24,7 @@ class UpdatesTableViewController: UITableViewController {
             case 1: return table.removedItems
             case 2: return table.changedIDItems
             case 3: return table.changedItems
+            case 4: return table.ambiguousChangedItems
             default: break
             }
         }
@@ -54,6 +55,14 @@ class UpdatesTableViewController: UITableViewController {
             showSection = 0
         }
         refreshData()
+    }
+    
+    @IBAction func commitButtonPressed(sender: UIBarButtonItem) {
+        if let showTable = showTable, output = output,
+            tableID = UpdateComparisonTable.TableID(rawValue: showSection) {
+                output.commit(sections: [tableID])
+                navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     func updateUI() {
@@ -114,6 +123,7 @@ class UpdatesTableViewController: UITableViewController {
             case 1: return "Removed \(table.removedItems.count) Items"
             case 2: return "Changed \(table.changedIDItems.count) ID Items"
             case 3: return "Changed \(table.changedItems.count) Items"
+            case 4: return "Changed OR add/del: \(table.ambiguousChangedItems.count) Items"
             default: break
             }
         }

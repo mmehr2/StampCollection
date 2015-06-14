@@ -180,6 +180,26 @@ extension DealerItem: SortTypeSortable {
         return false
     }
     
+    func updateFromData( data: [String : String] ) {
+        let oldID = self.id
+        DealerItem.setDataValuesForObject( self, fromData: data )
+        // if we detect that the ID code has changed,
+        //  we need to update any dependent relationships to reflect that new ID string
+        let newID = self.id
+        if newID != oldID {
+            for item in inventoryItems {
+                if let invItem = item as? InventoryItem {
+                    invItem.baseItem = newID
+                }
+            }
+            for item in referringItems {
+                if let invItem = item as? InventoryItem {
+                    invItem.refItem = newID
+                }
+            }
+        }
+    }
+    
     // return the names of the data properties, in import/export order (from the CSV file)
     static func getDataHeaderNames() -> [String] {
         var output : [String] = []

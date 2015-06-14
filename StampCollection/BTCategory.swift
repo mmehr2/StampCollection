@@ -20,6 +20,10 @@ class BTCategory: NSObject {
     var headers : [String] = []
     var dataItems : [BTDealerItem] = []
     
+    var infoNumber: Int16 {
+        return BTCategory.translateNumberToInfoCategory(number)
+    }
+    
     class func translateNumberToInfoCategory( catnum: Int) -> Int16 {
         // takes the category of current BT site and translates it into the internal category number used in the collection data
         switch catnum {

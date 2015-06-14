@@ -90,11 +90,11 @@ class CollectionStore: ExportDataSource {
     
     func getContextForThread(token: ContextToken) -> NSManagedObjectContext? {
         // this should properly be called only by the thread using the returned context
-        if isBadContextToken(token) {
-            return nil
-        } else if isMainContextToken(token) {
+        if isMainContextToken(token) {
             return CollectionStore.getMainContext() // it can also get the main context for you with the proper token
-        }
+        } else if isBadContextToken(token) {
+            return nil
+        } 
         return mocsForThreads[token]
     }
     
@@ -120,11 +120,15 @@ class CollectionStore: ExportDataSource {
     }
     
     func saveContextForThread(token: ContextToken) {
-        if token != CollectionStore.badContextToken, let context = mocsForThreads[token] {
+        if token == CollectionStore.mainContextToken {
+            saveMainContext()
+        }
+        else if token != CollectionStore.badContextToken, let context = mocsForThreads[token] {
             CollectionStore.saveContext(context)
         }
     }
-    
+
+    // MARK: object removal
     func removeAllItemsInStore() {
         // NOTE: BE VERY CAREFUL IN USING THIS FUNCTION
         /*
@@ -191,6 +195,14 @@ class CollectionStore: ExportDataSource {
         }
     }
 
+    // single-item remove (must call saveXContext() afterward to commit change)
+    func removeInfoItemByID( itemID: String, fromContext token: ContextToken = mainContextToken ) {
+        if let context = getContextForThread(token),
+            obj = fetchInfoItemByID(itemID, inContext: token) {
+                context.deleteObject(obj)
+        }
+    }
+    
     // MARK: import/export functions
     // NOTE: these functions are used by the ImportExport class to perform their jobs
     // They use a Dictionary [String:String] simple data exchange format
@@ -200,7 +212,7 @@ class CollectionStore: ExportDataSource {
         return getContextTokenForThread()
     }
     
-    func addObjectType(type: DataType, withData data: [String:String], toContext token: ContextToken) {
+    func addObjectType(type: DataType, withData data: [String:String], toContext token: ContextToken = mainContextToken) {
         // use the background thread's moc here
         let mocForThread = getContextForThread(token)
         switch type {
@@ -433,9 +445,7 @@ class CollectionStore: ExportDataSource {
         if let context = getContextForThread(token) where !id.isEmpty {
             let type = SearchType.SubCategory("^\(id)$")
             let data = fetchInfo(context, inCategory: CollectionStore.CategoryAll, withSearching: [type], andSorting: .None)
-            if  data.count ==  1 {
-                return data[0]
-            }
+            return data.first
         }
         return nil
     }

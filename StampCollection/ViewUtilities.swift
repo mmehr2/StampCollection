@@ -94,7 +94,7 @@ func formatBTDetail(item: BTDealerItem) -> String {
 }
 
 func formatDealerDetail(item: DealerItem) -> String {
-    var text = "\(item.id)"
+    var text = "\(item.id)(#\(item.exOrder))"
     if item.cat1 != "" {
         text += " [" + item.cat1
         if item.cat2 != "" {

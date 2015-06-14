@@ -25,29 +25,14 @@ This causes all the caches to be removed, and should only be used when XCode is 
 Git merge and diff using P4MERGE:
 Check this article on how to install it and do a proper 4-pane 3-way merge:
 http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-git-and-tower-dot-app
+
+I had to use this to help figure out how to push my local git onto the new repo I created on Github's servers:
+https://help.github.com/articles/syncing-a-fork/
 */
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
 func trimSpaces( input: String ) -> String {
-//    var begin = input.startIndex
-//    var end = input.endIndex
-//    while begin != input.endIndex {
-//        let char = input[begin]
-//        if char != " " {
-//            break
-//        }
-//        begin = begin.successor()
-//    }
-//    while begin != end {
-//        let char = input[end.predecessor()]
-//        if char != " " && char != "\n" {
-//            break
-//        }
-//        end = end.predecessor()
-//    }
-//    let range : Range<String.Index> = begin..<end
-//    return input[range]
     // new version using Regex
     // step 1 - replace all whitespace runs with a single space
     let temp = input.replace("\\s+", withTemplate: " ")
