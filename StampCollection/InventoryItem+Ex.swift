@@ -23,6 +23,16 @@ extension InventoryItem:  SortTypeSortableEx {
     var normalizedDate: String {
         return dealerItem.normalizedDate
     }
+
+    var itemCondition: String {
+        let prices = self.category.prices
+        let conds: [String:String]
+        switch prices {
+        case "PF": conds = ["price1":"Mint", "price2":"FDC"]
+        default: conds = ["price1":"Mint", "price2":"Used", "price3":"OnFDC", "price4":"M/NT"]
+        }
+        return conds[itemType]!
+    }
     
     enum ValueType {
         case tInt(NSNumber)

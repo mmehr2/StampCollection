@@ -58,6 +58,20 @@ func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // 
 
 
 // MARK: message box services
+typealias MenuBoxEntry = (String, (UIAlertAction!)->Void)
+func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forController vc: UIViewController ) {
+    messageBoxWithTitle(title, andBody: "", forController: vc) { ac in
+        var act = UIAlertAction(title: "Cancel", style: .Default) { x in
+            // dismiss but do nothing
+        }
+        ac.addAction(act)
+        for (menuItem, menuFunc) in body {
+            act = UIAlertAction(title: menuItem, style: .Default, handler: menuFunc)
+            ac.addAction(act)
+        }
+    }
+}
+
 func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
     messageBoxWithTitle(title, andBody: body, forController: vc) { ac in
         let act = UIAlertAction(title: "OK", style: .Default) { x in
@@ -117,7 +131,40 @@ func formatDealerDetail(item: DealerItem) -> String {
 //        output = "\(text) - \(item.status): \(price1) FDC-\(price2)"
 //    default: break
 //    }
+    if let invItems = Array(item.inventoryItems) as? [InventoryItem] where invItems.count > 0 {
+        let types = invItems.map{ $0.itemCondition }
+        let summary = histogram(types)
+        let sumstr = showHistogram(summary)
+        output += "; INV:\(sumstr)"
+    }
+    if let invItems = Array(item.referringItems) as? [InventoryItem] where invItems.count > 0 {
+        let refs = invItems.map{ $0.baseItem }
+        let summary = histogram(refs)
+        let sumstr = showHistogram(summary)
+        output += "; REF:\(sumstr)"
+    }
     return output
+}
+
+func histogram<T where T: Hashable>(items: [T]) -> [T:Int] {
+    var output: [T:Int] = [:]
+    for item in items {
+        if output[item] == nil {
+            output[item] = 1
+        } else {
+            ++(output[item]!)
+        }
+    }
+    return output
+}
+
+func showHistogram<T where T:Hashable>(input: [T:Int]) -> String {
+    var output: [String] = []
+    for (item, counter) in input {
+        let ctr = counter > 1 ? "(\(counter))" : ""
+        output.append("\(item)\(ctr)")
+    }
+    return ",".join(output)
 }
 
 func formatComparisonRecord( comprec: CompRecord ) -> String {
@@ -131,6 +178,47 @@ func formatComparisonRecord( comprec: CompRecord ) -> String {
         }
     }
     return output
+}
+
+func formatUpdateAction( action: UpdateCommitAction, isLong: Bool = false, withParens: Bool = true ) -> String {
+    var output = ""
+    switch action {
+    case .None: output = isLong ? "None" : ""
+    case .Add: output = isLong ? "Add" : "+"
+    case .AddAndRemove: output = isLong ? "AddAndRemove" : "+,-"
+    case .ConvertType: output = isLong ? "ConvertType" : "=>"
+    case .Remove: output = isLong ? "Remove" : "-"
+    case .Update: output = isLong ? "Update" : "->"
+    }
+    if withParens {
+        output = "(\(output))"
+    }
+    return output
+}
+
+func getFormattedActionKeysForSection( section: UpdateComparisonTable.TableID ) -> [String] {
+    let actions = UpdateComparisonTable.getAllowedActionsForSection(section)
+    var actionStrings = actions.map{ formatUpdateAction( $0 ) + ":" + formatUpdateAction( $0, isLong: true, withParens: false) }
+    actionStrings[0] += " (Default)"
+    return actionStrings
+}
+
+func formatActionKeyForSection( section: UpdateComparisonTable.TableID ) -> String {
+    var output = ""
+    let actionStrings = getFormattedActionKeysForSection(section)
+    output += "\n".join(actionStrings)
+    return output
+}
+
+func getColorForAction(action: UpdateCommitAction, inSection section: UpdateComparisonTable.TableID) -> UIColor {
+    switch action {
+    case .None: return UIColor.whiteColor()
+    case .Add: return UIColor.greenColor().colorWithAlphaComponent(0.5)
+    case .AddAndRemove: return UIColor.magentaColor().colorWithAlphaComponent(0.5)
+    case .ConvertType: return UIColor.blueColor().colorWithAlphaComponent(0.5)
+    case .Remove: return UIColor.redColor().colorWithAlphaComponent(0.5)
+    case .Update: return section == .Ambiguous ? UIColor.cyanColor().colorWithAlphaComponent(0.5) : UIColor.yellowColor().colorWithAlphaComponent(0.5)
+    }
 }
 
 /*

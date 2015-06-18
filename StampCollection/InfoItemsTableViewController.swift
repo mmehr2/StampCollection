@@ -233,6 +233,10 @@ class InfoItemsTableViewController: UITableViewController {
         default: break
         }
         infoButtonItem.title = "To:" + exwh
+        
+        // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100.0
     }
 
     // MARK: - Table view data source
@@ -249,7 +253,8 @@ class InfoItemsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell", forIndexPath: indexPath) as! UITableViewCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell") as! UITableViewCell
         
         // Configure the cell...
         let row = indexPath.row
