@@ -337,26 +337,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Info Item Cell" textLabel="fds-AZ-omz" detailTextLabel="N2e-1X-Fa8" style="IBUITableViewCellStyleSubtitle" id="KLL-5N-nSM">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Info Item Cell" id="KLL-5N-nSM" customClass="ItemTableViewCell" customModule="StampCollection" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KLL-5N-nSM" id="jrA-oJ-cPC">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fds-AZ-omz">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9R-Kj-OfI" userLabel="Title">
+                                            <rect key="frame" x="8" y="8" width="517" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="frX-2V-xZf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="frX-2V-xZf"/>
+                                                </mask>
+                                            </variation>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N2e-1X-Fa8">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2B-oO-T9D" userLabel="Subtitle">
+                                            <rect key="frame" x="8" y="34" width="517" height="1"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="uIb-hZ-KnK"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="uIb-hZ-KnK"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="y2B-oO-T9D" firstAttribute="top" secondItem="F9R-Kj-OfI" secondAttribute="bottom" constant="8" symbolic="YES" id="6XI-gJ-ypp"/>
+                                        <constraint firstItem="F9R-Kj-OfI" firstAttribute="top" secondItem="jrA-oJ-cPC" secondAttribute="topMargin" id="EXo-fZ-KhI"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="y2B-oO-T9D" secondAttribute="trailing" id="NN5-Qh-6ig"/>
+                                        <constraint firstItem="F9R-Kj-OfI" firstAttribute="leading" secondItem="jrA-oJ-cPC" secondAttribute="leadingMargin" id="TDR-ko-qNm"/>
+                                        <constraint firstItem="y2B-oO-T9D" firstAttribute="leading" secondItem="jrA-oJ-cPC" secondAttribute="leadingMargin" id="gD9-cu-mqa"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="F9R-Kj-OfI" secondAttribute="trailing" id="wpv-AD-E55"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="y2B-oO-T9D" secondAttribute="bottom" id="xds-KU-Cpv"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="subtitle" destination="y2B-oO-T9D" id="wGD-A6-9Pc"/>
+                                    <outlet property="title" destination="F9R-Kj-OfI" id="kIV-0d-fCu"/>
                                     <segue destination="Yrk-3y-5Gs" kind="show" identifier="Show Info Item Segue" trigger="accessoryAction" id="OM5-Ne-C4q"/>
                                 </connections>
                             </tableViewCell>

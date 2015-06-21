@@ -35,6 +35,12 @@ class InfoItemsTableViewController: UITableViewController {
         refetchData()
         //updateUI() // prelim version
     }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        refreshData()
+//        updateUI()
+    }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         refetchData()
@@ -236,7 +242,7 @@ class InfoItemsTableViewController: UITableViewController {
         
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100.0
+        tableView.estimatedRowHeight = 80.0
     }
 
     // MARK: - Table view data source
@@ -254,7 +260,7 @@ class InfoItemsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell", forIndexPath: indexPath) as! UITableViewCell
-        let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell") as! ItemTableViewCell
         
         // Configure the cell...
         let row = indexPath.row
@@ -262,16 +268,16 @@ class InfoItemsTableViewController: UITableViewController {
         if ftype == .Info {
             // format a DealerItem cell
             let item = model.info[row]
-            cell.textLabel?.text = item.descriptionX
-            cell.detailTextLabel?.text = formatDealerDetail(item)
+            cell.title?.text = item.descriptionX
+            cell.subtitle?.text = formatDealerDetail(item)
             useDisclosure = true
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.id)") // DEBUG
             //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.descriptionX, 30))") // DEBUG
         } else {
             // format an InventoryItem cell
             let item = model.inventory[row]
-            cell.textLabel?.text = formatInventoryMain(item)
-            cell.detailTextLabel?.text = formatInventoryDetail(item)
+            cell.title?.text = formatInventoryMain(item)
+            cell.subtitle?.text = formatInventoryDetail(item)
             useDisclosure = false
             //println("NormID = \(item.normalizedCode) (len=\(count(item.normalizedCode))) for ID = \(item.baseItem)") // DEBUG
             //println("NormDate = \(item.normalizedDate) (len=\(count(item.normalizedDate))) for Dscr = \(makeStringFit(item.dealerItem.descriptionX, 30))") // DEBUG

@@ -31,6 +31,7 @@
 		A632CBB91AF35D2A00565686 /* ViewFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBB81AF35D2A00565686 /* ViewFiltering.swift */; };
 		A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBA1AF538FD00565686 /* InfoUtilities.swift */; };
 		A632CBBD1AF6AC8B00565686 /* UIQueryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */; };
+		A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632F77C1B373AF8001C6EE1 /* ItemTableViewCell.swift */; };
 		A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */; };
 		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
 		A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */ = {isa = PBXBuildFile; fileRef = A662C1C21AFDFD520067792F /* inventory.corrupt.csv */; };
@@ -108,6 +109,7 @@
 		A632CBB81AF35D2A00565686 /* ViewFiltering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFiltering.swift; sourceTree = "<group>"; };
 		A632CBBA1AF538FD00565686 /* InfoUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoUtilities.swift; sourceTree = "<group>"; };
 		A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIQueryAlert.swift; sourceTree = "<group>"; };
+		A632F77C1B373AF8001C6EE1 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTableViewDoubleCell.swift; sourceTree = "<group>"; };
 		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
 		A662C1C21AFDFD520067792F /* inventory.corrupt.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inventory.corrupt.csv; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */,
 				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
 				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
+				A632F77C1B373AF8001C6EE1 /* ItemTableViewCell.swift */,
 				A66348101B20DAB900A4D225 /* InfoItemViewController.swift */,
 				A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */,
 				A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */,
@@ -485,6 +488,7 @@
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
 				A6856E5E1B070D56004B506E /* InventoryItem.swift in Sources */,
 				A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */,
+				A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */,
 				A6856E6A1B071691004B506E /* AlbumRef.swift in Sources */,
 				A6856E661B070D56004B506E /* AlbumPage.swift in Sources */,
 				A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */,
