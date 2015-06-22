@@ -33,6 +33,18 @@ extension InventoryItem:  SortTypeSortableEx {
         }
         return conds[itemType]!
     }
+
+    func updateBaseItem( item: DealerItem ) {
+        let newID = item.id
+        self.baseItem = newID
+        self.dealerItem = item
+    }
+    
+    func updateRefItem( item: DealerItem ) {
+        let newID = item.id
+        self.refItem = newID
+        self.referredItem = item
+    }
     
     enum ValueType {
         case tInt(NSNumber)

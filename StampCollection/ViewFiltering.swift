@@ -172,9 +172,11 @@ extension SearchType {
                 output = NSCompoundPredicate.orPredicateWithSubpredicates(preds)
             }
             break
-        case .SubCategory(let pattern):
+        case .SubCategory(let patternIn):
             // works with either INFO or INV
             let target = dealerItemPrefix + "id"
+            // pattern can contain "shorthand" characters for ID searching
+            let pattern = fillOutSubcatPattern(patternIn)
             output = NSPredicate(format: "%K MATCHES %@", target, pattern)
             break
 //        case .Catalog:
@@ -192,6 +194,12 @@ extension SearchType {
         }
         return output
     }
+}
+
+private func fillOutSubcatPattern( pattern: String ) -> String {
+    var output = pattern
+    output = output.replace("@", withTemplate: ".*")
+    return output
 }
 
 private func getPredicatesForField( field: String, inKeyWordList words: [String], caseInsensitive cival: Bool = false ) -> [NSPredicate] {

@@ -20,7 +20,7 @@ enum UIQueryFieldType {
 }
 
 enum UIQueryFieldDesignator {
-    case KeywordList, YearRangeStart, YearRangeEnd
+    case KeywordList, YearRangeStart, YearRangeEnd, IDPattern
 }
 
 struct UIQueryFieldConfiguration {
@@ -47,12 +47,17 @@ struct UIQueryFieldConfiguration {
             placeholder = "End year as YYYY"
             type = .Numeric
             break
+        case .IDPattern:
+            // set up the single text field config
+            placeholder = "ID search pattern"
+            type = .Text
+            break
         }
     }
 }
 
 enum UIQueryAlertType {
-    case Keyword, YearRange
+    case Keyword, YearRange, SubCategory
 }
 
 struct UIQueryAlertConfiguration {
@@ -84,6 +89,14 @@ struct UIQueryAlertConfiguration {
             "\nTo remove all year filtering, enter blank in both Start and End."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeStart))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeEnd))
+            break
+        case .SubCategory:
+            // set up the single text field config
+            title = "SubCategory Filter"
+            body = "Enter Search pattern for record IDs.\n"
+            "The search will check just the ID field.\n"
+            "To remove all subcategory filtering, enter an empty field."
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .IDPattern))
             break
         }
     }
@@ -126,6 +139,11 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     } else {
                         result = SearchType.KeyWordListAny(words)
                     }
+                    handler(result)
+                }
+                else if self.config.type == .SubCategory {
+                    let text : String = self.fields[0].text
+                    result = SearchType.SubCategory(text)
                     handler(result)
                 }
                 else if self.config.type == .YearRange {

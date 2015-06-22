@@ -21,6 +21,7 @@ class InfoItemsTableViewController: UITableViewController {
     var endYear = 0
     var keywords : [String] = []
     var useAllKeywords = false
+    var IDPattern = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class InfoItemsTableViewController: UITableViewController {
         
         // fetch the items under consideration
         refetchData()
-        //updateUI() // prelim version
+        updateUI() // prelim version
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -61,6 +62,11 @@ class InfoItemsTableViewController: UITableViewController {
         }
         if keywords.count > 0 {
             let stype = useAllKeywords ? SearchType.KeyWordListAll(keywords) : SearchType.KeyWordListAny(keywords)
+            output.append(stype)
+            names.append("\(stype)")
+        }
+        if !IDPattern.isEmpty {
+            let stype = SearchType.SubCategory(IDPattern)
             output.append(stype)
             names.append("\(stype)")
         }
@@ -92,14 +98,63 @@ class InfoItemsTableViewController: UITableViewController {
     @IBAction func picButtonPressed(sender: UIBarButtonItem) {
         // TBD: download and show the image identified by the selection's pictid property
         // URL is http://www.bait-tov.com/store/products/XXX.jpg where XXX is the pictid
-        // NOTE: should probably be a part of a detail controller instead
+        // NOTE: should probably be a part of the info item view controller instead
         //println("Pic button pressed.")
-        // I AM NOW COMMANDEERING THIS TO DO COMPARISON UPDATES!
-//        if category == CollectionStore.CategoryAll {
-//            println("Cannot compare all items at once; only do this for individual categories (for now)")
-//        } else {
-//            processComparison(model.info)
-//        }
+    }
+
+    private func getRelatedItemsFromMain( item: InventoryItem ) -> [DealerItem] {
+        let id = item.dealerItem.id
+        let splitID = IDParser(code: id, forCat: item.catgDisplayNum)
+        let mainID = splitID.main
+        // create a subcat pattern for any ID with this base ("base@")
+        let subcat = SearchType.SubCategory(mainID + "@")
+        // fetch the IDs in this list but without any .retired items
+        let items0 = model.fetchInfoInCategory(category: splitID.catnum, withSearching: [subcat], andSorting: SortType.ByCode(true))
+        let items = items0.filter{ !$0.retired }
+        //            let ids = items.map{ $0.id + " - " + $0.descriptionX }
+        //            let idstr = "\n".join(ids)
+        //            println("Searching for \(subcat): found \n\(idstr)")
+        return items
+    }
+    
+    private func createBaseAssignmentMenu( items: [DealerItem], forItem invItem: InventoryItem, withCompletion completion: (() -> Void)? = nil ) -> [MenuBoxEntry] {
+        var menuItems : [MenuBoxEntry] = []
+        for item in items {
+            let apos = advance(item.descriptionX.startIndex, 16)
+            let title = item.id + ":" + item.descriptionX.substringFromIndex(apos)
+            menuItems.append( (title, { x in
+                println("Assigning new base item=\(item.id): \(item.descriptionX) \nto INV\(invItem.baseItem): \(invItem.desc).")
+                invItem.updateBaseItem(item)
+                if let completion = completion {
+                    completion()
+                }
+            }) )
+        }
+        return menuItems
+    }
+    
+    @IBOutlet weak var moreButton: UIBarButtonItem!
+    @IBAction func moreButtonPressed(sender: UIBarButtonItem) {
+        // run an alert controller to choose from a menu of less-used functions
+        let path = self.tableView.indexPathForSelectedRow()!
+        let row = path.row
+        if ftype == .Inventory {
+            let invitem = self.model.inventory[row]
+            let menuItems : [MenuBoxEntry] = [
+                ("Reassign Base Item", { x in
+                    // get base ID number minus suffix for inv item selected
+                    let items = self.getRelatedItemsFromMain(invitem)
+                    // create a menu controller to hold the list of IDs
+                    let menu = self.createBaseAssignmentMenu(items, forItem: invitem) {
+                        self.model.saveMainContext()
+                        self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: .Automatic)
+                    }
+                    //  (action is to call the function that would assign the base item to this ID)
+                    menuBoxWithTitle("Reassign Base to \(invitem.desc)", andBody: menu, forController: self)
+                }),
+            ]
+            menuBoxWithTitle("Choose action for selected item", andBody: menuItems, forController: self)
+        }
     }
     
     @IBAction func searchButtonPressed(sender: AnyObject) {
@@ -119,6 +174,22 @@ class InfoItemsTableViewController: UITableViewController {
                 case .KeyWordListAny(let words):
                     self.keywords = words
                     self.useAllKeywords = false
+                    self.refetchData()
+                    break
+                default:
+                    break
+                }
+            }
+            kwc.RunWithViewController(self)
+        }
+        ac.addAction(act)
+        act = UIAlertAction(title: "By ID SubCategory", style: .Default) { x in
+            // action here
+            let kwc = UIQueryAlert(type: .SubCategory) { srchType in
+                // put the related data into the master VC's variables
+                switch srchType {
+                case .SubCategory(let pattern):
+                    self.IDPattern = pattern
                     self.refetchData()
                     break
                 default:
@@ -240,11 +311,23 @@ class InfoItemsTableViewController: UITableViewController {
         }
         infoButtonItem.title = "To:" + exwh
         
+        // enable the More button according to whether an item is selected
+        moreButton.enabled = tableView.indexPathForSelectedRow() != nil
+        
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80.0
     }
 
+    // MARK: - Table view delegate
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        updateUI()
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        updateUI()
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

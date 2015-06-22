@@ -378,7 +378,7 @@ class CollectionStore: ExportDataSource {
                 break
             case .Inventory:
                 inventory = self.fetchInventory(moc, inCategory: category, withSearching: searching)
-                showLocationStats(moc, inCategory: category)
+                //showLocationStats(moc, inCategory: category)
                 break
             }
             // run the completion block, if any, on the main queue
@@ -488,6 +488,13 @@ class CollectionStore: ExportDataSource {
         return sortCollection(temp2, byType: sortType)
     }
     
+    func fetchInfoInCategory( category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None, fromContext token: Int = mainContextToken ) -> [DealerItem] {
+        if let context = getContextForThread(token) {
+            return fetchInfo(context, inCategory: category, withSearching: searching, andSorting: sortType)
+        }
+        return []
+    }
+    
     private func fetchInventory(context: NSManagedObjectContext, inCategory category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None) -> [InventoryItem] {
         let firstST = category == CollectionStore.CategoryAll ? SearchType.None : SearchType.Category(category)
         let allSTs = [firstST] + searching
@@ -498,6 +505,13 @@ class CollectionStore: ExportDataSource {
         let temp : [InventoryItem] = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
         return filterInventory(temp, searching)
+    }
+    
+    func fetchInventoryInCategory( category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None, fromContext token: Int = mainContextToken ) -> [InventoryItem] {
+        if let context = getContextForThread(token) {
+            return fetchInventory(context, inCategory: category, withSearching: searching, andSorting: sortType)
+        }
+        return []
     }
     
     private func fetchCategories(context: NSManagedObjectContext) {

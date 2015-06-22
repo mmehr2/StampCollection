@@ -290,19 +290,14 @@ private func formatInventoryValue(item: InventoryItem) -> String {
 }
 
 private func formatInventoryVarCondition(item: InventoryItem) -> String {
-    let variety = item.desc.isEmpty ? "" : makeStringFit("V: \(item.desc)", 40)
-    let condct = count(item.notes)
-    let condlimited = min(condct, 40)
-    let condition = item.notes.isEmpty ? "" : makeStringFit("C: \(item.notes)", 40)
+    let variety = item.desc.isEmpty ? "" : /*makeStringFit(*/"V: \(item.desc)"//, 40)
+    let condition = item.notes.isEmpty ? "" : /*makeStringFit(*/"C: \(item.notes)"//, 40)
     return "\(variety) \(condition)"
 }
 
 func formatInventoryMain(item: InventoryItem) -> String {
-    if let cat = CollectionStore.sharedInstance.fetchCategory(item.catgDisplayNum) {
-            let basedes = makeStringFit(item.dealerItem.descriptionX, 60)
-            return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
-    }
-    return "\(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
+    let basedes = item.dealerItem.descriptionX //makeStringFit(item.dealerItem.descriptionX, 60)
+    return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
 }
 
 func formatInventoryDetail(item: InventoryItem) -> String {
@@ -408,7 +403,9 @@ func getCharacterClass( ch: Character ) -> CodeFieldClass {
 private func splitDealerCode( code: String, special: Bool = false ) -> [String] {
     // accepts code numbers of the following forms:
     //  "6110xNNNyy"
-    //  "psNNNyy"
+    //  "psXXNNNyy"
+    // SPECIAL: "6110kNNNRC[1]mMMM"
+    // New ANBAR system - uses 5-digit machine numbers
     // splits them into fields of homogenous type (alpha or numeric)
     var output: [String] = []
     var field = ""
@@ -487,6 +484,37 @@ private func paddington( len: Int, input: String, char: Character = " ", trailin
         output += input
     }
     return output
+}
+
+struct IDParser {
+    let catnum: Int16
+    let allows1000Fix: Bool
+    let original: String
+    let main: String // catcode + prefix + sequence
+    let catcode: String
+    let prefix: String // .Alpha or empty
+    let sequence: String // .Numeric - NOTE: still needs fixup (+1000 or year-set split)
+    var fields: [String] // all suffix fields, starting with first .Alpha one
+
+    init( code: String, forCat catnumIn: Int16, isPostE1K: Bool = false ) {
+        catnum = catnumIn
+        allows1000Fix = isPostE1K
+        original = code
+        let (catcode, rest) = splitCatCode(code, forCat: catnum)
+        self.catcode = catcode
+        fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
+        let firstField = fields.first!
+        let hasPrefix = getCharacterClass(firstField[0]) == .Alpha
+        if hasPrefix {
+            prefix = firstField
+            fields.removeAtIndex(0)
+        } else {
+            prefix = ""
+        }
+        sequence = fields.first!
+        fields.removeAtIndex(0)
+        main = catcode + prefix + sequence
+    }
 }
 
 /*
