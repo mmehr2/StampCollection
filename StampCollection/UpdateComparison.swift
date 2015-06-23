@@ -183,6 +183,19 @@ enum UpdateCommitAction {
     case AddAndRemove
 }
 
+extension UpdateComparisonResult {
+    // this is for use in creating a unique index for the UpdateActionTable
+    var commitActionCode: String {
+        switch self {
+        case .SameItem: return ""
+        case .RemovedItem(let dlrid): return dlrid
+        case .ChangedItem(let dlrid, _, _, _): return dlrid
+        case .ChangedIDItem(let dlrid, let btitem, _, _): return dlrid + "+" + btitem.code
+        case .AddedItem(let btitem, _): return btitem.code
+        }
+    }
+}
+
 typealias UpdateActionTable = [String: UpdateCommitAction]
 
 class UpdateComparisonTable {
@@ -196,13 +209,11 @@ class UpdateComparisonTable {
     var changedIDItems: [UpdateComparisonResult] = []
     var ambiguousChangedItems: [UpdateComparisonResult] = []
     // this is an editable list of items specifying how to commit if not using the default actions for the given idCode value
-    var commitItems: UpdateActionTable = [:]
-    // the item cache is used to cache ID-to-object mappings locally to avoid issues during the ID change process
-    var itemCache: [String: DealerItem] = [:]
+    private var commitItems: UpdateActionTable = [:]
     // the oldRecs cache is used to allow lookup only on those items originally searched for (from category) and NOT as currently modified into the database
     // it is populated at commit time and used for searching during commit, replacing the CollectionStore's fetchItemByID() function
-    var catnums: Set<Int16> = Set()
-    var oldRecsCache: [String: DealerItem] = [:]
+    private var catnums: Set<Int16> = Set()
+    private var oldRecsCache: [String: DealerItem] = [:]
 
     var count: Int {
         return removedItems.count + addedItems.count + changedItems.count + changedIDItems.count + ambiguousChangedItems.count
@@ -330,6 +341,9 @@ class UpdateComparisonTable {
             let oldRecs = getDealerItemsForUpdate(category)
             for item in oldRecs {
                 let id = item.id
+                if oldRecsCache[id] != nil {
+                    println("Cache hit: Duplicate ID \(id) found in category \(category.name)")
+                }
                 oldRecsCache[id] = item
             }
         }
@@ -344,6 +358,10 @@ class UpdateComparisonTable {
                     if action == .Update {
                         let newData = btitem.createInfoItem(categ)
                         dirty = updateItem(dealerItem, data: newData, comprec: comprec)
+                    } else if action == .Remove {
+                        dirty = true
+                        let removeResult = UpdateComparisonResult.RemovedItem(dealerItemID)
+                        commitItem(removeResult, action: .Remove)
                     } else if action == .AddAndRemove {
                         dirty = true
                         let removeResult = UpdateComparisonResult.RemovedItem(dealerItemID)
@@ -353,11 +371,11 @@ class UpdateComparisonTable {
                     }
                 }
             case .ChangedIDItem(let dealerItemID, let btitem, let categ, let comprec ):
-                // NOTE: we must get ID changeable items from the local cache rather than the store, since we are changing their fetch IDs one at a time and could get the wrong object
-                if let dealerItem = itemCache[dealerItemID] where action == .Update {
-                    let newData = btitem.createInfoItem(categ)
-                    dirty = updateItem(dealerItem, data: newData, comprec: comprec)
-                }
+                // NOTE: the need for itemsCache has gone away, since we are caching all dealer items by their old ID
+                // the ID of the item may change, but its position in the cache under its old ID index does not
+                // therefore, we can just recast this as a ChangedItem and run the commit algorithm on that
+                let result = UpdateComparisonResult.ChangedItem(dealerItemID, btitem, categ, comprec)
+                commitItem(result, action: action)
             case .RemovedItem(let dealerItemID):
                 if let dealerItem = oldRecsCache[dealerItemID] {
                     let removable = checkItemForRemoval(dealerItem)
@@ -398,18 +416,7 @@ class UpdateComparisonTable {
     //   NOTE: it does NOT redo any relationships, it only changes the strings in the inventory data item that refer to the specified DealerItem object's ID string that has been changed
     private func commitTable(items: [UpdateComparisonResult], altActions: UpdateActionTable = [:]) -> Bool {
         var dirty = false
-        // preload the itemCache if needed with any ID change objects
-        itemCache = [:]
-        for item in items {
-            switch item {
-            case .ChangedIDItem(let dealerItemID, _, _, _):
-                // for ID changes, we need to cache the DealerItems locally to avoid ID fetch problems during the modification
-                itemCache[dealerItemID] = oldRecsCache[dealerItemID]
-            default:
-                continue
-            }
-        }
-        // loop through the items again and commit each one
+        // loop through the items and commit each one
         for item in items {
             switch item {
             case .SameItem: continue
@@ -440,7 +447,7 @@ class UpdateComparisonTable {
         default:
             break
         }
-        var id = item.idCode
+        var id = item.commitActionCode
         if let altAction = altActions[id] {
             action = altAction
         }
@@ -488,6 +495,14 @@ class UpdateComparisonTable {
         let proto = getPrototypeResultForSection(section)
         let ambi = section == .Ambiguous
         return getAllowedActionsForResult(proto, isAmbiguous: ambi)
+    }
+
+    func setAction( action: UpdateCommitAction, forID idCode: String ) {
+        commitItems[idCode] = action
+    }
+
+    func setDefaultActionForID( idCode: String ) {
+        commitItems[idCode] = nil
     }
     
     func commit(sections: [TableID] = []) {
@@ -591,7 +606,12 @@ func processUpdateComparison(category: Category) -> UpdateComparisonTable {
     output.catnums.insert(category) // save this for commit-time use
     // get the corresponding category and item data from the live BT website (assumed to be done loading)
     let webtcatnum = BTCategory.translateNumberFromInfoCategory(category)
-    let webtcat = BTDealerStore.model.getCategoryByNumber(webtcatnum)!
+    let webtcatX = BTDealerStore.model.getCategoryByNumber(webtcatnum)
+    if webtcatX == nil {
+        println("No Website category \(webtcatnum) available")
+        return output
+    }
+    let webtcat = webtcatX!
     let newRecs = webtcat.dataItems
     if newRecs.count == 0 {
         println("No Website records to compare in category \(category) = website category \(webtcatnum)")

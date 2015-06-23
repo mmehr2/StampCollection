@@ -138,6 +138,16 @@ class InfoItemsTableViewController: UITableViewController {
         // run an alert controller to choose from a menu of less-used functions
         let path = self.tableView.indexPathForSelectedRow()!
         let row = path.row
+        if ftype == .Info {
+            let infoitem = self.model.info[row]
+            let menuItems : [MenuBoxEntry] = [
+                ("!Delete Item", { x in
+                    self.model.removeInfoItem(infoitem, commit: true)
+                    self.refetchData()
+                }),
+            ]
+            menuBoxWithTitle("Remove selected item from database", andBody: menuItems, forController: self)
+        }
         if ftype == .Inventory {
             let invitem = self.model.inventory[row]
             let menuItems : [MenuBoxEntry] = [

@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class CollectionStore: ExportDataSource {
-    static let moduleName = "StampCollection" // TBD: get this from proper place
     static let CategoryAll : Int16 = -1
     
     static var sharedInstance = CollectionStore()
@@ -39,49 +38,69 @@ class CollectionStore: ExportDataSource {
     var albumTypes : [AlbumType] = []
 
     // MARK: basics for CoreData implementation
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator?
+    static let moduleName = "StampCollection" // TBD: get this from proper place
+    lazy var applicationDocumentsDirectory: NSURL = {
+        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.azuresults.StampCollection" in the application's documents Application Support directory.
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        return urls[urls.count-1] as! NSURL
+        }()
+    
+    lazy var managedObjectModel: NSManagedObjectModel = {
+        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+        let modelURL = NSBundle.mainBundle().URLForResource(moduleName, withExtension: "momd")!
+        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        }()
+    
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
+        // Create the coordinator and store
+        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(moduleName+".sqlite")
+        println("CoreData stack established at \(url)")
+        var error: NSError? = nil
+        var failureReason = "There was an error creating or loading the application's saved data."
+        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+            coordinator = nil
+            // Report any error we got.
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSUnderlyingErrorKey] = error
+            error = NSError(domain: moduleName, code: 9999, userInfo: dict)
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog("Unresolved error \(error), \(error!.userInfo)")
+            abort()
+        }
+        
+        return coordinator
+        }()
     
     typealias ContextToken = Int
-    private static var nextContextToken = 0
-    static let badContextToken = -1
-    static let mainContextToken = 0
-    private static let threadContextToken1 = 1
-    private func isThreadContextToken( token: ContextToken ) -> Bool {
-        return token >= CollectionStore.threadContextToken1
-    }
+    static let badContextToken: ContextToken = -1
+    static let mainContextToken: ContextToken = 0
+    private static var nextContextToken: ContextToken = mainContextToken
     private func isBadContextToken( token: ContextToken ) -> Bool {
         return token == CollectionStore.badContextToken
-    }
-    private func isMainContextToken( token: ContextToken ) -> Bool {
-        return token == CollectionStore.mainContextToken
     }
     
     private var mocsForThreads : [ContextToken : NSManagedObjectContext] = [:]
     
     init() {
-        // get the PSC from the application delegate
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            psc = ad.persistentStoreCoordinator {
-                persistentStoreCoordinator = psc
-                // populate the arrays with any managed objects found
-                //fetchType(.Categories, background: true)
+        // create the main thread's context using token 0 (never remove this)
+        // also gets the PSC locally (dependency on AppDelegate removed 6/22/15 MLM)
+        let token = getContextTokenForThread()
+        if !isBadContextToken(token) {
+            // populate the arrays with any managed objects found
+            //fetchType(.Categories, background: true)
         }
-    }
-    
-    private static func getMainContext() -> NSManagedObjectContext? {
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            context = ad.managedObjectContext {
-                return context
-        }
-        return nil
     }
     
     func getContextTokenForThread() -> ContextToken {
-        if let ad = UIApplication.sharedApplication().delegate as? AppDelegate,
-            psc = persistentStoreCoordinator {
+        if let psc = persistentStoreCoordinator {
                 let context = NSManagedObjectContext()
                 context.persistentStoreCoordinator = psc
-                let token = ++CollectionStore.nextContextToken
+                let token = CollectionStore.nextContextToken++
                 mocsForThreads[token] = context
                 return token
         }
@@ -90,42 +109,46 @@ class CollectionStore: ExportDataSource {
     
     func getContextForThread(token: ContextToken) -> NSManagedObjectContext? {
         // this should properly be called only by the thread using the returned context
-        if isMainContextToken(token) {
-            return CollectionStore.getMainContext() // it can also get the main context for you with the proper token
-        } else if isBadContextToken(token) {
+        if isBadContextToken(token) {
             return nil
         } 
         return mocsForThreads[token]
     }
     
     func removeContextForThread(token: ContextToken) {
-        if token != CollectionStore.badContextToken {
+        if token != CollectionStore.badContextToken && token != CollectionStore.mainContextToken {
             mocsForThreads[token] = nil
         }
     }
     
-    private static func saveContext(context: NSManagedObjectContext) {
+    private static func saveContext(context: NSManagedObjectContext) -> Bool {
         var error : NSError?
-        if !context.save(&error) {
-            println("Error saving CoreData context \(error!)")
-        } else {
-            println("Successful CoreData save")
+        if context.hasChanges {
+            if !context.save(&error) {
+                println("Error saving CoreData context \(error!)")
+                return false
+            } else {
+                println("Successful CoreData save")
+            }
         }
+        return true
     }
     
-    func saveMainContext() {
-        if let context = CollectionStore.getMainContext() {
-            CollectionStore.saveContext(context)
+    func saveMainContext() -> Bool {
+        if let context = getContextForThread(CollectionStore.mainContextToken) {
+            return CollectionStore.saveContext(context)
         }
+        return false
     }
     
-    func saveContextForThread(token: ContextToken) {
+    func saveContextForThread(token: ContextToken) -> Bool {
         if token == CollectionStore.mainContextToken {
-            saveMainContext()
+            return saveMainContext()
         }
         else if token != CollectionStore.badContextToken, let context = mocsForThreads[token] {
-            CollectionStore.saveContext(context)
+            return CollectionStore.saveContext(context)
         }
+        return false
     }
 
     // MARK: object removal
@@ -196,11 +219,27 @@ class CollectionStore: ExportDataSource {
     }
 
     // single-item remove (must call saveXContext() afterward to commit change)
-    func removeInfoItemByID( itemID: String, fromContext token: ContextToken = mainContextToken ) {
+    func removeInfoItemByID( itemID: String, commit: Bool = true, fromContext token: ContextToken = mainContextToken ) {
         if let context = getContextForThread(token),
             obj = fetchInfoItemByID(itemID, inContext: token) {
-                context.deleteObject(obj)
+                removeInfoItem(obj, commit: commit)
         }
+    }
+    
+    func removeInfoItem( item: DealerItem, commit: Bool = true ) -> Bool {
+        if item.referringItems.count > 0 || item.inventoryItems.count > 0 {
+            // disallow delete if any relationships exist
+            // TBD: should change data model so delete rule takes care of this instead
+            return false
+        }
+        if let context = item.managedObjectContext {
+            context.deleteObject(item)
+            if commit {
+                return CollectionStore.saveContext(context)
+            }
+            return true
+        }
+        return false
     }
     
     // MARK: import/export functions
@@ -368,7 +407,7 @@ class CollectionStore: ExportDataSource {
 //        let queue = background ? NSOperationQueue() : NSOperationQueue.mainQueue()
 //        queue.addOperationWithBlock({
             //self.loading = true
-        if let moc = CollectionStore.getMainContext() {
+        if let moc = getContextForThread(CollectionStore.mainContextToken) {
             switch type {
             case .Categories:
                 self.fetchCategories(moc)
@@ -445,6 +484,9 @@ class CollectionStore: ExportDataSource {
         if let context = getContextForThread(token) where !id.isEmpty {
             let type = SearchType.SubCategory("^\(id)$")
             let data = fetchInfo(context, inCategory: CollectionStore.CategoryAll, withSearching: [type], andSorting: .None)
+            if data.count > 1 {
+                println("Non-unique ID found: \(id) has \(data.count) items.")
+            }
             return data.first
         }
         return nil

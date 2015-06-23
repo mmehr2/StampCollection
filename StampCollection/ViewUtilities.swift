@@ -61,12 +61,19 @@ func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // 
 typealias MenuBoxEntry = (String, (UIAlertAction!)->Void)
 func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forController vc: UIViewController ) {
     messageBoxWithTitle(title, andBody: "", forController: vc) { ac in
-        var act = UIAlertAction(title: "Cancel", style: .Default) { x in
+        var act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
             // dismiss but do nothing
         }
         ac.addAction(act)
         for (menuItem, menuFunc) in body {
-            act = UIAlertAction(title: menuItem, style: .Default, handler: menuFunc)
+            var menuTitle = menuItem
+            var style = UIAlertActionStyle.Default
+            // any provided title string that starts with a "!" will be Destructive style (and the "!" will be removed)
+            if menuItem[0] == "!" {
+                menuTitle = menuItem.substringFromIndex(menuItem.startIndex.successor())
+                style = UIAlertActionStyle.Destructive
+            }
+            act = UIAlertAction(title: menuTitle, style: style, handler: menuFunc)
             ac.addAction(act)
         }
     }

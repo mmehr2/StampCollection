@@ -86,7 +86,7 @@ class UpdatesTableViewController: UITableViewController {
         let selection = tableView.indexPathForSelectedRow()
         if let showTable = showTable, output = output, selection = selection {
             let item = showTable[selection.row]
-            let idCode = item.idCode
+            let idCode = item.commitActionCode
             var currentAction = output.getActionForResult(item)
             let currentActionStr = formatUpdateAction(currentAction, isLong: true, withParens: false)
             let title = "Change action for selection (currently \(currentActionStr)) on ID=\(idCode)"
@@ -106,15 +106,15 @@ class UpdatesTableViewController: UITableViewController {
             var act: MenuBoxEntry
             act = (defaultActionString, { x in
                 // default removes any override action for the given idCode in the output's commitItems table
-                output.commitItems[idCode] = nil
+                output.setDefaultActionForID( idCode )
                 self.tableView.reloadRowsAtIndexPaths([selection], withRowAnimation: .None)
             })
             menuBody.append(act)
             act = (defaultActionString + " ALL", { x in
                 // apply default action (removal) to all items in showTable
                 for item in showTable {
-                    let idCode = item.idCode
-                    output.commitItems[idCode] = nil
+                    let idCode = item.commitActionCode
+                    output.setDefaultActionForID( idCode )
                 }
                 self.tableView.reloadData()
             })
@@ -122,15 +122,15 @@ class UpdatesTableViewController: UITableViewController {
             for (index, actionString) in enumerate(otherActionStrings) {
                 act = (actionString, { x in
                     // other actions set selected item's action override in output's commitItems table
-                    output.commitItems[idCode] = otherActions[index]
+                    output.setAction(otherActions[index], forID: idCode)
                     self.tableView.reloadRowsAtIndexPaths([selection], withRowAnimation: .None)
                 })
                 menuBody.append(act)
                 act = (actionString + " ALL", { x in
                     // apply given action to all items in showTable
                     for item in showTable {
-                        let idCode = item.idCode
-                        output.commitItems[idCode] = otherActions[index]
+                        let idCode = item.commitActionCode
+                        output.setAction(otherActions[index], forID: idCode)
                     }
                     self.tableView.reloadData()
                 })
