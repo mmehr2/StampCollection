@@ -135,6 +135,9 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Info" id="Eeq-dM-N4u"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="exportButton" destination="Bll-5r-Cve" id="aGz-Ex-MFl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PN4-jR-bOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

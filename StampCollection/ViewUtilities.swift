@@ -8,6 +8,20 @@
 
 import UIKit
 
+// determine if running on simulator or not (checking if runtime features such as email are available)
+func isRunningOnSimulator() -> Bool {
+    var result = false
+    let devmodel = UIDevice.currentDevice().model
+    if devmodel.hasSuffix("Simulator") {
+        result = true
+    }
+    return result
+}
+
+func isEmailAvailable() -> Bool {
+    return !isRunningOnSimulator()
+}
+
 // MARK: UI date formatting services
 func getDateFromFormattedString(input: String) -> NSDate {
     let nf = NSDateFormatter()

@@ -14,6 +14,40 @@ class InfoCategoriesTableViewController: UITableViewController {
     
     var model = CollectionStore.sharedInstance
 
+    var progress: UIProgressView? {
+        didSet {
+            self.tableView.tableFooterView = progress
+        }
+    }
+    
+    func setProgressView(_ onOff: Bool = false) {
+        if !onOff {
+            progress = nil
+            return
+        }
+        let pv = UIProgressView(progressViewStyle: .Default)
+        pv.setProgress(0.0, animated: false)
+        progress = pv
+    }
+    
+    var spinner: UIActivityIndicatorView? {
+        didSet {
+            self.tableView.tableHeaderView = spinner
+        }
+    }
+    
+    func setSpinnerView(_ onOff: Bool = false) {
+        if !onOff {
+            spinner?.stopAnimating()
+            spinner = nil
+            return
+        }
+        let sp = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        sp.hidesWhenStopped = true
+        sp.startAnimating()
+        spinner = sp
+    }
+
     @IBAction func doImportAction(sender: UIBarButtonItem) {
         
         messageBoxWithTitle("Import Data from CSV", andBody: "NOTE: Wipes the database first! OK to proceed?", forController: self) { ac in
@@ -46,16 +80,23 @@ class InfoCategoriesTableViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBAction func doExportAction(sender: UIBarButtonItem) {
+        exportButton.enabled = false
+        // should use an activity indicator here as well, perhaps even UIProgressView
+        setProgressView(true)
         // TBD: select type of export (email, airdrop, ??)
         let emailer = EmailAttachmentExporter(forController: self) { error in
-            messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
+            self.setProgressView(false)
+            if error.code != 0 {
+                messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
+            }
+            self.exportButton.enabled = true
         }
         // send the data from CoreData to the CSV files
         model.exportAllData() {
             // when done, send the CSV files on their way
-            //emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
-            println("Emailing CSV files would go here on real device.")
+            emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
         }
     }
     
