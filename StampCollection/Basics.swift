@@ -28,6 +28,24 @@ http://naleid.com/blog/2013/10/29/how-to-use-p4merge-as-a-3-way-merge-tool-with-
 
 I had to use this to help figure out how to push my local git onto the new repo I created on Github's servers:
 https://help.github.com/articles/syncing-a-fork/
+Basic steps:
+Local:
+1 cd <project dir>
+2 cp ../prototype.gitignore .gitignore
+// create local repo
+3 git init
+4 git add *.*
+5 git commit -m "Initial commit."
+6 <restart XCode and you should see the source code features; Commit changes if needed>
+7 Remote: create the new repo on https://github.com/mmehr2 (include a README.md file)
+Local:
+8 git remote add upstream https://github.com/mmehr2/<RepoName>.git (create upstream ref, or use a different word, here and later)
+9 git remove -v (verify you have two pointers for fetch and push)
+// sync the fork, as they say:
+10 git fetch upstream (fetch the README.md file and other changes)
+11 git checkout master (prob.not needed if you didn't switch branches since checkin)
+12 git merge -m "<comment>" upstream/master
+NOTE: When I leave out the -m "" part, an editor pops up, but when I save and close it, nothing happens. Until I figure that out, use short comments with -m.
 */
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
