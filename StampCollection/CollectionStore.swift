@@ -95,11 +95,22 @@ class CollectionStore: ExportDataSource {
             //fetchType(.Categories, background: true)
         }
     }
-    
-    func getContextTokenForThread() -> ContextToken {
+
+    func getScratchContext(retainUndoManager retainUM: Bool = false) -> NSManagedObjectContext? {
         if let psc = persistentStoreCoordinator {
-                let context = NSManagedObjectContext()
-                context.persistentStoreCoordinator = psc
+            let context = NSManagedObjectContext()
+            context.persistentStoreCoordinator = psc
+            if !retainUM {
+                context.undoManager = nil
+            }
+            return context
+        }
+        return nil
+    }
+    
+    func getContextTokenForThread(retainUndoManager retainUM: Bool = false) -> ContextToken {
+        if let psc = persistentStoreCoordinator {
+                let context = getScratchContext(retainUndoManager: retainUM)
                 let token = CollectionStore.nextContextToken++
                 mocsForThreads[token] = context
                 return token
