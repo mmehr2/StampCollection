@@ -64,8 +64,8 @@ class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UI
         let item = category.dataItems[indexPath.row]
         cell.textLabel?.text = "\(item.descr)"
         cell.detailTextLabel?.text = formatBTDetail(item)
-        let useDisclosure = false
-        cell.accessoryType = useDisclosure ? .DisclosureIndicator : .None
+//        let useDisclosure = true
+//        cell.accessoryType = useDisclosure ? .DetailDisclosureButton : .None
 
         return cell
     }
@@ -110,9 +110,16 @@ class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UI
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
-        if segue.identifier == "@@@" {
-            //            if let dvc = segue.destinationViewController as? RequestPredictionViewController {
-            //            }
+        if segue.identifier == "Show Dealer Item Segue" {
+            if let dvc = segue.destinationViewController as? InfoItemViewController,
+                cell = sender as? UITableViewCell  {
+                    // create an info item for the dealer item selected, if possible
+                    let indexPath = tableView.indexPathForCell(cell)!
+                    let row = indexPath.row
+                    let btitem = category.dataItems[row]
+                    dvc.btitem = btitem
+                    dvc.btcat = category
+            }
         }
     }
 
