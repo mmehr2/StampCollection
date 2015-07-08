@@ -8,6 +8,25 @@
 
 import UIKit
 
+// MARK: image downloading
+// clever hack from here: http://stackoverflow.com/questions/24231680/swift-loading-image-from-url
+extension UIImageView {
+    public func imageFromUrlString(urlString: String) {
+        if let url = NSURL(string: urlString) {
+            imageFromUrl(url)
+        }
+    }
+    public func imageFromUrl(url: NSURL?) {
+        if let url = url {
+            let request = NSURLRequest(URL: url)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                self.image = UIImage(data: data)
+            }
+        }
+    }
+}
+
 // MARK: determine if running on simulator or not (checking if runtime features such as email are available)
 func isRunningOnSimulator() -> Bool {
     var result = false
