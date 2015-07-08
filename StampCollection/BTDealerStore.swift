@@ -88,9 +88,22 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         JSCategory.notes = data.notes
         JSCategory.items = JSCategory.dataItems.count
     }
+
+    private func jsCompletionRun( catnum: Int16, webJSCategory: BTCategory ) {
+        // this should be dispatched to a background thread, no completion needed
+        NSOperationQueue().addOperationWithBlock({
+            let token = CollectionStore.sharedInstance.getContextTokenForThread()
+            if let jsCategory = CollectionStore.sharedInstance.fetchCategory(catnum, inContext: token) {
+                populateJSDictionary(jsCategory, webJSCategory)
+            }
+            CollectionStore.sharedInstance.removeContextForThread(token)
+        })
+    }
     
     func messageHandler(handler: JSMessageDelegate, didLoadDataForCategory category: Int) {
-        //println("DidLoad Message received for cat=\(category)")
+        println("DidLoad Message received for cat=\(category)")
+        let catnum = BTCategory.translateNumberToInfoCategory(category)
+        jsCompletionRun(catnum, webJSCategory: self.JSCategory)
     }
     
     // MARK: - BTMessageProtocol
@@ -234,9 +247,11 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let importer = BTImporter()
         importer.importData() {
             // when it's done, we need to copy the data out
+            // NOTE: this is already running on the UI thread (completion block from importData())
             self.categories = importer.getBTCategories()
             if let jsc = importer.getJSCategory() {
                 self.JSCategory = jsc
+                self.jsCompletionRun(CATNUM_AUSTRIAN, webJSCategory: jsc)
             }
             // and then call the completion routine
             if let completion = completion {

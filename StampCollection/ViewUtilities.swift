@@ -8,7 +8,7 @@
 
 import UIKit
 
-// determine if running on simulator or not (checking if runtime features such as email are available)
+// MARK: determine if running on simulator or not (checking if runtime features such as email are available)
 func isRunningOnSimulator() -> Bool {
     var result = false
     let devmodel = UIDevice.currentDevice().model
@@ -188,6 +188,7 @@ func showHistogram<T where T:Hashable>(input: [T:Int]) -> String {
     return ",".join(output)
 }
 
+// MARK: formatting for update comparison review
 func formatComparisonRecord( comprec: CompRecord ) -> String {
     var output = "Changes:"
     for (fieldName, status) in comprec {
@@ -242,6 +243,7 @@ func getColorForAction(action: UpdateCommitAction, inSection section: UpdateComp
     }
 }
 
+// MARK: Inventory formatting basics
 /*
 LOCATION:
 var albumPage: String

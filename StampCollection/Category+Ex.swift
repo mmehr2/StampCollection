@@ -14,7 +14,7 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
-private let CATNUM_AUSTRIAN = Int16(28)
+let CATNUM_AUSTRIAN = Int16(28)
 private let CATNUM_INFOLDER = Int16(29)
 private let CATNUM_BULLETIN = Int16(30)
 private let CATNUM_SHEETS = Int16(31)

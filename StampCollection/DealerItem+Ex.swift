@@ -116,6 +116,25 @@ extension DealerItem: SortTypeSortable {
         return Int16(_transientVars!._exYearRange!.end)
     }
     
+    var isJS: Bool {
+        if count(id) > 2 {
+            return id[0...2] == "AUI"
+        }
+        return false
+    }
+    
+    var picPageURL: NSURL? {
+        return getPicRefURL(pictid, refType: isJS ? .DLJSRef  : .DLRef)
+    }
+    
+    var picFileRemoteURL: NSURL? {
+        return getPicFileRemoteURL(pictid, refType: isJS ? .DLJSRef  : .DLRef)
+    }
+    
+    var picFileLocalURL: NSURL? {
+        return getPicFileLocalURL(pictid, refType: isJS ? .DLJSRef  : .DLRef, category: catgDisplayNum)
+    }
+    
     enum ValueType {
         case tInt(NSNumber)
         case tString(String)

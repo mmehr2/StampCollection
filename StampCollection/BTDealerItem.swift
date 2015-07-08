@@ -29,6 +29,26 @@ class BTDealerItem: NSObject {
     var oldprice4 = ""
     var status = ""
     var picref = ""
+
+    var isJS: Bool {
+        if count(code) > 2 {
+            return code[0...2] == "AUI"
+        }
+        return false
+    }
+    
+    var picPageURL: NSURL? {
+        return getPicRefURL(picref, refType: isJS ? .JSRef  : .BTRef)
+    }
+    
+    var picFileRemoteURL: NSURL? {
+        return getPicFileRemoteURL(picref, refType: isJS ? .JSRef  : .BTRef)
+    }
+    
+    func getThePicFileLocalURL(btcatnum: Int) -> NSURL? {
+        let catgDisplayNum = BTCategory.translateNumberToInfoCategory(btcatnum)
+        return getPicFileLocalURL(picref, refType: isJS ? .JSRef  : .BTRef, category: catgDisplayNum)
+    }
     
     func fixupJSItem() {
         // synthesize a status field for JS data
@@ -134,7 +154,7 @@ class BTDealerItem: NSObject {
     func createInfoItem(category: BTCategory) -> [String:String] {
         // NOTE: be sure to use export names for all properties (i.e. description NOT descriptionX) to be comparable with the output of makeDataFromObject()
         var output : [String:String] = [:]
-        let isJS = (code[0...2] == "AUI")
+//        let isJS = (code[0...2] == "AUI")
         output["id"] = code
         output["description"] = trimSpaces(descr)//descr // TBD: needed to fix bug in initial download of data, but can be eliminated once fixupBTItem() is refreshed again 6/8/2015
         output["status"] = status

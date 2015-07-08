@@ -60,6 +60,7 @@
 		A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */; };
 		A6856E721B0EAB40004B506E /* BTImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E711B0EAB40004B506E /* BTImportExport.swift */; };
 		A6856E741B111AB6004B506E /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */; };
+		A6AA4E491B4CF882007D9558 /* ItemPicURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
 		A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */; };
 		A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */; };
@@ -144,6 +145,7 @@
 		A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateComparison.swift; sourceTree = "<group>"; };
 		A6856E711B0EAB40004B506E /* BTImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTImportExport.swift; sourceTree = "<group>"; };
 		A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
+		A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPicURL.swift; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
 		A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DealerItem+Ex.swift"; sourceTree = "<group>"; };
 		A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InventoryItem+Ex.swift"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		A632CBB51AF2BBF000565686 /* NetworkModel */ = {
 			isa = PBXGroup;
 			children = (
+				A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */,
 				A61C115B1AE6DBB400063025 /* BTDealerStore.swift */,
 				A6856E711B0EAB40004B506E /* BTImportExport.swift */,
 				A632CBAD1AEF2B8800565686 /* JSMessageDelegate.swift */,
@@ -503,6 +506,7 @@
 				A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */,
 				A662C1F01B049DD90067792F /* unzip.c in Sources */,
 				A632CBAE1AEF2B8800565686 /* JSMessageDelegate.swift in Sources */,
+				A6AA4E491B4CF882007D9558 /* ItemPicURL.swift in Sources */,
 				A6856E681B070DE9004B506E /* AlbumType.swift in Sources */,
 				A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */,
 				A61C11641AEADCD900063025 /* CollectionStore.swift in Sources */,

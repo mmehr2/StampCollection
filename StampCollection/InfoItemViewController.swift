@@ -47,8 +47,16 @@ class InfoItemViewController: UIViewController {
         yearRangeLabel.text = usingBT ? "" : item.normalizedDate
         descriptionLabel.text = usingBT ? btitem.descr  : item.descriptionX
         // set imageView to a webkit view if possible showing the BT or JS panel, using pictid
-        let url = usingBT ? btitem.picref  : item.pictid
-        println("TBD- Displaying pictid:\(url)")
+        let pictid = usingBT ? btitem.picref : item.pictid
+        if let url = usingBT ? btitem.picPageURL  : item.picPageURL {
+            println("TBD- Displaying page:\(url.absoluteString!) for pictid:\(pictid)")
+        }
+        if let pfrurl = usingBT ? btitem.picFileRemoteURL  : item.picFileRemoteURL {
+            println("TBD- Downloading file:\(pfrurl.absoluteString!) for pictid:\(pictid)")
+        }
+        if let pflurl = usingBT ? btitem.getThePicFileLocalURL(btcat.number)  : item.picFileLocalURL {
+            println("TBD- Caching file:\(pflurl.absoluteString!) for pictid:\(pictid)")
+        }
     }
     
     /*
