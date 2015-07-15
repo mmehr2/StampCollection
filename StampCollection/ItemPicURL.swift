@@ -148,7 +148,7 @@ func getPicFileRemoteURL( picref: String, refType type: PicRefURLType ) -> NSURL
     return getPicURLFromBaseURL(type, picref, btURLBase!, btURLPath, jsURLBase!, jsURLPath)
 }
 
-// TBD: this function will turn the URL type reference into a local file URL for the cached pic file (preferred for JS site, but can work with BT as files are downloaded)
+// this function will turn the URL type reference into a local file URL for the cached pic file (preferred for JS site, but can work with BT as files are downloaded)
 func getPicFileLocalURL( picref: String, refType type: PicRefURLType, category catnum: Int16 ) -> NSURL? {
     // BT style: not currently supported (will return nil); should return a cached location for the downloaded file whose name is as above (pictid + ".jpg")
     // JS style: "ajt%s.jpg" where the %s is the picref as if from the JS DealerItem pictid ("5c" or "1") - returns nil if no pic available
@@ -158,3 +158,36 @@ func getPicFileLocalURL( picref: String, refType type: PicRefURLType, category c
     return getPicURLFromBaseURL(type, picref, urlBase, urlPath, urlBase, urlPath)
 }
 
+// this function will turn a local URL into a cache key to use with the persistent key/value store
+func getPicFileCacheKeyFromLocalURL( URL: NSURL? ) -> String? {
+    if let url = URL, var comps = url.pathComponents as? [String] {
+        // we want the last path component, the normalized picref/pictid, if the URL was non-nil
+        return comps.last!
+    }
+    return nil
+}
+
+// this function will create a cache key (normalized pictid) from basic pictid/picref and type
+func getPicFileCacheKey( picref: String, type: PicRefURLType ) -> String? {
+    var output: String? = nil
+    if !picref.isEmpty && picref != "N/A" {
+        let comps = picref.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "="))
+        let picref2 = comps.last! // this is just the ID part as a string
+        switch type {
+        case .BTRef:
+            output = getFileNameFromPictid(picref2)
+        case .JSRef:
+            // translate "17020" back to "1" etc.
+            if let picref3 = jsRevDictionary[picref2] {
+                output = getFileNameFromJSPictid(picref3)
+            }
+        case .DLRef:
+            output = getFileNameFromPictid(picref)
+        case .DLJSRef:
+            output = getFileNameFromJSPictid(picref)
+        default:
+            break
+        }
+    }
+    return output
+}
