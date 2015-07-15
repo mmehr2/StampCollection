@@ -62,6 +62,9 @@
 		A6856E741B111AB6004B506E /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */; };
 		A6AA4E491B4CF882007D9558 /* ItemPicURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */; };
 		A6AA4E4F1B4DC43D007D9558 /* WebItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4E4E1B4DC43D007D9558 /* WebItemViewController.swift */; };
+		A6AA4EC91B4F756A007D9558 /* TMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4EC31B4F756A007D9558 /* TMCache.m */; };
+		A6AA4ECA1B4F756A007D9558 /* TMDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4EC61B4F756A007D9558 /* TMDiskCache.m */; };
+		A6AA4ECB1B4F756A007D9558 /* TMMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AA4EC81B4F756A007D9558 /* TMMemoryCache.m */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
 		A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */; };
 		A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */; };
@@ -148,6 +151,13 @@
 		A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPicURL.swift; sourceTree = "<group>"; };
 		A6AA4E4E1B4DC43D007D9558 /* WebItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebItemViewController.swift; sourceTree = "<group>"; };
+		A6AA4EC21B4F756A007D9558 /* TMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMCache.h; sourceTree = "<group>"; };
+		A6AA4EC31B4F756A007D9558 /* TMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMCache.m; sourceTree = "<group>"; };
+		A6AA4EC41B4F756A007D9558 /* TMCacheBackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMCacheBackgroundTaskManager.h; sourceTree = "<group>"; };
+		A6AA4EC51B4F756A007D9558 /* TMDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDiskCache.h; sourceTree = "<group>"; };
+		A6AA4EC61B4F756A007D9558 /* TMDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDiskCache.m; sourceTree = "<group>"; };
+		A6AA4EC71B4F756A007D9558 /* TMMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMMemoryCache.h; sourceTree = "<group>"; };
+		A6AA4EC81B4F756A007D9558 /* TMMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMMemoryCache.m; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
 		A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DealerItem+Ex.swift"; sourceTree = "<group>"; };
 		A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InventoryItem+Ex.swift"; sourceTree = "<group>"; };
@@ -270,10 +280,23 @@
 			path = ../ssziparchive/SSZipArchive/minizip;
 			sourceTree = "<group>";
 		};
+		A6AA4ECC1B4F7583007D9558 /* TMCache */ = {
+			isa = PBXGroup;
+			children = (
+				A6AA4EC21B4F756A007D9558 /* TMCache.h */,
+				A6AA4EC31B4F756A007D9558 /* TMCache.m */,
+				A6AA4EC41B4F756A007D9558 /* TMCacheBackgroundTaskManager.h */,
+				A6AA4EC51B4F756A007D9558 /* TMDiskCache.h */,
+				A6AA4EC61B4F756A007D9558 /* TMDiskCache.m */,
+				A6AA4EC71B4F756A007D9558 /* TMMemoryCache.h */,
+				A6AA4EC81B4F756A007D9558 /* TMMemoryCache.m */,
+			);
+			name = TMCache;
+			sourceTree = "<group>";
+		};
 		A6E198391AD6EEEC0090FDB1 = {
 			isa = PBXGroup;
 			children = (
-				A662C1D91B049B150067792F /* libz.dylib */,
 				A6E198441AD6EEEC0090FDB1 /* StampCollection */,
 				A6E1985D1AD6EEEC0090FDB1 /* StampCollectionTests */,
 				A6E198431AD6EEEC0090FDB1 /* Products */,
@@ -326,11 +349,13 @@
 				A60DBC701ADBC13600D4959D /* inventory.csv */,
 				A662C1C21AFDFD520067792F /* inventory.corrupt.csv */,
 				A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */,
+				A6AA4ECC1B4F7583007D9558 /* TMCache */,
 				A662C1E11B049D600067792F /* SSZipArchive.h */,
 				A662C1E21B049D600067792F /* SSZipArchive.m */,
 				A662C1E41B049DD90067792F /* minizip */,
 				A6E198731AD712630090FDB1 /* CHCSVParser.h */,
 				A6E198741AD712630090FDB1 /* CHCSVParser.m */,
+				A662C1D91B049B150067792F /* libz.dylib */,
 				A6E198461AD6EEEC0090FDB1 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -478,6 +503,7 @@
 				A662C1EF1B049DD90067792F /* mztools.c in Sources */,
 				A61C115E1AE6F0F900063025 /* BTMessageDelegate.swift in Sources */,
 				A632CBB41AF02C0800565686 /* EmailAttachmentImporter.swift in Sources */,
+				A6AA4ECA1B4F756A007D9558 /* TMDiskCache.m in Sources */,
 				A662C1CF1AFEAB020067792F /* DealerItem.swift in Sources */,
 				A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */,
 				A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */,
@@ -495,6 +521,7 @@
 				A6856E5E1B070D56004B506E /* InventoryItem.swift in Sources */,
 				A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */,
 				A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */,
+				A6AA4ECB1B4F756A007D9558 /* TMMemoryCache.m in Sources */,
 				A6856E6A1B071691004B506E /* AlbumRef.swift in Sources */,
 				A6856E661B070D56004B506E /* AlbumPage.swift in Sources */,
 				A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */,
@@ -507,6 +534,7 @@
 				A6AA4E4F1B4DC43D007D9558 /* WebItemViewController.swift in Sources */,
 				A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */,
 				A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */,
+				A6AA4EC91B4F756A007D9558 /* TMCache.m in Sources */,
 				A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */,
 				A662C1F01B049DD90067792F /* unzip.c in Sources */,
 				A632CBAE1AEF2B8800565686 /* JSMessageDelegate.swift in Sources */,
