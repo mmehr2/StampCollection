@@ -33,7 +33,7 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
         //    categoryNumber = JSCategory;
         let config = WKWebViewConfiguration()
         let scriptURL = NSBundle.mainBundle().pathForResource("getJSItems", ofType: "js")
-        let scriptContent = String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding, error: nil)
+        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding)
         let script = WKUserScript(source: scriptContent!, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
         config.userContentController.addUserScript(script)
         config.userContentController.addScriptMessageHandler(self, name: itemsJSMessage)
@@ -64,14 +64,14 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
                 } else if let headersNS = reply["headers"] as? NSArray,
                     headers = headersNS as? [String],
                     notesNS = reply["notes"] as? NSString,
-                    notes = notesNS as? String,
                     itemsNS = reply["items"] as? NSArray,
                     jsitems = itemsNS as? [NSDictionary]
                 {
+                    let notes = notesNS as String
                     if let delegate = delegate {
                         delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
                     }
-                    var category = BTCategory()
+                    let category = BTCategory()
                     category.number = categoryNumber
                     //println("Received \(message.name) in cat=\(categoryNumber) with \(dataCount) items with HEADERS \(headers)\n=== NOTES ===\n\(notes)\n============")//\n\(jsitems)")
                     category.notes = notes
@@ -79,7 +79,7 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
                     for itemX in jsitems {
                         if let item = itemX as? [String: AnyObject] {
                             //println("Item \(item)")
-                            var dealerItem = BTDealerItem()
+                            let dealerItem = BTDealerItem()
                             for propName in headers {
                                 if let value: AnyObject = item[propName] {
                                     dealerItem.setValue(value, forKey: BTDealerItem.translatePropertyNameJS(propName))

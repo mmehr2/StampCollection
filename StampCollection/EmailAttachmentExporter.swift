@@ -31,12 +31,15 @@ On device, crash is intermittent and only on Cancel (either way) - Send always s
 On simulator, crash has also happened intermittently, but when it passes breakpoint, it fails in the errFunc() call.
 */
 
+private var mailController: MFMailComposeViewController!
+
 class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
     var controller: UIViewController!
     
     var errFunc : ((NSError) -> Void)?
     
     init( forController vc: UIViewController, errorHandler: ((NSError) -> Void)? = nil ) {
+        super.init()
         controller = vc
         errFunc = errorHandler
     }
@@ -72,9 +75,9 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         let file2exists = fileManager.fileExistsAtPath(file2url.path!)
         let file3exists = fileManager.fileExistsAtPath(file3url.path!)
         if !(file1exists && file2exists && file3exists) {
-            if !file1exists { ecode += 1; println("Error preparing for email export: \(file1url.path!) doesn't exist.") }
-            if !file2exists { ecode += 2; println("Error preparing for email export: \(file2url.path!) doesn't exist.") }
-            if !file3exists { ecode += 4; println("Error preparing for email export: \(file3url.path!) doesn't exist.") }
+            if !file1exists { ecode += 1; print("Error preparing for email export: \(file1url.path!) doesn't exist.") }
+            if !file2exists { ecode += 2; print("Error preparing for email export: \(file2url.path!) doesn't exist.") }
+            if !file3exists { ecode += 4; print("Error preparing for email export: \(file3url.path!) doesn't exist.") }
             if let errFunc = errFunc {
                 errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
             }
@@ -86,65 +89,81 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         let zipFilename = "StampCollection" + zipFileExtension
         let zipFileurl = ad.applicationDocumentsDirectory.URLByAppendingPathComponent(zipFilename)
         var error : NSError?
-        fileManager.removeItemAtURL(zipFileurl, error: &error)
+        do {
+            try fileManager.removeItemAtURL(zipFileurl)
+        } catch let error1 as NSError {
+            error = error1
+        }
         if error != nil {
             ecode += 8
-            println("Unable to remove existing ZIPFILE: \(error!.localizedDescription).")
+            print("Unable to remove existing ZIPFILE: \(error!.localizedDescription).")
         }
         let fileUrls = [file1url.path!, file2url.path!, file3url.path!]
         let zipArchiveOK = SSZipArchive.createZipFileAtPath(zipFileurl.path!, withFilesAtPaths:fileUrls)
         if !zipArchiveOK {
             ecode += 16
-            println("Unable to create ZIPFILE archive \(zipFilename): \(error!.localizedDescription).")
+            print("Unable to create ZIPFILE archive \(zipFilename): \(error!.localizedDescription).")
             if let errFunc = errFunc {
                 errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
             }
             return false
         }
         
-        let fileData = NSData(contentsOfURL: zipFileurl)
+        guard let fileData = NSData(contentsOfURL: zipFileurl) else {
+            ecode += 32
+            print("Unable to read ZIPFILE archive \(zipFilename).")
+            if let errFunc = errFunc {
+                errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
+            }
+            return false
+        }
+
         
         let mimeType = "application/zip"
         
         // make sure email feature is available (running on device)
         if !MFMailComposeViewController.canSendMail() {
-            ecode += 32
+            ecode += 64
             if let errFunc = errFunc {
                 errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
             }
             return false
         }
+
+        // rather than using a local var here, we hold the reference in a private var instead
+        // this assures the controller's lifetime while it is doing its work
+        mailController = MFMailComposeViewController()
+        mailController.mailComposeDelegate = self
+        mailController.setSubject(emailSubject)
+        mailController.setMessageBody(emailBody, isHTML: false)
+        mailController.setToRecipients(toRecipients)
         
-        var mc = MFMailComposeViewController()
-        mc.mailComposeDelegate = self
-        mc.setSubject(emailSubject)
-        mc.setMessageBody(emailBody, isHTML: false)
-        mc.setToRecipients(toRecipients)
-        
-        mc.addAttachmentData(fileData, mimeType: mimeType, fileName: zipFilename)
+        mailController.addAttachmentData(fileData, mimeType: mimeType, fileName: zipFilename)
         
         // present the VC on behalf of the provided VC
-        controller.presentViewController(mc, animated: true, completion: nil)
+        controller.presentViewController(mailController, animated: true, completion: nil)
         return true
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
     {
-        var errHappened = false
-        let fakeError = NSError(domain: "StampCollection", code: 0, userInfo: nil)
+        //var errHappened = false
+//        let fakeError = NSError(domain: "StampCollection", code: 0, userInfo: nil)
+//        let fakeError2 = NSError(domain: "StampCollection", code: -1, userInfo: nil)
+//        let errorEx = error ?? fakeError2
         switch result {
         case MFMailComposeResultCancelled:
-            println("Email canceled by user")
+            print("Email canceled by user")
             break
         case MFMailComposeResultSaved:
-            println("Email saved by user")
+            print("Email saved by user")
             break
         case MFMailComposeResultSent:
-            println("Email sent by user")
+            print("Email sent by user")
             break
         case MFMailComposeResultFailed:
-            println("Email sent by user but failed due to error \(error.localizedDescription)")
-            errHappened = true
+            print("Email sent by user but failed due to error \(error?.localizedDescription)")
+            //errHappened = true
             break
         default:
             break
@@ -154,19 +173,19 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         controller.dismissViewControllerAnimated(true) {
             // try doing nothing here
         }
-        if let errFunc = self.errFunc {
-            if errHappened {
-                errFunc(error)
-            } else {
-                errFunc(fakeError)
-            }
-        }
+//        if let errFunc = self.errFunc {
+//            if errHappened {
+//                errFunc(errorEx)
+//            } else {
+//                errFunc(fakeError)
+//            }
+//        }
     }
 }
 
 // NOTE: function required to allow result to be used in a switch statement (check if still needed: Swift 1.2)
 // why doesn't Apple define this?
 func ~=( lhs: MFMailComposeResult, rhs: MFMailComposeResult) -> Bool {
-    return lhs.value ~= rhs.value
+    return lhs.rawValue ~= rhs.rawValue
 }
 

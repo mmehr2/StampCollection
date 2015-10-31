@@ -11,9 +11,10 @@ import CoreData
 
 class AlbumPage: NSManagedObject {
 
-    @NSManaged var code: String
-    @NSManaged var number: Float
-    @NSManaged var section: AlbumSection
-    @NSManaged var items: NSOrderedSet
+    // Contents originally generated under Swift 1.x - removed to XXX+CoreDataProperties.swift file
+//    @NSManaged var code: String
+//    @NSManaged var number: Float
+//    @NSManaged var section: AlbumSection
+//    @NSManaged var items: NSOrderedSet
 
 }

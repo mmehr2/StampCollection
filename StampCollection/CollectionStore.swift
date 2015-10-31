@@ -9,12 +9,12 @@
 import UIKit
 import CoreData
 
-class CollectionStore: ExportDataSource {
+class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     static let CategoryAll : Int16 = -1
     
-    static var sharedInstance = CollectionStore()
+    //static var sharedInstance = CollectionStore() // yes this is a global singleton; looking into how to do dependency injection with it
     
-    enum DataType: Printable  {
+    enum DataType: CustomStringConvertible  {
         case Categories
         case Info
         case Inventory
@@ -37,83 +37,145 @@ class CollectionStore: ExportDataSource {
     var albumFamilies : [AlbumFamily] = []
     var albumTypes : [AlbumType] = []
 
+    private var initialized_ = false
+    var initialized: Bool {
+        get {
+            return initialized_
+        }
+    }
+    private var initCompletionBlock: (() -> Void)?
+    
+    init(completion: (() -> Void)? = nil) {
+        // RayW init: class derives from NSObject so dependency injection can be done at runtime on all child VC objects
+        super.init()
+        // save completion block: it is NOT ok to use the persistence layer until this executes
+        initCompletionBlock = completion
+        // create the main thread's context using token 0 (never remove this)
+        // init redesigned using Zarra pattern #1-2 (MLM 10/17/2015) - this will fire all setup, including connection / migration on a background thread
+        let token = getNewContextTokenForThread()
+        if !isBadContextToken(token) {
+            print("Created the main CoreData context objects")
+            // populate the arrays with any managed objects found
+            // NOTE: this can no longer be done here with the Zarra design; it should be done inside the completion handler instead
+            //fetchType(.Categories)
+        }
+    }
+
     // MARK: basics for CoreData implementation
+    // Redesigned for Swift 2 and using concurrency pattern of Marcus Zarra from http://martiancraft.com/blog/2015/03/core-data-stack/
+    // The Zarra design pattern / suggestion involves several steps:
+    //   1. The initial setup of the stack is split into a lightweight portion that sets up the PSC, MOMD, and MOC objects, and
+    //   2. ... a background task that performs attaching the SQLITE file to the PSC (which could trigger lengthy migrations)
+    //   3. For regular usage, a parent MOC is put in a private property, set up to use the PrivateQueue concurrency type and the PSC as data source
+    //   4. Then a child MOC is provided as the main "source of truth" for the app, as a child of #3, using the MainQueue concurrency type
+    //   5. Finally, for any background queue work, other MOCs can be provided as children of #4
+    // This design was also partially followed by the Ray Wenderlich tutorial series Intermediate Core Data (video), but due to differences I chose to ignore its design.
+    // I wanted the design of CollectionStore to handle all the heavy lifting of CoreData and not "leak" any CoreData usage into other parts of the model,
+    //   except when using the individual managed objects themselves.
+    // The Zarra design uses the private parent MOC (#3) to save all data to disk without tying up the main queue.
+    // The more public MainQ child context is used for all UI data interactions, and children of that context are provided for background thread work (always non-UI).
+    // This means I can adapt my thread-confinement model to set up the private parent MOC separately, set the main controller as a child of this (with MainQ type),
+    //    and provide the thread MOCs as children of this one.
+    // The basic scheme of using integer tokens instead of actual MOCs should abstract the CoreData usage outside of this file sufficiently.
+    // However, I may wish to revisit this design at a later date.
+    
     static let moduleName = "StampCollection" // TBD: get this from proper place
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.azuresults.StampCollection" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource(moduleName, withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        // This resource is the same name as your xcdatamodeld contained in your project.
+        guard let modelURL = NSBundle.mainBundle().URLForResource(moduleName, withExtension:"momd") else {
+            fatalError("Error loading object model from bundle")
+        }
+        // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
+        guard let mom = NSManagedObjectModel(contentsOfURL: modelURL) else {
+            fatalError("Error initializing object model from url: \(modelURL)")
+        }
+        return mom
         }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
-        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(moduleName+".sqlite")
-        println("CoreData stack established at \(url)")
-        var error: NSError? = nil
-        var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
-            coordinator = nil
-            // Report any error we got.
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: moduleName, code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error!.userInfo)")
-            abort()
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            let docURL = urls[urls.endIndex-1]
+            /* The directory the application uses to store the Core Data store file.
+            This code uses a file named "*.sqlite" in the application's documents directory.
+            */
+            let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent(moduleName+".sqlite")
+            do {
+                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL,
+                    options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
+                print("CoreData stack established at \(storeURL)")
+                // SUCCESS: fire the init completion handler block on the main queue here
+                if let handler = self.initCompletionBlock {
+                    dispatch_sync(dispatch_get_main_queue(), handler)
+                } else {
+                    print("Unable to send completion signal block for UI continuation after persistence layer initialization.")
+                }
+                self.initialized_ = true
+            } catch {
+                fatalError("Error migrating store: \(error)")
+            }
         }
-        
-        return coordinator
+        return psc
         }()
     
     typealias ContextToken = Int
     static let badContextToken: ContextToken = -1
-    static let mainContextToken: ContextToken = 0
-    private static var nextContextToken: ContextToken = mainContextToken
+    static let mainContextToken: ContextToken = 0 // see Zarra pattern #4
+    private var nextContextToken: ContextToken = mainContextToken
     private func isBadContextToken( token: ContextToken ) -> Bool {
         return token == CollectionStore.badContextToken
     }
-    
-    private var mocsForThreads : [ContextToken : NSManagedObjectContext] = [:]
-    
-    init() {
-        // create the main thread's context using token 0 (never remove this)
-        // also gets the PSC locally (dependency on AppDelegate removed 6/22/15 MLM)
-        let token = getContextTokenForThread()
-        if !isBadContextToken(token) {
-            // populate the arrays with any managed objects found
-            //fetchType(.Categories, background: true)
-        }
-    }
 
-    func getScratchContext(retainUndoManager retainUM: Bool = false) -> NSManagedObjectContext? {
-        if let psc = persistentStoreCoordinator {
-            let context = NSManagedObjectContext()
-            context.persistentStoreCoordinator = psc
-            if !retainUM {
-                context.undoManager = nil
-            }
+    private lazy var saveManagedObjectContext: NSManagedObjectContext? = {
+        guard let coordinator = self.persistentStoreCoordinator else { return nil }
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = coordinator
+        // not needed and crashes! // managedObjectContext.parentContext = nil // this is the parent for the main UI MOC (Zarra pattern #3)
+        managedObjectContext.undoManager = nil // speed optimization: no UM needed for non-UI contexts
+        return managedObjectContext
+    }()
+    
+    private lazy var mainManagedObjectContext: NSManagedObjectContext? = {
+        guard let coordinator = self.persistentStoreCoordinator else { return nil }
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = nil // no PSC; this is the parent for other MOCs (Zarra pattern #4)
+        managedObjectContext.parentContext = self.saveManagedObjectContext // this is a child of the save context (Zarra pattern #3) above
+        //managedObjectContext.undoManager = nil // speed optimization: no UM needed for non-UI contexts
+        return managedObjectContext
+        }()
+    
+    private func getScratchContext() -> NSManagedObjectContext? {
+        if persistentStoreCoordinator != nil {
+            let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+            context.persistentStoreCoordinator = nil
+            context.parentContext = mainManagedObjectContext // Zarra pattern #4
+            context.undoManager = nil // speed optimization: no UM needed for non-UI contexts
             return context
         }
         return nil
     }
     
-    func getContextTokenForThread(retainUndoManager retainUM: Bool = false) -> ContextToken {
-        if let psc = persistentStoreCoordinator {
-                let context = getScratchContext(retainUndoManager: retainUM)
-                let token = CollectionStore.nextContextToken++
+    private var mocsForThreads : [ContextToken : NSManagedObjectContext] = [:]
+    
+    func getNewContextTokenForThread() -> ContextToken {
+        if persistentStoreCoordinator != nil {
+            let token = nextContextToken++
+            let setupMain = (token == CollectionStore.mainContextToken)
+            print("Setting up token #\(token) for \(setupMain ? "main " : "private") context")
+            if let context = (setupMain ? mainManagedObjectContext : getScratchContext()) {
                 mocsForThreads[token] = context
                 return token
+            }
         }
         return CollectionStore.badContextToken // only if CoreData is broken
     }
@@ -125,29 +187,131 @@ class CollectionStore: ExportDataSource {
         } 
         return mocsForThreads[token]
     }
-    
+
+    // NOTE: every call to getNewContextTokenForThread() should eventually call removeContextForThread() on the returned token (defer this)
     func removeContextForThread(token: ContextToken) {
         if token != CollectionStore.badContextToken && token != CollectionStore.mainContextToken {
-            mocsForThreads[token] = nil
+            // create the closure that will do the work
+            let completion = {
+                print("Context #\(token) removal on private queue")
+                self.mocsForThreads[token] = nil
+            }
+            // schedule it as the next task on the context's private queue (async call)
+            if let context = self.mocsForThreads[token] {
+                context.performBlock(completion)
+            }
+        }
+    }
+
+    // save the main context
+    private func saveMainContextOnQueue() {
+        if let context = mainManagedObjectContext, contextP = saveManagedObjectContext {
+            // two-step process:
+            // step 1 - save the source of truth running sync on its own queue (main)
+            if context.hasChanges {
+                context.performBlockAndWait() {
+                    do {
+                        try context.save()
+                        print("Successful CoreData main memory save")
+                    } catch {
+                        print("Error saving main CoreData memory context \(error)")
+                        return
+                    }
+                }
+            }
+            // step 2 - save the parent MOC running async on its own queue (pvt)
+            if contextP.hasChanges {
+                contextP.performBlock() {
+                    do {
+                        try contextP.save()
+                        print("Successful CoreData disk save")
+                    } catch {
+                        print("Error saving private CoreData disk context \(error)")
+                    }
+                }
+            }
         }
     }
     
-    private static func saveContext(context: NSManagedObjectContext) -> Bool {
-        var error : NSError?
+    private func saveMainContextOnQueueAsync() {
+        if let context = mainManagedObjectContext, contextP = saveManagedObjectContext {
+            // two-step process:
+            // step 1 - save the source of truth running async on its own queue (main)
+            if context.hasChanges {
+                context.performBlock() {
+                    do {
+                        try context.save()
+                        print("Successful CoreData main memory saveA")
+                        // step 2 - now do the async private save (it IS needed), on the private queue
+                        contextP.performBlock() {
+                            do {
+                                try contextP.save()
+                                print("Successful CoreData disk saveA")
+                            } catch {
+                                print("Error savingA private CoreData disk context \(error)")
+                            }
+                        }
+                    } catch {
+                        print("Error savingA main CoreData memory context \(error)")
+                        return
+                    }
+                }
+            }
+                // ALT (no changes in main, but still some left on pvt?) - should never happen?
+                // save the parent MOC running async on its own queue (pvt)
+            else if contextP.hasChanges {
+                // this really shouldn't happen, since contextP only gets changes that are scheduled by changes in context(main)
+                contextP.performBlock() {
+                    do {
+                        try contextP.save()
+                        print("Successful CoreData disk saveA2")
+                    } catch {
+                        print("Error savingA2 private CoreData disk context \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func saveChildContextOnQueue(context: NSManagedObjectContext) -> Bool {
+        // this is actually now a multi-step process, since save only goes up one parent level
+        // the function will perform a one-level save to its parent on whatever queue is assigned to it (main or pvt)
+        // by using performBlockAndWait() we actually run it synchronously
+        var result = false
+        let completion = {
+            do {
+                try context.save()
+                print("Successful CoreData save")
+                result = true
+            } catch {
+                print("Error saving CoreData context \(error)")
+            }
+        }
         if context.hasChanges {
-            if !context.save(&error) {
-                println("Error saving CoreData context \(error!)")
-                return false
-            } else {
-                println("Successful CoreData save")
+            context.performBlockAndWait(completion)
+        }
+        return result
+    }
+    
+    private func saveContext(context: NSManagedObjectContext, background: Bool = false) -> Bool {
+        if context == saveManagedObjectContext {
+            print("PROGRAMMING ERROR! Attempt to save master CoreData context directly.")
+            return false // this should not be used this way! assert?? programming error!
+        } else if context == mainManagedObjectContext {
+            background ? saveMainContextOnQueueAsync() : saveMainContextOnQueue()
+        } else {
+            let saved = saveChildContextOnQueue(context)
+            if saved {
+                saveMainContextOnQueueAsync()
             }
         }
         return true
     }
     
     func saveMainContext() -> Bool {
+        // this has two steps: save the context to parent, and then fire the async save of the private parent context
         if let context = getContextForThread(CollectionStore.mainContextToken) {
-            return CollectionStore.saveContext(context)
+            return saveContext(context)
         }
         return false
     }
@@ -157,13 +321,13 @@ class CollectionStore: ExportDataSource {
             return saveMainContext()
         }
         else if token != CollectionStore.badContextToken, let context = mocsForThreads[token] {
-            return CollectionStore.saveContext(context)
+            return saveContext(context)
         }
         return false
     }
 
     // MARK: object removal
-    func removeAllItemsInStore() {
+    func removeAllItemsInStore(completion: (()-> Void)?) {
         // NOTE: BE VERY CAREFUL IN USING THIS FUNCTION
         /*
         What we probably want to do with CoreData on Import is:
@@ -175,65 +339,74 @@ class CollectionStore: ExportDataSource {
         
         // For now, just wipe the managed object caches
         // Then use the CoreData context to wipe the database as well
-        if let context = getContextForThread(CollectionStore.mainContextToken) {
-            // Then remove all INVENTORY objects
-            inventory = fetch("InventoryItem", inContext: context)
-            println("Deleting \(inventory.count) inventory items")
-            for obj in inventory {
-                context.deleteObject(obj)
+        // Use private queue context for this operation (may take time)
+        let token = getNewContextTokenForThread()
+        addOperationToContext(token) {
+            if let context = self.getContextForThread(token) {
+                // Then remove all INVENTORY objects
+                self.inventory = fetch("InventoryItem", inContext: context)
+                print("Deleting \(self.inventory.count) inventory items")
+                for obj in self.inventory {
+                    context.deleteObject(obj)
+                }
+                self.inventory = []
+                //saveMainContext() // commit those changes
+                // Then remove all INFO objects
+                self.info = fetch("DealerItem", inContext: context)
+                print("Deleting \(self.info.count) info items")
+                for obj in self.info {
+                    context.deleteObject(obj)
+                }
+                self.info = []
+                //saveMainContext() // commit those changes
+                // Then remove all CATEGORY objects
+                self.categories = fetch("Category", inContext: context)
+                print("Deleting \(self.categories.count) category items")
+                for obj in self.categories {
+                    context.deleteObject(obj)
+                }
+                self.categories = []
+                // disassemble the derived Album Location hierarchy, from bottom to top
+                let pages = fetch("AlbumPage", inContext: context)
+                print("Deleting \(pages.count) album pages")
+                for obj in pages {
+                    context.deleteObject(obj)
+                }
+                let sections = fetch("AlbumSection", inContext: context)
+                print("Deleting \(sections.count) album sections")
+                for obj in sections {
+                    context.deleteObject(obj)
+                }
+                let albums = fetch("AlbumRef", inContext: context)
+                print("Deleting \(albums.count) album refs")
+                for obj in albums {
+                    context.deleteObject(obj)
+                }
+                let families = fetch("AlbumFamily", inContext: context)
+                print("Deleting \(families.count) album families")
+                for obj in families {
+                    context.deleteObject(obj)
+                }
+                let types = fetch("AlbumType", inContext: context)
+                print("Deleting \(types.count) album types")
+                for obj in types {
+                    context.deleteObject(obj)
+                }
+                self.saveContext(context) // save all these deletes to the local child context's parent
+                self.removeContextForThread(token) // finally done with the local child context, release it
+                //self.saveMainContext() // commit those changes to the parent and its background saver
+                
+                if let completion = completion {
+                    self.addCompletionOperationWithBlock(completion)
+                }
             }
-            inventory = []
-            //saveMainContext() // commit those changes
-            // Then remove all INFO objects
-            info = fetch("DealerItem", inContext: context)
-            println("Deleting \(info.count) info items")
-            for obj in info {
-                context.deleteObject(obj)
-            }
-            info = []
-            //saveMainContext() // commit those changes
-            // Then remove all CATEGORY objects
-            categories = fetch("Category", inContext: context)
-            println("Deleting \(categories.count) category items")
-            for obj in categories {
-                context.deleteObject(obj)
-            }
-            categories = []
-            // disassemble the derived Album Location hierarchy, from bottom to top
-            let pages = fetch("AlbumPage", inContext: context)
-            println("Deleting \(pages.count) album pages")
-            for obj in pages {
-                context.deleteObject(obj)
-            }
-            let sections = fetch("AlbumSection", inContext: context)
-            println("Deleting \(sections.count) album sections")
-            for obj in sections {
-                context.deleteObject(obj)
-            }
-            let albums = fetch("AlbumRef", inContext: context)
-            println("Deleting \(albums.count) album refs")
-            for obj in albums {
-                context.deleteObject(obj)
-            }
-            let families = fetch("AlbumFamily", inContext: context)
-            println("Deleting \(families.count) album families")
-            for obj in families {
-                context.deleteObject(obj)
-            }
-            let types = fetch("AlbumType", inContext: context)
-            println("Deleting \(types.count) album types")
-            for obj in types {
-                context.deleteObject(obj)
-            }
-            saveMainContext() // commit those changes
         }
     }
 
-    // single-item remove (must call saveXContext() afterward to commit change)
+    // single-item remove (if commit is set, will call saveContext() afterward to commit change)
     func removeInfoItemByID( itemID: String, commit: Bool = true, fromContext token: ContextToken = mainContextToken ) {
-        if let context = getContextForThread(token),
-            obj = fetchInfoItemByID(itemID, inContext: token) {
-                removeInfoItem(obj, commit: commit)
+        if let obj = fetchInfoItemByID(itemID, inContext: token) {
+            removeInfoItem(obj, commit: commit)
         }
     }
     
@@ -246,22 +419,47 @@ class CollectionStore: ExportDataSource {
         if let context = item.managedObjectContext {
             context.deleteObject(item)
             if commit {
-                return CollectionStore.saveContext(context)
+                return saveContext(context)
             }
             return true
         }
         return false
     }
     
-    // MARK: import/export functions
+    // MARK: ImportExportable protocol: import/export functions
     // NOTE: these functions are used by the ImportExport class to perform their jobs
     // They use a Dictionary [String:String] simple data exchange format
     
     // to implement exporting data, we subscribe to the ExportDataSource protocol
     func prepareStorageContext(forExport exporting: Bool = false) -> ContextToken {
-        return getContextTokenForThread()
+        return getNewContextTokenForThread()
     }
     
+    func finalizeStorageContext(token: ContextToken, forExport: Bool = false) {
+        if !forExport {
+            saveContextForThread(token)
+        }
+        removeContextForThread(token) // NOTE: do NOT use token after this point
+    }
+    
+    func addOperationToContext(token: ContextToken, withBlock handler: () -> Void) {
+        // add an operation to the queue for the provided token's private context
+        // does NOT wait for completion (async call)
+        if let context = mocsForThreads[token] {
+            context.performBlock(handler)
+        }
+    }
+    
+    func addCompletionOperationWithBlock( completion: () -> Void) {
+        // add an operation to the queue for the main context
+        // does NOT wait for completion (async call)
+        if let context = mainManagedObjectContext {
+            context.performBlock(completion)
+        }
+    }
+
+    // MARK: protocol ImportDataSink
+    // import protocol: persist a new object as requested
     func addObjectType(type: DataType, withData data: [String:String], toContext token: ContextToken = mainContextToken) {
         // use the background thread's moc here
         let mocForThread = getContextForThread(token)
@@ -273,7 +471,7 @@ class CollectionStore: ExportDataSource {
             break
         case .Info:
             // get appropriate Category object (all loaded prior) from this thread's moc
-            if let catnum = data["CatgDisplayNum"]?.toInt(),
+            if let catnumstr = data["CatgDisplayNum"], catnum = Int(catnumstr),
                 obj = fetchCategory(Int16(catnum), inContext: token)
             {
                     // pass the related object(s) in a Dictionary to make the new item in the moc
@@ -288,7 +486,7 @@ class CollectionStore: ExportDataSource {
                 // need to pass the related dealer item object to construct its relationship on the fly
                 let rule = NSPredicate(format: "%K == %@", "id", code)
                 let rule2 : NSPredicate? = code2 == "" ? nil : NSPredicate(format: "%K == %@", "id", code2)
-                if let catnum = data["CatgDisplayNum"]?.toInt(),
+                if let catnumstr = data["CatgDisplayNum"], catnum = Int(catnumstr),
                     catobj = fetchCategory(Int16(catnum), inContext: token),
                     obj = fetch("DealerItem", inContext: mocForThread, withFilter: rule).first
                     , pobj = AlbumPage.getObjectInImportData(data, fromContext: mocForThread)
@@ -309,14 +507,8 @@ class CollectionStore: ExportDataSource {
             break
         }
     }
-    
-    func finalizeStorageContext(token: ContextToken, forExport: Bool = false) {
-        if !forExport {
-            saveContextForThread(token)
-        }
-        removeContextForThread(token) // NOTE: do NOT use token after this point
-    }
 
+    // MARK: protocol ExportDataSource
     // cached export contents are saved here
     private var dataArray : [NSManagedObject]  = []
     
@@ -383,7 +575,7 @@ class CollectionStore: ExportDataSource {
         withContext token: CollectionStore.ContextToken ) -> [String:String] {
             var output : [String:String] = [:]
             if (0..<dataArray.count).contains(index) {
-                var item = dataArray[index]
+                let item = dataArray[index]
                 switch dataType {
                 case .Categories:
                     if let obj = item as? Category {
@@ -407,9 +599,8 @@ class CollectionStore: ExportDataSource {
 
     // MARK: main functionality
     func exportAllData(completion: (() -> Void)? = nil) {
-        var exporter = ImportExport()
-        exporter.dataSource = self
-        exporter.exportData(compare: false, completion: completion)
+        let exporter = ImportExport()
+        exporter.exportData(false, fromModel: self, completion: completion)
     }
     
     func fetchType(type: DataType, category: Int16 = CategoryAll, searching: [SearchType] = [], completion: (() -> Void)? = nil) {
@@ -453,29 +644,29 @@ class CollectionStore: ExportDataSource {
             ++total
         }
         var unamelist = Array(nameCountDict.keys)
-        unamelist.sort{ $0 < $1 }
-        let unames = ", ".join(unamelist)
-        println("There are \(nameCountDict.count-1) unique section names out of \(total) in use: \(unames)")
+        unamelist.sortInPlace{ $0 < $1 }
+        let unames = unamelist.joinWithSeparator(", ")
+        print("There are \(nameCountDict.count-1) unique section names out of \(total) in use: \(unames)")
         //println("Dict of section keys: \(nameCountDict)")
     }
     
     private func showLocationStats(moc: NSManagedObjectContext, inCategory catnum: Int16) {
-        let predTypes = NSPredicate(format: "%K == %@", "", "")
+        //let predTypes = NSPredicate(format: "%K == %@", "", "")
         let albumTypes : [AlbumType] = fetch("AlbumType", inContext: moc, withFilter: nil)
         let numAlbumTypes = albumTypes.count
-        let albumTypeNames = albumTypes.map{ x in x.code }
-        let typeList = ", ".join(albumTypeNames)
+        let albumTypeNames = albumTypes.map{ x in x.code as String }
+        let typeList = albumTypeNames.joinWithSeparator(", ")
         let albumFamilies : [AlbumFamily] = fetch("AlbumFamily", inContext: moc, withFilter: nil)
         let numAlbumFamilies = albumFamilies.count
-        let albumFamilyNames = albumFamilies.map{ x in x.code }
-        let familyList = ", ".join(albumFamilyNames)
+        let albumFamilyNames = albumFamilies.map{ x in x.code as String }
+        let familyList = albumFamilyNames.joinWithSeparator(", ")
         let numAlbums = countFetches("AlbumRef", inContext: moc, withFilter: nil)
         let numAlbumSections = countFetches("AlbumSection", inContext: moc, withFilter: nil)
         let numAlbumPages = countFetches("AlbumPage", inContext: moc, withFilter: nil)
         let numItems = countFetches("InventoryItem", inContext: moc, withFilter: nil)
-        println("There are \(numAlbums) albums in \(numAlbumFamilies) families of \(numAlbumTypes) types with \(numAlbumSections) sections holding \(numAlbumPages) pages for \(numItems) items")
-        println("Types: \(typeList)")
-        println("Families: \(familyList)")
+        print("There are \(numAlbums) albums in \(numAlbumFamilies) families of \(numAlbumTypes) types with \(numAlbumSections) sections holding \(numAlbumPages) pages for \(numItems) items")
+        print("Types: \(typeList)")
+        print("Families: \(familyList)")
         getUniqueSectionNames(moc)
     }
 
@@ -496,7 +687,7 @@ class CollectionStore: ExportDataSource {
             let type = SearchType.SubCategory("^\(id)$")
             let data = fetchInfo(context, inCategory: CollectionStore.CategoryAll, withSearching: [type], andSorting: .None)
             if data.count > 1 {
-                println("Non-unique ID found: \(id) has \(data.count) items.")
+                print("Non-unique ID found: \(id) has \(data.count) items.")
             }
             return data.first
         }
@@ -536,7 +727,7 @@ class CollectionStore: ExportDataSource {
         // TBD: replace sorting using its ViewModel types as well
         let temp : [DealerItem] = fetch("DealerItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
-        let temp2 = filterInfo(temp, searching)
+        let temp2 = filterInfo(temp, types: searching)
         // already sorted by default exOrder, so no need for further if specified
         return sortCollection(temp2, byType: sortType)
     }
@@ -557,7 +748,7 @@ class CollectionStore: ExportDataSource {
         // TBD: replace sorting using its ViewModel types as well
         let temp : [InventoryItem] = fetch("InventoryItem", inContext: context, withFilter: rule, andSorting: sorts)
         // run phase 2 filtering, if needed
-        return filterInventory(temp, searching)
+        return filterInventory(temp, types: searching)
     }
     
     func fetchInventoryInCategory( category: Int16 = CollectionStore.CategoryAll, withSearching searching: [SearchType] = [], andSorting sortType: SortType = .None, fromContext token: Int = mainContextToken ) -> [InventoryItem] {
@@ -584,57 +775,50 @@ class CollectionStore: ExportDataSource {
     
     func updateCategory( catnum: Int16, completion: ((UpdateComparisonTable) -> Void)? = nil ) {
         // do this on a background thread
-        NSOperationQueue().addOperationWithBlock({
+        let token = getNewContextTokenForThread()
+        self.addOperationToContext(token) {
             // if doing all categories, load each one's data, get the comparison table, and add it to the master table
             // if only doing one category, load its data, get the comparison table, and add that to the master table
-            var output = UpdateComparisonTable()
-            let token = self.getContextTokenForThread()
+            let output = UpdateComparisonTable(model: self)
             if let context = self.getContextForThread(token) {
                 let cats = self.fetchCategoriesEx(catnum, inContext: context)
-                for cat in cats {
-                    // filter out cats who are not of the proper type
-                    // for now this means ignoring numbers after the Austria/JS one (all generated info, not directly from BT or JS sites)
-                    // TBD: later we need postprocessing to enter generated info items too (SIMA sets, JOINT items, sheets from sets, etc.)
-                    if cat.updateable {
-                        var temp = processUpdateComparison(cat)
-                        output.merge(temp)
-                    }
-                }
+                output.processUpdateComparison(cats)
             }
+            self.saveContextForThread(token)
             self.removeContextForThread(token)
             // and then call the completion routine
             if let completion = completion {
-                NSOperationQueue.mainQueue().addOperationWithBlock{
+                self.addCompletionOperationWithBlock() {
                     completion(output)
                 }
             }
-        })
+        }
     }
 }
 
 // global utility funcs for access of CoreData object collections
 func fetch<T: NSManagedObject>( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
     var output : [T] = []
-    var fetchRequest = NSFetchRequest(entityName: entity)
+    let fetchRequest = NSFetchRequest(entityName: entity)
     fetchRequest.sortDescriptors = sorters
     fetchRequest.predicate = filter
     fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
-    var error : NSError?
-    if let fetchResults = moc.executeFetchRequest(fetchRequest, error: &error) {
+    do {
+        let fetchResults = try moc.executeFetchRequest(fetchRequest)
         output = fromNSArray(fetchResults)
-    } else if let error = error {
-        println("Fetch error:\(error.localizedDescription)")
+    } catch {
+        print("Fetch error:\(error)")
     }
     return output
 }
 
 func countFetches( entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil ) -> Int {
-    var fetchRequest = NSFetchRequest(entityName: entity)
+    let fetchRequest = NSFetchRequest(entityName: entity)
     fetchRequest.predicate = filter
     var error : NSError?
     let fetchResults = moc.countForFetchRequest(fetchRequest, error: &error)
     if let error = error {
-        println("Count error:\(error.localizedDescription)")
+        print("Count error:\(error.localizedDescription)")
     }
     return fetchResults
 }

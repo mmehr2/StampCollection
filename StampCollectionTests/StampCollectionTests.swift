@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+@testable import StampCollection
 
 class StampCollectionTests: XCTestCase {
     
@@ -21,16 +22,32 @@ class StampCollectionTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testXCTestSystem() {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
     }
+//
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measureBlock() {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    func testMainStoreWithNoInitBlock() {
+        let dataModel = CollectionStore()
+        XCTAssert(!dataModel.initialized, "Uninitialized basic CoreData stack at start")
+    }
+    
+    func testMainStoreWithInitBlock() {
+        let timeout: NSTimeInterval = 10.0
+        let expectation = expectationWithDescription("Should be initialized after start timeout of \(timeout) seconds.")
+        let dataModel = CollectionStore() {
+            expectation.fulfill()
+            print("Called final block of init with INITIALIZED = ???.")
         }
+        XCTAssert(!dataModel.initialized, "Uninitialized basic CoreData stack at start")
+        waitForExpectationsWithTimeout(timeout, handler: nil)
     }
     
 }

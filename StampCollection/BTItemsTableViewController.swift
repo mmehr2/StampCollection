@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class BTItemsTableViewController: UITableViewController {
 
     var categoryNumber = 0
     var storeModel = BTDealerStore.model
@@ -58,7 +58,7 @@ class BTItemsTableViewController: UITableViewController, UITableViewDelegate, UI
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BT Item Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("BT Item Cell", forIndexPath: indexPath) 
 
         // Configure the cell...
         let item = category.dataItems[indexPath.row]

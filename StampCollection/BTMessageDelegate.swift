@@ -35,7 +35,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         categoryNumber = BTCategoryAll;
         let config = WKWebViewConfiguration()
         let scriptURL = NSBundle.mainBundle().pathForResource("getCategories", ofType: "js")
-        let scriptContent = String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding, error: nil)
+        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding)
         let script = WKUserScript(source: scriptContent!, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
         config.userContentController.addUserScript(script)
         config.userContentController.addScriptMessageHandler(self, name: categoriesMessage)
@@ -53,7 +53,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         categoryNumber = category
         let config = WKWebViewConfiguration()
         let scriptURL = NSBundle.mainBundle().pathForResource("getItems", ofType: "js")
-        let scriptContent = String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding, error: nil)
+        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding)
         let script = WKUserScript(source: scriptContent!, injectionTime: .AtDocumentEnd, forMainFrameOnly: false)
         config.userContentController.addUserScript(script)
         config.userContentController.addScriptMessageHandler(self, name: itemsMessage)
@@ -95,12 +95,13 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                 tcols = rawCategories["tableCols"] as? NSArray,
                 column1Header = tcols[0] as? NSString,
                 column2Header = tcols[1] as? NSString,
-                column3Header = tcols[2] as? NSString,
-                col1Header = column1Header as? String,
-                col2Header = column2Header as? String,
-                col3Header = column3Header as? String {
+                column3Header = tcols[2] as? NSString {
                     //println("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
                     // println("There are \(tcols) column names for the table of Categories = \(trows)")
+                    let
+                    col1Header = column1Header as String,
+                    col2Header = column2Header as String,
+                    col3Header = column3Header as String
                     for row in trows {
                         /*
                         Typical row:
@@ -115,18 +116,18 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                             numberN = row.valueForKey(col1Header) as? NSString,
                             nameN = row.valueForKey(col2Header) as? NSString,
                             itemsN = row.valueForKey(col3Header) as? NSString,
-                            hrefN = row.valueForKey("href") as? NSString,
-                            name = nameN as? String,
-                            number = numberN as? String,
-                            items = itemsN as? String,
-                            href = hrefN as? String
+                            hrefN = row.valueForKey("href") as? NSString
                         {
                             //println("Row = \(row)")
-                            var category = BTCategory()
+                            let name = nameN as String,
+                            number = numberN as String,
+                            items = itemsN as String,
+                            href = hrefN as String
+                            let category = BTCategory()
                             category.name = name as String
                             category.href = href as String
-                            category.number = number.toInt()!
-                            category.items = items.toInt()!
+                            category.number = Int(number)!
+                            category.items = Int(items)!
                             if let delegate = delegate {
                                 delegate.messageHandler(self, receivedData: category, forCategory: categoryNumber)
                             }
@@ -157,18 +158,18 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                 } else if let headersNS = reply["headers"] as? NSArray,
                     headers = headersNS as? [String],
                     notesNS = reply["notes"] as? NSString,
-                    notes = notesNS as? String,
                     itemsNS = reply["items"] as? NSArray,
                     btitems = itemsNS as? [NSDictionary]
                 {
-                    var category = BTCategory()
+                    let notes = notesNS as String
+                    let category = BTCategory()
                     category.number = categoryNumber
                     //println("Received \(message.name) in cat=\(categoryNumber) with \(dataCount) items with HEADERS \(headers)\n=== NOTES ===\n\(notes)\n============")//\n\(btitems)")
                     category.notes = notes
                     category.headers = headers
                     for itemX in btitems {
                         if let item = itemX as? [String: AnyObject] {
-                            var dealerItem = BTDealerItem()
+                            let dealerItem = BTDealerItem()
                             for propName in headers {
                                 if let value: AnyObject = item[propName] {
                                     dealerItem.setValue(value, forKey: BTDealerItem.translatePropertyName(propName))

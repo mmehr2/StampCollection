@@ -125,13 +125,13 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
 
     func RunWithViewController(vc: UIViewController) {
         fields = []
-        var ac = UIAlertController(title: config.title, message: config.body, preferredStyle: .Alert)
+        let ac = UIAlertController(title: config.title, message: config.body, preferredStyle: .Alert)
         let act = UIAlertAction(title: "OK", style: .Default) { x in
             // run the user's completion handler in response to OK being pressed
             if let handler = self.userCompletionHandler {
                 let result : SearchType
                 if self.config.type == .Keyword {
-                    let text : String = self.fields[0].text
+                    let text : String = self.fields[0].text ?? ""
                     var words = text.isEmpty ? [] : text.componentsSeparatedByString(" ") // split this at spaces
                     if words.count > 0 && words[0] == "ALL" {
                         words.removeAtIndex(0)
@@ -142,15 +142,15 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     handler(result)
                 }
                 else if self.config.type == .SubCategory {
-                    let text : String = self.fields[0].text
+                    let text : String = self.fields[0].text ?? ""
                     result = SearchType.SubCategory(text)
                     handler(result)
                 }
                 else if self.config.type == .YearRange {
-                    let text1 : String = self.fields[0].text
-                    let text2 : String = self.fields[1].text
-                    var startYear = text1.toInt() ?? 0
-                    var endYear = text2.toInt() ?? 0
+                    let text1 : String = self.fields[0].text ?? ""
+                    let text2 : String = self.fields[1].text ?? ""
+                    var startYear = Int(text1) ?? 0
+                    var endYear = Int(text2) ?? 0
                     // convention: if you only type in the start, the end is set equal to it
                     if startYear != 0 && endYear == 0 {
                         endYear = startYear

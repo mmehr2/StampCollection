@@ -11,21 +11,22 @@ import CoreData
 
 class InventoryItem: NSManagedObject {
 
-    @NSManaged var albumPage: String
-    @NSManaged var albumRef: String
-    @NSManaged var albumSection: String
-    @NSManaged var albumType: String
-    @NSManaged var baseItem: String
-    @NSManaged var catgDisplayNum: Int16
-    @NSManaged var desc: String
-    @NSManaged var exOrder: Int16
-    @NSManaged var itemType: String
-    @NSManaged var notes: String
-    @NSManaged var refItem: String
-    @NSManaged var wantHave: String
-    @NSManaged var category: Category
-    @NSManaged var dealerItem: DealerItem
-    @NSManaged var referredItem: DealerItem
-    @NSManaged var page: AlbumPage
+    // Contents originally generated under Swift 1.x - removed to XXX+CoreDataProperties.swift file
+//    @NSManaged var albumPage: String
+//    @NSManaged var albumRef: String
+//    @NSManaged var albumSection: String
+//    @NSManaged var albumType: String
+//    @NSManaged var baseItem: String
+//    @NSManaged var catgDisplayNum: Int16
+//    @NSManaged var desc: String
+//    @NSManaged var exOrder: Int16
+//    @NSManaged var itemType: String
+//    @NSManaged var notes: String
+//    @NSManaged var refItem: String
+//    @NSManaged var wantHave: String
+//    @NSManaged var category: Category
+//    @NSManaged var dealerItem: DealerItem
+//    @NSManaged var referredItem: DealerItem
+//    @NSManaged var page: AlbumPage
 
 }

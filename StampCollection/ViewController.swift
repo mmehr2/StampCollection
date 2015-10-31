@@ -11,7 +11,7 @@ import WebKit
 
 // NOTE: WebKit project code from http://www.appcoda.com/webkit-framework-intro/
 
-class ViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UITableViewController {
     
     var storeModel = BTDealerStore.model
     
@@ -21,7 +21,7 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func setSpinnerView(_ onOff: Bool = false) {
+    func setSpinnerView(onOff: Bool = false) {
         if !onOff {
             spinner?.stopAnimating()
             spinner = nil
@@ -104,7 +104,7 @@ class ViewController: UITableViewController, UITableViewDelegate, UITableViewDat
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BT Category Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("BT Category Cell", forIndexPath: indexPath) 
         
         // Configure the cell...
         let catnum = getCategoryIndexForIndexPath(indexPath)

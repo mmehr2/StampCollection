@@ -15,7 +15,7 @@ extension AlbumSection {
     
     static func makeObjectWithName( name: String, forParent parent: AlbumRef ) -> Bool {
         if let context = parent.managedObjectContext {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumSection {
+            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumSection {
                 newObject.code = name
                 newObject.ordinal = 0 // could assign these on creation order, but needs to be editable or at least renumberable at runtime
                 newObject.descriptionX = ""

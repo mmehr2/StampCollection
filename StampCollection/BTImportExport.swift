@@ -18,11 +18,11 @@ private func getFile(name: String) -> NSURL {
 }
 
 // MARK: data import
-class BTImporter: InfoParseable {
+class BTImporter: CSVDataSink {
     
-    lazy private var infoParser = InfoParserDelegate(name: "BTINFO")
+    lazy private var infoParser: InfoParserDelegate = InfoParserDelegate(name: "BTINFO")
     
-    lazy private var categoryParser = InfoParserDelegate(name: "BTCATS")
+    lazy private var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "BTCATS")
     
     
     private var categories: [Int:BTCategory] = [:]
@@ -34,16 +34,16 @@ class BTImporter: InfoParseable {
     }
     
     func getBTCategories() -> [BTCategory] {
-        return Array(categories.values).filter{ $0.number != JSCategoryAll }.sorted{
+        return Array(categories.values).filter{ $0.number != JSCategoryAll }.sort{
             $0.number < $1.number
         }
     }
    
-    // MARK: - InfoParseable protocol implementation
+    // MARK: - CSVDataSink protocol implementation
     func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
         if parserDelegate === self.categoryParser {
             // we have a new category object's basic data
-            var newObject = BTCategory()
+            let newObject = BTCategory()
             newObject.importFromData(data)
             // place the item in the collection we are assembling
             let catnum = newObject.number
@@ -51,7 +51,7 @@ class BTImporter: InfoParseable {
         }
         else if parserDelegate === self.infoParser {
             // we have a new dealer item object's data
-            var newObject = BTDealerItem()
+            let newObject = BTDealerItem()
             let catnum = newObject.importFromData(data)
             // add it to the appropriate category
             if let cat = categories[catnum] {
@@ -61,7 +61,7 @@ class BTImporter: InfoParseable {
     }
     
     func parserDelegate( parserDelegate: CHCSVParserDelegate, inout shouldAddSequenceData seqname: String, inout fromCount start: Int, inContext token: CollectionStore.ContextToken) -> Bool {
-        var result = false
+        let result = false
         return result
     }
 
@@ -74,7 +74,7 @@ class BTImporter: InfoParseable {
             basicParser.sanitizesFields = true
             basicParser.delegate = parserDelegate
             basicParser.parse()
-            println("Completed parsing \(file.lastPathComponent!)")
+            print("Completed parsing \(file.lastPathComponent!)")
         }
     }
     
@@ -92,7 +92,7 @@ class BTImporter: InfoParseable {
             self.loadData(self.categoryParser, fromFile: fileCats, withContext: token)
             self.loadData(self.infoParser, fromFile: fileInfo, withContext: token)
             // finalize the data for this context token
-            CollectionStore.sharedInstance.finalizeStorageContext(token)
+            //CollectionStore.sharedInstance.finalizeStorageContext(token) // removed - not using CoreData
             // run the completion block, if any, on the main queue
             if let completion = completion {
                 NSOperationQueue.mainQueue().addOperationWithBlock(completion)
@@ -130,7 +130,6 @@ class BTExporter {
     private func exportItemData(data: [BTCategory], toFile file: NSURL) {
         // 1. determine file name and path
         // 2. get the header list for the item file
-        let headers = BTDealerItem.getExportNameList()
         // 3. for each category (incl.JS category)
         // 4. output its item data in a loop, passing the category number
         if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
@@ -161,27 +160,51 @@ class BTExporter {
        // do this on a background thread
         // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
         NSOperationQueue().addOperationWithBlock({
-            println("Exporting BT category and info files to path: \(fileCats.path!)")
+            print("Exporting BT category and info files to path: \(fileCats.path!)")
             self.exportCatalogData(data, toFile: tempfileCats)
             self.exportItemData(data, toFile: tempfileInfo)
             // delete the original files and rename the temp files to be the original files (with error handling - atomic somehow?)
             let fileManager = NSFileManager.defaultManager()
             var error : NSError?
-            fileManager.removeItemAtURL(fileCats, error: &error)
-            if error != nil {
-                println("Unable to remove CATEGORY original: \(error!.localizedDescription).")
+            do {
+                try fileManager.removeItemAtURL(fileCats)
+            } catch let error1 as NSError {
+                error = error1
+            } catch {
+                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#1")
             }
-            fileManager.moveItemAtURL(tempfileCats, toURL: fileCats, error: &error)
             if error != nil {
-                println("Unable to rename CATEGORY temp copy to original: \(error!.localizedDescription).")
+                print("Unable to remove CATEGORY original: \(error!.localizedDescription).")
             }
-            fileManager.removeItemAtURL(fileInfo, error: &error)
-            if error != nil {
-                println("Unable to remove INFO original: \(error!.localizedDescription).")
+            do {
+                try fileManager.moveItemAtURL(tempfileCats, toURL: fileCats)
+            } catch let error1 as NSError {
+                error = error1
+            } catch {
+                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#1")
             }
-            fileManager.moveItemAtURL(tempfileInfo, toURL: fileInfo, error: &error)
             if error != nil {
-                println("Unable to rename INFO temp copy to original: \(error!.localizedDescription).")
+                print("Unable to rename CATEGORY temp copy to original: \(error!.localizedDescription).")
+            }
+            do {
+                try fileManager.removeItemAtURL(fileInfo)
+            } catch let error1 as NSError {
+                error = error1
+            } catch {
+                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#2")
+            }
+            if error != nil {
+                print("Unable to remove INFO original: \(error!.localizedDescription).")
+            }
+            do {
+                try fileManager.moveItemAtURL(tempfileInfo, toURL: fileInfo)
+            } catch let error1 as NSError {
+                error = error1
+            } catch {
+                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#2")
+            }
+            if error != nil {
+                print("Unable to rename INFO temp copy to original: \(error!.localizedDescription).")
             }
             // run the completion block, if any, on the main queue
             if let completion = completion {

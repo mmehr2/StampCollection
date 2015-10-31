@@ -11,10 +11,11 @@ import CoreData
 
 class AlbumFamily: NSManagedObject {
 
-    @NSManaged var code: String
-    @NSManaged var descriptionX: String
-    @NSManaged var nextRef: Int16
-    @NSManaged var type: AlbumType
-    @NSManaged var refs: NSOrderedSet
+    // Contents originally generated under Swift 1.x - removed to XXX+CoreDataProperties.swift file
+//    @NSManaged var code: String
+//    @NSManaged var descriptionX: String
+//    @NSManaged var nextRef: Int16
+//    @NSManaged var type: AlbumType
+//    @NSManaged var refs: NSOrderedSet
 
 }

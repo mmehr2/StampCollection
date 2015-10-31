@@ -1,102 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="AlbumFamily" representedClassName="StampCollection.AlbumFamily" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nextRef" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" attributeType="String" syncable="YES"/>
+        <attribute name="nextRef" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="refs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumRef" inverseName="family" inverseEntity="AlbumRef" syncable="YES"/>
         <relationship name="type" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumType" inverseName="families" inverseEntity="AlbumType" syncable="YES"/>
     </entity>
     <entity name="AlbumPage" representedClassName="StampCollection.AlbumPage" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="page" inverseEntity="InventoryItem" syncable="YES"/>
         <relationship name="section" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumSection" inverseName="pages" inverseEntity="AlbumSection" syncable="YES"/>
     </entity>
     <entity name="AlbumRef" representedClassName="StampCollection.AlbumRef" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="family" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumFamily" inverseName="refs" inverseEntity="AlbumFamily" syncable="YES"/>
         <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumSection" inverseName="ref" inverseEntity="AlbumSection" syncable="YES"/>
     </entity>
     <entity name="AlbumSection" representedClassName="StampCollection.AlbumSection" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" attributeType="String" syncable="YES"/>
+        <attribute name="ordinal" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumPage" inverseName="section" inverseEntity="AlbumPage" syncable="YES"/>
         <relationship name="ref" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumRef" inverseName="sections" inverseEntity="AlbumRef" syncable="YES"/>
     </entity>
     <entity name="AlbumType" representedClassName="StampCollection.AlbumType" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionX" attributeType="String" syncable="YES"/>
+        <attribute name="ordinal" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="families" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AlbumFamily" inverseName="type" inverseEntity="AlbumFamily" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName="StampCollection.Category" syncable="YES">
-        <attribute name="catalogs" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="items" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="prices" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="catalogs" attributeType="String" syncable="YES"/>
+        <attribute name="code" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="items" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="prices" attributeType="String" syncable="YES"/>
         <relationship name="dealerItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DealerItem" inverseName="category" inverseEntity="DealerItem" syncable="YES"/>
         <relationship name="inventoryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="category" inverseEntity="InventoryItem" syncable="YES"/>
     </entity>
     <entity name="DealerItem" representedClassName="StampCollection.DealerItem" syncable="YES">
-        <attribute name="buy1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="buy2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="buy3" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="buy4" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cat1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cat2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="descriptionX" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="oldprice1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="oldprice2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="oldprice3" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="oldprice4" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pictid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pictype" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="price1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="price2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="price3" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="price4" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buy1" attributeType="String" syncable="YES"/>
+        <attribute name="buy2" attributeType="String" syncable="YES"/>
+        <attribute name="buy3" attributeType="String" syncable="YES"/>
+        <attribute name="buy4" attributeType="String" syncable="YES"/>
+        <attribute name="cat1" attributeType="String" syncable="YES"/>
+        <attribute name="cat2" attributeType="String" syncable="YES"/>
+        <attribute name="catgDisplayNum" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="descriptionX" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="group" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice1" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice2" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice3" attributeType="String" syncable="YES"/>
+        <attribute name="oldprice4" attributeType="String" syncable="YES"/>
+        <attribute name="pictid" attributeType="String" syncable="YES"/>
+        <attribute name="pictype" attributeType="String" syncable="YES"/>
+        <attribute name="price1" attributeType="String" syncable="YES"/>
+        <attribute name="price2" attributeType="String" syncable="YES"/>
+        <attribute name="price3" attributeType="String" syncable="YES"/>
+        <attribute name="price4" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="String" syncable="YES"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="dealerItems" inverseEntity="Category" syncable="YES"/>
         <relationship name="inventoryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="dealerItem" inverseEntity="InventoryItem" syncable="YES"/>
         <relationship name="referringItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InventoryItem" inverseName="referredItem" inverseEntity="InventoryItem" syncable="YES"/>
     </entity>
     <entity name="InventoryItem" representedClassName="StampCollection.InventoryItem" syncable="YES">
-        <attribute name="albumPage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="albumRef" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="albumSection" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="albumType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="baseItem" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="catgDisplayNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="exOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="itemType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="refItem" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="wantHave" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumPage" attributeType="String" syncable="YES"/>
+        <attribute name="albumRef" attributeType="String" syncable="YES"/>
+        <attribute name="albumSection" attributeType="String" syncable="YES"/>
+        <attribute name="albumType" attributeType="String" syncable="YES"/>
+        <attribute name="baseItem" attributeType="String" syncable="YES"/>
+        <attribute name="catgDisplayNum" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="desc" attributeType="String" syncable="YES"/>
+        <attribute name="exOrder" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemType" attributeType="String" syncable="YES"/>
+        <attribute name="notes" attributeType="String" syncable="YES"/>
+        <attribute name="refItem" attributeType="String" syncable="YES"/>
+        <attribute name="wantHave" attributeType="String" syncable="YES"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="inventoryItems" inverseEntity="Category" syncable="YES"/>
         <relationship name="dealerItem" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="inventoryItems" inverseEntity="DealerItem" syncable="YES"/>
         <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AlbumPage" inverseName="items" inverseEntity="AlbumPage" syncable="YES"/>
         <relationship name="referredItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DealerItem" inverseName="referringItems" inverseEntity="DealerItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-155" positionY="-63" width="128" height="180"/>
-        <element name="DealerItem" positionX="-326" positionY="0" width="128" height="420"/>
-        <element name="InventoryItem" positionX="-153" positionY="204" width="128" height="285"/>
-        <element name="AlbumType" positionX="-225" positionY="90" width="128" height="105"/>
-        <element name="AlbumFamily" positionX="-216" positionY="99" width="128" height="120"/>
-        <element name="AlbumRef" positionX="-207" positionY="108" width="128" height="120"/>
-        <element name="AlbumSection" positionX="-198" positionY="117" width="128" height="120"/>
-        <element name="AlbumPage" positionX="-189" positionY="126" width="128" height="105"/>
+        <element name="AlbumFamily" positionX="-216" positionY="375" width="128" height="118"/>
+        <element name="AlbumPage" positionX="-234" positionY="579" width="128" height="103"/>
+        <element name="AlbumRef" positionX="-11" positionY="375" width="128" height="118"/>
+        <element name="AlbumSection" positionX="-45" positionY="564" width="128" height="118"/>
+        <element name="AlbumType" positionX="-234" positionY="210" width="128" height="103"/>
+        <element name="Category" positionX="-621" positionY="135" width="128" height="178"/>
+        <element name="DealerItem" positionX="-855" positionY="174" width="128" height="418"/>
+        <element name="InventoryItem" positionX="-425" positionY="318" width="128" height="283"/>
     </elements>
 </model>

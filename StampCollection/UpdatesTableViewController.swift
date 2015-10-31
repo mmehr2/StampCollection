@@ -10,7 +10,7 @@ import UIKit
 
 class UpdatesTableViewController: UITableViewController {
     
-    var model = CollectionStore.sharedInstance
+    var model: CollectionStore!
 
     var category = CollectionStore.CategoryAll
     
@@ -61,8 +61,8 @@ class UpdatesTableViewController: UITableViewController {
     }
     
     @IBAction func commitButtonPressed(sender: UIBarButtonItem) {
-        if let showTable = showTable, output = output {
-            output.commit(sections: [tableID])
+        if let output = output where showTable != nil {
+            output.commit([tableID])
             navigationController?.popViewControllerAnimated(true)
         }
     }
@@ -75,7 +75,7 @@ class UpdatesTableViewController: UITableViewController {
     }
     
     @IBAction func commitKeyButtonPressed(sender: UIBarButtonItem) {
-        if let showTable = showTable, output = output {
+        if showTable != nil && output != nil {
             let key = formatActionKeyForSection(tableID)
             messageBoxWithTitle("Commit Actions", andBody: key, forController: self)
         }
@@ -83,11 +83,11 @@ class UpdatesTableViewController: UITableViewController {
     
     @IBAction func changeActionButtonPressed(sender: UIBarButtonItem) {
         // will provide cancelable action menu for user to modify selected item, then modify if asked
-        let selection = tableView.indexPathForSelectedRow()
+        let selection = tableView.indexPathForSelectedRow
         if let showTable = showTable, output = output, selection = selection {
             let item = showTable[selection.row]
             let idCode = item.commitActionCode
-            var currentAction = output.getActionForResult(item)
+            let currentAction = output.getActionForResult(item)
             let currentActionStr = formatUpdateAction(currentAction, isLong: true, withParens: false)
             let title = "Change action for selection (currently \(currentActionStr)) on ID=\(idCode)"
             // build the menu box table one line at a time
@@ -119,7 +119,7 @@ class UpdatesTableViewController: UITableViewController {
                 self.tableView.reloadData()
             })
             menuBody2.append(act)
-            for (index, actionString) in enumerate(otherActionStrings) {
+            for (index, actionString) in otherActionStrings.enumerate() {
                 act = (actionString, { x in
                     // other actions set selected item's action override in output's commitItems table
                     output.setAction(otherActions[index], forID: idCode)
@@ -211,20 +211,20 @@ class UpdatesTableViewController: UITableViewController {
         let actionString = formatUpdateAction(action)
         let actionColor = getColorForAction(action, inSection: tableID)
         switch item {
-        case .AddedItem(let btitem , let btcat ):
-            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) as! UITableViewCell
+        case .AddedItem(let btitem, _ ):
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) 
             cell.textLabel?.text = "\(actionString) \(btitem.descr)"
             cell.detailTextLabel?.text = formatBTDetail(btitem)
             cell.backgroundColor = actionColor
             return cell
         case .RemovedItem(let dlritemID):
-            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Single Cell", forIndexPath: indexPath) 
             let dlritem = model.fetchInfoItemByID(dlritemID)!
             cell.textLabel?.text = "\(actionString) \(dlritem.descriptionX)"
             cell.detailTextLabel?.text = formatDealerDetail(dlritem)
             cell.backgroundColor = actionColor
             return cell
-        case .ChangedItem(let dlritemID, let btitem, let btcat, let comprec ):
+        case .ChangedItem(let dlritemID, let btitem, _, let comprec ):
             let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Double Cell", forIndexPath: indexPath) as! UpdateTableViewDoubleCell
             let dlritem = model.fetchInfoItemByID(dlritemID)!
             cell.textLabelTop?.text = dlritem.descriptionX
@@ -234,7 +234,7 @@ class UpdatesTableViewController: UITableViewController {
             cell.changeLabel?.text = actionString + " " + formatComparisonRecord(comprec)
             cell.backgroundColor = actionColor
             return cell
-        case .ChangedIDItem(let dlritemID, let btitem, let btcat, let comprec ):
+        case .ChangedIDItem(let dlritemID, let btitem, _, let comprec ):
             let cell = tableView.dequeueReusableCellWithIdentifier("Update Comparison Double Cell", forIndexPath: indexPath) as! UpdateTableViewDoubleCell
             let dlritem = model.fetchInfoItemByID(dlritemID)!
             cell.textLabelTop?.text = dlritem.descriptionX

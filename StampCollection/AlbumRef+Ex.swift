@@ -15,10 +15,10 @@ extension AlbumRef {
     
     private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumRef {
+            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumRef {
                 newObject.code = name
                 let (_, numstr) = splitNumericEndOfString(name)
-                newObject.number = Int16(numstr.toInt() ?? 0) // 0 means no numeric suffix on ref code
+                newObject.number = Int16(Int(numstr) ?? 0) // 0 means no numeric suffix on ref code
                 newObject.descriptionX = ""
                 if let obj = relations["family"] as? AlbumFamily {
                     newObject.family = obj
@@ -42,7 +42,7 @@ extension AlbumRef {
     // get the Album family:String and ref:String (of a number) from the data's AlbumRef property
     static func getRefNameAndNumberFromData( data: [String:String] ) -> (String, String)? {
         // finds the data for "AlbumRef" and strips off the number at the end, if any
-        if let name = data[entityName] where count(name) > 2 {
+        if let name = data[entityName] where name.characters.count > 2 {
             return splitNumericEndOfString(name)
         }
         return nil

@@ -79,14 +79,14 @@ func splitNumericEndOfString( input: String ) -> (String, String) {
 }
 
 func makeStringFit(input: String, length: Int) -> String {
-    if count(input) > length-2 {
+    if input.characters.count > length-2 {
         return input[0..<length-2] + ".."
     }
     return input
 }
 
 func padIntegerString( input: Int, toLength outlen: Int, padWith pad: String = "0") -> String {
-    var fmt = NSNumberFormatter()
+    let fmt = NSNumberFormatter()
     fmt.paddingCharacter = pad
     fmt.minimumIntegerDigits = outlen
     fmt.maximumIntegerDigits = outlen
@@ -126,7 +126,7 @@ extension Dictionary {
 extension String {
     
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+        return self[self.startIndex.advancedBy(i)]
     }
     
     subscript (i: Int) -> String {
@@ -134,7 +134,7 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
     }
 }
 
@@ -193,8 +193,8 @@ extension String {
     }
     func endsWithCI( str: String ) -> Bool {
         let rcvr = self as NSString
-        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.BackwardsSearch | NSStringCompareOptions.CaseInsensitiveSearch)
-        return (res.location == NSNotFound ? false : (res.location + res.length == count(self)))
+        let res = rcvr.rangeOfString(str, options: [NSStringCompareOptions.BackwardsSearch, NSStringCompareOptions.CaseInsensitiveSearch])
+        return (res.location == NSNotFound ? false : (res.location + res.length == self.characters.count))
     }
 }
 
@@ -219,12 +219,14 @@ public func <(d1: NSDate, d2: NSDate) -> Bool {
     return res == .OrderedAscending
 }
 
-public func ==(d1: NSDate, d2: NSDate) -> Bool {
-    let res = d1.compare(d2)
-    return res == .OrderedSame
-}
+extension NSDate: Comparable { }
 
-extension NSDate: Equatable, Comparable { }
+//public func ==(d1: NSDate, d2: NSDate) -> Bool {
+//    let res = d1.compare(d2)
+//    return res == .OrderedSame
+//}
+//
+//extension NSDate: Equatable { }
 // NOTE: the protocols take care of defining the rest...
 //func >(d1: NSDate, d2: NSDate) -> Bool {
 //    let res = d1.compare(d2)
@@ -252,7 +254,7 @@ func linearScale( input: Double, fromRange: ClosedInterval<Double>, toRange: Clo
     let xNum = input - x0
     let xDenom = x1 - x0
     let yNum = y1 - y0
-    var result = y0 + (xNum / xDenom) * yNum
+    let result = y0 + (xNum / xDenom) * yNum
     return result
 }
 

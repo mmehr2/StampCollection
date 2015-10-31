@@ -18,7 +18,7 @@ class InfoItemViewController: UIViewController {
     var btcat: BTCategory!
     
     private var usingBT: Bool {
-        if let bti = btitem, btc = btcat {
+        if btitem != nil && btcat != nil {
             return true
         }
         return false
@@ -74,10 +74,10 @@ class InfoItemViewController: UIViewController {
         descriptionLabel.text = itemDescription
         // set imageView to a webkit view if possible showing the BT or JS panel, using pictid
         if let pfrurl = picFileURLSource {
-            println("TBD- Downloading file:\(pfrurl.absoluteString!) for pictid:\(itemPictid)")
+            print("TBD- Downloading file:\(pfrurl.absoluteString) for pictid:\(itemPictid)")
         }
         if let pflurl = picFileURLDestination {
-            println("TBD- Caching file:\(pflurl.absoluteString!) for pictid:\(itemPictid)")
+            print("TBD- Caching file:\(pflurl.absoluteString) for pictid:\(itemPictid)")
         }
         webInfoButton.enabled = picPageURL != nil
         if !displayImageFileIfPossible() {
@@ -91,17 +91,18 @@ class InfoItemViewController: UIViewController {
         var result = false
         let fm = NSFileManager.defaultManager()
         if let destURL = picFileURLDestination {
-            result = fm.fileExistsAtPath( destURL.absoluteString! )
+            result = fm.fileExistsAtPath( destURL.absoluteString )
         }
         return result
     }
     
     private func displayImageFileIfPossible() -> Bool {
         var result = false
-        if let destURL = picFileURLDestination where isImageFilePresent(),
-            let filename = destURL.absoluteString {
-                imageView.image = UIImage(contentsOfFile: filename)
-                result = true
+        if let destURL = picFileURLDestination where isImageFilePresent()
+        {
+            let filename = destURL.absoluteString
+            imageView.image = UIImage(contentsOfFile: filename)
+            result = true
         }
         return result
     }
@@ -109,7 +110,11 @@ class InfoItemViewController: UIViewController {
     private func downloadAndDisplayImage() {
         // run this on a background thread
         if let imageSource = picFileURLSource {
-            imageView.imageFromUrl(imageSource)
+            imageView.imageFromUrl(imageSource) { image in
+                if let image = image {
+                    self.imageView.image = image
+                }
+            }
         }
     }
     
@@ -124,7 +129,7 @@ class InfoItemViewController: UIViewController {
             if let dvc = segue.destinationViewController as? WebItemViewController,
                 url = picPageURL{
                 // Pass the selected object to the new view controller.
-                println("Displaying page:\(url.absoluteString!) for pictid:\(itemPictid)")
+                print("Displaying page:\(url.absoluteString) for pictid:\(itemPictid)")
                 dvc.url = url
             }
         }

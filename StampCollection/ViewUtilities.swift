@@ -10,19 +10,62 @@ import UIKit
 
 // MARK: image downloading
 // clever hack from here: http://stackoverflow.com/questions/24231680/swift-loading-image-from-url
+// NOTE: had to update it to use NSURLSession() due to iOS9 deprecations
+// NOTE: to make this work for IOS9+, need to add stuff to Info.plist from here: http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http/32560433#32560433
+/*
+NOTE: THIS IS A HACK! WE REALLY NEED TO CHANGE THINGS TO USE HTTPS: IN THE URLS INSTEAD.. HOW?
+<key>NSAppTransportSecurity</key>
+<dict>
+<key>NSAllowsArbitraryLoads</key>
+<false/>
+<key>NSExceptionDomains</key>
+<dict>
+<key>bait-tov.com</key>
+<dict>
+<key>NSIncludesSubdomains</key>
+<true/>
+<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+<true/>
+<key>NSTemporaryExceptionMinimumTLSVersion</key>
+<string>TLSv1.1</string>
+</dict>
+<key>judaicasales.com</key>
+<dict>
+<key>NSIncludesSubdomains</key>
+<true/>
+<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+<true/>
+<key>NSTemporaryExceptionMinimumTLSVersion</key>
+<string>TLSv1.1</string>
+</dict>
+</dict>
+</dict>
+*/
+private var completionHandlerForImageTask: ((UIImage?) -> Void)?
 extension UIImageView {
     public func imageFromUrlString(urlString: String) {
         if let url = NSURL(string: urlString) {
             imageFromUrl(url)
         }
     }
-    public func imageFromUrl(url: NSURL?) {
+    public func imageFromUrl(url: NSURL?, completion: ((UIImage?) -> Void)? = nil) {
         if let url = url {
-            let request = NSURLRequest(URL: url)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-                self.image = UIImage(data: data)
+            print("Requesting pic file at \(url)")
+            completionHandlerForImageTask = completion
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+                if let error = error {
+                    print("Pic data received with error \(error)")
+                } else {
+                    let image = UIImage(data: data!)
+                    print("Pic data received with image \(image)")
+                    if let completion = completionHandlerForImageTask {
+                        NSOperationQueue.mainQueue().addOperationWithBlock() {
+                            completion(image)
+                        }
+                    }
+                }
             }
+            task.resume()
         }
     }
 }
@@ -58,7 +101,7 @@ func getFormattedStringFromDate(input: NSDate, withTime: Bool = false) -> String
 
 func dateFromComponents( year: Int, month: Int, day: Int ) -> NSDate {
     let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    var comp = NSDateComponents()
+    let comp = NSDateComponents()
     comp.year = year
     comp.month = month
     comp.day = day
@@ -68,7 +111,7 @@ func dateFromComponents( year: Int, month: Int, day: Int ) -> NSDate {
 func componentsFromDate( date: NSDate ) -> (Int, Int, Int) { // as Y, M, D
     let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let comp = gregorian.components(
-        NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay, fromDate: date)
+        [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day], fromDate: date)
     return (comp.year, comp.month, comp.day)
 }
 
@@ -81,9 +124,9 @@ func normalizedStringFromDateComponents( year: Int, month: Int, day: Int ) -> St
 
 func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // as Y, M, D
     if !date.isEmpty {
-        let yyyy = date[0...3].toInt()!
-        let mm = date[5...6].toInt()!
-        let dd = date[8...9].toInt()!
+        let yyyy = Int(date[0...3])!
+        let mm = Int(date[5...6])!
+        let dd = Int(date[8...9])!
         return (yyyy, mm, dd)
     }
     return (0, 0, 0)
@@ -93,7 +136,7 @@ func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // 
 // MARK: message box services
 typealias MenuBoxEntry = (String, (UIAlertAction!)->Void)
 func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forController vc: UIViewController ) {
-    messageBoxWithTitle(title, andBody: "", forController: vc) { ac in
+    messageBoxWithTitleEx(title, andBody: "", forController: vc) { ac in
         var act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
             // dismiss but do nothing
         }
@@ -113,7 +156,7 @@ func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forControlle
 }
 
 func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
-    messageBoxWithTitle(title, andBody: body, forController: vc) { ac in
+    messageBoxWithTitleEx(title, andBody: body, forController: vc) { ac in
         let act = UIAlertAction(title: "OK", style: .Default) { x in
             // dismiss but do nothing
         }
@@ -121,12 +164,13 @@ func messageBoxWithTitle( title: String, andBody body: String, forController vc:
     }
 }
 
-func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController, configuration: ((inout UIAlertController) -> Void)? = nil ) {
-    var ac = UIAlertController(title: title, message: body, preferredStyle: .Alert)
+private var acInUse: UIAlertController! // retain ref to AC while it executes
+func messageBoxWithTitleEx( title: String, andBody body: String, forController vc: UIViewController, configuration: (( UIAlertController) -> Void)? = nil ) {
+    acInUse = UIAlertController(title: title, message: body, preferredStyle: .Alert) // putting in a new one forgets the old one, if any, which will get cleaned up by ARC
     if let configHandler = configuration {
-        configHandler(&ac)
+        configHandler(acInUse)
     }
-    vc.presentViewController(ac, animated: true, completion: nil)
+    vc.presentViewController(acInUse, animated: true, completion: nil)
 }
 
 // MARK: table view cell formatting services
@@ -143,7 +187,7 @@ func formatBTDetail(item: BTDealerItem) -> String {
     let price2 = item.price2.isEmpty ? "-0-" : item.price2
     let price3 = item.price3.isEmpty ? "-0-" : item.price3
     let price4 = item.price4.isEmpty ? "-0-" : item.price4
-    var output = "\(text) - \(item.status): \(price1) FDC-\(price2) Used-\(price3) M/nt-\(price4)"
+    let output = "\(text) - \(item.status): \(price1) FDC-\(price2) Used-\(price3) M/nt-\(price4)"
     return output
 }
 
@@ -178,7 +222,7 @@ func formatDealerDetail(item: DealerItem) -> String {
         output += "; INV:\(sumstr)"
     }
     if let invItems = Array(item.referringItems) as? [InventoryItem] where invItems.count > 0 {
-        let refs = invItems.map{ $0.baseItem }
+        let refs = invItems.map{ $0.baseItem as String }
         let summary = histogram(refs)
         let sumstr = showHistogram(summary)
         output += "; REF:\(sumstr)"
@@ -204,7 +248,7 @@ func showHistogram<T where T:Hashable>(input: [T:Int]) -> String {
         let ctr = counter > 1 ? "(\(counter))" : ""
         output.append("\(item)\(ctr)")
     }
-    return ",".join(output)
+    return output.joinWithSeparator(",")
 }
 
 // MARK: formatting for update comparison review
@@ -247,7 +291,7 @@ func getFormattedActionKeysForSection( section: UpdateComparisonTable.TableID ) 
 func formatActionKeyForSection( section: UpdateComparisonTable.TableID ) -> String {
     var output = ""
     let actionStrings = getFormattedActionKeysForSection(section)
-    output += "\n".join(actionStrings)
+    output += actionStrings.joinWithSeparator("\n")
     return output
 }
 
@@ -322,7 +366,7 @@ func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
 private func formatInventoryValue(item: InventoryItem) -> String {
     var output = "Val"
     let baseItem = item.dealerItem
-    let nameExt = formatPriceDescription(item.category.prices, item.itemType)
+    let nameExt = formatPriceDescription(item.category.prices, fieldName: item.itemType)
     output += nameExt
     if let price = baseItem.valueForKey(item.itemType) as? String,
         priceVal = price.toDouble() {
@@ -423,7 +467,7 @@ func formatInventoryDetail(item: InventoryItem) -> String {
 
 enum CodeFieldClass { case Unknown, Alpha, Numeric }
 
-extension CodeFieldClass: Printable {
+extension CodeFieldClass: CustomStringConvertible {
     var description: String {
         switch self {
         case .Numeric: return "num"
@@ -452,11 +496,11 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
     var output: [String] = []
     var field = ""
     var state: CodeFieldClass = .Unknown
-    for char in code {
+    for char in code.characters {
         let charClass = getCharacterClass(char)
         if special {
             // detect field == "RC" and wait until "m" is detected, accumulating digits and suffixes into field
-            if count(field) >= 2 && field[0...1] == "RC" {
+            if field.characters.count >= 2 && field[0...1] == "RC" {
                 if char != "m" {
                     field.append(char)
                     continue
@@ -502,7 +546,7 @@ private func splitCatCode( code: String, forCat catnum: Int16 ) -> (String, Stri
         // assumes 2-digit alpha (ps, fe, bu)
         splitAt = 2
     }
-    let len = count(code)
+    let len = code.characters.count
     let part1 = code[0..<splitAt]
     let part2 = code[splitAt..<len]
     return (part1, part2)
@@ -513,7 +557,7 @@ private func normalizeCatCode( codePart: String, forCat catnum: Int16 ) -> Strin
 }
 
 private func paddington( len: Int, input: String, char: Character = " ", trailing: Bool = false ) -> String {
-    let inlen = count(input)
+    let inlen = input.characters.count
     if inlen >= len {
         return input
     }
@@ -582,7 +626,7 @@ Needing special handling:
 func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = false ) -> String {
     let (catcode, rest) = splitCatCode(code, forCat: catnum)
     let normcat = normalizeCatCode(catcode, forCat: catnum)
-    let lenrest = count(rest)
+    let lenrest = rest.characters.count
     let finrest = lenrest < 2 ? "  " : rest[lenrest-2...lenrest-1]
     let fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
@@ -601,26 +645,26 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
             if catnum == 14 && finrest != "ip" {
                 // special handling for  Max Cards (cat 14)
                 // if the last field isn't an alpha == "ip", then add an alpha prefix to make it sort after the plan ones
-                output += paddington(8, "ZZPACKET", char: padder)
+                output += paddington(8, input: "ZZPACKET", char: padder)
             }
             else if catnum == 20 && rest[0...1] == "PC" && finrest[1] == "m" {
                 // special handling for Military Post Cards (cat 20) psPC NNN m
                 // if the last field is an alpha == "m", then add an alpha prefix to make it sort after the plan ones
-                output += paddington(8, "PC_MIL", char: padder, trailing: true)
+                output += paddington(8, input: "PC_MIL", char: padder, trailing: true)
                 skip = true // prevent the PC from becoming another prefix
             }
             else if catnum == 21 && finrest[1] == "p" {
                 // special handling for Revenue (cat 21) 6110r NNN p
                 // if the last field is an alpha == "p", then add an alpha prefix to make it sort after the plan ones
-                output += paddington(8, "ZZPACKET", char: padder)
+                output += paddington(8, input: "ZZPACKET", char: padder)
             }
             else if catnum == 26 && rest == "9k" {
                 // special handling for Vending (cat 26) 6110k 9 k
-                output += paddington(8, "ZZPACKET", char: padder)
+                output += paddington(8, input: "ZZPACKET", char: padder)
             }
             else if catnum == 26 && rest == "30" {
                 // special handling for Vending (cat 26) 6110k 9 k
-                output += paddington(8, "ZZPACKET", char: padder)
+                output += paddington(8, input: "ZZPACKET", char: padder)
             }
             else if catnum == 3 && catcode == "6110b" {
                 // special handling for Booklets (cat 26) 6110b s NN to go before 6110b NN [...]
@@ -633,22 +677,22 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
                     prefix = "BPRBKLT" // after "BOOKLET" but before "EBOOKLET"
                     skip = true // prevent the "PR" from becoming a prefix field
                 }
-                output += paddington(8, prefix, char: padder, trailing: true)
+                output += paddington(8, input: prefix, char: padder, trailing: true)
             }
             else if catnum == 3 && catcode == "6110e" {
                 // special handling for Booklets (cat 26) 6110e [...] to go after 6110b [...]
-                output += paddington(8, "EBOOKLET", char: padder)
+                output += paddington(8, input: "EBOOKLET", char: padder)
             }
             else if fieldClass != .Alpha {
                 // missing prefix field - normalize by adding empty one
-                output += paddington(8, "", char: padder)
+                output += paddington(8, input: "", char: padder)
             }
         }
-        let flen = count(field)
+        let flen = field.characters.count
         switch fieldClass {
-        case .Alpha: if !skip { output += paddington(8, field, char: padder, trailing: true) }
+        case .Alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
         case .Numeric:
-            var num = field.toInt()!
+            var num = Int(field)!
             // insert YEAR fixups here
             if catnum == 16 {
                 num += fixupCenturyYY(num)
@@ -657,8 +701,8 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
                 num += fixupCenturyYY(num)
             }
             if catnum == 27 && flen == 4 {
-                var num1 = field[0...1].toInt()!
-                var num2 = field[2...3].toInt()!
+                var num1 = Int(field[0...1])!
+                var num2 = Int(field[2...3])!
                 num1 += fixupCenturyYY(num1) // now between 1948 and 2047
                 num2 += fixupCenturyYY(num2) // now between 1948 and 2047
                 num = num1 * 10000 + num2
@@ -672,8 +716,8 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
                 }
                 else if flen == 4 {
                     // split YYNN in two to make a 6-digit century fixup field
-                    var num1 = field[0...1].toInt()! // YY
-                    var num2 = field[2...3].toInt()! // NN
+                    var num1 = Int(field[0...1])! // YY
+                    let num2 = Int(field[2...3])! // NN
                     num1 += fixupCenturyYY(num1) // now between 1948 and 2047
                     num = num1 * 100 + num2
                 }

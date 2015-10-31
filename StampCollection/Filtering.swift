@@ -27,12 +27,12 @@ func fromNSArray<T: NSObject>( input: NSArray ) -> [T] {
 // Basically, the key name is preceded by a "-" if descending order is desired for that prop's sort descriptor
 
 func sortKVONSArray( input: NSArray, keyNames: [String] ) -> NSArray {
-    var temp : NSArray = input
+    let temp : NSArray = input
     var sortDes : [NSSortDescriptor] = []
     for keyName in keyNames {
         var asc = true
         var kname = keyName
-        let klen = count(kname)
+        let klen = kname.characters.count
         if (kname[0] == "-") {
             asc = false
             kname = kname[1..<klen]
@@ -44,9 +44,9 @@ func sortKVONSArray( input: NSArray, keyNames: [String] ) -> NSArray {
 }
 
 func sortKVOArray<T: NSObject>( input: [T], keyNames: [String] ) -> [T] {
-    var temp : NSArray = input
-    let temp2 : NSArray = sortKVONSArray(temp, keyNames)
-    var output : [T] = fromNSArray(temp2)
+    let temp : NSArray = input
+    let temp2 : NSArray = sortKVONSArray(temp, keyNames: keyNames)
+    let output : [T] = fromNSArray(temp2)
     return output
 }
 
@@ -61,19 +61,19 @@ The description in certain categories (Joint, Full Sheets) has extra information
 */
 
 func filterKVONSArray( input: NSArray, keyName: String, keyValue: String, convertValueToInt: Bool ) -> NSArray {
-    var temp : NSArray = input
+    let temp : NSArray = input
     var kval : NSObject = keyValue as NSString
-    if let ival = keyValue.toInt() where convertValueToInt {
+    if let ival = Int(keyValue) where convertValueToInt {
         kval = NSNumber(integer: ival)
     }
-    var predicate = NSPredicate(format: "%K = %@", keyName, kval)
+    let predicate = NSPredicate(format: "%K = %@", keyName, kval)
     let output : NSArray = temp.filteredArrayUsingPredicate(predicate)
     return output
 }
 
 func filterKVOArray<T: NSObject>( input: [T], keyName: String, keyValue: String, convertValueToInt: Bool ) -> [T] {
-    var temp : NSArray = input
-    let temp2 : NSArray = filterKVONSArray(temp, keyName, keyValue, convertValueToInt)
-    var output : [T] = fromNSArray(temp2)
+    let temp : NSArray = input
+    let temp2 : NSArray = filterKVONSArray(temp, keyName: keyName, keyValue: keyValue, convertValueToInt: convertValueToInt)
+    let output : [T] = fromNSArray(temp2)
     return output
 }

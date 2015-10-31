@@ -31,7 +31,7 @@ class BTDealerItem: NSObject {
     var picref = ""
 
     var isJS: Bool {
-        if count(code) > 2 {
+        if code.characters.count > 2 {
             return code[0...2] == "AUI"
         }
         return false
@@ -59,13 +59,13 @@ class BTDealerItem: NSObject {
         case (true, false): status = "Mint only"
         case (false, true): status = "FDC only"
         case (true, true): status = "In stock"
-        default: status = "" // never occurs; stupid Swift compiler
+        //default: status = "" // never occurs; stupid Swift compiler
         }
         // NOTE: JS code will remove all leading and trailing white space
         // synthesize leading and trailing buy fields
         // (convention copied on 5/21/2015)
         // need to split off the index number from the picref field:
-        if let index = picref.componentsSeparatedByString("=").last?.toInt() {
+        if let indexStr = picref.componentsSeparatedByString("=").last, index = Int(indexStr) {
             if hasMint {
                 buy1 = "judaica/austrian.asp?on_load=1&UC_AddId=\(index)"
             }
@@ -82,7 +82,7 @@ class BTDealerItem: NSObject {
         var retval = catfieldx
         // make sure we are in proper catalog format; if not, just return field as-is
         // length must be longer than prefix length (2)
-        let cflen = count(retval)
+        let cflen = retval.characters.count
         if cflen < 2 { return retval }
         // TBD: first char must be a known catalog abbreviation code (this info can change slowly over time as BT adds catalog references)
         // second char must be a space
@@ -90,9 +90,9 @@ class BTDealerItem: NSObject {
         // split the prefix (cat type and space) from the data
         var splitIndex = catfieldx.startIndex.successor().successor()
         let prefix = catfieldx.substringToIndex(splitIndex)
-        var catfield = catfieldx.substringFromIndex(splitIndex)
-        var (part1, part2) = splitNumericEndOfString(catfield)
-        let lencf = count(part2)
+        let catfield = catfieldx.substringFromIndex(splitIndex)
+        let (part1, part2) = splitNumericEndOfString(catfield)
+        let lencf = part2.characters.count
         let is8digitField = lencf == 8 && part1.isEmpty
         // the function detects the need for missing commas, and puts them in the proper places
         // the type (field name 'cat1' or 'cat2') and ID fields are used to detect certain known problems that don't fit the rules,
@@ -113,8 +113,8 @@ class BTDealerItem: NSObject {
         // Rule #1 - detect 8-digit strings, insert comma after digit #4
         // (currently no other rules are implemented, just the above exceptions)
         let exceptionKey = id + fname
-        var (pos, type, char, found) = errorIDs[exceptionKey] ?? errorIDs["RULE1"]!
-        let len = count(char)
+        let (pos, type, char, found) = errorIDs[exceptionKey] ?? errorIDs["RULE1"]!
+        let len = char.characters.count
         // determine if we should do this at all
         var ok = is8digitField || found // yes if we have 8 digits (use Rule#1) OR if we found another rule via lookup
         // double-check if the problem hasn't already been corrected by BT or us (found case)
@@ -128,13 +128,13 @@ class BTDealerItem: NSObject {
         // if we're still good to go, do the substitution or insertion
         if ok {
             let startIndex = catfield.startIndex
-            splitIndex = advance(startIndex, pos)
+            splitIndex = startIndex.advancedBy(pos)
             retval = prefix + catfield[startIndex..<splitIndex] + char
             if type == "sub" {
                 // only diff between ins and sub is where we pick up the tail from
                 // ins means keep the entire tail (splitIndex doesn't move)
                 // whereas with sub, we must advance splitIndex past the same number of chars that were in 'char' string (len)
-                splitIndex = advance(splitIndex, len)
+                splitIndex = splitIndex.advancedBy(len)
             }
             retval += catfield[splitIndex..<catfield.endIndex]
         }
@@ -181,7 +181,7 @@ class BTDealerItem: NSObject {
         //   2. PF would be price1 and price2 as well
         //   3. Sets YrSets and Vars would use PUFS always as 1+2+3+4
         // So to make the correspondence work, any PU or PUFS cats need to adjust here (swap 2 and 3, or just move 3 to 2 in the PU case)
-        var foundPU = find(category.headers, "PriceUsed") != nil
+        let foundPU = category.headers.indexOf("PriceUsed") != nil
         if foundPU && !isJS {
             // in cases where PriceUsed appears, the Info/CSV form will be PU or PUFS
             // the Web form is always PFUS (so for PU, price2 is always blank)
@@ -329,7 +329,7 @@ class BTDealerItem: NSObject {
     }
     
     func importFromData(data: [String:String]) -> Int {
-        var refObj = self
+        let refObj = self
         var catnum = -1
         if let inputStr = data["code"] { refObj.code = inputStr }
         if let inputStr = data["descr"] { refObj.descr = inputStr }
@@ -349,7 +349,7 @@ class BTDealerItem: NSObject {
         if let inputStr = data["oldprice2"] { refObj.oldprice2 = inputStr }
         if let inputStr = data["oldprice3"] { refObj.oldprice3 = inputStr }
         if let inputStr = data["oldprice4"] { refObj.oldprice4 = inputStr }
-        if let inputNum = data["catgDisplayNum"]?.toInt() { catnum = inputNum }
+        if let inputStr = data["catgDisplayNum"], inputNum = Int(inputStr) { catnum = inputNum }
         return catnum
     }
 }

@@ -12,7 +12,11 @@ class InfoCategoriesTableViewController: UITableViewController {
     
     lazy var csvFileImporter = ImportExport()
     
-    var model = CollectionStore.sharedInstance
+    var model: CollectionStore! {
+        didSet {
+            BTDealerStore.collection = model // allows generation of JS category pic fixups
+        }
+    }
 
     var progress: UIProgressView? {
         didSet {
@@ -20,7 +24,7 @@ class InfoCategoriesTableViewController: UITableViewController {
         }
     }
     
-    func setProgressView(_ onOff: Bool = false) {
+    func setProgressView(onOff: Bool = false) {
         if !onOff {
             progress = nil
             return
@@ -36,7 +40,7 @@ class InfoCategoriesTableViewController: UITableViewController {
         }
     }
     
-    func setSpinnerView(_ onOff: Bool = false) {
+    func setSpinnerView(onOff: Bool = false) {
         if !onOff {
             spinner?.stopAnimating()
             spinner = nil
@@ -50,21 +54,24 @@ class InfoCategoriesTableViewController: UITableViewController {
 
     @IBAction func doImportAction(sender: UIBarButtonItem) {
         
-        messageBoxWithTitle("Import Data from CSV", andBody: "NOTE: Wipes the database first! OK to proceed?", forController: self) { ac in
-            var act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
+        messageBoxWithTitleEx("Import Data from CSV", andBody: "NOTE: Wipes the database first! OK to proceed?", forController: self) { ac in
+            var act = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
                 // dismiss but do nothing
             }
             ac.addAction(act)
-            act = UIAlertAction(title: "OK", style: .Destructive) { x in
+            act = UIAlertAction(title: "OK", style: .Destructive) { _ in
                 // wipe the slate
-                self.model.removeAllItemsInStore()
-                self.updateUI()
-                // load the data from CSV files
-                let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
-                self.csvFileImporter.importData(sourceType) {
-                    // when done, load the data, then update the UI
-                    self.model.fetchType(.Categories) {
-                        self.updateUI()
+                self.model.removeAllItemsInStore() {
+                    self.updateUI()
+                    // load the data from CSV files
+                    let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
+                    self.csvFileImporter.importData(sourceType, toModel: self.model) {
+                        // save all the imported data to its persistence layer
+                        self.model.saveMainContext()
+                        // also, load the data, then update the UI
+                        self.model.fetchType(.Categories) {
+                            self.updateUI()
+                        }
                     }
                 }
             }
@@ -74,7 +81,7 @@ class InfoCategoriesTableViewController: UITableViewController {
     }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
-        let catcount = model.categories.count
+        //?? let catcount = model.categories.count
         model.fetchType(.Categories) {
             self.updateUI()
         }
@@ -82,21 +89,40 @@ class InfoCategoriesTableViewController: UITableViewController {
     
     @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBAction func doExportAction(sender: UIBarButtonItem) {
-        exportButton.enabled = false
-        // should use an activity indicator here as well, perhaps even UIProgressView
-        setProgressView(true)
-        // TBD: select type of export (email, airdrop, ??)
-        let emailer = EmailAttachmentExporter(forController: self) { error in
-            self.setProgressView(false)
-            if error.code != 0 {
-                messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
+        // new version: choose Docs vs. Email
+        messageBoxWithTitleEx("Export Data to ...", andBody: "", forController: self) { ac in
+            var act = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
+                // dismiss but do nothing
             }
-            self.exportButton.enabled = true
-        }
-        // send the data from CoreData to the CSV files
-        model.exportAllData() {
-            // when done, send the CSV files on their way
-            emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
+            ac.addAction(act)
+            act = UIAlertAction(title: "CSV", style: .Default) { _ in
+                self.exportButton.enabled = false
+                self.setProgressView(true)
+                self.model.exportAllData() {
+                    self.exportButton.enabled = true
+                    self.setProgressView(false)
+               }
+            }
+            ac.addAction(act)
+            act = UIAlertAction(title: "CSV+Email", style: .Default) { _ in
+                self.exportButton.enabled = false
+                // should use an activity indicator here as well, perhaps even UIProgressView
+                self.setProgressView(true)
+                // TBD: select type of export (email, airdrop, ??)
+                let emailer = EmailAttachmentExporter(forController: self) { error in
+                    self.setProgressView(false)
+                    if error.code != 0 {
+                        messageBoxWithTitle("Email Send Error", andBody: error.localizedDescription, forController: self)
+                    }
+                    self.exportButton.enabled = true
+                }
+                // send the data from CoreData to the CSV files
+                self.model.exportAllData() {
+                    // when done, send the CSV files on their way
+                    emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
+                }
+            }
+            ac.addAction(act)
         }
     }
     
@@ -111,12 +137,23 @@ class InfoCategoriesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+    }
+    
+    /// special function to kick-start the UI after the data model has been properly set up
+    /// NOTE: only provide this in one top-level VC, the one that shows the main screen
+    func startUI(dataModel: CollectionStore) {
+        // save the now-properly-initialized data model object reference
+        model = dataModel
+        print("startUI triggered in \(self)")
         // load the category data from CoreData
         title = "Collection Categories"
         model.fetchType(.Categories) {
             // completion block
             self.updateUI()
+            // assure that the JS picture mapping occurs
+            if let cat = self.model.fetchCategory(CATNUM_AUSTRIAN) {
+                populateJSDictionary(cat)
+            }
         }
     }
 
@@ -133,12 +170,12 @@ class InfoCategoriesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return model.categories.count + 1
+        return model == nil ? 0 : model.categories.count + 1
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Info Category Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Info Category Cell", forIndexPath: indexPath) 
 
         // Configure the cell...
         let row = indexPath.row
@@ -202,6 +239,8 @@ class InfoCategoriesTableViewController: UITableViewController {
         if segue.identifier == "Show Info Items Segue" {
             if let dvc = segue.destinationViewController as? InfoItemsTableViewController,
                 cell = sender as? UITableViewCell {
+                    // pass dependency to data model
+                    dvc.model = self.model
                     // get row number of cell
                     let indexPath = tableView.indexPathForCell(cell)!
                     let row = indexPath.row

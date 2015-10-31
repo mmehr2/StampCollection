@@ -14,7 +14,7 @@ import Foundation
 
 // most of these are dependent on particular categories of records, as well
 
-enum WantHaveType: Printable {
+enum WantHaveType: CustomStringConvertible {
     case All, Haves, Wants
     
     var nextState: WantHaveType {
@@ -57,25 +57,25 @@ enum SearchType {
     case Price(String) // filtering based on price/value comparisons
 }
 
-extension SearchType: Printable {
+extension SearchType: CustomStringConvertible {
     var description: String {
         switch self {
         case .None: return "All Items"
         case .Category(let catnum):
             return "In Category \(catnum)"
         case .KeyWordListAll(let words):
-            let list = " ".join(words)
+            let list = words.joinWithSeparator(" ")
             return "By Words [ALL]:\(list)"
         case .KeyWordListAny(let words):
-            let list = " ".join(words)
+            let list = words.joinWithSeparator(" ")
             return "By Words [ANY]:\(list)"
         case .YearInRange(let range):
             return "By Years \(range.start):\(range.end)"
         case .WantHave(let whtype):
             return "Only \(whtype)"
         case .MultiCategory(let catlist):
-            let catlistX = ", ".join(catlist.map{ cat in
-                "\(cat)" })
+            let catlistX = catlist.map{ cat in
+                "\(cat)" }.joinWithSeparator(", ")
             return "In Categories: \(catlistX)"
         case .SubCategory(let pattern):
             return "In SubCategory Defined By \(pattern)"
@@ -85,8 +85,8 @@ extension SearchType: Printable {
             return "By Location Unimplemented"
         case .Price:
             return "By Price Unimplemented"
-        default:
-            return "Unknown search type"
+//        default:
+//            return "Unknown search type"
         }
     }
 }
@@ -111,8 +111,8 @@ extension SearchType {
             // it will NOT allow mix-and-matching - ONLY WAY TO DO THIS IS CONCATENATE THE FIELDS FOR SEARCHING!
             // Until I can figure out how to do this, it will only check descriptionX in the dealerItem
             let target1 : String = dealerItemPrefix + "descriptionX"
-            var subpredicates1 = getPredicatesForField(target1, inKeyWordList: words)
-            var temp = NSCompoundPredicate.andPredicateWithSubpredicates(subpredicates1)
+            let subpredicates1 = getPredicatesForField(target1, inKeyWordList: words)
+            let temp = NSCompoundPredicate(andPredicateWithSubpredicates: subpredicates1)
 //            var subpredicates2 = dataType != .Inventory ? [] : (getPredicatesForField("desc", inKeyWordList: words))
 //            if subpredicates2.count > 0 {
 //                let out2 = NSCompoundPredicate.andPredicateWithSubpredicates(subpredicates2)
@@ -131,11 +131,11 @@ extension SearchType {
             // if ANY word appears in ANY field, the entire predicate is true
             let target1 : String = dealerItemPrefix + "descriptionX"
             let cival = true // not really sure how to use this, so just try it for now on ANY searches
-            var subpredicates1 = getPredicatesForField(target1, inKeyWordList: words, caseInsensitive: cival)
-            var subpredicates2 = dataType != .Inventory ? [] : (getPredicatesForField("desc", inKeyWordList: words, caseInsensitive: cival))
-            var subpredicates3 = dataType != .Inventory ? [] : (getPredicatesForField("notes", inKeyWordList: words, caseInsensitive: cival))
-            var subpredicates = subpredicates1 + subpredicates2 + subpredicates3
-            var temp = NSCompoundPredicate.orPredicateWithSubpredicates(subpredicates)
+            let subpredicates1 = getPredicatesForField(target1, inKeyWordList: words, caseInsensitive: cival)
+            let subpredicates2 = dataType != .Inventory ? [] : (getPredicatesForField("desc", inKeyWordList: words, caseInsensitive: cival))
+            let subpredicates3 = dataType != .Inventory ? [] : (getPredicatesForField("notes", inKeyWordList: words, caseInsensitive: cival))
+            let subpredicates = subpredicates1 + subpredicates2 + subpredicates3
+            let temp = NSCompoundPredicate(orPredicateWithSubpredicates: subpredicates)
             output = temp
             break
         /** NOTE: The reason this and other fetches like this aren't here is the need to use derived data and not just what is in the fields using the predicate programming language
@@ -169,7 +169,7 @@ extension SearchType {
                 }
             }
             if preds.count > 0  {
-                output = NSCompoundPredicate.orPredicateWithSubpredicates(preds)
+                output = NSCompoundPredicate(orPredicateWithSubpredicates: preds)
             }
             break
         case .SubCategory(let patternIn):
@@ -231,17 +231,17 @@ func getPredicateOfType( dataType: CollectionStore.DataType, forSearchTypes type
 // simple predicate extensions to deal with making compound predicates
 infix operator && {}
 func &&( lhs: NSPredicate, rhs: NSPredicate) -> NSPredicate {
-    return NSCompoundPredicate.andPredicateWithSubpredicates([lhs, rhs])
+    return NSCompoundPredicate(andPredicateWithSubpredicates: [lhs, rhs])
 }
 
 infix operator || {}
 func ||( lhs: NSPredicate, rhs: NSPredicate) -> NSPredicate {
-    return NSCompoundPredicate.orPredicateWithSubpredicates([lhs, rhs])
+    return NSCompoundPredicate(orPredicateWithSubpredicates: [lhs, rhs])
 }
 
 prefix operator ! {}
 prefix func !( lhs: NSPredicate) -> NSPredicate {
-    return NSCompoundPredicate.notPredicateWithSubpredicate(lhs)
+    return NSCompoundPredicate(notPredicateWithSubpredicate: lhs)
 }
 
 // MARK: in-memory filtering
@@ -275,7 +275,7 @@ private func CompareInfoSingle( types: [SearchType], item: DealerItem) -> Bool {
         var eachResult = true
         switch type {
         case .YearInRange(let range):
-            eachResult = CompareYearInRange(item.descriptionX, range)
+            eachResult = CompareYearInRange(item.descriptionX, range: range)
         default: eachResult = true
         }
         if !eachResult {
@@ -290,7 +290,7 @@ private func CompareInfoSingle( types: [SearchType], item: DealerItem) -> Bool {
 func filterInfo( coll: [DealerItem], types: [SearchType] ) -> [DealerItem] {
     let mtypes = getMemorySearchTypes(types)
     return mtypes.count == 0 ? coll : coll.filter { item in
-        return CompareInfoSingle( mtypes, item )
+        return CompareInfoSingle( mtypes, item: item )
     }
 }
 
@@ -315,7 +315,7 @@ private func CompareInvSingle( types: [SearchType], item: InventoryItem) -> Bool
         var eachResult = true
         switch type {
         case .YearInRange(let range):
-            eachResult = CompareYearInRange(item.dealerItem.descriptionX, range) // date extraction only works on baseItem description field
+            eachResult = CompareYearInRange(item.dealerItem.descriptionX, range: range) // date extraction only works on baseItem description field
         default: eachResult = true
         }
         if !eachResult {
@@ -330,7 +330,7 @@ private func CompareInvSingle( types: [SearchType], item: InventoryItem) -> Bool
 func filterInventory( coll: [InventoryItem], types: [SearchType] ) -> [InventoryItem] {
     let mtypes = getMemorySearchTypes(types)
     return mtypes.count == 0 ? coll : coll.filter { item in
-        return CompareInvSingle( mtypes, item )
+        return CompareInvSingle( mtypes, item: item )
     }
 }
 

@@ -18,7 +18,7 @@ extension AlbumType {
     
     private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil ) -> Bool {
         if let context = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumType {
+            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumType {
                 newObject.code = name
                 newObject.ordinal = 0
                 newObject.descriptionX = ""

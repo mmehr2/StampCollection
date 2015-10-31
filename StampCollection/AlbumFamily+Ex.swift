@@ -16,12 +16,12 @@ extension AlbumFamily {
     static func getEntityName() -> String {
         // NOTE: I believe that since this variable is static, the function that calculates it will only be run once, after which it will be cached as a 'lazy' variable
         // tostring(self) in Swift 1.2 will return "ModuleName.ClassName"; we only want the latter
-        return toString(self).componentsSeparatedByString(".").last!
+        return String(self).componentsSeparatedByString(".").last!
         }
     
     private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumFamily {
+            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumFamily {
                 newObject.code = name
                 newObject.nextRef = 0 // needs to be maintained dynamically (call setMaxRef() as new refs are added for this family
                 newObject.descriptionX = ""

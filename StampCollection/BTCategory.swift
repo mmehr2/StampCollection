@@ -92,16 +92,16 @@ class BTCategory: NSObject {
         output["href"] = self.href
         output["items"] = "\(self.items)"
         output["notes"] = self.notes // poss.needs some escaping?
-        output["headers"] = ";".join(self.headers)
+        output["headers"] = self.headers.joinWithSeparator(";")
         return output
     }
     
     func importFromData(data: [String:String]) {
-        var refObj = self
+        let refObj = self
         if let name = data["name"] { refObj.name = name }
-        if let number = data["number"]?.toInt() { refObj.number = number }
+        if let numstr = data["number"], number = Int(numstr) { refObj.number = number }
         if let href = data["href"] { refObj.href = href }
-        if let items = data["items"]?.toInt() { refObj.items = items }
+        if let itemstr = data["items"], items = Int(itemstr) { refObj.items = items }
         if let notes = data["notes"] { refObj.notes = notes } // maybe needs unescaping then
         if let headers = data["headers"] { refObj.headers = headers.componentsSeparatedByString(";") }
     }

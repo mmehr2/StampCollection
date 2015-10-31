@@ -15,7 +15,7 @@ extension AlbumPage {
     
     static func makeObjectWithName( name: String, forParent parent: AlbumSection ) -> Bool {
         if let context = parent.managedObjectContext {
-            if var newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumPage {
+            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumPage {
                 newObject.code = name
                 newObject.number = name.toFloat()! // page must be a valid number "10.1" or "23" in this implementation; allow suffixes later on perhaps?
                 //newObject.descriptionX = ""

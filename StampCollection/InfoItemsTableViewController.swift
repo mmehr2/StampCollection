@@ -10,7 +10,7 @@ import UIKit
 
 class InfoItemsTableViewController: UITableViewController {
     
-    var model = CollectionStore.sharedInstance
+    var model: CollectionStore!
     
     var category = CollectionStore.CategoryAll
     var categoryItem : Category!
@@ -73,9 +73,9 @@ class InfoItemsTableViewController: UITableViewController {
         let cname = categoryItem?.name ?? "ALL"
         var caption = "Showing \(cname) (#\(category)) \(ftype) Items"
         if names.count > 0 {
-            caption += " filtered by " + "; ".join(names)
+            caption += " filtered by " + names.joinWithSeparator("; ")
         }
-        println(caption)
+        print(caption)
         return output
     }
     
@@ -109,7 +109,7 @@ class InfoItemsTableViewController: UITableViewController {
         // create a subcat pattern for any ID with this base ("base@")
         let subcat = SearchType.SubCategory(mainID + "@")
         // fetch the IDs in this list but without any .retired items
-        let items0 = model.fetchInfoInCategory(category: splitID.catnum, withSearching: [subcat], andSorting: SortType.ByCode(true))
+        let items0 = model.fetchInfoInCategory(splitID.catnum, withSearching: [subcat], andSorting: SortType.ByCode(true))
         let items = items0.filter{ !$0.retired }
         //            let ids = items.map{ $0.id + " - " + $0.descriptionX }
         //            let idstr = "\n".join(ids)
@@ -120,10 +120,10 @@ class InfoItemsTableViewController: UITableViewController {
     private func createBaseAssignmentMenu( items: [DealerItem], forItem invItem: InventoryItem, withCompletion completion: (() -> Void)? = nil ) -> [MenuBoxEntry] {
         var menuItems : [MenuBoxEntry] = []
         for item in items {
-            let apos = advance(item.descriptionX.startIndex, 16)
+            let apos = item.descriptionX.startIndex.advancedBy(16)
             let title = item.id + ":" + item.descriptionX.substringFromIndex(apos)
             menuItems.append( (title, { x in
-                println("Assigning new base item=\(item.id): \(item.descriptionX) \nto INV\(invItem.baseItem): \(invItem.desc).")
+                print("Assigning new base item=\(item.id): \(item.descriptionX) \nto INV\(invItem.baseItem): \(invItem.desc).")
                 invItem.updateBaseItem(item)
                 if let completion = completion {
                     completion()
@@ -136,7 +136,7 @@ class InfoItemsTableViewController: UITableViewController {
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBAction func moreButtonPressed(sender: UIBarButtonItem) {
         // run an alert controller to choose from a menu of less-used functions
-        let path = self.tableView.indexPathForSelectedRow()!
+        let path = self.tableView.indexPathForSelectedRow!
         let row = path.row
         if ftype == .Info {
             let infoitem = self.model.info[row]
@@ -170,7 +170,7 @@ class InfoItemsTableViewController: UITableViewController {
     @IBAction func searchButtonPressed(sender: AnyObject) {
         // show an action sheet to choose Keyword or YearRange filtering
         // other action types may be added in the future depending on category
-        var ac = UIAlertController(title: "Choose Search Method", message: nil, preferredStyle: .ActionSheet)
+        let ac = UIAlertController(title: "Choose Search Method", message: nil, preferredStyle: .ActionSheet)
         var act = UIAlertAction(title: "By Keywords", style: .Default) { x in
             // action here
             let kwc = UIQueryAlert(type: .Keyword) { srchType in
@@ -235,10 +235,10 @@ class InfoItemsTableViewController: UITableViewController {
 
     private func addSortAction( type: SortType, forDataType dataType: CollectionStore.DataType, toController ac: UIAlertController ) {
         let typeName = ftype == .Info ? "INFO" : "INVENTORY"
-        let title = ""
-        var act = UIAlertAction(title: "Sort by \(type)", style: .Default) { x in
+        //let title = ""
+        let act = UIAlertAction(title: "Sort by \(type)", style: .Default) { x in
             // resort current info data by id code (depends on category being shown)
-            println("Sorting \(typeName) by \(type)")
+            print("Sorting \(typeName) by \(type)")
             if dataType == .Info {
                 let temp = sortCollection(self.model.info, byType: type)
                 self.model.info = temp
@@ -248,17 +248,17 @@ class InfoItemsTableViewController: UITableViewController {
             }
             self.refreshData()
             self.updateUI()
-            println("Completed sorting \(typeName) by \(type)")
+            print("Completed sorting \(typeName) by \(type)")
         }
         ac.addAction(act)
     }
     
     @IBAction func sortButtonPressed(sender: AnyObject) {
         // implementing sorting functionality
-        var ac = UIAlertController(title: "Choose Info Sort Method", message: nil, preferredStyle: .Alert)
+        let ac = UIAlertController(title: "Choose Info Sort Method", message: nil, preferredStyle: .Alert)
         var act = UIAlertAction(title: "Unsorted", style: .Default) { x in
             // TBD resort current info data by exOrder (or category+exOrder if showing ALL)
-            println("Reverting to Unsorted data")
+            print("Reverting to Unsorted data")
             self.refetchData()
 //            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")
 //            println("Last: \(self.model.info.last?.normalizedCode)")
@@ -322,7 +322,7 @@ class InfoItemsTableViewController: UITableViewController {
         infoButtonItem.title = "To:" + exwh
         
         // enable the More button according to whether an item is selected
-        moreButton.enabled = tableView.indexPathForSelectedRow() != nil
+        moreButton.enabled = tableView.indexPathForSelectedRow != nil
         
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -425,6 +425,8 @@ class InfoItemsTableViewController: UITableViewController {
         if segue.identifier == "Show Updates Segue" {
             if let dvc = segue.destinationViewController as? UpdatesTableViewController {
                 dvc.category = category
+                // pass dependency to data model
+                dvc.model = self.model
             }
         }
         if segue.identifier == "Show Info Item Segue" {

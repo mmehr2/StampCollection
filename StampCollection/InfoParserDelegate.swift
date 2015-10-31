@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol InfoParseable {
+protocol CSVDataSink {
     // parser (via its delegate) will call this once for every data item (CSV data line) that has completed parsing
     func parserDelegate( parserDelegate: CHCSVParserDelegate,
         foundData data: [String : String],
@@ -35,17 +35,19 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     //typealias RecordType = [String:String]
     private var currentRecord : [String:String] = [:]
     var records : [[String:String]] = []
-    var dataSink : InfoParseable?
+    var dataSink : CSVDataSink?
     var contextToken: CollectionStore.ContextToken = 0 // must be set before usage!
     var sequencePropertyName : String?
     var sequenceCounter = 0
     
-    init(name namex: String) {
-        name = namex
+    init(name name2: String) {
+        // NOTE: for the reasoning about the bug in Swift 2/XCode 7 regarding errors in calling this, see here: http://stackoverflow.com/questions/32658812/string-literals-in-lazy-vars-in-swift-2-xcode-7-cannot-convert-value-of-type
+        name = name2
+        super.init()
     }
     
     func parser(parser: CHCSVParser!, didFailWithError error: NSError!) {
-        println("Failed parsing \(name) with error \(error)")
+        print("Failed parsing \(name) with error \(error)")
     }
 
     func parserDidBeginDocument(parser: CHCSVParser!) {
@@ -85,7 +87,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     
     func parser(parser: CHCSVParser!, didEndLine recordNumber: UInt) {
         if currentRecordNumber == 1 {
-            println("\(name) Headers: \(headers)")
+            print("\(name) Headers: \(headers)")
         } else if !currentRecord.isEmpty {
             // add extra (non-input) field for sequence data, if enabled
             if let propertyName = sequencePropertyName {
@@ -103,7 +105,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     }
     
     func parserDidEndDocument(parser: CHCSVParser!) {
-        println("Finished parsing \(name) with \(recordCount) records ending with #\(lastRecordNumber)")
+        print("Finished parsing \(name) with \(recordCount) records ending with #\(lastRecordNumber)")
     }
 }
 

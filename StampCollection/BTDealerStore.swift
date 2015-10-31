@@ -22,6 +22,7 @@ Only for my private use, of course. This app should never ship.
 
 class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     static let model = BTDealerStore() // singleton/global model item
+    static var collection: CollectionStore! // kludge to get JS pic fixup info
     
     var categories : [BTCategory] = []
     
@@ -63,9 +64,13 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     func loadStoreCategory(categoryNum: Int, whenDone: () -> Void) {
         completion = whenDone
         loadMultiple = false
-        let handler = categoryHandlers[categoryNum]
-        let category = getCategoryByNumber(categoryNum)!
-        handler.loadItemsFromWeb(category.href, forCategory: category.number)
+        if categoryNum == JSCategoryAll {
+            siteJSHandler.loadItemsFromWeb()
+        } else {
+            let handler = categoryHandlers[categoryNum]
+            let category = getCategoryByNumber(categoryNum)!
+            handler.loadItemsFromWeb(category.href, forCategory: category.number)
+        }
         loadingInProgress = true
     }
     
@@ -90,18 +95,20 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     }
 
     private func jsCompletionRun( catnum: Int16, webJSCategory: BTCategory ) {
+        // create a mapping table between website pic refs and persistent pic refs
         // this should be dispatched to a background thread, no completion needed
-        NSOperationQueue().addOperationWithBlock({
-            let token = CollectionStore.sharedInstance.getContextTokenForThread()
-            if let jsCategory = CollectionStore.sharedInstance.fetchCategory(catnum, inContext: token) {
-                populateJSDictionary(jsCategory, webJSCategory)
+        let store = BTDealerStore.collection
+        let token = store.getNewContextTokenForThread()
+        store.addOperationToContext(token) {
+            if let jsCategory = store.fetchCategory(catnum, inContext: token) {
+                populateJSDictionary(jsCategory, jsWebCat: webJSCategory)
             }
-            CollectionStore.sharedInstance.removeContextForThread(token)
-        })
+            store.removeContextForThread(token)
+        }
     }
     
     func messageHandler(handler: JSMessageDelegate, didLoadDataForCategory category: Int) {
-        println("DidLoad Message received for cat=\(category)")
+        print("DidLoad Message received for cat=\(category)")
         let catnum = BTCategory.translateNumberToInfoCategory(category)
         jsCompletionRun(catnum, webJSCategory: self.JSCategory)
     }
@@ -125,7 +132,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             // load each category's basic information, one at a time
             reloadCategories.append(dataItem)
             // create a handler to load the category's items
-            var handler = BTMessageDelegate()
+            let handler = BTMessageDelegate()
             handler.delegate = self
             categoryHandlers.append(handler)
             copyCategoryDataToStore(category, basicOnly: true)
@@ -218,12 +225,6 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         if num == JSCategoryAll {
             return JSCategory
         }
-//        for category in categories {
-//            if category.number == num {
-//                return category
-//            }
-//        }
-//        return nil
         return categories.filter{
             $0.number == num
         }.first
@@ -243,7 +244,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     }
     
     func importData( completion: (() -> Void)? = nil ) {
-        println("Importing data from CSV files")
+        print("Importing data from CSV files")
         let importer = BTImporter()
         importer.importData() {
             // when it's done, we need to copy the data out

@@ -40,17 +40,17 @@ struct Regex {
     
     init(pattern:String) {
         self.pattern = pattern
-        expressionOptions = NSRegularExpressionOptions(0)
-        matchingOptions = NSMatchingOptions(0)
+        expressionOptions = NSRegularExpressionOptions(rawValue: 0)
+        matchingOptions = NSMatchingOptions(rawValue: 0)
         updateRegex()
     }
     
     private mutating func updateRegex(){
-        regex = NSRegularExpression(pattern: pattern, options: expressionOptions, error: nil)
+        regex = try? NSRegularExpression(pattern: pattern, options: expressionOptions)
     }
     
     private static func testMatch(left: String, right: Regex) -> Bool {
-        let range = NSMakeRange(0, count(left))
+        let range = NSMakeRange(0, left.characters.count)
         if let regex = right.regex {
             let matches = regex.matchesInString(left, options: right.matchingOptions, range: range) // as! [NSTextCheckingResult]
             return matches.count > 0
@@ -61,7 +61,7 @@ struct Regex {
     
     private static func replacePattern(left:String, right: (regex:Regex, template:String) ) -> String{
         if Regex.testMatch(left, right: right.regex) {
-            let range = NSMakeRange(0, count(left))
+            let range = NSMakeRange(0, left.characters.count)
             if let regex = right.regex.regex {
                 return regex.stringByReplacingMatchesInString(left, options: right.regex.matchingOptions, range: range, withTemplate: right.template)
             }
