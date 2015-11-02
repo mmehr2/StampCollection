@@ -51,7 +51,7 @@ extension AlbumType {
         return nil
     }
     
-    static func getAlbumTypeInImportData( data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
+    static func getObjectInImportData( data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
         // will do all of the following to make sure a valid type object exists, and if so, return it (if not, returns nil)
         // 1. gets code of desired ref from data field "AlbumType"
         // 2. calls getUniqueObject() above to make sure proper object exists, and if not, creates it
@@ -62,5 +62,8 @@ extension AlbumType {
         return nil
     }
     
+    var theFamilies: [AlbumFamily] {
+        return Array(families) as! [AlbumFamily]
+    }
 }
 

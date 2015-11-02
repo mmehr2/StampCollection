@@ -13,12 +13,6 @@ private let entityName = "AlbumFamily"
 
 extension AlbumFamily {
     
-    static func getEntityName() -> String {
-        // NOTE: I believe that since this variable is static, the function that calculates it will only be run once, after which it will be cached as a 'lazy' variable
-        // tostring(self) in Swift 1.2 will return "ModuleName.ClassName"; we only want the latter
-        return String(self).componentsSeparatedByString(".").last!
-        }
-    
     private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
             if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumFamily {
@@ -67,7 +61,7 @@ extension AlbumFamily {
         // 3. calls getUniqueObject above to get the family object, creating it if needed using the object from step 2
         // 4. returns the object, or nil if anything goes wrong
         if let (datacode, _) = AlbumRef.getRefNameAndNumberFromData(data),
-            parent = AlbumType.getAlbumTypeInImportData(data, fromContext: moc) {
+            parent = AlbumType.getObjectInImportData(data, fromContext: moc) {
                 return getUniqueObject(datacode, fromContext: moc, createIfNeeded: true, withRelationships: ["type": parent])
         }
         return nil
@@ -79,5 +73,9 @@ extension AlbumFamily {
         if refCandidate > self.nextRef {
             self.nextRef = refCandidate
         }
+    }
+    
+    var theRefs: [AlbumRef] {
+        return Array(refs) as! [AlbumRef]
     }
 }

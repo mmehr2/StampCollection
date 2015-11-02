@@ -56,5 +56,8 @@ extension AlbumSection {
         }
         return nil
     }
-    
+
+    var thePages: [AlbumPage] {
+        return Array(pages) as! [AlbumPage]
+    }
 }

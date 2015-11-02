@@ -94,5 +94,8 @@ extension AlbumRef {
         }
         return nil
     }
-    
+
+    var theSections: [AlbumSection] {
+        return Array(sections) as! [AlbumSection]
+    }
 }

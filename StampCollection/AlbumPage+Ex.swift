@@ -39,4 +39,8 @@ extension AlbumPage {
         }
         return nil
     }
+    
+    var theItems: [DealerItem] {
+        return Array(items) as! [DealerItem]
+    }
 }

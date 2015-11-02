@@ -36,24 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         // set up the model layer internals (persistence, backend comm, etc.)
-        // first, decide which top level VC will be first to view (uses presence of particular function selector - poss.better to have a property?)
-        var defaultVC: UIViewController?
-        forEachTopLevelVC() { top in
-            // find the one VC that will kickstart the UI (for use by init completion block)
-            if top.respondsToSelector("startUI:") {
-                defaultVC = top
-                print("Set UI starter VC @ \(top)")
-            }
-        }
-        
-        // now initialize the data model, and trigger the UI display on its async completion
+        // trigger the UI display on its async completion
         dataModel = CollectionStore() {
-            print("COLLECTION STORE INITIALIZED, READY TO GO!")
-            // trigger UI here to display default VC
-            if let dvc = defaultVC {
-                dvc.performSelector("startUI:", withObject: self.dataModel)
-            } else {
-                print("Unable to start UI (no VC responds to startUI method)")
+            print("Collection Store initialization completed.")
+            // trigger UI here on VCs that depend on model data
+            self.forEachTopLevelVC() { top in
+                // find the one VC that will kickstart the UI (for use by init completion block)
+                if top.respondsToSelector("startUI:") {
+                    top.performSelector("startUI:", withObject: self.dataModel)
+                    print("Started UI for VC @ \(top)")
+                }
             }
         }
 
@@ -61,9 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // dynamically make sure all top-level VC objects know about the data model
         forEachTopLevelVC() { top in
             // if a top level VC has a property named 'model', this will set it to the data model object we just initialized
-            if top !== defaultVC && top.respondsToSelector("setModel:") {
+            if top.respondsToSelector("setModel:") {
                 top.performSelector("setModel:", withObject: self.dataModel)
-                print("Set one VC's model @ \(top)")
+                print("Set VC's model @ \(top)")
             }
         }
         
