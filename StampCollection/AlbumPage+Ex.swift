@@ -40,7 +40,7 @@ extension AlbumPage {
         return nil
     }
     
-    var theItems: [DealerItem] {
-        return Array(items) as! [DealerItem]
+    var theItems: [InventoryItem] {
+        return Array(items) as! [InventoryItem]
     }
 }

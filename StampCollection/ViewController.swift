@@ -32,6 +32,17 @@ class ViewController: UITableViewController {
         sp.startAnimating()
         spinner = sp
     }
+
+    // NOTE: the app delegate will send this message to all top-level VCs when starting up
+    // we can use this to autoload the persisted data before the user actually loads this
+    func setModel(store: CollectionStore) {
+        // use persisted copy with manual updates from web
+        setSpinnerView(true)
+        storeModel.importData() {
+            self.tableView.reloadData()
+            self.setSpinnerView(false)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +51,6 @@ class ViewController: UITableViewController {
         self.navigationController?.toolbarHidden = false
 
         title = "Dealer Categories"
-        // reload the BT categories page and continue to populate the data in the background
-//        storeModel.loadStore(.Populate) {
-//            self.tableView.reloadData()
-//        }
-        // use persisted copy with manual updates from web
-        setSpinnerView(true)
-        storeModel.importData() {
-            self.tableView.reloadData()
-            self.setSpinnerView(false)
-        }
     }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {

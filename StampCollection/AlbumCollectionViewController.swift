@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "AlbumCell"
-
 class AlbumCollectionViewController: UICollectionViewController {
     
     var model: CollectionStore!
@@ -27,7 +25,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
+        // Register cell classes // NOTE: this introduces bugs if uncommented - Oh, Apple!
    //     self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
@@ -40,13 +38,19 @@ class AlbumCollectionViewController: UICollectionViewController {
 
     /*
     // MARK: - Navigation
+    */
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowAlbumSegue" {
+            // Get the new view controller using [segue destinationViewController].
+            if let destinationVC = segue.destinationViewController as? AlbumPageViewController,
+                theAlbum = sender as? AlbumRef {
+                    // Pass the selected object to the new view controller.
+                    destinationVC.album = theAlbum
+            }
+        }
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -60,7 +64,7 @@ class AlbumCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! AlbumRefCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AlbumCell", forIndexPath: indexPath) as! AlbumRefCell
     
         // Configure the cell
         // set the title from the ViewModel here
@@ -96,36 +100,10 @@ class AlbumCollectionViewController: UICollectionViewController {
             return total + section.thePages.count
         }
         let secnames = sections.reduce("") { (x, y) -> String in return "\(x)\(x.characters.count > 0 ? ", " : "")\(y.code)" }
-        print("Album \(album.code) has \(pageCount) pages in \(sections.count) sections: [\(secnames)].")
+        print("Displaying album \(album.code) with \(pageCount) pages in \(sections.count) sections: [\(secnames)].")
+        
+        // and go there ...
+        performSegueWithIdentifier("ShowAlbumSegue", sender: album)
     }
     
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
 }

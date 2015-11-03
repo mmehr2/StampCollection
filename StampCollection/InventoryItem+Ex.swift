@@ -33,6 +33,10 @@ extension InventoryItem:  SortTypeSortableEx {
         }
         return conds[itemType]!
     }
+    
+    var itemPrice: String {
+        return self.dealerItem.getPrice(itemType)
+    }
 
     func updateBaseItem( item: DealerItem ) {
         let newID = item.id

@@ -135,6 +135,36 @@ extension DealerItem: SortTypeSortable {
         return getPicFileLocalURL(pictid, refType: isJS ? .DLJSRef  : .DLRef, category: catgDisplayNum)
     }
     
+    func getPrice(type: String) -> String {
+        switch type {
+        case "price1": return price1
+        case "price2": return price2
+        case "price3": return price3
+        case "price4": return price4
+        default: return ""
+        }
+    }
+    
+    func getOldPrice(type: String) -> String {
+        switch type {
+        case "price1": return oldprice1
+        case "price2": return oldprice2
+        case "price3": return oldprice3
+        case "price4": return oldprice4
+        default: return ""
+        }
+    }
+    
+    func getBuyURL(type: String) -> String {
+        switch type {
+        case "price1": return buy1
+        case "price2": return buy2
+        case "price3": return buy3
+        case "price4": return buy4
+        default: return ""
+        }
+    }
+    
     enum ValueType {
         case tInt(NSNumber)
         case tString(String)

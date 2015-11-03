@@ -41,26 +41,45 @@ NOTE: THIS IS A HACK! WE REALLY NEED TO CHANGE THINGS TO USE HTTPS: IN THE URLS 
 </dict>
 </dict>
 */
-private var completionHandlerForImageTask: ((UIImage?) -> Void)?
+public typealias CompHandler = ((UIImage?) -> Void)
+private var completionHandlersForImageTask: [String:CompHandler] = [:]
+// a pure URL index is not enough, we get two or three simultaneous requests for the same pic url in real life to different views
+// SO.. we need to get a unique hash from the URL and if it's in the table already, we need to extend it until we find one that's not
+// this could cause a race too, unless we can insure that the hashing is atomic
+// still, it should really only need to test once, or at most twice, so maybe it's okay...
+private func installHandler(url: NSURL, completion: CompHandler) -> String {
+    var code = url.path!
+    repeat {
+    guard completionHandlersForImageTask[code] != nil else {
+        completionHandlersForImageTask[code] = completion // this is the final case, not in the DB
+        print("Installed handler for code \(code)")
+        return code
+    }
+    code += ("X") // try it with another X on the end, until we have a hit
+    } while true
+}
+
 extension UIImageView {
     public func imageFromUrlString(urlString: String) {
         if let url = NSURL(string: urlString) {
             imageFromUrl(url)
         }
     }
-    public func imageFromUrl(url: NSURL?, completion: ((UIImage?) -> Void)? = nil) {
-        if let url = url {
+    public func imageFromUrl(url: NSURL?, completion: CompHandler? = nil) {
+        if let url = url, completion = completion {
             print("Requesting pic file at \(url)")
-            completionHandlerForImageTask = completion
+            let code = installHandler(url, completion: completion)
             let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
                 if let error = error {
                     print("Pic data received with error \(error)")
                 } else {
                     let image = UIImage(data: data!)
                     print("Pic data received with image \(image)")
-                    if let completion = completionHandlerForImageTask {
+                    if let completion = completionHandlersForImageTask[code] {
                         NSOperationQueue.mainQueue().addOperationWithBlock() {
                             completion(image)
+                            completionHandlersForImageTask[code] = nil
+                            print("Removed handler for code \(code)")
                         }
                     }
                 }

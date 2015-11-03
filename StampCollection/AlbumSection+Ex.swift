@@ -56,8 +56,14 @@ extension AlbumSection {
         }
         return nil
     }
+    
+    private func sortByNumber(lhs: AlbumPage, _ rhs: AlbumPage) -> Bool {
+        return lhs.number < rhs.number
+    }
 
     var thePages: [AlbumPage] {
-        return Array(pages) as! [AlbumPage]
+        var result = Array(pages) as! [AlbumPage]
+        result.sortInPlace(sortByNumber)
+        return result
     }
 }
