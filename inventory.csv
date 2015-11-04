@@ -2661,22 +2661,22 @@ h,6110e1024,price1,SCH,ISRAEL4,S/S,57,,,,24
 h,6110e1101,price1,SCH,ISRAEL4,S/S,60,,,,24
 h,6110e1014,price1,SCH,ISRAEL4,S/S,55,,,,24
 h,6110e845A,price1,SS6,BKLT3,SA,29,,"Partial set (1v) 0.30 1st print (1 Menorah)",,24
-h,6110e845A,price1,SS6,BKLT3,SA,30,,"Partial set (1v) 0.50 1st print (1 Menorah)",,24
-h,6110e845A,price1,SS6,BKLT3,SA,31,,"Partial set (1v) 1.00 1st print (1 Menorah)",,24
-h,6110e845C,price1,SS6,BKLT3,SA,32,,"Partial set (1v) 0.40 1st print (1 Menorah)",,24
-h,6110e845C,price1,SS6,BKLT3,SA,33,,"Partial set (1v) 0.50 2nd print (2 Menorah)",,24
-h,6110e845C,price1,SS6,BKLT3,SA,34,,"Partial set (1v) 1.00 2nd print (2 Menorah)",,24
-w,6110e845D,price1,SS6,BKLT3,SA,35,,,,24
-h,6110e845E,price1,SS6,BKLT3,SA,36,,,,24
-h,6110e845F,price1,SS6,BKLT3,SA,37,,,,24
-h,6110e845G,price1,SS6,BKLT3,SA,38,,"Partial set (1v) 0.30 3rd print (3 Menorah)",,24
-h,6110e845G,price1,SS6,BKLT3,SA,39,,"Partial set (1v) 1.00 4th print (4 Menorah)",,24
-h,6110e845H,price1,SS6,BKLT3,SA,40,,"Partial set (1v) 0.40 2nd print (2 Menorah)",,24
-h,6110e845H,price1,SS6,BKLT3,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
-h,6110e845H,price1,SS6,BKLT3,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
-h,6110e845I,price1,SS6,BKLT3,SA,42,,"Partial set (1v) 0.30 4th print (4 Menorah)",,24
-h,6110e845I,price1,SS6,BKLT3,SA,43,,"Partial set (1v) 1.00 5th print (5 Menorah)",,24
-h,6110e845K,price1,SS6,BKLT3,SA,44,,,,24
+h,6110e845B,price1,SS6,BKLT3,SA,30,,"Partial set (1v) 0.50 1st print (1 Menorah)",,24
+h,6110e845C,price1,SS6,BKLT3,SA,31,,"Partial set (1v) 1.00 1st print (1 Menorah)",,24
+h,6110e845D,price1,SS6,BKLT3,SA,32,,"Partial set (1v) 0.40 1st print (1 Menorah)",,24
+h,6110e845E,price1,SS6,BKLT3,SA,33,,"Partial set (1v) 0.50 2nd print (2 Menorah)",,24
+h,6110e845F,price1,SS6,BKLT3,SA,34,,"Partial set (1v) 1.00 2nd print (2 Menorah)",,24
+w,6110e845H,price1,SS6,BKLT3,SA,35,,,,24
+h,6110e845I,price1,SS6,BKLT3,SA,36,,,,24
+h,6110e845J,price1,SS6,BKLT3,SA,37,,,,24
+h,6110e845K,price1,SS6,BKLT3,SA,38,,"Partial set (1v) 0.30 3rd print (3 Menorah)",,24
+h,6110e845L,price1,SS6,BKLT3,SA,39,,"Partial set (1v) 1.00 4th print (4 Menorah)",,24
+h,6110e845M,price1,SS6,BKLT3,SA,40,,"Partial set (1v) 0.40 2nd print (2 Menorah)",,24
+h,6110e845N,price1,SS6,BKLT3,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
+h,6110e845N,price1,SS6,BKLT3,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
+h,6110e845O,price1,SS6,BKLT3,SA,42,,"Partial set (1v) 0.30 4th print (4 Menorah)",,24
+h,6110e845P,price1,SS6,BKLT3,SA,43,,"Partial set (1v) 1.00 5th print (5 Menorah)",,24
+h,6110e845R,price1,SS6,BKLT3,SA,44,,,,24
 h,6110e564,price2,SS6,FDC10,,627,,,,24
 h,6110e732,price2,SS6,FDC12,,793,,"Partial set (1v) 3.00 (King Solomon's Temple, #1/2)",,24
 h,6110e732,price2,SS6,FDC12,,794,,"Partial set (1v) 5.00 (Zippori, #2/2)",,24
@@ -4737,10 +4737,10 @@ h,6110e1214,price1,SS6,BKLT2,PB,19,,,,3
 h,6110e128A,price1,SS6,BKLT3,SA,19,,,,3
 h,6110e128B,price1,SS6,BKLT3,SA,20,,,,3
 h,6110e144B,price1,SS6,BKLT3,SA,23,,,,3
-h,6110e845L,price1,SS6,BKLT3,SA,45,,"Partial set (1v) 0.50 5th print (5 Menorah)",,24
-w,6110e845L,price1,SS6,BKLT3,SA,46,,"Partial set (1v) 1.00 6th print (6 Menorah)",,24
-h,6110e845M,price1,SS6,BKLT3,SA,47,,"Partial set (1v) 0.30 5th print (5 Menorah)",,24
-h,6110e845M,price1,SS6,BKLT3,SA,48,,"Partial set (1v) 0.40 4th print (4 Menorah)",,24
+h,6110e845S,price1,SS6,BKLT3,SA,45,,"Partial set (1v) 0.50 5th print (5 Menorah)",,24
+w,6110e845T,price1,SS6,BKLT3,SA,46,,"Partial set (1v) 1.00 6th print (6 Menorah)",,24
+h,6110e845U,price1,SS6,BKLT3,SA,47,,"Partial set (1v) 0.30 5th print (5 Menorah)",,24
+h,6110e845V,price1,SS6,BKLT3,SA,48,,"Partial set (1v) 0.40 4th print (4 Menorah)",,24
 h,6110e191A,price1,SS6,BKLT3,SA,49,,,,24
 h,6110e191B,price1,SS6,BKLT3,SA,50,,,,24
 h,6110t28,price1,SS10,SHEETS01,SER1948,1,6110s28,,,31
