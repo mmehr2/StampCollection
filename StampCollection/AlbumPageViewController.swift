@@ -260,6 +260,7 @@ class AlbumPageViewController: UICollectionViewController {
         cell.title = "\(infoItem.descriptionX) \(item.desc) \(item.notes)"
         cell.condition = "\(infoItem.id) \(item.itemCondition) \(item.itemPrice)"
         cell.wanted = item.wantHave == "w"
+        cell.image = nil // pave the way, delete any old image in dequeued cell
         cell.picURL = infoItem.picFileRemoteURL
     
         return cell

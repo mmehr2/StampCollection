@@ -571,12 +571,26 @@
                                             <rect key="frame" x="8" y="8" width="264" height="282"/>
                                             <gestureRecognizers/>
                                         </imageView>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKw-Sj-zd8" userLabel="Bottom Gradient View" customClass="GradientView" customModule="StampCollection" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="272" width="264" height="18"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="topDown" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCl-ml-fa5">
                                             <rect key="frame" x="8" y="272" width="264" height="18"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9S-9a-Yrz" userLabel="Top Gradient View" customClass="GradientView" customModule="StampCollection" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="264" height="18"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="topDown" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Koa-25-9Rf">
                                             <rect key="frame" x="8" y="8" width="264" height="18"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -589,13 +603,21 @@
                                 <color key="backgroundColor" red="0.25098040699958801" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="FQy-iI-JUL" firstAttribute="leading" secondItem="EPP-uh-cZj" secondAttribute="leading" constant="8" id="3Ft-7W-oDB"/>
+                                    <constraint firstItem="U9S-9a-Yrz" firstAttribute="height" secondItem="Koa-25-9Rf" secondAttribute="height" id="4xu-Cq-7HK"/>
+                                    <constraint firstItem="U9S-9a-Yrz" firstAttribute="trailing" secondItem="Koa-25-9Rf" secondAttribute="trailing" id="D9F-5Z-ld5"/>
                                     <constraint firstItem="FQy-iI-JUL" firstAttribute="top" secondItem="EPP-uh-cZj" secondAttribute="top" constant="8" id="JqI-du-k5k"/>
                                     <constraint firstItem="Koa-25-9Rf" firstAttribute="leading" secondItem="EPP-uh-cZj" secondAttribute="leading" constant="8" id="O0M-kU-Vif"/>
                                     <constraint firstAttribute="trailing" secondItem="Koa-25-9Rf" secondAttribute="trailing" constant="8" id="VuH-RK-mGJ"/>
+                                    <constraint firstItem="U9S-9a-Yrz" firstAttribute="top" secondItem="Koa-25-9Rf" secondAttribute="top" id="YB6-ZG-hr1"/>
+                                    <constraint firstItem="jKw-Sj-zd8" firstAttribute="height" secondItem="gCl-ml-fa5" secondAttribute="height" id="cFf-id-rb0"/>
                                     <constraint firstAttribute="bottom" secondItem="FQy-iI-JUL" secondAttribute="bottom" constant="8" id="fxT-kR-BaV"/>
+                                    <constraint firstItem="U9S-9a-Yrz" firstAttribute="leading" secondItem="Koa-25-9Rf" secondAttribute="leading" id="g6J-2v-4dD"/>
+                                    <constraint firstItem="jKw-Sj-zd8" firstAttribute="leading" secondItem="gCl-ml-fa5" secondAttribute="leading" id="g6l-yJ-mXO"/>
                                     <constraint firstAttribute="bottom" secondItem="gCl-ml-fa5" secondAttribute="bottom" constant="8" id="m3R-v8-QBI"/>
                                     <constraint firstAttribute="trailing" secondItem="gCl-ml-fa5" secondAttribute="trailing" constant="8" id="mqI-cL-YMU"/>
+                                    <constraint firstItem="jKw-Sj-zd8" firstAttribute="bottom" secondItem="gCl-ml-fa5" secondAttribute="bottom" id="s82-UP-Xjh"/>
                                     <constraint firstAttribute="trailing" secondItem="FQy-iI-JUL" secondAttribute="trailing" constant="8" id="utW-U3-D3Y"/>
+                                    <constraint firstItem="jKw-Sj-zd8" firstAttribute="trailing" secondItem="gCl-ml-fa5" secondAttribute="trailing" id="vG7-gM-VW1"/>
                                     <constraint firstItem="Koa-25-9Rf" firstAttribute="top" secondItem="EPP-uh-cZj" secondAttribute="top" constant="8" id="vap-bg-HXw"/>
                                     <constraint firstItem="gCl-ml-fa5" firstAttribute="leading" secondItem="EPP-uh-cZj" secondAttribute="leading" constant="8" id="ydX-z3-l3l"/>
                                 </constraints>
