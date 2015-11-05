@@ -47,7 +47,7 @@ class AlbumCollectionViewController: UICollectionViewController {
             if let destinationVC = segue.destinationViewController as? AlbumPageViewController,
                 theAlbum = sender as? AlbumRef {
                     // Pass the selected object to the new view controller.
-                    destinationVC.album = theAlbum
+                    destinationVC.setStartAlbum(theAlbum)
             }
         }
     }
