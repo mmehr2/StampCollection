@@ -41,7 +41,7 @@ NOTE: THIS IS A HACK! WE REALLY NEED TO CHANGE THINGS TO USE HTTPS: IN THE URLS 
 </dict>
 </dict>
 */
-public typealias CompHandler = ((UIImage?) -> Void)
+public typealias CompHandler = ((UIImage?, forURL: NSURL) -> Void)
 private var completionHandlersForImageTask: [String:CompHandler] = [:]
 private var debugging = false // turn on to get debug printouts
 // a pure URL index is not enough, we get two or three simultaneous requests for the same pic url in real life to different views
@@ -78,7 +78,7 @@ extension UIImageView {
                     if debugging { print("Pic data received with image \(image)") }
                     if let completion = completionHandlersForImageTask[code] {
                         NSOperationQueue.mainQueue().addOperationWithBlock() {
-                            completion(image)
+                            completion(image, forURL: url)
                             completionHandlersForImageTask[code] = nil
                             if debugging { print("Removed handler for code \(code)") }
                         }

@@ -54,6 +54,11 @@ class InfoCategoriesTableViewController: UITableViewController {
 
     @IBAction func doImportAction(sender: UIBarButtonItem) {
         
+        guard let appDel = UIApplication.sharedApplication().delegate as? AppDelegate else {
+            print("Unable to get app delegate - should never happen.")
+            return
+        }
+        
         messageBoxWithTitleEx("Import Data from CSV", andBody: "NOTE: Wipes the database first! OK to proceed?", forController: self) { ac in
             var act = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
                 // dismiss but do nothing
@@ -62,16 +67,16 @@ class InfoCategoriesTableViewController: UITableViewController {
             act = UIAlertAction(title: "OK", style: .Destructive) { _ in
                 // wipe the slate
                 self.model.removeAllItemsInStore() {
-                    self.updateUI()
-                    // load the data from CSV files
+                    // all items successfully erased here
+                    // since we are majorly changing the model, we must notify all top level VCs of the change (including ourselves)
+                    appDel.restartUI()
+                    // load the new data from CSV files
                     let sourceType = ImportExport.Source.Bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
                     self.csvFileImporter.importData(sourceType, toModel: self.model) {
                         // save all the imported data to its persistence layer
                         self.model.saveMainContext()
-                        // also, load the data, then update the UI
-                        self.model.fetchType(.Categories) {
-                            self.updateUI()
-                        }
+                        // trigger the app delegate to update all the top-level UI's with new model data (including self)
+                        appDel.restartUI()
                     }
                 }
             }

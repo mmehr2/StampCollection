@@ -76,6 +76,9 @@ extension AlbumFamily {
     }
     
     var theRefs: [AlbumRef] {
+        guard let refs = self.refs else {
+            return []
+        }
         return Array(refs) as! [AlbumRef]
     }
 }

@@ -110,8 +110,8 @@ class InfoItemViewController: UIViewController {
     private func downloadAndDisplayImage() {
         // run this on a background thread
         if let imageSource = picFileURLSource {
-            imageView.imageFromUrl(imageSource) { image in
-                if let image = image {
+            imageView.imageFromUrl(imageSource) { image, urlReceived in
+                if let image = image where urlReceived == imageSource {
                     self.imageView.image = image
                 }
             }

@@ -41,6 +41,9 @@ extension AlbumPage {
     }
     
     var theItems: [InventoryItem] {
+        guard let items = self.items else {
+            return []
+        }
         return Array(items) as! [InventoryItem]
     }
 }

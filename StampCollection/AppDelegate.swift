@@ -31,24 +31,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+
+    /// restartUI - function to update all top level user interfaces once the CollectionStore has been (re-)initialized
+    ///
+    /// It will send the startUI(:) selector to all top-level VC's (those directly attached to the NavigationControllers under the master TabBarController
+    /// It will pass a reference to the data model object (CollectionStore) for access to the refreshed CoreData objects.
+    func restartUI() {
+        // trigger UI here on VCs that depend on model data
+        forEachTopLevelVC() { top in
+            // find the one VC that will kickstart the UI (for use by init completion block)
+            if top.respondsToSelector("startUI:") {
+                top.performSelector("startUI:", withObject: self.dataModel)
+                print("Started UI for VC @ \(top)")
+            }
+        }
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
         // set up the model layer internals (persistence, backend comm, etc.)
         // trigger the UI display on its async completion
         dataModel = CollectionStore() {
             print("Collection Store initialization completed.")
-            // trigger UI here on VCs that depend on model data
-            self.forEachTopLevelVC() { top in
-                // find the one VC that will kickstart the UI (for use by init completion block)
-                if top.respondsToSelector("startUI:") {
-                    top.performSelector("startUI:", withObject: self.dataModel)
-                    print("Started UI for VC @ \(top)")
-                }
-            }
+            self.restartUI()
         }
-
+        
         // THIS CODE IS FROM RAY WENDERLICH INTERMEDIATE COREDATA TUTORIAL
         // dynamically make sure all top-level VC objects know about the data model
         forEachTopLevelVC() { top in
@@ -58,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Set VC's model @ \(top)")
             }
         }
-        
         return true
     }
     

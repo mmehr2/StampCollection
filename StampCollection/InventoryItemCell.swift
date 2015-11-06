@@ -38,8 +38,8 @@ class InventoryItemCell: UICollectionViewCell {
     /// set the image by providing a (remote) URL
     var picURL: NSURL? {
         didSet {
-            imageView.imageFromUrl(picURL) { image in
-                if let image = image {
+            imageView.imageFromUrl(picURL) { image, urlReceived in
+                if let image = image where urlReceived == self.picURL {
                     self.imageView.image = image
                 }
             }

@@ -15,6 +15,7 @@ class AlbumCollectionViewController: UICollectionViewController {
     func startUI(store: CollectionStore) {
         families = fetch("AlbumFamily", inContext: model.getContextForThread(CollectionStore.mainContextToken)!)
         print("Started with \(families.count) album family groups")
+        collectionView?.reloadData()
     }
     
     var families: [AlbumFamily] = []
@@ -60,7 +61,7 @@ class AlbumCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return families[section].refs.count
+        return families[section].theRefs.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

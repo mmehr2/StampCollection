@@ -96,6 +96,9 @@ extension AlbumRef {
     }
 
     var theSections: [AlbumSection] {
+        guard let sections = self.sections else {
+            return []
+        }
         return Array(sections) as! [AlbumSection]
     }
 }

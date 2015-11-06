@@ -63,6 +63,9 @@ extension AlbumType {
     }
     
     var theFamilies: [AlbumFamily] {
+        guard let families = self.families else {
+            return []
+        }
         return Array(families) as! [AlbumFamily]
     }
 }

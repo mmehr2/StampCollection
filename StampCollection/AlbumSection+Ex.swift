@@ -62,6 +62,9 @@ extension AlbumSection {
     }
 
     var thePages: [AlbumPage] {
+        guard let pages = self.pages else {
+            return []
+        }
         var result = Array(pages) as! [AlbumPage]
         result.sortInPlace(sortByNumber)
         return result
