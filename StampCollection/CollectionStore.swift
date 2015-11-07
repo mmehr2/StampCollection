@@ -204,7 +204,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     }
 
     // save the main context
-    private func saveMainContextOnQueue() {
+    private func saveMainContextOnQueue(userCompletion: (()->Void)?) {
         if let context = mainManagedObjectContext, contextP = saveManagedObjectContext {
             // two-step process:
             // step 1 - save the source of truth running sync on its own queue (main)
@@ -218,6 +218,10 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                         return
                     }
                 }
+            }
+            // step 1A - run the user completion routine async on main queue
+            if let userCompletion = userCompletion {
+                context.performBlock(userCompletion)
             }
             // step 2 - save the parent MOC running async on its own queue (pvt)
             if contextP.hasChanges {
@@ -233,7 +237,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         }
     }
     
-    private func saveMainContextOnQueueAsync() {
+    private func saveMainContextOnQueueAsync(userCompletion: (()->Void)?) {
         if let context = mainManagedObjectContext, contextP = saveManagedObjectContext {
             // two-step process:
             // step 1 - save the source of truth running async on its own queue (main)
@@ -256,6 +260,10 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                         return
                     }
                 }
+                // step 1A - queue the user's block on the main queue in any case
+                if let userCompletion = userCompletion {
+                    context.performBlock(userCompletion)
+                }
             }
                 // ALT (no changes in main, but still some left on pvt?) - should never happen?
                 // save the parent MOC running async on its own queue (pvt)
@@ -268,6 +276,10 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                     } catch {
                         print("Error savingA2 private CoreData disk context \(error)")
                     }
+                }
+                // queue the user's block on the main queue in any case
+                if let userCompletion = userCompletion {
+                    context.performBlock(userCompletion)
                 }
             }
         }
@@ -293,35 +305,35 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         return result
     }
     
-    private func saveContext(context: NSManagedObjectContext, background: Bool = false) -> Bool {
+    private func saveContext(context: NSManagedObjectContext, background: Bool = false, userCompletion: (() -> Void)?) -> Bool {
         if context == saveManagedObjectContext {
             print("PROGRAMMING ERROR! Attempt to save master CoreData context directly.")
             return false // this should not be used this way! assert?? programming error!
         } else if context == mainManagedObjectContext {
-            background ? saveMainContextOnQueueAsync() : saveMainContextOnQueue()
+            background ? saveMainContextOnQueueAsync(userCompletion) : saveMainContextOnQueue(userCompletion)
         } else {
             let saved = saveChildContextOnQueue(context)
             if saved {
-                saveMainContextOnQueueAsync()
+                saveMainContextOnQueueAsync(userCompletion)
             }
         }
         return true
     }
     
-    func saveMainContext() -> Bool {
+    func saveMainContext(userCompletion: (() -> Void)? = nil) -> Bool {
         // this has two steps: save the context to parent, and then fire the async save of the private parent context
         if let context = getContextForThread(CollectionStore.mainContextToken) {
-            return saveContext(context)
+            return saveContext(context, userCompletion: userCompletion)
         }
         return false
     }
     
-    func saveContextForThread(token: ContextToken) -> Bool {
+    func saveContextForThread(token: ContextToken, userCompletion: (() -> Void)? = nil) -> Bool {
         if token == CollectionStore.mainContextToken {
-            return saveMainContext()
+            return saveMainContext(userCompletion)
         }
         else if token != CollectionStore.badContextToken, let context = mocsForThreads[token] {
-            return saveContext(context)
+            return saveContext(context, userCompletion: userCompletion)
         }
         return false
     }
@@ -392,7 +404,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                 for obj in types {
                     context.deleteObject(obj)
                 }
-                self.saveContext(context) // save all these deletes to the local child context's parent
+                self.saveContext(context, userCompletion: nil) // save all these deletes to the local child context's parent
                 self.removeContextForThread(token) // finally done with the local child context, release it
                 //self.saveMainContext() // commit those changes to the parent and its background saver
                 
@@ -419,7 +431,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         if let context = item.managedObjectContext {
             context.deleteObject(item)
             if commit {
-                return saveContext(context)
+                return saveContext(context, userCompletion: nil)
             }
             return true
         }
