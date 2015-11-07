@@ -23,6 +23,10 @@ extension InventoryItem:  SortTypeSortableEx {
     var normalizedDate: String {
         return dealerItem.normalizedDate
     }
+    
+    var wanted: Bool {
+        return self.wantHave == "w"
+    }
 
     var itemCondition: String {
         let prices = self.category.prices

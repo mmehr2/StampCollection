@@ -299,8 +299,8 @@ func filterInfo( coll: [DealerItem], types: [SearchType] ) -> [DealerItem] {
 //    var result = false
 //    switch type {
 //    case .WantHave(let wht):
-//        if wht == .Haves && item.wantHave == "h" { result = true }
-//        if wht == .Wants && item.wantHave == "w" { result = true }
+//        if wht == .Haves && !item.wanted { result = true }
+//        if wht == .Wants && item.wanted { result = true }
 //        break
 //    default:
 //        break

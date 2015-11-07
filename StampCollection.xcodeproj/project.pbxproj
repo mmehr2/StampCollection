@@ -16,6 +16,7 @@
 		A60DBCB41AE38AD900D4959D /* BTItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */; };
 		A60DBCB61AE38BDA00D4959D /* BTDealerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */; };
 		A60DBCB81AE38C3400D4959D /* getItems.js in Resources */ = {isa = PBXBuildFile; fileRef = A60DBCB71AE38C3400D4959D /* getItems.js */; };
+		A61996C31BECC12600F3BD01 /* InventoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61996C21BECC12600F3BD01 /* InventoryItemView.swift */; };
 		A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115B1AE6DBB400063025 /* BTDealerStore.swift */; };
 		A61C115E1AE6F0F900063025 /* BTMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */; };
 		A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */; };
@@ -32,6 +33,7 @@
 		A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBA1AF538FD00565686 /* InfoUtilities.swift */; };
 		A632CBBD1AF6AC8B00565686 /* UIQueryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */; };
 		A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632F77C1B373AF8001C6EE1 /* ItemTableViewCell.swift */; };
+		A63965F01BED528E00308F2F /* InventoryItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63965EF1BED528E00308F2F /* InventoryItemView.xib */; };
 		A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */; };
 		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
 		A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */ = {isa = PBXBuildFile; fileRef = A662C1C21AFDFD520067792F /* inventory.corrupt.csv */; };
@@ -51,6 +53,7 @@
 		A66FD2951BEA916E00C7A2FD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD2941BEA916E00C7A2FD /* GradientView.swift */; };
 		A66FD2971BEAC45000C7A2FD /* AlbumFamilyNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD2961BEAC45000C7A2FD /* AlbumFamilyNavigator.swift */; };
 		A66FD2991BEB45B400C7A2FD /* UIImageView+NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD2981BEB45B400C7A2FD /* UIImageView+NetworkExtensions.swift */; };
+		A66FD29B1BEC78EA00C7A2FD /* InventoryItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD29A1BEC78EA00C7A2FD /* InventoryItemViewController.swift */; };
 		A67977DA1BB11994007F298D /* InventoryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67977D21BB11994007F298D /* InventoryItem+CoreDataProperties.swift */; };
 		A67977DB1BB11994007F298D /* AlbumSection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67977D31BB11994007F298D /* AlbumSection+CoreDataProperties.swift */; };
 		A67977DC1BB11994007F298D /* AlbumRef+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67977D41BB11994007F298D /* AlbumRef+CoreDataProperties.swift */; };
@@ -115,6 +118,7 @@
 		A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemsTableViewController.swift; sourceTree = "<group>"; };
 		A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDealerItem.swift; sourceTree = "<group>"; };
 		A60DBCB71AE38C3400D4959D /* getItems.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getItems.js; sourceTree = "<group>"; };
+		A61996C21BECC12600F3BD01 /* InventoryItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryItemView.swift; sourceTree = "<group>"; };
 		A61C115B1AE6DBB400063025 /* BTDealerStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDealerStore.swift; sourceTree = "<group>"; };
 		A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTMessageDelegate.swift; sourceTree = "<group>"; };
 		A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCategoriesTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 		A632CBBA1AF538FD00565686 /* InfoUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoUtilities.swift; sourceTree = "<group>"; };
 		A632CBBC1AF6AC8B00565686 /* UIQueryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIQueryAlert.swift; sourceTree = "<group>"; };
 		A632F77C1B373AF8001C6EE1 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		A63965EF1BED528E00308F2F /* InventoryItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryItemView.xib; sourceTree = "<group>"; };
 		A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTableViewDoubleCell.swift; sourceTree = "<group>"; };
 		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
 		A662C1C21AFDFD520067792F /* inventory.corrupt.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inventory.corrupt.csv; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 		A66FD2941BEA916E00C7A2FD /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		A66FD2961BEAC45000C7A2FD /* AlbumFamilyNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumFamilyNavigator.swift; sourceTree = "<group>"; };
 		A66FD2981BEB45B400C7A2FD /* UIImageView+NetworkExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+NetworkExtensions.swift"; sourceTree = "<group>"; };
+		A66FD29A1BEC78EA00C7A2FD /* InventoryItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryItemViewController.swift; sourceTree = "<group>"; };
 		A67977D21BB11994007F298D /* InventoryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InventoryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A67977D31BB11994007F298D /* AlbumSection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumSection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A67977D41BB11994007F298D /* AlbumRef+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumRef+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -358,11 +364,14 @@
 			isa = PBXGroup;
 			children = (
 				A6E1984E1AD6EEEC0090FDB1 /* Main.storyboard */,
+				A61996C21BECC12600F3BD01 /* InventoryItemView.swift */,
+				A63965EF1BED528E00308F2F /* InventoryItemView.xib */,
 				A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */,
 				A69C300F1BE76E2900A9D39D /* AlbumCollectionViewController.swift */,
 				A69C30131BE78CD300A9D39D /* AlbumRefCell.swift */,
 				A69C30111BE780E900A9D39D /* AlbumSectionHeaderView.swift */,
 				A66FD28E1BE85CC600C7A2FD /* AlbumPageViewController.swift */,
+				A66FD29A1BEC78EA00C7A2FD /* InventoryItemViewController.swift */,
 				A66FD2901BE86DE400C7A2FD /* InventoryItemCell.swift */,
 				A6AA4E4E1B4DC43D007D9558 /* WebItemViewController.swift */,
 				A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */,
@@ -518,6 +527,7 @@
 				A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */,
 				A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */,
 				A60DBC711ADBC13600D4959D /* info.csv in Resources */,
+				A63965F01BED528E00308F2F /* InventoryItemView.xib in Resources */,
 				A6E198521AD6EEEC0090FDB1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +580,7 @@
 				A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */,
 				A66348151B236FDA00A4D225 /* Regex.swift in Sources */,
 				A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */,
+				A61996C31BECC12600F3BD01 /* InventoryItemView.swift in Sources */,
 				A67977DF1BB11994007F298D /* Category+CoreDataProperties.swift in Sources */,
 				A67977E01BB11994007F298D /* DealerItem+CoreDataProperties.swift in Sources */,
 				A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */,
@@ -578,6 +589,7 @@
 				A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */,
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
 				A6856E5E1B070D56004B506E /* InventoryItem.swift in Sources */,
+				A66FD29B1BEC78EA00C7A2FD /* InventoryItemViewController.swift in Sources */,
 				A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */,
 				A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */,
 				A69C30121BE780E900A9D39D /* AlbumSectionHeaderView.swift in Sources */,

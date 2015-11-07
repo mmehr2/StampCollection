@@ -73,6 +73,49 @@ class AlbumFamilyNavigator {
         gotoMarker(AlbumMarker.CurrentAlbumStart)
     }
 
+    init?(page: AlbumPage) {
+        currentAlbum = page.section.ref
+        var found = false
+        for (index, item) in currentAlbum.family.theRefs.enumerate() {
+            if item === currentAlbum {
+                currentAlbumIndex = index
+                found = true
+            }
+        }
+        if !found {
+            print("Cannot find album index \(page.section.ref.code) for page \(page.code)")
+            return nil
+        }
+        //print("Initpage1/3 \(currentIndex) of \(maxIndex)")
+        found = false
+        currentSection = page.section
+        for (index, item) in currentAlbum.theSections.enumerate() {
+            if item === currentSection {
+                currentSectionIndex = index
+                found = true
+            }
+        }
+        if !found {
+            print("Cannot find section index \(page.section.code) for page \(page.code)")
+            return nil
+        }
+        //print("Initpage2/3 \(currentIndex) of \(maxIndex)")
+        found = false
+        currentPage = page
+        for (index, item) in currentSection.thePages.enumerate() {
+            if item === currentPage {
+                currentPageIndex = index
+                found = true
+            }
+        }
+        if !found {
+            print("Cannot find page index for page \(page.code)")
+            return nil
+        }
+        //print("Initpage3/3 \(currentIndex) of \(maxIndex)")
+        found = false
+    }
+    
     /// Summarizes the title for the current page using album and section attributes, suitable for UI titling
     func getCurrentPageTitle() -> String {
         // set the nav bar title to the page/section/ref indicator and show # of items

@@ -270,7 +270,7 @@ WANTED vs HAVE-IT:
 var wantHave: String // "w" for want list item, "h" for have it in the collection
 */
 private func formatInventoryWantField(item: InventoryItem) -> String {
-    return item.wantHave == "w" ? "*WANTED*" : ""
+    return item.wanted ? "*WANTED*" : ""
 }
 
 private func formatInventoryLocation(item: InventoryItem) -> String {
@@ -326,6 +326,13 @@ func formatInventoryMain(item: InventoryItem) -> String {
 
 func formatInventoryDetail(item: InventoryItem) -> String {
     return "\(item.baseItem) \(formatInventoryValue(item)) \(formatInventoryVarCondition(item))"
+}
+
+func getTitlesForInventoryItem(item: InventoryItem) -> (top:String, bottom:String) {
+    let infoItem = item.dealerItem
+    let title = "\(infoItem?.descriptionX ?? "") \(item.desc) \(item.notes)"
+    let condition = "\(infoItem.id) \(item.itemCondition) \(item.itemPrice)"
+    return (condition, title)
 }
 
 // MARK: Parsing the ID code field for sorting

@@ -9,50 +9,37 @@
 import UIKit
 
 class InventoryItemCell: UICollectionViewCell {
-    
-    @IBOutlet private weak var bottomLabel: UILabel!
+    @IBOutlet private weak var innerView: InventoryItemView!
     
     var title: String? {
         didSet {
-            bottomLabel.text = title
+            innerView.title = title
         }
     }
-    
-    @IBOutlet private weak var topLabel: UILabel!
     
     var condition: String? {
         didSet {
-            topLabel.text = condition
+            innerView.condition = condition
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView!
-
     /// allows setting the image directly
     var image: UIImage? {
         didSet {
-            imageView.image = image
+            innerView.image = image
         }
     }
-
+    
     /// set the image by providing a (remote) URL
     var picURL: NSURL? {
         didSet {
-            imageView.imageFromUrl(picURL) { image, urlReceived in
-                if let image = image where urlReceived == self.picURL {
-                    self.imageView.image = image
-                }
-            }
+            innerView.picURL = picURL
         }
     }
     
     var wanted: Bool = false {
         didSet {
-            if wanted {
-                self.backgroundColor = UIColor.redColor()
-            } else {
-                self.backgroundColor = UIColor.fern()
-            }
+            innerView.wanted = wanted
         }
     }
     
