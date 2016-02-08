@@ -15,6 +15,8 @@ import Foundation
 //  3) used if let syntax for regex optional testing/chaining
 //  4) better use of private keyword
 // Then I modified it to use static private implementation funcs for the guts (to make the Ruby operators optional), and wrote String extension versions a la Javascript
+// WARNING 11/2015: USES MIXED VALUE AND REFERENCE SEMANTICS! TBD: Need to deal with copy-on-write-if-referenced semantics as in: http://www.raywenderlich.com/112029/reference-value-types-in-swift-part-2
+// Also there have been other articles I've read recently 11/14/15 about using init(copy:C) that seem better, but is this a convention/best-practice or a 2.1 compiler change? find the ref ...
 
 struct Regex {
     var pattern: String{
@@ -71,31 +73,31 @@ struct Regex {
 
 }
 
-// MARK: match test operator (OPT - can be removed)
-infix operator =~ { associativity left precedence 140 }
-
-// match using an existing Regex: String =~ Regex
-func =~(left: String, right: Regex) -> Bool {
-    return Regex.testMatch(left, right: right)
-}
-
-// match using a Regex created from a String: String =~ String-regex-pattern
-func =~(left: String, right: String) -> Bool {
-    return left =~ Regex(pattern: right)
-}
-
-// MARK: replacement operator (OPT - can be removed)
-infix operator >< { associativity left precedence 140 }
-
-// replace using an existing Regex: String >< (Regex, String-template)
-func >< (left:String, right: (regex:Regex, template:String) ) -> String{
-    return Regex.replacePattern(left, right: right)
-}
-
-// replace using a Regex created from a String: String >< (String-pattern, String-template)
-func >< (left:String, right: (pattern:String, template:String) ) -> String{
-    return left >< (Regex(pattern: right.pattern), right.template)
-}
+//// MARK: match test operator (OPT - can be removed)
+//infix operator =~ { associativity left precedence 140 }
+//
+//// match using an existing Regex: String =~ Regex
+//func =~(left: String, right: Regex) -> Bool {
+//    return Regex.testMatch(left, right: right)
+//}
+//
+//// match using a Regex created from a String: String =~ String-regex-pattern
+//func =~(left: String, right: String) -> Bool {
+//    return left =~ Regex(pattern: right)
+//}
+//
+//// MARK: replacement operator (OPT - can be removed)
+//infix operator >< { associativity left precedence 140 }
+//
+//// replace using an existing Regex: String >< (Regex, String-template)
+//func >< (left:String, right: (regex:Regex, template:String) ) -> String{
+//    return Regex.replacePattern(left, right: right)
+//}
+//
+//// replace using a Regex created from a String: String >< (String-pattern, String-template)
+//func >< (left:String, right: (pattern:String, template:String) ) -> String{
+//    return left >< (Regex(pattern: right.pattern), right.template)
+//}
 
 // MY OWN EXTENSIONS: I prefer the JavaScript syntax of
 // string.test(pattern: String) -> Bool

@@ -21,9 +21,9 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
 @IBDesignable class InventoryItemView: UIView {
 
     // Our custom view from the XIB file
-    var view: UIView!
+    private var view: UIView!
     
-    func xibSetup() {
+    private func xibSetup() {
         view = loadViewFromNib(nibName)
         
         // use bounds not frame or it'll be offset
@@ -35,7 +35,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
         addSubview(view)
     }
     
-    func loadViewFromNib(nibName: String) -> UIView {
+    private func loadViewFromNib(nibName: String) -> UIView {
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: nibName, bundle: bundle)

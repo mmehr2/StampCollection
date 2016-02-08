@@ -18,12 +18,12 @@ class AlbumPageViewController: UICollectionViewController {
     var model: CollectionStore!
     
     func setStartAlbum( album: AlbumRef ) {
-        // setup the navigator for this album family
+        // setup the navigator for this album family using individual volume of series
         navigator = AlbumFamilyNavigator(album: album)
     }
     
     func setStartPage( page: AlbumPage ) {
-        // setup the navigator for this album family
+        // setup the navigator for this album family using current page to display
         navigator = AlbumFamilyNavigator(page: page)
     }
     
