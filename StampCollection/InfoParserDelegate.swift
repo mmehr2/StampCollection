@@ -11,16 +11,16 @@ import Foundation
 
 protocol CSVDataSink {
     // parser (via its delegate) will call this once for every data item (CSV data line) that has completed parsing
-    func parserDelegate( parserDelegate: CHCSVParserDelegate,
+    func parserDelegate( _ parserDelegate: CHCSVParserDelegate,
         foundData data: [String : String],
         inContext token: CollectionStore.ContextToken)
     
     // parser (via its delegate) will call this once at startup to determine if adding sequence info is needed
     // if so, return true and set the inout properties to reflect the starting count and property name to add to each data record
     // the automatically advancing sequence number will be added to each object dictionary returned using the property name provided, starting at the provided count
-    func parserDelegate( parserDelegate: CHCSVParserDelegate,
-        inout shouldAddSequenceData seqname: String,
-        inout fromCount start: Int,
+    func parserDelegate( _ parserDelegate: CHCSVParserDelegate,
+        shouldAddSequenceData seqname: inout String,
+        fromCount start: inout Int,
         inContext token: CollectionStore.ContextToken) -> Bool
 }
 
@@ -29,11 +29,11 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     let name : String
     var recordCount = 0
     var lastRecordNumber = -1
-    private var currentRecordNumber = -1
+    fileprivate var currentRecordNumber = -1
     var fieldCount = 0
     var headers : [String] = []
     //typealias RecordType = [String:String]
-    private var currentRecord : [String:String] = [:]
+    fileprivate var currentRecord : [String:String] = [:]
     var records : [[String:String]] = []
     var dataSink : CSVDataSink?
     var contextToken: CollectionStore.ContextToken = 0 // must be set before usage!
@@ -46,11 +46,11 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         super.init()
     }
     
-    func parser(parser: CHCSVParser!, didFailWithError error: NSError!) {
+    func parser(_ parser: CHCSVParser!, didFailWithError error: NSError!) {
         print("Failed parsing \(name) with error \(error)")
     }
 
-    func parserDidBeginDocument(parser: CHCSVParser!) {
+    func parserDidBeginDocument(_ parser: CHCSVParser!) {
         recordCount = 0
         fieldCount = 0
         // set up automatic data sequencing feature if told to
@@ -67,12 +67,12 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         }
     }
 
-    func parser(parser: CHCSVParser!, didBeginLine recordNumber: UInt) {
+    func parser(_ parser: CHCSVParser!, didBeginLine recordNumber: UInt) {
         currentRecordNumber = Int(recordNumber)
         currentRecord = [:]
     }
     
-    func parser(parser: CHCSVParser!, didReadField field: String!, atIndex fieldIndex: Int) {
+    func parser(_ parser: CHCSVParser!, didReadField field: String!, at fieldIndex: Int) {
         if currentRecordNumber == 1 {
             // each field is a new header name
             headers.append(field)
@@ -85,7 +85,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         }
     }
     
-    func parser(parser: CHCSVParser!, didEndLine recordNumber: UInt) {
+    func parser(_ parser: CHCSVParser!, didEndLine recordNumber: UInt) {
         if currentRecordNumber == 1 {
             print("\(name) Headers: \(headers)")
         } else if !currentRecord.isEmpty {
@@ -100,11 +100,11 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
             }
             
         }
-        ++recordCount
+        recordCount += 1
         lastRecordNumber = Int(recordNumber)
     }
     
-    func parserDidEndDocument(parser: CHCSVParser!) {
+    func parserDidEndDocument(_ parser: CHCSVParser!) {
         print("Finished parsing \(name) with \(recordCount) records ending with #\(lastRecordNumber)")
     }
 }

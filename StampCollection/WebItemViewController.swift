@@ -11,7 +11,7 @@ import WebKit
 
 class WebItemViewController: UIViewController {
 
-    var url: NSURL!
+    var url: URL!
     
     var webView: WKWebView!
 
@@ -29,8 +29,8 @@ class WebItemViewController: UIViewController {
 
 //        // Do any additional setup after loading the view.
         if let url = url {
-            let request = NSURLRequest(URL: url)
-            webView.loadRequest(request)
+            let request = URLRequest(url: url)
+            webView.load(request)
         }
     }
 

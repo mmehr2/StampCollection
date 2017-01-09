@@ -9,7 +9,7 @@
 import UIKit
 
 class InventoryItemCell: UICollectionViewCell {
-    @IBOutlet private weak var innerView: InventoryItemView!
+    @IBOutlet fileprivate weak var innerView: InventoryItemView!
     
     var title: String? {
         didSet {
@@ -31,7 +31,7 @@ class InventoryItemCell: UICollectionViewCell {
     }
     
     /// set the image by providing a (remote) URL
-    var picURL: NSURL? {
+    var picURL: URL? {
         didSet {
             innerView.picURL = picURL
         }

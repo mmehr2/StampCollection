@@ -40,14 +40,14 @@ class StampCollectionTests: XCTestCase {
     }
     
     func testMainStoreWithInitBlock() {
-        let timeout: NSTimeInterval = 10.0
-        let expectation = expectationWithDescription("Should be initialized after start timeout of \(timeout) seconds.")
+        let timeout: TimeInterval = 10.0
+        let expectation = self.expectation(description: "Should be initialized after start timeout of \(timeout) seconds.")
         let dataModel = CollectionStore() {
             expectation.fulfill()
             print("Called final block of init with INITIALIZED = ???.")
         }
         XCTAssert(!dataModel.initialized, "Uninitialized basic CoreData stack at start")
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
     
 }

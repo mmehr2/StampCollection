@@ -41,99 +41,99 @@ All this should be handled automatically when processing the local website files
 /// protocol for any import/export usage
 protocol ImportExportable {
     func prepareStorageContext(forExport exp: Bool) -> CollectionStore.ContextToken
-    func finalizeStorageContext(token: CollectionStore.ContextToken, forExport: Bool)
+    func finalizeStorageContext(_ token: CollectionStore.ContextToken, forExport: Bool)
     // operational requirements for persistence
-    func addOperationToContext(token: CollectionStore.ContextToken, withBlock handler: () -> Void ) // to do the actual import job (handler runs on private queue)
-    func addCompletionOperationWithBlock( handler: () -> Void ) // to notify when finished (handler runs on main queue)
+    func addOperationToContext(_ token: CollectionStore.ContextToken, withBlock handler: () -> Void ) // to do the actual import job (handler runs on private queue)
+    func addCompletionOperationWithBlock( _ handler: () -> Void ) // to notify when finished (handler runs on main queue)
 }
 
 /// protocol for sending data from a store to a csv file (exporting from store to csv file)
 protocol ExportDataSource: ImportExportable {
-    func numberOfItemsOfDataType( dataType: CollectionStore.DataType,
+    func numberOfItemsOfDataType( _ dataType: CollectionStore.DataType,
         withContext token: CollectionStore.ContextToken ) -> Int
-    func headersForItemsOfDataType( dataType: CollectionStore.DataType,
+    func headersForItemsOfDataType( _ dataType: CollectionStore.DataType,
         withContext token: CollectionStore.ContextToken )  -> [String]
-    func dataType(dataType: CollectionStore.DataType, dataItemAtIndex index: Int,
+    func dataType(_ dataType: CollectionStore.DataType, dataItemAtIndex index: Int,
         withContext token: CollectionStore.ContextToken ) -> [String:String]
 }
 
 /// protocol for sending incoming csv data to a store (importing from csv file to store)
 protocol ImportDataSink: ImportExportable {
-    func addObjectType(type: CollectionStore.DataType, withData: [String:String], toContext: CollectionStore.ContextToken)
-    func getCountForType(type: CollectionStore.DataType, fromCategory: Int16, inContext: CollectionStore.ContextToken) -> Int
+    func addObjectType(_ type: CollectionStore.DataType, withData: [String:String], toContext: CollectionStore.ContextToken)
+    func getCountForType(_ type: CollectionStore.DataType, fromCategory: Int16, inContext: CollectionStore.ContextToken) -> Int
 }
 
 class ImportExport: CSVDataSink {
     enum Source {
-        case Documents
-        case Bundle
+        case documents
+        case bundle
         // other cases may be added, such as:
         //case AirDrop
-        case EmailAttachment
+        case emailAttachment
     }
     
-    private var dataModel: ImportDataSink? // where this object will send import data coming from the csv files
+    fileprivate var dataModel: ImportDataSink? // where this object will send import data coming from the csv files
     
-    private var dataSource: ExportDataSource? // where this object will get export data going to the csv files
+    fileprivate var dataSource: ExportDataSource? // where this object will get export data going to the csv files
         
-    private var bundleURL: NSURL { return NSBundle.mainBundle().bundleURL }
+    fileprivate var bundleURL: URL { return Bundle.main.bundleURL }
 
-    private var bundleInfoURL: NSURL { return bundleURL.URLByAppendingPathComponent("info.csv") }
+    fileprivate var bundleInfoURL: URL { return bundleURL.appendingPathComponent("info.csv") }
 
-    private var bundleInventoryURL: NSURL { return bundleURL.URLByAppendingPathComponent("inventory.csv") }
+    fileprivate var bundleInventoryURL: URL { return bundleURL.appendingPathComponent("inventory.csv") }
 
-    private var bundleCategoryURL: NSURL { return  bundleURL.URLByAppendingPathComponent("baitcfg.csv") }
+    fileprivate var bundleCategoryURL: URL { return  bundleURL.appendingPathComponent("baitcfg.csv") }
     
-    lazy private var infoParser: InfoParserDelegate = InfoParserDelegate(name: "INFO")
+    lazy fileprivate var infoParser: InfoParserDelegate = InfoParserDelegate(name: "INFO")
     
-    lazy private var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "CATEGORY")
+    lazy fileprivate var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "CATEGORY")
     
-    lazy private var inventoryParser: InfoParserDelegate = InfoParserDelegate(name: "INVENTORY")
+    lazy fileprivate var inventoryParser: InfoParserDelegate = InfoParserDelegate(name: "INVENTORY")
     
-    private var infoURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("info.csv")
+    fileprivate var infoURL : URL {
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.appendingPathComponent("info.csv")!
     }
     
-    private var inventoryURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("inventory.csv")
+    fileprivate var inventoryURL : URL {
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.appendingPathComponent("inventory.csv")!
     }
     
-    private var categoryURL : NSURL {
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.URLByAppendingPathComponent("category.csv")
+    fileprivate var categoryURL : URL {
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        return ad.applicationDocumentsDirectory.appendingPathComponent("category.csv")!
     }
 
     // MARK: - CSVDataSink protocol implementation (internal link to 3rd party CSV file parser)
-    internal func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
+    internal func parserDelegate(_ parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
         // OPTIONAL: create persistent data objects for the parsed info
         if parserDelegate === categoryParser {
-            dataModel?.addObjectType(.Categories, withData: data, toContext: token)
+            dataModel?.addObjectType(.categories, withData: data, toContext: token)
         }
         else if parserDelegate === infoParser {
-            dataModel?.addObjectType(.Info, withData: data, toContext: token)
+            dataModel?.addObjectType(.info, withData: data, toContext: token)
         }
         else if parserDelegate === inventoryParser {
-            dataModel?.addObjectType(.Inventory, withData: data, toContext: token)
+            dataModel?.addObjectType(.inventory, withData: data, toContext: token)
         }
     }
 
-    internal func parserDelegate( parserDelegate: CHCSVParserDelegate, inout shouldAddSequenceData seqname: String, inout fromCount start: Int, inContext token: CollectionStore.ContextToken) -> Bool {
+    internal func parserDelegate( _ parserDelegate: CHCSVParserDelegate, shouldAddSequenceData seqname: inout String, fromCount start: inout Int, inContext token: CollectionStore.ContextToken) -> Bool {
         var result = false
         if parserDelegate === categoryParser {
             seqname = "exOrder"
-            start = dataModel?.getCountForType(.Categories, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
+            start = dataModel?.getCountForType(.categories, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
         }
         else if parserDelegate === infoParser {
             seqname = "exOrder"
-            start = dataModel?.getCountForType(.Info, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
+            start = dataModel?.getCountForType(.info, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
         }
         else if parserDelegate === inventoryParser {
             seqname = "exOrder"
-            start = dataModel?.getCountForType(.Inventory, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
+            start = dataModel?.getCountForType(.inventory, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
         }
         return result
@@ -141,9 +141,9 @@ class ImportExport: CSVDataSink {
 
     // MARK: - file import front-end
     // NOTE: responsible for getting the persistent CSV files into the user's Documents folder for importData() back-end stage
-    private func prepareImportFromSource( source: Source ) -> Bool {
+    fileprivate func prepareImportFromSource( _ source: Source ) -> Bool {
         switch source {
-        case .Bundle:
+        case .bundle:
             return prepareImportFromBundle()
 //        case .AirDrop:
 //            return prepareImportFromAirDrop()
@@ -156,14 +156,14 @@ class ImportExport: CSVDataSink {
 
     // MARK: - bundle file import front-end
     // NOTE: copies files from bundle to user's Documents folder
-    private func prepareImportFromBundle() -> Bool {
+    fileprivate func prepareImportFromBundle() -> Bool {
         // this does blocking (synchronous) parsing of the files
         // copy the default data files into the documents dirctory
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         var error : NSError?
         let categoryRemovedSuccessfully: Bool
         do {
-            try fileManager.removeItemAtURL(categoryURL)
+            try fileManager.removeItem(at: categoryURL)
             categoryRemovedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -174,7 +174,7 @@ class ImportExport: CSVDataSink {
         }
         let categoryCopiedSuccessfully: Bool
         do {
-            try fileManager.copyItemAtURL(bundleCategoryURL, toURL: categoryURL)
+            try fileManager.copyItem(at: bundleCategoryURL, to: categoryURL)
             categoryCopiedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -185,7 +185,7 @@ class ImportExport: CSVDataSink {
         }
         let infoRemovedSuccessfully: Bool
         do {
-            try fileManager.removeItemAtURL(infoURL)
+            try fileManager.removeItem(at: infoURL)
             infoRemovedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -196,7 +196,7 @@ class ImportExport: CSVDataSink {
         }
         let infoCopiedSuccessfully: Bool
         do {
-            try fileManager.copyItemAtURL(bundleInfoURL, toURL: infoURL)
+            try fileManager.copyItem(at: bundleInfoURL, to: infoURL)
             infoCopiedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -207,7 +207,7 @@ class ImportExport: CSVDataSink {
         }
         let inventoryRemovedSuccessfully: Bool
         do {
-            try fileManager.removeItemAtURL(inventoryURL)
+            try fileManager.removeItem(at: inventoryURL)
             inventoryRemovedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -218,7 +218,7 @@ class ImportExport: CSVDataSink {
         }
         let inventoryCopiedSuccessfully: Bool
         do {
-            try fileManager.copyItemAtURL(bundleInventoryURL, toURL: inventoryURL)
+            try fileManager.copyItem(at: bundleInventoryURL, to: inventoryURL)
             inventoryCopiedSuccessfully = true
         } catch let error1 as NSError {
             error = error1
@@ -236,7 +236,7 @@ class ImportExport: CSVDataSink {
     
     // MARK: - data import
     // NOTE: imports from CSV files in user's Documents folder
-    private func loadData( parserDelegate: InfoParserDelegate, fromFile file: NSURL, withContext token: CollectionStore.ContextToken ) {
+    fileprivate func loadData( _ parserDelegate: InfoParserDelegate, fromFile file: URL, withContext token: CollectionStore.ContextToken ) {
         // this does blocking (synchronous) parsing of the files
         if let basicParser = CHCSVParser(contentsOfCSVURL: file) {
             // link the InfoParserDelegate to the collection store
@@ -246,12 +246,12 @@ class ImportExport: CSVDataSink {
             basicParser.sanitizesFields = true
             basicParser.delegate = parserDelegate
             basicParser.parse()
-            print("Completed parsing \(file.lastPathComponent!)")
+            print("Completed parsing \(file.lastPathComponent)")
         }
     }
 
     /// Import the data (back-end) from CSV files in the user's Documents folder
-    func importData( sourceType: Source,
+    func importData( _ sourceType: Source,
         toModel dataModel: ImportDataSink,
         completion: (() -> Void)? )
     {
@@ -281,12 +281,12 @@ class ImportExport: CSVDataSink {
     // MARK: - data export
     
     // NOTE: exports to CSV files in user's Documents folder
-    private func writeDataOfType( dataType: CollectionStore.DataType, toCSVFile file: NSURL,
+    fileprivate func writeDataOfType( _ dataType: CollectionStore.DataType, toCSVFile file: URL,
         withContext token: CollectionStore.ContextToken )
     {
         if let dataSource = dataSource, let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = dataSource.headersForItemsOfDataType(dataType, withContext: token)
-            basicWriter.writeLineOfFields(headers)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
             let itemCount = dataSource.numberOfItemsOfDataType(dataType, withContext: token)
             for index in 0..<itemCount {
                 let dictObject = dataSource.dataType(dataType, dataItemAtIndex: index, withContext: token)
@@ -297,12 +297,12 @@ class ImportExport: CSVDataSink {
                         fields.append(field)
                     }
                 }
-                basicWriter.writeLineOfFields(fields)
+                basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
             }
         }
     }
     
-    func exportData( compare: Bool = false,
+    func exportData( _ compare: Bool = false,
         fromModel dataSource: ExportDataSource,
         completion: (() -> Void)? )
     {
@@ -314,33 +314,33 @@ class ImportExport: CSVDataSink {
             // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
             dataSource.addOperationToContext(token) {
                 // this does blocking (synchronous) writing of the files
-                let categoryFileTmp = self.categoryURL.URLByAppendingPathExtension("tmp")
-                let infoFileTmp = self.infoURL.URLByAppendingPathExtension("tmp")
-                let inventoryFileTmp = self.inventoryURL.URLByAppendingPathExtension("tmp")
-                print("Exporting files to \(self.categoryURL.path!)")
-                self.writeDataOfType(.Categories, toCSVFile: categoryFileTmp, withContext: token)
-                print("Completed writing \(categoryFileTmp.lastPathComponent!)")
-                self.writeDataOfType(.Info, toCSVFile: infoFileTmp, withContext: token)
-                print("Completed writing \(infoFileTmp.lastPathComponent!)")
-                self.writeDataOfType(.Inventory, toCSVFile: inventoryFileTmp, withContext: token)
-                print("Completed writing \(inventoryFileTmp.lastPathComponent!)")
+                let categoryFileTmp = self.categoryURL.appendingPathExtension("tmp")
+                let infoFileTmp = self.infoURL.appendingPathExtension("tmp")
+                let inventoryFileTmp = self.inventoryURL.appendingPathExtension("tmp")
+                print("Exporting files to \(self.categoryURL.path)")
+                self.writeDataOfType(.categories, toCSVFile: categoryFileTmp, withContext: token)
+                print("Completed writing \(categoryFileTmp.lastPathComponent)")
+                self.writeDataOfType(.info, toCSVFile: infoFileTmp, withContext: token)
+                print("Completed writing \(infoFileTmp.lastPathComponent)")
+                self.writeDataOfType(.inventory, toCSVFile: inventoryFileTmp, withContext: token)
+                print("Completed writing \(inventoryFileTmp.lastPathComponent)")
                 // finalize the data for this context token
                 dataSource.finalizeStorageContext(token, forExport: true)
                 // compare files to originals, if needed
                 if compare {
                     // compare the temp files to the originals
-                    let fileManager = NSFileManager.defaultManager()
-                    let categoryOK = fileManager.contentsEqualAtPath(categoryFileTmp.path!, andPath: self.categoryURL.path!)
+                    let fileManager = FileManager.default
+                    let categoryOK = fileManager.contentsEqual(atPath: categoryFileTmp.path, andPath: self.categoryURL.path)
                     if !categoryOK {
-                        print("Unable to compare CATEGORY temp copy \(categoryFileTmp.path!) to original.")
+                        print("Unable to compare CATEGORY temp copy \(categoryFileTmp.path) to original.")
                     }
-                    let infoOK = fileManager.contentsEqualAtPath(infoFileTmp.path!, andPath: self.infoURL.path!)
+                    let infoOK = fileManager.contentsEqual(atPath: infoFileTmp.path, andPath: self.infoURL.path)
                     if !infoOK {
-                        print("Unable to compare INFO temp copy \(infoFileTmp.path!) to original.")
+                        print("Unable to compare INFO temp copy \(infoFileTmp.path) to original.")
                     }
-                    let inventoryOK = fileManager.contentsEqualAtPath(inventoryFileTmp.path!, andPath: self.inventoryURL.path!)
+                    let inventoryOK = fileManager.contentsEqual(atPath: inventoryFileTmp.path, andPath: self.inventoryURL.path)
                     if !inventoryOK {
-                        print("Unable to compare INVENTORY temp copy \(inventoryFileTmp.path!) to original.")
+                        print("Unable to compare INVENTORY temp copy \(inventoryFileTmp.path) to original.")
                     }
                 }
                 // delete the original files and rename the temp files to be the original files (with error handling - atomic somehow?)
@@ -353,65 +353,65 @@ class ImportExport: CSVDataSink {
         }
     }
     
-    private func finalizeFiles(categoryFileTmp: NSURL, _ infoFileTmp: NSURL, _ inventoryFileTmp: NSURL) {
-        let fileManager = NSFileManager.defaultManager()
+    fileprivate func finalizeFiles(_ categoryFileTmp: URL, _ infoFileTmp: URL, _ inventoryFileTmp: URL) {
+        let fileManager = FileManager.default
         var error : NSError?
         do {
-            try fileManager.removeItemAtURL(self.categoryURL)
+            try fileManager.removeItem(at: self.categoryURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#1")
+            fatalError("Swift 2 error - \(#file):\(#line) removeItemAtURL#1")
         }
         if error != nil {
             print("Unable to remove CATEGORY original: \(error!.localizedDescription).")
         }
         do {
-            try fileManager.moveItemAtURL(categoryFileTmp, toURL: self.categoryURL)
+            try fileManager.moveItem(at: categoryFileTmp, to: self.categoryURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#1")
+            fatalError("Swift 2 error - \(#file):\(#line) moveItemAtURL#1")
         }
         if error != nil {
             print("Unable to rename CATEGORY temp copy to original: \(error!.localizedDescription).")
         }
         do {
-            try fileManager.removeItemAtURL(self.infoURL)
+            try fileManager.removeItem(at: self.infoURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#2")
+            fatalError("Swift 2 error - \(#file):\(#line) removeItemAtURL#2")
         }
         if error != nil {
             print("Unable to remove INFO original: \(error!.localizedDescription).")
         }
         do {
-            try fileManager.moveItemAtURL(infoFileTmp, toURL: self.infoURL)
+            try fileManager.moveItem(at: infoFileTmp, to: self.infoURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#2")
+            fatalError("Swift 2 error - \(#file):\(#line) moveItemAtURL#2")
         }
         if error != nil {
             print("Unable to rename INFO temp copy to original: \(error!.localizedDescription).")
         }
         do {
-            try fileManager.removeItemAtURL(self.inventoryURL)
+            try fileManager.removeItem(at: self.inventoryURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#3")
+            fatalError("Swift 2 error - \(#file):\(#line) removeItemAtURL#3")
         }
         if error != nil {
             print("Unable to remove INVENTORY original: \(error!.localizedDescription).")
         }
         do {
-            try fileManager.moveItemAtURL(inventoryFileTmp, toURL: self.inventoryURL)
+            try fileManager.moveItem(at: inventoryFileTmp, to: self.inventoryURL)
         } catch let error1 as NSError {
             error = error1
         } catch {
-            fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#3")
+            fatalError("Swift 2 error - \(#file):\(#line) moveItemAtURL#3")
         }
         if error != nil {
             print("Unable to rename INVENTORY temp copy to original: \(error!.localizedDescription).")

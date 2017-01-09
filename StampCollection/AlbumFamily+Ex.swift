@@ -13,9 +13,9 @@ private let entityName = "AlbumFamily"
 
 extension AlbumFamily {
     
-    private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
+    fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
-            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumFamily {
+            if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumFamily {
                 newObject.code = name
                 newObject.nextRef = 0 // needs to be maintained dynamically (call setMaxRef() as new refs are added for this family
                 newObject.descriptionX = ""
@@ -28,7 +28,7 @@ extension AlbumFamily {
         return false
     }
     
-    private static func getObjectWithName( name: String, fromContext moc: NSManagedObjectContext? = nil ) -> AlbumFamily? {
+    fileprivate static func getObjectWithName( _ name: String, fromContext moc: NSManagedObjectContext? = nil ) -> AlbumFamily? {
         if let context = moc {
             let rule = NSPredicate(format: "%K == %@", "code", name)
             return fetch(entityName, inContext: context, withFilter: rule).first as? AlbumFamily
@@ -37,7 +37,7 @@ extension AlbumFamily {
     }
     
     // MARK: find-or-create pattern implementation
-    private static func getUniqueObject( name: String, fromContext moc: NSManagedObjectContext? = nil, createIfNeeded: Bool = false, withRelationships relations: [String:NSManagedObject] = [:]) -> AlbumFamily? {
+    fileprivate static func getUniqueObject( _ name: String, fromContext moc: NSManagedObjectContext? = nil, createIfNeeded: Bool = false, withRelationships relations: [String:NSManagedObject] = [:]) -> AlbumFamily? {
         // Will return the object of the given name
         // Fetch predicate: SELF.code == 'name'
         // Relationship objects required for creation:
@@ -54,14 +54,14 @@ extension AlbumFamily {
         return nil
     }
     
-    static func getObjectInImportData( data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumFamily? {
+    static func getObjectInImportData( _ data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumFamily? {
         // will do all of the following to make sure a valid object exists, and if so, return it (if not, returns nil)
         // 1. gets code of desired family from data field "AlbumRef" (strips off integer at end, if any)
         // 2. calls AlbumType.getObjectInImportData() to get the proper relationship object
         // 3. calls getUniqueObject above to get the family object, creating it if needed using the object from step 2
         // 4. returns the object, or nil if anything goes wrong
         if let (datacode, _) = AlbumRef.getRefNameAndNumberFromData(data),
-            parent = AlbumType.getObjectInImportData(data, fromContext: moc) {
+            let parent = AlbumType.getObjectInImportData(data, fromContext: moc) {
                 return getUniqueObject(datacode, fromContext: moc, createIfNeeded: true, withRelationships: ["type": parent])
         }
         return nil
@@ -69,7 +69,7 @@ extension AlbumFamily {
     
     
     // MARK: member functions
-    func setMaxRef( refCandidate: Int16 ) {
+    func setMaxRef( _ refCandidate: Int16 ) {
         if refCandidate > self.nextRef {
             self.nextRef = refCandidate
         }

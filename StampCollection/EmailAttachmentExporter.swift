@@ -44,12 +44,12 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         errFunc = errorHandler
     }
     
-    func sendFiles(fileSuffix: String = "") -> Bool {
+    func sendFiles(_ fileSuffix: String = "") -> Bool {
         // The files to send are: CATEGORY.CSV, INFO.CSV, INVENTORY.CSV from the Documents directory
         // The file suffix is an optional string to add to each base name (INFOxxx.CSV) in case we use multiple sets of files for user backup
         var ecode = 0
         
-        let now = NSDate()
+        let now = Date()
         let datestr = getFormattedStringFromDate(now, withTime: true)
         let versionstr = "v1.0"
         let emailSubject = "Stamp Collection Backup \(versionstr) at \(datestr)"
@@ -63,21 +63,21 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         let recipient1 = "mmehr2@yahoo.com" // TBD: make this a setting
         let toRecipients = [recipient1]
         
-        let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-        let file1url = ad.applicationDocumentsDirectory.URLByAppendingPathComponent(file1)
-        let file2url = ad.applicationDocumentsDirectory.URLByAppendingPathComponent(file2)
-        let file3url = ad.applicationDocumentsDirectory.URLByAppendingPathComponent(file3)
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        let file1url = ad.applicationDocumentsDirectory.appendingPathComponent(file1)
+        let file2url = ad.applicationDocumentsDirectory.appendingPathComponent(file2)
+        let file3url = ad.applicationDocumentsDirectory.appendingPathComponent(file3)
         
         // check file existence first, to make sure we can send
         // fail if we can't send them all
-        let fileManager = NSFileManager.defaultManager()
-        let file1exists = fileManager.fileExistsAtPath(file1url.path!)
-        let file2exists = fileManager.fileExistsAtPath(file2url.path!)
-        let file3exists = fileManager.fileExistsAtPath(file3url.path!)
+        let fileManager = FileManager.default
+        let file1exists = fileManager.fileExists(atPath: file1url!.path)
+        let file2exists = fileManager.fileExists(atPath: file2url!.path)
+        let file3exists = fileManager.fileExists(atPath: file3url!.path)
         if !(file1exists && file2exists && file3exists) {
-            if !file1exists { ecode += 1; print("Error preparing for email export: \(file1url.path!) doesn't exist.") }
-            if !file2exists { ecode += 2; print("Error preparing for email export: \(file2url.path!) doesn't exist.") }
-            if !file3exists { ecode += 4; print("Error preparing for email export: \(file3url.path!) doesn't exist.") }
+            if !file1exists { ecode += 1; print("Error preparing for email export: \(file1url?.path) doesn't exist.") }
+            if !file2exists { ecode += 2; print("Error preparing for email export: \(file2url?.path) doesn't exist.") }
+            if !file3exists { ecode += 4; print("Error preparing for email export: \(file3url?.path) doesn't exist.") }
             if let errFunc = errFunc {
                 errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
             }
@@ -87,10 +87,10 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         // replace with SSZipArchive
         let zipFileExtension = ".sczp" // can be used for custom registration for import feature
         let zipFilename = "StampCollection" + zipFileExtension
-        let zipFileurl = ad.applicationDocumentsDirectory.URLByAppendingPathComponent(zipFilename)
+        let zipFileurl = ad.applicationDocumentsDirectory.appendingPathComponent(zipFilename)
         var error : NSError?
         do {
-            try fileManager.removeItemAtURL(zipFileurl)
+            try fileManager.removeItem(at: zipFileurl!)
         } catch let error1 as NSError {
             error = error1
         }
@@ -98,8 +98,8 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             ecode += 8
             print("Unable to remove existing ZIPFILE: \(error!.localizedDescription).")
         }
-        let fileUrls = [file1url.path!, file2url.path!, file3url.path!]
-        let zipArchiveOK = SSZipArchive.createZipFileAtPath(zipFileurl.path!, withFilesAtPaths:fileUrls)
+        let fileUrls = [file1url?.path, file2url?.path, file3url?.path]
+        let zipArchiveOK = SSZipArchive.createZipFile(atPath: zipFileurl!.path!, withFilesAtPaths:fileUrls)
         if !zipArchiveOK {
             ecode += 16
             print("Unable to create ZIPFILE archive \(zipFilename): \(error!.localizedDescription).")
@@ -109,7 +109,7 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             return false
         }
         
-        guard let fileData = NSData(contentsOfURL: zipFileurl) else {
+        guard let fileData = try? Data(contentsOf: zipFileurl!) else {
             ecode += 32
             print("Unable to read ZIPFILE archive \(zipFilename).")
             if let errFunc = errFunc {
@@ -141,27 +141,27 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         mailController.addAttachmentData(fileData, mimeType: mimeType, fileName: zipFilename)
         
         // present the VC on behalf of the provided VC
-        controller.presentViewController(mailController, animated: true, completion: nil)
+        controller.present(mailController, animated: true, completion: nil)
         return true
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
     {
         //var errHappened = false
 //        let fakeError = NSError(domain: "StampCollection", code: 0, userInfo: nil)
 //        let fakeError2 = NSError(domain: "StampCollection", code: -1, userInfo: nil)
 //        let errorEx = error ?? fakeError2
         switch result {
-        case MFMailComposeResultCancelled:
+        case MFMailComposeResult.cancelled:
             print("Email canceled by user")
             break
-        case MFMailComposeResultSaved:
+        case MFMailComposeResult.saved:
             print("Email saved by user")
             break
-        case MFMailComposeResultSent:
+        case MFMailComposeResult.sent:
             print("Email sent by user")
             break
-        case MFMailComposeResultFailed:
+        case MFMailComposeResult.failed:
             print("Email sent by user but failed due to error \(error?.localizedDescription)")
             //errHappened = true
             break
@@ -170,7 +170,7 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         }
         
         // dismiss the VC
-        controller.dismissViewControllerAnimated(true) {
+        controller.dismiss(animated: true) {
             // try doing nothing here
         }
 //        if let errFunc = self.errFunc {

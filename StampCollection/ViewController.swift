@@ -21,13 +21,13 @@ class ViewController: UITableViewController {
         }
     }
     
-    func setSpinnerView(onOff: Bool = false) {
+    func setSpinnerView(_ onOff: Bool = false) {
         if !onOff {
             spinner?.stopAnimating()
             spinner = nil
             return
         }
-        let sp = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        let sp = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         sp.hidesWhenStopped = true
         sp.startAnimating()
         spinner = sp
@@ -35,7 +35,7 @@ class ViewController: UITableViewController {
 
     // NOTE: the app delegate will send this message to all top-level VCs when starting up
     // we can use this to autoload the persisted data before the user actually loads this
-    func setModel(store: CollectionStore) {
+    func setModel(_ store: CollectionStore) {
         // use persisted copy with manual updates from web
         setSpinnerView(true)
         storeModel.importData() {
@@ -48,33 +48,33 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         // make sure the toolbar is visible
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.isToolbarHidden = false
 
         title = "Dealer Categories"
     }
     
-    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // reload the BT categories page
         setSpinnerView(true)
-        storeModel.loadStore(.JustCategories) {
+        storeModel.loadStore(.justCategories) {
             self.tableView.reloadData()
             self.setSpinnerView(false)
         }
     }
     
-    @IBAction func reloadButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func reloadButtonPressed(_ sender: UIBarButtonItem) {
         setSpinnerView(true)
-        storeModel.loadStore(.Populate) {
+        storeModel.loadStore(.populate) {
             self.tableView.reloadData()
             self.setSpinnerView(false)
         }
     }
     
-    @IBAction func exportButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func exportButtonPressed(_ sender: UIBarButtonItem) {
         storeModel.exportData()
     }
     
-    @IBAction func importButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func importButtonPressed(_ sender: UIBarButtonItem) {
         setSpinnerView(true)
         storeModel.importData() {
             self.tableView.reloadData()
@@ -84,40 +84,40 @@ class ViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    func getCategoryIndexForIndexPath( indexPath: NSIndexPath ) -> Int {
-        if indexPath.section == 1 {
+    func getCategoryIndexForIndexPath( _ indexPath: IndexPath ) -> Int {
+        if (indexPath as NSIndexPath).section == 1 {
             return -1
         } else {
-            return indexPath.row
+            return (indexPath as NSIndexPath).row
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         // NOTE: add section 2 for judaicasales.com (Austria tabs)
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return section == 0 ? storeModel.categories.count : 1
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BT Category Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BT Category Cell", for: indexPath) 
         
         // Configure the cell...
         let catnum = getCategoryIndexForIndexPath(indexPath)
         let category = storeModel.getCategoryByIndex(catnum)
         cell.textLabel?.text = "\(category.number): \(category.name)"
         cell.detailTextLabel?.text = "(\(category.items) items)"
-        cell.accessoryType = category.items != 0 ? .DisclosureIndicator : .None
+        cell.accessoryType = category.items != 0 ? .disclosureIndicator : .none
         
         return cell
     }
  
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "From site www.bait-tov.com"
         }
@@ -135,19 +135,19 @@ class ViewController: UITableViewController {
     }
     */
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
     }
     
     
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
             // then delete the row from the table view
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             // if the last visible item was deleted, also clear the editing state of the VC
-        } else if editingStyle == .Insert {
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
             // MLM - not supported at this time
         }
@@ -172,13 +172,13 @@ class ViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         if segue.identifier == "Show BT Items Segue" {
-            if let dvc = segue.destinationViewController as? BTItemsTableViewController,
-                cell = sender as? UITableViewCell {
+            if let dvc = segue.destination as? BTItemsTableViewController,
+                let cell = sender as? UITableViewCell {
                     // get row number of cell
-                    let indexPath = tableView.indexPathForCell(cell)!
+                    let indexPath = tableView.indexPath(for: cell)!
                     // set the destination category object accordingly
                     let catnum = getCategoryIndexForIndexPath(indexPath)
                     let category = storeModel.getCategoryByIndex(catnum)

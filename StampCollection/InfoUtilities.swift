@@ -128,11 +128,11 @@ let startCentury = startEpoch / yearsInCentury * yearsInCentury
 let endCentury = endEpoch / yearsInCentury * yearsInCentury
 let startEpochYY = startEpoch - startCentury
 
-func fixupCenturyYY( yy: Int ) -> Int {
+func fixupCenturyYY( _ yy: Int ) -> Int {
     return yy >= startEpochYY ? startCentury : endCentury
 }
 
-func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<Int>, ClosedInterval<Int>, ClosedInterval<Int>) {
+func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Int>, ClosedRange<Int>, ClosedRange<Int>) {
     var startYear = 0
     var endYear = 0
     var fmtFound = 0
@@ -143,8 +143,8 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
     var endMonth = 0
     var endDay = 0
     // begin testing here; order of tests IS IMPORTANT
-    if let match = descr.rangeOfString("^[0-9][0-9][0-9][0-9][s ]", options: .RegularExpressionSearch) {
-        found = descr.substringWithRange(match)
+    if let match = descr.range(of: "^[0-9][0-9][0-9][0-9][s ]", options: .regularExpression) {
+        found = descr.substring(with: match)
         let yyyy = Int(found[0...3])!
         startYear = yyyy;
         let sep = found[4...4]
@@ -154,9 +154,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startMonth = 1; startDay = 1
         endMonth = 12; endDay = 31
     }
-    else if let match = descr.rangeOfString("^[0-9][0-9][0-9][0-9]\\-[0-9][0-9][0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "^[0-9][0-9][0-9][0-9]\\-[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 3 // which is YYYY-YYYY
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yyyy = Int(found[0...3])!
         startYear = yyyy;
         let zzzz = Int(found[5...8])!
@@ -170,9 +170,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startMonth = 1; startDay = 1
         endMonth = 12; endDay = 31
     }
-    else if let match = descr.rangeOfString("^[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "^[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 5 // which is DD.MM.YYYY - this MUST precede the format 4 YY counterpart, which would match all of these strings too
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yyyy = Int(found[6...9])!
         startYear = yyyy;
         endYear = startYear
@@ -183,9 +183,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startDay = dd;
         endDay = startDay
     }
-    else if let match = descr.rangeOfString("^[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "^[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 4 // which is DD.MM.YY - this must follow format 5 YYYY counterpart, so that it doesn't pre-empt that test
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yy = Int(found[6...7])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
@@ -196,9 +196,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startDay = dd;
         endDay = startDay
     }
-    else if let match = descr.rangeOfString("^[0-9][0-9]\\-[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "^[0-9][0-9]\\-[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 6 // which is DD-DD.MM.YYYY (same note for YYYY preceding YY as above)
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yyyy = Int(found[9...12])!
         startYear = yyyy;
         endYear = startYear
@@ -210,9 +210,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         let dd2 = Int(found[3...4])!
         endDay = dd2
     }
-    else if let match = descr.rangeOfString("^[0-9][0-9]\\-[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "^[0-9][0-9]\\-[0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 7 // which is DD-DD.MM.YY (same note for YY following YYYY as above)
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yy = Int(found[9...10])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear // but diff days
@@ -224,9 +224,9 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         let dd2 = Int(found[3...4])!
         endDay = dd2
     }
-    else if let match = descr.rangeOfString(" \\'[0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: " \\'[0-9][0-9]", options: .regularExpression) {
         fmtFound = 8 // which is 'YY preceded by space, anywhere in string
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yy = Int(found[2...3])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
@@ -235,10 +235,10 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startMonth = 1; startDay = 1
         endMonth = 12; endDay = 31
     }
-    else if let match = descr.rangeOfString(" [0-9][0-9]\\'", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: " [0-9][0-9]\\'", options: .regularExpression) {
         fmtFound = 9 // which is YY' preceded by space, anywhere in string
         // NOTE: this will create false positives in Vending Labels, where the strings often contain things like 'Klussendorf 11' or 'Doarmat 23'
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yy = Int(found[1...2])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
@@ -247,10 +247,10 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startMonth = 1; startDay = 1
         endMonth = 12; endDay = 31
     }
-    else if let match = descr.rangeOfString("[Dd]ate.[0-9][0-9][0-9][0-9][0-9][0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: "[Dd]ate.[0-9][0-9][0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 10 // which is 'Date DDMMYY', anywhere in string (also accepts 1st letter LC)
         // NOTE: this is used by one booklet item that specifies nothing but "print date 100989" for 10 Sep 1989 (Olive Branch booklet reprint)
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yy = Int(found[9...10])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
@@ -262,10 +262,10 @@ func extractDateRangesFromDescription( descr: String ) -> (Int, ClosedInterval<I
         startDay = dd;
         endDay = startDay
     }
-    else if let match = descr.rangeOfString(" [0-9][0-9][0-9][0-9][^0-9]", options: .RegularExpressionSearch) {
+    else if let match = descr.range(of: " [0-9][0-9][0-9][0-9][^0-9]", options: .regularExpression) {
         // NOTE: this causes some false positives in AUI class (no dates given), only one of which is a date (e.g., "Jerusalem 3000")
         // SANITY RANGE CHECK REQUIRED - we only want dates between 1948 and 2015 (or current year, whatever it is!)
-        found = descr.substringWithRange(match)
+        found = descr.substring(with: match)
         let yyyy = Int(found[1...4])!
         //descr2 = descr // DEBUG
         if yyyy >= startEpoch && yyyy <= endEpoch {

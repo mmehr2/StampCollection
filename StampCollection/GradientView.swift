@@ -15,19 +15,19 @@ class GradientView: UIView {
     
   @IBInspectable var topDown: Bool = false
   
-  lazy private var gradientLayer: CAGradientLayer = {
+  lazy fileprivate var gradientLayer: CAGradientLayer = {
     let layer = CAGradientLayer()
-    layer.colors = [UIColor(white: 0.25, alpha: 0.50).CGColor, UIColor(white: 0.0, alpha: 0.75).CGColor]
+    layer.colors = [UIColor(white: 0.25, alpha: 0.50).cgColor, UIColor(white: 0.0, alpha: 0.75).cgColor]
     if self.topDown {
-        layer.colors = layer.colors?.reverse()
+        layer.colors = layer.colors?.reversed()
     }
-    layer.locations = [NSNumber(float: 0.0), NSNumber(float: 1.0)]
+    layer.locations = [NSNumber(value: 0.0 as Float), NSNumber(value: 1.0 as Float)]
     return layer
     }()
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    backgroundColor = UIColor.clearColor()
+    backgroundColor = UIColor.clear
     layer.addSublayer(gradientLayer)
   }
   

@@ -11,11 +11,11 @@ import UIKit // but only for AppDelegate reference to app docs dir - remove ASAP
 
 // MARK: URL construction for pic pages and references (TBD: belongs in Network Model)
 enum PicRefURLType {
-    case BTRef // format: "pic.php?ID=6110s4"
-    case JSRef // format: "austrian_pic_detail.asp?index=17020" (for id="AUI001")
-    case DLRef // format: "6110s4"
-    case DLJSRef // format: "N/A" for none, or "1a" for "ajt1a.jpg" local filename - no way back to picref 17XXX without table
-    case Unknown
+    case btRef // format: "pic.php?ID=6110s4"
+    case jsRef // format: "austrian_pic_detail.asp?index=17020" (for id="AUI001")
+    case dlRef // format: "6110s4"
+    case dljsRef // format: "N/A" for none, or "1a" for "ajt1a.jpg" local filename - no way back to picref 17XXX without table
+    case unknown
 }
 
 /**
@@ -32,15 +32,15 @@ private var jsDictionary: [String: String] = [:]
 // this table will be indexed by page ref ID ("17020" or "17054") and get you a DealerItem pictid ("5c" or "2")
 private var jsRevDictionary: [String: String] = [:]
 
-func splitJSPictID( pictid: String ) -> (dbRefID: String, fileRefID: String?) {
-    let comps = pictid.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "="))
+func splitJSPictID( _ pictid: String ) -> (dbRefID: String, fileRefID: String?) {
+    let comps = pictid.components(separatedBy: CharacterSet(charactersIn: "="))
     guard comps.count > 1 else {
         return (comps.first ?? "", nil)
     }
     return (comps.first ?? "", comps.last)
 }
 
-private func setJSDictionaryEntry( pictid: String, picref: String ) {
+private func setJSDictionaryEntry( _ pictid: String, picref: String ) {
     // at this point, picref comes from the web (BTCategory) and pictid from the database (Category)
     // for setting up the table just from the DB side, the picref is optionally empty
     // we have set up pictid in the form "X=Y" where X is the 5-digit ref ID (17020) and Y is the file ref
@@ -56,7 +56,7 @@ private func setJSDictionaryEntry( pictid: String, picref: String ) {
     // NOTE: We want to populate this solely from the pictid field in some cases, so picref.isEmpty is allowed
     // In this case, just parse the dbRefID and fileRefID without the webID check
     if pictid != "N/A" {
-        let comps = picref.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "="))
+        let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
         let webID = comps.last
         let hasWebID = (webID != nil) && comps.count > 1
         let (dbRefID, fileRefID) = splitJSPictID(pictid)
@@ -77,7 +77,7 @@ private func setJSDictionaryEntry( pictid: String, picref: String ) {
             // no webID and no pic file ref - no dictionary
             break
         }
-        if let fileRefID = fileRefID where allow {
+        if let fileRefID = fileRefID , allow {
             jsDictionary[dbRefID] = fileRefID
             jsRevDictionary[fileRefID] = dbRefID
         } else if hasWebID {
@@ -89,7 +89,7 @@ private func setJSDictionaryEntry( pictid: String, picref: String ) {
 }
 
 // this function should be called first before using getPicRefURL() with refs of type .DLJSRef (the CoreData JS info items)
-func populateJSDictionary( jsDealerCat: Category, jsWebCat: BTCategory? = nil ) {
+func populateJSDictionary( _ jsDealerCat: Category, jsWebCat: BTCategory? = nil ) {
     if let items = Array(jsDealerCat.dealerItems) as? [DealerItem] {
         // set up cache of IDs to locate BTDealerItems by ID
         var jsToBTIDCache: [String: String] = [:]
@@ -108,7 +108,7 @@ func populateJSDictionary( jsDealerCat: Category, jsWebCat: BTCategory? = nil ) 
         // set up pictid-to-fileref mapping array for later use
         for item in items {
             let idcode = item.id // matching ID to look up in BT cache
-            let btpicref = jsToBTIDCache[idcode] ?? ""
+            let btpicref = jsToBTIDCache[idcode!] ?? ""
             setJSDictionaryEntry(item.pictid, picref: btpicref)
         }
     }
@@ -116,24 +116,24 @@ func populateJSDictionary( jsDealerCat: Category, jsWebCat: BTCategory? = nil ) 
 
 // this utility function should be called by item classes and not directly
 // it will turn a pic reference string in one of the four types into a full NSURL for the page that shows that pic (along with other formatted info from the dealer website)
-func getPicRefURL( picref: String, refType type: PicRefURLType ) -> NSURL? {
+func getPicRefURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
     // BT style: "http://www.bait-tov.com/store/" plus the formatted link from BTRef
     // JS style: "http://www.judaicasales.com/judaica/" plus the formatted link from JSRef
-    var output: NSURLComponents! = nil
+    var output: URLComponents! = nil
     if !picref.isEmpty {
-        let comps = picref.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "?"))
+        let comps = picref.components(separatedBy: CharacterSet(charactersIn: "?"))
         var storeName = ""
         var pathName = ""
         var queryName = ""
         switch type {
-        case .BTRef, .DLRef:
-            output = NSURLComponents(string: "http://www.bait-tov.com/store")
-            storeName = output.path!
+        case .btRef, .dlRef:
+            output = URLComponents(string: "http://www.bait-tov.com/store")
+            storeName = output.path
             pathName = "pic.php"
             queryName = "ID"
-        case .JSRef, .DLJSRef: // TBD: add .DLJSRef support with table lookup from ajtX.jpg file ref to 17XXX index
-            output = NSURLComponents(string: "http://www.judaicasales.com/judaica")
-            storeName = output.path!
+        case .jsRef, .dljsRef: // TBD: add .DLJSRef support with table lookup from ajtX.jpg file ref to 17XXX index
+            output = URLComponents(string: "http://www.judaicasales.com/judaica")
+            storeName = output.path
             pathName = "austrian_pic_detail.asp"
             queryName = "index"
         default:
@@ -141,11 +141,11 @@ func getPicRefURL( picref: String, refType type: PicRefURLType ) -> NSURL? {
         }
         if comps.count > 1 {
             // fully specified BT/JS ref
-            output.path = (storeName as NSString).stringByAppendingPathComponent(comps.first!) //storeName + "/" + comps.first!
+            output.path = (storeName as NSString).appendingPathComponent(comps.first!) //storeName + "/" + comps.first!
             output.query = comps.last!
         } else {
-            var refValue = type == .DLRef ? picref : ""
-            if type == .DLJSRef {
+            var refValue = type == .dlRef ? picref : ""
+            if type == .dljsRef {
                 // dealer item JS ref is in X=Y form; need to split it and use the 1st part
                 let (dbRefID, fileRefID) = splitJSPictID(picref)
                 if fileRefID != nil {
@@ -157,46 +157,46 @@ func getPicRefURL( picref: String, refType type: PicRefURLType ) -> NSURL? {
             }
             // only ID given (DL works, JS requires table lookup first), which could fail (table not initialized)
             if !refValue.isEmpty {
-                output.path = (storeName as NSString).stringByAppendingPathComponent(pathName) //storeName + "/" + pathName
-                let qitem = NSURLQueryItem(name: queryName, value: refValue)
+                output.path = (storeName as NSString).appendingPathComponent(pathName) //storeName + "/" + pathName
+                let qitem = URLQueryItem(name: queryName, value: refValue)
                 output.queryItems = [qitem]
             }
         }
     }
     if let output = output {
         let urlpath = output.string!
-        return NSURL(string: urlpath)
+        return URL(string: urlpath)
     }
     return nil
 }
 
-private func getFileNameFromPictid( pictid: String ) -> String {
+private func getFileNameFromPictid( _ pictid: String ) -> String {
     // takes an ID of the form "6110s5", returns the file name with ".jpg" added
     return pictid + ".jpg"
 }
 
-private func getFileNameFromJSPictid( pictid: String ) -> String {
+private func getFileNameFromJSPictid( _ pictid: String ) -> String {
     // takes an ID of the form "17020", returns the file name with "ajt" and ".jpg" added
     return "ajt" + pictid + ".jpg"
 }
 
-private func getPicURLFromBaseURL( type: PicRefURLType, picref: String, btBase: NSURL, btPath: String, jsBase: NSURL, jsPath: String ) -> NSURL? {
-    var output: NSURL! = nil
+private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase: URL, btPath: String, jsBase: URL, jsPath: String ) -> URL? {
+    var output: URL! = nil
     if !picref.isEmpty && picref != "N/A" {
-        let comps = picref.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "="))
+        let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
         let picref2 = comps.last! // this is just the ID part as a string
         switch type {
-        case .BTRef:
-            output = btBase.URLByAppendingPathComponent(btPath + getFileNameFromPictid(picref2))
-        case .JSRef:
+        case .btRef:
+            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref2))
+        case .jsRef:
             // translate "17020" forward to "1" etc.
             if let picref3 = jsDictionary[picref2] {
-                output = jsBase.URLByAppendingPathComponent(jsPath + getFileNameFromJSPictid(picref3))
+                output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref3))
             }
-        case .DLRef:
-            output = btBase.URLByAppendingPathComponent(btPath + getFileNameFromPictid(picref))
-        case .DLJSRef:
-            output = jsBase.URLByAppendingPathComponent(jsPath + getFileNameFromJSPictid(picref2))
+        case .dlRef:
+            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref))
+        case .dljsRef:
+            output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref2))
         default:
             break
         }
@@ -205,29 +205,29 @@ private func getPicURLFromBaseURL( type: PicRefURLType, picref: String, btBase: 
 }
 
 // this function will turn the URL type reference into a remote URL for just the pic file (only works for the BT site)
-func getPicFileRemoteURL( picref: String, refType type: PicRefURLType ) -> NSURL? {
+func getPicFileRemoteURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
     // BT style: "http://www.bait-tov.com/store/products/" plus the file name (pictid/picref such as "6110s4" + ".jpg" file extension)
     // JS style: "http://www.judaicasales.com/pics/judaica_austriantabs/" plus the file name ("ajt" + picref + ".jpg", where "5" is the picref)
-    let btURLBase = NSURL(string: "http://www.bait-tov.com")
-    let jsURLBase = NSURL(string: "http://www.judaicasales.com")
+    let btURLBase = URL(string: "http://www.bait-tov.com")
+    let jsURLBase = URL(string: "http://www.judaicasales.com")
     let btURLPath = "/store/products/"
     let jsURLPath = "/pics/judaica_austriantabs/"
     return getPicURLFromBaseURL(type, picref: picref, btBase: btURLBase!, btPath: btURLPath, jsBase: jsURLBase!, jsPath: jsURLPath)
 }
 
 // this function will turn the URL type reference into a local file URL for the cached pic file (preferred for JS site, but can work with BT as files are downloaded)
-func getPicFileLocalURL( picref: String, refType type: PicRefURLType, category catnum: Int16 ) -> NSURL? {
+func getPicFileLocalURL( _ picref: String, refType type: PicRefURLType, category catnum: Int16 ) -> URL? {
     // BT style: not currently supported (will return nil); should return a cached location for the downloaded file whose name is as above (pictid + ".jpg")
     // JS style: "ajt%s.jpg" where the %s is the picref as if from the JS DealerItem pictid ("5c" or "1") - returns nil if no pic available
     // actually requires a caching scheme from the base documents directory, or perhaps some data scraping from the pic page to cache the file (ouch)
-    let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
+    let ad = UIApplication.shared.delegate! as! AppDelegate
     let urlBase = ad.applicationDocumentsDirectory
     let urlPath = "pics/cat\(catnum)/"
-    return getPicURLFromBaseURL(type, picref: picref, btBase: urlBase, btPath: urlPath, jsBase: urlBase, jsPath: urlPath)
+    return getPicURLFromBaseURL(type, picref: picref, btBase: urlBase as URL, btPath: urlPath, jsBase: urlBase as URL, jsPath: urlPath)
 }
 
 // this function will turn a local URL into a cache key to use with the persistent key/value store
-func getPicFileCacheKeyFromLocalURL( URL: NSURL? ) -> String? {
+func getPicFileCacheKeyFromLocalURL( _ URL: Foundation.URL? ) -> String? {
     if let comps = URL?.pathComponents {
         // we want the last path component, the normalized picref/pictid, if the URL was non-nil
         return comps.last!
@@ -236,22 +236,22 @@ func getPicFileCacheKeyFromLocalURL( URL: NSURL? ) -> String? {
 }
 
 // this function will create a cache key (normalized pictid) from basic pictid/picref and type
-func getPicFileCacheKey( picref: String, type: PicRefURLType ) -> String? {
+func getPicFileCacheKey( _ picref: String, type: PicRefURLType ) -> String? {
     var output: String? = nil
     if !picref.isEmpty && picref != "N/A" {
-        let comps = picref.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "="))
+        let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
         let picref2 = comps.last! // this is just the ID part as a string
         switch type {
-        case .BTRef:
+        case .btRef:
             output = getFileNameFromPictid(picref2)
-        case .JSRef:
+        case .jsRef:
             // translate "17020" back to "1" etc.
             if let picref3 = jsRevDictionary[picref2] {
                 output = getFileNameFromJSPictid(picref3)
             }
-        case .DLRef:
+        case .dlRef:
             output = getFileNameFromPictid(picref)
-        case .DLJSRef:
+        case .dljsRef:
             output = getFileNameFromJSPictid(picref)
         default:
             break

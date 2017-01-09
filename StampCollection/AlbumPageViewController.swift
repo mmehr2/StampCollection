@@ -17,17 +17,17 @@ class AlbumPageViewController: UICollectionViewController {
     
     var model: CollectionStore!
     
-    func setStartAlbum( album: AlbumRef ) {
+    func setStartAlbum( _ album: AlbumRef ) {
         // setup the navigator for this album family using individual volume of series
         navigator = AlbumFamilyNavigator(album: album)
     }
     
-    func setStartPage( page: AlbumPage ) {
+    func setStartPage( _ page: AlbumPage ) {
         // setup the navigator for this album family using current page to display
         navigator = AlbumFamilyNavigator(page: page)
     }
     
-    private var navigator: AlbumFamilyNavigator!
+    fileprivate var navigator: AlbumFamilyNavigator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,25 +40,25 @@ class AlbumPageViewController: UICollectionViewController {
         
         // Do any additional setup after loading the view.
         // set some gesture recognizers for command usage:
-        let rightGR1 = UISwipeGestureRecognizer(target: self, action: "swipeRightDetected:")
-        rightGR1.direction = .Right
+        let rightGR1 = UISwipeGestureRecognizer(target: self, action: #selector(AlbumPageViewController.swipeRightDetected(_:)))
+        rightGR1.direction = .right
         rightGR1.numberOfTouchesRequired = 1
         collectionView?.addGestureRecognizer(rightGR1)
-        let leftGR1 = UISwipeGestureRecognizer(target: self, action: "swipeLeftDetected:")
-        leftGR1.direction = .Left
+        let leftGR1 = UISwipeGestureRecognizer(target: self, action: #selector(AlbumPageViewController.swipeLeftDetected(_:)))
+        leftGR1.direction = .left
         leftGR1.numberOfTouchesRequired = 1
         collectionView?.addGestureRecognizer(leftGR1)
         
-        let rightGR2 = UISwipeGestureRecognizer(target: self, action: "swipeTwoRightDetected:")
-        rightGR2.direction = .Right
+        let rightGR2 = UISwipeGestureRecognizer(target: self, action: #selector(AlbumPageViewController.swipeTwoRightDetected(_:)))
+        rightGR2.direction = .right
         rightGR2.numberOfTouchesRequired = 2
         collectionView?.addGestureRecognizer(rightGR2)
-        let leftGR2 = UISwipeGestureRecognizer(target: self, action: "swipeTwoLeftDetected:")
-        leftGR2.direction = .Left
+        let leftGR2 = UISwipeGestureRecognizer(target: self, action: #selector(AlbumPageViewController.swipeTwoLeftDetected(_:)))
+        leftGR2.direction = .left
         leftGR2.numberOfTouchesRequired = 2
         collectionView?.addGestureRecognizer(leftGR2)
         
-        let longGR = UILongPressGestureRecognizer(target: self, action: "longPressDetected:")
+        let longGR = UILongPressGestureRecognizer(target: self, action: #selector(AlbumPageViewController.longPressDetected(_:)))
         collectionView?.addGestureRecognizer(longGR)
         
         updateUI()
@@ -69,32 +69,32 @@ class AlbumPageViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func swipeRightDetected(sender: AnyObject) {
-        navigator?.movePageRelative(.Forward)
+    @IBAction func swipeRightDetected(_ sender: AnyObject) {
+        navigator?.movePageRelative(.forward)
         updateUI()
     }
     
-    @IBAction func swipeLeftDetected(sender: AnyObject) {
-        navigator?.movePageRelative(.Reverse)
+    @IBAction func swipeLeftDetected(_ sender: AnyObject) {
+        navigator?.movePageRelative(.reverse)
         updateUI()
     }
     
-    @IBAction func swipeTwoRightDetected(sender: AnyObject) {
-        navigator?.movePageRelative(.Forward, byCount: 10)
+    @IBAction func swipeTwoRightDetected(_ sender: AnyObject) {
+        navigator?.movePageRelative(.forward, byCount: 10)
         updateUI()
     }
     
-    @IBAction func swipeTwoLeftDetected(sender: AnyObject) {
-        navigator?.movePageRelative(.Reverse, byCount: 10)
+    @IBAction func swipeTwoLeftDetected(_ sender: AnyObject) {
+        navigator?.movePageRelative(.reverse, byCount: 10)
         updateUI()
     }
     
-    @IBAction func longPressDetected(sender: AnyObject) {
+    @IBAction func longPressDetected(_ sender: AnyObject) {
         navigator?.gotoEndOfAlbum()
         updateUI()
     }
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         // set the nav bar title to the page/section/ref indicator and show # of items
         title = navigator?.getCurrentPageTitle()
         // refresh the display of items on the current page
@@ -104,11 +104,11 @@ class AlbumPageViewController: UICollectionViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InventoryItemSegue" {
             // Get the new view controller using [segue destinationViewController].
-            if let destinationVC = segue.destinationViewController as? InventoryItemViewController,
-                theItem = sender as? InventoryItem {
+            if let destinationVC = segue.destination as? InventoryItemViewController,
+                let theItem = sender as? InventoryItem {
                     // Pass the selected object to the new view controller.
                     destinationVC.model = model
                     destinationVC.item = theItem
@@ -118,20 +118,20 @@ class AlbumPageViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return navigator?.currentPage.theItems.count ?? 0
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("InventoryItemCell", forIndexPath: indexPath) as! InventoryItemCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InventoryItemCell", for: indexPath) as! InventoryItemCell
     
         // Configure the cell
-        let item = navigator.currentPage.theItems[indexPath.item]
+        let item = navigator.currentPage.theItems[(indexPath as NSIndexPath).item]
         let (top, btm) = getTitlesForInventoryItem(item)
         cell.title = btm
         cell.condition = top
@@ -139,18 +139,18 @@ class AlbumPageViewController: UICollectionViewController {
         
         cell.image = nil // pave the way, delete any old image in dequeued cell
         let infoItem = item.dealerItem
-        cell.picURL = infoItem.picFileRemoteURL
+        cell.picURL = infoItem?.picFileRemoteURL
     
         return cell
     }
 
     // MARK: UICollectionViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let item = navigator.currentPage.theItems[indexPath.item]
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = navigator.currentPage.theItems[(indexPath as NSIndexPath).item]
         
         // and go there ...
-        performSegueWithIdentifier("InventoryItemSegue", sender: item)
+        performSegue(withIdentifier: "InventoryItemSegue", sender: item)
     }
 
 }

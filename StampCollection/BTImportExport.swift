@@ -12,20 +12,20 @@ import UIKit
 private let nameOfCategoryFile = "BTCATS.CSV"
 private let nameOfInfoFile = "BTINFO.CSV"
 
-private func getFile(name: String) -> NSURL {
-    let ad = UIApplication.sharedApplication().delegate! as! AppDelegate
-    return ad.applicationDocumentsDirectory.URLByAppendingPathComponent(name)
+private func getFile(_ name: String) -> URL {
+    let ad = UIApplication.shared.delegate! as! AppDelegate
+    return ad.applicationDocumentsDirectory.appendingPathComponent(name)!
 }
 
 // MARK: data import
 class BTImporter: CSVDataSink {
     
-    lazy private var infoParser: InfoParserDelegate = InfoParserDelegate(name: "BTINFO")
+    lazy fileprivate var infoParser: InfoParserDelegate = InfoParserDelegate(name: "BTINFO")
     
-    lazy private var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "BTCATS")
+    lazy fileprivate var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "BTCATS")
     
     
-    private var categories: [Int:BTCategory] = [:]
+    fileprivate var categories: [Int:BTCategory] = [:]
     
     // MARK: data access
     
@@ -34,13 +34,13 @@ class BTImporter: CSVDataSink {
     }
     
     func getBTCategories() -> [BTCategory] {
-        return Array(categories.values).filter{ $0.number != JSCategoryAll }.sort{
+        return Array(categories.values).filter{ $0.number != JSCategoryAll }.sorted{
             $0.number < $1.number
         }
     }
    
     // MARK: - CSVDataSink protocol implementation
-    func parserDelegate(parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
+    func parserDelegate(_ parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
         if parserDelegate === self.categoryParser {
             // we have a new category object's basic data
             let newObject = BTCategory()
@@ -60,13 +60,13 @@ class BTImporter: CSVDataSink {
         }
     }
     
-    func parserDelegate( parserDelegate: CHCSVParserDelegate, inout shouldAddSequenceData seqname: String, inout fromCount start: Int, inContext token: CollectionStore.ContextToken) -> Bool {
+    func parserDelegate( _ parserDelegate: CHCSVParserDelegate, shouldAddSequenceData seqname: inout String, fromCount start: inout Int, inContext token: CollectionStore.ContextToken) -> Bool {
         let result = false
         return result
     }
 
     // MARK: main functionality
-    private func loadData( parserDelegate: InfoParserDelegate, fromFile file: NSURL, withContext token: CollectionStore.ContextToken ) {
+    fileprivate func loadData( _ parserDelegate: InfoParserDelegate, fromFile file: URL, withContext token: CollectionStore.ContextToken ) {
         // this does blocking (synchronous) parsing of the files
         if let basicParser = CHCSVParser(contentsOfCSVURL: file) {
             parserDelegate.contextToken = token
@@ -74,14 +74,14 @@ class BTImporter: CSVDataSink {
             basicParser.sanitizesFields = true
             basicParser.delegate = parserDelegate
             basicParser.parse()
-            print("Completed parsing \(file.lastPathComponent!)")
+            print("Completed parsing \(file.lastPathComponent)")
         }
     }
     
-    func importData( completion: (() -> Void)? )
+    func importData( _ completion: (() -> Void)? )
     {
         // do this on a background thread
-        NSOperationQueue().addOperationWithBlock({
+        OperationQueue().addOperation({
             // this does blocking (synchronous) parsing of the files
             let fileCats = getFile(nameOfCategoryFile)
             let fileInfo = getFile(nameOfInfoFile)
@@ -95,7 +95,7 @@ class BTImporter: CSVDataSink {
             //CollectionStore.sharedInstance.finalizeStorageContext(token) // removed - not using CoreData
             // run the completion block, if any, on the main queue
             if let completion = completion {
-                NSOperationQueue.mainQueue().addOperationWithBlock(completion)
+                OperationQueue.main.addOperation(completion)
             }
         })
         
@@ -106,14 +106,14 @@ class BTImporter: CSVDataSink {
 // MARK: data export
 class BTExporter {
     
-    private func exportCatalogData(data: [BTCategory], toFile file: NSURL) {
+    fileprivate func exportCatalogData(_ data: [BTCategory], toFile file: URL) {
         // 1. determine file name and path
         // 2. get the header list for the category file
         // 3. for each category
         // 4. output its base data
         if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = BTCategory.getExportNameList()
-            basicWriter.writeLineOfFields(headers)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
             for item in data {
                 let dictObject = item.getExportData()
                 var fields: [String] = []
@@ -122,19 +122,19 @@ class BTExporter {
                         fields.append(field)
                     }
                 }
-                basicWriter.writeLineOfFields(fields)
+                basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
             }
         }
     }
     
-    private func exportItemData(data: [BTCategory], toFile file: NSURL) {
+    fileprivate func exportItemData(_ data: [BTCategory], toFile file: URL) {
         // 1. determine file name and path
         // 2. get the header list for the item file
         // 3. for each category (incl.JS category)
         // 4. output its item data in a loop, passing the category number
         if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = BTDealerItem.getExportNameList()
-            basicWriter.writeLineOfFields(headers)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
             for cat in data {
                 let catnum = cat.number
                 let items = cat.dataItems
@@ -146,69 +146,69 @@ class BTExporter {
                             fields.append(field)
                         }
                     }
-                    basicWriter.writeLineOfFields(fields)
+                    basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
                 }
             }
         }
     }
     
-    func exportData(data: [BTCategory], completion: (() -> Void)? ) {
+    func exportData(_ data: [BTCategory], completion: (() -> Void)? ) {
         let fileCats = getFile(nameOfCategoryFile)
         let fileInfo = getFile(nameOfInfoFile)
         let tempfileCats = getFile(nameOfCategoryFile + ".tmp")
         let tempfileInfo = getFile(nameOfInfoFile + ".tmp")
        // do this on a background thread
         // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
-        NSOperationQueue().addOperationWithBlock({
-            print("Exporting BT category and info files to path: \(fileCats.path!)")
+        OperationQueue().addOperation({
+            print("Exporting BT category and info files to path: \(fileCats.path)")
             self.exportCatalogData(data, toFile: tempfileCats)
             self.exportItemData(data, toFile: tempfileInfo)
             // delete the original files and rename the temp files to be the original files (with error handling - atomic somehow?)
-            let fileManager = NSFileManager.defaultManager()
+            let fileManager = FileManager.default
             var error : NSError?
             do {
-                try fileManager.removeItemAtURL(fileCats)
+                try fileManager.removeItem(at: fileCats)
             } catch let error1 as NSError {
                 error = error1
             } catch {
-                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#1")
+                fatalError("Swift 2 error - \(#file):\(#line) removeItemAtURL#1")
             }
             if error != nil {
                 print("Unable to remove CATEGORY original: \(error!.localizedDescription).")
             }
             do {
-                try fileManager.moveItemAtURL(tempfileCats, toURL: fileCats)
+                try fileManager.moveItem(at: tempfileCats, to: fileCats)
             } catch let error1 as NSError {
                 error = error1
             } catch {
-                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#1")
+                fatalError("Swift 2 error - \(#file):\(#line) moveItemAtURL#1")
             }
             if error != nil {
                 print("Unable to rename CATEGORY temp copy to original: \(error!.localizedDescription).")
             }
             do {
-                try fileManager.removeItemAtURL(fileInfo)
+                try fileManager.removeItem(at: fileInfo)
             } catch let error1 as NSError {
                 error = error1
             } catch {
-                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) removeItemAtURL#2")
+                fatalError("Swift 2 error - \(#file):\(#line) removeItemAtURL#2")
             }
             if error != nil {
                 print("Unable to remove INFO original: \(error!.localizedDescription).")
             }
             do {
-                try fileManager.moveItemAtURL(tempfileInfo, toURL: fileInfo)
+                try fileManager.moveItem(at: tempfileInfo, to: fileInfo)
             } catch let error1 as NSError {
                 error = error1
             } catch {
-                fatalError("Swift 2 error - \(__FILE__):\(__LINE__) moveItemAtURL#2")
+                fatalError("Swift 2 error - \(#file):\(#line) moveItemAtURL#2")
             }
             if error != nil {
                 print("Unable to rename INFO temp copy to original: \(error!.localizedDescription).")
             }
             // run the completion block, if any, on the main queue
             if let completion = completion {
-                NSOperationQueue.mainQueue().addOperationWithBlock(completion)
+                OperationQueue.main.addOperation(completion)
             }
         })
     }

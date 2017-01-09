@@ -35,33 +35,33 @@ class BTItemsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func notesButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func notesButtonPressed(_ sender: UIBarButtonItem) {
         messageBoxWithTitle("Notes", andBody: category.notes, forController: self)
     }
     
-    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // load the BT category items page for scraping
         storeModel.loadStoreCategory(category.number, whenDone: updateUI)
     }
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return category.dataItems.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BT Item Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BT Item Cell", for: indexPath) 
 
         // Configure the cell...
-        let item = category.dataItems[indexPath.row]
+        let item = category.dataItems[(indexPath as NSIndexPath).row]
         cell.textLabel?.text = "\(item.descr)"
         cell.detailTextLabel?.text = formatBTDetail(item)
 //        let useDisclosure = true
@@ -108,14 +108,14 @@ class BTItemsTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         if segue.identifier == "Show Dealer Item Segue" {
-            if let dvc = segue.destinationViewController as? InfoItemViewController,
-                cell = sender as? UITableViewCell  {
+            if let dvc = segue.destination as? InfoItemViewController,
+                let cell = sender as? UITableViewCell  {
                     // create an info item for the dealer item selected, if possible
-                    let indexPath = tableView.indexPathForCell(cell)!
-                    let row = indexPath.row
+                    let indexPath = tableView.indexPath(for: cell)!
+                    let row = (indexPath as NSIndexPath).row
                     let btitem = category.dataItems[row]
                     dvc.btitem = btitem
                     dvc.btcat = category

@@ -16,61 +16,61 @@ For now we will customize it to edit SearchType objects' auxiliary data.
 */
 
 enum UIQueryFieldType {
-    case Text, Numeric
+    case text, numeric
 }
 
 enum UIQueryFieldDesignator {
-    case KeywordList, YearRangeStart, YearRangeEnd, IDPattern
+    case keywordList, yearRangeStart, yearRangeEnd, idPattern
 }
 
 struct UIQueryFieldConfiguration {
-    var designator: UIQueryFieldDesignator = .KeywordList
-    var type: UIQueryFieldType = .Text
+    var designator: UIQueryFieldDesignator = .keywordList
+    var type: UIQueryFieldType = .text
     var placeholder: String = ""
     
     // this object's job is to set up configuration instructions for the various text fields
     init( type des: UIQueryFieldDesignator) {
         designator = des
         switch des {
-        case .KeywordList:
+        case .keywordList:
             // set up the single text field config
             placeholder = "Space-separated key words"
-            type = .Text
+            type = .text
             break
-        case .YearRangeStart:
+        case .yearRangeStart:
             // set up the two numeric field configs
             placeholder = "Start year as YYYY"
-            type = .Numeric
+            type = .numeric
             break
-        case .YearRangeEnd:
+        case .yearRangeEnd:
             // set up the two numeric field configs
             placeholder = "End year as YYYY"
-            type = .Numeric
+            type = .numeric
             break
-        case .IDPattern:
+        case .idPattern:
             // set up the single text field config
             placeholder = "ID search pattern"
-            type = .Text
+            type = .text
             break
         }
     }
 }
 
 enum UIQueryAlertType {
-    case Keyword, YearRange, SubCategory
+    case keyword, yearRange, subCategory
 }
 
 struct UIQueryAlertConfiguration {
-    var type: UIQueryAlertType = .Keyword
-    private var title: String = ""
-    private var body: String = ""
-    private var fieldConfigs: [UIQueryFieldConfiguration] = []
+    var type: UIQueryAlertType = .keyword
+    fileprivate var title: String = ""
+    fileprivate var body: String = ""
+    fileprivate var fieldConfigs: [UIQueryFieldConfiguration] = []
 
     // this object's job is to set up configuration instructions for the various text fields
     init( type: UIQueryAlertType) {
         self.type = type
         switch type {
-        case .Keyword:
+        case .keyword:
             // set up the single text field config
             title = "Edit Keyword List"
             body = "Enter key words for searching, separated by spaces.\n"
@@ -78,25 +78,25 @@ struct UIQueryAlertConfiguration {
             "By default, any keyword will match. To force all keywords to match,"
             " use the word ALL as the first keyword.\n"
             "To remove all keyword filtering, enter an empty field."
-            fieldConfigs.append(UIQueryFieldConfiguration(type: .KeywordList))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .keywordList))
             break
-        case .YearRange:
+        case .yearRange:
             // set up the two numeric field configs
             title = "Edit Year Range Filter"
             body = "Specify the years to include. End must be greater than or equal to Start.\n"
                 "Valid years for Israeli stamps are 1948 to present."
             "\nTo specify a single year, enter valid Start and blank End."
             "\nTo remove all year filtering, enter blank in both Start and End."
-            fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeStart))
-            fieldConfigs.append(UIQueryFieldConfiguration(type: .YearRangeEnd))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeStart))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeEnd))
             break
-        case .SubCategory:
+        case .subCategory:
             // set up the single text field config
             title = "SubCategory Filter"
             body = "Enter Search pattern for record IDs.\n"
             "The search will check just the ID field.\n"
             "To remove all subcategory filtering, enter an empty field."
-            fieldConfigs.append(UIQueryFieldConfiguration(type: .IDPattern))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .idPattern))
             break
         }
     }
@@ -105,7 +105,7 @@ struct UIQueryAlertConfiguration {
         return fieldConfigs.count
     }
     
-    func getConfiguration(index: Int) -> UIQueryFieldConfiguration {
+    func getConfiguration(_ index: Int) -> UIQueryFieldConfiguration {
         return fieldConfigs[index]
     }
 }
@@ -116,37 +116,37 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
     var fields: [UITextField] = []
     var userCompletionHandler: ((SearchType) -> Void)?
 
-    init(type: UIQueryAlertType, completion: (SearchType) -> Void) {
+    init(type: UIQueryAlertType, completion: @escaping (SearchType) -> Void) {
         config = UIQueryAlertConfiguration(type: type)
         userCompletionHandler = completion
         // lots here eventually
         super.init()
     }
 
-    func RunWithViewController(vc: UIViewController) {
+    func RunWithViewController(_ vc: UIViewController) {
         fields = []
-        let ac = UIAlertController(title: config.title, message: config.body, preferredStyle: .Alert)
-        let act = UIAlertAction(title: "OK", style: .Default) { x in
+        let ac = UIAlertController(title: config.title, message: config.body, preferredStyle: .alert)
+        let act = UIAlertAction(title: "OK", style: .default) { x in
             // run the user's completion handler in response to OK being pressed
             if let handler = self.userCompletionHandler {
                 let result : SearchType
-                if self.config.type == .Keyword {
+                if self.config.type == .keyword {
                     let text : String = self.fields[0].text ?? ""
-                    var words = text.isEmpty ? [] : text.componentsSeparatedByString(" ") // split this at spaces
+                    var words = text.isEmpty ? [] : text.components(separatedBy: " ") // split this at spaces
                     if words.count > 0 && words[0] == "ALL" {
-                        words.removeAtIndex(0)
-                        result = SearchType.KeyWordListAll(words)
+                        words.remove(at: 0)
+                        result = SearchType.keyWordListAll(words)
                     } else {
-                        result = SearchType.KeyWordListAny(words)
+                        result = SearchType.keyWordListAny(words)
                     }
                     handler(result)
                 }
-                else if self.config.type == .SubCategory {
+                else if self.config.type == .subCategory {
                     let text : String = self.fields[0].text ?? ""
-                    result = SearchType.SubCategory(text)
+                    result = SearchType.subCategory(text)
                     handler(result)
                 }
-                else if self.config.type == .YearRange {
+                else if self.config.type == .yearRange {
                     let text1 : String = self.fields[0].text ?? ""
                     let text2 : String = self.fields[1].text ?? ""
                     var startYear = Int(text1) ?? 0
@@ -155,13 +155,13 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     if startYear != 0 && endYear == 0 {
                         endYear = startYear
                     }
-                    let (currentYear, _, _) = componentsFromDate(NSDate())
+                    let (currentYear, _, _) = componentsFromDate(Date())
                     if startYear < 1948 || startYear > currentYear || endYear < startYear {
                         // validity check: any invalid causes removal of searching type in question by sending back special data
                         startYear = 0
                         endYear = 0
                     }
-                    result = SearchType.YearInRange(startYear...endYear)
+                    result = SearchType.yearInRange(startYear...endYear)
                     handler(result)
                 }
             }
@@ -170,19 +170,19 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
         // add the text fields required by the configuration
         for index in 0..<config.getConfigurationCount() {
             let fldconfig = config.getConfiguration(index)
-            ac.addTextFieldWithConfigurationHandler() { (textField) in
+            ac.addTextField() { (textField) in
                 textField.delegate = self
                 textField.placeholder = fldconfig.placeholder
-                if fldconfig.type == .Numeric {
-                    textField.keyboardType = .NumbersAndPunctuation //.NumberPad
-                } else if fldconfig.type == .Text {
-                    textField.keyboardType = .Default //.ASCIICapable
+                if fldconfig.type == .numeric {
+                    textField.keyboardType = .numbersAndPunctuation //.NumberPad
+                } else if fldconfig.type == .text {
+                    textField.keyboardType = .default //.ASCIICapable
                 }
-                textField.returnKeyType = .Done
+                textField.returnKeyType = .done
                 self.fields.append(textField)
             }
         }
-        vc.presentViewController(ac, animated: true) {
+        vc.present(ac, animated: true) {
         }
     }
     
@@ -194,20 +194,20 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
 //    }
     
     // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         //updateModel() // name field updated and keyboard dismissed
     }
 

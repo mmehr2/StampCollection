@@ -16,9 +16,9 @@ private let entityName = "AlbumType"
 
 extension AlbumType {
     
-    private static func makeObjectWithName( name: String, inContext moc: NSManagedObjectContext? = nil ) -> Bool {
+    fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil ) -> Bool {
         if let context = moc {
-            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumType {
+            if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumType {
                 newObject.code = name
                 newObject.ordinal = 0
                 newObject.descriptionX = ""
@@ -28,7 +28,7 @@ extension AlbumType {
         return false
     }
     
-    private static func getObjectWithName( name: String, fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
+    fileprivate static func getObjectWithName( _ name: String, fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
         if let context = moc {
             let rule = NSPredicate(format: "%K == %@", "code", name)
             return fetch(entityName, inContext: context, withFilter: rule).first as? AlbumType
@@ -36,7 +36,7 @@ extension AlbumType {
         return nil
     }
     
-    private static func getUniqueObject( name: String, fromContext moc: NSManagedObjectContext? = nil, createIfNeeded: Bool = false) -> AlbumType? {
+    fileprivate static func getUniqueObject( _ name: String, fromContext moc: NSManagedObjectContext? = nil, createIfNeeded: Bool = false) -> AlbumType? {
         // Will return the object of the given name
         // Relationship objects required for creation: None.
         // If no object exists, and createIfNeeded is true, it will create the object of the given name
@@ -51,7 +51,7 @@ extension AlbumType {
         return nil
     }
     
-    static func getObjectInImportData( data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
+    static func getObjectInImportData( _ data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumType? {
         // will do all of the following to make sure a valid type object exists, and if so, return it (if not, returns nil)
         // 1. gets code of desired ref from data field "AlbumType"
         // 2. calls getUniqueObject() above to make sure proper object exists, and if not, creates it

@@ -13,9 +13,9 @@ private let entityName = "AlbumSection"
 
 extension AlbumSection {
     
-    static func makeObjectWithName( name: String, forParent parent: AlbumRef ) -> Bool {
+    static func makeObjectWithName( _ name: String, forParent parent: AlbumRef ) -> Bool {
         if let context = parent.managedObjectContext {
-            if let newObject = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? AlbumSection {
+            if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumSection {
                 newObject.code = name
                 newObject.ordinal = 0 // could assign these on creation order, but needs to be editable or at least renumberable at runtime
                 newObject.descriptionX = ""
@@ -27,12 +27,12 @@ extension AlbumSection {
     }
     
     // MARK: find-or-create pattern implementation
-    func getMemberObject( name: String, createIfNeeded: Bool = false) -> AlbumPage? {
+    func getMemberObject( _ name: String, createIfNeeded: Bool = false) -> AlbumPage? {
         // Will return the object of the given name (page number code), if any, that is a member of this section object's .pages list
         // If no object exists, and createIfNeeded is true, it will create the object of the given name with the proper relationships (to self)
         // If no object exists, and createIfNeeded is false, it will return nil
         for obj in pages {
-            if let thisPage = obj as? AlbumPage where thisPage.code == name {
+            if let thisPage = obj as? AlbumPage , thisPage.code == name {
                 return thisPage
             }
         }
@@ -44,20 +44,20 @@ extension AlbumSection {
         return nil
     }
     
-    static func getObjectInImportData( data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumSection? {
+    static func getObjectInImportData( _ data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumSection? {
         // will do all of the following to make sure a valid page object exists, and if so, return it (if not, returns nil)
         // 1. gets code for the desired section from data field "AlbumSection"
         // 2. calls AlbumRef.getObjectInImportData() to get the proper album object, creating it if needed
         // 3. calls that object's getMemberObject() to get the appropriate section object for the given code in step 1, creating it if needed
         // 4. returns the object, or nil if anything goes wrong
         if let datacode = data[entityName],
-            album = AlbumRef.getObjectInImportData(data, fromContext: moc) {
+            let album = AlbumRef.getObjectInImportData(data, fromContext: moc) {
                 return album.getMemberObject(datacode, createIfNeeded: true)
         }
         return nil
     }
     
-    private func sortByNumber(lhs: AlbumPage, _ rhs: AlbumPage) -> Bool {
+    fileprivate func sortByNumber(_ lhs: AlbumPage, _ rhs: AlbumPage) -> Bool {
         return lhs.number < rhs.number
     }
 
@@ -66,7 +66,7 @@ extension AlbumSection {
             return []
         }
         var result = Array(pages) as! [AlbumPage]
-        result.sortInPlace(sortByNumber)
+        result.sort(by: sortByNumber)
         return result
     }
 }

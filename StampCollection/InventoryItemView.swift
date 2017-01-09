@@ -21,25 +21,25 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
 @IBDesignable class InventoryItemView: UIView {
 
     // Our custom view from the XIB file
-    private var view: UIView!
+    fileprivate var view: UIView!
     
-    private func xibSetup() {
+    fileprivate func xibSetup() {
         view = loadViewFromNib(nibName)
         
         // use bounds not frame or it'll be offset
         view.frame = bounds
         
         // Make the view stretch with containing view
-        view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(view)
     }
     
-    private func loadViewFromNib(nibName: String) -> UIView {
+    fileprivate func loadViewFromNib(_ nibName: String) -> UIView {
         
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         
         return view
     }
@@ -64,7 +64,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
         xibSetup()
     }
     
-    @IBOutlet private weak var bottomLabel: UILabel!
+    @IBOutlet fileprivate weak var bottomLabel: UILabel!
 
     /// a multiline description to be placed at the bottom of the image
     var title: String? {
@@ -73,7 +73,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
         }
     }
     
-    @IBOutlet private weak var topLabel: UILabel!
+    @IBOutlet fileprivate weak var topLabel: UILabel!
 
     /// an optional multiline label to be placed at the top of the image
     var condition: String? {
@@ -82,7 +82,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet fileprivate weak var imageView: UIImageView!
     
     /// allows setting the image directly
     @IBInspectable var image: UIImage? {
@@ -95,10 +95,10 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
     }
     
     /// sets the image by providing a (remote) URL
-    var picURL: NSURL? {
+    var picURL: URL? {
         didSet {
             imageView.imageFromUrl(picURL) { image, urlReceived in
-                if let image = image where urlReceived == self.picURL {
+                if let image = image , urlReceived == self.picURL {
                     self.imageView.image = image
                 }
             }
@@ -109,7 +109,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
     var wanted: Bool = false {
         didSet {
             if wanted {
-                self.imageView.backgroundColor = UIColor.redColor()
+                self.imageView.backgroundColor = UIColor.red
             } else {
                 self.imageView.backgroundColor = UIColor.fern()
             }

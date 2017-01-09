@@ -24,7 +24,7 @@ class BTCategory: NSObject {
         return BTCategory.translateNumberToInfoCategory(number)
     }
     
-    class func translateNumberToInfoCategory( catnum: Int) -> Int16 {
+    class func translateNumberToInfoCategory( _ catnum: Int) -> Int16 {
         // takes the category of current BT site and translates it into the internal category number used in the collection data
         switch catnum {
         case 1...3: return Int16(catnum)
@@ -39,7 +39,7 @@ class BTCategory: NSObject {
         }
     }
     
-    class func translateNumberFromInfoCategory( catnum: Int16) -> Int {
+    class func translateNumberFromInfoCategory( _ catnum: Int16) -> Int {
         // takes the category of current BT site and translates it into the internal category number used in the collection data
         switch catnum {
         case 1...3: return Int(catnum)
@@ -54,7 +54,7 @@ class BTCategory: NSObject {
         }
     }
     
-    class func copyBasicDataFrom(sender: BTCategory, toCategoryObject receiver: BTCategory) {
+    class func copyBasicDataFrom(_ sender: BTCategory, toCategoryObject receiver: BTCategory) {
         //receiver.raw = sender.raw
         receiver.name = sender.name
         receiver.href = sender.href
@@ -62,13 +62,13 @@ class BTCategory: NSObject {
         receiver.items = sender.items
     }
     
-    class func copyBasicDataFrom(sender: [BTCategory], toCategoryArray receiver: [BTCategory]) {
-        for var i=0; i<sender.count; ++i {
+    class func copyBasicDataFrom(_ sender: [BTCategory], toCategoryArray receiver: [BTCategory]) {
+        for i in 0 ..< sender.count += 1 {
             copyBasicDataFrom(sender[i], toCategoryObject: receiver[i])
         }
     }
     
-    class func copyItemDataFrom(sender: BTCategory, toCategoryObject receiver: BTCategory) {
+    class func copyItemDataFrom(_ sender: BTCategory, toCategoryObject receiver: BTCategory) {
         receiver.notes = sender.notes
         receiver.headers = sender.headers
         receiver.dataItems = sender.dataItems
@@ -92,17 +92,17 @@ class BTCategory: NSObject {
         output["href"] = self.href
         output["items"] = "\(self.items)"
         output["notes"] = self.notes // poss.needs some escaping?
-        output["headers"] = self.headers.joinWithSeparator(";")
+        output["headers"] = self.headers.joined(separator: ";")
         return output
     }
     
-    func importFromData(data: [String:String]) {
+    func importFromData(_ data: [String:String]) {
         let refObj = self
         if let name = data["name"] { refObj.name = name }
-        if let numstr = data["number"], number = Int(numstr) { refObj.number = number }
+        if let numstr = data["number"], let number = Int(numstr) { refObj.number = number }
         if let href = data["href"] { refObj.href = href }
-        if let itemstr = data["items"], items = Int(itemstr) { refObj.items = items }
+        if let itemstr = data["items"], let items = Int(itemstr) { refObj.items = items }
         if let notes = data["notes"] { refObj.notes = notes } // maybe needs unescaping then
-        if let headers = data["headers"] { refObj.headers = headers.componentsSeparatedByString(";") }
+        if let headers = data["headers"] { refObj.headers = headers.components(separatedBy: ";") }
     }
 }

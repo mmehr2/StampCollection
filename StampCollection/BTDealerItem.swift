@@ -37,17 +37,17 @@ class BTDealerItem: NSObject {
         return false
     }
     
-    var picPageURL: NSURL? {
-        return getPicRefURL(picref, refType: isJS ? .JSRef  : .BTRef)
+    var picPageURL: URL? {
+        return getPicRefURL(picref, refType: isJS ? .jsRef  : .btRef)
     }
     
-    var picFileRemoteURL: NSURL? {
-        return getPicFileRemoteURL(picref, refType: isJS ? .JSRef  : .BTRef)
+    var picFileRemoteURL: URL? {
+        return getPicFileRemoteURL(picref, refType: isJS ? .jsRef  : .btRef)
     }
     
-    func getThePicFileLocalURL(btcatnum: Int) -> NSURL? {
+    func getThePicFileLocalURL(_ btcatnum: Int) -> URL? {
         let catgDisplayNum = BTCategory.translateNumberToInfoCategory(btcatnum)
-        return getPicFileLocalURL(picref, refType: isJS ? .JSRef  : .BTRef, category: catgDisplayNum)
+        return getPicFileLocalURL(picref, refType: isJS ? .jsRef  : .btRef, category: catgDisplayNum)
     }
     
     func fixupJSItem() {
@@ -65,7 +65,7 @@ class BTDealerItem: NSObject {
         // synthesize leading and trailing buy fields
         // (convention copied on 5/21/2015)
         // need to split off the index number from the picref field:
-        if let indexStr = picref.componentsSeparatedByString("=").last, index = Int(indexStr) {
+        if let indexStr = picref.components(separatedBy: "=").last, let index = Int(indexStr) {
             if hasMint {
                 buy1 = "judaica/austrian.asp?on_load=1&UC_AddId=\(index)"
             }
@@ -76,7 +76,7 @@ class BTDealerItem: NSObject {
     }
     
     
-    func fixCatField(catfieldx: String, Named fname: String, WithID id: String) -> String
+    func fixCatField(_ catfieldx: String, Named fname: String, WithID id: String) -> String
     {
         // returns fixed-up version of catfield, which is a string of ranges separated by commas
         var retval = catfieldx
@@ -88,9 +88,9 @@ class BTDealerItem: NSObject {
         // second char must be a space
         if retval[1...1] != " " { return retval }
         // split the prefix (cat type and space) from the data
-        var splitIndex = catfieldx.startIndex.successor().successor()
-        let prefix = catfieldx.substringToIndex(splitIndex)
-        let catfield = catfieldx.substringFromIndex(splitIndex)
+        var splitIndex = <#T##Collection corresponding to your index##Collection#>.index(after: catfieldx.characters.index(after: catfieldx.startIndex))
+        let prefix = catfieldx.substring(to: splitIndex)
+        let catfield = catfieldx.substring(from: splitIndex)
         let (part1, part2) = splitNumericEndOfString(catfield)
         let lencf = part2.characters.count
         let is8digitField = lencf == 8 && part1.isEmpty
@@ -128,20 +128,20 @@ class BTDealerItem: NSObject {
         // if we're still good to go, do the substitution or insertion
         if ok {
             let startIndex = catfield.startIndex
-            splitIndex = startIndex.advancedBy(pos)
+            splitIndex = <#T##String.CharacterView corresponding to `startIndex`##String.CharacterView#>.index(startIndex, offsetBy: pos)
             retval = prefix + catfield[startIndex..<splitIndex] + char
             if type == "sub" {
                 // only diff between ins and sub is where we pick up the tail from
                 // ins means keep the entire tail (splitIndex doesn't move)
                 // whereas with sub, we must advance splitIndex past the same number of chars that were in 'char' string (len)
-                splitIndex = splitIndex.advancedBy(len)
+                splitIndex = <#T##Collection corresponding to `splitIndex`##Collection#>.index(splitIndex, offsetBy: len)
             }
             retval += catfield[splitIndex..<catfield.endIndex]
         }
         return retval
     }
     
-    func fixupBTItem(btcatNumber: Int) {
+    func fixupBTItem(_ btcatNumber: Int) {
         let isSets = btcatNumber == CATNUM_SETS
         if isSets {
             catalog1 = fixCatField(catalog1, Named: "cat1", WithID: code)
@@ -151,7 +151,7 @@ class BTDealerItem: NSObject {
         status = trimSpaces(status)
     }
     
-    func createInfoItem(category: BTCategory) -> [String:String] {
+    func createInfoItem(_ category: BTCategory) -> [String:String] {
         // NOTE: be sure to use export names for all properties (i.e. description NOT descriptionX) to be comparable with the output of makeDataFromObject()
         var output : [String:String] = [:]
 //        let isJS = (code[0...2] == "AUI")
@@ -159,7 +159,7 @@ class BTDealerItem: NSObject {
         output["description"] = trimSpaces(descr)//descr // TBD: needed to fix bug in initial download of data, but can be eliminated once fixupBTItem() is refreshed again 6/8/2015
         output["status"] = status
         output["pictype"] = isJS ? "1" : "0" // 1 is JS type, 0 is BT
-        output["pictid"] = picref.componentsSeparatedByString("=").last ?? ""
+        output["pictid"] = picref.components(separatedBy: "=").last ?? ""
         output["cat1"] = catalog1
         output["cat2"] = catalog2
         output["group"] = category.name
@@ -181,7 +181,7 @@ class BTDealerItem: NSObject {
         //   2. PF would be price1 and price2 as well
         //   3. Sets YrSets and Vars would use PUFS always as 1+2+3+4
         // So to make the correspondence work, any PU or PUFS cats need to adjust here (swap 2 and 3, or just move 3 to 2 in the PU case)
-        let foundPU = category.headers.indexOf("PriceUsed") != nil
+        let foundPU = category.headers.index(of: "PriceUsed") != nil
         if foundPU && !isJS {
             // in cases where PriceUsed appears, the Info/CSV form will be PU or PUFS
             // the Web form is always PFUS (so for PU, price2 is always blank)
@@ -215,7 +215,7 @@ class BTDealerItem: NSObject {
         return output
     }
     
-    class func translatePropertyName( pname: String ) -> String {
+    class func translatePropertyName( _ pname: String ) -> String {
         switch pname {
         case "ItemCode": return "code"
         case "Description": return "descr"
@@ -259,7 +259,7 @@ class BTDealerItem: NSObject {
         }
     }
     
-    class func translatePropertyNameJS( pname: String ) -> String {
+    class func translatePropertyNameJS( _ pname: String ) -> String {
         // HEADERS [Item#, Pic, Description, Mint, FDC]
         switch pname {
         case "Item#": return "code"
@@ -304,7 +304,7 @@ class BTDealerItem: NSObject {
         return output
     }
     
-    func getExportData(catnum: Int) -> [String:String] {
+    func getExportData(_ catnum: Int) -> [String:String] {
         var output:[String:String] = [:]
         output["catgDisplayNum"] = "\(catnum)"
         output["code"] = self.code
@@ -328,7 +328,7 @@ class BTDealerItem: NSObject {
         return output
     }
     
-    func importFromData(data: [String:String]) -> Int {
+    func importFromData(_ data: [String:String]) -> Int {
         let refObj = self
         var catnum = -1
         if let inputStr = data["code"] { refObj.code = inputStr }
@@ -349,7 +349,7 @@ class BTDealerItem: NSObject {
         if let inputStr = data["oldprice2"] { refObj.oldprice2 = inputStr }
         if let inputStr = data["oldprice3"] { refObj.oldprice3 = inputStr }
         if let inputStr = data["oldprice4"] { refObj.oldprice4 = inputStr }
-        if let inputStr = data["catgDisplayNum"], inputNum = Int(inputStr) { catnum = inputNum }
+        if let inputStr = data["catgDisplayNum"], let inputNum = Int(inputStr) { catnum = inputNum }
         return catnum
     }
 }

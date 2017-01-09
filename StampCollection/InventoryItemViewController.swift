@@ -24,9 +24,9 @@ class InventoryItemViewController: UIViewController {
         updateUI()
     }
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         title = "Edit \(item.dealerItem.descriptionX) \(item.itemCondition)"
-        refersButton.enabled = item.referredItem != nil
+        refersButton.isEnabled = item.referredItem != nil
         itemView.wanted = item.wanted
         itemView.picURL = item.dealerItem.picFileRemoteURL
         let (top, btm) = getTitlesForInventoryItem(item)
@@ -35,7 +35,7 @@ class InventoryItemViewController: UIViewController {
     }
 
     /// call after any changes on the item target
-    private func reload() {
+    fileprivate func reload() {
         // save the data and update the UI
         model.saveMainContext()
         updateUI()
@@ -46,55 +46,55 @@ class InventoryItemViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func wantHaveButtonPressed(sender: AnyObject) {
+    @IBAction func wantHaveButtonPressed(_ sender: AnyObject) {
         item.wantHave = item.wanted ? "h" : "w"
         reload()
     }
     
-    @IBAction func descButtonPressed(sender: AnyObject) {
+    @IBAction func descButtonPressed(_ sender: AnyObject) {
     }
     
-    @IBAction func notesButtonPressed(sender: AnyObject) {
+    @IBAction func notesButtonPressed(_ sender: AnyObject) {
     }
     
-    @IBAction func priceButtonPressed(sender: AnyObject) {
+    @IBAction func priceButtonPressed(_ sender: AnyObject) {
     }
     
-    @IBAction func refersButtonPressed(sender: AnyObject) {
+    @IBAction func refersButtonPressed(_ sender: AnyObject) {
         // first make sure we have an item of the referred type, in the same condition (mint/FDC/..)
         let itemsThatMatchX = (item.referredItem?.inventoryItems.filter {
-            $0.itemType == item.itemType
+            ($0 as AnyObject).itemType == item.itemType
         })
         let itemsThatMatch = itemsThatMatchX ?? [] // SWIFT BUG? 11/6/15 - should combine these expressions
         let count = itemsThatMatch.count
         // if we have any of these, pick the first and segue to the page it is on
         if count > 0,
             let page = (itemsThatMatch.first as? InventoryItem)?.page {
-            performSegueWithIdentifier("Show Ref From Inv Segue", sender: page)
+            performSegue(withIdentifier: "Show Ref From Inv Segue", sender: page)
         }
         // if not, segue to the info page for that item
         else {
-            performSegueWithIdentifier("Show Info From Inv Segue", sender: item.referredItem)
+            performSegue(withIdentifier: "Show Info From Inv Segue", sender: item.referredItem)
         }
     }
 
-    @IBAction func infoButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("Show Info From Inv Segue", sender: item.dealerItem)
+    @IBAction func infoButtonPressed(_ sender: AnyObject) {
+        performSegue(withIdentifier: "Show Info From Inv Segue", sender: item.dealerItem)
     }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.Show Ref From Inv Segue
         if segue.identifier == "Show Info From Inv Segue" {
-            if let dvc = segue.destinationViewController as? InfoItemViewController {
+            if let dvc = segue.destination as? InfoItemViewController {
                 dvc.item = sender as? DealerItem
             }
         }
         if segue.identifier == "Show Ref From Inv Segue" {
-            if let dvc = segue.destinationViewController as? AlbumPageViewController {
+            if let dvc = segue.destination as? AlbumPageViewController {
                 dvc.setStartPage((sender as? AlbumPage)!)
             }
         }

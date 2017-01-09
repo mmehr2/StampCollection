@@ -24,16 +24,16 @@ struct Regex {
             updateRegex()
         }
     }
-    var expressionOptions: NSRegularExpressionOptions{
+    var expressionOptions: NSRegularExpression.Options{
         didSet{
             updateRegex()
         }
     }
-    var matchingOptions: NSMatchingOptions
+    var matchingOptions: NSRegularExpression.MatchingOptions
     
     var regex : NSRegularExpression?
     
-    init(pattern: String, expressionOptions: NSRegularExpressionOptions, matchingOptions: NSMatchingOptions) {
+    init(pattern: String, expressionOptions: NSRegularExpression.Options, matchingOptions: NSRegularExpression.MatchingOptions) {
         self.pattern = pattern
         self.expressionOptions = expressionOptions
         self.matchingOptions = matchingOptions
@@ -42,30 +42,30 @@ struct Regex {
     
     init(pattern:String) {
         self.pattern = pattern
-        expressionOptions = NSRegularExpressionOptions(rawValue: 0)
-        matchingOptions = NSMatchingOptions(rawValue: 0)
+        expressionOptions = NSRegularExpression.Options(rawValue: 0)
+        matchingOptions = NSRegularExpression.MatchingOptions(rawValue: 0)
         updateRegex()
     }
     
-    private mutating func updateRegex(){
+    fileprivate mutating func updateRegex(){
         regex = try? NSRegularExpression(pattern: pattern, options: expressionOptions)
     }
     
-    private static func testMatch(left: String, right: Regex) -> Bool {
+    fileprivate static func testMatch(_ left: String, right: Regex) -> Bool {
         let range = NSMakeRange(0, left.characters.count)
         if let regex = right.regex {
-            let matches = regex.matchesInString(left, options: right.matchingOptions, range: range) // as! [NSTextCheckingResult]
+            let matches = regex.matches(in: left, options: right.matchingOptions, range: range) // as! [NSTextCheckingResult]
             return matches.count > 0
         }
         
         return false
     }
     
-    private static func replacePattern(left:String, right: (regex:Regex, template:String) ) -> String{
+    fileprivate static func replacePattern(_ left:String, right: (regex:Regex, template:String) ) -> String{
         if Regex.testMatch(left, right: right.regex) {
             let range = NSMakeRange(0, left.characters.count)
             if let regex = right.regex.regex {
-                return regex.stringByReplacingMatchesInString(left, options: right.regex.matchingOptions, range: range, withTemplate: right.template)
+                return regex.stringByReplacingMatches(in: left, options: right.regex.matchingOptions, range: range, withTemplate: right.template)
             }
         }
         return left
@@ -110,19 +110,19 @@ struct Regex {
 // so I will just use the simple test and replace definitions below
 extension String {
     
-    func test(pattern: String) -> Bool {
+    func test(_ pattern: String) -> Bool {
         return test(Regex(pattern: pattern))
     }
     
-    func test(regex: Regex) -> Bool {
+    func test(_ regex: Regex) -> Bool {
         return Regex.testMatch(self, right: regex) //self =~ regex
     }
     
-    func replace( pattern: String, withTemplate template: String) -> String {
+    func replace( _ pattern: String, withTemplate template: String) -> String {
         return replace( Regex(pattern: pattern), withTemplate: template )
     }
     
-    func replace( regex: Regex, withTemplate template: String) -> String {
+    func replace( _ regex: Regex, withTemplate template: String) -> String {
         return Regex.replacePattern(self, right: (regex, template)) //self >< (regex, template)
     }
     

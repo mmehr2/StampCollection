@@ -17,31 +17,31 @@ class InfoItemViewController: UIViewController {
     var btitem: BTDealerItem!
     var btcat: BTCategory!
     
-    private var usingBT: Bool {
+    fileprivate var usingBT: Bool {
         if btitem != nil && btcat != nil {
             return true
         }
         return false
     }
-    private var itemID: String {
+    fileprivate var itemID: String {
         return usingBT ? btitem.code  : item.id
     }
-    private var itemDescription: String {
+    fileprivate var itemDescription: String {
         return usingBT ? btitem.descr  : item.descriptionX
     }
-    private var itemCategoryName: String {
+    fileprivate var itemCategoryName: String {
         return usingBT ? btcat.name  : item.category.name
     }
-    private var itemPictid: String {
+    fileprivate var itemPictid: String {
         return usingBT ? btitem.picref : item.pictid
     }
-    private var picPageURL: NSURL? {
-        return usingBT ? btitem.picPageURL  : item.picPageURL
+    fileprivate var picPageURL: URL? {
+        return usingBT ? btitem.picPageURL  : item.picPageURL as URL?
     }
-    private var picFileURLSource: NSURL? {
-        return usingBT ? btitem.picFileRemoteURL  : item.picFileRemoteURL
+    fileprivate var picFileURLSource: URL? {
+        return usingBT ? btitem.picFileRemoteURL  : item.picFileRemoteURL as URL?
     }
-    private var picFileURLDestination: NSURL? {
+    fileprivate var picFileURLDestination: URL? {
         return usingBT ? btitem.getThePicFileLocalURL(btcat.number)  : item.picFileLocalURL
     }
 
@@ -62,7 +62,7 @@ class InfoItemViewController: UIViewController {
     @IBOutlet weak var yearRangeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var webInfoButton: UIBarButtonItem!
-    @IBAction func refreshButtonPressed(sender: AnyObject) {
+    @IBAction func refreshButtonPressed(_ sender: AnyObject) {
         // download image file if needed (on background thread) to display later
         downloadAndDisplayImage()
     }
@@ -79,7 +79,7 @@ class InfoItemViewController: UIViewController {
         if let pflurl = picFileURLDestination {
             print("TBD- Caching file:\(pflurl.absoluteString) for pictid:\(itemPictid)")
         }
-        webInfoButton.enabled = picPageURL != nil
+        webInfoButton.isEnabled = picPageURL != nil
         if !displayImageFileIfPossible() {
             // download image file if needed (on background thread) to display later
             downloadAndDisplayImage()
@@ -87,18 +87,18 @@ class InfoItemViewController: UIViewController {
     }
 
     // MARK: image file manipulations
-    private func isImageFilePresent() -> Bool {
+    fileprivate func isImageFilePresent() -> Bool {
         var result = false
-        let fm = NSFileManager.defaultManager()
+        let fm = FileManager.default
         if let destURL = picFileURLDestination {
-            result = fm.fileExistsAtPath( destURL.absoluteString )
+            result = fm.fileExists( atPath: destURL.absoluteString )
         }
         return result
     }
     
-    private func displayImageFileIfPossible() -> Bool {
+    fileprivate func displayImageFileIfPossible() -> Bool {
         var result = false
-        if let destURL = picFileURLDestination where isImageFilePresent()
+        if let destURL = picFileURLDestination , isImageFilePresent()
         {
             let filename = destURL.absoluteString
             imageView.image = UIImage(contentsOfFile: filename)
@@ -107,11 +107,11 @@ class InfoItemViewController: UIViewController {
         return result
     }
 
-    private func downloadAndDisplayImage() {
+    fileprivate func downloadAndDisplayImage() {
         // run this on a background thread
         if let imageSource = picFileURLSource {
             imageView.imageFromUrl(imageSource) { image, urlReceived in
-                if let image = image where urlReceived == imageSource {
+                if let image = image , urlReceived == imageSource {
                     self.imageView.image = image
                 }
             }
@@ -123,11 +123,11 @@ class InfoItemViewController: UIViewController {
     */
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Show Web Page Segue" {
             // Get the new view controller using segue.destinationViewController.
-            if let dvc = segue.destinationViewController as? WebItemViewController,
-                url = picPageURL{
+            if let dvc = segue.destination as? WebItemViewController,
+                let url = picPageURL{
                 // Pass the selected object to the new view controller.
                 print("Displaying page:\(url.absoluteString) for pictid:\(itemPictid)")
                 dvc.url = url

@@ -10,7 +10,7 @@ import UIKit
 
 class AlbumRefCell: UICollectionViewCell {
     
-    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet fileprivate weak var titleLabel: UILabel!
     
     var title: String? {
         didSet {

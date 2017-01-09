@@ -9,10 +9,10 @@
 import WebKit
 
 protocol BTMessageProtocol {
-    func messageHandler( handler: BTMessageDelegate, willLoadDataForCategory category: Int)
-    func messageHandler( handler: BTMessageDelegate, didLoadDataForCategory category: Int)
-    func messageHandler( handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int)
-    func messageHandler( handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, willLoadDataForCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, didLoadDataForCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
 let BTCategoryAll = -1
@@ -25,22 +25,22 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     
     let categoriesMessage = "getCategories"
     
-    private var internalWebView: WKWebView?
+    fileprivate var internalWebView: WKWebView?
     
-    private let itemsMessage = "getItems"
+    fileprivate let itemsMessage = "getItems"
     
     
     func loadCategoriesFromWeb() {
-        let url = NSURL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
+        let url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
         categoryNumber = BTCategoryAll;
         let config = WKWebViewConfiguration()
-        let scriptURL = NSBundle.mainBundle().pathForResource("getCategories", ofType: "js")
-        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding)
-        let script = WKUserScript(source: scriptContent!, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
+        let scriptURL = Bundle.main.path(forResource: "getCategories", ofType: "js")
+        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
+        let script = WKUserScript(source: scriptContent!, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         config.userContentController.addUserScript(script)
-        config.userContentController.addScriptMessageHandler(self, name: categoriesMessage)
-        internalWebView = WKWebView(frame: CGRectZero, configuration: config)
-        internalWebView!.loadRequest(NSURLRequest(URL: url!))
+        config.userContentController.add(self, name: categoriesMessage)
+        internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+        internalWebView!.load(URLRequest(url: url!))
         if let delegate = delegate {
             delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
         }
@@ -48,17 +48,17 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         //storeModel.categories = []
     }
     
-    func loadItemsFromWeb( href: String, forCategory category: Int ) {
-        let url = NSURL(string: href)
+    func loadItemsFromWeb( _ href: String, forCategory category: Int ) {
+        let url = URL(string: href)
         categoryNumber = category
         let config = WKWebViewConfiguration()
-        let scriptURL = NSBundle.mainBundle().pathForResource("getItems", ofType: "js")
-        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:NSUTF8StringEncoding)
-        let script = WKUserScript(source: scriptContent!, injectionTime: .AtDocumentEnd, forMainFrameOnly: false)
+        let scriptURL = Bundle.main.path(forResource: "getItems", ofType: "js")
+        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
+        let script = WKUserScript(source: scriptContent!, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         config.userContentController.addUserScript(script)
-        config.userContentController.addScriptMessageHandler(self, name: itemsMessage)
-        internalWebView = WKWebView(frame: CGRectZero, configuration: config)
-        internalWebView!.loadRequest(NSURLRequest(URL: url!))
+        config.userContentController.add(self, name: itemsMessage)
+        internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+        internalWebView!.load(URLRequest(url: url!))
         if let delegate = delegate {
             delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
         }
@@ -67,7 +67,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     }
     
     // MARK: WKScriptMessageHandler
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.name == categoriesMessage) {
             categoriesMessageHandler(message)
         }
@@ -76,7 +76,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         }
     }
     
-    private func categoriesMessageHandler( message: WKScriptMessage ) {
+    fileprivate func categoriesMessageHandler( _ message: WKScriptMessage ) {
         //println("Received \(message.name) message")
         if let rawCategories = message.body as? NSDictionary {
             // Structure: contains two NSArrays
@@ -92,10 +92,10 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
             //                let tableRows = rawCategories["tableRows"] as! NSArray;
             //                println("Category names: \(tableCols) => \(tableRows)")
             if let trows = rawCategories["tableRows"] as? NSArray,
-                tcols = rawCategories["tableCols"] as? NSArray,
-                column1Header = tcols[0] as? NSString,
-                column2Header = tcols[1] as? NSString,
-                column3Header = tcols[2] as? NSString {
+                let tcols = rawCategories["tableCols"] as? NSArray,
+                let column1Header = tcols[0] as? NSString,
+                let column2Header = tcols[1] as? NSString,
+                let column3Header = tcols[2] as? NSString {
                     //println("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
                     // println("There are \(tcols) column names for the table of Categories = \(trows)")
                     let
@@ -113,10 +113,10 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                         },
                         */
                         if let row = row as? NSDictionary,
-                            numberN = row.valueForKey(col1Header) as? NSString,
-                            nameN = row.valueForKey(col2Header) as? NSString,
-                            itemsN = row.valueForKey(col3Header) as? NSString,
-                            hrefN = row.valueForKey("href") as? NSString
+                            let numberN = row.value(forKey: col1Header) as? NSString,
+                            let nameN = row.value(forKey: col2Header) as? NSString,
+                            let itemsN = row.value(forKey: col3Header) as? NSString,
+                            let hrefN = row.value(forKey: "href") as? NSString
                         {
                             //println("Row = \(row)")
                             let name = nameN as String,
@@ -141,7 +141,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         }
     }
     
-    private func itemsMessageHandler( message: WKScriptMessage ) {
+    fileprivate func itemsMessageHandler( _ message: WKScriptMessage ) {
         //println("Received \(message.name) message")
         if let reply = message.body as? NSDictionary {
             // Structure of reply - NSDictionary with props:
@@ -152,14 +152,14 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
             //    NOTE: there is one OldX prop and one BuyX prob for each PriceX prop that is present, e.g., PriceUsed + BuyUsed + OldPriceUsed
             //    X can be "", "FDC", "Used" or "Other"
             if let dataCountNS = reply["dataCount"] as? NSNumber {
-                let dataCount = dataCountNS.integerValue
+                let dataCount = dataCountNS.intValue
                 if dataCount == -1 {
                     //println("Received null \(message.name) message from main frame")
                 } else if let headersNS = reply["headers"] as? NSArray,
-                    headers = headersNS as? [String],
-                    notesNS = reply["notes"] as? NSString,
-                    itemsNS = reply["items"] as? NSArray,
-                    btitems = itemsNS as? [NSDictionary]
+                    let headers = headersNS as? [String],
+                    let notesNS = reply["notes"] as? NSString,
+                    let itemsNS = reply["items"] as? NSArray,
+                    let btitems = itemsNS as? [NSDictionary]
                 {
                     let notes = notesNS as String
                     let category = BTCategory()

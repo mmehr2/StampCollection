@@ -9,32 +9,32 @@
 import Foundation
 
 enum SortType {
-    case None // leaves Phase 1 (predicate) sorting intact
-    case ByImport(Bool) // needs to know Ascending or Descending
-    case ByCode(Bool) // needs to know Ascending or Descending
-    case ByCatThenCode(Bool) // needs to know Ascending or Descending
-    case ByPrice(Int, Bool) // needs to know which price to sort INFO by (INV should use Value sorting)
-    case ByDate(Bool) // needs to know Ascending or Descending
+    case none // leaves Phase 1 (predicate) sorting intact
+    case byImport(Bool) // needs to know Ascending or Descending
+    case byCode(Bool) // needs to know Ascending or Descending
+    case byCatThenCode(Bool) // needs to know Ascending or Descending
+    case byPrice(Int, Bool) // needs to know which price to sort INFO by (INV should use Value sorting)
+    case byDate(Bool) // needs to know Ascending or Descending
     // INV ONLY
-    case ByAlbum(Bool) // needs to know Ascending or Descending
-    case ByValue(Bool) // needs to know Ascending or Descending
+    case byAlbum(Bool) // needs to know Ascending or Descending
+    case byValue(Bool) // needs to know Ascending or Descending
 }
 
 extension SortType: CustomStringConvertible {
     var description: String {
         switch self {
-        case .None: return "Default"
-        case .ByImport(let asc): return decide(asc, name: "Import")
-        case .ByCode(let asc): return decide(asc, name: "Code")
-        case .ByCatThenCode(let asc): return decide(asc, name: "Cat:Code")
-        case .ByPrice(let num, let asc): return decide(asc, name: "Price"+num.description)
-        case .ByDate(let asc): return decide(asc, name: "Date")
-        case .ByAlbum(let asc): return decide(asc, name: "INV:Album")
-        case .ByValue(let asc): return decide(asc, name: "INV:Value")
+        case .none: return "Default"
+        case .byImport(let asc): return decide(asc, name: "Import")
+        case .byCode(let asc): return decide(asc, name: "Code")
+        case .byCatThenCode(let asc): return decide(asc, name: "Cat:Code")
+        case .byPrice(let num, let asc): return decide(asc, name: "Price"+num.description)
+        case .byDate(let asc): return decide(asc, name: "Date")
+        case .byAlbum(let asc): return decide(asc, name: "INV:Album")
+        case .byValue(let asc): return decide(asc, name: "INV:Value")
         }
     }
     
-    private func decide( asc: Bool, name: String ) -> String {
+    fileprivate func decide( _ asc: Bool, name: String ) -> String {
         return asc ? name + "+" : name + "-"
     }
 }
@@ -68,56 +68,56 @@ protocol AlbumSortable {
 protocol SortTypeSortable : CodeSortable, DateSortable, ImportSortable { }
 protocol SortTypeSortableEx : SortTypeSortable, AlbumSortable { }
 
-func sortCollection<T: SortTypeSortable>( coll: [T], byType type: SortType) -> [T] {
+func sortCollection<T: SortTypeSortable>( _ coll: [T], byType type: SortType) -> [T] {
     switch type {
-    case .ByImport(let asc):
+    case .byImport(let asc):
         if asc {
-            return coll.sort{ $0.exOrder < $1.exOrder }
+            return coll.sorted{ $0.exOrder < $1.exOrder }
         } else {
-            return coll.sort{ $1.exOrder < $0.exOrder }
+            return coll.sorted{ $1.exOrder < $0.exOrder }
         }
-    case .ByCode(let asc):
+    case .byCode(let asc):
         if asc {
-            return coll.sort{ $0.normalizedCode < $1.normalizedCode }
+            return coll.sorted{ $0.normalizedCode < $1.normalizedCode }
         } else {
-            return coll.sort{ $1.normalizedCode < $0.normalizedCode }
+            return coll.sorted{ $1.normalizedCode < $0.normalizedCode }
         }
-    case .ByDate(let asc):
+    case .byDate(let asc):
         if asc {
-            return coll.sort{ $0.normalizedDate < $1.normalizedDate }
+            return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
         } else {
-            return coll.sort{ $1.normalizedDate < $0.normalizedDate }
+            return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
         }
     default: break
     }
     return coll
 }
 
-func sortCollectionEx<T: SortTypeSortableEx>( coll: [T], byType type: SortType) -> [T] {
+func sortCollectionEx<T: SortTypeSortableEx>( _ coll: [T], byType type: SortType) -> [T] {
     switch type {
-    case .ByImport(let asc):
+    case .byImport(let asc):
         if asc {
-            return coll.sort{ $0.exOrder < $1.exOrder }
+            return coll.sorted{ $0.exOrder < $1.exOrder }
         } else {
-            return coll.sort{ $1.exOrder < $0.exOrder }
+            return coll.sorted{ $1.exOrder < $0.exOrder }
         }
-    case .ByCode(let asc):
+    case .byCode(let asc):
         if asc {
-            return coll.sort{ $0.normalizedCode < $1.normalizedCode }
+            return coll.sorted{ $0.normalizedCode < $1.normalizedCode }
         } else {
-            return coll.sort{ $1.normalizedCode < $0.normalizedCode }
+            return coll.sorted{ $1.normalizedCode < $0.normalizedCode }
         }
-    case .ByDate(let asc):
+    case .byDate(let asc):
         if asc {
-            return coll.sort{ $0.normalizedDate < $1.normalizedDate }
+            return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
         } else {
-            return coll.sort{ $1.normalizedDate < $0.normalizedDate }
+            return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
         }
-    case .ByAlbum(let asc):
+    case .byAlbum(let asc):
         if asc {
-            return coll.sort{ return compareByAlbum($0, rhs: $1) }
+            return coll.sorted{ return compareByAlbum($0, rhs: $1) }
         } else {
-            return coll.sort{ return compareByAlbum($1, rhs: $0) }
+            return coll.sorted{ return compareByAlbum($1, rhs: $0) }
         }
     default: break
     }

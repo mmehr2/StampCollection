@@ -50,7 +50,7 @@ NOTE: When I leave out the -m "" part, an editor pops up, but when I save and cl
 
 // 75 great developer tools (and more in the comments) here: http://benscheirman.com/2013/08/the-ios-developers-toolbelt/
 
-func trimSpaces( input: String ) -> String {
+func trimSpaces( _ input: String ) -> String {
     // new version using Regex
     // step 1 - replace all whitespace runs with a single space
     let temp = input.replace("\\s+", withTemplate: " ")
@@ -62,41 +62,41 @@ func trimSpaces( input: String ) -> String {
 }
 
 // splits a string into a numeric suffix and non-numeric prefix
-func splitNumericEndOfString( input: String ) -> (String, String) {
+func splitNumericEndOfString( _ input: String ) -> (String, String) {
     var indexSplit = input.endIndex
     while indexSplit != input.startIndex {
         // adjust index backwards from end as long as numerics are found; stop at 1st Alpha or start of string
-        let tempIndex = indexSplit.predecessor()
-        if getCharacterClass(input[tempIndex]) == .Numeric {
+        let tempIndex = <#T##Collection corresponding to `indexSplit`##Collection#>.index(before: indexSplit)
+        if getCharacterClass(input[tempIndex]) == .numeric {
             indexSplit = tempIndex
         } else {
             break
         }
     }
-    let textString = input.substringToIndex(indexSplit)
-    let numberString = input.substringFromIndex(indexSplit)
+    let textString = input.substring(to: indexSplit)
+    let numberString = input.substring(from: indexSplit)
     return (textString, numberString)
 }
 
-func makeStringFit(input: String, length: Int) -> String {
+func makeStringFit(_ input: String, length: Int) -> String {
     if input.characters.count > length-2 {
         return input[0..<length-2] + ".."
     }
     return input
 }
 
-func padIntegerString( input: Int, toLength outlen: Int, padWith pad: String = "0") -> String {
-    let fmt = NSNumberFormatter()
+func padIntegerString( _ input: Int, toLength outlen: Int, padWith pad: String = "0") -> String {
+    let fmt = NumberFormatter()
     fmt.paddingCharacter = pad
     fmt.minimumIntegerDigits = outlen
     fmt.maximumIntegerDigits = outlen
     fmt.allowsFloats = false
     fmt.minimumFractionDigits = 0
     fmt.maximumFractionDigits = 0
-    return fmt.stringFromNumber(input) ?? ""
+    return fmt.string(from: NSNumber(input)) ?? ""
 }
 
-func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits places: Int = 2, padWith pad: String = "0") -> String {
+func padDoubleString( _ input: Double, toLength outlen: Int, withFractionDigits places: Int = 2, padWith pad: String = "0") -> String {
     var fmtstr = String(format: "%d.%dlf", (pad.isEmpty ? 1 : outlen), places)
     fmtstr = "%" + pad + fmtstr
     let str = String(format:fmtstr, input)
@@ -114,7 +114,7 @@ func padDoubleString( input: Double, toLength outlen: Int, withFractionDigits pl
 
 // code stolen from: http://stackoverflow.com/questions/26728477/swift-how-to-combine-two-dictionary-arrays
 extension Dictionary {
-    mutating func merge<K, V>(dict: [K: V]){
+    mutating func merge<K, V>(_ dict: [K: V]){
         for (k, v) in dict {
             self.updateValue(v as! Value, forKey: k as! Key)
         }
@@ -126,7 +126,7 @@ extension Dictionary {
 extension String {
     
     subscript (i: Int) -> Character {
-        return self[self.startIndex.advancedBy(i)]
+        return self[self.characters.index(self.startIndex, offsetBy: i)]
     }
     
     subscript (i: Int) -> String {
@@ -134,17 +134,17 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+        return substring(with: (characters.index(startIndex, offsetBy: r.lowerBound) ..< characters.index(startIndex, offsetBy: r.upperBound)))
     }
 }
 
 // MARK: treat a string as a floating point number if possible
 extension String {
     func toDouble() -> Double? {
-        return NSNumberFormatter().numberFromString(self)?.doubleValue
+        return NumberFormatter().number(from: self)?.doubleValue
     }
     func toFloat() -> Float? {
-        return NSNumberFormatter().numberFromString(self)?.floatValue
+        return NumberFormatter().number(from: self)?.floatValue
     }
 }
 
@@ -153,9 +153,9 @@ extension String {
 // Since I want to use ClosedInterval<Int> for Year range filtering, I'd like to have 1980...1989 be a ClosedInterval
 // Normally, I'd get a Range<Int> instead because of the indexing capabilities of Int for Array subscripts.
 // So this function makes the equivalent range ambiguous, so now I have to say Range or ClosedInterval specifically.
-func ... <T: Comparable where T: ForwardIndexType>
-    (start: T, end: T) -> ClosedInterval<T> {
-        return ClosedInterval(start, end)
+func ... <T: Comparable>
+    (start: T, end: T) -> ClosedRange<T> where T: Comparable {
+        return (start ... end)
 }
 
 // MARK: string extensions for quick find a la predicate programming: BEGINSWITH, CONTAINS, ENDSWITH
@@ -166,34 +166,34 @@ extension String {
     }
     // NOTE: Plain methods use native or bridged functions
     // check if receiver contains the given string anywhere
-    func contains( str: String ) -> Bool {
-        let res = self.rangeOfString(str) // non-nil version is a Range<String.Index>
+    func contains( _ str: String ) -> Bool {
+        let res = self.range(of: str) // non-nil version is a Range<String.Index>
         return (res != nil)
     }
     // check if receiver starts with the given string
-    func beginsWith( str: String ) -> Bool {
+    func beginsWith( _ str: String ) -> Bool {
         return self.hasPrefix(str)
     }
     // check if receiver ends with the given string
-    func endsWith( str: String ) -> Bool {
+    func endsWith( _ str: String ) -> Bool {
         return self.hasSuffix(str)
     }
     // CI methods (and maybe DI too?) need to use NSString APIs - didn't try finding bridged versions yet
     // check if receiver contains the given string anywhere (case insensitive)
-    func containsCI( str: String ) -> Bool {
+    func containsCI( _ str: String ) -> Bool {
         let rcvr = self as NSString
-        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.CaseInsensitiveSearch)
+        let res = rcvr.range(of: str, options: NSString.CompareOptions.caseInsensitive)
         return (res != String.NotFound)
     }
     // check if receiver starts with the given string
-    func beginsWithCI( str: String ) -> Bool {
+    func beginsWithCI( _ str: String ) -> Bool {
         let rcvr = self as NSString
-        let res = rcvr.rangeOfString(str, options: NSStringCompareOptions.CaseInsensitiveSearch)
+        let res = rcvr.range(of: str, options: NSString.CompareOptions.caseInsensitive)
         return (res.location == 0)
     }
-    func endsWithCI( str: String ) -> Bool {
+    func endsWithCI( _ str: String ) -> Bool {
         let rcvr = self as NSString
-        let res = rcvr.rangeOfString(str, options: [NSStringCompareOptions.BackwardsSearch, NSStringCompareOptions.CaseInsensitiveSearch])
+        let res = rcvr.range(of: str, options: [NSString.CompareOptions.backwards, NSString.CompareOptions.caseInsensitive])
         return (res.location == NSNotFound ? false : (res.location + res.length == self.characters.count))
     }
 }
@@ -214,12 +214,12 @@ public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
 
 // MARK: date extensions and helpers
 // full set of comparison operators for NSDate pairs
-public func <(d1: NSDate, d2: NSDate) -> Bool {
+public func <(d1: Date, d2: Date) -> Bool {
     let res = d1.compare(d2)
-    return res == .OrderedAscending
+    return res == .orderedAscending
 }
 
-extension NSDate: Comparable { }
+extension Date: Comparable { }
 
 //public func ==(d1: NSDate, d2: NSDate) -> Bool {
 //    let res = d1.compare(d2)
@@ -246,7 +246,7 @@ extension NSDate: Comparable { }
 //}
 
 // MARK: linear scaling function
-func linearScale( input: Double, fromRange: ClosedInterval<Double>, toRange: ClosedInterval<Double> ) -> Double {
+func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: ClosedRange<Double> ) -> Double {
     let x0 = fromRange.start
     let x1 = fromRange.end
     let y0 = toRange.start
@@ -260,7 +260,7 @@ func linearScale( input: Double, fromRange: ClosedInterval<Double>, toRange: Clo
 
 // MARK: generic range comparisons
 // Isn't this in Swift already? I can't tell yet!
-func isValue<T: Comparable>( input: T, inClosedRange range: ClosedInterval<T>) -> Bool {
+func isValue<T: Comparable>( _ input: T, inClosedRange range: ClosedRange<T>) -> Bool {
     if input < range.start {
         return false
     } else if input > range.end {
@@ -269,7 +269,7 @@ func isValue<T: Comparable>( input: T, inClosedRange range: ClosedInterval<T>) -
     return true
 }
 
-func isValue<T: Comparable>( input: T, inOpenRange range: ClosedInterval<T>) -> Bool {
+func isValue<T: Comparable>( _ input: T, inOpenRange range: ClosedRange<T>) -> Bool {
     if input < range.start {
         return false
     } else if input >= range.end {
@@ -278,19 +278,19 @@ func isValue<T: Comparable>( input: T, inOpenRange range: ClosedInterval<T>) -> 
     return true
 }
 
-func isValue<T: Comparable>( input: T, inClosedRange range: Range<T>) -> Bool {
-    if input < range.startIndex {
+func isValue<T: Comparable>( _ input: T, inClosedRange range: Range<T>) -> Bool {
+    if input < range.lowerBound {
         return false
-    } else if input > range.endIndex {
+    } else if input > range.upperBound {
         return false
     }
     return true
 }
 
-func isValue<T: Comparable>( input: T, inOpenRange range: Range<T>) -> Bool {
-    if input < range.startIndex {
+func isValue<T: Comparable>( _ input: T, inOpenRange range: Range<T>) -> Bool {
+    if input < range.lowerBound {
         return false
-    } else if input >= range.endIndex {
+    } else if input >= range.upperBound {
         return false
     }
     return true
@@ -324,7 +324,7 @@ class PagingDataCounter {
         count = total
     }
     
-    func getNumberOfValuesOnPage(page: Int) -> Int? {
+    func getNumberOfValuesOnPage(_ page: Int) -> Int? {
         if let index = getFirstIndexForPageNumber(page) {
             switch index {
             case _ where index >= indexOfPartialPage: return valuesOnPartialPage
@@ -333,14 +333,14 @@ class PagingDataCounter {
         } else { return nil }
     }
     
-    func getPageNumberForIndex(index: Int) -> Int? {
+    func getPageNumberForIndex(_ index: Int) -> Int? {
         if index >= count || index < 0 {
             return nil
         }
         return index / valuesPerPage
     }
     
-    func getFirstIndexForPageNumber(page: Int) -> Int? {
+    func getFirstIndexForPageNumber(_ page: Int) -> Int? {
         let index = page * valuesPerPage
         return index >= count ? nil : index
     }

@@ -21,13 +21,13 @@ extension AlbumIndex: CustomStringConvertible {
 }
 
 enum AlbumNavigationDirection {
-    case Forward, Reverse
+    case forward, reverse
 }
 
 
 typealias SwiftOptionRawType = UInt32 // this changed between Swift 1.2(Int), 2.0(Int32), and XCode 7.0.1(UInt32) [OH APPLE!] UInt64 anyone?
 
-struct AlbumMarker: OptionSetType {
+struct AlbumMarker: OptionSet {
     let rawValue: SwiftOptionRawType
     init(rawValue: SwiftOptionRawType) { self.rawValue = rawValue }
     
@@ -61,8 +61,8 @@ struct AlbumMarker: OptionSetType {
    the current page within that section.
  */
 enum AlbumNavigationMethod {
-    case ByPagesInVolumeAcrossSections // default - through all sections within a volume, then onto the next
-    case ByPagesInSectionAcrossVolumes // confined to same section within all volumes of a family series
+    case byPagesInVolumeAcrossSections // default - through all sections within a volume, then onto the next
+    case byPagesInSectionAcrossVolumes // confined to same section within all volumes of a family series
 }
 
 class AlbumFamilyNavigator {
@@ -76,7 +76,7 @@ class AlbumFamilyNavigator {
     init?(page: AlbumPage) {
         currentAlbum = page.section.ref
         var found = false
-        for (index, item) in currentAlbum.family.theRefs.enumerate() {
+        for (index, item) in currentAlbum.family.theRefs.enumerated() {
             if item === currentAlbum {
                 currentAlbumIndex = index
                 found = true
@@ -89,7 +89,7 @@ class AlbumFamilyNavigator {
         //print("Initpage1/3 \(currentIndex) of \(maxIndex)")
         found = false
         currentSection = page.section
-        for (index, item) in currentAlbum.theSections.enumerate() {
+        for (index, item) in currentAlbum.theSections.enumerated() {
             if item === currentSection {
                 currentSectionIndex = index
                 found = true
@@ -102,7 +102,7 @@ class AlbumFamilyNavigator {
         //print("Initpage2/3 \(currentIndex) of \(maxIndex)")
         found = false
         currentPage = page
-        for (index, item) in currentSection.thePages.enumerate() {
+        for (index, item) in currentSection.thePages.enumerated() {
             if item === currentPage {
                 currentPageIndex = index
                 found = true
@@ -136,12 +136,12 @@ class AlbumFamilyNavigator {
         return AlbumIndex(ref: maxAlbumIndex-1, section: maxSectionIndexInAlbum-1, page: maxPageIndexInSection-1)
     }
     
-    var method: AlbumNavigationMethod = .ByPagesInVolumeAcrossSections
+    var method: AlbumNavigationMethod = .byPagesInVolumeAcrossSections
     
-    func movePageRelative( direction: AlbumNavigationDirection, byCount: Int = 1 ) {
+    func movePageRelative( _ direction: AlbumNavigationDirection, byCount: Int = 1 ) {
         switch direction {
-        case .Forward: gotoNextPage(byCount)
-        case .Reverse: gotoPrevPage(byCount)
+        case .forward: gotoNextPage(byCount)
+        case .reverse: gotoPrevPage(byCount)
         }
     }
     
@@ -162,27 +162,27 @@ class AlbumFamilyNavigator {
     So, how to tell which page we are on? We need a section/page# pair, sounds like an NSIndexPath of sorts. Actual access should come from this ref via the album object's theSections array.
     */
     
-    private var currentAlbum: AlbumRef! {
+    fileprivate var currentAlbum: AlbumRef! {
         didSet {
             //maxSectionIndex = currentAlbum.theSections.count
             currentSectionIndex = 0
         }
     }
     
-    private var currentSectionIndex = 0 {
+    fileprivate var currentSectionIndex = 0 {
         didSet {
             currentSection = currentAlbum.theSections[currentSectionIndex]
             // also reset the current page index
             currentPageIndex = 0 // sets a page object as well
         }
     }
-    private var currentPageIndex = 0 {
+    fileprivate var currentPageIndex = 0 {
         didSet {
             currentPage = currentSection.thePages[currentPageIndex]
         }
     }
     
-    private var currentAlbumIndex: Int {
+    fileprivate var currentAlbumIndex: Int {
         get {
             let (_, index) = splitNumericEndOfString(currentAlbum.code)
             guard let result = Int(index) else { return 0 }
@@ -193,23 +193,23 @@ class AlbumFamilyNavigator {
         }
     }
     
-    private var maxAlbumIndex: Int {
+    fileprivate var maxAlbumIndex: Int {
         return currentAlbum.family.theRefs.count
     }
     
-    private var maxSectionIndexInAlbum: Int {
+    fileprivate var maxSectionIndexInAlbum: Int {
         return currentAlbum.theSections.count
     }
     
     //private var maxSectionIndex = 0
-    private var maxPageIndexInSection: Int {
+    fileprivate var maxPageIndexInSection: Int {
         return currentSection.thePages.count
     }
     
-    private var currentSection: AlbumSection!
+    fileprivate var currentSection: AlbumSection!
     var currentPage: AlbumPage!
     
-    private var currentMarker: AlbumMarker {
+    fileprivate var currentMarker: AlbumMarker {
         var mark = AlbumMarker()
         // add options for special cases
         let effectiveAlbumIndex = currentAlbumIndex ?? 0
@@ -234,7 +234,7 @@ class AlbumFamilyNavigator {
         return mark
     }
     
-    private func gotoMarker( marker: AlbumMarker ) {
+    fileprivate func gotoMarker( _ marker: AlbumMarker ) {
         // there is always an album, a section (possibly unnamed), and at least one page defined in every family
         // resolve this in top-down fashion from album thru section to page (property observers would otherwise interfere)
         // NOTE: this is rather inefficient if all bits are set, or both first and last (last will take precedence)
@@ -261,7 +261,7 @@ class AlbumFamilyNavigator {
     
     // MARK: navigating the album hierarchy by pages
     // This type of nav is extended to go thru section and ref boundaries as if browsing one big book
-    private func gotoNextPage(by: Int = 1) {
+    fileprivate func gotoNextPage(_ by: Int = 1) {
         let next = currentPageIndex + by
         if (0 ..< maxPageIndexInSection).contains(next) {
             currentPageIndex = next
@@ -273,7 +273,7 @@ class AlbumFamilyNavigator {
         print("\(currentIndex) of \(maxIndex)")
     }
     
-    private func gotoPrevPage(by: Int = 1) {
+    fileprivate func gotoPrevPage(_ by: Int = 1) {
         let next = currentPageIndex - by
         if (0 ..< maxPageIndexInSection).contains(next) {
             currentPageIndex = next
@@ -285,7 +285,7 @@ class AlbumFamilyNavigator {
         print("\(currentIndex) of \(maxIndex)")
     }
     
-    private func gotoNextSection() {
+    fileprivate func gotoNextSection() {
         let next = currentSectionIndex + 1
         if next < maxSectionIndexInAlbum {
             currentSectionIndex = next
@@ -296,7 +296,7 @@ class AlbumFamilyNavigator {
         }
     }
     
-    private func gotoPrevSection() {
+    fileprivate func gotoPrevSection() {
         let next = currentSectionIndex - 1
         if next >= 0 {
             currentSectionIndex = next
@@ -308,7 +308,7 @@ class AlbumFamilyNavigator {
         }
     }
     
-    private func gotoNextAlbum() {
+    fileprivate func gotoNextAlbum() {
         if currentMarker.contains(AlbumMarker.SingleAlbumOnly) {
             print("Singleton album not a series, cannot goto next.")
             return
@@ -322,7 +322,7 @@ class AlbumFamilyNavigator {
         }
     }
     
-    private func gotoPrevAlbum() {
+    fileprivate func gotoPrevAlbum() {
         if currentMarker.contains(AlbumMarker.SingleAlbumOnly) {
             print("Singleton album not a series, cannot goto previous.")
             return

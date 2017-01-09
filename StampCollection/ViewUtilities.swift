@@ -7,11 +7,31 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 // MARK: determine if running on simulator or not (checking if runtime features such as email are available)
 func isRunningOnSimulator() -> Bool {
     var result = false
-    let devmodel = UIDevice.currentDevice().model
+    let devmodel = UIDevice.current.model
     if devmodel.hasSuffix("Simulator") {
         result = true
     }
@@ -23,44 +43,44 @@ func isEmailAvailable() -> Bool {
 }
 
 // MARK: UI date formatting services
-func getDateFromFormattedString(input: String) -> NSDate {
-    let nf = NSDateFormatter()
-    nf.dateStyle = .MediumStyle
-    nf.timeStyle = .NoStyle
-    return nf.dateFromString(input) ?? NSDate()
+func getDateFromFormattedString(_ input: String) -> Date {
+    let nf = DateFormatter()
+    nf.dateStyle = .medium
+    nf.timeStyle = .none
+    return nf.date(from: input) ?? Date()
 }
 
-func getFormattedStringFromDate(input: NSDate, withTime: Bool = false) -> String {
-    let nf = NSDateFormatter()
-    nf.dateStyle = .MediumStyle
-    nf.timeStyle = withTime ? .MediumStyle : .NoStyle
-    return nf.stringFromDate(input) ?? ""
+func getFormattedStringFromDate(_ input: Date, withTime: Bool = false) -> String {
+    let nf = DateFormatter()
+    nf.dateStyle = .medium
+    nf.timeStyle = withTime ? .medium : .none
+    return nf.string(from: input) ?? ""
 }
 
-func dateFromComponents( year: Int, month: Int, day: Int ) -> NSDate {
-    let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    let comp = NSDateComponents()
+func dateFromComponents( _ year: Int, month: Int, day: Int ) -> Date {
+    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+    var comp = DateComponents()
     comp.year = year
     comp.month = month
     comp.day = day
-    return gregorian.dateFromComponents(comp)!
+    return gregorian.date(from: comp)!
 }
 
-func componentsFromDate( date: NSDate ) -> (Int, Int, Int) { // as Y, M, D
-    let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    let comp = gregorian.components(
-        [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day], fromDate: date)
-    return (comp.year, comp.month, comp.day)
+func componentsFromDate( _ date: Date ) -> (Int, Int, Int) { // as Y, M, D
+    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+    let comp = (gregorian as NSCalendar).components(
+        [NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day], from: date)
+    return (comp.year!, comp.month!, comp.day!)
 }
 
-func normalizedStringFromDateComponents( year: Int, month: Int, day: Int ) -> String {
+func normalizedStringFromDateComponents( _ year: Int, month: Int, day: Int ) -> String {
     if year == 0 || month == 0 || day == 0 {
         return ""
     }
     return String(format: "%4d.%02d.%02d", year, month, day) // as YYYY.MM.DD
 }
 
-func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // as Y, M, D
+func dateComponentsFromNormalizedString( _ date: String ) -> (Int, Int, Int) { // as Y, M, D
     if !date.isEmpty {
         let yyyy = Int(date[0...3])!
         let mm = Int(date[5...6])!
@@ -72,20 +92,20 @@ func dateComponentsFromNormalizedString( date: String ) -> (Int, Int, Int) { // 
 
 
 // MARK: message box services
-typealias MenuBoxEntry = (String, (UIAlertAction!)->Void)
-func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forController vc: UIViewController ) {
+typealias MenuBoxEntry = (String, (UIAlertAction?)->Void)
+func menuBoxWithTitle( _ title: String, andBody body: [MenuBoxEntry], forController vc: UIViewController ) {
     messageBoxWithTitleEx(title, andBody: "", forController: vc) { ac in
-        var act = UIAlertAction(title: "Cancel", style: .Cancel) { x in
+        var act = UIAlertAction(title: "Cancel", style: .cancel) { x in
             // dismiss but do nothing
         }
         ac.addAction(act)
         for (menuItem, menuFunc) in body {
             var menuTitle = menuItem
-            var style = UIAlertActionStyle.Default
+            var style = UIAlertActionStyle.default
             // any provided title string that starts with a "!" will be Destructive style (and the "!" will be removed)
             if menuItem[0] == "!" {
-                menuTitle = menuItem.substringFromIndex(menuItem.startIndex.successor())
-                style = UIAlertActionStyle.Destructive
+                menuTitle = menuItem.substring(from: menuItem.characters.index(after: menuItem.startIndex))
+                style = UIAlertActionStyle.destructive
             }
             act = UIAlertAction(title: menuTitle, style: style, handler: menuFunc)
             ac.addAction(act)
@@ -93,9 +113,9 @@ func menuBoxWithTitle( title: String, andBody body: [MenuBoxEntry], forControlle
     }
 }
 
-func messageBoxWithTitle( title: String, andBody body: String, forController vc: UIViewController ) {
+func messageBoxWithTitle( _ title: String, andBody body: String, forController vc: UIViewController ) {
     messageBoxWithTitleEx(title, andBody: body, forController: vc) { ac in
-        let act = UIAlertAction(title: "OK", style: .Default) { x in
+        let act = UIAlertAction(title: "OK", style: .default) { x in
             // dismiss but do nothing
         }
         ac.addAction(act)
@@ -103,16 +123,16 @@ func messageBoxWithTitle( title: String, andBody body: String, forController vc:
 }
 
 private var acInUse: UIAlertController! // retain ref to AC while it executes
-func messageBoxWithTitleEx( title: String, andBody body: String, forController vc: UIViewController, configuration: (( UIAlertController) -> Void)? = nil ) {
-    acInUse = UIAlertController(title: title, message: body, preferredStyle: .Alert) // putting in a new one forgets the old one, if any, which will get cleaned up by ARC
+func messageBoxWithTitleEx( _ title: String, andBody body: String, forController vc: UIViewController, configuration: (( UIAlertController) -> Void)? = nil ) {
+    acInUse = UIAlertController(title: title, message: body, preferredStyle: .alert) // putting in a new one forgets the old one, if any, which will get cleaned up by ARC
     if let configHandler = configuration {
         configHandler(acInUse)
     }
-    vc.presentViewController(acInUse, animated: true, completion: nil)
+    vc.present(acInUse, animated: true, completion: nil)
 }
 
 // MARK: table view cell formatting services
-func formatBTDetail(item: BTDealerItem) -> String {
+func formatBTDetail(_ item: BTDealerItem) -> String {
     var text = "\(item.code)"
     if item.catalog1 != "" {
         text += " [" + item.catalog1
@@ -129,7 +149,7 @@ func formatBTDetail(item: BTDealerItem) -> String {
     return output
 }
 
-func formatDealerDetail(item: DealerItem) -> String {
+func formatDealerDetail(_ item: DealerItem) -> String {
     var text = "\(item.id)(#\(item.exOrder))"
     if item.cat1 != "" {
         text += " [" + item.cat1
@@ -153,13 +173,13 @@ func formatDealerDetail(item: DealerItem) -> String {
 //        output = "\(text) - \(item.status): \(price1) FDC-\(price2)"
 //    default: break
 //    }
-    if let invItems = Array(item.inventoryItems) as? [InventoryItem] where invItems.count > 0 {
+    if let invItems = Array(item.inventoryItems) as? [InventoryItem] , invItems.count > 0 {
         let types = invItems.map{ $0.itemCondition }
         let summary = histogram(types)
         let sumstr = showHistogram(summary)
         output += "; INV:\(sumstr)"
     }
-    if let invItems = Array(item.referringItems) as? [InventoryItem] where invItems.count > 0 {
+    if let invItems = Array(item.referringItems) as? [InventoryItem] , invItems.count > 0 {
         let refs = invItems.map{ $0.baseItem as String }
         let summary = histogram(refs)
         let sumstr = showHistogram(summary)
@@ -168,34 +188,34 @@ func formatDealerDetail(item: DealerItem) -> String {
     return output
 }
 
-func histogram<T where T: Hashable>(items: [T]) -> [T:Int] {
+func histogram<T>(_ items: [T]) -> [T:Int] where T: Hashable {
     var output: [T:Int] = [:]
     for item in items {
         if output[item] == nil {
             output[item] = 1
         } else {
-            ++(output[item]!)
+            (output[item]!) += 1
         }
     }
     return output
 }
 
-func showHistogram<T where T:Hashable>(input: [T:Int]) -> String {
+func showHistogram<T>(_ input: [T:Int]) -> String where T:Hashable {
     var output: [String] = []
     for (item, counter) in input {
         let ctr = counter > 1 ? "(\(counter))" : ""
         output.append("\(item)\(ctr)")
     }
-    return output.joinWithSeparator(",")
+    return output.joined(separator: ",")
 }
 
 // MARK: formatting for update comparison review
-func formatComparisonRecord( comprec: CompRecord ) -> String {
+func formatComparisonRecord( _ comprec: CompRecord ) -> String {
     var output = "Changes:"
     for (fieldName, status) in comprec {
         switch status {
-        case .Equal: continue
-        case .EqualIfTC: continue
+        case .equal: continue
+        case .equalIfTC: continue
         default:
             output += " \(fieldName)"
         }
@@ -203,15 +223,15 @@ func formatComparisonRecord( comprec: CompRecord ) -> String {
     return output
 }
 
-func formatUpdateAction( action: UpdateCommitAction, isLong: Bool = false, withParens: Bool = true ) -> String {
+func formatUpdateAction( _ action: UpdateCommitAction, isLong: Bool = false, withParens: Bool = true ) -> String {
     var output = ""
     switch action {
-    case .None: output = isLong ? "None" : ""
-    case .Add: output = isLong ? "Add" : "+"
-    case .AddAndRemove: output = isLong ? "AddAndRemove" : "+,-"
-    case .ConvertType: output = isLong ? "ConvertType" : "=>"
-    case .Remove: output = isLong ? "Remove" : "-"
-    case .Update: output = isLong ? "Update" : "->"
+    case .none: output = isLong ? "None" : ""
+    case .add: output = isLong ? "Add" : "+"
+    case .addAndRemove: output = isLong ? "AddAndRemove" : "+,-"
+    case .convertType: output = isLong ? "ConvertType" : "=>"
+    case .remove: output = isLong ? "Remove" : "-"
+    case .update: output = isLong ? "Update" : "->"
     }
     if withParens {
         output = "(\(output))"
@@ -219,28 +239,28 @@ func formatUpdateAction( action: UpdateCommitAction, isLong: Bool = false, withP
     return output
 }
 
-func getFormattedActionKeysForSection( section: UpdateComparisonTable.TableID ) -> [String] {
+func getFormattedActionKeysForSection( _ section: UpdateComparisonTable.TableID ) -> [String] {
     let actions = UpdateComparisonTable.getAllowedActionsForSection(section)
     var actionStrings = actions.map{ formatUpdateAction( $0 ) + ":" + formatUpdateAction( $0, isLong: true, withParens: false) }
     actionStrings[0] += " (Default)"
     return actionStrings
 }
 
-func formatActionKeyForSection( section: UpdateComparisonTable.TableID ) -> String {
+func formatActionKeyForSection( _ section: UpdateComparisonTable.TableID ) -> String {
     var output = ""
     let actionStrings = getFormattedActionKeysForSection(section)
-    output += actionStrings.joinWithSeparator("\n")
+    output += actionStrings.joined(separator: "\n")
     return output
 }
 
-func getColorForAction(action: UpdateCommitAction, inSection section: UpdateComparisonTable.TableID) -> UIColor {
+func getColorForAction(_ action: UpdateCommitAction, inSection section: UpdateComparisonTable.TableID) -> UIColor {
     switch action {
-    case .None: return UIColor.whiteColor()
-    case .Add: return UIColor.greenColor().colorWithAlphaComponent(0.5)
-    case .AddAndRemove: return UIColor.magentaColor().colorWithAlphaComponent(0.5)
-    case .ConvertType: return UIColor.blueColor().colorWithAlphaComponent(0.5)
-    case .Remove: return UIColor.redColor().colorWithAlphaComponent(0.5)
-    case .Update: return section == .Ambiguous ? UIColor.cyanColor().colorWithAlphaComponent(0.5) : UIColor.yellowColor().colorWithAlphaComponent(0.5)
+    case .none: return UIColor.white
+    case .add: return UIColor.green.withAlphaComponent(0.5)
+    case .addAndRemove: return UIColor.magenta.withAlphaComponent(0.5)
+    case .convertType: return UIColor.blue.withAlphaComponent(0.5)
+    case .remove: return UIColor.red.withAlphaComponent(0.5)
+    case .update: return section == .ambiguous ? UIColor.cyan.withAlphaComponent(0.5) : UIColor.yellow.withAlphaComponent(0.5)
     }
 }
 
@@ -269,17 +289,17 @@ var refItem: String // OPT - identifies associated base item code
 WANTED vs HAVE-IT:
 var wantHave: String // "w" for want list item, "h" for have it in the collection
 */
-private func formatInventoryWantField(item: InventoryItem) -> String {
+private func formatInventoryWantField(_ item: InventoryItem) -> String {
     return item.wanted ? "*WANTED*" : ""
 }
 
-private func formatInventoryLocation(item: InventoryItem) -> String {
+private func formatInventoryLocation(_ item: InventoryItem) -> String {
     let section = item.albumSection
-    let sectionStr = section.isEmpty ? "" : " (S:\(section))"
+    let sectionStr = (section?.isEmpty)! ? "" : " (S:\(section))"
     return "IN \(item.albumRef) p.\(item.albumPage)\(sectionStr)"
 }
 
-func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
+func formatPriceDescription( _ catPrices: String, fieldName: String ) -> String {
     // determine whether to return
     //  Mint v Used (cat.prices == PU)
     //  Mint(tab) v Used v FDC v Other (PUFS)
@@ -301,37 +321,37 @@ func formatPriceDescription( catPrices: String, fieldName: String ) -> String {
     return output
 }
 
-private func formatInventoryValue(item: InventoryItem) -> String {
+private func formatInventoryValue(_ item: InventoryItem) -> String {
     var output = "Val"
     let baseItem = item.dealerItem
     let nameExt = formatPriceDescription(item.category.prices, fieldName: item.itemType)
     output += nameExt
-    if let price = baseItem.valueForKey(item.itemType) as? String,
-        priceVal = price.toDouble() {
+    if let price = baseItem?.value(forKey: item.itemType) as? String,
+        let priceVal = price.toDouble() {
             output += "=" + padDoubleString(priceVal, toLength: 10, withFractionDigits: 2, padWith: "")
     }
     return output
 }
 
-private func formatInventoryVarCondition(item: InventoryItem) -> String {
+private func formatInventoryVarCondition(_ item: InventoryItem) -> String {
     let variety = item.desc.isEmpty ? "" : /*makeStringFit(*/"V: \(item.desc)"//, 40)
     let condition = item.notes.isEmpty ? "" : /*makeStringFit(*/"C: \(item.notes)"//, 40)
     return "\(variety) \(condition)"
 }
 
-func formatInventoryMain(item: InventoryItem) -> String {
+func formatInventoryMain(_ item: InventoryItem) -> String {
     let basedes = item.dealerItem.descriptionX //makeStringFit(item.dealerItem.descriptionX, 60)
     return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
 }
 
-func formatInventoryDetail(item: InventoryItem) -> String {
+func formatInventoryDetail(_ item: InventoryItem) -> String {
     return "\(item.baseItem) \(formatInventoryValue(item)) \(formatInventoryVarCondition(item))"
 }
 
-func getTitlesForInventoryItem(item: InventoryItem) -> (top:String, bottom:String) {
+func getTitlesForInventoryItem(_ item: InventoryItem) -> (top:String, bottom:String) {
     let infoItem = item.dealerItem
     let title = "\(infoItem?.descriptionX ?? "") \(item.desc) \(item.notes)"
-    let condition = "\(infoItem.id) \(item.itemCondition) \(item.itemPrice)"
+    let condition = "\(infoItem?.id) \(item.itemCondition) \(item.itemPrice)"
     return (condition, title)
 }
 
@@ -410,28 +430,28 @@ func getTitlesForInventoryItem(item: InventoryItem) -> (top:String, bottom:Strin
 - should sort fine as split fields
 */
 
-enum CodeFieldClass { case Unknown, Alpha, Numeric }
+enum CodeFieldClass { case unknown, alpha, numeric }
 
 extension CodeFieldClass: CustomStringConvertible {
     var description: String {
         switch self {
-        case .Numeric: return "num"
-        case .Alpha: return "alp"
+        case .numeric: return "num"
+        case .alpha: return "alp"
         default: break
         }
         return "unk"
     }
 }
 
-func getCharacterClass( ch: Character ) -> CodeFieldClass {
+func getCharacterClass( _ ch: Character ) -> CodeFieldClass {
     // assumes old-style ASCII - okay for what I have used so far
     if ch >= "0" && ch <= "9" {
-        return .Numeric
+        return .numeric
     }
-    return .Alpha
+    return .alpha
 }
 
-private func splitDealerCode( code: String, special: Bool = false ) -> [String] {
+private func splitDealerCode( _ code: String, special: Bool = false ) -> [String] {
     // accepts code numbers of the following forms:
     //  "6110xNNNyy"
     //  "psXXNNNyy"
@@ -440,7 +460,7 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
     // splits them into fields of homogenous type (alpha or numeric)
     var output: [String] = []
     var field = ""
-    var state: CodeFieldClass = .Unknown
+    var state: CodeFieldClass = .unknown
     for char in code.characters {
         let charClass = getCharacterClass(char)
         if special {
@@ -450,12 +470,12 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
                     field.append(char)
                     continue
                 }
-                state = .Numeric // even if RC ends in a non-digit
+                state = .numeric // even if RC ends in a non-digit
             }
         }
         if charClass != state {
             // save old field if not 1st time
-            if state != .Unknown {
+            if state != .unknown {
                 output.append(field)
             }
             // creat new field from char
@@ -470,11 +490,11 @@ private func splitDealerCode( code: String, special: Bool = false ) -> [String] 
     return output
 }
 
-private func splitCatCode( code: String, forCat catnum: Int16 ) -> (String, String) {
+private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, String) {
     let firstCharClass = getCharacterClass(code[0])
     let shorthand = code[0...1]
     let splitAt: Int
-    if firstCharClass == .Numeric {
+    if firstCharClass == .numeric {
         // assumes 6110z where z is single character alpha
         if code[0...5] == "6110pb" {
             splitAt = 6
@@ -497,11 +517,11 @@ private func splitCatCode( code: String, forCat catnum: Int16 ) -> (String, Stri
     return (part1, part2)
 }
 
-private func normalizeCatCode( codePart: String, forCat catnum: Int16 ) -> String {
+private func normalizeCatCode( _ codePart: String, forCat catnum: Int16 ) -> String {
     return "NCAT" + padIntegerString(Int(catnum), toLength: 4)
 }
 
-private func paddington( len: Int, input: String, char: Character = " ", trailing: Bool = false ) -> String {
+private func paddington( _ len: Int, input: String, char: Character = " ", trailing: Bool = false ) -> String {
     let inlen = input.characters.count
     if inlen >= len {
         return input
@@ -535,15 +555,15 @@ struct IDParser {
         self.catcode = catcode
         fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
         let firstField = fields.first!
-        let hasPrefix = getCharacterClass(firstField[0]) == .Alpha
+        let hasPrefix = getCharacterClass(firstField[0]) == .alpha
         if hasPrefix {
             prefix = firstField
-            fields.removeAtIndex(0)
+            fields.remove(at: 0)
         } else {
             prefix = ""
         }
         sequence = fields.first!
-        fields.removeAtIndex(0)
+        fields.remove(at: 0)
         main = catcode + prefix + sequence
     }
 }
@@ -568,7 +588,7 @@ Needing special handling:
 26 = 6110k 9 k sorts after all, exc 6110k 30 (final one)
 */
 // TBD: NEED TO REMOVE HARDCODED CATEGORY NUMBERS!! WHAT IF BT RENUMBERS? (IT ALREADY DID)
-func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = false ) -> String {
+func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = false ) -> String {
     let (catcode, rest) = splitCatCode(code, forCat: catnum)
     let normcat = normalizeCatCode(catcode, forCat: catnum)
     let lenrest = rest.characters.count
@@ -628,15 +648,15 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
                 // special handling for Booklets (cat 26) 6110e [...] to go after 6110b [...]
                 output += paddington(8, input: "EBOOKLET", char: padder)
             }
-            else if fieldClass != .Alpha {
+            else if fieldClass != .alpha {
                 // missing prefix field - normalize by adding empty one
                 output += paddington(8, input: "", char: padder)
             }
         }
         let flen = field.characters.count
         switch fieldClass {
-        case .Alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
-        case .Numeric:
+        case .alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
+        case .numeric:
             var num = Int(field)!
             // insert YEAR fixups here
             if catnum == 16 {
@@ -677,7 +697,7 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
                 let thr = catnum == 13 ? 595 : 350
                 if fieldnum + 1 < numFields {
                     let (_, _, nextField, nextFieldClass) = data[fieldnum + 1]
-                    if nextFieldClass == .Alpha && nextField[0] != "x" && num < thr {
+                    if nextFieldClass == .alpha && nextField[0] != "x" && num < thr {
                         num += 1000
                     }
                 }
@@ -685,14 +705,14 @@ func normalizeIDCode( code: String, forCat catnum: Int16, isPostE1K: Bool = fals
             output += padIntegerString(num, toLength: 8)
         default: break
         }
-        ++fieldnum
+        fieldnum += 1
         skip = false
     }
     return output
 }
 
 // Album-order inventory comparisons, almost like in the PHP code
-func getSectionSortOrder( section: String ) -> Int {
+func getSectionSortOrder( _ section: String ) -> Int {
     if !section.isEmpty {
         if section[0...0] == "J" { switch section {
             // special joint issue sorting, figure out order of sections by base ID (j#) instead
@@ -759,7 +779,7 @@ func getSectionSortOrder( section: String ) -> Int {
     return 0
 }
 
-func compareByAlbum( lhs: AlbumSortable, rhs: AlbumSortable ) -> Bool {
+func compareByAlbum( _ lhs: AlbumSortable, rhs: AlbumSortable ) -> Bool {
     // first combine Type and Ref, sort by the combo
     let tr1 = lhs.albumType + lhs.albumRef
     let tr2 = rhs.albumType + rhs.albumRef
