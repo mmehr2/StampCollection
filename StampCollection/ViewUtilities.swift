@@ -54,7 +54,7 @@ func getFormattedStringFromDate(_ input: Date, withTime: Bool = false) -> String
     let nf = DateFormatter()
     nf.dateStyle = .medium
     nf.timeStyle = withTime ? .medium : .none
-    return nf.string(from: input) ?? ""
+    return nf.string(from: input)
 }
 
 func dateFromComponents( _ year: Int, month: Int, day: Int ) -> Date {
@@ -82,9 +82,15 @@ func normalizedStringFromDateComponents( _ year: Int, month: Int, day: Int ) -> 
 
 func dateComponentsFromNormalizedString( _ date: String ) -> (Int, Int, Int) { // as Y, M, D
     if !date.isEmpty {
-        let yyyy = Int(date[0...3])!
-        let mm = Int(date[5...6])!
-        let dd = Int(date[8...9])!
+        let ix0 = date.startIndex
+        let ix1 = date.index(date.startIndex, offsetBy: 3)
+        let yyyy = Int(date[ix0...ix1])!
+        let ix2 = date.index(date.startIndex, offsetBy: 5)
+        let ix3 = date.index(date.startIndex, offsetBy: 6)
+        let mm = Int(date[ix2...ix3])!
+        let ix4 = date.index(date.startIndex, offsetBy: 8)
+        let ix5 = date.index(date.startIndex, offsetBy: 9)
+        let dd = Int(date[ix4...ix5])!
         return (yyyy, mm, dd)
     }
     return (0, 0, 0)
@@ -158,10 +164,11 @@ func formatDealerDetail(_ item: DealerItem) -> String {
         }
         text += "]"
     }
-    let price1 = item.price1.isEmpty ? "-0-" : item.price1
-    let price2 = item.price2.isEmpty ? "-0-" : item.price2
-    let price3 = item.price3.isEmpty ? "-0-" : item.price3
-    let price4 = item.price4.isEmpty ? "-0-" : item.price4
+    let emptyStr = "-0-"
+    let price1 = item.price1.isEmpty ? emptyStr : item.price1 ?? emptyStr
+    let price2 = item.price2.isEmpty ? emptyStr : item.price2 ?? emptyStr
+    let price3 = item.price3.isEmpty ? emptyStr : item.price3 ?? emptyStr
+    let price4 = item.price4.isEmpty ? emptyStr : item.price4 ?? emptyStr
     var output = "\(text) - \(item.status): \(price1) Used-\(price2) FDC-\(price3) M/nt-\(price4)"
 //    let pufs = item.category.prices
 //    switch pufs {
@@ -294,8 +301,8 @@ private func formatInventoryWantField(_ item: InventoryItem) -> String {
 }
 
 private func formatInventoryLocation(_ item: InventoryItem) -> String {
-    let section = item.albumSection
-    let sectionStr = (section?.isEmpty)! ? "" : " (S:\(section))"
+    let section = item.albumSection!
+    let sectionStr = (section.isEmpty) ? "" : " (S:\(section))"
     return "IN \(item.albumRef) p.\(item.albumPage)\(sectionStr)"
 }
 
@@ -340,7 +347,7 @@ private func formatInventoryVarCondition(_ item: InventoryItem) -> String {
 }
 
 func formatInventoryMain(_ item: InventoryItem) -> String {
-    let basedes = item.dealerItem.descriptionX //makeStringFit(item.dealerItem.descriptionX, 60)
+    let basedes = item.dealerItem.descriptionX! //makeStringFit(item.dealerItem.descriptionX, 60)
     return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
 }
 
@@ -349,9 +356,9 @@ func formatInventoryDetail(_ item: InventoryItem) -> String {
 }
 
 func getTitlesForInventoryItem(_ item: InventoryItem) -> (top:String, bottom:String) {
-    let infoItem = item.dealerItem
-    let title = "\(infoItem?.descriptionX ?? "") \(item.desc) \(item.notes)"
-    let condition = "\(infoItem?.id) \(item.itemCondition) \(item.itemPrice)"
+    let infoItem = item.dealerItem!
+    let title = "\(infoItem.descriptionX ?? "") \(item.desc) \(item.notes)"
+    let condition = "\(infoItem.id) \(item.itemCondition) \(item.itemPrice)"
     return (condition, title)
 }
 
@@ -465,7 +472,7 @@ private func splitDealerCode( _ code: String, special: Bool = false ) -> [String
         let charClass = getCharacterClass(char)
         if special {
             // detect field == "RC" and wait until "m" is detected, accumulating digits and suffixes into field
-            if field.characters.count >= 2 && field[0...1] == "RC" {
+            if field.characters.count >= 2 && field.hasPrefix("RC") {
                 if char != "m" {
                     field.append(char)
                     continue
@@ -492,11 +499,11 @@ private func splitDealerCode( _ code: String, special: Bool = false ) -> [String
 
 private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, String) {
     let firstCharClass = getCharacterClass(code[0])
-    let shorthand = code[0...1]
+    let shorthand = String(code.characters.prefix(2))
     let splitAt: Int
     if firstCharClass == .numeric {
         // assumes 6110z where z is single character alpha
-        if code[0...5] == "6110pb" {
+        if String(code.characters.prefix(6)) == "6110pb" {
             splitAt = 6
         } else {
             splitAt = 5
@@ -592,7 +599,9 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
     let (catcode, rest) = splitCatCode(code, forCat: catnum)
     let normcat = normalizeCatCode(catcode, forCat: catnum)
     let lenrest = rest.characters.count
-    let finrest = lenrest < 2 ? "  " : rest[lenrest-2...lenrest-1]
+    let ix2 = rest.index(before: rest.endIndex)
+    let ix1 = rest.index(before: ix2)
+    let finrest = lenrest < 2 ? "  " : rest[ix1...ix2]
     let fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
         (normcat, catcode, x, getCharacterClass(x[0]))
@@ -612,7 +621,7 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
                 // if the last field isn't an alpha == "ip", then add an alpha prefix to make it sort after the plan ones
                 output += paddington(8, input: "ZZPACKET", char: padder)
             }
-            else if catnum == 20 && rest[0...1] == "PC" && finrest[1] == "m" {
+            else if catnum == 20 && rest.hasPrefix("PC") && finrest[1] == "m" {
                 // special handling for Military Post Cards (cat 20) psPC NNN m
                 // if the last field is an alpha == "m", then add an alpha prefix to make it sort after the plan ones
                 output += paddington(8, input: "PC_MIL", char: padder, trailing: true)
@@ -654,6 +663,8 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
             }
         }
         let flen = field.characters.count
+        let catnum26 = catnum == 26 // only needed due to ambiguous '==' operator error below in Swift 3.x
+        let catnum27 = catnum == 27 // only needed due to ambiguous '==' operator error below in Swift 3.x
         switch fieldClass {
         case .alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
         case .numeric:
@@ -662,17 +673,21 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
             if catnum == 16 {
                 num += fixupCenturyYY(num)
             }
-            if catnum == 27 && flen == 2 {
+            if catnum27 && flen == 2 {
                 num += fixupCenturyYY(num)
             }
-            if catnum == 27 && flen == 4 {
-                var num1 = Int(field[0...1])!
-                var num2 = Int(field[2...3])!
+            if catnum27 && flen == 4 {
+                let ix0 = field.startIndex
+                let ix1 = field.index(field.startIndex, offsetBy: 1)
+                let ix2 = field.index(field.startIndex, offsetBy: 2)
+                let ix3 = field.index(field.startIndex, offsetBy: 3)
+                var num1 = Int(String(field[ix0...ix1]))!
+                var num2 = Int(String(field[ix2...ix3]))!
                 num1 += fixupCenturyYY(num1) // now between 1948 and 2047
                 num2 += fixupCenturyYY(num2) // now between 1948 and 2047
                 num = num1 * 10000 + num2
             }
-            if catnum == 26 && fieldnum == 0 {
+            if catnum26 && fieldnum == 0 {
                 if field == "9" && finrest == "9k" { num = 99999998 }
                 else if field == "30" && finrest == "30" { num = 99999999 }
                 else if flen == 2 {
@@ -681,8 +696,12 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
                 }
                 else if flen == 4 {
                     // split YYNN in two to make a 6-digit century fixup field
-                    var num1 = Int(field[0...1])! // YY
-                    let num2 = Int(field[2...3])! // NN
+                    let ix0 = field.startIndex
+                    let ix1 = field.index(field.startIndex, offsetBy: 1)
+                    let ix2 = field.index(field.startIndex, offsetBy: 2)
+                    let ix3 = field.index(field.startIndex, offsetBy: 3)
+                    var num1 = Int(String(field[ix0...ix1]))!
+                    let num2 = Int(String(field[ix2...ix3]))!
                     num1 += fixupCenturyYY(num1) // now between 1948 and 2047
                     num = num1 * 100 + num2
                 }
@@ -714,7 +733,7 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
 // Album-order inventory comparisons, almost like in the PHP code
 func getSectionSortOrder( _ section: String ) -> Int {
     if !section.isEmpty {
-        if section[0...0] == "J" { switch section {
+        if section.hasPrefix("J") { switch section {
             // special joint issue sorting, figure out order of sections by base ID (j#) instead
             /*
             '6110j595 '=>array('JPOLAND','2001','125','2SF'), // SF possibly doesn't exist (?)

@@ -51,20 +51,20 @@ class InfoDependentVars {
             _exMonthRange = mrange
             _exDayRange = drange
             // NOTE: this function will turn (0,0,0) into ""
-            var converted = normalizedStringFromDateComponents(range.start, month: mrange.start, day: drange.start)
+            var converted = normalizedStringFromDateComponents(range.lowerBound, month: mrange.lowerBound, day: drange.lowerBound)
             // sort items with no date (alpha) AFTER items with date (numeric)
             if converted.isEmpty {
                 _exNormalizedStartDate = "_NO_DATE__" // follows all numeric date strings
             } else {
                 _exNormalizedStartDate = converted
-                _exStartDate = dateFromComponents(range.start, month: mrange.start, day: drange.start)
+                _exStartDate = dateFromComponents(range.lowerBound, month: mrange.lowerBound, day: drange.lowerBound)
             }
-            converted = normalizedStringFromDateComponents(range.end, month: mrange.end, day: drange.end)
+            converted = normalizedStringFromDateComponents(range.upperBound, month: mrange.upperBound, day: drange.upperBound)
             if converted.isEmpty {
                 _exNormalizedEndDate = "_NO_DATE__"
             } else {
                 _exNormalizedEndDate = converted
-                _exEndDate = dateFromComponents(range.end, month: mrange.end, day: drange.end)
+                _exEndDate = dateFromComponents(range.upperBound, month: mrange.upperBound, day: drange.upperBound)
             }
             _exNormalizedDate = _exNormalizedStartDate! + "-" + _exNormalizedEndDate!
         } else if keyPath == "id" {
@@ -73,8 +73,8 @@ class InfoDependentVars {
             let catgDisplayNum = extra
             let id = value
             if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
-                if id[0...4] == "6110e" {
-                    postE1K = _exYearRange!.start >= 2000
+                if String(id.characters.prefix(4)) == "6110e" {
+                    postE1K = _exYearRange!.lowerBound >= 2000
                 }
             }
             //println("Normalizing ID=\(id) catnum=\(catgDisplayNum), E1K=\(postE1K)")
@@ -108,17 +108,17 @@ extension DealerItem: SortTypeSortable {
     
     var exYearStart: Int16 {
         if _transientVars == nil { updateDependentVars() }
-        return Int16(_transientVars!._exYearRange!.start)
+        return Int16(_transientVars!._exYearRange!.lowerBound)
     }
     
     var exYearEnd: Int16 {
         if _transientVars == nil { updateDependentVars() }
-        return Int16(_transientVars!._exYearRange!.end)
+        return Int16(_transientVars!._exYearRange!.upperBound)
     }
     
     var isJS: Bool {
         if id.characters.count > 2 {
-            return id[0...2] == "AUI"
+            return id.hasPrefix("AUI")
         }
         return false
     }

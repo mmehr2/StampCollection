@@ -14,7 +14,7 @@ private let nameOfInfoFile = "BTINFO.CSV"
 
 private func getFile(_ name: String) -> URL {
     let ad = UIApplication.shared.delegate! as! AppDelegate
-    return ad.applicationDocumentsDirectory.appendingPathComponent(name)!
+    return ad.applicationDocumentsDirectory.appendingPathComponent(name)
 }
 
 // MARK: data import

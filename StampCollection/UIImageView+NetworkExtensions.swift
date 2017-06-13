@@ -74,7 +74,7 @@ extension UIImageView {
                 if let error = error {
                     if debugging { print("Pic data received with error \(error)") }
                 } else {
-                    let image = UIImage(data: data!)
+                    let image = UIImage(data: data!)!
                     if debugging { print("Pic data received with image \(image)") }
                     if let completion = completionHandlersForImageTask[code] {
                         OperationQueue.main.addOperation() {

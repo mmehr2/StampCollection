@@ -71,13 +71,13 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         // check file existence first, to make sure we can send
         // fail if we can't send them all
         let fileManager = FileManager.default
-        let file1exists = fileManager.fileExists(atPath: file1url!.path)
-        let file2exists = fileManager.fileExists(atPath: file2url!.path)
-        let file3exists = fileManager.fileExists(atPath: file3url!.path)
+        let file1exists = fileManager.fileExists(atPath: file1url.path)
+        let file2exists = fileManager.fileExists(atPath: file2url.path)
+        let file3exists = fileManager.fileExists(atPath: file3url.path)
         if !(file1exists && file2exists && file3exists) {
-            if !file1exists { ecode += 1; print("Error preparing for email export: \(file1url?.path) doesn't exist.") }
-            if !file2exists { ecode += 2; print("Error preparing for email export: \(file2url?.path) doesn't exist.") }
-            if !file3exists { ecode += 4; print("Error preparing for email export: \(file3url?.path) doesn't exist.") }
+            if !file1exists { ecode += 1; print("Error preparing for email export: \(file1url.path) doesn't exist.") }
+            if !file2exists { ecode += 2; print("Error preparing for email export: \(file2url.path) doesn't exist.") }
+            if !file3exists { ecode += 4; print("Error preparing for email export: \(file3url.path) doesn't exist.") }
             if let errFunc = errFunc {
                 errFunc( NSError(domain: "StampCollection", code: ecode, userInfo: nil) )
             }
@@ -90,7 +90,7 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         let zipFileurl = ad.applicationDocumentsDirectory.appendingPathComponent(zipFilename)
         var error : NSError?
         do {
-            try fileManager.removeItem(at: zipFileurl!)
+            try fileManager.removeItem(at: zipFileurl)
         } catch let error1 as NSError {
             error = error1
         }
@@ -98,8 +98,8 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             ecode += 8
             print("Unable to remove existing ZIPFILE: \(error!.localizedDescription).")
         }
-        let fileUrls = [file1url?.path, file2url?.path, file3url?.path]
-        let zipArchiveOK = SSZipArchive.createZipFile(atPath: zipFileurl!.path!, withFilesAtPaths:fileUrls)
+        let fileUrls = [file1url.path, file2url.path, file3url.path]
+        let zipArchiveOK = SSZipArchive.createZipFile(atPath: zipFileurl.path, withFilesAtPaths:fileUrls)
         if !zipArchiveOK {
             ecode += 16
             print("Unable to create ZIPFILE archive \(zipFilename): \(error!.localizedDescription).")
@@ -109,7 +109,7 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             return false
         }
         
-        guard let fileData = try? Data(contentsOf: zipFileurl!) else {
+        guard let fileData = try? Data(contentsOf: zipFileurl) else {
             ecode += 32
             print("Unable to read ZIPFILE archive \(zipFilename).")
             if let errFunc = errFunc {
@@ -162,11 +162,11 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             print("Email sent by user")
             break
         case MFMailComposeResult.failed:
-            print("Email sent by user but failed due to error \(error?.localizedDescription)")
+            print("Email sent by user but failed due to error \(error!.localizedDescription)")
             //errHappened = true
             break
-        default:
-            break
+        //default:
+        //    break
         }
         
         // dismiss the VC

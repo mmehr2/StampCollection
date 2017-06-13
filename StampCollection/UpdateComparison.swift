@@ -363,7 +363,7 @@ class UpdateComparisonTable {
         if let category = dataModel.fetchCategory(categoryNumber) {
             let oldRecs = getDealerItemsForUpdate(category)
             for item in oldRecs {
-                let id = item.id
+                let id = item.id!
                 if oldRecsCache[id] != nil {
                     print("Cache hit: Duplicate ID \(id) found in category \(category.name)")
                 }

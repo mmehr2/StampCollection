@@ -169,7 +169,8 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     
     func getNewContextTokenForThread() -> ContextToken {
         if persistentStoreCoordinator != nil {
-            let token = nextContextToken += 1
+            nextContextToken += 1
+            let token = nextContextToken
             let setupMain = (token == CollectionStore.mainContextToken)
             print("Setting up token #\(token) for \(setupMain ? "main " : "private") context")
             if let context = (setupMain ? mainManagedObjectContext : getScratchContext()) {
@@ -811,13 +812,13 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
 // global utility funcs for access of CoreData object collections
 func fetch<T: NSManagedObject>( _ entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil, andSorting sorters: [NSSortDescriptor] = [] ) -> [T] {
     var output : [T] = []
-    let fetchRequest = NSFetchRequest(entityName: entity)
+    let fetchRequest = NSFetchRequest<T>(entityName: entity)
     fetchRequest.sortDescriptors = sorters
     fetchRequest.predicate = filter
     fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
     do {
         let fetchResults = try moc.fetch(fetchRequest)
-        output = fromNSArray(fetchResults)
+        output = fromNSArray(fetchResults as NSArray)
     } catch {
         print("Fetch error:\(error)")
     }
@@ -825,12 +826,13 @@ func fetch<T: NSManagedObject>( _ entity: String, inContext moc: NSManagedObject
 }
 
 func countFetches( _ entity: String, inContext moc: NSManagedObjectContext, withFilter filter: NSPredicate? = nil ) -> Int {
-    let fetchRequest = NSFetchRequest(entityName: entity)
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
     fetchRequest.predicate = filter
-    var error : NSError?
-    let fetchResults = moc.count(for: fetchRequest, error: &error)
-    if let error = error {
-        print("Count error:\(error.localizedDescription)")
+    var fetchResults = 0
+    do {
+        fetchResults = try moc.count(for: fetchRequest)
+    } catch {
+        print("Count error:\(error) for \(entity)")
     }
     return fetchResults
 }

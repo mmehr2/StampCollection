@@ -46,7 +46,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         super.init()
     }
     
-    func parser(_ parser: CHCSVParser!, didFailWithError error: NSError!) {
+    @nonobjc func parser(_ parser: CHCSVParser!, didFailWithError error: NSError!) {
         print("Failed parsing \(name) with error \(error)")
     }
 
@@ -91,7 +91,8 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
         } else if !currentRecord.isEmpty {
             // add extra (non-input) field for sequence data, if enabled
             if let propertyName = sequencePropertyName {
-                currentRecord[propertyName] = "\(sequenceCounter++)"
+                currentRecord[propertyName] = "\(sequenceCounter)"
+                sequenceCounter += 1
             }
             //records.append(currentRecord) // not needed in CoreData version, I believe
             //println("\(name)[\(currentRecordNumber)] = \(currentRecord)")

@@ -86,7 +86,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         let album = family.theRefs[0]
         let albumTitle = album.code ?? ""
         let (actualTitle, _) = splitNumericEndOfString(albumTitle)
-        let type = family.type.code
+        let type = family.type.code ?? ""
         sectionHeaderView.title = "\(actualTitle) (\(type))"
         
         return sectionHeaderView

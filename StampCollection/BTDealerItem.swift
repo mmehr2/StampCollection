@@ -32,7 +32,7 @@ class BTDealerItem: NSObject {
 
     var isJS: Bool {
         if code.characters.count > 2 {
-            return code[0...2] == "AUI"
+            return code.hasPrefix("AUI")
         }
         return false
     }
@@ -86,9 +86,10 @@ class BTDealerItem: NSObject {
         if cflen < 2 { return retval }
         // TBD: first char must be a known catalog abbreviation code (this info can change slowly over time as BT adds catalog references)
         // second char must be a space
-        if retval[1...1] != " " { return retval }
+        let rvidx1 = retval.index(after: retval.startIndex)
+        if retval[rvidx1...rvidx1] != " " { return retval }
         // split the prefix (cat type and space) from the data
-        var splitIndex = <#T##Collection corresponding to your index##Collection#>.index(after: catfieldx.characters.index(after: catfieldx.startIndex))
+        var splitIndex = catfieldx.index(after: catfieldx.characters.index(after: catfieldx.startIndex))
         let prefix = catfieldx.substring(to: splitIndex)
         let catfield = catfieldx.substring(from: splitIndex)
         let (part1, part2) = splitNumericEndOfString(catfield)
@@ -128,13 +129,13 @@ class BTDealerItem: NSObject {
         // if we're still good to go, do the substitution or insertion
         if ok {
             let startIndex = catfield.startIndex
-            splitIndex = <#T##String.CharacterView corresponding to `startIndex`##String.CharacterView#>.index(startIndex, offsetBy: pos)
+            splitIndex = catfield.index(startIndex, offsetBy: pos)
             retval = prefix + catfield[startIndex..<splitIndex] + char
             if type == "sub" {
                 // only diff between ins and sub is where we pick up the tail from
                 // ins means keep the entire tail (splitIndex doesn't move)
                 // whereas with sub, we must advance splitIndex past the same number of chars that were in 'char' string (len)
-                splitIndex = <#T##Collection corresponding to `splitIndex`##Collection#>.index(splitIndex, offsetBy: len)
+                splitIndex = catfield.index(splitIndex, offsetBy: len)
             }
             retval += catfield[splitIndex..<catfield.endIndex]
         }

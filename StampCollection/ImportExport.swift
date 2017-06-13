@@ -43,8 +43,8 @@ protocol ImportExportable {
     func prepareStorageContext(forExport exp: Bool) -> CollectionStore.ContextToken
     func finalizeStorageContext(_ token: CollectionStore.ContextToken, forExport: Bool)
     // operational requirements for persistence
-    func addOperationToContext(_ token: CollectionStore.ContextToken, withBlock handler: () -> Void ) // to do the actual import job (handler runs on private queue)
-    func addCompletionOperationWithBlock( _ handler: () -> Void ) // to notify when finished (handler runs on main queue)
+    func addOperationToContext(_ token: CollectionStore.ContextToken, withBlock handler: @escaping () -> Void ) // to do the actual import job (handler runs on private queue)
+    func addCompletionOperationWithBlock( _ handler: @escaping () -> Void ) // to notify when finished (handler runs on main queue)
 }
 
 /// protocol for sending data from a store to a csv file (exporting from store to csv file)
@@ -92,17 +92,17 @@ class ImportExport: CSVDataSink {
     
     fileprivate var infoURL : URL {
         let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("info.csv")!
+        return ad.applicationDocumentsDirectory.appendingPathComponent("info.csv")
     }
     
     fileprivate var inventoryURL : URL {
         let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("inventory.csv")!
+        return ad.applicationDocumentsDirectory.appendingPathComponent("inventory.csv")
     }
     
     fileprivate var categoryURL : URL {
         let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("category.csv")!
+        return ad.applicationDocumentsDirectory.appendingPathComponent("category.csv")
     }
 
     // MARK: - CSVDataSink protocol implementation (internal link to 3rd party CSV file parser)

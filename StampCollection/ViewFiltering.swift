@@ -70,7 +70,7 @@ extension SearchType: CustomStringConvertible {
             let list = words.joined(separator: " ")
             return "By Words [ANY]:\(list)"
         case .yearInRange(let range):
-            return "By Years \(range.start):\(range.end)"
+            return "By Years \(range.lowerBound):\(range.upperBound)"
         case .wantHave(let whtype):
             return "Only \(whtype)"
         case .multiCategory(let catlist):
@@ -259,8 +259,8 @@ private func getMemorySearchTypes( _ types: [SearchType] ) -> [SearchType] {
 private func CompareYearInRange( _ input: String, range: ClosedRange<Int> ) -> Bool {
     let (fmt, extractedRange, _, _) = extractDateRangesFromDescription(input)
     if fmt != 0 {
-        let startInside = range.contains(extractedRange.start)
-        let endInside = range.contains(extractedRange.end)
+        let startInside = range.contains(extractedRange.lowerBound)
+        let endInside = range.contains(extractedRange.upperBound)
         if startInside && endInside {
             // fully contained
             return true

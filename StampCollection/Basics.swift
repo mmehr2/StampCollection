@@ -66,7 +66,7 @@ func splitNumericEndOfString( _ input: String ) -> (String, String) {
     var indexSplit = input.endIndex
     while indexSplit != input.startIndex {
         // adjust index backwards from end as long as numerics are found; stop at 1st Alpha or start of string
-        let tempIndex = <#T##Collection corresponding to `indexSplit`##Collection#>.index(before: indexSplit)
+        let tempIndex = input.index(before: indexSplit)
         if getCharacterClass(input[tempIndex]) == .numeric {
             indexSplit = tempIndex
         } else {
@@ -93,7 +93,7 @@ func padIntegerString( _ input: Int, toLength outlen: Int, padWith pad: String =
     fmt.allowsFloats = false
     fmt.minimumFractionDigits = 0
     fmt.maximumFractionDigits = 0
-    return fmt.string(from: NSNumber(input)) ?? ""
+    return fmt.string(from: NSNumber(value: input)) ?? ""
 }
 
 func padDoubleString( _ input: Double, toLength outlen: Int, withFractionDigits places: Int = 2, padWith pad: String = "0") -> String {
@@ -219,8 +219,6 @@ public func <(d1: Date, d2: Date) -> Bool {
     return res == .orderedAscending
 }
 
-extension Date: Comparable { }
-
 //public func ==(d1: NSDate, d2: NSDate) -> Bool {
 //    let res = d1.compare(d2)
 //    return res == .OrderedSame
@@ -247,10 +245,10 @@ extension Date: Comparable { }
 
 // MARK: linear scaling function
 func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: ClosedRange<Double> ) -> Double {
-    let x0 = fromRange.start
-    let x1 = fromRange.end
-    let y0 = toRange.start
-    let y1 = toRange.end
+    let x0 = fromRange.lowerBound
+    let x1 = fromRange.upperBound
+    let y0 = toRange.lowerBound
+    let y1 = toRange.upperBound
     let xNum = input - x0
     let xDenom = x1 - x0
     let yNum = y1 - y0
@@ -261,18 +259,18 @@ func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: Clos
 // MARK: generic range comparisons
 // Isn't this in Swift already? I can't tell yet!
 func isValue<T: Comparable>( _ input: T, inClosedRange range: ClosedRange<T>) -> Bool {
-    if input < range.start {
+    if input < range.lowerBound {
         return false
-    } else if input > range.end {
+    } else if input > range.upperBound {
         return false
     }
     return true
 }
 
 func isValue<T: Comparable>( _ input: T, inOpenRange range: ClosedRange<T>) -> Bool {
-    if input < range.start {
+    if input < range.lowerBound {
         return false
-    } else if input >= range.end {
+    } else if input >= range.upperBound {
         return false
     }
     return true

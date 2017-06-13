@@ -63,7 +63,7 @@ class InventoryItemViewController: UIViewController {
     @IBAction func refersButtonPressed(_ sender: AnyObject) {
         // first make sure we have an item of the referred type, in the same condition (mint/FDC/..)
         let itemsThatMatchX = (item.referredItem?.inventoryItems.filter {
-            ($0 as AnyObject).itemType == item.itemType
+            ($0 as! InventoryItem).itemType == item.itemType
         })
         let itemsThatMatch = itemsThatMatchX ?? [] // SWIFT BUG? 11/6/15 - should combine these expressions
         let count = itemsThatMatch.count

@@ -63,7 +63,7 @@ class BTCategory: NSObject {
     }
     
     class func copyBasicDataFrom(_ sender: [BTCategory], toCategoryArray receiver: [BTCategory]) {
-        for i in 0 ..< sender.count += 1 {
+        for i in 0 ..< sender.count {
             copyBasicDataFrom(sender[i], toCategoryObject: receiver[i])
         }
     }

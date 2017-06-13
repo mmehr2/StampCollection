@@ -29,7 +29,7 @@ extension InventoryItem:  SortTypeSortableEx {
     }
 
     var itemCondition: String {
-        let prices = self.category.prices
+        let prices = self.category.prices!
         let conds: [String:String]
         switch prices {
         case "PF": conds = ["price1":"Mint", "price2":"FDC"]
@@ -67,7 +67,7 @@ extension InventoryItem:  SortTypeSortableEx {
         default:
             // need to lowercase the 1st character in the name
             let index = name.characters.index(after: name.startIndex)
-            let firstChar = forExport ? name.substringToIndex(index).uppercased() : name.substringToIndex(index).lowercased()
+            let firstChar = forExport ? name.substring(to: index).uppercased() : name.substring(to: index).lowercased()
             let rest = name.substring(from: index)
             name = firstChar + rest
         }

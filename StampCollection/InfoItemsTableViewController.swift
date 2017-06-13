@@ -215,8 +215,8 @@ class InfoItemsTableViewController: UITableViewController {
                 // put the related data into the master VC's variables
                 switch srchType {
                 case .yearInRange(let range):
-                    self.startYear = range.start
-                    self.endYear = range.end
+                    self.startYear = range.lowerBound
+                    self.endYear = range.upperBound
                     self.refetchData()
                     break
                 default:

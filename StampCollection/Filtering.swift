@@ -14,7 +14,7 @@ import Foundation
 // Only looping through and casting the individual elements seems to work, so that's what we do here.
 func fromNSArray<T: NSObject>( _ input: NSArray ) -> [T] {
     var output : [T] = []
-    for i in 0 ..< input.count += 1 {
+    for i in 0 ..< input.count {
         let t: AnyObject = input.object(at: i) as AnyObject
         if let temp4 = t as? T {
             output.append(temp4)
@@ -39,7 +39,7 @@ func sortKVONSArray( _ input: NSArray, keyNames: [String] ) -> NSArray {
         }
         sortDes.append(NSSortDescriptor(key: kname, ascending: asc))
     }
-    let output : NSArray = temp.sortedArray(using: sortDes)
+    let output : NSArray = NSArray(array: temp.sortedArray(using: sortDes))
     return output
 }
 

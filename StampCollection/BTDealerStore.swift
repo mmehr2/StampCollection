@@ -97,9 +97,9 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate func jsCompletionRun( _ catnum: Int16, webJSCategory: BTCategory ) {
         // create a mapping table between website pic refs and persistent pic refs
         // this should be dispatched to a background thread, no completion needed
-        let store = BTDealerStore.collection
-        let token = store?.getNewContextTokenForThread()
-        store?.addOperationToContext(token) {
+        guard let store = BTDealerStore.collection else { return }
+        let token = store.getNewContextTokenForThread()
+        store.addOperationToContext(token) {
             if let jsCategory = store.fetchCategory(catnum, inContext: token) {
                 populateJSDictionary(jsCategory, jsWebCat: webJSCategory)
             }
