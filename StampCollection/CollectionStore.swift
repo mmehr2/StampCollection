@@ -169,8 +169,8 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     
     func getNewContextTokenForThread() -> ContextToken {
         if persistentStoreCoordinator != nil {
-            nextContextToken += 1
             let token = nextContextToken
+            nextContextToken += 1
             let setupMain = (token == CollectionStore.mainContextToken)
             print("Setting up token #\(token) for \(setupMain ? "main " : "private") context")
             if let context = (setupMain ? mainManagedObjectContext : getScratchContext()) {
