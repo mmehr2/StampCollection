@@ -148,16 +148,6 @@ extension String {
     }
 }
 
-// Deal with Range (index functionality) vs. ClosedInterval (all else) by forcing ambiguity so user must choose
-// Discussion here: http://airspeedvelocity.net/2014/11/16/which-function-does-swift-call-part-6-tinkering-with-priorities/
-// Since I want to use ClosedInterval<Int> for Year range filtering, I'd like to have 1980...1989 be a ClosedInterval
-// Normally, I'd get a Range<Int> instead because of the indexing capabilities of Int for Array subscripts.
-// So this function makes the equivalent range ambiguous, so now I have to say Range or ClosedInterval specifically.
-func ... <T: Comparable>
-    (start: T, end: T) -> ClosedRange<T> where T: Comparable {
-        return (start ... end)
-}
-
 // MARK: string extensions for quick find a la predicate programming: BEGINSWITH, CONTAINS, ENDSWITH
 // NOTE: requires NSRange extension for equality testing (Equatable protocol)
 extension String {
