@@ -599,9 +599,15 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
     let (catcode, rest) = splitCatCode(code, forCat: catnum)
     let normcat = normalizeCatCode(catcode, forCat: catnum)
     let lenrest = rest.characters.count
-    let ix2 = rest.index(before: rest.endIndex)
-    let ix1 = rest.index(before: ix2)
-    let finrest = lenrest < 2 ? "  " : rest[ix1...ix2]
+    var finrest_ = ""
+    if lenrest < 2 {
+        finrest_ = " "
+    } else {
+        let ix2 = rest.index(before: rest.endIndex)
+        let ix1 = rest.index(before: ix2)
+        finrest_ = rest[ix1...ix2]
+    }
+    let finrest = finrest_
     let fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
         (normcat, catcode, x, getCharacterClass(x[0]))
