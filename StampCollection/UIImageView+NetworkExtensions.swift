@@ -73,8 +73,8 @@ extension UIImageView {
             let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 if let error = error {
                     if debugging { print("Pic data received with error \(error)") }
-                } else {
-                    let image = UIImage(data: data!)!
+                } else if let data = data {
+                    let image = UIImage(data: data)!
                     if debugging { print("Pic data received with image \(image)") }
                     if let completion = completionHandlersForImageTask[code] {
                         OperationQueue.main.addOperation() {
@@ -83,6 +83,8 @@ extension UIImageView {
                             if debugging { print("Removed handler for code \(code)") }
                         }
                     }
+                } else {
+                    if debugging { print("Unable to find image with url \(url)") }
                 }
             }) 
             task.resume()
