@@ -170,9 +170,13 @@ func getPicRefURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
     return nil
 }
 
-private func getFileNameFromPictid( _ pictid: String ) -> String {
-    // takes an ID of the form "6110s5", returns the file name with ".jpg" added
-    return pictid + ".jpg"
+private let SET_CANCELLATIONS_FIRST = 4
+private let SET_CANCELLATIONS_LAST = 8
+
+private func getFileNameFromPictid( _ pictid: String, _ cat: Int ) -> String {
+    // takes an ID of the form "6110s5", returns the file name with ".jpg" or ".gif" added
+    let ext = (cat >= SET_CANCELLATIONS_FIRST && cat <= SET_CANCELLATIONS_LAST) ? ".gif" : ".jpg"
+    return pictid + ext
 }
 
 private func getFileNameFromJSPictid( _ pictid: String ) -> String {
@@ -180,21 +184,21 @@ private func getFileNameFromJSPictid( _ pictid: String ) -> String {
     return "ajt" + pictid + ".jpg"
 }
 
-private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase: URL, btPath: String, jsBase: URL, jsPath: String ) -> URL? {
+private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase: URL, btPath: String, jsBase: URL, jsPath: String, catnum: Int ) -> URL? {
     var output: URL! = nil
     if !picref.isEmpty && picref != "N/A" {
         let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
         let picref2 = comps.last! // this is just the ID part as a string
         switch type {
         case .btRef:
-            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref2))
+            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref2, catnum))
         case .jsRef:
             // translate "17020" forward to "1" etc.
             if let picref3 = jsDictionary[picref2] {
                 output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref3))
             }
         case .dlRef:
-            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref))
+            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref, catnum))
         case .dljsRef:
             output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref2))
         default:
@@ -205,14 +209,14 @@ private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase
 }
 
 // this function will turn the URL type reference into a remote URL for just the pic file (only works for the BT site)
-func getPicFileRemoteURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
+func getPicFileRemoteURL( _ picref: String, refType type: PicRefURLType, category cat: Int = 0 ) -> URL? {
     // BT style: "http://www.bait-tov.com/store/products/" plus the file name (pictid/picref such as "6110s4" + ".jpg" file extension)
     // JS style: "http://www.judaicasales.com/pics/judaica_austriantabs/" plus the file name ("ajt" + picref + ".jpg", where "5" is the picref)
     let btURLBase = URL(string: "http://www.bait-tov.com")
     let jsURLBase = URL(string: "http://www.judaicasales.com")
     let btURLPath = "/store/products/"
     let jsURLPath = "/pics/judaica_austriantabs/"
-    return getPicURLFromBaseURL(type, picref: picref, btBase: btURLBase!, btPath: btURLPath, jsBase: jsURLBase!, jsPath: jsURLPath)
+    return getPicURLFromBaseURL(type, picref: picref, btBase: btURLBase!, btPath: btURLPath, jsBase: jsURLBase!, jsPath: jsURLPath, catnum: cat)
 }
 
 // this function will turn the URL type reference into a local file URL for the cached pic file (preferred for JS site, but can work with BT as files are downloaded)
@@ -223,7 +227,7 @@ func getPicFileLocalURL( _ picref: String, refType type: PicRefURLType, category
     let ad = UIApplication.shared.delegate! as! AppDelegate
     let urlBase = ad.applicationDocumentsDirectory
     let urlPath = "pics/cat\(catnum)/"
-    return getPicURLFromBaseURL(type, picref: picref, btBase: urlBase as URL, btPath: urlPath, jsBase: urlBase as URL, jsPath: urlPath)
+    return getPicURLFromBaseURL(type, picref: picref, btBase: urlBase as URL, btPath: urlPath, jsBase: urlBase as URL, jsPath: urlPath, catnum: Int(catnum))
 }
 
 // this function will turn a local URL into a cache key to use with the persistent key/value store
@@ -243,14 +247,14 @@ func getPicFileCacheKey( _ picref: String, type: PicRefURLType ) -> String? {
         let picref2 = comps.last! // this is just the ID part as a string
         switch type {
         case .btRef:
-            output = getFileNameFromPictid(picref2)
+            output = getFileNameFromPictid(picref2, 0)
         case .jsRef:
             // translate "17020" back to "1" etc.
             if let picref3 = jsRevDictionary[picref2] {
                 output = getFileNameFromJSPictid(picref3)
             }
         case .dlRef:
-            output = getFileNameFromPictid(picref)
+            output = getFileNameFromPictid(picref, 0)
         case .dljsRef:
             output = getFileNameFromJSPictid(picref)
         default:

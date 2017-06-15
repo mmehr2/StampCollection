@@ -9,6 +9,7 @@
 import Foundation
 
 private let CATNUM_SETS = 2 // belongs in constants list somewhere else
+private let CATNUM_JS = 29
 
 class BTDealerItem: NSObject {
     var code = ""
@@ -29,6 +30,7 @@ class BTDealerItem: NSObject {
     var oldprice4 = ""
     var status = ""
     var picref = ""
+    var catnum = 0
 
     var isJS: Bool {
         if code.characters.count > 2 {
@@ -42,7 +44,7 @@ class BTDealerItem: NSObject {
     }
     
     var picFileRemoteURL: URL? {
-        return getPicFileRemoteURL(picref, refType: isJS ? .jsRef  : .btRef)
+        return getPicFileRemoteURL(picref, refType: isJS ? .jsRef  : .btRef, category: catnum)
     }
     
     func getThePicFileLocalURL(_ btcatnum: Int) -> URL? {
@@ -51,6 +53,7 @@ class BTDealerItem: NSObject {
     }
     
     func fixupJSItem() {
+        catnum = CATNUM_JS
         // synthesize a status field for JS data
         let hasMint = (price1 != "N/A")
         let hasFDC = (price2 != "N/A")
@@ -143,6 +146,7 @@ class BTDealerItem: NSObject {
     }
     
     func fixupBTItem(_ btcatNumber: Int) {
+        catnum = btcatNumber
         let isSets = btcatNumber == CATNUM_SETS
         if isSets {
             catalog1 = fixCatField(catalog1, Named: "cat1", WithID: code)
