@@ -149,7 +149,7 @@ class UpdatesTableViewController: UITableViewController {
         var name = "All Categories"
         if let categoryItem = model.fetchCategory(category) {
             if category != CollectionStore.CategoryAll {
-                name = "\(categoryItem.name) (#\(category))"
+                name = "\(categoryItem.name!) (#\(category))"
             }
         }
         let text = "\(count) Updates for \(name)"
