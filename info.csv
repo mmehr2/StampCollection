@@ -1326,8 +1326,6 @@ ILrc58,"15.08.77 4.40/3.90/2.00/1.70 L.I. black ovp.","In Stock",ILrc58,0,"Inter
 ILrc60,"15.08.77 4.40 L.I. regular","Temp. Sold Out",ILrc60,0,"International Reply Coupons","B RC60",,7.50,10.00,,,0,0,0,0,,,,,12
 ILrc63,"16.10.77 4.40/3.50/3.30/2.00 L.I. black ovp.","In Stock",ILrc63,0,"International Reply Coupons","B RC63",,5.00,6.00,,,1,1,0,0,,,,,12
 ILrc64,"01.12.77 6.90 L.I. regular","In Stock",ILrc64,0,"International Reply Coupons","B RC64",,3.00,4.00,,,1,1,0,0,,,,,12
-ILrc2009,"01.07.09 Non Denominated","In Stock",ILrc2009,0,"International Reply Coupons","B RC2009",,5.00,7.50,,,1,1,0,0,,,,,12
-ILrc1,"01.09.50 London Design - needs further desc",Unavailable,ILrc1,-1,"International Reply Coupons","B RC1",,,,,,0,0,0,0,,,,,12
 ILrc2,"01.09.50 London Design - needs further desc",Unavailable,ILrc2,-1,"International Reply Coupons","B RC2",,,,,,0,0,0,0,,,,,12
 ILrc3,"01.09.50 London Design - needs further desc",Unavailable,ILrc3,-1,"International Reply Coupons","B RC3",,,,,,0,0,0,0,,,,,12
 ILrc4,"01.09.50 London Design - needs further desc",Unavailable,ILrc4,-1,"International Reply Coupons","B RC4",,,,,,0,0,0,0,,,,,12
@@ -1456,7 +1454,6 @@ ILrc141,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc141,-1,"
 ILrc142,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc142,-1,"International Reply Coupons","B RC142",,,,,,0,0,0,0,,,,,12
 ILrc143,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc143,-1,"International Reply Coupons","B RC143",,,,,,0,0,0,0,,,,,12
 ILrc144,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc144,-1,"International Reply Coupons","B RC144",,,,,,0,0,0,0,,,,,12
-ILrc145,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc145,-1,"International Reply Coupons","B RC145",,,,,,0,0,0,0,,,,,12
 ILrc146,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc146,-1,"International Reply Coupons","B RC146",,,,,,0,0,0,0,,,,,12
 ILrc147,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc147,-1,"International Reply Coupons","B RC147",,,,,,0,0,0,0,,,,,12
 ILrc148,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc148,-1,"International Reply Coupons","B RC148",,,,,,0,0,0,0,,,,,12
@@ -1468,10 +1465,13 @@ ILrc153,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc153,-1,"
 ILrc154,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc154,-1,"International Reply Coupons","B RC154",,,,,,0,0,0,0,,,,,12
 ILrc155,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc155,-1,"International Reply Coupons","B RC155",,,,,,0,0,0,0,,,,,12
 ILrc156,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc156,-1,"International Reply Coupons","B RC156",,,,,,0,0,0,0,,,,,12
-ILrc157,"01.01.75 Lausanne Design - needs further desc",Unavailable,ILrc157,-1,"International Reply Coupons","B RC157",,,,,,0,0,0,0,,,,,12
-ILrc2001,"01.01.02 Beijing Type 1 Design - needs further desc",Unavailable,ILrc2001,-1,"International Reply Coupons","B RC2001",,,,,,0,0,0,0,,,,,12
-ILrc2006,"01.07.06 Non Denominated",Soon...,,0,"International Reply Coupons","B RC2006",,5.00,7.50,,,0,0,0,0,,,,,12
-ILrc2002,"01.01.02 Non Denominated",Soon...,,0,"International Reply Coupons","B RC2001",,5.00,7.50,,,0,0,0,0,,,,,12
+ILrc1,"01.09.50 45 pr regular",Catalogue,ILrc1,0,"International Reply Coupons","B RC1",,15.00,20.00,,,0,0,0,0,,,,,12
+ILrc145,"08.05.83 Non Denominated",Catalogue,ILrc145,0,"International Reply Coupons","B RC145",,3.00,4.00,,,0,0,0,0,,,,,12
+ILrc157,"17.05.83 18.10 IS black ovp.",Catalogue,ILrc157,0,"International Reply Coupons","B RC157",,3.00,4.00,,,0,0,0,0,,,,,12
+ILrc158,"01.01.02 Non Denominated",Catalogue,ILrc158,0,"International Reply Coupons","B RC2001",,5.00,7.50,,,0,0,0,0,,,,,12
+ILrc159,"01.07.06 Non Denominated",Catalogue,ILrc159,0,"International Reply Coupons","B RC2006",,5.00,7.50,,,0,0,0,0,,,,,12
+ILrc160,"01.07.09 Non Denominated","In Stock",ILrc160,0,"International Reply Coupons","B RC2009",,5.00,7.50,,,1,1,0,0,,,,,12
+ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coupons","B RC2013",,5.00,7.50,,,0,0,0,0,,,,,12
 6110j595,"1993 50 Years Ghettos Uprisings - Joint Issue with Poland","In Stock",6110j595,0,"Joint Issues","C 1356a","S 3151",1.20,,,,1,0,0,0,,,,,13
 6110j682,"1996 Hanukkah 96' - Joint Issue with USA (later same design were issued: 1999 33c, 2001 34c, 2002 37c)","In Stock",6110j682,0,"Joint Issues","C 1504","S 3118",0.90,4.00,,,1,1,0,0,,,,,13
 6110j693,"1997 Jewish Monuments in Prague - Joint Issue with Czech Republic","In Stock",6110j693,0,"Joint Issues","C 1521,22","S 3009,10",3.00,8.00,,,1,1,0,0,,,,,13
