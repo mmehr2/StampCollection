@@ -33,9 +33,9 @@ func sortKVONSArray( _ input: NSArray, keyNames: [String] ) -> NSArray {
         var asc = true
         var kname = keyName
         let klen = kname.characters.count
-        if (kname[0] == "-") {
+        if kname.hasPrefix("-") {
             asc = false
-            kname = kname[1..<klen]
+            kname = String(kname.characters.suffix(klen - 1))
         }
         sortDes.append(NSSortDescriptor(key: kname, ascending: asc))
     }

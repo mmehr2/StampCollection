@@ -317,7 +317,7 @@ class InfoItemsTableViewController: UITableViewController {
         case (.info, _): exwh = "Info"
         case (.inventory, .all): exwh = "Inv"
         case (.inventory, .haves),
-            (.inventory, .wants): exwh = "Inv" + "\(nitype)"[0]
+            (.inventory, .wants): exwh = "Inv" + String("\(nitype)".characters.first!)
         default: break
         }
         infoButtonItem.title = "To:" + exwh

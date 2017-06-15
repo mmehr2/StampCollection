@@ -123,7 +123,9 @@ class BTDealerItem: NSObject {
         var ok = is8digitField || found // yes if we have 8 digits (use Rule#1) OR if we found another rule via lookup
         // double-check if the problem hasn't already been corrected by BT or us (found case)
         if ok {
-            let catchr = catfield[pos..<pos+len]
+            let idx1 = catfield.index(catfield.startIndex, offsetBy: pos)
+            let idx2 = catfield.index(idx1, offsetBy: len)
+            let catchr = catfield[idx1..<idx2]
             if catchr == char {
                 // we're done, right character in position
                 ok = false

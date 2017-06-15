@@ -80,7 +80,7 @@ func splitNumericEndOfString( _ input: String ) -> (String, String) {
 
 func makeStringFit(_ input: String, length: Int) -> String {
     if input.characters.count > length-2 {
-        return input[0..<length-2] + ".."
+        return String(input.characters.prefix(length - 2)) + ".."
     }
     return input
 }
@@ -123,20 +123,22 @@ extension Dictionary {
 
 
 // following was stolen from: http://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
-extension String {
-    
-    subscript (i: Int) -> Character {
-        return self[self.characters.index(self.startIndex, offsetBy: i)]
-    }
-    
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
-    
-    subscript (r: Range<Int>) -> String {
-        return substring(with: (characters.index(startIndex, offsetBy: r.lowerBound) ..< characters.index(startIndex, offsetBy: r.upperBound)))
-    }
-}
+// THIS IS CONSIDERED DANGEROUS IN SWIFT 3.x (AND PROBABLY ALL ALONG) - see here: https://stackoverflow.com/questions/39677330/how-does-string-substring-work-in-swift-3
+//   which refers to this article to prevent the following usage - https://oleb.net/blog/2016/08/swift-3-strings/
+//extension String {
+
+//subscript (i: Int) -> Character {
+//    return self[self.characters.index(self.startIndex, offsetBy: i)]
+//}
+
+//subscript (i: Int) -> String {
+//    return String(self[i] as Character)
+//}
+
+//subscript (r: Range<Int>) -> String {
+//    return substring(with: (characters.index(startIndex, offsetBy: r.lowerBound) ..< characters.index(startIndex, offsetBy: r.upperBound)))
+//}
+//}
 
 // MARK: treat a string as a floating point number if possible
 extension String {

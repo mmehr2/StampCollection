@@ -195,7 +195,7 @@ class InfoCategoriesTableViewController: UITableViewController {
             let categoryItems = category.dealerItems.count
             cell.textLabel?.text = category.name
             cell.detailTextLabel?.text = "(\(categoryItems) items)"
-            let allowDisc = (category.code[0] != "*")
+            let allowDisc = !category.code.hasPrefix("*")
             cell.accessoryType = allowDisc ? .disclosureIndicator : .none
         }
 

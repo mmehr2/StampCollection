@@ -6,6 +6,15 @@
 //  Copyright (c) 2015 Michael L. Mehr. All rights reserved.
 //
 
+private let CATNUM_BKLT: Int16 = 3
+private let CATNUM_JOINT: Int16 = 13
+private let CATNUM_MAXC: Int16 = 14
+private let CATNUM_NEWYR: Int16 = 16
+private let CATNUM_PC: Int16 = 20
+private let CATNUM_REV: Int16 = 21
+private let CATNUM_ATM: Int16 = 26
+private let CATNUM_YRSETS: Int16 = 27
+
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -109,8 +118,8 @@ func menuBoxWithTitle( _ title: String, andBody body: [MenuBoxEntry], forControl
             var menuTitle = menuItem
             var style = UIAlertActionStyle.default
             // any provided title string that starts with a "!" will be Destructive style (and the "!" will be removed)
-            if menuItem[0] == "!" {
-                menuTitle = menuItem.substring(from: menuItem.characters.index(after: menuItem.startIndex))
+            if menuItem.hasPrefix("!") {
+                menuTitle = String(menuItem.characters.suffix(menuItem.characters.count - 1))
                 style = UIAlertActionStyle.destructive
             }
             act = UIAlertAction(title: menuTitle, style: style, handler: menuFunc)
@@ -508,7 +517,7 @@ private func splitDealerCode( _ code: String, special: Bool = false ) -> [String
 }
 
 private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, String) {
-    let firstCharClass = getCharacterClass(code[0])
+    let firstCharClass = getCharacterClass(code.characters.first!)
     let shorthand = String(code.characters.prefix(2))
     let splitAt: Int
     if firstCharClass == .numeric {
@@ -528,9 +537,8 @@ private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, St
         // assumes 2-digit alpha (ps, fe, bu)
         splitAt = 2
     }
-    let len = code.characters.count
-    let part1 = code[0..<splitAt]
-    let part2 = code[splitAt..<len]
+    let part1 = String(code.characters.prefix(splitAt))
+    let part2 = String(code.characters.suffix(splitAt))
     return (part1, part2)
 }
 
@@ -570,9 +578,9 @@ struct IDParser {
         original = code
         let (catcode, rest) = splitCatCode(code, forCat: catnum)
         self.catcode = catcode
-        fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
+        fields = splitDealerCode(rest, special: catnum == CATNUM_ATM) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
         let firstField = fields.first!
-        let hasPrefix = getCharacterClass(firstField[0]) == .alpha
+        let hasPrefix = getCharacterClass(firstField.characters.first!) == .alpha
         if hasPrefix {
             prefix = firstField
             fields.remove(at: 0)
@@ -611,16 +619,17 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
     let lenrest = rest.characters.count
     var finrest_ = ""
     if lenrest < 2 {
-        finrest_ = " "
+        finrest_ = "  "
     } else {
         let ix2 = rest.index(before: rest.endIndex)
         let ix1 = rest.index(before: ix2)
         finrest_ = rest[ix1...ix2]
     }
     let finrest = finrest_
-    let fields = splitDealerCode(rest, special: catnum == 26) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
+    let finrest1 = finrest.characters.last!
+    let fields = splitDealerCode(rest, special: catnum == CATNUM_ATM) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
-        (normcat, catcode, x, getCharacterClass(x[0]))
+        (normcat, catcode, x, getCharacterClass(x.characters.first!))
     }
     //println("Data for normID \(data)")
     var output = ""
@@ -632,45 +641,45 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
         if output.isEmpty {
             output += normcat
             // special handling for sorting items at end
-            if catnum == 14 && finrest != "ip" {
+            if (catnum == CATNUM_MAXC) && finrest != "ip" {
                 // special handling for  Max Cards (cat 14)
                 // if the last field isn't an alpha == "ip", then add an alpha prefix to make it sort after the plan ones
                 output += paddington(8, input: "ZZPACKET", char: padder)
             }
-            else if catnum == 20 && rest.hasPrefix("PC") && finrest[1] == "m" {
+            else if (catnum == CATNUM_PC) && rest.hasPrefix("PC") && finrest1 == "m" {
                 // special handling for Military Post Cards (cat 20) psPC NNN m
                 // if the last field is an alpha == "m", then add an alpha prefix to make it sort after the plan ones
                 output += paddington(8, input: "PC_MIL", char: padder, trailing: true)
                 skip = true // prevent the PC from becoming another prefix
             }
-            else if catnum == 21 && finrest[1] == "p" {
+            else if (catnum == CATNUM_REV) && finrest1 == "p" {
                 // special handling for Revenue (cat 21) 6110r NNN p
                 // if the last field is an alpha == "p", then add an alpha prefix to make it sort after the plan ones
                 output += paddington(8, input: "ZZPACKET", char: padder)
             }
-            else if catnum == 26 && rest == "9k" {
+            else if (catnum == CATNUM_ATM) && rest == "9k" {
                 // special handling for Vending (cat 26) 6110k 9 k
                 output += paddington(8, input: "ZZPACKET", char: padder)
             }
-            else if catnum == 26 && rest == "30" {
-                // special handling for Vending (cat 26) 6110k 9 k
+            else if (catnum == CATNUM_ATM) && rest == "30" {
+                // special handling for Vending (cat 26) 6110k 30
                 output += paddington(8, input: "ZZPACKET", char: padder)
             }
-            else if catnum == 3 && catcode == "6110b" {
-                // special handling for Booklets (cat 26) 6110b s NN to go before 6110b NN [...]
+            else if (catnum == CATNUM_BKLT) && catcode == "6110b" {
+                // special handling for Booklets (cat 3) 6110b s NN to go before 6110b NN [...]
                 var prefix = "BOOKLET"
-                if rest[0] == "s" {
+                if rest.hasPrefix("s") {
                     prefix = "_SBKLT"
                     skip = true // prevent the "s" from becoming a prefix field
                 }
-                if rest[0] == "P" {
+                if rest.hasPrefix("P") {
                     prefix = "BPRBKLT" // after "BOOKLET" but before "EBOOKLET"
                     skip = true // prevent the "PR" from becoming a prefix field
                 }
                 output += paddington(8, input: prefix, char: padder, trailing: true)
             }
-            else if catnum == 3 && catcode == "6110e" {
-                // special handling for Booklets (cat 26) 6110e [...] to go after 6110b [...]
+            else if (catnum == CATNUM_BKLT) && catcode == "6110e" {
+                // special handling for Booklets (cat 3) 6110e [...] to go after 6110b [...]
                 output += paddington(8, input: "EBOOKLET", char: padder)
             }
             else if fieldClass != .alpha {
@@ -679,20 +688,18 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
             }
         }
         let flen = field.characters.count
-        let catnum26 = catnum == 26 // only needed due to ambiguous '==' operator error below in Swift 3.x
-        let catnum27 = catnum == 27 // only needed due to ambiguous '==' operator error below in Swift 3.x
         switch fieldClass {
         case .alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
         case .numeric:
             var num = Int(field)!
             // insert YEAR fixups here
-            if catnum == 16 {
+            if catnum == CATNUM_NEWYR {
                 num += fixupCenturyYY(num)
             }
-            if catnum27 && flen == 2 {
+            if (catnum == CATNUM_YRSETS) && flen == 2 {
                 num += fixupCenturyYY(num)
             }
-            if catnum27 && flen == 4 {
+            if (catnum == CATNUM_YRSETS) && flen == 4 {
                 let ix0 = field.startIndex
                 let ix1 = field.index(field.startIndex, offsetBy: 1)
                 let ix2 = field.index(field.startIndex, offsetBy: 2)
@@ -703,7 +710,7 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
                 num2 += fixupCenturyYY(num2) // now between 1948 and 2047
                 num = num1 * 10000 + num2
             }
-            if catnum26 && fieldnum == 0 {
+            if (catnum == CATNUM_ATM) && fieldnum == 0 {
                 if field == "9" && finrest == "9k" { num = 99999998 }
                 else if field == "30" && finrest == "30" { num = 99999999 }
                 else if flen == 2 {
@@ -729,10 +736,10 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
             // To do this, we provide date-related info in the form of the isPostE1K flag (date such that e-numbers over 1000 are likely)
             // 6110j only deals with the cutoff number, since no joint numbers exist before 595 (the s-number of the 1993 Poland joint issue) - FORTUNATELY!
             if fieldnum == 0 && flen == 3 && ((isPostE1K && catcode == "6110e") || catcode == "6110j") {
-                let thr = catnum == 13 ? 595 : 350
+                let thr = catnum == CATNUM_JOINT ? 595 : 350
                 if fieldnum + 1 < numFields {
                     let (_, _, nextField, nextFieldClass) = data[fieldnum + 1]
-                    if nextFieldClass == .alpha && nextField[0] != "x" && num < thr {
+                    if nextFieldClass == .alpha && !nextField.hasPrefix("x") && num < thr {
                         num += 1000
                     }
                 }
