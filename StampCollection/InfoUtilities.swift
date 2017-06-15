@@ -248,7 +248,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
         found = descr.substring(with: match)
         let yidx1 = found.index(found.startIndex, offsetBy: 1)
         let yidx2 = found.index(found.startIndex, offsetBy: 3)
-        let yy = Int(found[yidx1...yidx2])!
+        let yy = Int(found[yidx1..<yidx2])!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
         //descr2 = descr // DEBUG
