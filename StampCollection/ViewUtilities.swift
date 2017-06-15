@@ -156,7 +156,8 @@ func formatBTDetail(_ item: BTDealerItem) -> String {
 }
 
 func formatDealerDetail(_ item: DealerItem) -> String {
-    var text = "\(item.id)(#\(item.exOrder))"
+    let itemid = item.id ?? ""
+    var text = "\(itemid)(#\(item.exOrder))"
     if item.cat1 != "" {
         text += " [" + item.cat1
         if item.cat2 != "" {
@@ -169,7 +170,8 @@ func formatDealerDetail(_ item: DealerItem) -> String {
     let price2 = item.price2.isEmpty ? emptyStr : item.price2 ?? emptyStr
     let price3 = item.price3.isEmpty ? emptyStr : item.price3 ?? emptyStr
     let price4 = item.price4.isEmpty ? emptyStr : item.price4 ?? emptyStr
-    var output = "\(text) - \(item.status): \(price1) Used-\(price2) FDC-\(price3) M/nt-\(price4)"
+    let status = item.status ?? "Unknown"
+    var output = "\(text) - \(status): \(price1) Used-\(price2) FDC-\(price3) M/nt-\(price4)"
 //    let pufs = item.category.prices
 //    switch pufs {
 //    case "P":
@@ -303,7 +305,9 @@ private func formatInventoryWantField(_ item: InventoryItem) -> String {
 private func formatInventoryLocation(_ item: InventoryItem) -> String {
     let section = item.albumSection!
     let sectionStr = (section.isEmpty) ? "" : " (S:\(section))"
-    return "IN \(item.albumRef) p.\(item.albumPage)\(sectionStr)"
+    let albumRef = item.albumRef ?? "X"
+    let albumPage = item.albumPage ?? "N"
+    return "IN \(albumRef) p.\(albumPage)\(sectionStr)"
 }
 
 func formatPriceDescription( _ catPrices: String, fieldName: String ) -> String {
@@ -341,25 +345,31 @@ private func formatInventoryValue(_ item: InventoryItem) -> String {
 }
 
 private func formatInventoryVarCondition(_ item: InventoryItem) -> String {
-    let variety = item.desc.isEmpty ? "" : /*makeStringFit(*/"V: \(item.desc)"//, 40)
-    let condition = item.notes.isEmpty ? "" : /*makeStringFit(*/"C: \(item.notes)"//, 40)
+    let idesc = item.desc ?? ""
+    let inotes = item.notes ?? ""
+    let variety = idesc.isEmpty ? "" : "V: \(idesc)"
+    let condition = inotes.isEmpty ? "" : "C: \(inotes)"
     return "\(variety) \(condition)"
 }
 
 func formatInventoryMain(_ item: InventoryItem) -> String {
-    let basedes = item.dealerItem.descriptionX! //makeStringFit(item.dealerItem.descriptionX, 60)
+    let basedes = item.dealerItem.descriptionX!
     return "\(basedes) \(formatInventoryWantField(item)) \(formatInventoryLocation(item))"
 }
 
 func formatInventoryDetail(_ item: InventoryItem) -> String {
-    return "\(item.baseItem) \(formatInventoryValue(item)) \(formatInventoryVarCondition(item))"
+    let baseItem = item.baseItem ?? "??"
+    return "\(baseItem) \(formatInventoryValue(item)) \(formatInventoryVarCondition(item))"
 }
 
 func getTitlesForInventoryItem(_ item: InventoryItem) -> (top:String, bottom:String) {
+    let idesc = item.desc ?? ""
+    let inotes = item.notes ?? ""
     let infoItem = item.dealerItem!
-    let title = "\(infoItem.descriptionX ?? "") \(item.desc) \(item.notes)"
-    let condition = "\(infoItem.id) \(item.itemCondition) \(item.itemPrice)"
-    return (condition, title)
+    let itemid = infoItem.id ?? "XXX"
+    let line1 = "\(itemid) \(item.itemCondition) \(item.itemPrice)"
+    let line2 = "\(infoItem.descriptionX ?? "") \(idesc) \(inotes)"
+   return (line1, line2)
 }
 
 // MARK: Parsing the ID code field for sorting

@@ -25,7 +25,7 @@ class InventoryItemViewController: UIViewController {
     }
     
     fileprivate func updateUI() {
-        title = "Edit \(item.dealerItem.descriptionX) \(item.itemCondition)"
+        title = "Edit \(item.dealerItem.descriptionX!) \(item.itemCondition)"
         refersButton.isEnabled = item.referredItem != nil
         itemView.wanted = item.wanted
         itemView.picURL = item.dealerItem.picFileRemoteURL

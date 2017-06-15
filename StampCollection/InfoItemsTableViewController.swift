@@ -300,7 +300,8 @@ class InfoItemsTableViewController: UITableViewController {
         let num = ftype == .info ? model.info.count : model.inventory.count
         var name = "All Categories"
         if category != CollectionStore.CategoryAll {
-            name = "\(categoryItem.name) (#\(category))"
+            let catname = categoryItem.name ?? "None"
+            name = "\(catname) (#\(category))"
         }
         var itemsname = "items"
         switch (ftype, itype) {
