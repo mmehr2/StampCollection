@@ -69,7 +69,7 @@ class ImportExport: CSVDataSink {
         case bundle
         // other cases may be added, such as:
         //case AirDrop
-        case emailAttachment
+        case emailAttachment(url: URL)
     }
     
     fileprivate var dataModel: ImportDataSink? // where this object will send import data coming from the csv files
@@ -147,8 +147,8 @@ class ImportExport: CSVDataSink {
             return prepareImportFromBundle()
 //        case .AirDrop:
 //            return prepareImportFromAirDrop()
-//        case .EmailAttachment:
-//            return prepareImportFromEmailAttachment()
+        case let .emailAttachment(url):
+            return prepareImportFromEmailAttachment(url)
         default: break
         }
         return false
@@ -230,7 +230,13 @@ class ImportExport: CSVDataSink {
         return categoryCopiedSuccessfully && infoCopiedSuccessfully && inventoryCopiedSuccessfully
     }
 
-    // MARK: - email attachment file import front-end (TBD)
+    // MARK: - email attachment file import front-end
+    // NOTE: copies files from given SCZP file url to user's Documents folder
+    fileprivate func prepareImportFromEmailAttachment(_ url: URL) -> Bool {
+        // this does blocking (synchronous) parsing of the files
+        // copy the default data files into the documents dirctory using the email attachment importer method
+        return EmailAttachmentImporter.receiveFiles(url)
+    }
     
     // MARK: - AirDrop file import front-end (TBD)
     

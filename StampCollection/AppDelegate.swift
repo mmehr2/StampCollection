@@ -70,8 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // open with a file attachment URL
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("Application invoked to open SCZP file at URL = \(url)")
-        return false
+        forEachTopLevelVC() { top in
+            // if a top level VC has a property named 'model', this will set it to the data model object we just initialized
+            if top.responds(to: Selector(("doImportFromEmail:"))) {
+                top.perform(Selector(("doImportFromEmail:")), with: url)
+                print("Invoking email importer @ \(top)")
+            }
+        }
+        return true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

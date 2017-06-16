@@ -54,6 +54,20 @@ class InfoCategoriesTableViewController: UITableViewController {
 
     @IBAction func doImportAction(_ sender: UIBarButtonItem) {
         
+        let sourceType = ImportExport.Source.bundle
+        doImportFromSource(sourceType)
+        
+    }
+    
+    func doImportFromEmail(_ url: URL) {
+        
+        let sourceType = ImportExport.Source.emailAttachment(url: url)
+        doImportFromSource(sourceType)
+        
+    }
+    
+    private func doImportFromSource( _ sourceType: ImportExport.Source) {
+
         guard let appDel = UIApplication.shared.delegate as? AppDelegate else {
             print("Unable to get app delegate - should never happen.")
             return
@@ -71,7 +85,6 @@ class InfoCategoriesTableViewController: UITableViewController {
                     // since we are majorly changing the model, we must notify all top level VCs of the change (including ourselves)
                     appDel.restartUI()
                     // load the new data from CSV files
-                    let sourceType = ImportExport.Source.bundle // TBD: make this a setting, once we can do AirDrop and EmailAttachment
                     self.csvFileImporter.importData(sourceType, toModel: self.model) {
                         // save all the imported data to its persistence layer
                         self.model.saveMainContext()
