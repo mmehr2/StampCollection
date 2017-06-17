@@ -339,6 +339,11 @@ class InfoItemsTableViewController: UITableViewController {
         updateUI()
     }
     
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return ftype == .info
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -351,13 +356,59 @@ class InfoItemsTableViewController: UITableViewController {
         return ftype == .info ? model.info.count : model.inventory.count
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let retval:[UITableViewRowAction]?
+        
+        if ftype == .info {
+            // actions for Info items
+            let item = self.model.info[indexPath.row]
+            let cat = item.category!
+
+            let have = UITableViewRowAction(style: .normal, title: "Have") { action, index in
+                // add selected item to Inventory as a HAVE
+               print("Adding to INV(have) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+            }
+            have.backgroundColor = .blue
+            
+            if cat.prices.characters.count == 1 {
+                let want = UITableViewRowAction(style: .normal, title: "Want") { action, index in
+                    // add selected item to Inventory as a WANT
+                    print("Adding to INV(Want) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                }
+                want.backgroundColor = .orange
+                
+                retval = [have, want]
+            } else {
+                let haveFDC = UITableViewRowAction(style: .normal, title: "Have\n(FDC)") { action, index in
+                    // add selected item to Inventory as a HAVE
+                    print("Adding to INV(have - FDC) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                }
+                haveFDC.backgroundColor = .orange
+                
+                let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
+                    // run More Actions table selection action controller
+                    print("Invoking More Actions for Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                }
+                more.backgroundColor = .lightGray
+                
+                retval = [have, haveFDC, more]
+            }
+        } else {
+            // actions for Inventory items TBD
+            retval = nil
+        }
+        
+        return retval
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("Info Item Cell", forIndexPath: indexPath) as! UITableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Info Item Cell") as! ItemTableViewCell
         
         // Configure the cell...
-        let row = (indexPath as NSIndexPath).row
+        let row = indexPath.row
         var useDisclosure = false
         if ftype == .info {
             // format a DealerItem cell
@@ -380,14 +431,6 @@ class InfoItemsTableViewController: UITableViewController {
         
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     /*
     // Override to support editing the table view.
