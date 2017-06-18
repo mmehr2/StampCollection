@@ -85,10 +85,10 @@ class ViewController: UITableViewController {
     // MARK: - Table view data source
     
     func getCategoryIndexForIndexPath( _ indexPath: IndexPath ) -> Int {
-        if (indexPath as NSIndexPath).section == 1 {
+        if indexPath.section == 1 {
             return -1
         } else {
-            return (indexPath as NSIndexPath).row
+            return indexPath.row
         }
     }
     

@@ -131,7 +131,7 @@ class AlbumPageViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InventoryItemCell", for: indexPath) as! InventoryItemCell
     
         // Configure the cell
-        let item = navigator.currentPage.theItems[(indexPath as NSIndexPath).item]
+        let item = navigator.currentPage.theItems[indexPath.item]
         let (top, btm) = getTitlesForInventoryItem(item)
         cell.title = btm
         cell.condition = top
@@ -147,7 +147,7 @@ class AlbumPageViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = navigator.currentPage.theItems[(indexPath as NSIndexPath).item]
+        let item = navigator.currentPage.theItems[indexPath.item]
         
         // and go there ...
         performSegue(withIdentifier: "InventoryItemSegue", sender: item)

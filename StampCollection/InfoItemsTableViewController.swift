@@ -478,7 +478,7 @@ class InfoItemsTableViewController: UITableViewController {
                 let cell = sender as? UITableViewCell , ftype == .info  {
                     // Info only (for now)
                     let indexPath = tableView.indexPath(for: cell)!
-                    let row = (indexPath as NSIndexPath).row
+                    let row = indexPath.row
                     dvc.item = model.info[row]
             }
         }

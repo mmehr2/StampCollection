@@ -70,7 +70,7 @@ class AlbumCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         // set the title from the ViewModel here
-        let album = families[(indexPath as NSIndexPath).section].theRefs[(indexPath as NSIndexPath).item]
+        let album = families[indexPath.section].theRefs[indexPath.item]
         let albumTitle = album.code ?? ""
         let (_, actualNumber) = splitNumericEndOfString(albumTitle)
         cell.title = actualNumber
@@ -82,7 +82,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         let sectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AlbumHeader", for: indexPath) as! AlbumSectionHeaderView
         
         // set the title from the ViewModel here
-        let family = families[(indexPath as NSIndexPath).section]
+        let family = families[indexPath.section]
         let album = family.theRefs[0]
         let albumTitle = album.code ?? ""
         let (actualTitle, _) = splitNumericEndOfString(albumTitle)
@@ -95,8 +95,8 @@ class AlbumCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let family = families[(indexPath as NSIndexPath).section]
-        let album = family.theRefs[(indexPath as NSIndexPath).item]
+        let family = families[indexPath.section]
+        let album = family.theRefs[indexPath.item]
         let sections = album.theSections
         let pageCount = sections.reduce(0) { (total, section) -> Int in
             return total + section.thePages.count

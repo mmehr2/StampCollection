@@ -196,7 +196,7 @@ class InfoCategoriesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Info Category Cell", for: indexPath) 
 
         // Configure the cell...
-        let row = (indexPath as NSIndexPath).row
+        let row = indexPath.row
         if row == model.categories.count {
             // special handling for the AllData row
             cell.textLabel?.text = "All Categories"
@@ -261,7 +261,7 @@ class InfoCategoriesTableViewController: UITableViewController {
                     dvc.model = self.model
                     // get row number of cell
                     let indexPath = tableView.indexPath(for: cell)!
-                    let row = (indexPath as NSIndexPath).row
+                    let row = indexPath.row
                     if row == model.categories.count {
                         // special handling for the AllData row
                         dvc.category = CollectionStore.CategoryAll

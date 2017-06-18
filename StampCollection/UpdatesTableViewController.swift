@@ -206,7 +206,7 @@ class UpdatesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = showTable![(indexPath as NSIndexPath).row]
+        let item = showTable![indexPath.row]
         let action = output?.getActionForResult(item) ?? .none
         let actionString = formatUpdateAction(action)
         let actionColor = getColorForAction(action, inSection: tableID)
