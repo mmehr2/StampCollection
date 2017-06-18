@@ -85,7 +85,7 @@ class UpdatesTableViewController: UITableViewController {
         // will provide cancelable action menu for user to modify selected item, then modify if asked
         let selection = tableView.indexPathForSelectedRow
         if let showTable = showTable, let output = output, let selection = selection {
-            let item = showTable[(selection as NSIndexPath).row]
+            let item = showTable[selection.row]
             let idCode = item.commitActionCode
             let currentAction = output.getActionForResult(item)
             let currentActionStr = formatUpdateAction(currentAction, isLong: true, withParens: false)

@@ -137,7 +137,7 @@ class InfoItemsTableViewController: UITableViewController {
     @IBAction func moreButtonPressed(_ sender: UIBarButtonItem) {
         // run an alert controller to choose from a menu of less-used functions
         let path = self.tableView.indexPathForSelectedRow!
-        let row = (path as NSIndexPath).row
+        let row = path.row
         if ftype == .info {
             let infoitem = self.model.info[row]
             let menuItems : [MenuBoxEntry] = [
