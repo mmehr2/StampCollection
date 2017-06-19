@@ -38,6 +38,33 @@ extension Category {
         return !nonupdateables.contains(number)
     }
     
+    var numPriceTypes : Int {
+        return prices.characters.count
+    }
+    
+    var usedPriceType : String? {
+        switch prices {
+            case "PU": return "price2"
+            case "PUFS": return "price2"
+        default: return nil
+        }
+    }
+    
+    var fdcPriceType : String? {
+        switch prices {
+        case "PF": return "price2"
+        case "PUFS": return "price3"
+        default: return nil
+        }
+    }
+    
+    var mintNotabPriceType : String? {
+        switch prices {
+        case "PUFS": return "price4"
+        default: return nil
+        }
+    }
+   
     fileprivate static func translateKeyName( _ nameIn: String, forExport: Bool = false ) -> String {
         var name = nameIn
         // translate key name if needed (not allowed to use 1st letter as capital, not allowed to use the word "description"
