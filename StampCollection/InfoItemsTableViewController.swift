@@ -364,35 +364,60 @@ class InfoItemsTableViewController: UITableViewController {
             // actions for Info items
             let item = self.model.info[indexPath.row]
             let cat = item.category!
-
+            let numPriceTypes = cat.numPriceTypes
+            
             let have = UITableViewRowAction(style: .normal, title: "Have") { action, index in
                 // add selected item to Inventory as a HAVE
-               print("Adding to INV(have) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                print("Adding to INV(have) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                let bldr = InventoryBuilder(for: item, withPriceType: "price1", want: false)
+                self.model.invBuilder = bldr
+                print("\(bldr)")
             }
             have.backgroundColor = .blue
+            retval = [have]
             
-            if cat.prices.characters.count == 1 {
+            if numPriceTypes == 1 {
                 let want = UITableViewRowAction(style: .normal, title: "Want") { action, index in
                     // add selected item to Inventory as a WANT
                     print("Adding to INV(Want) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                    let bldr = InventoryBuilder(for: item, withPriceType: "price1", want: true)
+                    self.model.invBuilder = bldr
+                    print("\(bldr)")
                 }
                 want.backgroundColor = .orange
-                
-                retval = [have, want]
+                retval! += [want]
             } else {
-                let haveFDC = UITableViewRowAction(style: .normal, title: "Have\n(FDC)") { action, index in
-                    // add selected item to Inventory as a HAVE
-                    print("Adding to INV(have - FDC) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                if let ptype = cat.fdcPriceType {
+                    let haveFDC = UITableViewRowAction(style: .normal, title: "Have\n(FDC)") { action, index in
+                        // add selected item to Inventory as a HAVE
+                        print("Adding to INV(have - FDC) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                        let bldr = InventoryBuilder(for: item, withPriceType: ptype, want: false)
+                        self.model.invBuilder = bldr
+                        print("\(bldr)")
+                    }
+                    haveFDC.backgroundColor = .orange
+                    retval! += [haveFDC]
                 }
-                haveFDC.backgroundColor = .orange
+                
+                if let ptype = cat.usedPriceType , numPriceTypes <= 2 {
+                    let haveUsed = UITableViewRowAction(style: .normal, title: "Have\n(Used)") { action, index in
+                        // add selected item to Inventory as a HAVE
+                        print("Adding to INV(have - Used) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                        let bldr = InventoryBuilder(for: item, withPriceType: ptype, want: false)
+                        self.model.invBuilder = bldr
+                        print("\(bldr)")
+                    }
+                    haveUsed.backgroundColor = .orange
+                    retval! += [haveUsed]
+                }
                 
                 let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
                     // run More Actions table selection action controller
                     print("Invoking More Actions for Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                    // create an action controller with N items for extra haves/wants (N<=6 depending on category.prices string)
                 }
                 more.backgroundColor = .lightGray
-                
-                retval = [have, haveFDC, more]
+                retval! += [more]
             }
         } else {
             // actions for Inventory items TBD

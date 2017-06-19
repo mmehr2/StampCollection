@@ -36,6 +36,13 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     var albums : [AlbumRef] = []
     var albumFamilies : [AlbumFamily] = []
     var albumTypes : [AlbumType] = []
+    
+    // the InventoryItem Builder is used to store an InventoryItem under construction for adding to the collection
+    // This is really a two-step process:
+    // 1. A new Builder is set up by the InfoItemsTableVC when user swipes right and selects an item and its price type (mint, FDC, ...)
+    // 2. The user navigates to the proper location in AlbumPageVC and performs an Add action (specifying the current page, next, new album, etc.)
+    // Since this is only a data object, it can be overwritten at any time, or remain optional
+    var invBuilder: InventoryBuilder?
 
     fileprivate var initialized_ = false
     var initialized: Bool {

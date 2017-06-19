@@ -47,6 +47,7 @@
 		A66348111B20DAB900A4D225 /* InfoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66348101B20DAB900A4D225 /* InfoItemViewController.swift */; };
 		A66348131B21384B00A4D225 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = A66348121B21384B00A4D225 /* noimage.png */; };
 		A66348151B236FDA00A4D225 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66348141B236FDA00A4D225 /* Regex.swift */; };
+		A66DE5C71EF858A9000A0066 /* InventoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66DE5C61EF858A9000A0066 /* InventoryBuilder.swift */; };
 		A66FD28F1BE85CC600C7A2FD /* AlbumPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD28E1BE85CC600C7A2FD /* AlbumPageViewController.swift */; };
 		A66FD2911BE86DE400C7A2FD /* InventoryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD2901BE86DE400C7A2FD /* InventoryItemCell.swift */; };
 		A66FD2931BE8CFF700C7A2FD /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66FD2921BE8CFF700C7A2FD /* UIColor+Extensions.swift */; };
@@ -158,6 +159,7 @@
 		A66348101B20DAB900A4D225 /* InfoItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemViewController.swift; sourceTree = "<group>"; };
 		A66348121B21384B00A4D225 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
 		A66348141B236FDA00A4D225 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		A66DE5C61EF858A9000A0066 /* InventoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryBuilder.swift; sourceTree = "<group>"; };
 		A66FD28E1BE85CC600C7A2FD /* AlbumPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumPageViewController.swift; sourceTree = "<group>"; };
 		A66FD2901BE86DE400C7A2FD /* InventoryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryItemCell.swift; sourceTree = "<group>"; };
 		A66FD2921BE8CFF700C7A2FD /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				A66FD2961BEAC45000C7A2FD /* AlbumFamilyNavigator.swift */,
 				A61C11661AEB785B00063025 /* ViewUtilities.swift */,
+				A66DE5C61EF858A9000A0066 /* InventoryBuilder.swift */,
 				A632CBB81AF35D2A00565686 /* ViewFiltering.swift */,
 				A65232E51AF8261900A86FAC /* ViewSorting.swift */,
 				A632CBAF1AEFE15900565686 /* EmailAttachmentExporter.swift */,
@@ -628,6 +631,7 @@
 				A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */,
 				A61996C31BECC12600F3BD01 /* InventoryItemView.swift in Sources */,
 				A67977DF1BB11994007F298D /* Category+CoreDataProperties.swift in Sources */,
+				A66DE5C71EF858A9000A0066 /* InventoryBuilder.swift in Sources */,
 				A67977E01BB11994007F298D /* DealerItem+CoreDataProperties.swift in Sources */,
 				A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */,
 				A632CBB71AF2E96F00565686 /* Filtering.swift in Sources */,
