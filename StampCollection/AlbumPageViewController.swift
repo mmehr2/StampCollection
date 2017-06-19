@@ -17,6 +17,11 @@ class AlbumPageViewController: UICollectionViewController {
     
     var model: CollectionStore!
     
+    @IBOutlet weak var addToNewNextPageButton: UIBarButtonItem!
+    @IBOutlet weak var addToThisPageButton: UIBarButtonItem!
+    @IBOutlet weak var addToNewIntermediatePageButton: UIBarButtonItem!
+    
+    
     func setStartAlbum( _ album: AlbumRef ) {
         // setup the navigator for this album family using individual volume of series
         navigator = AlbumFamilyNavigator(album: album)
@@ -64,6 +69,23 @@ class AlbumPageViewController: UICollectionViewController {
         updateUI()
     }
     
+    // Make the toolbar visible as we enter
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: animated)
+        // decide if the add-page buttons are active and set them accordingly
+        let activePageAdds = true
+        addToNewNextPageButton.isEnabled = activePageAdds
+        addToThisPageButton.isEnabled = activePageAdds
+        addToNewIntermediatePageButton.isEnabled = activePageAdds
+    }
+   
+    // Make the toolbar invisible as we leave
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -92,6 +114,18 @@ class AlbumPageViewController: UICollectionViewController {
     @IBAction func longPressDetected(_ sender: AnyObject) {
         navigator?.gotoEndOfAlbum()
         updateUI()
+    }
+    
+    @IBAction func addToThisPageButtonPressed(_ sender: Any) {
+        print("Item will be added to this page.")
+    }
+    
+    @IBAction func addToNewNextPageButtonPressed(_ sender: Any) {
+        print("Item will be added to the next page.")
+    }
+    
+    @IBAction func addToNewIntermediatePageButtonPressed(_ sender: Any) {
+        print("Item will be added to the next intermediate page.")
     }
     
     fileprivate func updateUI() {
