@@ -95,7 +95,6 @@ class InventoryBuilder {
         category = baseItem.category!
         relations["category"] = category
         data["catgDisplayNum"] = "\(category.number)"
-        data[""] = ""
         //relations[""] = ""
     }
 
@@ -109,8 +108,8 @@ class InventoryBuilder {
         albumLoc = pageRef
         relations["page"] = pageRef
         data["albumPage"] = pageRef.code!
-        data["albumRef"] = pageRef.section.ref.code! + pageRef.section.ref.family.code!
-        data["albumSect"] = pageRef.section.code!
+        data["albumRef"] = pageRef.section.ref.code!
+        data["albumSection"] = pageRef.section.code!
         data["albumType"] = pageRef.section.ref.family.type.code!
         return true
     }
@@ -125,7 +124,7 @@ class InventoryBuilder {
         var albumData: [String:String] = [:]
         albumData["albumPage"] = page
         albumData["albumRef"] = albumRef
-        albumData["albumSect"] = sect
+        albumData["albumSection"] = sect
         albumData["albumType"] = albumType
         // MARK: find-or-create pattern implementation
 //        static func getObjectInImportData( _ data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumPage? {
@@ -145,14 +144,22 @@ class InventoryBuilder {
         return addLocation(newLoc)
     }
     
-    func create() -> Bool {
+    func createItem(for model: CollectionStore) -> Bool {
         var result = false
         if !isReady {
             print("Unready to create INV item (missing loc) for ")
         } else {
-            //result = InventoryItem.makeObjectFromData(data, withRelationships: relations)
+            result = true
+            let token = CollectionStore.mainContextToken
+            let mocForThread = model.getContextForThread(token)
+            result = InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
             if result {
-                print("Successfully created new INV item for ")
+                result = model.saveMainContext()
+                if result {
+                    print("Successfully created and saved new INV item for ")
+                } else {
+                    print("Unable to save new INV item for ")
+                }
             } else {
                 print("Unable to create new INV item for ")
             }
@@ -160,6 +167,17 @@ class InventoryBuilder {
         let desc = formatDealerDetail(dealerItem)
         print(desc)
         return result
+    }
+    
+    func isItemAddable(_ to: AlbumFamilyNavigator) -> Bool {
+        // find out if our item is compatible with the album family being navigated
+        // typically, category and pricetype are enough to narrow down the list of possible album families' sections
+        // come categories have different needs though
+        // this should be a subsystem
+        //
+        // For example, if we have cat 2 (sets) price3 (FDC) then we want the FDC family
+        // Some items have an assigned album section, some don't yet (but we will fix this eventually)
+        return true
     }
 }
 

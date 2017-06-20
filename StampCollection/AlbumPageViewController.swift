@@ -73,8 +73,15 @@ class AlbumPageViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setToolbarHidden(false, animated: animated)
+        setAddButtonStates()
+    }
+    
+    fileprivate func setAddButtonStates() {
         // decide if the add-page buttons are active and set them accordingly
-        let activePageAdds = true
+        var activePageAdds = false
+        if let invBuilder = model.invBuilder {
+            activePageAdds = invBuilder.isItemAddable(navigator!)
+        }
         addToNewNextPageButton.isEnabled = activePageAdds
         addToThisPageButton.isEnabled = activePageAdds
         addToNewIntermediatePageButton.isEnabled = activePageAdds
@@ -118,6 +125,18 @@ class AlbumPageViewController: UICollectionViewController {
     
     @IBAction func addToThisPageButtonPressed(_ sender: Any) {
         print("Item will be added to this page.")
+        if let invBuilder = model.invBuilder,
+            let page = navigator?.currentPage {
+            if invBuilder.addLocation(page) {
+                if invBuilder.createItem(for: model) {
+                    print("Added item OK, removing Builder \(invBuilder)")
+                    model.invBuilder = nil
+                } else {
+                    print("Item add error for Builder \(invBuilder)")
+                }
+                updateUI()
+            }
+        }
     }
     
     @IBAction func addToNewNextPageButtonPressed(_ sender: Any) {
@@ -131,6 +150,8 @@ class AlbumPageViewController: UICollectionViewController {
     fileprivate func updateUI() {
         // set the nav bar title to the page/section/ref indicator and show # of items
         title = navigator?.getCurrentPageTitle()
+        // make sure state of add buttons is updated
+        setAddButtonStates()
         // refresh the display of items on the current page
         collectionView?.reloadData()
     }
