@@ -356,6 +356,53 @@ class InfoItemsTableViewController: UITableViewController {
         return ftype == .info ? model.info.count : model.inventory.count
     }
     
+    fileprivate func getRowAction(forItem item:DealerItem, wanted: Bool, withPriceType pusage: PriceUsage, inColor color: UIColor) -> UITableViewRowAction {
+        let cat = item.category!
+        let wantedName = wanted ? "Want" : "Have"
+        let wantedTitle, rowTitle: String
+        if pusage.numprices == 1 {
+            wantedTitle = wantedName.lowercased()
+            rowTitle = wantedName;
+        } else {
+            wantedTitle = "\(wantedName.lowercased()) - \(pusage.ptype.pname)"
+            rowTitle = "\(wantedName)\n(\(pusage.ptype.pname))"
+        }
+        print("Added action for \(wantedName)(\(pusage.ptype.pname))")
+        let retval = UITableViewRowAction(style: .normal, title: "\(rowTitle)") { action, index in
+            // add selected item to Inventory as a HAVE or WANT
+            print("Adding to INV(\(wantedTitle)) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+            let bldr = InventoryBuilder(for: item, withPriceType: pusage.ptype.ptype, want: wanted)
+            self.model.invBuilder = bldr
+            print("\(bldr)")
+            self.tableView.setEditing(false, animated: true)
+        }
+        retval.backgroundColor = color
+        return retval
+    }
+    
+    fileprivate func addInventoryAction(forItem item:DealerItem, wanted: Bool, withPriceType pusage: PriceUsage, toController ac: UIAlertController ) {
+        let cat = item.category!
+        let wantedName = wanted ? "Want" : "Have"
+        let wantedTitle, rowTitle: String
+        if pusage.numprices == 1 {
+            wantedTitle = wantedName.lowercased()
+            rowTitle = wantedName;
+        } else {
+            wantedTitle = "\(wantedName.lowercased()) - \(pusage.ptype.pname)"
+            rowTitle = "\(wantedName)\n(\(pusage.ptype.pname))"
+        }
+        print("Added action for \(wantedName)(\(pusage.ptype.pname))")
+        let act = UIAlertAction(title: "Add to INV(\(wantedTitle))", style: .default) { x in /// 1
+            // add selected item to Inventory as a HAVE or WANT
+            print("Adding to INV(\(wantedTitle)) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+            let bldr = InventoryBuilder(for: item, withPriceType: pusage.ptype.ptype, want: wanted)
+            self.model.invBuilder = bldr
+            print("\(bldr)")
+            self.tableView.setEditing(false, animated: true)
+        }
+        ac.addAction(act) /// 2
+    }
+  
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let retval:[UITableViewRowAction]?
@@ -364,57 +411,59 @@ class InfoItemsTableViewController: UITableViewController {
             // actions for Info items
             let item = self.model.info[indexPath.row]
             let cat = item.category!
+            let hasFDC = cat.fdcPriceType != nil
+            let hasUsed = cat.usedPriceType != nil
             let numPriceTypes = cat.numPriceTypes
+            let hasLessChoices = numPriceTypes <= 2
+            let sayUsed = hasUsed && hasLessChoices
+            let pumint = PriceUsage(.mint, num: numPriceTypes)
+            let pufdc = PriceUsage(.FDC(false), num: numPriceTypes)
+            let puused = PriceUsage(.used, num: numPriceTypes)
+            let pumnotab = PriceUsage(.mintNoTab, num: numPriceTypes)
+            let pufu = sayUsed ? puused : pufdc
             
-            let have = UITableViewRowAction(style: .normal, title: "Have") { action, index in
-                // add selected item to Inventory as a HAVE
-                print("Adding to INV(have) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
-                let bldr = InventoryBuilder(for: item, withPriceType: "price1", want: false)
-                self.model.invBuilder = bldr
-                print("\(bldr)")
-            }
-            have.backgroundColor = .blue
+            let have = getRowAction(forItem: item, wanted: false, withPriceType: pumint, inColor: .blue)
             retval = [have]
             
             if numPriceTypes == 1 {
-                let want = UITableViewRowAction(style: .normal, title: "Want") { action, index in
-                    // add selected item to Inventory as a WANT
-                    print("Adding to INV(Want) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
-                    let bldr = InventoryBuilder(for: item, withPriceType: "price1", want: true)
-                    self.model.invBuilder = bldr
-                    print("\(bldr)")
-                }
-                want.backgroundColor = .orange
+                let want = getRowAction(forItem: item, wanted: true, withPriceType: pumint, inColor: .orange)
                 retval! += [want]
             } else {
-                if let ptype = cat.fdcPriceType {
-                    let haveFDC = UITableViewRowAction(style: .normal, title: "Have\n(FDC)") { action, index in
-                        // add selected item to Inventory as a HAVE
-                        print("Adding to INV(have - FDC) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
-                        let bldr = InventoryBuilder(for: item, withPriceType: ptype, want: false)
-                        self.model.invBuilder = bldr
-                        print("\(bldr)")
-                    }
-                    haveFDC.backgroundColor = .orange
+                if hasFDC || sayUsed {
+                    let haveFDC = getRowAction(forItem: item, wanted: false, withPriceType: pufu, inColor: .orange)
                     retval! += [haveFDC]
-                }
-                
-                if let ptype = cat.usedPriceType , numPriceTypes <= 2 {
-                    let haveUsed = UITableViewRowAction(style: .normal, title: "Have\n(Used)") { action, index in
-                        // add selected item to Inventory as a HAVE
-                        print("Adding to INV(have - Used) in Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
-                        let bldr = InventoryBuilder(for: item, withPriceType: ptype, want: false)
-                        self.model.invBuilder = bldr
-                        print("\(bldr)")
-                    }
-                    haveUsed.backgroundColor = .orange
-                    retval! += [haveUsed]
                 }
                 
                 let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
                     // run More Actions table selection action controller
                     print("Invoking More Actions for Category \(cat.name!) (\(item.catgDisplayNum)): \(item.id!) \(item.descriptionX!)")
+                    let ac = UIAlertController(title: "Choose Inventory Action", message: nil, preferredStyle: .alert)
                     // create an action controller with N items for extra haves/wants (N<=6 depending on category.prices string)
+                    if hasLessChoices {
+                        //print("Added action for Want(\(pumint.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: pumint, toController: ac)
+                        //print("Added action for Want(\(pufu.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: pufu, toController: ac)
+                    } else {
+                        //print("Added action for Have(\(puused.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: false, withPriceType: puused, toController: ac)
+                        //print("Added action for Have(\(pumnotab.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: false, withPriceType: pumnotab, toController: ac)
+                        //print("Added action for Want(\(pumint.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: pumint, toController: ac)
+                        //print("Added action for Want(\(pufdc.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: pufdc, toController: ac)
+                        //print("Added action for Want(\(puused.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: puused, toController: ac)
+                        //print("Added action for Want(\(pumnotab.ptype.pname))")
+                        self.addInventoryAction(forItem: item, wanted: true, withPriceType: pumnotab, toController: ac)
+                    }
+                    // add a cancel (None) operation and present the controller
+                    let act = UIAlertAction(title: "Cancel", style: .cancel) { x in
+                        // no action here
+                    }
+                    ac.addAction(act)
+                    self.present(ac, animated: true, completion: nil)
                 }
                 more.backgroundColor = .lightGray
                 retval! += [more]
