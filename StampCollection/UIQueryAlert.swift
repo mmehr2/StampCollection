@@ -73,19 +73,20 @@ struct UIQueryAlertConfiguration {
         case .keyword:
             // set up the single text field config
             title = "Edit Keyword List"
-            body = "Enter key words for searching, separated by spaces.\n"
-                "The search will check all description fields.\n"
-            "By default, any keyword will match. To force all keywords to match,"
-            " use the word ALL as the first keyword.\n"
+            body =
+            "Enter key words for searching, separated by spaces.\n" +
+                "The search will check all description fields.\n" +
+            "By default, any keyword will match. To force all keywords to match," +
+            " use the word ALL as the first keyword.\n" +
             "To remove all keyword filtering, enter an empty field."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .keywordList))
             break
         case .yearRange:
             // set up the two numeric field configs
             title = "Edit Year Range Filter"
-            body = "Specify the years to include. End must be greater than or equal to Start.\n"
-                "Valid years for Israeli stamps are 1948 to present."
-            "\nTo specify a single year, enter valid Start and blank End."
+            body = "Specify the years to include. End must be greater than or equal to Start.\n" +
+                "Valid years for Israeli stamps are 1948 to present." +
+            "\nTo specify a single year, enter valid Start and blank End." +
             "\nTo remove all year filtering, enter blank in both Start and End."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeStart))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeEnd))
@@ -93,8 +94,8 @@ struct UIQueryAlertConfiguration {
         case .subCategory:
             // set up the single text field config
             title = "SubCategory Filter"
-            body = "Enter Search pattern for record IDs.\n"
-            "The search will check just the ID field.\n"
+            body = "Enter Search pattern for record IDs.\n" +
+            "The search will check just the ID field.\n" +
             "To remove all subcategory filtering, enter an empty field."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .idPattern))
             break
