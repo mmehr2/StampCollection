@@ -126,9 +126,10 @@ class InventoryBuilder {
         return addLocation(albumData)
     }
     
-    private func getDataForItemCreation() -> [String:String] {
+    private func getDataForItemCreation(_ count: Int) -> [String:String] {
         var retval = data
         retval.removeValue(forKey: "AlbumFamily") // used for page creation but not inventory item creation
+        retval["exOrder"] = "\(count)" // NOTE: currently this is Int16 - need to expand it after 65K items in inventory
         return retval
     }
     
@@ -150,14 +151,12 @@ class InventoryBuilder {
             }
             // make sure we have the album page object to continue creation
             if hasPage {
-                let itemData = getDataForItemCreation()
+                let count = model.getCountForType(.inventory, fromCategory: CollectionStore.CategoryAll, inContext: token)
+                let itemData = getDataForItemCreation(count)
                 result = InventoryItem.makeObjectFromData(itemData, withRelationships: relations, inContext: mocForThread)
                 if result {
                     if let invRef = lastCreatedInventoryObject {
-                        print("The created item #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
-                        if let thePage = invRef.page {
-                            albumLoc = thePage
-                        }
+                        print("The created item was #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
                     }
                     result = model.saveMainContext()
                     if result {
