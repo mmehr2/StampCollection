@@ -14,6 +14,9 @@ This class provides useful extensions to the CoreData object model classes, to a
 Currently it seems that these generated classes are all @NSManaged properties, and any additions will be clobbered.
 */
 
+// TOTAL DEBUGGING KLUDGE!
+var lastCreatedInventoryObject: InventoryItem?
+
 extension InventoryItem:  SortTypeSortableEx {
     
     var normalizedCode: String {
@@ -119,6 +122,7 @@ extension InventoryItem:  SortTypeSortableEx {
                 }
                 // set all the other data values here, so it can use related object reference data
                 InventoryItem.setDataValuesForObject(newObject, fromData: data)
+                lastCreatedInventoryObject = newObject // optional reference usage by single-item creators
                 return true
             } else {
                 // report error creating object in CoreData MOC
