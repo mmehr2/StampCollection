@@ -148,6 +148,16 @@ class AlbumFamilyNavigator {
     func gotoEndOfAlbum() {
         gotoMarker(AlbumMarker.CurrentAlbumEnd)
     }
+    
+    func getRefAsData() -> [String:String] {
+        var data: [String:String] = [:]
+        data["albumPage"] = "\(currentPage.code!)"
+        data["albumSection"] = "\(currentPage.section.code!)"
+        data["albumFamily"] = "\(currentAlbum.family.code!)"
+        data["albumIndex"] = "\(currentAlbumIndex)"
+        data["albumType"] = "\(currentAlbum.family.type.code!)"
+        return data
+    }
 
     // MARK: implementation properties
     /*

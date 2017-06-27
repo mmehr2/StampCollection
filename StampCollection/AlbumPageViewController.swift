@@ -80,7 +80,7 @@ class AlbumPageViewController: UICollectionViewController {
         // decide if the add-page buttons are active and set them accordingly
         var activePageAdds = false
         if let invBuilder = model.invBuilder {
-            activePageAdds = invBuilder.isItemAddable(navigator!)
+            activePageAdds = invBuilder.isItemAddable(to: navigator!)
         }
         addToNewNextPageButton.isEnabled = activePageAdds
         addToThisPageButton.isEnabled = activePageAdds
@@ -129,22 +129,78 @@ class AlbumPageViewController: UICollectionViewController {
             let page = navigator?.currentPage {
             if invBuilder.addLocation(page) {
                 if invBuilder.createItem(for: model) {
-                    print("Added item OK, removing Builder \(invBuilder)")
+                    print("Added item OK, removing \(invBuilder)")
                     model.invBuilder = nil
                 } else {
-                    print("Item add error for Builder \(invBuilder)")
+                    print("Item add error for \(invBuilder)")
                 }
                 updateUI()
+            } else {
+                print("Unable to add location for \(invBuilder)")
             }
         }
     }
     
     @IBAction func addToNewNextPageButtonPressed(_ sender: Any) {
         print("Item will be added to the next page.")
+        if let invBuilder = model.invBuilder,
+            let nav = navigator {
+            // create a ref to the next page of the end of the current section in whatever album that's in
+            // step 1. make sure we are at an EOS marker (for section page add)
+            // step 2. get the data ref of the current (new) page
+            var pageData = nav.getRefAsData()
+            print("Page data: \(pageData)")
+            // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
+            pageData = offsetAlbumPageInData(pageData)
+            print("Page data modified: \(pageData)")
+            // step 4. use alternate form of invBuilder.addLocation to create new theoretical reference
+            if invBuilder.addLocation(pageData) {
+                print("About to add item on page: \(invBuilder)")
+                if invBuilder.createItem(for: model) {
+                    if let newnav = invBuilder.navigatorForNewPage {
+                        print("Added item OK, updated page navigator and removing \(invBuilder)")
+                        navigator = newnav
+                        model.invBuilder = nil
+                    } else {
+                        print("Unable to update page navigator for \(invBuilder)")
+                    }
+                } else {
+                    print("Item add error for \(invBuilder)")
+                }
+                updateUI()
+            } else {
+                print("Unable to add location for \(invBuilder)")
+            }
+        }
     }
     
     @IBAction func addToNewIntermediatePageButtonPressed(_ sender: Any) {
         print("Item will be added to the next intermediate page.")
+        if let invBuilder = model.invBuilder,
+            let nav = navigator {
+            // create a ref to the next page of the end of the current section in whatever album that's in
+            // step 1. NOT needed; PageEx can be added anywhere
+            // step 2. get the data ref of the current (new) page
+            var pageData = nav.getRefAsData()
+            print("Page data: \(pageData)")
+            // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
+            pageData = offsetAlbumPageExInData(pageData)
+            print("Page data modified: \(pageData)")
+            // step 4. use alternate form of invBuilder.addLocation to create new theoretical reference
+            if invBuilder.addLocation(pageData) {
+                print("About to add item on page: \(invBuilder)")
+                if invBuilder.createItem(for: model) {
+                    print("Added item OK, removing \(invBuilder)")
+                    navigator = invBuilder.navigatorForNewPage
+                    model.invBuilder = nil
+                } else {
+                    print("Item add error for \(invBuilder)")
+                }
+                updateUI()
+            } else {
+                print("Unable to add location for \(invBuilder)")
+            }
+        }
     }
     
     fileprivate func updateUI() {

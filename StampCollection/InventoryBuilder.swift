@@ -13,58 +13,9 @@ import CoreData
 // Two-step process:
 // 1. The base DealerItem is added by the InfoItemsTableVC when user swipes right and selects an item and its W/H state and price type (mint, FDC, ...)
 // 2. The user navigates to the proper location in AlbumPageVC and performs an Add action (current page, next, new album, etc.)
-// Minimal Data needed: DealerItem ref, priceType code, Album Location (data only, will use FindOrCreate pattern function)
+// Minimal Data needed: DealerItem ref, priceType code, Album Location (data only, will use FindOrCreate pattern functions*)
 // Optional additions: alt DealerItem ref, desc, notes,
-
-//extension InventoryItem {
-//    
-//    @NSManaged var albumPage: String!
-//    @NSManaged var albumRef: String!
-//    @NSManaged var albumSection: String!
-//    @NSManaged var albumType: String!
-//    @NSManaged var baseItem: String!
-//    @NSManaged var catgDisplayNum: Int16
-//    @NSManaged var desc: String!
-//    @NSManaged var exOrder: Int16
-//    @NSManaged var itemType: String!
-//    @NSManaged var notes: String!
-//    @NSManaged var refItem: String!
-//    @NSManaged var wantHave: String!
-//    @NSManaged var category: Category!
-//    @NSManaged var dealerItem: DealerItem!
-//    @NSManaged var page: AlbumPage!
-//    @NSManaged var referredItem: DealerItem!
-//    
-//}
-//static func (InventoryItem=>)makeObjectFromData( _ data: [String : String], withRelationships relations: [String:NSManagedObject], inContext moc: NSManagedObjectContext? = nil) -> Bool {
-//    // add a new object of this type to the moc
-//    if let moc = moc {
-//        let entityName = "InventoryItem"
-//        if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc) as? InventoryItem {
-//            // set the relationships back to the proper objects
-//            if let robj = relations["referredItem"] as? DealerItem {
-//                newObject.referredItem = robj
-//            }
-//            if let mobj = relations["dealerItem"] as? DealerItem {
-//                newObject.dealerItem = mobj
-//            }
-//            if let cobj = relations["category"] as? Category {
-//                newObject.category = cobj
-//            }
-//            if let pobj = relations["page"] as? AlbumPage {
-//                newObject.page = pobj
-//            }
-//            // set all the other data values here, so it can use related object reference data
-//            InventoryItem.setDataValuesForObject(newObject, fromData: data)
-//            return true
-//        } else {
-//            // report error creating object in CoreData MOC
-//            print("Unable to make CoreData InventoryItem from data \(data)")
-//        }
-//    }
-//    return false
-//}
-
+// * Discovered during testing: adding to current location requires the actual albumPage object be specified, not just its data (I think)
 
 class InventoryBuilder {
     private let addWant: Bool
@@ -77,8 +28,27 @@ class InventoryBuilder {
     private var refItem: DealerItem?
     private var albumLoc: AlbumPage?
     
-    var isReady: Bool {
+    private var isReady: Bool {
         return albumLoc != nil
+    }
+    
+    private var locationDataLevel: Int {
+        guard let _ = data["albumPage"] else { return 0 }
+        guard let _ = data["albumType"] else { return 0 }
+        guard let _ = data["albumSection"] else { return 0 }
+        if let _ = data["albumRef"] { return 2 }
+        // if no albumRef, allow combination of albumFamily and albumIndex to substitute
+        if let _ = data["albumFamily"], let _ = data["albumIndex"] { return 1 }
+        return 0
+    }
+    
+    private var canCreate: Bool {
+        return locationDataLevel > 0
+    }
+    
+    var navigatorForNewPage: AlbumFamilyNavigator? {
+        guard let page = albumLoc else { return nil }
+        return AlbumFamilyNavigator(page: page)
     }
     
     init(for baseItem: DealerItem, withPriceType ptype: String, want: Bool) {
@@ -114,54 +84,81 @@ class InventoryBuilder {
         return true
     }
     
-    func addLocation(_ page:String, inSection sect:String?, ofAlbumSeries album:String, num number: Int, ofType albumType: String) -> Bool {
+    func addLocation(_ indata:[String:String]) -> Bool {
+        // add to a new page based only on album data not object refs
+        // required data items: albumPage, albumSection, albumType
+        //   and either: albumRef (creates data level 2)
+        //   or: both albumFamily and albumIndex (number as String - use "0" for no number) (creates data level 1)
+        var albumData = indata
+        var retval = true
+        if albumData["albumRef"] == nil {
+            if let idx = albumData["albumIndex"],
+                let fam = albumData["albumFamily"] {
+                albumData["albumRef"] = AlbumRef.makeCode(fromFamily: fam, andNumber: idx)
+            } else {
+                retval = false
+            }
+        }
+        if retval {
+            data["albumPage"] = albumData["albumPage"]
+            data["albumRef"] = albumData["albumRef"]
+            data["albumSection"] = albumData["albumSection"]
+            data["albumType"] = albumData["albumType"]
+        }
+        return retval
+    }
+    
+    func addLocation(_ page:String, inSection sect:String?, ofAlbumSeries album:String, number num: String, ofType albumType: String) -> Bool {
         // add to a new page/section/album/type, which might not be creatable
-        let albumRef = album + "\(number)"
-        //    @NSManaged var albumPage: String!
-        //    @NSManaged var albumRef: String!
-        //    @NSManaged var albumSection: String!
-        //    @NSManaged var albumType: String!
+        // same as addLocation([String:String]) but uses individual data parameters
         var albumData: [String:String] = [:]
         albumData["albumPage"] = page
-        albumData["albumRef"] = albumRef
-        albumData["albumSection"] = sect
+        albumData["albumFamily"] = album
+        albumData["albumIndex"] = num
+        albumData["albumSection"] = sect ?? ""
         albumData["albumType"] = albumType
-        // MARK: find-or-create pattern implementation
-//        static func getObjectInImportData( _ data: [String:String], fromContext moc: NSManagedObjectContext? = nil ) -> AlbumPage? {
-//            // will do all of the following to make sure a valid page object exists, and if so, return it (if not, returns nil)
-//            // 1. gets code for the desired page from data field "AlbumPage"
-//            // 2. calls AlbumSection.getObjectInImportData() to get the section object that is the parent of this page, creating it if needed
-//            // 3. calls that object's getMemberObject() with the code from step 1 to get the desired page object, creating it if needed
-//            // 4. returns the object, or nil if anything goes wrong
-//            if let datacode = data[entityName],
-//                let obj = AlbumSection.getObjectInImportData(data, fromContext: moc) {
-//                return obj.getMemberObject(datacode, createIfNeeded: true)
-//            }
-//            return nil
-//        }
-        // use info provided to create a possibly new AlbumPage, or find the existing one if adding to the current page
-        guard let newLoc = AlbumPage.getObjectInImportData(albumData) else { return false }
-        return addLocation(newLoc)
+        return addLocation(albumData)
     }
     
     func createItem(for model: CollectionStore) -> Bool {
         var result = false
-        if !isReady {
+        var pagestr = ""
+        if !canCreate {
             print("Unready to create INV item (missing loc) for ")
         } else {
             result = true
             let token = CollectionStore.mainContextToken
             let mocForThread = model.getContextForThread(token)
-            result = InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
-            if result {
-                result = model.saveMainContext()
-                if result {
-                    print("Successfully created and saved new INV item for ")
-                } else {
-                    print("Unable to save new INV item for ")
+            if !isReady {
+                // need to create a new album page
+                pagestr = " on a new page"
+                if locationDataLevel < 2 {
+                    // make sure we have the data for it (create the albumRef from components)
+                    if !addLocation(data) {
+                        print("Unable to fix data of new album page for INV item for ")
+                    }
                 }
-            } else {
-                print("Unable to create new INV item for ")
+                // the theory here is that proper creation of new pages is done by the inventory item creation system at import time, so same here
+            }
+            // make sure we have the album page object to continue creation
+            if result {
+                result = InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+                if result {
+                    if let invRef = lastCreatedInventoryObject {
+                        print("The created item #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
+                        if let thePage = invRef.page {
+                            albumLoc = thePage
+                        }
+                    }
+                    result = model.saveMainContext()
+                    if result {
+                        print("Successfully created and saved new INV item\(pagestr) for ")
+                    } else {
+                        print("Unable to save new INV item\(pagestr) for ")
+                    }
+                } else {
+                    print("Unable to create new INV item\(pagestr) for ")
+                }
             }
         }
         let desc = formatDealerDetail(dealerItem)
@@ -169,7 +166,7 @@ class InventoryBuilder {
         return result
     }
     
-    func isItemAddable(_ to: AlbumFamilyNavigator) -> Bool {
+    func isItemAddable(to: AlbumFamilyNavigator) -> Bool {
         // find out if our item is compatible with the album family being navigated
         // typically, category and pricetype are enough to narrow down the list of possible album families' sections
         // come categories have different needs though
