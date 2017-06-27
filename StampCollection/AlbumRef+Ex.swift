@@ -13,6 +13,20 @@ private let entityName = "AlbumRef"
 
 extension AlbumRef {
     
+    static func makeCode(fromFamily fam: String, andNumber idx: String) -> String? {
+        // NOTE: Requires idx to be a numeric integer suffix, such as "02" for "FDC02" results
+        // Will only return nil if the extraction of the numeric fails
+        var retval: String?
+        if let idxi = Int(idx) {
+            retval = idxi > 0 ? "\(fam)\(idx)" : "\(fam)"
+        }
+        return retval
+    }
+    
+    static func getFamilyAndNumber(fromRef rcode: String) -> (String, String) {
+        return splitNumericEndOfString(rcode)
+    }
+    
     fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
             if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumRef {
