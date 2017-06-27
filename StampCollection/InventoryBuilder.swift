@@ -28,22 +28,21 @@ class InventoryBuilder {
     private var refItem: DealerItem?
     private var albumLoc: AlbumPage?
     
-    private var isReady: Bool {
+    private var hasPage: Bool {
         return albumLoc != nil
     }
     
-    private var locationDataLevel: Int {
-        guard let _ = data["albumPage"] else { return 0 }
-        guard let _ = data["albumType"] else { return 0 }
-        guard let _ = data["albumSection"] else { return 0 }
-        if let _ = data["albumRef"] { return 2 }
-        // if no albumRef, allow combination of albumFamily and albumIndex to substitute
-        if let _ = data["albumFamily"], let _ = data["albumIndex"] { return 1 }
-        return 0
+    private var hasNewPageData: Bool {
+        guard let _ = data["AlbumPage"] else { return false }
+        guard let _ = data["AlbumType"] else { return false }
+        guard let _ = data["AlbumSection"] else { return false }
+        guard let _ = data["AlbumRef"] else { return false }
+        guard let _ = data["AlbumFamily"] else { return false }
+        return true
     }
     
     private var canCreate: Bool {
-        return locationDataLevel > 0
+        return hasPage || hasNewPageData
     }
     
     var navigatorForNewPage: AlbumFamilyNavigator? {
@@ -98,12 +97,19 @@ class InventoryBuilder {
             } else {
                 retval = false
             }
+        } else if albumData["albumFamily"] == nil {
+            // make sure Family name is also available
+            let (albumFamily, albumIndex) = AlbumRef.getFamilyAndNumber(fromRef: albumData["albumRef"]!)
+            albumData["albumFamily"] = albumFamily
+            albumData["albumIndex"] = albumIndex
         }
         if retval {
-            data["albumPage"] = albumData["albumPage"]
-            data["albumRef"] = albumData["albumRef"]
-            data["albumSection"] = albumData["albumSection"]
-            data["albumType"] = albumData["albumType"]
+            // NOTE: for page object creation, internal data[] names must be capitalized as if doing import from CSV
+            data["AlbumPage"] = albumData["albumPage"]
+            data["AlbumRef"] = albumData["albumRef"]
+            data["AlbumFamily"] = albumData["albumFamily"]
+            data["AlbumSection"] = albumData["albumSection"]
+            data["AlbumType"] = albumData["albumType"]
         }
         return retval
     }
@@ -120,6 +126,12 @@ class InventoryBuilder {
         return addLocation(albumData)
     }
     
+    private func getDataForItemCreation() -> [String:String] {
+        var retval = data
+        retval.removeValue(forKey: "AlbumFamily") // used for page creation but not inventory item creation
+        return retval
+    }
+    
     func createItem(for model: CollectionStore) -> Bool {
         var result = false
         var pagestr = ""
@@ -129,20 +141,17 @@ class InventoryBuilder {
             result = true
             let token = CollectionStore.mainContextToken
             let mocForThread = model.getContextForThread(token)
-            if !isReady {
+            if !hasPage {
                 // need to create a new album page
                 pagestr = " on a new page"
-                if locationDataLevel < 2 {
-                    // make sure we have the data for it (create the albumRef from components)
-                    if !addLocation(data) {
-                        print("Unable to fix data of new album page for INV item for ")
-                    }
+                if let newLoc = AlbumPage.getObjectInImportData(data, fromContext: mocForThread) {
+                    result = addLocation(newLoc)
                 }
-                // the theory here is that proper creation of new pages is done by the inventory item creation system at import time, so same here
             }
             // make sure we have the album page object to continue creation
-            if result {
-                result = InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+            if hasPage {
+                let itemData = getDataForItemCreation()
+                result = InventoryItem.makeObjectFromData(itemData, withRelationships: relations, inContext: mocForThread)
                 if result {
                     if let invRef = lastCreatedInventoryObject {
                         print("The created item #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
@@ -159,6 +168,8 @@ class InventoryBuilder {
                 } else {
                     print("Unable to create new INV item\(pagestr) for ")
                 }
+            } else {
+                print("Unable to create new page for INV item for ")
             }
         }
         let desc = formatDealerDetail(dealerItem)
