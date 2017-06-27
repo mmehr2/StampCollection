@@ -383,13 +383,11 @@ class InfoItemsTableViewController: UITableViewController {
     fileprivate func addInventoryAction(forItem item:DealerItem, wanted: Bool, withPriceType pusage: PriceUsage, toController ac: UIAlertController ) {
         let cat = item.category!
         let wantedName = wanted ? "Want" : "Have"
-        let wantedTitle, rowTitle: String
+        let wantedTitle: String
         if pusage.numprices == 1 {
             wantedTitle = wantedName.lowercased()
-            rowTitle = wantedName;
         } else {
             wantedTitle = "\(wantedName.lowercased()) - \(pusage.ptype.pname)"
-            rowTitle = "\(wantedName)\n(\(pusage.ptype.pname))"
         }
         print("Added action for \(wantedName)(\(pusage.ptype.pname))")
         let act = UIAlertAction(title: "Add to INV(\(wantedTitle))", style: .default) { x in /// 1
