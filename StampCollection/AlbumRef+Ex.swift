@@ -13,26 +13,53 @@ private let entityName = "AlbumRef"
 
 extension AlbumRef {
     
-    static func makeCode(fromFamily fam: String, andNumber idx: String) -> String? {
-        // NOTE: Requires idx to be a numeric integer suffix, such as "02" for "FDC02" results
-        // Will only return nil if the extraction of the numeric fails
-        var retval: String?
-        if let idxi = Int(idx) {
-            retval = idxi > 0 ? "\(fam)\(idx)" : "\(fam)"
+    static func makeCode(fromFamily fam: String, andNumber idx: Int) -> String {
+        var retval = fam
+        if idx < 10 {
+            retval += "0"
         }
+        retval += "\(idx)"
         return retval
     }
     
-    static func getFamilyAndNumber(fromRef rcode: String) -> (String, String) {
-        return splitNumericEndOfString(rcode)
+    static func getFamily(fromRef rcode: String) -> String {
+        let (fam,_) = splitNumericEndOfString(rcode)
+        return fam
+    }
+    
+    static func getIndex(fromRef rcode: String) -> String {
+        let (_,idx) = splitNumericEndOfString(rcode)
+        return idx
+    }
+    
+    var displayIndex: String {
+        var idx = AlbumRef.getIndex(fromRef: code!)
+        // get number of albums in family
+        let albumCount = family!.theRefs.count
+        // if there is only one album in the family, return ""
+        if albumCount == 1 {
+            return ""
+        }
+        // if there are <10, return index of code as single digit
+        else if albumCount < 10 {
+            return String(idx.characters.last!)
+        }
+        // else return as index of code
+        return idx
+    }
+    
+    var displayName: String {
+        var idx = AlbumRef.getFamily(fromRef: code!)
+        idx += displayIndex
+        return idx
     }
     
     fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
             if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumRef {
                 newObject.code = name
-                let (_, numstr) = splitNumericEndOfString(name)
-                newObject.number = Int16(Int(numstr) ?? 0) // 0 means no numeric suffix on ref code
+                let numstr = getIndex(fromRef: name)
+                newObject.number = Int16(Int(numstr) ?? 0)
                 newObject.descriptionX = ""
                 if let obj = relations["family"] as? AlbumFamily {
                     newObject.family = obj
@@ -57,7 +84,7 @@ extension AlbumRef {
     static func getRefNameAndNumberFromData( _ data: [String:String] ) -> (String, String)? {
         // finds the data for "AlbumRef" and strips off the number at the end, if any
         if let name = data[entityName] , name.characters.count > 2 {
-            return splitNumericEndOfString(name)
+            return (getFamily(fromRef: name), getIndex(fromRef: name))
         }
         return nil
     }

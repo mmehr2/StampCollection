@@ -71,9 +71,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         // Configure the cell
         // set the title from the ViewModel here
         let album = families[indexPath.section].theRefs[indexPath.item]
-        let albumTitle = album.code ?? ""
-        let (_, actualNumber) = splitNumericEndOfString(albumTitle)
-        cell.title = actualNumber
+        cell.title = album.displayIndex
     
         return cell
     }
@@ -85,7 +83,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         let family = families[indexPath.section]
         let album = family.theRefs[0]
         let albumTitle = album.code ?? ""
-        let (actualTitle, _) = splitNumericEndOfString(albumTitle)
+        let actualTitle = AlbumRef.getFamily(fromRef: albumTitle)
         let type = family.type.code ?? ""
         sectionHeaderView.title = "\(actualTitle) (\(type))"
         

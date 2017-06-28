@@ -34,10 +34,10 @@ class InventoryBuilder {
     
     private var hasNewPageData: Bool {
         guard let _ = data["AlbumPage"] else { return false }
-        guard let _ = data["AlbumType"] else { return false }
         guard let _ = data["AlbumSection"] else { return false }
         guard let _ = data["AlbumRef"] else { return false }
         guard let _ = data["AlbumFamily"] else { return false }
+        guard let _ = data["AlbumType"] else { return false }
         return true
     }
     
@@ -86,22 +86,23 @@ class InventoryBuilder {
     func addLocation(_ indata:[String:String]) -> Bool {
         // add to a new page based only on album data not object refs
         // required data items: albumPage, albumSection, albumType
-        //   and either: albumRef (creates data level 2)
-        //   or: both albumFamily and albumIndex (number as String - use "0" for no number) (creates data level 1)
+        //   and either: albumRef
+        //   or: both albumFamily and albumIndex (number as String - use "0" for no number)
         var albumData = indata
         var retval = true
         if albumData["albumRef"] == nil {
             if let idx = albumData["albumIndex"],
                 let fam = albumData["albumFamily"] {
-                albumData["albumRef"] = AlbumRef.makeCode(fromFamily: fam, andNumber: idx)
+                albumData["albumRef"] = fam + idx
             } else {
                 retval = false
             }
-        } else if albumData["albumFamily"] == nil {
+        } else { //if albumData["albumFamily"] == nil {
             // make sure Family name is also available
-            let (albumFamily, albumIndex) = AlbumRef.getFamilyAndNumber(fromRef: albumData["albumRef"]!)
+            let albumFamily = AlbumRef.getFamily(fromRef: albumData["albumRef"]!)
+            let albumIndex = AlbumRef.getIndex(fromRef: albumData["albumRef"]!)
             albumData["albumFamily"] = albumFamily
-            albumData["albumIndex"] = albumIndex
+            albumData["albumIndex"] = albumIndex // TBD - not used??
         }
         if retval {
             // NOTE: for page object creation, internal data[] names must be capitalized as if doing import from CSV
@@ -114,13 +115,12 @@ class InventoryBuilder {
         return retval
     }
     
-    func addLocation(_ page:String, inSection sect:String?, ofAlbumSeries album:String, number num: String, ofType albumType: String) -> Bool {
+    func addLocation(_ page:String, inSection sect:String?, ofAlbumSeries album:String, number num: Int, ofType albumType: String) -> Bool {
         // add to a new page/section/album/type, which might not be creatable
         // same as addLocation([String:String]) but uses individual data parameters
         var albumData: [String:String] = [:]
         albumData["albumPage"] = page
-        albumData["albumFamily"] = album
-        albumData["albumIndex"] = num
+        albumData["albumRef"] = AlbumRef.makeCode(fromFamily: album, andNumber: num)
         albumData["albumSection"] = sect ?? ""
         albumData["albumType"] = albumType
         return addLocation(albumData)

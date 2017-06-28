@@ -120,7 +120,7 @@ class AlbumFamilyNavigator {
     func getCurrentPageTitle() -> String {
         // set the nav bar title to the page/section/ref indicator and show # of items
         let numItems = currentPage.theItems.count
-        let albumcode = currentAlbum.code ?? ""
+        let albumcode = currentAlbum.displayName
         let sectioncode = currentSection.code ?? ""
         let pagenum = currentPage.code ?? ""
         let optionalSection = sectioncode == "" ? "" : "[\(sectioncode)] "
@@ -154,7 +154,7 @@ class AlbumFamilyNavigator {
         data["albumPage"] = "\(currentPage.code!)"
         data["albumSection"] = "\(currentPage.section.code!)"
         data["albumFamily"] = "\(currentAlbum.family.code!)"
-        data["albumIndex"] = "\(currentAlbumIndex)"
+        data["albumRef"] = "\(currentAlbum.code!)"
         data["albumType"] = "\(currentAlbum.family.type.code!)"
         return data
     }
@@ -194,7 +194,7 @@ class AlbumFamilyNavigator {
     
     fileprivate var currentAlbumIndex: Int {
         get {
-            let (_, index) = splitNumericEndOfString(currentAlbum.code)
+            let index = AlbumRef.getIndex(fromRef: currentAlbum.code)
             guard let result = Int(index) else { return 0 }
             return result - 1
         }
