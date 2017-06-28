@@ -9,12 +9,23 @@
 import Foundation
 import CoreData
 
-// NOTE: cannot use static let here in Swift 1.2 ("both final and dynamic" error): see http://stackoverflow.com/questions/29814706/a-declaration-cannot-be-both-final-and-dynamic-error-in-swift-1-2
+// NOTE: cannot use static let here in Swift 1.2,3.x ("both final and dynamic" error): see http://stackoverflow.com/questions/29814706/a-declaration-cannot-be-both-final-and-dynamic-error-in-swift-1-2
 // HOW TO GET SWIFT CLASS NAMES: http://stackoverflow.com/questions/24006165/how-do-i-print-the-type-or-class-of-a-variable-in-swift
 
 private let entityName = "AlbumType"
 
+private var theTypes: [AlbumType] = []
+
 extension AlbumType {
+    
+    private static func seenType(_ obj: AlbumType) -> Bool {
+        for typObj in theTypes {
+            if let id = typObj.code, id == obj.code! {
+                return true
+            }
+        }
+        return false
+    }
     
     fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil ) -> Bool {
         if let context = moc {
@@ -22,6 +33,9 @@ extension AlbumType {
                 newObject.code = name
                 newObject.ordinal = 0
                 newObject.descriptionX = ""
+                if !seenType(newObject) {
+                    theTypes.append( newObject )
+                }
                 return true
             }
         }
