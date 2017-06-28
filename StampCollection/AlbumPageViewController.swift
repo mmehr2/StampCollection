@@ -16,6 +16,7 @@ import UIKit
 class AlbumPageViewController: UICollectionViewController {
     
     var model: CollectionStore!
+    var callerUpdate: ((CollectionStore) -> ())?
     
     @IBOutlet weak var addToNewNextPageButton: UIBarButtonItem!
     @IBOutlet weak var addToThisPageButton: UIBarButtonItem!
@@ -258,6 +259,10 @@ class AlbumPageViewController: UICollectionViewController {
                     print("Item add error for \(invBuilder)")
                 }
                 updateUI()
+                // new album will also affect caller
+                if let callerUpdate = callerUpdate {
+                    callerUpdate(model)
+                }
             } else {
                 print("Unable to add location for \(invBuilder)")
             }
