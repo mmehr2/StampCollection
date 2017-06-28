@@ -146,7 +146,11 @@ class AlbumFamilyNavigator {
     }
     
     func gotoEndOfAlbum() {
-        gotoMarker(AlbumMarker.CurrentAlbumEnd)
+        gotoMarker(.CurrentAlbumEnd)
+    }
+    
+    func gotoEndOfSection() {
+        gotoMarker([.LastAlbum, .LastPage])
     }
     
     func getRefAsData() -> [String:String] {

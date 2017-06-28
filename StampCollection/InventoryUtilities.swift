@@ -80,26 +80,20 @@ func offsetAlbumPageExInData(_ data_: [String:String], by offset:Int = 1) -> [St
     return data
 }
 
-// this assumes albumIndex has been set to the numeric suffix of the albumRef string
-// if it has not, it uses the numeric part of albumRef, if present
 func offsetAlbumIndexInData(_ data_: [String:String], by offset:Int = 1) -> [String:String] {
-    var data = data_
-    var numstr = data["albumIndex"]
-    if numstr == nil {
-        // if albumIndex doesn't exist, check for albumRef and do the split here
-        if let albumRef = data["albumRef"] {
-            let (_, num) = splitNumericEndOfString(albumRef)
-            numstr = num
-        } else {
-            // give up, no changes (silently)
-            return data
-        }
+    // this will increment the numeric portion of the index portion of the albumRef field in the data
+    guard let albumRef = data_["albumRef"] else {
+        // give up, no changes (silently) if no albumRef provided
+        return data_
     }
-    if let numint = Int(numstr!) {
-        data["albumIndex"] = "\(numint + offset)"
+    let numstr = AlbumRef.getIndex(fromRef: albumRef)
+    let family = AlbumRef.getFamily(fromRef: albumRef)
+    var data = data_
+    if let numint = Int(numstr) {
+        data["albumRef"] = AlbumRef.makeCode(fromFamily: family, andNumber: numint + offset)
     } else {
-        // current number didn't exist (???), assume unnumbered first item is always 1
-        data["albumIndex"] = "\(1 + offset)"
+        // current number didn't exist (should not happen now!), assume unnumbered first item is always 1
+        data["albumRef"] = AlbumRef.makeCode(fromFamily: family, andNumber: offset)
     }
     // NOTE: since we have created a new album here (continuing the same section as before), we must also increment the page number to prevent duplicate page codes
     // since it is possible that other patterns will emerge for using this function, this can be commented out, but some way of preventing duplicates must be assured
