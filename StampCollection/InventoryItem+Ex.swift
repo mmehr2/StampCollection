@@ -15,9 +15,13 @@ Currently it seems that these generated classes are all @NSManaged properties, a
 */
 
 // TOTAL DEBUGGING KLUDGE!
-var lastCreatedInventoryObject: InventoryItem?
+private var lastCreatedInventoryObject: InventoryItem?
 
 extension InventoryItem:  SortTypeSortableEx {
+    
+    static func getLastCreatedInventoryObject() -> InventoryItem? {
+        return lastCreatedInventoryObject
+    }
     
     var normalizedCode: String {
         return dealerItem.normalizedCode

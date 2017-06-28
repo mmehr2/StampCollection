@@ -155,7 +155,7 @@ class InventoryBuilder {
                 let itemData = getDataForItemCreation(count)
                 result = InventoryItem.makeObjectFromData(itemData, withRelationships: relations, inContext: mocForThread)
                 if result {
-                    if let invRef = lastCreatedInventoryObject {
+                    if let invRef = InventoryItem.getLastCreatedInventoryObject() {
                         print("The created item was #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
                     }
                     result = model.saveMainContext()
