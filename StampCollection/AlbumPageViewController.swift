@@ -126,56 +126,145 @@ class AlbumPageViewController: UICollectionViewController {
         updateUI()
     }
     
-    func moveToSectionMarker(_ dir: AlbumNavigationDirection) {
-        guard let nav = navigator else { return }
-        // determine if we are at first or last page of section (marker)
-        let marker = nav.currentMarker
-        if dir == .forward {
-            if marker.contains(.LastPage) {
-                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
-            } else {
-                nav.gotoMarker(.LastPage)
-            }
-        } else if dir == .reverse {
-            if marker.contains(.FirstPage) {
-                nav.gotoMarkerAcrossVolumes([.FirstAlbum, .FirstPage])
-            } else {
-                nav.gotoMarker(.FirstPage)
-            }
-        }
-    }
-    
     @IBAction func addToThisPageButtonPressed(_ sender: Any) {
-        print("Item will be added to this page.")
-        if let invBuilder = model.invBuilder,
-            let page = navigator?.currentPage {
-            if invBuilder.addLocation(page) {
-                if invBuilder.createItem(for: model) {
-                    print("Added item OK, removing \(invBuilder)")
-                    model.invBuilder = nil
-                } else {
-                    print("Item add error for \(invBuilder)")
-                }
-                updateUI()
-            } else {
-                print("Unable to add location for \(invBuilder)")
-            }
-        }
+        addToNewPageEx(.ThisPage)
     }
     
     @IBAction func addToNewNextPageButtonPressed(_ sender: Any) {
-        print("Item will be added to the next page.")
-        if let invBuilder = model.invBuilder,
-            let nav = navigator {
+        addToNewPageEx(.NextPage)
+    }
+    
+    @IBAction func addToNewIntermediatePageButtonPressed(_ sender: Any) {
+        // create an action controller with N items for extra haves/wants (N<=6 depending on category.prices string)
+        let ac = UIAlertController(title: "Add Item To ..", message: nil, preferredStyle: .alert)
+        var act: UIAlertAction
+        // add action to add item to a new intermediate page
+        act = UIAlertAction(title: "New (.X) page", style: .default) { x in
+            self.addToNewPageEx(.NextPageEx)
+        }
+        ac.addAction(act)
+        // add action to add item to a new page in a new section of current album
+        act = UIAlertAction(title: "Named section...", style: .default) { x in
+            self.addToNamedSection() // uses page 1, current album; dialog asks for section name
+        }
+        ac.addAction(act)
+        // add action to add item to a new page in next album of series
+        act = UIAlertAction(title: "Next album, current section", style: .default) { x in
+            self.addToNewPageEx(.NextAlbum) // uses next page code in default section numbering
+        }
+        ac.addAction(act)
+        // add action to add item to a new page in a new section of next album
+        act = UIAlertAction(title: "Next album, named section...", style: .default) { x in
+            self.addToNamedSectionInNextAlbum() // uses page 1, next album; dialog asks for section name
+        }
+        ac.addAction(act)
+        // add action to add item to a new page in a new section of a new album family
+        act = UIAlertAction(title: "New album group...", style: .default) { x in
+            self.addToNewAlbumFamily() // uses page 1 and default section, dialog asks album name, uses first ref (01), 2nd dialog selects type from list
+        }
+        ac.addAction(act)
+        // add action to add item to a new page in a new section of a new album family
+        act = UIAlertAction(title: "New album group, named section...", style: .default) { x in
+            self.addToNamedSectionInNewAlbumFamily() // uses page 1, dialog asks for name of section and album, uses first ref (01), 2nd dialog selects type from list
+        }
+        ac.addAction(act)
+        // add a cancel (None) operation and present the controller
+        act = UIAlertAction(title: "Cancel", style: .cancel) { x in
+            // no action here
+        }
+        ac.addAction(act)
+        self.present(ac, animated: true, completion: nil)
+    }
+    
+    fileprivate func addToNamedSection() {
+        var description = "Item will be added to "
+        description += "page 1 of the new named section of the current album group."
+        print(description)
+        // run SEC name dialog, get name or cancel operation
+        // exit if cancelled
+        //return addToNewPageEx(.NamedSection(secname))
+    }
+    
+    fileprivate func addToNamedSectionInNextAlbum() {
+        var description = "Item will be added to "
+        description += "page 1 of the new section S of the next album in the current album group."
+        print(description)
+        // run SEC name dialog, get name or cancel operation
+        // exit if cancelled
+        //return addToNewPageEx(.NextAlbumNamedSection(secname))
+    }
+    
+    fileprivate func addToNewAlbumFamily() {
+        var description = "Item will be added to "
+        description += "page 1 of the default section of a new album group (name: N, type: T)."
+        print(description)
+        // run FAM name dialog, get name or cancel operation
+        // exit if cancelled
+        // run TYP name selector or cancel operation
+        // exit if cancelled
+        //return addToNewPageEx(.NewAlbumFamily(famname, typname))
+    }
+    
+    fileprivate func addToNamedSectionInNewAlbumFamily() {
+        var description = "Item will be added to "
+        description += "page 1 of the new section S of a new album group (name: N, type: T)."
+        print(description)
+        // run SEC name dialog, get name or cancel operation
+        // exit if cancelled
+        // run FAM name dialog, get name or cancel operation
+        // exit if cancelled
+        // run TYP name selector or cancel operation
+        // exit if cancelled
+        //return addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typname, secname))
+    }
+
+    enum AddType {
+        case ThisPage, NextPageEx, NextPage, NextAlbum
+        //, NamedSection(String) // needs section name
+        //, NextAlbumNamedSection(String) // needs section name
+        //, NewAlbumFamily(String,String) // needs album and albumtype names
+        //, NewAlbumFamilyNamedSection(String,String,String) // needs section, album and albumtype names
+    }
+    
+    fileprivate func addToNewPageEx(_ type: AddType) {
+        if let invBuilder = model.invBuilder, let nav = navigator {
+            var description = "Item will be added to "
+            var addedNewAlbum = false
             // create a ref to the next page of the end of the current section in whatever album that's in
-            // step 1. make sure we are at an EOS marker (for section page add)
-            // step 2. get the data ref of the current (new) page
-            var pageData = nav.getRefAsData()
-            print("Page data: \(pageData)")
+            // step 1. make sure we are at the proper EOS marker (for current section page add)
+            // step 2. get the data ref of the current page
+            let pageDataOrg, pageData: [String:String]
             // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
-            pageData = offsetAlbumPageInData(pageData)
-            print("Page data modified: \(pageData)")
-            // step 4. use alternate form of invBuilder.addLocation to create new theoretical reference
+            // TBD: what if current page is intermediate (.X) type?
+            switch type {
+            case .ThisPage:
+                description += "the current page of the current section in the current album."
+                // no need to change positions
+                pageDataOrg = nav.getRefAsData()
+                pageData = pageDataOrg
+           case .NextPageEx:
+                description += "the next intermediate page of the current section in the current album."
+                // no need to change positions
+                pageDataOrg = nav.getRefAsData()
+                pageData = offsetAlbumPageExInData(pageDataOrg)
+            case .NextPage:
+                description += "the next page of the current section of the current album group."
+                // must be at end of section (across all albums in family)
+                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+                pageDataOrg = nav.getRefAsData()
+                pageData = offsetAlbumPageInData(pageDataOrg)
+            case .NextAlbum:
+                description += "the next page of the current section of the next album in the current album group."
+                // must be in last album of family
+                nav.gotoMarker(.SeriesEnd)
+                pageDataOrg = nav.getRefAsData()
+                pageData = offsetAlbumIndexInData(pageDataOrg)
+                addedNewAlbum = true
+            }
+            print(description)
+            print("Repos Page data: \(pageDataOrg)")
+            print("New Page data: \(pageData)")
+            // step 4. use alternate form of invBuilder.addLocation to create new location from reference
             if invBuilder.addLocation(pageData) {
                 print("About to add item on page: \(invBuilder)")
                 if invBuilder.createItem(for: model) {
@@ -190,95 +279,8 @@ class AlbumPageViewController: UICollectionViewController {
                     print("Item add error for \(invBuilder)")
                 }
                 updateUI()
-            } else {
-                print("Unable to add location for \(invBuilder)")
-            }
-        }
-    }
-    
-    @IBAction func addToNewIntermediatePageButtonPressed(_ sender: Any) {
-        // create an action controller with N items for extra haves/wants (N<=6 depending on category.prices string)
-        let ac = UIAlertController(title: "Choose Page Action", message: nil, preferredStyle: .alert)
-        var act: UIAlertAction
-        if let nav = navigator {
-            act = UIAlertAction(title: "Go to section end", style: .default) { x in
-                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
-                self.updateUI()
-            }
-            ac.addAction(act)
-        }
-        // add action to add item to a new intermediate page
-        act = UIAlertAction(title: "Add item to new intermediate (.X) page", style: .default) { x in
-            self.addToNewIntermediatePage()
-        }
-        ac.addAction(act)
-        // add action to add item to a new page in next album of series
-        act = UIAlertAction(title: "Add item to new page in next album", style: .default) { x in
-            self.addToNewPageInNextAlbum()
-        }
-        ac.addAction(act)
-        // add a cancel (None) operation and present the controller
-        act = UIAlertAction(title: "Cancel", style: .cancel) { x in
-            // no action here
-        }
-        ac.addAction(act)
-        self.present(ac, animated: true, completion: nil)
-    }
-    
-    fileprivate func addToNewIntermediatePage() {
-        print("Item will be added to the next intermediate page.")
-        if let invBuilder = model.invBuilder,
-            let nav = navigator {
-            // create a ref to the next page of the end of the current section in whatever album that's in
-            // step 1. NOT needed; PageEx can be added anywhere
-            // step 2. get the data ref of the current (new) page
-            var pageData = nav.getRefAsData()
-            print("Page data: \(pageData)")
-            // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
-            pageData = offsetAlbumPageExInData(pageData)
-            print("Page data modified: \(pageData)")
-            // step 4. use alternate form of invBuilder.addLocation to create new theoretical reference
-            if invBuilder.addLocation(pageData) {
-                print("About to add item on page: \(invBuilder)")
-                if invBuilder.createItem(for: model) {
-                    print("Added item OK, removing \(invBuilder)")
-                    navigator = invBuilder.navigatorForNewPage
-                    model.invBuilder = nil
-                } else {
-                    print("Item add error for \(invBuilder)")
-                }
-                updateUI()
-            } else {
-                print("Unable to add location for \(invBuilder)")
-            }
-        }
-    }
-    
-    fileprivate func addToNewPageInNextAlbum() {
-        print("Item will be added to the current section of the next album in the series.")
-        if let invBuilder = model.invBuilder,
-            let nav = navigator {
-            // create a ref to the next page of the end of the current section in whatever album that's in
-            // step 1. NOT sure - do we need manual navigation or checks?
-            // step 2. get the data ref of the current (new) page
-            var pageData = nav.getRefAsData()
-            print("Page data: \(pageData)")
-            // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
-            pageData = offsetAlbumIndexInData(pageData)
-            print("Page data modified: \(pageData)")
-            // step 4. use alternate form of invBuilder.addLocation to create new theoretical reference
-            if invBuilder.addLocation(pageData) {
-                print("About to add item on page: \(invBuilder)")
-                if invBuilder.createItem(for: model) {
-                    print("Added item OK, removing \(invBuilder)")
-                    navigator = invBuilder.navigatorForNewPage
-                    model.invBuilder = nil
-                } else {
-                    print("Item add error for \(invBuilder)")
-                }
-                updateUI()
-                // new album will also affect caller
-                if let callerUpdate = callerUpdate {
+                // new album will also affect calling VC
+                if addedNewAlbum, let callerUpdate = callerUpdate {
                     callerUpdate(model)
                 }
             } else {
@@ -297,6 +299,25 @@ class AlbumPageViewController: UICollectionViewController {
     }
     
     // MARK: - Navigation
+    
+    func moveToSectionMarker(_ dir: AlbumNavigationDirection) {
+        guard let nav = navigator else { return }
+        // determine if we are at first or last page of section (marker)
+        let marker = nav.currentMarker
+        if dir == .forward {
+            if marker.contains(.LastPage) {
+                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+            } else {
+                nav.gotoMarker(.LastPage)
+            }
+        } else if dir == .reverse {
+            if marker.contains(.FirstPage) {
+                nav.gotoMarkerAcrossVolumes([.FirstAlbum, .FirstPage])
+            } else {
+                nav.gotoMarker(.FirstPage)
+            }
+        }
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
