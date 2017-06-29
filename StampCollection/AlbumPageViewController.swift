@@ -110,18 +110,39 @@ class AlbumPageViewController: UICollectionViewController {
     }
     
     @IBAction func swipeTwoRightDetected(_ sender: AnyObject) {
-        navigator?.movePageRelative(.forward, byCount: 10)
+        //navigator?.movePageRelative(.forward, byCount: 10)
+        moveToSectionMarker(.forward)
         updateUI()
     }
     
     @IBAction func swipeTwoLeftDetected(_ sender: AnyObject) {
-        navigator?.movePageRelative(.reverse, byCount: 10)
+        //navigator?.movePageRelative(.reverse, byCount: 10)
+        moveToSectionMarker(.reverse)
         updateUI()
     }
     
     @IBAction func longPressDetected(_ sender: AnyObject) {
-        navigator?.gotoEndOfAlbum()
+        navigator?.gotoMarker(.CurrentAlbumEnd)
         updateUI()
+    }
+    
+    func moveToSectionMarker(_ dir: AlbumNavigationDirection) {
+        guard let nav = navigator else { return }
+        // determine if we are at first or last page of section (marker)
+        let marker = nav.currentMarker
+        if dir == .forward {
+            if marker.contains(.LastPage) {
+                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+            } else {
+                nav.gotoMarker(.LastPage)
+            }
+        } else if dir == .reverse {
+            if marker.contains(.FirstPage) {
+                nav.gotoMarkerAcrossVolumes([.FirstAlbum, .FirstPage])
+            } else {
+                nav.gotoMarker(.FirstPage)
+            }
+        }
     }
     
     @IBAction func addToThisPageButtonPressed(_ sender: Any) {
@@ -181,10 +202,7 @@ class AlbumPageViewController: UICollectionViewController {
         var act: UIAlertAction
         if let nav = navigator {
             act = UIAlertAction(title: "Go to section end", style: .default) { x in
-                let oldMethod = nav.method
-                nav.method = .byPagesInSectionAcrossVolumes
-                nav.gotoEndOfSection()
-                nav.method = oldMethod
+                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
                 self.updateUI()
             }
             ac.addAction(act)

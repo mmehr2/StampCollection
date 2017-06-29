@@ -20,6 +20,15 @@ extension AlbumIndex: CustomStringConvertible {
     }
 }
 
+extension AlbumIndex: Equatable {
+    static func == (lhs: AlbumIndex, rhs: AlbumIndex) -> Bool {
+        return
+            lhs.page == rhs.page &&
+                lhs.ref == rhs.ref &&
+                lhs.section == rhs.section
+    }
+}
+
 enum AlbumNavigationDirection {
     case forward, reverse
 }
@@ -145,12 +154,11 @@ class AlbumFamilyNavigator {
         }
     }
     
-    func gotoEndOfAlbum() {
-        gotoMarker(.CurrentAlbumEnd)
-    }
-    
-    func gotoEndOfSection() {
-        gotoMarker([.LastAlbum, .LastPage])
+    func gotoMarkerAcrossVolumes(_ marker: AlbumMarker) {
+        let oldMethod = method
+        method = .byPagesInSectionAcrossVolumes
+        gotoMarker(marker)
+        method = oldMethod
     }
     
     func getRefAsData() -> [String:String] {
@@ -223,7 +231,7 @@ class AlbumFamilyNavigator {
     fileprivate var currentSection: AlbumSection!
     var currentPage: AlbumPage!
     
-    fileprivate var currentMarker: AlbumMarker {
+    var currentMarker: AlbumMarker {
         var mark = AlbumMarker()
         // add options for special cases
         let effectiveAlbumIndex = currentAlbumIndex 
@@ -248,7 +256,7 @@ class AlbumFamilyNavigator {
         return mark
     }
     
-    fileprivate func gotoMarker( _ marker: AlbumMarker ) {
+    func gotoMarker( _ marker: AlbumMarker ) {
         // there is always an album, a section (possibly unnamed), and at least one page defined in every family
         // resolve this in top-down fashion from album thru section to page (property observers would otherwise interfere)
         // NOTE: this is rather inefficient if all bits are set, or both first and last (last will take precedence)
