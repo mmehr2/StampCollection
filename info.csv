@@ -1120,6 +1120,9 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1345,"2017 Passover Haggadah","In Stock",6110s1345,0,"Sets, SS, FDC",,,6.60,5.30,7.20,5.80,1,1,1,1,,,,,2
 6110s1347,"2017 Settling","In Stock",6110s1347,0,"Sets, SS, FDC",,,4.00,3.10,4.50,3.40,1,1,1,1,,,,,2
 6110s1349,"2017 Jerusalem Reunification - Souvenir Sheet","In Stock",6110s1349,0,"Sets, SS, FDC",,,5.50,4.40,6.00,5.50,1,1,1,1,,,,,2
+6110s1350,"2017 WWI Allenby","In Stock",6110s1350,0,"Sets, SS, FDC",,,6.00,5.00,6.75,5.50,1,1,1,1,,,,,2
+6110s1351,"2017 20th Maccabiah","In Stock",6110s1351,0,"Sets, SS, FDC",,,1.30,1.00,1.85,1.15,1,1,1,1,,,,,2
+6110s1353,"2017 Music Love Songs","In Stock",6110s1353,0,"Sets, SS, FDC",,,15.50,12.50,16.00,14.00,1,1,1,1,,,,,2
 6110bs1,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Tab Pairs",Unavailable,6110bs1,0,Booklets,"B SB.1","C --",620.00,----,,,0,0,0,0,,,,,3
 6110bs2,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Blocks of 4 Stamps",Unavailable,6110bs2,0,Booklets,"B SB.2","C --",135.00,----,,,0,0,0,0,,,,,3
 6110bs3,"1948 Doar Ivri IMABA Exhibition, Large Format",Unavailable,6110bs3,0,Booklets,"B SB.3","C --",400.00,----,,,0,0,0,0,,,,,3
@@ -1271,6 +1274,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e1321,"13.09.16 Sages Parables Booklet (6v)","2 In Stock",6110e1321,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
 6110e1330,"13.11.16 Tourism in Jerusalem Booklet (10v)","2 In Stock",6110e1330,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
 6110e001e,"05.12.07 Hula Nature Reserve Booklet print error like white rainbow (6v)","In Stock",6110e001e,0,Booklets,"B --","S --",15.00,----,,,1,0,0,0,,,,,3
+6110e037J,"21.05.17 Medical Herbs and Spices 'DOAR 24' Booklet (12v) ninth print (nine Menorah)",Available,6110e037J,0,Booklets,,,20.00,27.00,,,1,1,0,0,,,,,3
 6110x1,"WIPA '81 Wien 22-31.5.1981",Unavailable,6110x1,0,"Exhibition Show Cards","C 1",,21.00,12.50,,,0,0,0,0,,,,,9
 6110x2,"ESSEN '82 Essen 28.4-2.5.1982",Unavailable,6110x2,0,"Exhibition Show Cards","C 2",,12.50,12.50,,,0,0,0,0,,,,,9
 6110x3,"PHILEXFRANCE '82 Paris 11-21.6.1982",Unavailable,6110x3,0,"Exhibition Show Cards","C 3",,175.00,70.00,,,0,0,0,0,,,,,9
@@ -1307,8 +1311,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110x34,"SINGAPORE '95 Singapore 1-10.9.1995 (numbered)",Unavailable,6110x34,0,"Exhibition Show Cards","C 34",,10.50,12.50,,,0,0,0,0,,,,,9
 6110x35,"CHINA '96 China 18-24.5.1996 (numbered)",Unavailable,6110x35,0,"Exhibition Show Cards","C --",,10.50,12.50,,,0,0,0,0,,,,,9
 6110x36,"CAPEX '96 Toronto 8-16.6.1996 (numbered)",Unavailable,6110x36,0,"Exhibition Show Cards","C --",,10.50,12.50,,,0,0,0,0,,,,,9
-6110x37,"HONG KONG '97 Hong Kong 20.2.1997",Catalogue,,0,"Exhibition Show Cards","C 35",,9.00,10.50,,,0,0,0,0,,,,,9
-6110x38,"PACIFIC '97 San Francisco 26.5.1997 (numbered)","In Stock",6110x38,0,"Exhibition Show Cards","C 36",,10.50,12.50,,,1,1,0,0,,,,,9
+6110x37,"PACIFIC '97 San Francisco 29.5-8.6.1997 (numbered)","In Stock",6110x37,0,"Exhibition Show Cards","C 36",,10.50,12.50,,,1,1,0,0,,,,,9
 ILrc35,"16.01.72 1.00 L.I. regular","In Stock",ILrc35,0,"International Reply Coupons","B RC35",,4.00,5.00,,,1,1,0,0,,,,,12
 ILrc39,"01.12.74 1.70/1.20 L.I. black ovp.","In Stock",ILrc39,0,"International Reply Coupons","B RC39",,4.00,5.00,,,1,1,0,0,,,,,12
 ILrc40,"01.01.75 1.70 L.I. regular","In Stock",ILrc40,0,"International Reply Coupons","B RC40",,3.00,4.00,,,1,1,0,0,,,,,12
@@ -1679,12 +1682,12 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110d66,"2017 Memorial Day - Facsimile Sign by Avigdor Liberman",Catalogue,6110d66,0,"Ministry of Defense Covers",,,22.00,,,,0,0,0,0,,,,,15
 6110n85n,"1985 A National Happy New Year Card",Unavailable,6110n85n,0,"New Year Greeting Cards",,,5.00,,,,0,0,0,0,,,,,16
 6110n86n,"1986 A National Happy New Year Card",Unavailable,6110n86n,0,"New Year Greeting Cards",,,5.00,,,,0,0,0,0,,,,,16
-6110n87,"1987 A Happy New Year 5748 Card","2 In Stock",6110n87,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
+6110n87,"1987 A Happy New Year 5748 Card","1 In Stock",6110n87,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
 6110n88,"1988 A Happy New Year 5749 Card","4 In Stock",6110n88,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
-6110n89,"1989 A Happy New Year 5750 Card","3 In Stock",6110n89,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
-6110n90,"1990 A Happy New Year 5751 Card","4 In Stock",6110n90,0,"New Year Greeting Cards",,,5.00,,,,1,0,0,0,,,,,16
+6110n89,"1989 A Happy New Year 5750 Card","2 In Stock",6110n89,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
+6110n90,"1990 A Happy New Year 5751 Card","3 In Stock",6110n90,0,"New Year Greeting Cards",,,5.00,,,,1,0,0,0,,,,,16
 6110n91,"1991 A Happy New Year 5752 Card","4 In Stock",6110n91,0,"New Year Greeting Cards",,,4.00,,,,1,0,0,0,,,,,16
-6110n92,"1992 A Happy New Year 5753 Card","1 In Stock",6110n92,0,"New Year Greeting Cards",,,4.00,,,,1,0,0,0,,,,,16
+6110n92,"1992 A Happy New Year 5753 Card","Temp. Sold Out",6110n92,0,"New Year Greeting Cards",,,4.00,,,,0,0,0,0,,,,,16
 6110n93,"1993 A Happy New Year 5754 Card","2 In Stock",6110n93,0,"New Year Greeting Cards",,,4.00,,,,1,0,0,0,,,,,16
 6110n94,"1994 A Happy New Year 5755 Card","1 In Stock",6110n94,0,"New Year Greeting Cards",,,2.80,,,,1,0,0,0,,,,,16
 6110n95,"1995 A Happy New Year 5756 Card","2 In Stock",6110n95,0,"New Year Greeting Cards",,,2.40,,,,1,0,0,0,,,,,16
@@ -1916,9 +1919,9 @@ psPC79,"27.11.94 Airmail Picture Postcard no denomination - Underwater Observato
 psPC80,"07.02.95 Airmail Picture Postcard no denomination - Al Jazzar Mosque Akko",Catalogue,psPC80,0,"Postal Stationery","B PC.47a","P ICP2",1.25,1.25,,,0,0,0,0,,,,,20
 psPC81,"07.02.95 Airmail Picture Postcard no denomination - Massada",Catalogue,psPC81,0,"Postal Stationery","B PC.47b","P ICP3",1.25,1.25,,,0,0,0,0,,,,,20
 psPC82,"24.04.95 Postcard no denomination - Netanya",Catalogue,psPC82,0,"Postal Stationery","B PC.48","P PC33",1.00,1.00,,,0,0,0,0,,,,,20
-psPC83,"14.12.95 Airmail Picture Postcard no denomination - Supreme Court Jerusalem",Available,psPC83,0,"Postal Stationery","B PC.49a","P ICP4",3.00,3.50,,,1,1,0,0,,,,,20
-psPC84,"14.12.95 Airmail Picture Postcard no denomination - Tower of David Jerusalem",Available,psPC84,0,"Postal Stationery","B PC.49c","P ICP5",3.00,3.50,,,1,1,0,0,,,,,20
-psPC85,"14.12.95 Airmail Picture Postcard no denomination - Western Wall Jerusalem",Available,psPC85,0,"Postal Stationery","B PC.49b","P ICP6",3.00,3.50,,,1,1,0,0,,,,,20
+psPC83,"14.12.95 Airmail Picture Postcard no denomination - Supreme Court Jerusalem",Available,psPC83,0,"Postal Stationery","B PC.49a","P ICP4",4.00,4.00,,,1,1,0,0,,,,,20
+psPC84,"14.12.95 Airmail Picture Postcard no denomination - Tower of David Jerusalem",Available,psPC84,0,"Postal Stationery","B PC.49c","P ICP5",4.00,4.00,,,1,1,0,0,,,,,20
+psPC85,"14.12.95 Airmail Picture Postcard no denomination - Western Wall Jerusalem",Available,psPC85,0,"Postal Stationery","B PC.49b","P ICP6",4.00,4.00,,,1,1,0,0,,,,,20
 psPC86,"17.04.96 Airmail Picture Postcard no denomination - Mishkenot Sha'ananim Jerusalem",Catalogue,psPC86,0,"Postal Stationery","B PC.50a","P ICP7",15.00,16.00,,,0,0,0,0,,,,,20
 psPC87,"17.04.96 Airmail Picture Postcard no denomination - Gethsemane Jerusalem",Catalogue,psPC87,0,"Postal Stationery","B PC.50c","P ICP8",15.00,16.00,,,0,0,0,0,,,,,20
 psPC88,"17.04.96 Airmail Picture Postcard no denomination - Audio-Visual Show Jerusalem",Catalogue,psPC88,0,"Postal Stationery","B PC.50b","P ICP9",15.00,16.00,,,0,0,0,0,,,,,20
@@ -2170,9 +2173,9 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110h6,"31.12.1999 A Souvenir of the Last Day of the Second Millennium, 31 December 1999. This folder contains three envelopes bearing stamps depicting different cities in Israel and canceled with the special 'Last Day of the Millennium' postmarks of Jerusalem, Nazareth and Tiberias, dated 31 December 1999","2 In Stock",6110h6,0,"Souvenir Folders",,,6.00,,,,1,0,0,0,,,,,22
 6110h7,"1999-2000 Souvenir Special Postmarks for the end of the Millennium and the Beginning of a New Millennium. This folder contains three stamped envelopes which are canceled with the special Jerusalem postmarks dated 24 December 1999, 31 December 1999 and 1January 2000.","2 In Stock",6110h7,0,"Souvenir Folders",,,6.00,,,,1,0,0,0,,,,,22
 6110h8,"01.01.2000 A Souvenir of the First Day of the New Millennium, 1 January 2000. This folder contains three envelopes bearing Israel's Millennium stamps issued on this Historic Date and canceled with the special postmarks of Jerusalem, Nazareth and Tiberias, dated 1 January 2000.","2 In Stock",6110h8,0,"Souvenir Folders",,,6.00,,,,1,0,0,0,,,,,22
-6110h10,"21.03.2000 This folder have Complete six special cancellations on six decorated envelopes to mark the historic visit of Pope John Paul II to Israel 21-26.3.2000","1 In Stock",6110h10,0,"Souvenir Folders",,,12.00,,,,1,0,0,0,,,,,22
+6110h10,"21.03.2000 This folder have Complete six special cancellations on six decorated envelopes to mark the historic visit of Pope John Paul II to Israel 21-26.3.2000",Available,6110h10,0,"Souvenir Folders",,,12.00,,,,1,0,0,0,,,,,22
 6110h11,"03.09.2001 Shota Rustaveli Georgian Poet - Joint Issue with Georgia - the Kutaisi Synagogue, this folder contains the Souvenir Leaf and the two stamps",Unavailable,6110h11,0,"Souvenir Folders",,,15.50,,,,0,0,0,0,,,,,22
-6110h12,"06.07.2004 Centennial of the Death of Benyamin Ze'ev Herzl - Joint Stamp Issue Israel-Austria-Hungary, this folder contains the Souvenir Leaf and the three stamps",Available,6110h12,0,"Souvenir Folders",,,16.00,,,,1,0,0,0,,,,,22
+6110h12,"06.07.2004 Centennial of the Death of Benyamin Ze'ev Herzl - Joint Stamp Issue Israel-Austria-Hungary, this folder contains the Souvenir Leaf and the three stamps",Catalogue,6110h12,0,"Souvenir Folders",,,16.00,,,,0,0,0,0,,,,,22
 6110h13,"28.01.2008 International Holocaust Remembrance Day - Joint Stamp Issue Israel-United Nation, this folder contains the Souvenir Leaf and the four stamps",Available,6110h13,0,"Souvenir Folders",,,24.00,,,,1,0,0,0,,,,,22
 6110h14,"14.05.2008 A Souvenir to mark 60 Years of Creativity and Achievements, this folder contains the 'Hatikva' Souvenir Sheet and more four stamps",Available,6110h14,0,"Souvenir Folders",,,22.00,,,,1,0,0,0,,,,,22
 6110h15,"06.11.2008 Israel-France 60 Years Friendship - Joint Stamp Issue Israel-France, this folder contains the Souvenir Leaf and the four stamps",Available,6110h15,0,"Souvenir Folders",,,20.00,,,,1,0,0,0,,,,,22
@@ -2187,7 +2190,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110h24,"2010 Love, this folder contains the Love - 'My Own Stamp' full Sheet (12v) and Audio Disc","Sold Out",6110h24,0,"Souvenir Folders",,,16.50,,,,0,0,0,0,,,,,22
 6110h25,"2010 Pesah, this folder contains the Pesah - 'My Own Stamp' full Sheet (12v), Audio Disc and Hagada","1 In Stock",6110h25,0,"Souvenir Folders",,,16.50,,,,1,0,0,0,,,,,22
 6110h26,"2010 Herzl, this folder contains the Herzl - 'My Own Stamp' full Sheet (12v), Herzl Souvenir Sheetlet and Information Book","1 In Stock",6110h26,0,"Souvenir Folders",,,21.00,,,,1,0,0,0,,,,,22
-6110h27,"14.04.2010 60 Years of Friendship - Joint Issue with Canada - this folder contains the Souvenir Leaf, the Israeli Stamp and the Canadian Booklet","1 In Stock",6110h27,0,"Souvenir Folders",,,24.00,,,,1,0,0,0,,,,,22
+6110h27,"14.04.2010 60 Years of Friendship - Joint Issue with Canada - this folder contains the Souvenir Leaf, the Israeli Stamp and the Canadian Booklet",Catalogue,6110h27,0,"Souvenir Folders",,,24.00,,,,0,0,0,0,,,,,22
 6110h28,"2010 Disney Channel, this folder contains the Disney - 'My Own Stamp' full Sheet (12v), Learn Read/Write and Arithmetic Books","Sold Out",6110h28,0,"Souvenir Folders",,,16.50,,,,0,0,0,0,,,,,22
 6110h101,"1968 TABIRA stamp Exhibition - The multipage folder is bound with ornate string. Inside are the Tabira souvenir sheet, first day cover and tab single",Unavailable,6110h101,0,"Souvenir Folders",,,17.00,,,,0,0,0,0,,,,,22
 6110h102,"1980 HAIFA stamp Exhibition - This Folder have two souvenir sheets one with FD Cancel",Unavailable,6110h102,0,"Souvenir Folders",,,7.50,,,,0,0,0,0,,,,,22
@@ -2195,7 +2198,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110h104,"15-21.10.1989 TEVEL Stamp Exhibition IPS Compliments Card","1 In Stock",6110h104,0,"Souvenir Folders",,,10.00,,,,1,0,0,0,,,,,22
 6110h105,"02.12.1991 Establishment of the Postal and Philatelic Museum souvenir folder","In Stock",6110h105,0,"Souvenir Folders",,,60.00,,,,1,0,0,0,,,,,22
 6110h106,"21-26.08.1993 Israel-Romania Binational Stamp Exhibition IPS Compliments Card",Available,6110h106,0,"Souvenir Folders",,,7.50,,,,1,0,0,0,,,,,22
-6110h107,"21.03.2000 Card from Pilgrimage of the Pope to Israel","Temp. Sold Out",6110h107,0,"Souvenir Folders",,,2.00,,,,0,0,0,0,,,,,22
+6110h107,"21.03.2000 Card from Pilgrimage of the Pope to Israel",Available,6110h107,0,"Souvenir Folders",,,2.00,,,,1,0,0,0,,,,,22
 6110h108,"World Philatelic Exhibition-Washington 2006 - Israel Post Compliments 2 Cards",Unavailable,6110h108,0,"Souvenir Folders",,,12.00,,,,0,0,0,0,,,,,22
 6110h301,"ITALIA '85 Set of 4 Show Cards, IPF issued by IPS Permission (numbered)","1 In Stock",6110h301,0,"Souvenir Folders",,,12.00,,,,1,0,0,0,,,,,22
 6110h302a,"AMERIPEX '86 set of 4 Show Cards, IPF issued by IPS Permission (numbered)",Unavailable,6110h302a,0,"Souvenir Folders",,,30.00,,,,0,0,0,0,,,,,22
@@ -2226,7 +2229,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110h401b,"18.12.86 50th Anniversary of the Israel Philharmonic Orchestra, IPF issued by IPS Permission (numbered 550 exist) Bronislaw Huberman",Unavailable,6110h401b,0,"Souvenir Folders",,,5.00,,,,0,0,0,0,,,,,22
 6110h402,"09.03.87 First Convention of Israeli Philatelists, set of 2 Show Cards IPF issued by IPS Permission (numbered 550 exist)",Unavailable,6110h402,0,"Souvenir Folders",,,20.00,,,,0,0,0,0,,,,,22
 6110h403,"06.12.88 2nd Conference of Israel Philatelists commemorating the Israel Philatelic Federation Jubilee and the 40th Anniversary of the First Edition of the Federation Periodical, booklet (numbered 2000 exist) - issued by Israel Philatelic Federation",Unavailable,6110h403,0,"Souvenir Folders",,,7.50,,,,0,0,0,0,,,,,22
-6110h404,"1990 Festival Booklet 'Spice Boxes' IPF Canceled by IPS Permission (numbered)",Available,6110h404,0,"Souvenir Folders",,,53.00,,,,1,0,0,0,,,,,22
+6110h404,"1990 Festival Booklet 'Spice Boxes' IPF Canceled by IPS Permission (numbered)",Unavailable,6110h404,0,"Souvenir Folders",,,53.00,,,,0,0,0,0,,,,,22
 6110h501a,"TABIM 54' booklet with the Exhibition Canceled on Tabim set (numbered)",Available,6110h501a,0,"Souvenir Folders",,,4.50,,,,1,0,0,0,,,,,22
 6110h501b,"TABIM 54' booklet with the IPF Convention Canceled on Tabim set (numbered)",Available,6110h501b,0,"Souvenir Folders",,,4.50,,,,1,0,0,0,,,,,22
 6110h502a,"Netanya 86' Show Card, Organizing Committee issued by IPS Permission (numbered)",Unavailable,6110h502a,0,"Souvenir Folders",,,7.50,,,,0,0,0,0,,,,,22
@@ -2746,6 +2749,8 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110eHAN5,"22.11.16 Hanukkah - 'My Own Stamp' full Sheet (9v)",Available,6110eHAN5,0,"Special Sheets-Sheetlets-Combination",,,17.50,30.00,,,1,1,0,0,,,,,24
 6110ePES9,"10.03.17 Passover - 'My Own Stamp' full Sheet (9v)",Available,6110ePES9,0,"Special Sheets-Sheetlets-Combination",,,17.50,30.00,,,1,1,0,0,,,,,24
 6110eTRUM,"28.05.17 Trump Visits - 'My Own Stamp' full Sheet (9v), numbered 1499 exist",Available,6110eTRUM,0,"Special Sheets-Sheetlets-Combination",,,22.50,37.00,,,1,1,0,0,,,,,24
+6110e1352,"13.06.17 20th Maccabiah Full Sheet of 10 stamps",Available,6110e1352,0,"Special Sheets-Sheetlets-Combination",,,10.00,14.00,,,1,1,0,0,,,,,24
+6110e1354,"13.06.17 Music Love Songs Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue)",Available,6110e1354,0,"Special Sheets-Sheetlets-Combination",,,15.50,22.00,,,1,1,0,0,,,,,24
 6110e1,"1948 Doar Ivri - Wrong Tabs inscription (2v)",Available,6110e1,0,"Varieties and Variants","B 3b,4b","C 3E,4E",65.00,48.00,----,----,1,1,0,0,,,,,25
 6110e2a,"1948 Doar Ivri - grey paper (2v)",Catalogue,,0,"Varieties and Variants","B 3a,6a","C 3p,6p",,,----,,0,0,0,0,,,,,25
 6110e2b,"1948 Doar Ivri - perforation 10x11 (4v)",Catalogue,,0,"Varieties and Variants","B 1d,3d5d,6d","C 1A,3A5A,6A",,,----,,0,0,0,0,,,,,25
@@ -3426,6 +3431,8 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110k1704,"07.02.17 'Inbar 14' Cross at the Crossing, FDC inland 2.40 value","1 In Stock",6110k1704,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
 6110k1705,"04.04.17 'Inbar 15' Buckle up for Life, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1705,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
 6110k1706,"04.04.17 'Inbar 15' Buckle up for Life, FDC inland 2.40 value","1 In Stock",6110k1706,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
+6110k1707,"13.06.17 'Inbar 16' Ride Safely, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1707,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+6110k1708,"13.06.17 'Inbar 16' Ride Safely, FDC inland 2.40 value","1 In Stock",6110k1708,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
 6110y48,"1948 19 stamps (FDC 14 stamps)",Available,6110y48,0,"Year Sets","C 1-19","S 1-14,J1-J5",10485.00,310.00,282.00,640.00,1,1,1,1,,,,,27
 6110y49,"1949 18 stamps (FDC 12 stamps) + 1 S/S","In Stock",6110y49,0,"Year Sets","C 20-38","S 15-22,24,27-30,J6-J11",1211.00,50.00,52.00,144.00,1,1,1,1,,,,,27
 6110y50,"1950 21 stamps","In Stock",6110y50,0,"Year Sets","C 39-58,69","S 23,25,31-43,C1-C6",1193.00,34.00,187.00,38.00,1,1,1,1,,,,,27
