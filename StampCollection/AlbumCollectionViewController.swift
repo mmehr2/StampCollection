@@ -13,9 +13,33 @@ class AlbumCollectionViewController: UICollectionViewController {
     var model: CollectionStore!
     
     func startUI(_ store: CollectionStore) {
-        families = fetch("AlbumFamily", inContext: model.getContextForThread(CollectionStore.mainContextToken)!)
+        prepAlbumLists()
+        families = model.albumFamilies
         print("Started with \(families.count) album family groups")
         collectionView?.reloadData()
+    }
+    
+    func prepAlbumLists() {
+        // NOTE: This is a bit of a kludge. It's needed to provide a class static way of getting at the list of album types/families/sections of the system.
+        // This is performed naturally during inventory import, but if no import is done, the array is empty, thus the need for this
+        // It could probably be better placed elsehwere, but for now, here is the only place it is needed (TBD REVISIT DECISION!)
+        // ALSO NOTE: Since the creation of new objects uses the same mechanism as import, these lists should stay up to date as we add new inventory incrementally.
+        guard let moc = model.getContextForThread(CollectionStore.mainContextToken) else { return }
+        if model.albumTypes.count == 0 || model.albumFamilies.count == 0 || model.albumSections.count == 0 {
+            model.getAlbumLocations(moc) // this gets all three arrays: albumTypes, albumFamilies, and albumSections
+        }
+        if AlbumType.allTheNames.count == 0 {
+            AlbumType.setObjects(model.albumTypes)
+            print("Set empty album type list to \(AlbumType.allTheNames)")
+        }
+        if AlbumFamily.allTheNames.count == 0 {
+            AlbumFamily.setObjects(model.albumFamilies)
+            print("Set empty album family list to \(AlbumFamily.allTheNames)")
+        }
+        if AlbumSection.allTheNames.count == 0 {
+            AlbumSection.setObjects(model.albumSections)
+            print("Set empty album section list to \(AlbumSection.allTheNames)")
+        }
     }
     
     var families: [AlbumFamily] = []
