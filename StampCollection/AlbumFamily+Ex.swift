@@ -13,6 +13,33 @@ private let entityName = "AlbumFamily"
 
 extension AlbumFamily {
     
+    @nonobjc private static var theObjects: [AlbumFamily] = []
+    
+    private static func seenObject(_ obj: AlbumFamily) -> Bool {
+        for objx in theObjects {
+            if let id = objx.code, id == obj.code! {
+                return true
+            }
+        }
+        return false
+    }
+    
+    static func setObjects(_ fetchedObjects: [AlbumFamily]) {
+        // func to set this when needed if it is empty by calling CollectionStore.fetch("AlbumSection",...)
+        theObjects = fetchedObjects
+    }
+    
+    static var allTheNames: [String] {
+        var result: [String] = []
+        for obj in theObjects {
+            let c = obj.code!
+            if !result.contains(c) {
+                result.append(c)
+            }
+        }
+        return result
+    }
+    
     fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil, withRelationships relations: [String:NSManagedObject] = [:] ) -> Bool {
         if let context = moc {
             if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumFamily {
@@ -21,6 +48,9 @@ extension AlbumFamily {
                 newObject.descriptionX = ""
                 if let obj = relations["type"] as? AlbumType {
                     newObject.type = obj
+                }
+                if !seenObject(newObject) {
+                    theObjects.append( newObject )
                 }
                 return true
             }

@@ -33,6 +33,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     var info : [DealerItem] = []
     var inventory : [InventoryItem] = []
     //var loading = false // means well, but ... not thread safe??
+    var albumSections : [AlbumSection] = []
     var albums : [AlbumRef] = []
     var albumFamilies : [AlbumFamily] = []
     var albumTypes : [AlbumType] = []
@@ -673,7 +674,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     func getAlbumLocations(_ moc: NSManagedObjectContext) {
         albumTypes = fetch("AlbumType", inContext: moc, withFilter: nil)
         albumFamilies = fetch("AlbumFamily", inContext: moc, withFilter: nil)
-        //albumSections = fetch("AlbumSection", inContext: moc, withFilter: nil)
+        albumSections = fetch("AlbumSection", inContext: moc, withFilter: nil)
     }
     
     fileprivate func showLocationStats(_ moc: NSManagedObjectContext, inCategory catnum: Int16) {

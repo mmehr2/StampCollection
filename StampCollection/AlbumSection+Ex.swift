@@ -13,6 +13,33 @@ private let entityName = "AlbumSection"
 
 extension AlbumSection {
     
+    @nonobjc private static var theObjects: [AlbumSection] = []
+    
+    private static func seenObject(_ obj: AlbumSection) -> Bool {
+        for objx in theObjects {
+            if let id = objx.code, id == obj.code! {
+                return true
+            }
+        }
+        return false
+    }
+    
+    static func setObjects(_ fetchedObjects: [AlbumSection]) {
+        // func to set this when needed if it is empty by calling CollectionStore.fetch("AlbumSection",...)
+        theObjects = fetchedObjects
+    }
+    
+    static var allTheNames: [String] {
+        var result: [String] = []
+        for obj in theObjects {
+            let c = obj.code!
+            if !result.contains(c) {
+                result.append(c)
+            }
+        }
+        return result
+    }
+    
     static func makeObjectWithName( _ name: String, forParent parent: AlbumRef ) -> Bool {
         if let context = parent.managedObjectContext {
             if let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? AlbumSection {
@@ -20,6 +47,9 @@ extension AlbumSection {
                 newObject.ordinal = 0 // could assign these on creation order, but needs to be editable or at least renumberable at runtime
                 newObject.descriptionX = ""
                 newObject.ref = parent
+                if !seenObject(newObject) {
+                    theObjects.append( newObject )
+                }
                 return true
             }
         }

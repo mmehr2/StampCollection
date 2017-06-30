@@ -13,6 +13,8 @@ This class will display a UIAlertController modally.
 The controller will have a few text input fields for editing various things, such as keywords or year ranges.
 For now we will customize it to edit SearchType objects' auxiliary data.
 // TBD: needs to remember previous entry for each field - how?
+ 
+ UPDATE: added text fields for inventory Section Name and Album Family Name, and query types using either or both
 */
 
 enum UIQueryFieldType {
@@ -20,7 +22,7 @@ enum UIQueryFieldType {
 }
 
 enum UIQueryFieldDesignator {
-    case keywordList, yearRangeStart, yearRangeEnd, idPattern
+    case keywordList, yearRangeStart, yearRangeEnd, idPattern, invSectionName, invAlbumName
 }
 
 struct UIQueryFieldConfiguration {
@@ -52,12 +54,25 @@ struct UIQueryFieldConfiguration {
             placeholder = "ID search pattern"
             type = .text
             break
+        case .invSectionName:
+            // set up the single text field config
+            placeholder = "Section name (nonblank)"
+            type = .text
+            break
+        case .invAlbumName:
+            // set up the single text field config
+            placeholder = "Album Group name (nonblank)"
+            type = .text
+            break
         }
     }
 }
 
 enum UIQueryAlertType {
     case keyword, yearRange, subCategory
+    , invAskSection(String) // include existing section names to avoid
+    , invAskAlbum(String) // include existing album names to avoid
+    , invAskSectionAndAlbum(String,String)
 }
 
 struct UIQueryAlertConfiguration {
@@ -74,10 +89,10 @@ struct UIQueryAlertConfiguration {
             // set up the single text field config
             title = "Edit Keyword List"
             body =
-            "Enter key words for searching, separated by spaces.\n" +
+                "Enter key words for searching, separated by spaces.\n" +
                 "The search will check all description fields.\n" +
-            "By default, any keyword will match. To force all keywords to match," +
-            " use the word ALL as the first keyword.\n" +
+                "By default, any keyword will match. To force all keywords to match," +
+                " use the word ALL as the first keyword.\n" +
             "To remove all keyword filtering, enter an empty field."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .keywordList))
             break
@@ -86,7 +101,7 @@ struct UIQueryAlertConfiguration {
             title = "Edit Year Range Filter"
             body = "Specify the years to include. End must be greater than or equal to Start.\n" +
                 "Valid years for Israeli stamps are 1948 to present." +
-            "\nTo specify a single year, enter valid Start and blank End." +
+                "\nTo specify a single year, enter valid Start and blank End." +
             "\nTo remove all year filtering, enter blank in both Start and End."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeStart))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .yearRangeEnd))
@@ -95,9 +110,35 @@ struct UIQueryAlertConfiguration {
             // set up the single text field config
             title = "SubCategory Filter"
             body = "Enter Search pattern for record IDs.\n" +
-            "The search will check just the ID field.\n" +
+                "The search will check just the ID field.\n" +
             "To remove all subcategory filtering, enter an empty field."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .idPattern))
+            break
+        case .invAskSection(let secnames):
+            // set up the single text field config
+            title = "New Section Name"
+            body = "Enter the (required) name of the new Section.\n" +
+            "Do not use one of the section names already used: \(secnames).\n"
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invSectionName))
+            break
+        case .invAskAlbum(let albnames):
+            // set up the single text field config
+            title = "New Album Name"
+            body = "Enter the (required) name of the new Album group.\n" +
+                "Do not provide any numeric suffix, such as XXX01; just XXX.\n" +
+            "Do not use one of the album names already used: \(albnames).\n"
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invAlbumName))
+            break
+        case .invAskSectionAndAlbum(let secnames, let albnames):
+            // set up the single text field config
+            title = "New Section and Album Names"
+            body = "Enter the (required) name of the new Section.\n" +
+                "Do not use one of the section names already used: \(secnames).\n" +
+                "\nAlso, enter the name of the new Album group.\n" +
+                "Do not provide any numeric suffix, such as XXX01; just XXX.\n" +
+            "Do not use one of the album names already used: \(albnames).\n"
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invSectionName))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invAlbumName))
             break
         }
     }
@@ -131,7 +172,8 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
             // run the user's completion handler in response to OK being pressed
             if let handler = self.userCompletionHandler {
                 let result : SearchType
-                if self.config.type == .keyword {
+                switch self.config.type {
+                case .keyword:
                     let text : String = self.fields[0].text ?? ""
                     var words = text.isEmpty ? [] : text.components(separatedBy: " ") // split this at spaces
                     if words.count > 0 && words[0] == "ALL" {
@@ -141,13 +183,11 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                         result = SearchType.keyWordListAny(words)
                     }
                     handler(result)
-                }
-                else if self.config.type == .subCategory {
+                case .subCategory:
                     let text : String = self.fields[0].text ?? ""
                     result = SearchType.subCategory(text)
                     handler(result)
-                }
-                else if self.config.type == .yearRange {
+                case .yearRange:
                     let text1 : String = self.fields[0].text ?? ""
                     let text2 : String = self.fields[1].text ?? ""
                     var startYear = Int(text1) ?? 0
@@ -163,6 +203,23 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                         endYear = 0
                     }
                     result = SearchType.yearInRange(startYear...endYear)
+                    handler(result)
+                case .invAskSection:
+                    // KLUDGE - we need to use a SearchType to return the textual result
+                    let text : String = self.fields[0].text ?? ""
+                    result = SearchType.location(text)
+                    handler(result)
+                case .invAskAlbum:
+                    // KLUDGE - we need to use a SearchType to return the textual result
+                    let text : String = self.fields[0].text ?? ""
+                    result = SearchType.location(text)
+                    handler(result)
+                case .invAskSectionAndAlbum:
+                    // KLUDGE - we need to use a SearchType to return the textual result
+                    let text1 : String = self.fields[0].text ?? ""
+                    let text2 : String = self.fields[1].text ?? ""
+                    let text = "\(text1);\(text2)"
+                    result = SearchType.location(text)
                     handler(result)
                 }
             }

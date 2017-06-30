@@ -25,30 +25,40 @@ class AlbumPageViewController: UICollectionViewController {
     
     func setStartAlbum( _ album: AlbumRef ) {
         // make sure we can walk types and families
-        prepAlbumTypeList()
+        prepAlbumLists()
         // setup the navigator for this album family using individual volume of series
         navigator = AlbumFamilyNavigator(album: album)
     }
     
     func setStartPage( _ page: AlbumPage ) {
         // make sure we can walk types and families
-        prepAlbumTypeList()
+        prepAlbumLists()
         // setup the navigator for this album family using current page to display
         navigator = AlbumFamilyNavigator(page: page)
     }
     
     fileprivate var navigator: AlbumFamilyNavigator!
     
-    func prepAlbumTypeList() {
-        // NOTE: This is a bit of a kludge. It's needed to provide a class static way of getting at the list of album types of the system.
+    func prepAlbumLists() {
+        // NOTE: This is a bit of a kludge. It's needed to provide a class static way of getting at the list of album types/families/sections of the system.
         // This is performed naturally during inventory import, but if no import is done, the array is empty, thus the need for this
         // It could probably be better placed elsehwere, but for now, here is the only place it is needed (TBD REVISIT DECISION!)
-        if AlbumType.theTypeNames.count == 0 {
-            if model.albumTypes.count == 0, let moc = model.getContextForThread(CollectionStore.mainContextToken) {
-                model.getAlbumLocations(moc)
-            }
-            AlbumType.setTypes(model.albumTypes)
-            print("Set empty album type list to \(AlbumType.theTypeNames)")
+        // ALSO NOTE: Since the creation of new objects uses the same mechanism as import, these lists should stay up to date as we add new inventory incrementally.
+        guard let moc = model.getContextForThread(CollectionStore.mainContextToken) else { return }
+        if model.albumTypes.count == 0 || model.albumFamilies.count == 0 || model.albumSections.count == 0 {
+            model.getAlbumLocations(moc) // this gets all three arrays: albumTypes, albumFamilies, and albumSections
+        }
+        if AlbumType.allTheNames.count == 0 {
+            AlbumType.setObjects(model.albumTypes)
+            print("Set empty album type list to \(AlbumType.allTheNames)")
+        }
+        if AlbumFamily.allTheNames.count == 0 {
+            AlbumFamily.setObjects(model.albumFamilies)
+            print("Set empty album family list to \(AlbumFamily.allTheNames)")
+        }
+        if AlbumSection.allTheNames.count == 0 {
+            AlbumSection.setObjects(model.albumSections)
+            print("Set empty album section list to \(AlbumSection.allTheNames)")
         }
     }
     
@@ -195,57 +205,81 @@ class AlbumPageViewController: UICollectionViewController {
     
     fileprivate func addToNamedSection() {
         // run SEC name dialog, get name or cancel operation
-        // exit if cancelled
-        var description = "Item will be added to "
-        description += "page 1 of the new section S of the current album group."
-        print(description)
-        //return addToNewPageEx(.NamedSection(secname))
+        let existingNames = AlbumSection.allTheNames.sorted().joined(separator: ",")
+        let qa = UIQueryAlert(type: .invAskSection(existingNames)) { result in
+            if case let SearchType.location(secname) = result {
+                var description = "Item will be added to "
+                description += "page 1 of the new section [\(secname)] of the current album group."
+                print(description)
+                //return addToNewPageEx(.NamedSection(secname))
+            }
+        }
+        qa.RunWithViewController(self)
     }
     
     fileprivate func addToNamedSectionInNextAlbum() {
         // run SEC name dialog, get name or cancel operation
-        // exit if cancelled
-        var description = "Item will be added to "
-        description += "page 1 of the new section S of the next album in the current album group."
-        print(description)
-        //return addToNewPageEx(.NextAlbumNamedSection(secname))
+        let existingNames = AlbumSection.allTheNames.sorted().joined(separator: ",")
+        let qa = UIQueryAlert(type: .invAskSection(existingNames)) { result in
+            if case let SearchType.location(secname) = result {
+                var description = "Item will be added to "
+                description += "page 1 of the new section [\(secname)] of the next album in the current album group."
+                print(description)
+                //return addToNewPageEx(.NextAlbumNamedSection(secname))
+            }
+        }
+        qa.RunWithViewController(self)
     }
     
     fileprivate func addToNewAlbumFamily() {
         // run FAM name dialog, get name or cancel operation
-        // exit if cancelled
-        // run TYP name selector or cancel operation
-        runAlbumTypeSelector() { typename in
-            // exit if cancelled
-            var description = "Item will be added to "
-            description += "page 1 of the default section of a new album group (name: N, type: \(typename))."
-            print(description)
-            //addToNewPageEx(.NewAlbumFamily(famname, typname))
+        let existingNames = AlbumFamily.allTheNames.sorted().joined(separator: ",")
+        let qa = UIQueryAlert(type: .invAskAlbum(existingNames)) { result in
+            if case let SearchType.location(famname) = result {
+                // run TYP name selector or cancel operation
+                self.runAlbumTypeSelector() { typename in
+                    // exit if cancelled
+                    var description = "Item will be added to "
+                    description += "page 1 of the default section [] of a new album group (name: \(famname), type: \(typename))."
+                    print(description)
+                    //addToNewPageEx(.NewAlbumFamily(famname, typename))
+                }
+            }
         }
-    }
+        qa.RunWithViewController(self)
+   }
     
     fileprivate func addToNamedSectionInNewAlbumFamily() {
-        // run SEC name dialog, get name or cancel operation
-        // run FAM name dialog, get name or cancel operation
-        // run TYP name selector or cancel operation
-        runAlbumTypeSelector() { typename in
-            var description = "Item will be added to "
-            description += "page 1 of the new section S of a new album group (name: N, type: \(typename))."
-            print(description)
-            //addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typname, secname))
+        // run SEC+FAM name dialog, get name or cancel operation
+        let existingSectionNames = AlbumSection.allTheNames.sorted().joined(separator: ",")
+        let existingFamilyNames = AlbumFamily.allTheNames.sorted().joined(separator: ",")
+        let qa = UIQueryAlert(type: .invAskSectionAndAlbum(existingSectionNames,existingFamilyNames)) { result in
+            if case let SearchType.location(asnames) = result {
+                let comps = asnames.components(separatedBy: ";")
+                let secname = comps[0]
+                let famname = comps[1]
+                // run TYP name selector or cancel operation
+                self.runAlbumTypeSelector() { typename in
+                    var description = "Item will be added to "
+                    description += "page 1 of the new section [\(secname)] of a new album group (name: \(famname), type: \(typename))."
+                    print(description)
+                    //addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typename, secname))
+                }
+            }
         }
+        qa.RunWithViewController(self)
     }
 
     // run a selection box for album types, with a completion block to decide what to do with the selection
     func runAlbumTypeSelector(_ completion: ((String)->())? = nil) {
         var lines: [MenuBoxEntry] = []
-        print("Album types in use:")
-        for name in AlbumType.theTypeNames {
-            print(name)
+        //print("Album types in use:")
+        for name in AlbumType.allTheNames {
+            //print(name)
             let y:MenuBoxEntry = (name, { x in
                 if let tname = x?.title {
                     // place the title string into the invBuilder and call the next step
-                    print("Set TYPE name to \(tname)")
+                    //print("Set TYPE name to \(tname)")
                     if let completion = completion {
                         completion(tname)
                     }

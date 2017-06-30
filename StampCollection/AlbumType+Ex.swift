@@ -16,26 +16,29 @@ private let entityName = "AlbumType"
 
 extension AlbumType {
     
-    @nonobjc private static var theTypes: [AlbumType] = []
+    @nonobjc private static var theObjects: [AlbumType] = []
     
-    private static func seenType(_ obj: AlbumType) -> Bool {
-        for typObj in theTypes {
-            if let id = typObj.code, id == obj.code! {
+    private static func seenObject(_ obj: AlbumType) -> Bool {
+        for objx in theObjects {
+            if let id = objx.code, id == obj.code! {
                 return true
             }
         }
         return false
     }
     
-    static func setTypes(_ albumTypes: [AlbumType]) {
-        // KLUDGE - to set this when needed if it is empty by calling CollectionStore.fetch("AlbumType",...)
-        theTypes = albumTypes
+    static func setObjects(_ fetchedObjects: [AlbumType]) {
+        // func to set this when needed if it is empty by calling CollectionStore.fetch("AlbumSection",...)
+        theObjects = fetchedObjects
     }
     
-    static var theTypeNames: [String] {
+    static var allTheNames: [String] {
         var result: [String] = []
-        for typObj in theTypes {
-            result.append(typObj.code!)
+        for obj in theObjects {
+            let c = obj.code!
+            if !result.contains(c) {
+                result.append(c)
+            }
         }
         return result
     }
@@ -46,8 +49,8 @@ extension AlbumType {
                 newObject.code = name
                 newObject.ordinal = 0
                 newObject.descriptionX = ""
-                if !seenType(newObject) {
-                    theTypes.append( newObject )
+                if !seenObject(newObject) {
+                    theObjects.append( newObject )
                 }
                 return true
             }
