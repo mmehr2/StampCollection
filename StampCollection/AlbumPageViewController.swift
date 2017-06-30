@@ -194,45 +194,66 @@ class AlbumPageViewController: UICollectionViewController {
     }
     
     fileprivate func addToNamedSection() {
-        var description = "Item will be added to "
-        description += "page 1 of the new named section of the current album group."
-        print(description)
         // run SEC name dialog, get name or cancel operation
         // exit if cancelled
+        var description = "Item will be added to "
+        description += "page 1 of the new section S of the current album group."
+        print(description)
         //return addToNewPageEx(.NamedSection(secname))
     }
     
     fileprivate func addToNamedSectionInNextAlbum() {
+        // run SEC name dialog, get name or cancel operation
+        // exit if cancelled
         var description = "Item will be added to "
         description += "page 1 of the new section S of the next album in the current album group."
         print(description)
-        // run SEC name dialog, get name or cancel operation
-        // exit if cancelled
         //return addToNewPageEx(.NextAlbumNamedSection(secname))
     }
     
     fileprivate func addToNewAlbumFamily() {
-        var description = "Item will be added to "
-        description += "page 1 of the default section of a new album group (name: N, type: T)."
-        print(description)
         // run FAM name dialog, get name or cancel operation
         // exit if cancelled
         // run TYP name selector or cancel operation
-        // exit if cancelled
-        //return addToNewPageEx(.NewAlbumFamily(famname, typname))
+        runAlbumTypeSelector() { typename in
+            // exit if cancelled
+            var description = "Item will be added to "
+            description += "page 1 of the default section of a new album group (name: N, type: \(typename))."
+            print(description)
+            //addToNewPageEx(.NewAlbumFamily(famname, typname))
+        }
     }
     
     fileprivate func addToNamedSectionInNewAlbumFamily() {
-        var description = "Item will be added to "
-        description += "page 1 of the new section S of a new album group (name: N, type: T)."
-        print(description)
         // run SEC name dialog, get name or cancel operation
-        // exit if cancelled
         // run FAM name dialog, get name or cancel operation
-        // exit if cancelled
         // run TYP name selector or cancel operation
-        // exit if cancelled
-        //return addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typname, secname))
+        runAlbumTypeSelector() { typename in
+            var description = "Item will be added to "
+            description += "page 1 of the new section S of a new album group (name: N, type: \(typename))."
+            print(description)
+            //addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typname, secname))
+        }
+    }
+
+    // run a selection box for album types, with a completion block to decide what to do with the selection
+    func runAlbumTypeSelector(_ completion: ((String)->())? = nil) {
+        var lines: [MenuBoxEntry] = []
+        print("Album types in use:")
+        for name in AlbumType.theTypeNames {
+            print(name)
+            let y:MenuBoxEntry = (name, { x in
+                if let tname = x?.title {
+                    // place the title string into the invBuilder and call the next step
+                    print("Set TYPE name to \(tname)")
+                    if let completion = completion {
+                        completion(tname)
+                    }
+                }
+            })
+            lines.append(y)
+        }
+        menuBoxWithTitle("Choose Album Type", andBody: lines, forController: self)
     }
 
     enum AddType {
@@ -252,7 +273,6 @@ class AlbumPageViewController: UICollectionViewController {
             // step 2. get the data ref of the current page
             let pageDataOrg, pageData: [String:String]
             // step 3. increment the ref properly (3 inc styles: page, exPage, albumIndex)
-            // TBD: what if current page is intermediate (.X) type?
             switch type {
             case .ThisPage:
                 description += "the current page of the current section in the current album."
