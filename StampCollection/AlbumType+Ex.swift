@@ -14,9 +14,9 @@ import CoreData
 
 private let entityName = "AlbumType"
 
-private var theTypes: [AlbumType] = []
-
 extension AlbumType {
+    
+    @nonobjc private static var theTypes: [AlbumType] = []
     
     private static func seenType(_ obj: AlbumType) -> Bool {
         for typObj in theTypes {
@@ -25,6 +25,19 @@ extension AlbumType {
             }
         }
         return false
+    }
+    
+    static func setTypes(_ albumTypes: [AlbumType]) {
+        // KLUDGE - to set this when needed if it is empty by calling CollectionStore.fetch("AlbumType",...)
+        theTypes = albumTypes
+    }
+    
+    static var theTypeNames: [String] {
+        var result: [String] = []
+        for typObj in theTypes {
+            result.append(typObj.code!)
+        }
+        return result
     }
     
     fileprivate static func makeObjectWithName( _ name: String, inContext moc: NSManagedObjectContext? = nil ) -> Bool {

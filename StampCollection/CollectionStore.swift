@@ -670,6 +670,12 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         //println("Dict of section keys: \(nameCountDict)")
     }
     
+    func getAlbumLocations(_ moc: NSManagedObjectContext) {
+        albumTypes = fetch("AlbumType", inContext: moc, withFilter: nil)
+        albumFamilies = fetch("AlbumFamily", inContext: moc, withFilter: nil)
+        //albumSections = fetch("AlbumSection", inContext: moc, withFilter: nil)
+    }
+    
     fileprivate func showLocationStats(_ moc: NSManagedObjectContext, inCategory catnum: Int16) {
         //let predTypes = NSPredicate(format: "%K == %@", "", "")
         let albumTypes : [AlbumType] = fetch("AlbumType", inContext: moc, withFilter: nil)

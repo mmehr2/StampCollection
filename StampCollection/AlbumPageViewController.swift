@@ -24,16 +24,33 @@ class AlbumPageViewController: UICollectionViewController {
     
     
     func setStartAlbum( _ album: AlbumRef ) {
+        // make sure we can walk types and families
+        prepAlbumTypeList()
         // setup the navigator for this album family using individual volume of series
         navigator = AlbumFamilyNavigator(album: album)
     }
     
     func setStartPage( _ page: AlbumPage ) {
+        // make sure we can walk types and families
+        prepAlbumTypeList()
         // setup the navigator for this album family using current page to display
         navigator = AlbumFamilyNavigator(page: page)
     }
     
     fileprivate var navigator: AlbumFamilyNavigator!
+    
+    func prepAlbumTypeList() {
+        // NOTE: This is a bit of a kludge. It's needed to provide a class static way of getting at the list of album types of the system.
+        // This is performed naturally during inventory import, but if no import is done, the array is empty, thus the need for this
+        // It could probably be better placed elsehwere, but for now, here is the only place it is needed (TBD REVISIT DECISION!)
+        if AlbumType.theTypeNames.count == 0 {
+            if model.albumTypes.count == 0, let moc = model.getContextForThread(CollectionStore.mainContextToken) {
+                model.getAlbumLocations(moc)
+            }
+            AlbumType.setTypes(model.albumTypes)
+            print("Set empty album type list to \(AlbumType.theTypeNames)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
