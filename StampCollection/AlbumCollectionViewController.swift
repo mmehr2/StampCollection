@@ -25,21 +25,13 @@ class AlbumCollectionViewController: UICollectionViewController {
         // It could probably be better placed elsehwere, but for now, here is the only place it is needed (TBD REVISIT DECISION!)
         // ALSO NOTE: Since the creation of new objects uses the same mechanism as import, these lists should stay up to date as we add new inventory incrementally.
         guard let moc = model.getContextForThread(CollectionStore.mainContextToken) else { return }
-        if model.albumTypes.count == 0 || model.albumFamilies.count == 0 || model.albumSections.count == 0 {
-            model.getAlbumLocations(moc) // this gets all three arrays: albumTypes, albumFamilies, and albumSections
-        }
-        if AlbumType.allTheNames.count == 0 {
-            AlbumType.setObjects(model.albumTypes)
-            print("Set empty album type list to \(AlbumType.allTheNames)")
-        }
-        if AlbumFamily.allTheNames.count == 0 {
-            AlbumFamily.setObjects(model.albumFamilies)
-            print("Set empty album family list to \(AlbumFamily.allTheNames)")
-        }
-        if AlbumSection.allTheNames.count == 0 {
-            AlbumSection.setObjects(model.albumSections)
-            print("Set empty album section list to \(AlbumSection.allTheNames)")
-        }
+        model.getAlbumLocations(moc) // this gets all three arrays: albumTypes, albumFamilies, and albumSections
+        AlbumType.setObjects(model.albumTypes)
+        print("Set album type list to \(AlbumType.allTheNames)")
+        AlbumFamily.setObjects(model.albumFamilies)
+        print("Set album family list to \(AlbumFamily.allTheNames)")
+        AlbumSection.setObjects(model.albumSections)
+        print("Set album section list to \(AlbumSection.allTheNames)")
     }
     
     var families: [AlbumFamily] = []
