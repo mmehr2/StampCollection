@@ -212,7 +212,11 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                 case .invAskSection(let namelist), .invAskAlbum(let namelist):
                     // KLUDGE - we need to use a SearchType.location to return the textual result
                     let text : String = self.fields[0].text ?? ""
-                    let statcode = self.validateInvUsage(forText: text, in: namelist)
+                    var valTypes:[InvValidationType] = [.empty, .inUse(namelist)]
+                    if case .invAskAlbum = self.config.type {
+                        valTypes += [.numSuffix]
+                    }
+                    let statcode:InvValidationType = self.validateInvUsage(types:valTypes, forText: text)
                     if statcode != .OK {
                         let statstr = "Name is: \(statcode)"
                         self.RunWithViewController(vc, withStatus: statstr, andPresets: [text])
@@ -222,10 +226,10 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     handler(result)
                 case .invAskSectionAndAlbum(let namelist1, let namelist2):
                     // KLUDGE - we need to use a SearchType.location to return the textual result
-                    let text1 : String = self.fields[0].text ?? ""
-                    let text2 : String = self.fields[1].text ?? ""
-                    let statcode1 = self.validateInvUsage(forText: text1, in: namelist1)
-                    let statcode2 = self.validateInvUsage(forText: text2, in: namelist2)
+                    let text1 : String = self.fields[0].text ?? "" // section
+                    let text2 : String = self.fields[1].text ?? "" // album
+                    let statcode1 = self.validateInvUsage(types: [.empty, .inUse(namelist1)], forText: text1)
+                    let statcode2 = self.validateInvUsage(types: [.empty, .inUse(namelist2), .numSuffix], forText: text2)
                     if statcode1 != .OK || statcode2 != .OK {
                         let statstr = "Section is: \(statcode1); Album is: \(statcode2)"
                         self.RunWithViewController(vc, withStatus: statstr, andPresets: [text1, text2])
@@ -256,6 +260,7 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     textField.text = presets[index]
                 }
                 textField.tag = index
+                textField.clearButtonMode = .whileEditing
                 if fldconfig.type == .numeric {
                     textField.keyboardType = .numbersAndPunctuation //.NumberPad
                 } else if fldconfig.type == .text {
@@ -288,7 +293,7 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
     
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // runs when keyboard Done is pressed
+        // runs when keyboard Done is pressed, does nothing except edit next field (if more than one), or pass control on to the OK handler
         return true
     }
     
@@ -305,12 +310,16 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         //updateModel() // name field updated and keyboard dismissed
-        print("In textFieldDidEndEditing for field #\(textField.tag + 1)")
-        //textField.resignFirstResponder()
+        //textField.resignFirstResponder() // not needed here
     }
     
-    enum InvValidationType: CustomStringConvertible {
-        case OK, empty, inUse, badUse
+    enum InvValidationType: CustomStringConvertible, Equatable {
+        case OK, badUse, empty, inUse(String), numSuffix
+        
+        static func == (lhs: InvValidationType, rhs: InvValidationType) -> Bool {
+            return lhs.description == rhs.description
+        }
+        
         var description: String {
             switch self {
             case .OK:
@@ -319,24 +328,40 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                 return "Empty"
             case .inUse:
                 return "In Use"
+            case .numSuffix:
+                return "Numeric Suffix"
             default:
                 return "Bad Use"
             }
         }
     }
     
-    private func validateInvUsage(forText text: String?, in names: String) -> InvValidationType {
+    func validateInvUsage(types: [InvValidationType], forText text: String?) -> InvValidationType {
         if let text=text {
-            if text.isEmpty {
-                print("Name is empty, nonblank required. Please try again.")
-                return .empty
+            for type in types {
+                switch type {
+                case .empty:
+                    if text.isEmpty {
+                        print("Name is empty, nonblank required. Please try again.")
+                        return .empty
+                    }
+                case .inUse(let names):
+                    let pnames = names.components(separatedBy: ",")
+                    if pnames.contains(text) {
+                        print("Name \(text) is in list \(pnames); try again.")
+                        return .inUse(names)
+                    }
+                case .numSuffix:
+                    let (_, sfx) = splitNumericEndOfString(text)
+                    if !sfx.isEmpty {
+                        print("Name \(text) has numeric suffix \(sfx); try again.")
+                        return .numSuffix
+                    }
+                default:
+                    break
+                }
             }
-            let pnames = names.components(separatedBy: ",")
-            if pnames.contains(text) {
-                print("Name \(text) is in list \(pnames); try again.")
-                return .inUse
-            }
-            print("Name \(text) is validated (not in) \(pnames)")
+            print("Name \(text) is validated")
             return .OK
         } else {
             print("No text entered. Please try again.")
