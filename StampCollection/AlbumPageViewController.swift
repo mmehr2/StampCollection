@@ -184,6 +184,7 @@ class AlbumPageViewController: UICollectionViewController {
                 var description = "Item will be added to "
                 description += "page 1 of the new section [\(secname)] of the current album group."
                 print(description)
+                messageBoxWithTitle("Add to Named Section", andBody: description, forController: self)
                 //return addToNewPageEx(.NamedSection(secname))
             }
         }
@@ -198,6 +199,7 @@ class AlbumPageViewController: UICollectionViewController {
                 var description = "Item will be added to "
                 description += "page 1 of the new section [\(secname)] of the next album in the current album group."
                 print(description)
+                messageBoxWithTitle("Add to Named Section, Next Album", andBody: description, forController: self)
                 //return addToNewPageEx(.NextAlbumNamedSection(secname))
             }
         }
@@ -215,6 +217,7 @@ class AlbumPageViewController: UICollectionViewController {
                     var description = "Item will be added to "
                     description += "page 1 of the default section [] of a new album group (name: \(famname), type: \(typename))."
                     print(description)
+                    messageBoxWithTitle("Add to New Album Group", andBody: description, forController: self)
                     //addToNewPageEx(.NewAlbumFamily(famname, typename))
                 }
             }
@@ -236,6 +239,7 @@ class AlbumPageViewController: UICollectionViewController {
                     var description = "Item will be added to "
                     description += "page 1 of the new section [\(secname)] of a new album group (name: \(famname), type: \(typename))."
                     print(description)
+                    messageBoxWithTitle("Add to Named Section, New Album Group", andBody: description, forController: self)
                     //addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typename, secname))
                 }
             }
@@ -266,7 +270,7 @@ class AlbumPageViewController: UICollectionViewController {
     enum AddType {
         case ThisPage, NextPageEx, NextPage, NextAlbum
         //, NamedSection(String) // needs section name
-        //, NextAlbumNamedSection(String) // needs section name
+        //, NewAlbumNamedSection(String) // needs section name
         //, NewAlbumFamily(String,String) // needs album and albumtype names
         //, NewAlbumFamilyNamedSection(String,String,String) // needs section, album and albumtype names
     }
