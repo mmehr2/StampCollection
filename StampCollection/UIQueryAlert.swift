@@ -235,6 +235,12 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     textField.keyboardType = .numbersAndPunctuation //.NumberPad
                 } else if fldconfig.type == .text {
                     textField.keyboardType = .default //.ASCIICapable
+                    switch self.config.type {
+                    case UIQueryAlertType.invAskSection, UIQueryAlertType.invAskAlbum, UIQueryAlertType.invAskSectionAndAlbum:
+                        textField.autocapitalizationType = .allCharacters
+                    default:
+                        break
+                    }
                 }
                 textField.returnKeyType = .done
                 self.fields.append(textField)
