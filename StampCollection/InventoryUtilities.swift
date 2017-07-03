@@ -81,8 +81,8 @@ func offsetAlbumPageExInData(_ data_: [String:String], by offset:Int = 1) -> [St
 }
 
 // create modified page data object by adding an offset to the albumRef numeric suffix (default inc by 1)
-// NOTE: for compatibility, if no numeric portion exists, one is created at 1 (however, this should not happen in the current design, since all albums were renumbered on the 01 scheme and display mods were added)
-func offsetAlbumIndexInData(_ data_: [String:String], by offset:Int = 1) -> [String:String] {
+// NOTE: if no numeric portion exists, one is created at 1; this is used internally when creating a new album family in code (the existing data has been modified to use no blank refs)
+func offsetAlbumIndexInData(_ data_: [String:String], by offset:Int = 1, restartPages: Bool = false) -> [String:String] {
     // this will increment the numeric portion of the index portion of the albumRef field in the data
     guard let albumRef = data_["albumRef"] else {
         // give up, no changes (silently) if no albumRef provided
@@ -93,13 +93,39 @@ func offsetAlbumIndexInData(_ data_: [String:String], by offset:Int = 1) -> [Str
     var data = data_
     if let numint = Int(numstr) {
         data["albumRef"] = AlbumRef.makeCode(fromFamily: family, andNumber: numint + offset)
+        data["albumFamily"] = family
     } else {
-        // current number didn't exist (should not happen now!), assume unnumbered first item is always 1
+        // current number didn't exist (internal use only), assume unnumbered first item is always 1
         data["albumRef"] = AlbumRef.makeCode(fromFamily: family, andNumber: 1)
+        data["albumFamily"] = family
     }
     // NOTE: since we have created a new album here (continuing the same section as before), we must also increment the page number to prevent duplicate page codes
     // since it is possible that other patterns will emerge for using this function, this can be commented out, but some way of preventing duplicates must be assured
-    data = offsetAlbumPageInData(data)
+    if restartPages {
+        // sometimes, the page should be set to the beginning
+        data["albumPage"] = "1"
+    } else {
+        data = offsetAlbumPageInData(data)
+    }
     return data
 }
 
+func addPageOneOfNewSection(_ secname: String, toAlbumData data: [String:String]) -> [String:String] {
+    var albumData = data
+    albumData["albumSection"] = secname
+    return albumData
+}
+
+func addPageOneOfNewSection(_ secname: String, toNextAlbumData data: [String:String]) -> [String:String] {
+    var albumData = data
+    albumData["albumSection"] = secname
+    return offsetAlbumIndexInData(albumData, by: 1, restartPages: true)
+}
+
+func addPageOneOfSection(_ secname: String, toNewAlbumFamily familyName: String, ofType familyType: String, withData data: [String:String]) -> [String:String] {
+    var albumData = data
+    albumData["albumSection"] = secname
+    albumData["albumType"] = familyType
+    albumData["albumRef"] = familyName // this is ok for internal use, will create a ref to album #1 of family
+    return offsetAlbumIndexInData(albumData, by: 0, restartPages: true)
+}

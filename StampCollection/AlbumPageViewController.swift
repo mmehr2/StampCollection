@@ -181,11 +181,7 @@ class AlbumPageViewController: UICollectionViewController {
         let existingNames = AlbumSection.allTheNames.sorted().joined(separator: ",")
         let qa = UIQueryAlert(type: .invAskSection(existingNames)) { result in
             if case let SearchType.location(secname) = result {
-                var description = "Item will be added to "
-                description += "page 1 of the new section [\(secname)] of the current album group."
-                print(description)
-                messageBoxWithTitle("Add to Named Section", andBody: description, forController: self)
-                //return addToNewPageEx(.NamedSection(secname))
+                return self.addToNewPageEx(.NamedSection(secname))
             }
         }
         qa.RunWithViewController(self)
@@ -196,11 +192,7 @@ class AlbumPageViewController: UICollectionViewController {
         let existingNames = AlbumSection.allTheNames.sorted().joined(separator: ",")
         let qa = UIQueryAlert(type: .invAskSection(existingNames)) { result in
             if case let SearchType.location(secname) = result {
-                var description = "Item will be added to "
-                description += "page 1 of the new section [\(secname)] of the next album in the current album group."
-                print(description)
-                messageBoxWithTitle("Add to Named Section, Next Album", andBody: description, forController: self)
-                //return addToNewPageEx(.NextAlbumNamedSection(secname))
+                return self.addToNewPageEx(.NextAlbumNamedSection(secname))
             }
         }
         qa.RunWithViewController(self)
@@ -213,12 +205,7 @@ class AlbumPageViewController: UICollectionViewController {
             if case let SearchType.location(famname) = result {
                 // run TYP name selector or cancel operation
                 self.runAlbumTypeSelector() { typename in
-                    // exit if cancelled
-                    var description = "Item will be added to "
-                    description += "page 1 of the default section [] of a new album group (name: \(famname), type: \(typename))."
-                    print(description)
-                    messageBoxWithTitle("Add to New Album Group", andBody: description, forController: self)
-                    //addToNewPageEx(.NewAlbumFamily(famname, typename))
+                    return self.addToNewPageEx(.NewAlbumFamily(famname, ofType: typename))
                 }
             }
         }
@@ -235,12 +222,8 @@ class AlbumPageViewController: UICollectionViewController {
                 let secname = comps[0]
                 let famname = comps[1]
                 // run TYP name selector or cancel operation
-                self.runAlbumTypeSelector() { typename in
-                    var description = "Item will be added to "
-                    description += "page 1 of the new section [\(secname)] of a new album group (name: \(famname), type: \(typename))."
-                    print(description)
-                    messageBoxWithTitle("Add to Named Section, New Album Group", andBody: description, forController: self)
-                    //addToNewPageEx(.NewAlbumFamilyNamedSection(famname, typename, secname))
+                self.runAlbumTypeSelector() { altypename in
+                    return self.addToNewPageEx(.NewAlbumFamilyNamedSection(secname, inFamily: famname, ofType: altypename))
                 }
             }
         }
@@ -269,16 +252,17 @@ class AlbumPageViewController: UICollectionViewController {
 
     enum AddType {
         case ThisPage, NextPageEx, NextPage, NextAlbum
-        //, NamedSection(String) // needs section name
-        //, NewAlbumNamedSection(String) // needs section name
-        //, NewAlbumFamily(String,String) // needs album and albumtype names
-        //, NewAlbumFamilyNamedSection(String,String,String) // needs section, album and albumtype names
+        , NamedSection(String) // needs section name
+        , NextAlbumNamedSection(String) // needs section name
+        , NewAlbumFamily(String, ofType: String) // needs album and albumtype names
+        , NewAlbumFamilyNamedSection(String, inFamily:String, ofType:String) // needs section, album and albumtype names
     }
     
     fileprivate func addToNewPageEx(_ type: AddType) {
         if let invBuilder = model.invBuilder, let nav = navigator {
             var description = "Item will be added to "
             var addedNewAlbum = false
+            var debug = false
             // create a ref to the next page of the end of the current section in whatever album that's in
             // step 1. make sure we are at the proper EOS marker (for current section page add)
             // step 2. get the data ref of the current page
@@ -308,12 +292,45 @@ class AlbumPageViewController: UICollectionViewController {
                 pageDataOrg = nav.getRefAsData()
                 pageData = offsetAlbumIndexInData(pageDataOrg)
                 addedNewAlbum = true
+            case .NamedSection(let secname):
+                description += "page 1 of the new section [\(secname)] of the current album group."
+                // must be at end of section (across all albums in family)
+                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+                pageDataOrg = nav.getRefAsData()
+                pageData = addPageOneOfNewSection(secname, toAlbumData: pageDataOrg)
+                //debug = true
+                break
+            case .NextAlbumNamedSection(let secname):
+                description += "page 1 of the new section [\(secname)] of the next album in the current album group."
+                // must be in last album of family
+                nav.gotoMarker(.SeriesEnd)
+                pageDataOrg = nav.getRefAsData()
+                pageData = addPageOneOfNewSection(secname, toNextAlbumData: pageDataOrg)
+                //debug = true
+                break
+            case .NewAlbumFamily(let famname, let typename):
+                description += "page 1 of the default section [] of a new album group (name: \(famname), type: \(typename))."
+                // no need to change positions
+                pageDataOrg = nav.getRefAsData() // is this needed?
+                pageData = addPageOneOfSection("", toNewAlbumFamily: famname, ofType: typename, withData: pageDataOrg)
+                //debug = true
+                break
+            case .NewAlbumFamilyNamedSection(let secname, let famname, let typename):
+                description += "page 1 of the new section [\(secname)] of a new album group (name: \(famname), type: \(typename))."
+                // no need to change positions
+                pageDataOrg = nav.getRefAsData() // is this needed?
+                pageData = addPageOneOfSection(secname, toNewAlbumFamily: famname, ofType: typename, withData: pageDataOrg)
+                //debug = true
+                break
             }
             print(description)
             print("Repos Page data: \(pageDataOrg)")
             print("New Page data: \(pageData)")
             // step 4. use alternate form of invBuilder.addLocation to create new location from reference
-            if invBuilder.addLocation(pageData) {
+            if debug {
+                updateUI() // in case of repositioning side-effects
+                messageBoxWithTitle("Add to Inventory", andBody: description, forController: self)
+           } else if invBuilder.addLocation(pageData) {
                 print("About to add item on page: \(invBuilder)")
                 if invBuilder.createItem(for: model) {
                     if let newnav = invBuilder.navigatorForNewPage {
