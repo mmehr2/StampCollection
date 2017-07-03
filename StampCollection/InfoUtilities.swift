@@ -299,3 +299,79 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
     //println("Found [\(found)] as YearRange[fmt=\(fmtFound), \(startYear)...\(endYear)]") //\(descr2)")
     return (fmtFound, startYear...endYear, startMonth...endMonth, startDay...endDay)
 }
+
+/*
+ ONE-TIME TASK UTILITIES
+ This is the place to add functionality to scan and fix parts of the INFO or INVENTORY databases that shouldn't need to be repeated often.
+ The calls can be placed at the appropriate point in the runtime code, but can be cut off here, funneled through the master funcion.
+ */
+
+enum OneTimeTaskType: CustomStringConvertible {
+    case OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS(model: CollectionStore?)
+    
+    var description: String {
+        switch self {
+        case .OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS:
+            return "OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS"
+        }
+    }
+}
+
+// map of types to their functions (use nil to prevent execution)
+// NOTE: In spite of the name, the facility can be used with multiple calls and/or even running them every time. It's all in the source code here.
+typealias TaskFunc = ((OneTimeTaskType) -> String)
+fileprivate let ottPolicies:[String:TaskFunc?] = [
+    OneTimeTaskType.OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS(model: nil).description: nil, //removeInfoFoldersDuplicateDates,
+]
+
+func callUtilityTask(_ otttype: OneTimeTaskType) -> String {
+    var result = ""
+    for (tasktype, taskfunc) in ottPolicies {
+        if let taskfunc = taskfunc {
+            print("Running Task \(tasktype)")
+            result = taskfunc(otttype)
+        }
+    }
+    return result
+}
+
+// Utility to remove duplicate dates YYYY YYYY at start of InfoBulletin descriptionX fields (code feXXXX in category 29)
+fileprivate func removeInfoFoldersDuplicateDates(_ ott:OneTimeTaskType) -> String {
+    var result = ""
+    // first attempt: count them
+    // fetch
+    let CATEG_INFOLDERS:Int16 = 29
+    if case OneTimeTaskType.OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS(model: let store) = ott, let model = store {
+        let objects = model.fetchInfoInCategory(CATEG_INFOLDERS)
+        let objects2 = objects.filter() { x in
+            return filterDuplicateDatePrefix(x.descriptionX!)
+        }
+        let objects3 = objects2.map{fixTheDuplicatePrefix($0)}.map{$0.descriptionX!}
+        let objects4 = objects3.joined(separator: "\n")
+        result = "Found \(objects3.count) info folder objects with duplicate dates out of total \(objects.count) objects."
+        print("\(result)\n\(objects4)")
+    }
+    return result
+}
+
+fileprivate func filterDuplicateDatePrefix(_ test: String) -> Bool {
+    var result = false
+    guard test.characters.count >= 9 else { return result }
+    guard let c1 = test.characters.first, getCharacterClass(c1) == .numeric else { return result }
+    let splitPt1 = test.index(test.startIndex, offsetBy: 4)
+    let splitPt2 = test.index(splitPt1, offsetBy: 1)
+    let splitPt3 = test.index(splitPt2, offsetBy: 4)
+    let firstFour = test.substring(to: splitPt1)
+    let nextFour = test.substring(with: splitPt2..<splitPt3)
+    if firstFour == nextFour {
+        result = true
+    }
+    return result
+}
+
+fileprivate func fixTheDuplicatePrefix(_ x: DealerItem) -> DealerItem {
+    var item = x
+    item.descriptionX = String(x.descriptionX.characters.dropFirst(5))
+    return item
+    
+}

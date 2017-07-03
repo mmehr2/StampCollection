@@ -172,6 +172,11 @@ class InfoCategoriesTableViewController: UITableViewController {
             if let cat = self.model.fetchCategory(CATNUM_AUSTRIAN) {
                 populateJSDictionary(cat)
             }
+            // perform any "one-time" registered utilities
+            let uresult = callUtilityTask(.OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS(model: self.model))
+            if !uresult.isEmpty {
+                messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
+            }
         }
     }
 
