@@ -173,7 +173,7 @@ class InfoCategoriesTableViewController: UITableViewController {
                 populateJSDictionary(cat)
             }
             // perform any "one-time" registered utilities
-            let uresult = callUtilityTask(.OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS(model: self.model))
+            let uresult = callUtilityTasks(forModel: self.model)
             if !uresult.isEmpty {
                 messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
             }
