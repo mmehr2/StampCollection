@@ -309,6 +309,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
 enum OneTimeTaskType: CustomStringConvertible {
     case OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS
     , OTT2017_07_05_ADD_MISSING_INFOLDERS
+    , OTT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS
     
     var description: String {
         switch self {
@@ -316,6 +317,8 @@ enum OneTimeTaskType: CustomStringConvertible {
             return "OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS"
         case .OTT2017_07_05_ADD_MISSING_INFOLDERS:
             return "OTT2017_07_05_ADD_MISSING_INFOLDERS"
+        case .OTT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS:
+            return "OTT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS"
         }
     }
 }
@@ -326,6 +329,7 @@ typealias TaskFunc = ((CollectionStore) -> String)
 fileprivate let ottPolicies:[String:TaskFunc?] = [
     OneTimeTaskType.OTT2017_07_02_INFOLDERS_W_DUPLICATE_YEARS.description: nil, //(removeInfoFoldersDuplicateDates as! TaskFunc),
     OneTimeTaskType.OTT2017_07_05_ADD_MISSING_INFOLDERS.description: createMissingFoldersCSV,
+    OneTimeTaskType.OTT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS.description: createMissingATMBlancoLabelsCSV,
 ]
 
 func callUtilityTasks(forModel model: CollectionStore) -> String {
@@ -442,3 +446,85 @@ fileprivate func printFolderCSVEntry(_ folderNum:Int, fromSetItem item: DealerIt
     let fecode = "fe\(fepref)\(folderNum)"
     print("\(fecode),\"\(item.descriptionX!)\",Unavailable,feuillet2,0,\"(X)Information Folders\",,,0.65,0.00,,,1,0,0,0,,,,,29")
 }
+
+// U3, Utility to generate missing Blanco ATM labels.
+// Method:
+// 1. Search for Category 26 (ATM labels) with keywords like 'Sima' and 'Inbar' (filter? search criteria?) - filter out descriptionX containing "FDC"
+// 2. For each item, add 'bl' to the code, modify the description (use up to ',' and add ", blanco label"), and use the appropriate value/price line to generate and print the CSV entries
+// 3. Print the stats as results (#mods, #examined)
+//
+// 6110k1313bl,"26.08.13 'Sima 49' Nymphaea caerulea, blanco label",Unavailable,6110k1313,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+//
+// RUN RESULTS:
+// There are several varieties included in the BT main list here that should also be avoided:
+/*
+ 6110k0707bl,"27.08.07 'Sima 13' Eilat, blanco label",Unavailable,6110k0707,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+ 6110k0708bl,"27.08.07 'Sima 13' Eilat, blanco label",Unavailable,6110k0708,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+ 6110k0803bl,"14.05.08 'Sima 9' Rehovot, blanco label",Unavailable,6110k0803,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+ 6110k0804bl,"14.05.08 'Sima 11' 'Doarmat 11' Doar Israel II, blanco label",Unavailable,6110k0804,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+ 6110k0805bl,"14.05.08 'Sima 12' Ashdod, blanco label",Unavailable,6110k0805,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+ 6110k0806bl,"14.05.08 'Sima 13' Eilat, blanco label",Unavailable,6110k0806,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
+from base entries:
+ 6110k0707,"27.08.07 'Sima 13' Eilat, full set of 8 values, Eilat machine 013 1.50/2.20/2.40/2.50/2.90/3.00/4.30/4.90",Available,6110k0707,0,"Vending Machine Labels",,,14.00,,,,1,0,0,0,,,,,26
+ 6110k0708,"27.08.07 'Sima 13' Eilat, full set of 8 values, Carmiel machine 004 1.50/2.20/2.40/2.50/2.90/3.00/4.30/4.90",Available,6110k0708,0,"Vending Machine Labels",,,14.00,,,,1,0,0,0,,,,,26
+ 6110k0803,"14.05.08 'Sima 9' Rehovot, full set of 8 values 1.55/2.25/2.80/3.30/3.40/4.50/4.60/5.80 Black Ink",Available,6110k0803,0,"Vending Machine Labels","C --","B M.09",14.00,,,,1,0,0,0,,,,,26
+ 6110k0804,"14.05.08 'Sima 11' 'Doarmat 11' Doar Israel II, full set of 8 values 1.55/2.25/2.80/3.30/3.40/4.50/4.60/5.80 Black Ink",Available,6110k0804,0,"Vending Machine Labels","C --","B M.11",14.00,,,,1,0,0,0,,,,,26
+ 6110k0805,"14.05.08 'Sima 12' Ashdod, full set of 8 values 1.55/2.25/2.80/3.30/3.40/4.50/4.60/5.80 Black Ink",Available,6110k0805,0,"Vending Machine Labels","C --","B M.12",14.00,,,,1,0,0,0,,,,,26
+ 6110k0806,"14.05.08 'Sima 13' Eilat, full set of 8 values 1.55/2.25/2.80/3.30/3.40/4.50/4.60/5.80 Black Ink",Available,6110k0806,0,"Vending Machine Labels","C --","B M.13",14.00,,,,1,0,0,0,,,,,26
+ */
+// Rather than find a pattern here, just exclude these IDs directly
+//
+
+let CATEG_ATM:Int16 = 26
+let ignores = [ "6110k0707", "6110k0708", "6110k0803", "6110k0804", "6110k0805", "6110k0806", ]
+fileprivate func createMissingATMBlancoLabelsCSV(_ model: CollectionStore) -> String {
+    var result = ""
+    var firstCode = ""
+    var lastCode = ""
+    var firstDesc = ""
+    var lastDesc = ""
+    var totalAdded = 0
+    let objects1 = model.fetchInfoInCategory(CATEG_ATM, withSearching: [.keyWordListAny(["Sima", "Inbar"])], andSorting: .byImport(true))
+    let objects2 = objects1.filter() { x in
+        return !(x.descriptionX!.contains("FDC") || x.id!.contains("m") || x.id!.contains("bl"))
+    }
+    let objects3 = objects2.filter() { x in
+        return !ignores.contains(x.id!)
+    }
+    for item in objects3 {
+        let blIdCode = "\(item.id!)bl"
+        let descCore = getCoreOfATMDescription(item)
+        if let _ = model.fetchInfoItemByID(blIdCode) {
+            //print("\(item.id!): \(descCore) already has a blanco label.")
+            continue
+        }
+        printATMBlancoCSVEntry(fromSetItem: item)
+        totalAdded += 1
+        if firstCode.isEmpty {
+            firstCode = item.id!
+        }
+        lastCode = item.id!
+        if firstDesc.isEmpty {
+            firstDesc = descCore
+        }
+        lastDesc = descCore
+    }
+    if totalAdded > 0 {
+        result = "Created \(totalAdded) CSV entries for ATM blanco labels for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
+        print(result)
+    }
+    return result
+}
+
+fileprivate func getCoreOfATMDescription(_ item: DealerItem) -> String {
+    let desclines = item.descriptionX!.components(separatedBy: ",")
+    return desclines[0]
+}
+
+fileprivate func printATMBlancoCSVEntry(fromSetItem item: DealerItem) {
+    let idCode = item.id!
+    let desc = getCoreOfATMDescription(item)
+    print("\(idCode)bl,\"\(desc), blanco label\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",,,45.00,,,,0,0,0,0,,,,,26")
+}
+
+
