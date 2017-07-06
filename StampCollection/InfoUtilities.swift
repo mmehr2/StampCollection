@@ -447,7 +447,7 @@ fileprivate func printFolderCSVEntry(_ folderNum:Int, fromSetItem item: DealerIt
     print("\(fecode),\"\(item.descriptionX!)\",Unavailable,feuillet2,0,\"(X)Information Folders\",,,0.65,0.00,,,1,0,0,0,,,,,29")
 }
 
-// U3, Utility to generate missing Blanco ATM labels.
+// U3, Utility to generate missing entries for ATM labels (blanco, machine sets).
 // Method:
 // 1. Search for Category 26 (ATM labels) with keywords like 'Sima' and 'Inbar' (filter? search criteria?) - filter out descriptionX containing "FDC"
 // 2. For each item, add 'bl' to the code, modify the description (use up to ',' and add ", blanco label"), and use the appropriate value/price line to generate and print the CSV entries
@@ -492,22 +492,26 @@ fileprivate func createMissingATMBlancoLabelsCSV(_ model: CollectionStore) -> St
         return !ignores.contains(x.id!)
     }
     for item in objects3 {
+        // test for and create blanco label if needed
         let blIdCode = "\(item.id!)bl"
         let descCore = getCoreOfATMDescription(item)
-        if let _ = model.fetchInfoItemByID(blIdCode) {
+        if model.fetchInfoItemByID(blIdCode) == nil {
+            printATMBlancoCSVEntry(fromSetItem: item)
+            totalAdded += 1
+            if firstCode.isEmpty {
+                firstCode = item.id!
+            }
+            lastCode = item.id!
+            if firstDesc.isEmpty {
+                firstDesc = descCore
+            }
+            lastDesc = descCore
+        } else {
             //print("\(item.id!): \(descCore) already has a blanco label.")
-            continue
+            //continue
         }
-        printATMBlancoCSVEntry(fromSetItem: item)
-        totalAdded += 1
-        if firstCode.isEmpty {
-            firstCode = item.id!
-        }
-        lastCode = item.id!
-        if firstDesc.isEmpty {
-            firstDesc = descCore
-        }
-        lastDesc = descCore
+        // also test for and create related machine sets for the same base sets
+        printATM_MachineSets_CSVEntries(fromSetItem: item, inModel: model)
     }
     if totalAdded > 0 {
         result = "Created \(totalAdded) CSV entries for ATM blanco labels for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
@@ -527,4 +531,205 @@ fileprivate func printATMBlancoCSVEntry(fromSetItem item: DealerItem) {
     print("\(idCode)bl,\"\(desc), blanco label\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",,,45.00,,,,0,0,0,0,,,,,26")
 }
 
+// Utility 3a, derived from above to add machine sets interleaved with the blanco labels
+/* REPRESENTATIVE SAMPLE
+ 6110k1001m004,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Carmiel machine 004 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m006,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Haifa machine 006 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m008,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Netanya machine 008 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m010,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Jerusalem machine 010 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m011,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Rehovot machine 011 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m012,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Beer Sheva machine 012 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m013,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Eilat machine 013 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m015,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Nazareth machine 015 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ 6110k1001m018,"03.01.10 'Sima 24' Yellow birds, full set of 8 values, Ashdod machine 018 - 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70",Unavailable,6110k1001,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+ taken from
+ 6110k1001,"03.01.10 'Sima 24' Birds of Israel 2, full set of 8 values 1.60/2.40/3.60/3.80/4.60/5.30/6.50/6.70","1 In Stock",6110k1001,0,"Vending Machine Labels","C --","B --",17.50,,,,1,0,0,0,,,,,26
+  OR
+ 6110k1511,"24.11.15 'Inbar 4' Christmas, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1511,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
 
+ */
+
+let machineListSima = [
+    "001":"Jaffa IPS",
+    "002":"Nahariya",
+    "003":"Acre",
+    "004":"Carmiel", // Tari's preferred spelling of Carmel
+    "005":"Tiberia",
+    "006":"Haifa",
+    "007":"Hadera",
+    "008":"Netanya",
+    "009":"Tel Aviv",
+    "010":"Jerusalem", // replaced with 020 in 2014+
+    "011":"Rehovot",
+    "012":"Beer Sheva",
+    "013":"Eilat", // retired in 2013+
+    "014":"Exhibition",
+    "015":"Nazareth",
+    "016":"Exhibition?",
+    "017":"Exhibition",
+    "018":"Ashdod",
+    "020":"Jerusalem", // replaces 010 in 2014+
+    "061":"Exhibition",
+    "062":"Exhibition",
+    "065":"Exhibition",
+]
+
+let machineListInbar = [
+    "001":"Tel Aviv IPS",
+    "101":"Jerusalem",
+    "220":"Beer Sheva",
+    "300":"Ashdod",
+    "326":"Rishon LeZion",
+    "450":"Rehovot",
+    "636":"Netanya",
+    "714":"Haifa",
+    "900":"Tiberia",
+    "920":"Acre",
+    "987":"Nazareth",
+    "1601":"Exhibition",
+    "1602":"Exhibition",
+    "1603":"Exhibition",
+]
+
+// catalog of what to actually add (no real pattern here to exploit that I can see)
+/*
+ 6110k1301,"01.01.13 'Sima 44' Endangered Flowers, full set of 8 values 2.00/3.00/3.50/4.20/4.50/5.00/6.10/6.20","1 In Stock",6110k1301,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1303,"05.02.13 'Sima 45' Negev Iris, full set of 8 values 2.00/3.00/3.50/4.20/4.50/5.00/6.10/6.20","1 In Stock",6110k1303,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1305,"02.04.13 'Sima 46' Coral Peony, full set of 8 values 2.00/3.00/3.50/4.20/4.50/5.00/6.10/6.20","1 In Stock",6110k1305,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+NEW:
+ 6110k1307,"26.05.13 'Sima 47' Spotted Rockrose, full set of 8 values 2.00/3.00/3.50/4.20/4.50/5.00/6.10/6.20","1 In Stock",6110k1307,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1309,"26.05.13 'Sima 48' Stamp Exhibition, full set of 8 values 2.00/3.00/3.50/4.20/4.50/5.00/6.10/6.20","1 In Stock",6110k1309,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1313,"26.08.13 'Sima 49' Nymphaea caerulea, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70","1 In Stock",6110k1313,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1315,"25.11.13 'Sima 50' Christmas, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70","1 In Stock",6110k1315,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1401,"01.01.14 'Sima 51' Weasels, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70",Available,6110k1401,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1403,"11.02.14 'Sima 52' Marbled Polecat, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70",Available,6110k1403,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1405,"08.04.14 'Sima 53' Beech Marten, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70",Available,6110k1405,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1407,"26.05.14 'Sima 54' Pope Francis, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70",Available,6110k1407,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1409,"23.06.14 'Sima 55' Honey Badger, full set of 8 values 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70",Available,6110k1409,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1411,"09.09.14 'Sima 56' Eurasian Badger, full set of 8 values 2.00/3.10/3.20/3.80/4.60/5.10/5.50/5.60",Available,6110k1411,0,"Vending Machine Labels",,,17.50,,,,1,0,0,0,,,,,26
+ 6110k1413,"25.11.14 'Sima 57' Christmas, full set of 8 values 1.80/2.70/3.20/3.80/4.00/5.10/5.50/5.60",Available,6110k1413,0,"Vending Machine Labels",,,16.00,,,,1,0,0,0,,,,,26
+ 6110k1501,"11.02.15 'Sima 58' Partridges, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1501,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1503,"14.04.15 'Sima 59' Chukar, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1503,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1505,"01.06.15 'Inbar 1' (4th vending self-adhesive labels machine ATM, with 6 fixed tariff values, 10 numbered machines were introduced gradually) Definitive, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1505,0,"Vending Machine Labels",,,16.00,,,,1,0,0,0,,,,,26
+ 6110k1506,"01.06.15 'Inbar 1' Post delivery, FDC inland 2.20 value","5 In Stock",6110k1506,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
+ 6110k1507,"16.06.15 'Inbar 2' Sand Partridge, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1507,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1509,"02.09.15 'Inbar 3' Francolinus, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1509,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1511,"24.11.15 'Inbar 4' Christmas, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1511,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1513,"08.12.15 'Inbar 5' Quail, full set of 6 values 2.20/4.10/6.50/7.40/8.30/9.00",Available,6110k1513,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1601,"01.01.16 'Inbar 6' Dog Adoption, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1601,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1603,"09.02.16 'Inbar 7' Dog Adoption Willy, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1603,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1605,"19.04.16 'Inbar 8' Dog Adoption Bob, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1605,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1607,"21.06.16 'Inbar 9' Dog Adoption Viki & Riki, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1607,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1609,"13.09.16 'Inbar 10' Dog Adoption Teddy, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1609,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1611,"13.11.16 'Inbar 11' Christmas, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1611,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1613,"13.11.16 'Inbar 12' Jerusalem 2016, full set of 6 values 2.30/4.10/6.50/7.40/8.30/9.00",Available,6110k1613,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1701,"01.01.17 'Inbar 13' Road Safety, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1701,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1703,"07.02.17 'Inbar 14' Cross at the Crossing, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1703,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1705,"04.04.17 'Inbar 15' Buckle up for Life, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1705,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ 6110k1707,"13.06.17 'Inbar 16' Ride Safely, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1707,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+ */
+let issues = [
+    // 2013
+    "6110k1301": [["004","006","008","010","011","012","015","018"], // base rate given by desc2 from BT
+                  ["001","004","006","008","010","011","012","015","018"], //13.RC
+                  ["001","006","008","010","011","015","018"], //13.RC2
+    ],
+    "6110k1303": [["012"],["001","012"],["001","012"],],
+    "6110k1305": [["004"],["001","004"],["001","004"],],
+    "6110k1307": [["011"],["001","011"],["001","011"],],
+    "6110k1309": [["065"],],
+    "6110k1313": [["006"],],
+    "6110k1315": [["010","015"],],
+    // 2014
+    "6110k1401": [["004","006","010","011","012","015","018","020"], // base rate given by desc2 from BT
+        ["001","004","006","011","012","015","018","020"], //14.RC
+        ["001","004","006","011","012","015","018","020"], //14.RC2
+    ],
+    "6110k1403": [["008","010","020"],["001","008"],["001","008"],],
+    "6110k1405": [["004"],["001","004"],["001","004"],],
+    "6110k1407": [["020"],],
+    "6110k1409": [["011"],["001","011"],["001","011"],],
+    "6110k1411": [["015"],[],["001","015"]],
+    "6110k1413": [["015","020"],],
+    // 2015 Sima
+    "6110k1501": [["004", "008", "011", "015", "020"],],
+    "6110k1503": [["004"],],
+    // 2015 Inbar
+    "6110k1505": [["101","220","300","326","450","636","714","900","920","987"],],
+    "6110k1507": [["300"],],
+    "6110k1509": [["900"],],
+    "6110k1511": [["101","987"],],
+    "6110k1513": [["220"],],
+    // 2016 Inbar
+    "6110k1601": [["101","220","300","326","450","636","714","900","920","987","1603"],],
+    "6110k1603": [["220"],],
+    "6110k1605": [["450"],],
+    "6110k1607": [["101"],],
+    "6110k1609": [["714"],],
+    "6110k1613": [["1601"],],
+    "6110k1611": [["101","987","1602"],],
+    // 2017 Inbar
+    "6110k1701": [["101","220","300","326","450","636","714","900","920","987"],],
+    "6110k1703": [["300"],],
+    "6110k1705": [["326"],],
+    "6110k1707": [["636"],],
+]
+
+let rateSets = [
+    "13.RC": " 2.00/3.10/3.50/4.20/4.60/5.00/6.10/6.20",
+    "13.RC2": " 2.00/3.10/3.20/3.90/4.60/5.20/5.60/5.70", // also base rates for 2014
+    "14.RC": " 2.00/3.10/3.20/3.80/4.60/5.10/5.50/5.60",
+    "14.RC2": " 1.80/2.70/3.20/3.80/4.00/5.10/5.50/5.60",
+]
+
+fileprivate func printATM_MachineSets_CSVEntries(fromSetItem item: DealerItem, inModel model:CollectionStore) {
+    let idCode = item.id!
+    let kRange = idCode.range(of: "6110k")!
+    let ycodeX = idCode.substring(from: kRange.upperBound)
+    let ycode = String(ycodeX.characters.prefix(2))
+    
+    let desc = item.descriptionX!
+    let isSima = desc.range(of: "'Sima ") != nil
+    let isInbar = desc.range(of: "'Inbar ") != nil
+    guard isSima != isInbar else { return } // just one or the other
+    let macnames = isSima ? machineListSima : machineListInbar
+    
+    if let macnumsets = issues[idCode] {
+        // primary rates (desc2) used for these machine numbers
+        printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[0], withNames: macnames)
+        if macnumsets.count > 1 {
+            // first secondary rates used with these numbers
+            printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[1], withNames: macnames, andRateSet: ycode+".RC")
+        }
+        if macnumsets.count > 2 {
+            // second secondary rates used with these numbers
+            printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[2], withNames: macnames, andRateSet: ycode+".RC2")
+        }
+    }
+}
+
+fileprivate func printATM_SingleMachineSet_CSVEntries(fromSetItem item: DealerItem, inModel model:CollectionStore, forMachines macnums:[String], withNames macnames:[String:String], andRateSet rsCode: String = "") {
+    let idCode = item.id!
+    let desc = item.descriptionX!
+    if let valRange = desc.range(of: "values") {
+        let desc1 = desc.substring(to: valRange.upperBound)
+        var desc2 = desc.substring(from: valRange.upperBound)
+        var rcString = ""
+        if !rsCode.isEmpty {
+            desc2 = rateSets[rsCode]!
+            let rcss = rsCode.components(separatedBy: ".")
+            if rcss.count > 1 {
+                rcString = rcss[1]
+            }
+        }
+        for macnum in macnums {
+            let msetCode = "\(idCode)\(rcString)m\(macnum)"
+            // probe for existence of individual mset entry and only add if not already exists
+            if model.fetchInfoItemByID(msetCode) == nil {
+                if let macname = macnames[macnum] {
+                    print("\(msetCode),\"\(desc1), \(macname) machine \(macnum) -\(desc2)\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",\"C --\",\"B --\",55.00,,,,0,0,0,0,,,,,26")
+                }
+            }
+        }
+    }
+}
