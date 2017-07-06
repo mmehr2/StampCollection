@@ -172,8 +172,8 @@ class InfoCategoriesTableViewController: UITableViewController {
             if let cat = self.model.fetchCategory(CATNUM_AUSTRIAN) {
                 populateJSDictionary(cat)
             }
-            // perform any "one-time" registered utilities
-            let uresult = callUtilityTasks(forModel: self.model)
+            // perform any registered utility tasks
+            let uresult = UtilityTaskRunner.defaultRunner.callUtilityTasks(forModel: self.model)
             if !uresult.isEmpty {
                 messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
             }
