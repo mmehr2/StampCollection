@@ -27,6 +27,7 @@ class InventoryBuilder {
     private let category: Category
     private var refItem: DealerItem?
     private var albumLoc: AlbumPage?
+    private var relatedFolder: DealerItem?
     
     private var hasPage: Bool {
         return albumLoc != nil
@@ -43,6 +44,13 @@ class InventoryBuilder {
     
     private var canCreate: Bool {
         return hasPage || hasNewPageData
+    }
+    
+    private var addingSetFDC: Bool {
+        // detects if we are adding a set (cat.2) FDC to the album family "FDC"
+        guard let aref = data["AlbumFamily"], aref == "FDC" else { return false }
+        let pufdc = PriceUsage(.FDC(false), num: dealerItem.category!.numPriceTypes)
+        return dealerItem.catgDisplayNum == CATEG_SETS && priceType == pufdc.ptype.ptype
     }
     
     var navigatorForNewPage: AlbumFamilyNavigator? {
@@ -126,7 +134,7 @@ class InventoryBuilder {
         return addLocation(albumData)
     }
     
-    private func getDataForItemCreation(_ count: Int) -> [String:String] {
+    private func modifyData(_ data:[String:String], forItemCreation count: Int) -> [String:String] {
         var retval = data
         retval.removeValue(forKey: "AlbumFamily") // used for page creation but not inventory item creation
         retval["exOrder"] = "\(count)" // NOTE: currently this is Int16 - need to expand it after 65K items in inventory
@@ -152,11 +160,27 @@ class InventoryBuilder {
             // make sure we have the album page object to continue creation
             if hasPage {
                 let count = model.getCountForType(.inventory, fromCategory: CollectionStore.CategoryAll, inContext: token)
-                let itemData = getDataForItemCreation(count)
+                let itemData = modifyData(data, forItemCreation: count)
                 result = InventoryItem.makeObjectFromData(itemData, withRelationships: relations, inContext: mocForThread)
                 if result {
                     if let invRef = InventoryItem.getLastCreatedInventoryObject() {
                         print("The created item was #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
+                        // also if we are adding an FDC to the FDC album, add the related folder if found
+                        if addingSetFDC {
+                            findRelatedFolder(in: model)
+                            if let _ = relatedFolder {
+                                // add the folder to inventory on the same page, and make sure it refers to the set item used
+                                let fdata = getRelatedFolderData()
+                                let folderRlations = getRelatedFolderRelations()
+                                let folderData = modifyData(fdata, forItemCreation: count + 1)
+                                result = InventoryItem.makeObjectFromData(folderData, withRelationships: folderRlations, inContext: mocForThread)
+                                if result {
+                                    if let invFolderRef = InventoryItem.getLastCreatedInventoryObject() {
+                                        print("The created item for the related folder was #\(invFolderRef.exOrder) on page \(invFolderRef.page?.code ?? "none")")
+                                    }
+                                }
+                           }
+                        }
                     }
                     result = model.saveMainContext()
                     if result {
@@ -174,6 +198,47 @@ class InventoryBuilder {
         let desc = formatDealerDetail(dealerItem)
         print(desc)
         return result
+    }
+    
+    func findRelatedFolder(in model: CollectionStore) {
+        // look up the Info Folder item, if any, with the same description as the base DealerItem we are building
+        let descWords = dealerItem.descriptionX!.components(separatedBy: " ").filter() { $0.characters.count > 5 }
+        let search = SearchType.keyWordListAll(descWords)
+        let fitems = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [search], andSorting: .byCode(false))
+        if fitems.count == 0 {
+            print("Could not find folder related to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
+        } else {
+            print("Examining \(fitems.count) related folders for exact match to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
+            for fldr in fitems {
+                if fldr.descriptionX! == dealerItem.descriptionX! {
+                    relatedFolder = fldr
+                    print("Found related folder #\(fldr.id!): \(fldr.descriptionX!)")
+                }
+            }
+        }
+    }
+    
+    private func getRelatedFolderData() -> [String:String] {
+        // create a copy of the inventory data and modify it
+        var rfdata = data
+        rfdata["itemType"] = "price1"
+        rfdata["wantHave"] = data["wantHave"]
+        rfdata["baseItem"] = relatedFolder!.id!
+        rfdata["desc"] = ""
+        rfdata["notes"] = ""
+        rfdata["refItem"] = dealerItem.id!
+        rfdata["catgDisplayNum"] = "\(relatedFolder!.category.number)"
+        return rfdata
+    }
+    
+    private func getRelatedFolderRelations() -> [String:NSManagedObject] {
+        // create a copy of the inventory relations and modify it
+        var rfrelations = relations
+        rfrelations["dealerItem"] = relatedFolder!
+        rfrelations["category"] = relatedFolder!.category!
+        rfrelations["referredItem"] = dealerItem
+        rfrelations["page"] = albumLoc!
+        return rfrelations
     }
     
     func isItemAddable(to: AlbumFamilyNavigator) -> Bool {
