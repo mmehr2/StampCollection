@@ -22,7 +22,11 @@ enum UIQueryFieldType {
 }
 
 enum UIQueryFieldDesignator {
-    case keywordList, yearRangeStart, yearRangeEnd, idPattern, invSectionName, invAlbumName
+    case keywordList, yearRangeStart, yearRangeEnd, idPattern
+    , invSectionName, invAlbumName
+    , invPartSetM
+    , invPartSetOfN
+    , invPartSetVal(String)
 }
 
 struct UIQueryFieldConfiguration {
@@ -64,6 +68,21 @@ struct UIQueryFieldConfiguration {
             placeholder = "Album Group name (nonblank)"
             type = .text
             break
+        case .invPartSetM:
+            // set up the two numeric field configs
+            placeholder = "Which part M (M of N)"
+            type = .numeric
+            break
+        case .invPartSetOfN:
+            // set up the two numeric field configs
+            placeholder = "Number of pars N (M of N)"
+            type = .numeric
+            break
+        case .invPartSetVal(let option):
+            // set up the two numeric field configs
+            placeholder = "Value \(option)"
+            type = .text
+            break
         }
     }
 }
@@ -72,7 +91,8 @@ enum UIQueryAlertType {
     case keyword, yearRange, subCategory
     , invAskSection(String) // include existing section names to avoid
     , invAskAlbum(String) // include existing album names to avoid
-    , invAskSectionAndAlbum(String,String)
+    , invAskSectionAndAlbum(String,String) // include both the above
+    , invAskPartialSetValues
 }
 
 struct UIQueryAlertConfiguration {
@@ -139,6 +159,19 @@ struct UIQueryAlertConfiguration {
             "Do not use one of the album names already used: \(albnames).\n"
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invSectionName))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invAlbumName))
+            break
+        case .invAskPartialSetValues:
+            // set up the single text field config
+            title = "Partial Set Description"
+            body = "Enter the number of parts to split and which one (m of n).\n" +
+                "Then enter up to four values in order.\n" +
+            "The description of the partial set will be added to the Inventory Item pending its location."
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetOfN))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetM))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("1")))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("2 (OPT)")))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("3 (OPT)")))
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("4 (OPT)")))
             break
         }
     }
@@ -238,6 +271,15 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     // the double result is returned as a string delimited by a semicolon (disallow semicolons in names)
                     let text = "\(text1);\(text2)"
                     result = SearchType.location(text)
+                    handler(result)
+                case .invAskPartialSetValues:
+                    // the values are packed into a keyword array
+                    // by convention, N and M are first; defaults are "" if not entered
+                    var results:[String] = []
+                    for field in self.fields {
+                        results.append(field.text ?? "")
+                    }
+                    result = SearchType.keyWordListAny(results)
                     handler(result)
                 }
             }

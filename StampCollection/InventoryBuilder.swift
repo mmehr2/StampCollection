@@ -83,6 +83,31 @@ class InventoryBuilder {
         relations["referredItem"] = item
     }
     
+    func setPartialSetInfo(_ values:[String]) {
+        // sets the desc field to the form:
+        // Partial set (2v): 2.00(blue) 5.00(red) (#1/3)
+        // input is assumed to be in order [N, M, val1, val2, ...]
+        // empty entries ("") are ignored, except N and M which get defaults as follows:
+        let n = Int(values[0]) ?? 1
+        let m = Int(values[1]) ?? 0
+        var vals = [String]()
+        for val in values[2..<values.count] {
+            if !val.isEmpty {
+                vals.append(val)
+            }
+        }
+        let valstrs = vals.joined(separator: " ")
+        let ofstr:String
+        if m>0 && n>1 {
+            ofstr = " (#\(m)/\(n))"
+        } else {
+            ofstr = ""
+        }
+        let desc = "Partial set (\(vals.count)v): \(valstrs)\(ofstr)"
+        print("Setting desc field to \(desc)")
+        data["desc"] = desc
+    }
+    
     func addLocation(_ pageRef: AlbumPage) -> Bool {
         // add to any existing album page
         albumLoc = pageRef

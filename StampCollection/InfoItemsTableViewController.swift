@@ -163,6 +163,19 @@ class InfoItemsTableViewController: UITableViewController {
                         }),
                         ("Split Set in Parts", {x in
                             // code that will setup Partial Set description in invBuilder
+                            let kwc = UIQueryAlert(type: .invAskPartialSetValues) { srchType in
+                                // put the related data into the master VC's variables
+                                switch srchType {
+                                case .keyWordListAny(let values):
+                                    if let ivb = self.model.invBuilder {
+                                        ivb.setPartialSetInfo(values)
+                                    }
+                                    break
+                                default:
+                                    break
+                                }
+                            }
+                            kwc.RunWithViewController(self)
                         }),
                         ]
                     menuBoxWithTitle("Modify Add Action", andBody: ibMenuItems, forController: self)
