@@ -136,17 +136,40 @@ class InfoItemsTableViewController: UITableViewController {
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBAction func moreButtonPressed(_ sender: UIBarButtonItem) {
         // run an alert controller to choose from a menu of less-used functions
-        let path = self.tableView.indexPathForSelectedRow!
+        guard let path = self.tableView.indexPathForSelectedRow else { return }
         let row = path.row
         if ftype == .info {
             let infoitem = self.model.info[row]
-            let menuItems : [MenuBoxEntry] = [
-                ("!Delete Item", { x in
-                    self.model.removeInfoItem(infoitem, commit: true)
-                    self.refetchData()
+            
+            let masterMenuItems : [MenuBoxEntry] = [
+                ("Remove Info Item", { x in
+                    // first selection: run the box to delete the item if possible
+                    let delMenuItems : [MenuBoxEntry] = [
+                        ("!Delete Item", { x in
+                            self.model.removeInfoItem(infoitem, commit: true)
+                            self.refetchData()
+                        }),
+                        ]
+                    menuBoxWithTitle("Remove selected item from database", andBody: delMenuItems, forController: self)
                 }),
-            ]
-            menuBoxWithTitle("Remove selected item from database", andBody: menuItems, forController: self)
+                ("Modify Add Action", { x in
+                    // second selection: run a box to select options on the inventory builder
+                    let ibMenuItems : [MenuBoxEntry] = [
+                        ("Disable FDC Folder", {x in
+                            // code that will disable the invBuilder's folder additions
+                            if let ivb = self.model.invBuilder {
+                                ivb.allowRelatedFolder = false
+                            }
+                        }),
+                        ("Split Set in Parts", {x in
+                            // code that will setup Partial Set description in invBuilder
+                        }),
+                        ]
+                    menuBoxWithTitle("Modify Add Action", andBody: ibMenuItems, forController: self)
+                }),
+                ]
+            menuBoxWithTitle("Info Tools", andBody: masterMenuItems, forController: self)
+           
         }
         if ftype == .inventory {
             let invitem = self.model.inventory[row]

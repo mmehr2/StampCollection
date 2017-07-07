@@ -29,6 +29,8 @@ class InventoryBuilder {
     private var albumLoc: AlbumPage?
     private var relatedFolder: DealerItem?
     
+    var allowRelatedFolder: Bool
+    
     private var hasPage: Bool {
         return albumLoc != nil
     }
@@ -72,6 +74,7 @@ class InventoryBuilder {
         category = baseItem.category!
         relations["category"] = category
         data["catgDisplayNum"] = "\(category.number)"
+        allowRelatedFolder = true
         //relations[""] = ""
     }
 
@@ -166,7 +169,7 @@ class InventoryBuilder {
                     if let invRef = InventoryItem.getLastCreatedInventoryObject() {
                         print("The created item was #\(invRef.exOrder) on page \(invRef.page?.code ?? "none")")
                         // also if we are adding an FDC to the FDC album, add the related folder if found
-                        if addingSetFDC {
+                        if allowRelatedFolder && addingSetFDC {
                             findRelatedFolder(in: model)
                             if let _ = relatedFolder {
                                 // add the folder to inventory on the same page, and make sure it refers to the set item used
