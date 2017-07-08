@@ -66,6 +66,7 @@
 		A67977E11BB11994007F298D /* AlbumFamily+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67977D91BB11994007F298D /* AlbumFamily+CoreDataProperties.swift */; };
 		A68104041F0ED8720000272B /* InfoFolderUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104031F0ED8720000272B /* InfoFolderUtilities.swift */; };
 		A68104061F0EDC480000272B /* ATMUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104051F0EDC480000272B /* ATMUtilities.swift */; };
+		A68104081F101F310000272B /* getItemDetails.js in Resources */ = {isa = PBXBuildFile; fileRef = A68104071F101F310000272B /* getItemDetails.js */; };
 		A6856E521B06FDF8004B506E /* AlbumType+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */; };
 		A6856E541B06FE1B004B506E /* AlbumFamily+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */; };
 		A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */; };
@@ -181,6 +182,7 @@
 		A67977D91BB11994007F298D /* AlbumFamily+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumFamily+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A68104031F0ED8720000272B /* InfoFolderUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoFolderUtilities.swift; sourceTree = "<group>"; };
 		A68104051F0EDC480000272B /* ATMUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMUtilities.swift; sourceTree = "<group>"; };
+		A68104071F101F310000272B /* getItemDetails.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getItemDetails.js; sourceTree = "<group>"; };
 		A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumType+Ex.swift"; sourceTree = "<group>"; };
 		A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumFamily+Ex.swift"; sourceTree = "<group>"; };
 		A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumRef+Ex.swift"; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 		A6E198451AD6EEEC0090FDB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A68104071F101F310000272B /* getItemDetails.js */,
 				A632CBAB1AEEDBDD00565686 /* getJSItems.js */,
 				A60DBCB71AE38C3400D4959D /* getItems.js */,
 				A60DBCAF1AE19C3B00D4959D /* getCategories.js */,
@@ -584,6 +587,7 @@
 				A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */,
 				A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */,
 				A60DBC711ADBC13600D4959D /* info.csv in Resources */,
+				A68104081F101F310000272B /* getItemDetails.js in Resources */,
 				A6B34CFF1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx in Resources */,
 				A63965F01BED528E00308F2F /* InventoryItemView.xib in Resources */,
 				A6E198521AD6EEEC0090FDB1 /* Images.xcassets in Resources */,

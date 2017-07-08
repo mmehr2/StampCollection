@@ -813,8 +813,17 @@ func getSectionSortOrder( _ section: String ) -> Int {
             case "S/S": return 3
             case "P": return 4
             case "ILS": return 5
-            case "AS": return 6
-            // needs total expansion here - TBD actually needs to be derived from object instead (user-editable and expandable)
+            case "AS": return 6 // Needs: PC, SERXXXX(4 planned? whenever Plate #1 gets reused lol - pick the year:1948, 1960, 1980, 1986), PB, SIMAFDC, SA
+            // Furthermore, now the user can invent these at will, so assignments can only be made at creation time (or import)
+            // The JOINT album family is worst case - no clues as to order except the j-code (as listed above), still this can be the primary ref even for new sections
+            // In other albums, there aren't often too many where sections gather in one album, but the SA booklets and generic sheets come to mind - I've chosen arrangements that are grouped by sheet type
+            //  For example, the DOAR24 SA sheets have been ongoing now for over a decade, and well-used, adding a menorah every time it's reissued. So they have their own section. Similar to other definitive SA "booklet" sheets.
+            //   BT lists them in category 24 (Special Sheets, Sheetlets, Combination) and seems to group the different numbers of menorahs together with the same base code, adding a capital letter suffix
+            //   This scheme doesn't always hold, but often causes the dreaded "missing-1" scenario, i.e., 6110e1005 becomes 6110e005A-G for example; this scheme was changed a few years back and played havoc with the update system, but I worked it out.
+            // So, in other words, this scheme needs total expansion here - TBD actually needs to be derived from album object instead (user-editable and expandable), since this defines "Album Ordering"
+            // NOTE: Since the sections remain roughly in date order of first issue (actually set order of base set), we can derive an overall ordering from this, working for both 6110j, 6110e, and future, IFF I get the referred items working properly!
+            //
+            /*Set album section list to ["JAUSTRALIA", "", "JROMANIA", "JBELGIUM", "PC", "JPOLAND2", "S/S", "Tab", "JUN_NGV", "JFRANCE", "JRUSSIA", "JCHINA", "AS", "JPOLAND", "JINDIA", "JNEPAL", "SER1948", "JVATICAN", "JSLOVAKIA", "JUSA", "JAUS_HUN", "JHUNGARY", "SER1960", "PB", "JCANADA", "JGERMANY", "SIMAFDC", "ILS", "TabD", "JAUSTRIA", "JOINT", "JCZECH", "JITALY", "SA", "P", "JGEORGIA"]*/
         default: return 99999
             }}
     }

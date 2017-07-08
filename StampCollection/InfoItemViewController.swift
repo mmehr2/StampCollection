@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoItemViewController: UIViewController {
+class InfoItemViewController: UIViewController, BTInfoProtocol {
 
     // set by client for info (CoreData object) usage
     var item: DealerItem!
@@ -16,6 +16,25 @@ class InfoItemViewController: UIViewController {
     // OPT - set by client instead of the above for DealerItem object usage
     var btitem: BTDealerItem!
     var btcat: BTCategory!
+    
+    var infoNode = BTMessageDelegate()
+    private var oldLabel: String?
+    private var extraInfo: String? {
+        willSet {
+            if let newValue = newValue {
+                // set label extension
+                if let text = descriptionLabel.text {
+                    oldLabel = text
+                    descriptionLabel.text = "\(text)\n\(newValue)"
+                }
+            } else {
+                // remove label extension
+                if let old = oldLabel {
+                    descriptionLabel.text = "\(old)"
+                }
+            }
+        }
+    }
     
     fileprivate var usingBT: Bool {
         if btitem != nil && btcat != nil {
@@ -31,6 +50,9 @@ class InfoItemViewController: UIViewController {
     }
     fileprivate var itemCategoryName: String {
         return usingBT ? btcat.name  : item.category.name
+    }
+    fileprivate var itemCategoryNumber: Int16 {
+        return usingBT ? btcat.infoNumber  : item.category.number
     }
     fileprivate var itemPictid: String {
         return usingBT ? btitem.picref : item.pictid
@@ -53,6 +75,7 @@ class InfoItemViewController: UIViewController {
         // make sure the toolbar is visible
 //        self.navigationController?.navigationBarHidden = false
 //        self.navigationController?.toolbarHidden = false
+        infoNode.delegate = self
         updateUI()
     }
 
@@ -73,16 +96,27 @@ class InfoItemViewController: UIViewController {
         yearRangeLabel.text = usingBT ? "" : item.normalizedDate
         descriptionLabel.text = itemDescription
         // set imageView to a webkit view if possible showing the BT or JS panel, using pictid
-        if let pfrurl = picFileURLSource {
-            print("TBD- Downloading file:\(pfrurl.absoluteString) for pictid:\(itemPictid)")
-        }
-        if let pflurl = picFileURLDestination {
-            print("TBD- Caching file:\(pflurl.absoluteString) for pictid:\(itemPictid)")
-        }
+//        if let pfrurl = picFileURLSource {
+//            print("TBD- Downloading file:\(pfrurl.absoluteString) for pictid:\(itemPictid)")
+//        }
+//        if let pflurl = picFileURLDestination {
+//            print("TBD- Caching file:\(pflurl.absoluteString) for pictid:\(itemPictid)")
+//        }
         webInfoButton.isEnabled = picPageURL != nil
+        if let nodeUrl = picPageURL?.absoluteString {
+            infoNode.loadItemDetailsFromWeb(nodeUrl, forCategory: itemCategoryNumber)
+        }
         if !displayImageFileIfPossible() {
             // download image file if needed (on background thread) to display later
             downloadAndDisplayImage()
+        }
+    }
+    
+    // MARK: BTInfoProtocol
+    func messageHandler(_ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int) {
+        if let data = data as? [String:String], let info = data["info"] {
+            print("Data received from infoNode:\(data)")
+            extraInfo = info
         }
     }
 
