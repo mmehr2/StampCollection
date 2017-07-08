@@ -128,7 +128,7 @@ extension DealerItem: SortTypeSortable {
     }
     
     var picFileRemoteURL: URL? {
-        return getPicFileRemoteURL(pictid, refType: isJS ? .dljsRef  : .dlRef)
+        return getPicFileRemoteURL(pictid, refType: isJS ? .dljsRef  : .dlRef, category: Int(catgDisplayNum))
     }
     
     var picFileLocalURL: URL? {
