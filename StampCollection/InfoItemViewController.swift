@@ -89,6 +89,8 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
         // download image file if needed (on background thread) to display later
         downloadAndDisplayImage()
     }
+
+    let CATEG_SHEETS: Int16 = 31
     
     func updateUI() {
         categoryLabel.text = itemCategoryName
@@ -104,7 +106,12 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
 //        }
         webInfoButton.isEnabled = picPageURL != nil
         if let nodeUrl = picPageURL?.absoluteString {
-            infoNode.loadItemDetailsFromWeb(nodeUrl, forCategory: itemCategoryNumber)
+            var catnumToUse = itemCategoryNumber
+            if itemCategoryNumber == CATEG_SHEETS {
+                catnumToUse = CATEG_SETS
+                // picPageURL is already set to display the base set here, no need to change that
+            }
+            infoNode.loadItemDetailsFromWeb(nodeUrl, forCategory: catnumToUse)
         }
         if !displayImageFileIfPossible() {
             // download image file if needed (on background thread) to display later
