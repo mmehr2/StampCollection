@@ -189,7 +189,7 @@ class U5Task: UtilityTaskRunnable {
 // U6, Utility to scan the bulletins cat.30 to detect diffs between ID and PICTID and write a code table that can be used to modify task U4 so that it will still work if run again
 class U6Task: UtilityTaskRunnable {
     static let defaultTask = U6Task()
-    var isEnabled: Bool { return true }
+    var isEnabled: Bool { return false }
     var taskName: String { return "UT2017_07_10_BULLETINS_REGEN_U4_SOURCE_PICTID_DIFFTABLE" }
     func runUtilityTask(_ model: CollectionStore) -> String {
         return regenPictidDifferencesTable(model)
