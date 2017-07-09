@@ -97,13 +97,6 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
         idLabel.text = itemID
         yearRangeLabel.text = usingBT ? "" : item.normalizedDate
         descriptionLabel.text = itemDescription
-        // set imageView to a webkit view if possible showing the BT or JS panel, using pictid
-//        if let pfrurl = picFileURLSource {
-//            print("TBD- Downloading file:\(pfrurl.absoluteString) for pictid:\(itemPictid)")
-//        }
-//        if let pflurl = picFileURLDestination {
-//            print("TBD- Caching file:\(pflurl.absoluteString) for pictid:\(itemPictid)")
-//        }
         webInfoButton.isEnabled = picPageURL != nil
         if let nodeUrl = picPageURL?.absoluteString {
             var catnumToUse = itemCategoryNumber

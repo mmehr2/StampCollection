@@ -143,7 +143,24 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
     var endMonth = 0
     var endDay = 0
     // begin testing here; order of tests IS IMPORTANT
-    if let match = descr.range(of: "^[0-9][0-9][0-9][0-9][s ]", options: .regularExpression) {
+    if let match = descr.range(of: "[0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]$", options: .regularExpression) {
+        fmtFound = 11 // which is YYYY.MM.DD at the END of the description; this is from Folders and Bulletins (cat.29,30), Morgenstein format
+        // this MUST precede format 1,2 finds, because these strings always start with a YYYY date as well
+        // if this is found in another category, it is probably mistaken (but let's see what happens)
+        // in this format the size of DD and YY is always 2, since leading zeroes are used
+        found = descr.substring(with: match)
+        let dmy = found.components(separatedBy: ".")
+        let yyyy = Int(dmy[0])!
+        startYear = yyyy;
+        endYear = startYear
+        let mm = Int(dmy[1])!
+        startMonth = mm;
+        endMonth = startMonth
+        let dd = Int(dmy[2])!
+        startDay = dd;
+        endDay = startDay
+    }
+    else if let match = descr.range(of: "^[0-9][0-9][0-9][0-9][s ]", options: .regularExpression) {
         found = descr.substring(with: match)
         let yyyy = Int(String(found.characters.prefix(4)))!        //let yyyy = Int(found[0...3])!
         startYear = yyyy;
@@ -334,6 +351,7 @@ class UtilityTaskRunner {
             U3Task.defaultTask.register(with: self)
             U4Task.defaultTask.register(with: self)
             U5Task.defaultTask.register(with: self)
+            U6Task.defaultTask.register(with: self)
        }
         for runner in utRegistrations {
             if runner.isEnabled {
