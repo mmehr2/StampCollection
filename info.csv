@@ -4778,8 +4778,9 @@ fe1022,"2017 Jerusalem Reunification - Souvenir Sheet",Unavailable,feuillet2,0,"
 fe1023,"2017 WWI Allenby",Unavailable,feuillet2,0,"(X)Information Folders",,,0.65,0.00,,,1,0,0,0,,,,,29
 fe1024,"2017 20th Maccabiah",Unavailable,feuillet2,0,"(X)Information Folders",,,0.65,0.00,,,1,0,0,0,,,,,29
 fe1025,"2017 Music Love Songs",Unavailable,feuillet2,0,"(X)Information Folders",,,0.65,0.00,,,1,0,0,0,,,,,29
-bu003,"1949 Flag FMT=[A1] (no picture, just text) 1949.03.31",Unavailable,bul3,0,"(X)Information Bulletins","B 0016",,0.00,0.00,,,0,0,0,0,,,,,30
-bu004,"1949 Petah Tikvah FMT=[A1] (no number) 1949.08.10",Unavailable,bul4,0,"(X)Information Bulletins","B 0017",,0.00,0.00,,,0,0,0,0,,,,,30
+bu002,"1948 New Year FMT=[A1] (no picture, just text) 1949.09.21?",Unavailable,bul5e,0,"(X)Information Bulletins","B 0016",,0.00,0.00,,,0,0,0,0,,,,,30
+bu003,"1949 Flag FMT=[A1] (no picture, just text) 1949.03.31",Unavailable,bulN5,0,"(X)Information Bulletins","B 0016",,0.00,0.00,,,0,0,0,0,,,,,30
+bu009,"1949 Petah Tikvah FMT=[A1] (no number) 1949.08.10",Unavailable,bul9e,0,"(X)Information Bulletins","B 0017",,0.00,0.00,,,0,0,0,0,,,,,30
 bu010,"1949 New Year FMT=[A1]  1949.09.20",Unavailable,bul10,0,"(X)Information Bulletins","B 0018-0020",,0.00,0.00,,,0,0,0,0,,,,,30
 bu011,"1949 Negcv Entire FMT=[A1]  1949.10.10",Unavailable,bul11,0,"(X)Information Bulletins","B ENV002",,0.00,0.00,,,0,0,0,0,,,,,30
 bu012,"1949 2nd Coins MERED FMT=[A1]  1949.12.18",Unavailable,bul12,0,"(X)Information Bulletins","B 0021-0026",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -4788,9 +4789,9 @@ bu014,"1950 75th Anniversary UPU FMT=[A1]  1950.03.26",Unavailable,bul14,0,"(X)I
 bu019,"1950 UPU booklets FMT=[A1]  1950.03.26",Unavailable,bul19,0,"(X)Information Bulletins","B 0027-0028",,0.00,0.00,,,0,0,0,0,,,,,30
 bu015,"1950 MERED COIN FMT=[A1]  1950.06.01",Unavailable,bul15,0,"(X)Information Bulletins","B B 04 - B 06",,0.00,0.00,,,0,0,0,0,,,,,30
 bu017,"1950 Hebrew University FMT=[A1]  1950.06.25",Unavailable,bul17,0,"(X)Information Bulletins","B 0031",,0.00,0.00,,,0,0,0,0,,,,,30
-bu018,"1950 1st Airmail (birds) FMT=[1rregu1ar] (no number, booklet) 1950.06.25",Unavailable,bul18,0,"(X)Information Bulletins","B 0032",,0.00,0.00,,,0,0,0,0,,,,,30
-bu021,"1950 3rd Maccabiah FMT=[A1]  1950.08.31",Unavailable,bul21,0,"(X)Information Bulletins","B 0040",,0.00,0.00,,,0,0,0,0,,,,,30
-bu023,"1951 Official Stamps FMT=[A1]  1951.02.01",Unavailable,bul23,0,"(X)Information Bulletins","B OFl -OF4",,0.00,0.00,,,0,0,0,0,,,,,30
+bu018,"1950 1st Airmail (birds) FMT=[irregular] (no number, booklet) 1950.06.25",Unavailable,bul18,0,"(X)Information Bulletins","B 0032",,0.00,0.00,,,0,0,0,0,,,,,30
+bu021,"1950 3rd Maccabiah FMT=[A1]  1950.08.31",Unavailable,bul21e,0,"(X)Information Bulletins","B 0040",,0.00,0.00,,,0,0,0,0,,,,,30
+bu023,"1951 Official Stamps FMT=[A1]  1951.02.01",Unavailable,bul23e,0,"(X)Information Bulletins","B OFl -OF4",,0.00,0.00,,,0,0,0,0,,,,,30
 bu024,"1951 Tel Aviv FMT=[A1]  1951.03.22",Unavailable,bul24,0,"(X)Information Bulletins","B 0048",,0.00,0.00,,,0,0,0,0,,,,,30
 bu016,"1951 1950 Independence FMT=[A1]  1951.04.23",Unavailable,bul16,0,"(X)Information Bulletins","B 0029-0030",,0.00,0.00,,,0,0,0,0,,,,,30
 bu026,"1951 Israel Bonds FMT=[A1]  1951.04.30",Unavailable,bul26,0,"(X)Information Bulletins","B 0049",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -4799,7 +4800,7 @@ bu025,"1951 JNF FMT=[A1]  1951.05.09",Unavailable,bul25,0,"(X)Information Bullet
 bu028,"1951 Herzl FMT=[A2]  1951.08.14",Unavailable,bul28,0,"(X)Information Bulletins","B 0055",,0.00,0.00,,,0,0,0,0,,,,,30
 bu029,"1951 New Year FMT=[A1]  1951.09.16",Unavailable,bul29,0,"(X)Information Bulletins","B 0056-0058",,0.00,0.00,,,0,0,0,0,,,,,30
 bu030,"1952 Menorah FMT=[A2]  1952.02.17",Unavailable,bul30,0,"(X)Information Bulletins","B 0059",,0.00,0.00,,,0,0,0,0,,,,,30
-bu031,"1952 4th Coins FMT=[1rregu1ar] (no picture, just text, square format) 1952.03.30",Unavailable,bul31,0,"(X)Information Bulletins","B 0061-0065",,0.00,0.00,,,0,0,0,0,,,,,30
+bu031,"1952 4th Coins FMT=[irregular] (no picture, just text, square format) 1952.03.30",Unavailable,bul31,0,"(X)Information Bulletins","B 0061-0065",,0.00,0.00,,,0,0,0,0,,,,,30
 bu032,"1952 TABA Airmail FMT=[A2]  1952.04.13",Unavailable,bul32,0,"(X)Information Bulletins","B 0066-0067",,0.00,0.00,,,0,0,0,0,,,,,30
 bu033,"1952 Independence FMT=[A2]  1952.04.29",Unavailable,bul33,0,"(X)Information Bulletins","B 0068-0070",,0.00,0.00,,,0,0,0,0,,,,,30
 bu034,"1952 ZOA House FMT=[A2]  1952.05.13",Unavailable,bul34,0,"(X)Information Bulletins","B 0071",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -4810,17 +4811,17 @@ bu038,"1952 BILU FMT=[A3]  1952.12.31",Unavailable,bul38,0,"(X)Information Bulle
 bu039,"1953 MERED COIN FMT=[A2]  1953.01.04",Unavailable,bul39,0,"(X)Information Bulletins","B B08",,0.00,0.00,,,0,0,0,0,,,,,30
 bu041,"1953 Independence FMT=[A3]  1953.04.19",Unavailable,bul41,0,"(X)Information Bulletins","B 0086",,0.00,0.00,,,0,0,0,0,,,,,30
 bu042,"1953 Maimonides FMT=[A3]  1953.08.03",Unavailable,bul42,0,"(X)Information Bulletins","B 0087",,0.00,0.00,,,0,0,0,0,,,,,30
-bu044,"1953 4th Maccaiah Games FMT=[A3]  1953.09.20",Unavailable,bul44,0,"(X)Information Bulletins","B 0091",,0.00,0.00,,,0,0,0,0,,,,,30
+bu044,"1953 4th Maccaiah Games FMT=[A3]  1953.09.20",Unavailable,bul44e,0,"(X)Information Bulletins","B 0091",,0.00,0.00,,,0,0,0,0,,,,,30
 bu045,"1953 Conquest ofthe Desert FMT=[A3]  1953.09.22",Unavailable,bul45,0,"(X)Information Bulletins","B 0092",,0.00,0.00,,,0,0,0,0,,,,,30
 bu046,"1954 5th Coins FMT=[A3]  1954.01.05",Unavailable,bul46,0,"(X)Information Bulletins","B 0093-0096",,0.00,0.00,,,0,0,0,0,,,,,30
-bu047,"1954 Landscape Airmails FMT=[A3] (various issue dates; see text) 1954.03.04",Unavailable,bul47,0,"(X)Information Bulletins","B 0079-0085",,0.00,0.00,,,0,0,0,0,,,,,30
+bu047,"1954 Landscape Airmails FMT=[A3] (various issue dates; see text) 1954.03.04",Unavailable,bul47e,0,"(X)Information Bulletins","B 0079-0085",,0.00,0.00,,,0,0,0,0,,,,,30
 bu048,"1954 Independence FMT=[A3]  1954.05.05",Unavailable,bul48,0,"(X)Information Bulletins","B 0097-0098",,0.00,0.00,,,0,0,0,0,,,,,30
-bu049,"1954 Herzl FMT=[A3]  1954.07.21",Unavailable,bul49,0,"(X)Information Bulletins","B 0099",,0.00,0.00,,,0,0,0,0,,,,,30
-bu051,"1954 New Year FMT=[A3]  1954.09.08",Unavailable,bul51,0,"(X)Information Bulletins","B 0100",,0.00,0.00,,,0,0,0,0,,,,,30
+bu049,"1954 Herzl FMT=[A3]  1954.07.21",Unavailable,bul49e,0,"(X)Information Bulletins","B 0099",,0.00,0.00,,,0,0,0,0,,,,,30
+bu051,"1954 New Year FMT=[A3]  1954.09.08",Unavailable,bul51e,0,"(X)Information Bulletins","B 0100",,0.00,0.00,,,0,0,0,0,,,,,30
 bu052,"1954 Tabim stamp show FMT=[A3]  1954.10.13",Unavailable,bul52,0,"(X)Information Bulletins","B 0101-102",,0.00,0.00,,,0,0,0,0,,,,,30
 bu050,"1954 Rothschild FMT=[A3]  1954.11.23",Unavailable,bul50,0,"(X)Information Bulletins","B 0103",,0.00,0.00,,,0,0,0,0,,,,,30
 bu056,"1955 Independence   1955.04.26",Unavailable,bul56,0,"(X)Information Bulletins","B 0106",,0.00,0.00,,,0,0,0,0,,,,,30
-bu057,"1955 Youth Aliyah FMT=[1rregu1ar] (no number, glossy paper, has prices) 1955.05.10",Unavailable,bul57,0,"(X)Information Bulletins","B 0107-0112",,0.00,0.00,,,0,0,0,0,,,,,30
+bu057,"1955 Youth Aliyah FMT=[irregular] (no number, glossy paper, has prices) 1955.05.10",Unavailable,bul57,0,"(X)Information Bulletins","B 0107-0112",,0.00,0.00,,,0,0,0,0,,,,,30
 bu063,"1956 Independence   1956.04.12",Unavailable,bul63,0,"(X)Information Bulletins","B 0132",,0.00,0.00,,,0,0,0,0,,,,,30
 bu064,"1956 Citrus Growers   1956.05.20",Unavailable,bul64,0,"(X)Information Bulletins","B 0133",,0.00,0.00,,,0,0,0,0,,,,,30
 bu067,"1956 New Year   1956.08.14",Unavailable,bul67,0,"(X)Information Bulletins","B 0134-0136",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -4830,7 +4831,7 @@ bu069,"1957 Israel Defense Forces FMT=[A3]  1957.01.01",Unavailable,bul69,0,"(X)
 bu071,"1957 Independence FMT=[A3]  1957.04.29",Unavailable,bul71,0,"(X)Information Bulletins","B 0142",,0.00,0.00,,,0,0,0,0,,,,,30
 bu070,"1957 Bezalel FMT=[A3]  1957.04.29",Unavailable,bul70,0,"(X)Information Bulletins","B 0143",,0.00,0.00,,,0,0,0,0,,,,,30
 bu072,"1957 New Year FMT=[A3]  1957.09.04",Unavailable,bul72,0,"(X)Information Bulletins","B 0144-0146",,0.00,0.00,,,0,0,0,0,,,,,30
-bu073,"1957 TABIL FMT=[1rregu1ar] (no number, info on show) 1957.09.17",Unavailable,bul73,0,"(X)Information Bulletins","B MS 002",,0.00,0.00,,,0,0,0,0,,,,,30
+bu073,"1957 TABIL FMT=[irregular] (no number, info on show) 1957.09.17",Unavailable,bul73,0,"(X)Information Bulletins","B MS 002",,0.00,0.00,,,0,0,0,0,,,,,30
 bu074,"1958 25th Maccabiah FMT=[A4]  1958.01.20",Unavailable,bul74,0,"(X)Information Bulletins","B 0147",,0.00,0.00,,,0,0,0,0,,,,,30
 bu075,"1958 Maritime FMT=[A3,A4]  1958.01.27",Unavailable,bul75,0,"(X)Information Bulletins","B 0148-0151",,0.00,0.00,,,0,0,0,0,,,,,30
 bu076,"1958 Independence FMT=[A3]  1958.04.21",Unavailable,bul76,0,"(X)Information Bulletins","B 0152",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -4876,7 +4877,7 @@ bu117,"1962 Independence FMT=[A3,A5]  1962.04.30",Unavailable,bul117,0,"(X)Infor
 bu118,"1962 Tel Aviv Fair FMT=[A3]  1962.06.05",Unavailable,bul118,0,"(X)Information Bulletins","B 0245",,0.00,0.00,,,0,0,0,0,,,,,30
 bu119,"1962 New Year FMT=[A3,A5]  1962.09.05",Unavailable,bul119,0,"(X)Information Bulletins","B 0246-0248",,0.00,0.00,,,0,0,0,0,,,,,30
 bu120,"1962 EL AL FMT=[A3,A5]  1962.11.07",Unavailable,bul120,0,"(X)Information Bulletins","B 0249",,0.00,0.00,,,0,0,0,0,,,,,30
-bu120a,"1962 ELAL FMT=[1rregu1ar] (no number, booklet) 1962.11.07",Unavailable,bul120a,0,"(X)Information Bulletins","B MS 04",,0.00,0.00,,,0,0,0,0,,,,,30
+bu120a,"1962 ELAL FMT=[irregular] (no number, booklet) 1962.11.07",Unavailable,bul120a,0,"(X)Information Bulletins","B MS 04",,0.00,0.00,,,0,0,0,0,,,,,30
 bu121,"1962 UJA FMT=[A3, A5]  1962.12.26",Unavailable,bul121,0,"(X)Information Bulletins","B 0250",,0.00,0.00,,,0,0,0,0,,,,,30
 bu122,"1962 Korczak FMT=[A3]  1962.12.26",Unavailable,bul122,0,"(X)Information Bulletins","B 0251",,0.00,0.00,,,0,0,0,0,,,,,30
 bu123,"1962 Red Sea Fishes FMT=[A3,A5]  1962.12.26",Unavailable,bul123,0,"(X)Information Bulletins","B 0252-0255",,0.00,0.00,,,0,0,0,0,,,,,30
@@ -5184,7 +5185,7 @@ bu405,"1982 Olive Branch FMT=[D3]  1982.09.12",Unavailable,bul405,0,"(X)Informat
 bu403,"1982 Keep Israel Beautiful FMT=[D3]  1982.10.05",Unavailable,bul403,0,"(X)Information Bulletins","B 0836",,0.00,0.00,,,0,0,0,0,,,,,30
 bu402,"1982 Early Jewish Colonies 6.00 9.00 FMT=[D3]  1982.10.05",Unavailable,bul402,0,"(X)Information Bulletins","B 0837,0838",,0.00,0.00,,,0,0,0,0,,,,,30
 bu403a,"1982 Be'er Sheva Stamp Show FMT=[D3]  1982.10.05",Unavailable,bul403a,0,"(X)Information Bulletins","B MS 022",,0.00,0.00,,,0,0,0,0,,,,,30
-bu404,"1982 Martyrs FMT=[1rregu1ar]  1982.12.22",Unavailable,bul404,0,"(X)Information Bulletins","B IrS 28",,0.00,0.00,,,0,0,0,0,,,,,30
+bu404,"1982 Martyrs FMT=[irregular]  1982.12.22",Unavailable,bul404,0,"(X)Information Bulletins","B IrS 28",,0.00,0.00,,,0,0,0,0,,,,,30
 bu409,"1983 Seven Species 0.40 0.80 6.00 FMT=[D3]  1983.01.11",Unavailable,bul409,0,"(X)Information Bulletins","B 0839,0840,0841",,0.00,0.00,,,0,0,0,0,,,,,30
 bu408,"1983 Modern Settlements FMT=[D3]  1983.02.15",Unavailable,bul408,0,"(X)Information Bulletins","B 0842-0844",,0.00,0.00,,,0,0,0,0,,,,,30
 bu407,"1983 Anti-Smoking FMT=[D3]  1983.02.15",Unavailable,bul407,0,"(X)Information Bulletins","B 0845",,0.00,0.00,,,0,0,0,0,,,,,30
