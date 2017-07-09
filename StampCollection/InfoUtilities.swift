@@ -332,7 +332,9 @@ class UtilityTaskRunner {
             U1Task.defaultTask.register(with: self)
             U2Task.defaultTask.register(with: self)
             U3Task.defaultTask.register(with: self)
-        }
+            U4Task.defaultTask.register(with: self)
+            U5Task.defaultTask.register(with: self)
+       }
         for runner in utRegistrations {
             if runner.isEnabled {
                 print("Running Task \(runner.taskName)")

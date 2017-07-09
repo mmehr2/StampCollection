@@ -170,12 +170,12 @@ func getPicRefURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
     return nil
 }
 
-private let SET_CANCELLATIONS_FIRST = 4
-private let SET_CANCELLATIONS_LAST = 8
+let CATEG_CANCELLATIONS_FIRST = 4
+let CATEG_CANCELLATIONS_LAST = 8
 
 private func getFileNameFromPictid( _ pictid: String, _ cat: Int ) -> String {
     // takes an ID of the form "6110s5", returns the file name with ".jpg" or ".gif" added
-    let ext = (cat >= SET_CANCELLATIONS_FIRST && cat <= SET_CANCELLATIONS_LAST) ? ".gif" : ".jpg"
+    let ext = (cat >= CATEG_CANCELLATIONS_FIRST && cat <= CATEG_CANCELLATIONS_LAST) ? ".gif" : ".jpg"
     return pictid + ext
 }
 

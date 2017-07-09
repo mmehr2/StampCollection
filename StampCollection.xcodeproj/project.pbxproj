@@ -67,6 +67,7 @@
 		A68104041F0ED8720000272B /* InfoFolderUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104031F0ED8720000272B /* InfoFolderUtilities.swift */; };
 		A68104061F0EDC480000272B /* ATMUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104051F0EDC480000272B /* ATMUtilities.swift */; };
 		A68104081F101F310000272B /* getItemDetails.js in Resources */ = {isa = PBXBuildFile; fileRef = A68104071F101F310000272B /* getItemDetails.js */; };
+		A681040A1F11F3050000272B /* BulletinUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104091F11F3050000272B /* BulletinUtilities.swift */; };
 		A6856E521B06FDF8004B506E /* AlbumType+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */; };
 		A6856E541B06FE1B004B506E /* AlbumFamily+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */; };
 		A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */; };
@@ -183,6 +184,7 @@
 		A68104031F0ED8720000272B /* InfoFolderUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoFolderUtilities.swift; sourceTree = "<group>"; };
 		A68104051F0EDC480000272B /* ATMUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMUtilities.swift; sourceTree = "<group>"; };
 		A68104071F101F310000272B /* getItemDetails.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getItemDetails.js; sourceTree = "<group>"; };
+		A68104091F11F3050000272B /* BulletinUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinUtilities.swift; sourceTree = "<group>"; };
 		A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumType+Ex.swift"; sourceTree = "<group>"; };
 		A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumFamily+Ex.swift"; sourceTree = "<group>"; };
 		A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumRef+Ex.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				A60DBC761ADC463400D4959D /* ImportExport.swift */,
 				A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */,
 				A68104051F0EDC480000272B /* ATMUtilities.swift */,
+				A68104091F11F3050000272B /* BulletinUtilities.swift */,
 				A632CBB61AF2E96F00565686 /* Filtering.swift */,
 				A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */,
 				A68104031F0ED8720000272B /* InfoFolderUtilities.swift */,
@@ -654,6 +657,7 @@
 				A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */,
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
 				A6856E5E1B070D56004B506E /* InventoryItem.swift in Sources */,
+				A681040A1F11F3050000272B /* BulletinUtilities.swift in Sources */,
 				A66FD29B1BEC78EA00C7A2FD /* InventoryItemViewController.swift in Sources */,
 				A6856E6C1B0ADBE9004B506E /* UpdateComparison.swift in Sources */,
 				A632F77D1B373AF8001C6EE1 /* ItemTableViewCell.swift in Sources */,
