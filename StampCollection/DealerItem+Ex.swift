@@ -124,6 +124,7 @@ extension DealerItem: SortTypeSortable {
     }
     
     var picPageURL: URL? {
+        if catgDisplayNum == CATEG_BULLETINS || catgDisplayNum == CATEG_INFOLDERS { return nil }
         return getPicRefURL(pictid, refType: isJS ? .dljsRef  : .dlRef)
     }
     
