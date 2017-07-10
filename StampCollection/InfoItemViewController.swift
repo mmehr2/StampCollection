@@ -114,7 +114,7 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
     
     // MARK: BTInfoProtocol
     func messageHandler(_ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int) {
-        if let data = data as? [String:String], let info = data["info"] {
+        if let data = data as? BTItemDetails, let info = data.dataObject["info"] {
             print("Data received from infoNode:\(data)")
             extraInfo = info
         }

@@ -213,130 +213,16 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         }
     }
 
-    /* FOR STUDY: (both innerText and innerHTML, split by lines, between "{{" and "}}"):
-     NEW!!!!  *&^*&^*&^ Attempting to load details for http://www.bait-tov.com/store/pic.php?ID=6110s1228
-     BT item = {{TEXT:
-           In Stock 2.15 US $
-     2014 Hospitallers - Malta Joint Issue
-     
-     28.1.2014/Ronen Goldberg/p933/15s 5t/leaflet 938/
-     
-     RELATED ITEMS
-     First Day Cancel: Israel-Malta@Acre
-     Joint Issue: Malta Stamp
-     
-     THE HALLS OF THE KNIGHTS HOSPITALLERS IN ACRE,ISRAEL AND VALLETTA, MALTA - Joint Issue Israel-Malta
-     
-     The year 2014 marks 50 years of diplomatic relations between Israel and Malta. Israel, which was still a young country when relations were established in 1964, shared the knowledge and experience it accrued during its 16 years of independence with Malta.
-     
-     The relationship between these two peoples is ancient and special: friendly and cooperative relations between the Jewish people and the Phoenicians, the ancient inhabitants of Malta, were mentioned in the Bible - the Book of Books, which is extremely significant to both peoples.
-     
-     There was apparently already a Jewish community in Malta before the Christian era and during the Middle Ages it is estimated that Jews made up approximately one third of the population of Mdina, which was the island's capital at that time.
-     
-     The heroic efforts by Malta's residents in resisting the Nazi enemy and their proud stance in face of heavy bombings and siege were warmly appreciated by the Jewish Yishuv in Eretz Israel, many of whom took part in the fight against the Nazis who annihilated one third of the Jewish people during the Holocaust.
-     
-     The two countries share a commitment to democracy and democratic values, as well as the same parliamentary system and they are also similar culturally, geographically and linguistically.
-     
-     Relations between the two countries and their peoples continue to flourish in the areas of trade, technology, science, energy, culture and tourism.
-     
-     
-     The Order of the Knights Hospitaller, also known as the Order of the Hospitallers of St. John of Jerusalem, developed in Jerusalem in the early 12th century around the church hospital building located south of the Church of the Holy Sepulchre. Members of the Order swore to dedicate their lives to helping Christian pilgrims who came to Jerusalem during the Crusader period, to provide them with medical care and to protect them from bandits and attackers along their route. In 1187, following the Crusader defeat in the Battle of Hattin, the Hospitaller's were forced to leave Jerusalem and moved to Acre.
-     
-     The city of Acre served as the capital of the Crusader kingdom from 1191-1291. The city was divided into quarters which were inhabited by the military Orders (the Hospitallers, the Templers and the Teutonics) and the Italian commercial communes. Each of these groups built grand buildings within its own area, reflecting Acre's status as one of the most important cities in the world at the time. The Knights' Halls built by the Hospitallers in Acre were unearthed in archeological excavations and have become a popular tourist site.
-     
-     The most impressive building in the complex is the Order of the Knights Hospitallers' dining room (the refectory). Its domes and arches intersect in the gothic style that developed in France and Italy in the 12th century and also appeared in Acre during that period.
-     
-     In 1291, Acre was conquered by the Mamluks, led by Kalavun, and completely destroyed. The Hospitallers resided in Cyprus for some 20 years until they conquered the island of Rhodes from pirates in 1310, and there established their center. They fortified the island, defending it against Muslim attacks, and lived there for some 200 years until they were forced out by the Turks.
-     
-     In 1530 the Hospitallers were granted control of the island of Malta by Roman Emperor Charles V and founded a sovereign state. The members of the Order, led by Jean Parisot de Valette, were widely praised when they successfully prevented Malta from being conquered and withstood the lengthy siege the Turks imposed upon the island.
-     
-     After driving out the Turks, the Hospitallers founded a new city called Valletta, in honor of their leader, where they constructed a series of magnificent buildings. On the edge of the city, overlooking the Port of Valletta, they built a sophisticated hospital where dedicated members of the order treated hundreds of wounded and ill. Today the building serves as the Mediterranean Conference Centre, which can accommodate 1400 visitors in modern halls that preserve a sense of the past.
-     
-     Description of the Stamp and the First Day Cover
-     
-     The stamp: on the right - the Hospitallers' refectory in Acre (photograph: www.goisrael.com); on the left - one of the halls in the Hospitaller Hospital in Valletta.
-     The first day cover: on the right - a section of the sea wall in Acre (Photograph: www.shutterstock.com) ; on the left: a section of the port fortifications in Valletta.
-     
-     
-     
-     This item appears in the following topics:
-       Philately and Post\Joint Issues
-       Flags
-       Israel Settlements\Acre
-     }}
-     {{HTML:
-     
-     <div dir="LTR">
-     <a href="pic.php?ID=6110s1225"><img src="../images/previous.gif" alt="Previous" title="Previous"></a>
-     <a href="pic.php?ID=6110s1229"><img src="../images/next.gif" alt="Next" title="Next" hspace="8"></a>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.go(-1)"><img src="../images/back.gif" alt="Back" title="Back" hspace="8"></a>
-     <font color="GREEN">In Stock</font>
-     2.15 US $ <a href="cart2.php?Action=Add&amp;Prod=6110s1228&amp;Which=Price"><img src="../images/cart1.gif" border="1" align="bottom" hspace="8" alt="Add to cart" title="Add to cart"></a> <a href="../atlas/atlas.php?Code=6110" target="Main"><img src="../atlas/flags/f6110.gif" border="0" align="BOTTOM" height="28"></a>
-     </div>
-     <table cellspacing="0" cellpadding="0" border="0">
-     
-     <tbody><tr><td class="DatE" align="CENTER"><b>2014 Hospitallers - <font color="purple">Malta Joint Issue</font></b></td></tr>
-     
-     <tr><td><img src="products/6110s1228.jpg"></td></tr>
-     
-     </tbody></table>
-     
-     28.1.2014/Ronen Goldberg/p933/15s 5t/leaflet 938/<br>
-     <br>
-     RELATED ITEMS<br>
-     <li>First Day Cancel: <a href="pic.php?ID=ec14005">Israel-Malta@Acre</a><br>
-     </li><li>Joint Issue: <a href="pic.php?ID=6110j1228">Malta Stamp</a><br>
-     <br>
-     <u>THE HALLS OF THE KNIGHTS HOSPITALLERS IN ACRE,ISRAEL AND VALLETTA, MALTA</u> - Joint Issue Israel-Malta<br>
-     <br>
-     The year 2014 marks 50 years of diplomatic relations between Israel and Malta. Israel, which was still a young country when relations were established in 1964, shared the knowledge and experience it accrued during its 16 years of independence with Malta. <br>
-     <br>
-     The relationship between these two peoples is ancient and special: friendly and cooperative relations between the Jewish people and the Phoenicians, the ancient inhabitants of Malta, were mentioned in the Bible - the Book of Books, which is extremely significant to both peoples. <br>
-     <br>
-     There was apparently already a Jewish community in Malta before the Christian era and during the Middle Ages it is estimated that Jews made up approximately one third of the population of Mdina, which was the island's capital at that time. <br>
-     <br>
-     The heroic efforts by Malta's residents in resisting the Nazi enemy and their proud stance in face of heavy bombings and siege were warmly appreciated by the Jewish Yishuv in Eretz Israel, many of whom took part in the fight against the Nazis who annihilated one third of the Jewish people during the Holocaust. <br>
-     <br>
-     The two countries share a commitment to democracy and democratic values, as well as the same parliamentary system and they are also similar culturally, geographically and linguistically. <br>
-     <br>
-     Relations between the two countries and their peoples continue to flourish in the areas of trade, technology, science, energy, culture and tourism.<br>
-     <br>
-     <br>
-     <b>The Order of the Knights Hospitaller</b>, also known as the Order of the Hospitallers of St. John of Jerusalem, developed in Jerusalem in the early 12th century around the church hospital building located south of the Church of the Holy Sepulchre. Members of the Order swore to dedicate their lives to helping Christian pilgrims who came to Jerusalem during the Crusader period, to provide them with medical care and to protect them from bandits and attackers along their route. In 1187, following the Crusader defeat in the Battle of Hattin, the Hospitaller's were forced to leave Jerusalem and moved to Acre.<br>
-     <br>
-     The city of Acre served as the capital of the Crusader kingdom from 1191-1291. The city was divided into quarters which were inhabited by the military Orders (the Hospitallers, the Templers and the Teutonics) and the Italian commercial communes. Each of these groups built grand buildings within its own area, reflecting Acre's status as one of the most important cities in the world at the time. The Knights' Halls built by the Hospitallers in Acre were unearthed in archeological excavations and have become a popular tourist site.<br>
-     <br>
-     The most impressive building in the complex is the Order of the Knights Hospitallers' dining room (the refectory). Its domes and arches intersect in the gothic style that developed in France and Italy in the 12th century and also appeared in Acre during that period.<br>
-     <br>
-     In 1291, Acre was conquered by the Mamluks, led by Kalavun, and completely destroyed. The Hospitallers resided in Cyprus for some 20 years until they conquered the island of Rhodes from pirates in 1310, and there established their center. They fortified the island, defending it against Muslim attacks, and lived there for some 200 years until they were forced out by the Turks. <br>
-     <br>
-     In 1530 the Hospitallers were granted control of the island of Malta by Roman Emperor Charles V and founded a sovereign state. The members of the Order, led by Jean Parisot de Valette, were widely praised when they successfully prevented Malta from being conquered and withstood the lengthy siege the Turks imposed upon the island.<br>
-     <br>
-     After driving out the Turks, the Hospitallers founded a new city called Valletta, in honor of their leader, where they constructed a series of magnificent buildings.  On the edge of the city, overlooking the Port of Valletta, they built a sophisticated hospital where dedicated members of the order treated hundreds of wounded and ill. Today the building serves as the Mediterranean Conference Centre, which can accommodate 1400 visitors in modern halls that preserve a sense of the past.<br>
-     <br>
-     <b>Description of the Stamp and the First Day Cover<br>
-     <br>
-     The stamp:</b> on the right - the Hospitallers' refectory in Acre (photograph: www.goisrael.com); on the left - one of the halls in the Hospitaller Hospital in Valletta. <br>
-     <b>The first day cover:</b> on the right - a section of the sea wall in Acre (Photograph: www.shutterstock.com) ; on the left: a section of the port fortifications in Valletta. <br>
-     <br>
-     
-     
-     <br><br><div style="direction:ltr;text-align:left"><span style="color:green">This item appears in the following topics: </span><br>&nbsp;&nbsp;<font color="black">Philately and Post</font>\Joint Issues<br>&nbsp;&nbsp;Flags <br>&nbsp;&nbsp;Israel Settlements\Acre<br></div>
-     
-     
-     
-     
-     
-     </li>}}
-     */
     /*
-     VARIOUS INSIGHTS (7/2017):
+     VARIOUS INSIGHTS (7/2017) from study of picURL data from http://www.bait-tov.com/store/pic.php?ID=6110s1228 and similar:
      0. This level of detail is ONLY in category 2 (sets/S/S/FDC) - therefore the protocol will only get messages if it is passed for category 2 (so far)
      1. Someone has lovingly entered the text of all the leaflets and continues to do so. This is where the big articles come from.
      2. The info is on the 4th line of text, and looks the same in the DOM structure.
      3. The second line of text has the full title, including the "Souvenir Sheet" disclaimer, if any (also "Joint Issue" annotation, sometimes both - see Greenland or Vatican)
      4. Of the fields of the info line, each can include multiples separated by commas, e.g. see Alphabet set (s796) for two sheet formats and two plate numbers (the 'p' is not duplicated, and there are no spaces with the commas)
-     5. The HTML shows that proper parsing of the RELATED ITEMS list (when present) should show the ID codes for all related FD cancels (pic IDs), related joint items, special sheets, varieties, the works!
+     5. The HTML shows that proper parsing of the RELATED ITEMS list (when present) should show the ID codes for all related FD cancels (pic IDs), related joint items, special sheets, varieties, the works! This is for extending the referredItems feature
+     6. This info can be added to the DealerItem extensions via the transient vars feature and used in other contexts
+     7. This can be shown for Full Sheets category 31 since it uses the base set pic URL from category 2 already
      */
     fileprivate func itemMessageHandler( _ message: WKScriptMessage ) {
         //println("Received \(message.name) message")
@@ -349,29 +235,9 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
             if categoryNumber == 2 && lines1.count > 3 {
                 let titleLine = lines1[1]
                 let infoLine = lines1[3]
-                let infoData = infoLine.components(separatedBy: "/")
                 // processing needed to make sure we have all possible lines all the time
-                // typically, bulletin and/or leaflet line will be missing - will all dates be there? who knows?
-                // if we're a Souvenir Sheet (see lines[1]), the plate number line is replaced by a size line in cm (HxW, floating point with 1 decimal optional) (so far, no S/S has a plate number...)
-                // create a dictionary using the following headers (all data are strings):
-                //  "ssCount" = 0/1/2/3/+? (souvenir sheet count) -- sometimes it says "N Souvenir Sheets" for N==3 or ...
-                //  "jointWith" = XXX (joint issue partner, or blank if none)
-                //  "plateNumbers" = NNN (CSV plate number list*) - always pure numbers with a 'p' at the front, no spaces (EXCEPT Stand-by issues have no p# but are listed as 'p--'; this is flagged in the title as "Stand-By"
-                //  "bulletins" = BBB (CSV bulletin number list*) - bulletins as marked so some can have a suffix like 259a for s255 (25th Independence); these went away after the early '80s so the field is optional, empty if not present
-                //  "leaflets" = LLL (CSV leaflet number list*) - these weren't available in the early years, so field is optional and empty if not present, but see s88 (leaflet (0)) or s91 "leaflet none" (and "bulletin ??")
-                //  "ssWidth" = WW.W (souv.sheet width dimension in cm)
-                //  "ssHeight" = HH.H (souv.sheet height dimension in cm)
-                //  "designers" = DDDDD (designer name(s))
-                //  "issueDates" = DD.MM.YYYY (date of issue, I think) - this is sometimes a date range separated by '-' (see for example Landscapes I and II (s234) or Coins Mered (s23)
-                // NOTE: sheet format variation on s738-9 Flag 1st SA - uses 40s (4t) 
-                //  "numStamps" = NN (sheet format, number of stamps per sheet, except in case of "3 Souvenir Sheets" like Jerusalem '73 where it's still 3 in the set, but for 3 sheets, it's like 10s 5t, the single sheet format (!)
-                //  "numTabs" = TT (sheet format, number of tabs)
-                //  "setCardinality" = N for purposes of splitting, how many things are in this set? diff.#s needed for set, FDC, and sheet, but we can't really tell here, so just one guess (or can we?)
-                //     for now, I would define it as the number of plate numbers present, and if no P# line, then the # of S/S
-                // * These CSV lists should be normalized to include all values, separated by commas, instead of the shorthand method used by the website; parse something like "255-7,263,279-81" into "255,256,257,263,279,280,281"
-                //    NOTE: remember bulletins can have non-numeric suffixes too, and maybe the early leaflets too; see Morgenstein for the excruciating details!
+                let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine)
                 if let delegate = delegate {
-                    let info = [ "xtitle": titleLine, "info": infoData.joined(separator: "||") ] // temporary placeholder version
                     delegate.messageHandler(self, receivedData: info as AnyObject, forCategory: categoryNumber)
                 }
             }

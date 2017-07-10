@@ -68,6 +68,7 @@
 		A68104061F0EDC480000272B /* ATMUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104051F0EDC480000272B /* ATMUtilities.swift */; };
 		A68104081F101F310000272B /* getItemDetails.js in Resources */ = {isa = PBXBuildFile; fileRef = A68104071F101F310000272B /* getItemDetails.js */; };
 		A681040A1F11F3050000272B /* BulletinUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68104091F11F3050000272B /* BulletinUtilities.swift */; };
+		A681040C1F1365B50000272B /* BTItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681040B1F1365B50000272B /* BTItemDetails.swift */; };
 		A6856E521B06FDF8004B506E /* AlbumType+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */; };
 		A6856E541B06FE1B004B506E /* AlbumFamily+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */; };
 		A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */; };
@@ -185,6 +186,7 @@
 		A68104051F0EDC480000272B /* ATMUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMUtilities.swift; sourceTree = "<group>"; };
 		A68104071F101F310000272B /* getItemDetails.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getItemDetails.js; sourceTree = "<group>"; };
 		A68104091F11F3050000272B /* BulletinUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinUtilities.swift; sourceTree = "<group>"; };
+		A681040B1F1365B50000272B /* BTItemDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemDetails.swift; sourceTree = "<group>"; };
 		A6856E511B06FDF8004B506E /* AlbumType+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumType+Ex.swift"; sourceTree = "<group>"; };
 		A6856E531B06FE1B004B506E /* AlbumFamily+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumFamily+Ex.swift"; sourceTree = "<group>"; };
 		A6856E551B06FE3E004B506E /* AlbumRef+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumRef+Ex.swift"; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */,
 				A60DBCB11AE1A34E00D4959D /* BTCategory.swift */,
 				A60DBCB51AE38BDA00D4959D /* BTDealerItem.swift */,
+				A681040B1F1365B50000272B /* BTItemDetails.swift */,
 			);
 			name = NetworkServices;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				A662C1CF1AFEAB020067792F /* DealerItem.swift in Sources */,
 				A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */,
 				A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */,
+				A681040C1F1365B50000272B /* BTItemDetails.swift in Sources */,
 				A662C1EE1B049DD90067792F /* ioapi.c in Sources */,
 				A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */,
 				A66DE5C91EF9E556000A0066 /* InventoryUtilities.swift in Sources */,
