@@ -75,13 +75,13 @@ struct UIQueryFieldConfiguration {
             break
         case .invPartSetOfN:
             // set up the two numeric field configs
-            placeholder = "Number of pars N (M of N)"
+            placeholder = "Number of parts N (M of N)"
             type = .numeric
             break
         case .invPartSetVal(let option):
             // set up the two numeric field configs
             placeholder = "Value \(option)"
-            type = .text
+            type = .numeric // allows text too, but no emoji
             break
         }
     }
@@ -165,6 +165,7 @@ struct UIQueryAlertConfiguration {
             title = "Partial Set Description"
             body = "Enter the number of parts to split and which one (m of n).\n" +
                 "Then enter up to four values in order.\n" +
+                "Thee values describe each individual part, i.e, denomination, color.\n" +
             "The description of the partial set will be added to the Inventory Item pending its location."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetOfN))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetM))
