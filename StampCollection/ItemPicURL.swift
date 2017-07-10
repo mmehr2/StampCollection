@@ -77,9 +77,11 @@ private func setJSDictionaryEntry( _ pictid: String, picref: String ) {
             // no webID and no pic file ref - no dictionary
             break
         }
-        if let fileRefID = fileRefID , allow {
-            jsDictionary[dbRefID] = fileRefID
-            jsRevDictionary[fileRefID] = dbRefID
+        if let fileRefID = fileRefID {
+            if allow {
+                jsDictionary[dbRefID] = fileRefID
+                jsRevDictionary[fileRefID] = dbRefID
+            }
         } else if hasWebID {
             print("No matching ref found for [webID=\(webID!) vs.dbRefID=\(dbRefID)]")
         } else {
@@ -186,24 +188,25 @@ private func getFileNameFromJSPictid( _ pictid: String ) -> String {
 
 private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase: URL, btPath: String, jsBase: URL, jsPath: String, catnum: Int ) -> URL? {
     var output: URL! = nil
-    if !picref.isEmpty && picref != "N/A" {
-        let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
-        let picref2 = comps.last! // this is just the ID part as a string
-        switch type {
-        case .btRef:
-            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref2, catnum))
-        case .jsRef:
-            // translate "17020" forward to "1" etc.
-            if let picref3 = jsDictionary[picref2] {
-                output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref3))
-            }
-        case .dlRef:
-            output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref, catnum))
-        case .dljsRef:
-            output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref2))
-        default:
-            break
+    guard !picref.isEmpty else { return output }
+    guard picref != "N/A" else { return output }
+    
+    let comps = picref.components(separatedBy: CharacterSet(charactersIn: "="))
+    let picref2 = comps.last! // this is just the ID part as a string
+    switch type {
+    case .btRef:
+        output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref2, catnum))
+    case .jsRef:
+        // translate "17020" forward to "1" etc.
+        if let picref3 = jsDictionary[picref2] {
+            output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref3))
         }
+    case .dlRef:
+        output = btBase.appendingPathComponent(btPath + getFileNameFromPictid(picref, catnum))
+    case .dljsRef:
+        output = jsBase.appendingPathComponent(jsPath + getFileNameFromJSPictid(picref2))
+    default:
+        break
     }
     return output
 }
