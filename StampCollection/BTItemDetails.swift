@@ -27,6 +27,7 @@ class BTItemDetails {
                 "titleRaw": "", //raw
                 "ssCount": "",
                 "jointWith": "",
+                "subTitle": "",
                 "xinfoRaw": "", //raw (all following)
                 "issueDatesRaw": "", //raw
                 "issueDates": "",
@@ -107,20 +108,34 @@ class BTItemDetails {
         data["titleRaw"] = input
         // look for "- Souvenir Sheet" OR "- N Souvenir Sheets" to set ssCount to "N" or "1" or "0"
         // look for "- XXXX YYY ZZ Joint Issue" to set jointWith to "XXXX YYY ZZ"
-        // NOTE: DO IT ALL WITH Regexes!!
-        var accumulationInProgress = false // T if we are accumulating
+        // NOTE: DO IT ALL WITH Regexes!! -- actually tho it gets more complicated
+        // The Joint Issue might be blank, because the title itself says "Thailand Friendship" or "Germany Relations", so ...
+        // We need to be always accumulating in the buffer and scanning it for these new keywords (Friendship and Relations for now)
+        var seenHyphen = false // T if we have seen a hyphen
         var seenSouvenir = false // "state machine" for Souvenir Sheet pattern
         var seenJoint = false // "state machine" for Joint Issue pattern
         var buffer = [String]()
+        var subtitleBuffer = [String]()
         var ssCount = 0
         var jointWith = ""
-        for word in input.components(separatedBy: " ") {
+        var completedJoint = false
+        var unlinkSubtitle = false
+        var unlinkKeywords = 0
+         for word in input.components(separatedBy: " ") {
+            subtitleBuffer += [word] // never cleared completely, just when keywords are recognized
+            
             switch word {
             case "-":
-                accumulationInProgress = true
+                seenHyphen = true
                 buffer = []
-            case _ where accumulationInProgress && word.contains("Souvenir"):
+                unlinkKeywords = 1
+            case _ where word.contains("Friendship") || word.contains("Relations"):
+                if buffer.count > 0 {
+                    jointWith = buffer.last!
+                }
+            case _ where seenHyphen && word.contains("Souvenir"):
                 seenSouvenir = true
+                unlinkKeywords += 1
             case _ where seenSouvenir && word.contains("Sheets"):
                 // BINGO! more than one S/S
                 // set ssCount from buffer[0] if buffer.count == 1
@@ -130,28 +145,49 @@ class BTItemDetails {
                     print("Bad parse of Title SSCount buffer \(buffer)")
                 }
                 seenSouvenir = false
-                accumulationInProgress = false
+                seenHyphen = false
+                unlinkKeywords += 1
+                unlinkSubtitle = true
             case _ where seenSouvenir && word.contains("Sheet"):
                 // BINGO! one S/S
                 ssCount = 1
                 seenSouvenir = false
-                accumulationInProgress = false
-            case _ where accumulationInProgress == true && word.contains("Joint"):
+                seenHyphen = false
+                unlinkKeywords += 1
+                unlinkSubtitle = true
+            case _ where seenHyphen == true && word.contains("Joint"):
                 seenJoint = true
+                unlinkKeywords += 1
             case _ where seenJoint == true && word.contains("Issue"):
-                // BINGO! joint issue completed
-                jointWith = buffer.joined(separator: " ")
-                seenJoint = false
-                accumulationInProgress = false
-            default:
-                if accumulationInProgress {
-                    buffer += [word]
+                // BINGO! joint issue completed - might already have something tho
+                // We can safely overwrite it if the buffer has something instead (word(s) seen since hyphen)
+                // Test this with set 6110s935 2005 Germany Diplomatic Relations
+                if buffer.count > 0 {
+                    jointWith = buffer.joined(separator: " ")
                 }
-                // else ignore the word
+                seenJoint = false
+                seenHyphen = false
+                completedJoint = true
+                unlinkKeywords += 1
+                unlinkSubtitle = true
+            default:
+                buffer += [word]
             }
+            
+            if unlinkSubtitle {
+                // remove the last N items in the buffer from the subtitle too, plus one each for the hyphen and two keywords
+                subtitleBuffer = Array(subtitleBuffer.dropLast(buffer.count + unlinkKeywords))
+                unlinkSubtitle = false
+                unlinkKeywords = 0
+            }
+        } // loop on words
+        if !completedJoint {
+            // random use of Friendship or Relations if we never saw the "- Joint Issue" tag
+            jointWith = ""
         }
         data["ssCount"] = String(ssCount)
         data["jointWith"] = jointWith
+        data["subTitle"] = subtitleBuffer.joined(separator: " ")
     }
     
     func parseDateList(_ input: String) {
