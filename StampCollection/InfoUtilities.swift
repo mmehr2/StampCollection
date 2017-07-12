@@ -323,47 +323,198 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
  The calls can be placed at the appropriate point in the runtime code, but can be cut off here, funneled through the master funcion.
  */
 
-protocol UtilityTaskRunnable {
+protocol UtilityTaskRunnable: ProgressReporting {
+    // this is how to set up the object
+    init(forModel model_: CollectionStore, inContext token: Int, withProgress prog: Progress?)
     // this will tell whether or not to run the task
     var isEnabled: Bool { get }
     // this will be the name of the task
     var taskName: String { get }
+    // the progress reporter units assigned (approx msec to execute typically)
+    var taskUnits: Int64 { get }
     // the task runner will call this function to run the task at startup point
     // return value will be printed and displayed on the UI when all functions are completed; this should be just a summary
-    func runUtilityTask(_ model: CollectionStore) -> String
+    func runUtilityTask() -> String
     // this will be used for runtime registration
     func register(with: UtilityTaskRunner)
 }
+//
+//protocol UTR2: UtilityTaskRunnable {
+//    // this is how to set up the object
+//    init(forModel model_: CollectionStore, inContext token: Int, withRunner runner: UtilityTaskRunner)
+//    // this protocol runs during the init, so progress creation and reporting are all tied together
+//}
 
-class UtilityTaskRunner {
-    static let defaultRunner = UtilityTaskRunner()
+class UtilityTaskRunner: NSObject, ProgressReporting {
+
+    var progress: Progress
+    var model: CollectionStore
+    var contextToken: Int
     
     // map of types to their functions (use nil to prevent execution)
     // NOTE: In spite of the name, the facility can be used with multiple calls and/or even running them every time. It's all in the source code here.
-    private var utRegistrations:[UtilityTaskRunnable] = []
+    // This must be dynamic so that the UI can do KVO on this object
+    private dynamic var utRegistrations:[UtilityTask] = []
     
-    func callUtilityTasks(forModel model: CollectionStore) -> String {
-        var result = ""
+    required init(withModel model_: CollectionStore) {
+        model = model_
+        progress = Progress()
+        // reconfigure each time called
+        utRegistrations = []
+        contextToken = model.getNewContextTokenForThread()
+        // the base class must be initialized after we do local inits, but before we start working with them for further setup
+        super.init()
         if utRegistrations.isEmpty {
-            // call for all known registrations
-            U1Task.defaultTask.register(with: self)
-            U2Task.defaultTask.register(with: self)
-            U3Task.defaultTask.register(with: self)
-            U4Task.defaultTask.register(with: self)
-            U5Task.defaultTask.register(with: self)
-            U6Task.defaultTask.register(with: self)
-       }
-        for runner in utRegistrations {
-            if runner.isEnabled {
-                print("Running Task \(runner.taskName)")
-                result += runner.runUtilityTask(model)
+            // call for all known registrations (creates progress objects with this one as parent)
+//            U1Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+//            U2Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+//            U3Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+//            U4Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+//            U5Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+//            U6Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self))
+            
+        }
+        progress.isCancellable = false // for now - might want a mechanism tho
+        progress.isPausable = false // for now - might want a mechanism tho
+    }
+    
+    func callUtilityTasks(completion: ((String)->())? = nil ) {
+        var result = ""
+        // filter out those who will not be running
+        let tasks = utRegistrations.filter{ $0.isEnabled }
+        // task units are accumulated incrementally as part of registration
+        //let totalUnits = tasks.reduce(0) { total, x in return total + x.taskUnits }
+        //progress.totalUnitCount = totalUnits
+        // launch this on a background queue too
+        model.addOperationToContext(contextToken) {
+            // this code runs on the background thread associated with the context passed
+            // parent progress must becomeCurrent() here before creating any child progress object
+            for task in tasks {
+                //print("Running Task \(task.taskName) synchronously on background thread.")
+                // run the task (will update its own progress accordingly - needs the context token tho
+                result += task.runUtilityTask()
+            }
+            if let completion = completion {
+                // switch this back to the main thread to display the result, if any
+                self.model.addCompletionOperationWithBlock() {
+                    completion(result)
+                }
             }
         }
-        return result
+    }
+
+    // old way
+    func registerUtilityTask(_ utask: UtilityTaskRunnable ) {
+        //utRegistrations.append(utask)
+    }
+
+    // new way - NO PROTOCOLS since you have to be dynamic to be KVO-observable, and this requires the object to be Objective-C compatible, not pure Swift, so no protocols
+    func registerUtilityTask(_ utask: UtilityTask ) {
+        utRegistrations.append(utask)
+        progress.addChild(utask.progress, withPendingUnitCount: utask.taskUnits)
+        progress.totalUnitCount += utask.taskUnits
+    }
+
+    // MARK: client services: also need to add statistics functions here
+    
+    // client task must call this at start of operation to set current progress object for thread
+    // client should therefore create any progress objects after this call
+    func startTask(_ utask: UtilityTaskRunnable ) {
+        print("Started task \(utask.taskName) progress with 0 of pending \(utask.taskUnits) work units.")
+        progress.becomeCurrent(withPendingUnitCount: utask.taskUnits)
     }
     
-    func registerUtilityTask(_ utask: UtilityTaskRunnable ) {
-        utRegistrations.append(utask)
+    // client task can call this in middle of operation for finer grained progress; can be used to start if number of steps is known; will end task if step == of
+    func updateTask(_ utask: UtilityTaskRunnable, step: Int, of: Int ) {
+        let units = utask.taskUnits * Int64(step) / Int64(of)
+        utask.progress.completedUnitCount = units
+        //progress.completedUnitCount = units // is this also needed? should be automatic due to parent/child, shouldn't it?
+        let funcname = (step == 0) ? "Started" : (step == of) ? "Completed" : "Continued"
+        print("\(funcname) task \(utask.taskName) progress at step \(step) of \(of) with \(units) of pending \(utask.taskUnits) work units.")
     }
+    
+    // client task must call this at end of operation to resign parent progress for thread, even if task is completed, unit-wise
+    func completeTask(_ utask: UtilityTaskRunnable ) {
+        progress.resignCurrent()
+        utask.progress.completedUnitCount = utask.taskUnits
+        print("Completed task \(utask.taskName) progress with all of \(utask.taskUnits) work units.")
+   }
 }
 
+// generic task, to test the progress mechanism
+class UtilityTask: NSObject {
+    
+    // create, register
+    required init(forModel model_: CollectionStore, inContext token: Int, withRunner runner_: UtilityTaskRunner) {
+        progress = Progress()
+        runner = runner_
+        super.init()
+        progress.totalUnitCount = taskUnits
+        register(with: runner_) // hooks up the progress object hierarchy also
+    }
+
+    var result: String = ""
+    
+    var taskName: String = "GENERIC TASK"
+    
+    var isEnabled: Bool = true  // set this if it should respond to registration and running
+    
+    var taskUnits: Int64 = 10
+    
+    var progress: Progress
+    
+    private var runner: UtilityTaskRunner! // TBD - remove optional when U*Tasks use this as their base class or pattern
+
+    // DON'T USE THIS ONE! debug only, backwards compatibility
+    required init(forModel model_: CollectionStore, inContext token: Int, withProgress prog: Progress?) {
+        isEnabled = true // set this if it should respond to registration and running
+        taskName = "GENERIC TASK"
+        taskUnits = 10
+        progress = Progress()
+        super.init()
+    }
+    // END OF BACKWARDS COMPATIBILITY INIT
+    
+    func runUtilityTask() -> String {
+        startTask()
+        // now it's safe to create our progress monitor
+        let result = run()
+        completeTask()
+        return result
+    }
+   
+    
+    func register(with: UtilityTaskRunner) {
+        // register with the runner object
+        with.registerUtilityTask(self as UtilityTask)
+        runner = with
+    }
+
+    func run() -> String {
+        // do the (fake) task here
+        for step in 0...taskUnits {
+            updateTask(step: step, of: taskUnits)
+            sleep(1) // sec
+        }
+        return "\(taskName) completed."
+    }
+    
+    func startTask() {
+        print("Started task \(taskName) progress with 0 of pending \(taskUnits) work units.")
+    }
+    
+    // client task can call this in middle of operation for finer grained progress; can be used to start if number of steps is known; will end task if step == of
+    func updateTask(step: Int64, of: Int64 ) {
+        let units = taskUnits * (step) / (of)
+        progress.completedUnitCount = units
+        let funcname = (step == 0) ? "Started" : (step == of) ? "Completed" : "Continued"
+        print("\(funcname) task \(taskName) progress at step \(step) of \(of) with \(units) of pending \(taskUnits) work units.")
+    }
+    
+    // client task must call this at end of operation to resign parent progress for thread, even if task is completed, unit-wise
+    func completeTask() {
+        progress.completedUnitCount = taskUnits
+        print("Completed task \(taskName) progress with all of \(taskUnits) work units.")
+    }
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoCategoriesTableViewController: UITableViewController {
+class InfoCategoriesTableViewController: UITableViewController, ProgressReporting {
     
     lazy var csvFileImporter = ImportExport()
     
@@ -18,20 +18,18 @@ class InfoCategoriesTableViewController: UITableViewController {
         }
     }
 
-    var progress: UIProgressView? {
-        didSet {
-            self.tableView.tableFooterView = progress
-        }
-    }
+    @IBOutlet weak var progressViewBar: UIProgressView!
+    var progress: Progress = Progress()
     
     func setProgressView(_ onOff: Bool = false) {
-        if !onOff {
-            progress = nil
-            return
-        }
-        let pv = UIProgressView(progressViewStyle: .default)
-        pv.setProgress(0.0, animated: false)
-        progress = pv
+//        if !onOff {
+//            progress = nil
+//            return
+//        }
+//        let pv = UIProgressView(progressViewStyle: .default)
+//        pv.setProgress(0.0, animated: false)
+//        progress = pv
+        //progress. = true
     }
     
     var spinner: UIActivityIndicatorView? {
@@ -163,19 +161,42 @@ class InfoCategoriesTableViewController: UITableViewController {
         // save the now-properly-initialized data model object reference
         model = dataModel
         print("startUI triggered in \(self)")
+        // Progress object protocol: 
+        /* From the Apple docs - it's obscure: see Ole Bergmann on the issues back in 2014: https://oleb.net/blog/2014/03/nsprogress/
+         As an example, consider that you are tracking the progress of code downloading and copying files on disk. You could use a single progress object to track the entire task, but it’s easier to manage each subtask using a separate progress object. 
+         You start by creating an overall parent progress object with a suitable total unit count, 
+         then call becomeCurrent(withPendingUnitCount:), 
+         then create your sub-task progress objects, 
+         before finally calling resignCurrent().
+         A better article can be found here (June 4, 2016, about a year old): https://www.allaboutswift.com/dev/2016/6/4/working-with-nsprogress
+         */
+        progress = Progress(totalUnitCount: 100)
+        self.progressViewBar.observedProgress = progress
+        progress.becomeCurrent(withPendingUnitCount: 10) // for initial fetch (short)
         // load the category data from CoreData
         title = "Collection Categories"
         model.fetchType(.categories) {
-            // completion block
+            // completion block of initial fetch (which is quick)
+            // calling resignCurrent() here will update the overall progress whether or not model.fetchType() supports progress object composition
+            self.progress.resignCurrent()
+            // on completion, update the UI and tell the user any results
             self.updateUI()
             // assure that the JS picture mapping occurs
             if let cat = self.model.fetchCategory(CATNUM_AUSTRIAN) {
                 populateJSDictionary(cat)
             }
-            // perform any registered utility tasks
-            let uresult = UtilityTaskRunner.defaultRunner.callUtilityTasks(forModel: self.model)
-            if !uresult.isEmpty {
-                messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
+            // READY any utility tasks on the DB while user is interacting with the last DB
+            // perform any registered utility tasks; initial call will create Progress objects
+            let utr = UtilityTaskRunner(withModel: self.model)
+            // when we add the task's progress as a child of ours (which is observed) it should just work
+            self.progress.addChild(utr.progress, withPendingUnitCount: 90) // for task running (long)
+           // make sure we update our progress bar viewer with the task's progress indicator
+            // run the tasks on a background thread with a completion handler
+            utr.callUtilityTasks() { uresult in
+                // tell the user about the task results last
+                if !uresult.isEmpty {
+                    messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
+                }
             }
         }
     }

@@ -48,44 +48,67 @@ import Foundation
 // This relies on splitting the descriptionX field into two parts at the word "values", and adding the machine description there; the subsequent value list might be replaced by a rate set change.
 
 let CATEG_ATM:Int16 = 26
-class U3Task: UtilityTaskRunnable {
-    static let defaultTask = U3Task()
+class U3Task: NSObject, UtilityTaskRunnable {
+    var progress: Progress!
+    var taskUnits: Int64 { return TU }
+    private var model: CollectionStore
+    private var contextToken: Int
     
+    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
+        model = model_
+        contextToken = token
+        //progress = Progress(parent: prog)
+        super.init()
+        progress.totalUnitCount = taskUnits
+    }
+    
+    let TU:Int64 = 5000 // generate this as approx msec execution time on my device; only relative size matters
     // protocol: UtilityTaskRunnable
     var isEnabled: Bool { return true }
     var taskName: String { return "UT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS_AND_SETS" }
-    func runUtilityTask(_ model: CollectionStore) -> String {
-        return createMissingATMBlancoLabelsCSV(model)
+    
+    private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
+    
+    func runUtilityTask() -> String {
+        runner.startTask(self)
+        // now it's safe to create our progress monitor
+        progress = Progress(parent: Progress.current(), userInfo: nil)
+        let result = run()
+        runner.completeTask(self)
+        return result
     }
     
     func register(with: UtilityTaskRunner) {
         // register with the runner object
         with.registerUtilityTask(self as UtilityTaskRunnable)
+        runner = with
     }
     
     // MARK: Task data and functions
     
     let ignores = [ "6110k0707", "6110k0708", "6110k0803", "6110k0804", "6110k0805", "6110k0806", ]
     
-    private func createMissingATMBlancoLabelsCSV(_ model: CollectionStore) -> String {
+    private func run() -> String {
         var result = ""
         var firstCode = ""
         var lastCode = ""
         var firstDesc = ""
         var lastDesc = ""
         var totalAdded = 0
-        let objects1 = model.fetchInfoInCategory(CATEG_ATM, withSearching: [.keyWordListAny(["Sima", "Inbar"])], andSorting: .byImport(true))
+        let objects1 = model.fetchInfoInCategory(CATEG_ATM, withSearching: [.keyWordListAny(["Sima", "Inbar"])], andSorting: .byImport(true), fromContext: contextToken)
         let objects2 = objects1.filter() { x in
             return !(x.descriptionX!.contains("FDC") || x.id!.contains("m") || x.id!.contains("bl"))
         }
         let objects3 = objects2.filter() { x in
             return !ignores.contains(x.id!)
         }
+        let totalSteps = objects3.count
+        var stepCount = 0
         for item in objects3 {
             // test for and create blanco label if needed
             let blIdCode = "\(item.id!)bl"
             let descCore = getCoreOfATMDescription(item)
-            if model.fetchInfoItemByID(blIdCode) == nil {
+            if model.fetchInfoItemByID(blIdCode, inContext: contextToken) == nil {
                 printATMBlancoCSVEntry(fromSetItem: item)
                 totalAdded += 1
                 if firstCode.isEmpty {
@@ -101,7 +124,9 @@ class U3Task: UtilityTaskRunnable {
                 //continue
             }
             // also test for and create related machine sets for the same base sets
-            printATM_MachineSets_CSVEntries(fromSetItem: item, inModel: model)
+            printATM_MachineSets_CSVEntries(fromSetItem: item)
+            stepCount += 1
+            runner.updateTask(self, step: stepCount, of: totalSteps)
         }
         if totalAdded > 0 {
             result = "Created \(totalAdded) CSV entries for ATM blanco labels for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
@@ -236,7 +261,7 @@ class U3Task: UtilityTaskRunnable {
         "14.RC2": " 1.80/2.70/3.20/3.80/4.00/5.10/5.50/5.60",
         ]
     
-    private func printATM_MachineSets_CSVEntries(fromSetItem item: DealerItem, inModel model:CollectionStore) {
+    private func printATM_MachineSets_CSVEntries(fromSetItem item: DealerItem) {
         let idCode = item.id!
         let kRange = idCode.range(of: "6110k")!
         let ycodeX = idCode.substring(from: kRange.upperBound)
@@ -250,19 +275,19 @@ class U3Task: UtilityTaskRunnable {
         
         if let macnumsets = issues[idCode] {
             // primary rates (desc2) used for these machine numbers
-            printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[0], withNames: macnames)
+            printATM_SingleMachineSet_CSVEntries(fromSetItem: item, forMachines: macnumsets[0], withNames: macnames)
             if macnumsets.count > 1 {
                 // first secondary rates used with these numbers
-                printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[1], withNames: macnames, andRateSet: ycode+".RC")
+                printATM_SingleMachineSet_CSVEntries(fromSetItem: item, forMachines: macnumsets[1], withNames: macnames, andRateSet: ycode+".RC")
             }
             if macnumsets.count > 2 {
                 // second secondary rates used with these numbers
-                printATM_SingleMachineSet_CSVEntries(fromSetItem: item, inModel: model, forMachines: macnumsets[2], withNames: macnames, andRateSet: ycode+".RC2")
+                printATM_SingleMachineSet_CSVEntries(fromSetItem: item, forMachines: macnumsets[2], withNames: macnames, andRateSet: ycode+".RC2")
             }
         }
     }
     
-    private func printATM_SingleMachineSet_CSVEntries(fromSetItem item: DealerItem, inModel model:CollectionStore, forMachines macnums:[String], withNames macnames:[String:String], andRateSet rsCode: String = "") {
+    private func printATM_SingleMachineSet_CSVEntries(fromSetItem item: DealerItem, forMachines macnums:[String], withNames macnames:[String:String], andRateSet rsCode: String = "") {
         let idCode = item.id!
         let desc = item.descriptionX!
         if let valRange = desc.range(of: "values") {
@@ -279,7 +304,7 @@ class U3Task: UtilityTaskRunnable {
             for macnum in macnums {
                 let msetCode = "\(idCode)\(rcString)m\(macnum)"
                 // probe for existence of individual mset entry and only add if not already exists
-                if model.fetchInfoItemByID(msetCode) == nil {
+                if model.fetchInfoItemByID(msetCode, inContext: contextToken) == nil {
                     if let macname = macnames[macnum] {
                         print("\(msetCode),\"\(desc1), \(macname) machine \(macnum) -\(desc2)\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",\"C --\",\"B --\",55.00,,,,0,0,0,0,,,,,26")
                     }

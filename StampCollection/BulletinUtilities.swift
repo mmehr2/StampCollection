@@ -15,17 +15,40 @@ let CATEG_BULLETINS:Int16 = 30
 // NOTE: as of running this July 10, 2017, the following bulletins after 150 were NOT scanned by the BT site folks:
 ///  131,301-8,321-34,348,355,355a,366,368a,373,384,392a,404,406-8,411a,417-20,433a,428,445,448-50,458-9,463-478,480-501
 ///  Listings don't exist in Morgenstein for: 391,495
-class U4Task: UtilityTaskRunnable {
-    static let defaultTask = U4Task()
+class U4Task: NSObject, UtilityTaskRunnable {
+    var progress: Progress!
+    var taskUnits: Int64 { return TU }
+    private var model: CollectionStore
+    private var contextToken: Int
+    
+    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
+        model = model_
+        contextToken = token
+        //progress = Progress(parent: prog)
+        super.init()
+        progress.totalUnitCount = taskUnits
+    }
+    
+    // protocol: UtilityTaskRunnable
+    let TU: Int64 = 2000 // generate this as approx msec execution time on my device; only relative size matters
     var isEnabled: Bool { return false }
     var taskName: String { return "UT2017_07_09_BULLETINS_ADD_PICREFS" }
-    func runUtilityTask(_ model: CollectionStore) -> String {
-        return addPictfileRefToBulletins(model)
+    
+    private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
+    
+    func runUtilityTask() -> String {
+        runner.startTask(self)
+        // now it's safe to create our progress monitor
+        progress = Progress(parent: Progress.current(), userInfo: nil)
+        let result = run()
+        runner.completeTask(self)
+        return result
     }
     
     func register(with: UtilityTaskRunner) {
         // register with the runner object
         with.registerUtilityTask(self as UtilityTaskRunnable)
+        runner = with
     }
 
     var shouldOverwrite = true // set to true to make it overwrite existing pictid fields (we know better now)
@@ -80,10 +103,10 @@ class U4Task: UtilityTaskRunnable {
         "bu421A":"bul421"
     ]
     
-    private func addPictfileRefToBulletins(_ model: CollectionStore) -> String {
+    private func run() -> String {
         var result = ""
         if true {
-            let objects = model.fetchInfoInCategory(CATEG_BULLETINS)
+            let objects = model.fetchInfoInCategory(CATEG_BULLETINS, withSearching: [], andSorting: .none, fromContext: contextToken)
             let objects2: [DealerItem]
             if !shouldOverwrite {
                 // look for only fields with empty pictid (original situation)
@@ -133,23 +156,46 @@ class U4Task: UtilityTaskRunnable {
 }
 
 // U5, Utility to remove duplicate dates YYYY YYYY at start of InfoBulletin descriptionX fields (code buXXXX in category 30)
-class U5Task: UtilityTaskRunnable {
-    static let defaultTask = U5Task()
+class U5Task: NSObject, UtilityTaskRunnable {
+    var progress: Progress!
+    var taskUnits: Int64 { return TU }
+    private var model: CollectionStore
+    private var contextToken: Int
+    
+    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
+        model = model_
+        contextToken = token
+        //progress = Progress(parent: prog)
+        super.init()
+        progress.totalUnitCount = taskUnits
+    }
+    
+    // protocol: UtilityTaskRunnable
+    let TU: Int64 =  1000 // generate this as approx msec execution time on my device; only relative size matters
     var isEnabled: Bool { return false }
     var taskName: String { return "UT2017_07_09_BULLETINS_W_DUPLICATE_YEARS" }
-    func runUtilityTask(_ model: CollectionStore) -> String {
-        return removeInfoFoldersDuplicateDates(model)
+    
+    private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
+    
+    func runUtilityTask() -> String {
+        runner.startTask(self)
+        // now it's safe to create our progress monitor
+        progress = Progress(parent: Progress.current(), userInfo: nil)
+        let result = run()
+        runner.completeTask(self)
+        return result
     }
     
     func register(with: UtilityTaskRunner) {
         // register with the runner object
         with.registerUtilityTask(self as UtilityTaskRunnable)
+        runner = with
     }
     
-    private func removeInfoFoldersDuplicateDates(_ model: CollectionStore) -> String {
+    private func run() -> String {
         var result = ""
         if true {
-            let objects = model.fetchInfoInCategory(CATEG_BULLETINS)
+            let objects = model.fetchInfoInCategory(CATEG_BULLETINS, withSearching: [], andSorting: .none, fromContext: contextToken)
             let objects2 = objects.filter() { x in
                 return filterDuplicateDatePrefix(x.descriptionX!)
             }
@@ -187,23 +233,46 @@ class U5Task: UtilityTaskRunnable {
 }
 
 // U6, Utility to scan the bulletins cat.30 to detect diffs between ID and PICTID and write a code table that can be used to modify task U4 so that it will still work if run again
-class U6Task: UtilityTaskRunnable {
-    static let defaultTask = U6Task()
+class U6Task: NSObject, UtilityTaskRunnable {
+    var progress: Progress!
+    var taskUnits: Int64 { return TU }
+    private var model: CollectionStore
+    private var contextToken: Int
+    
+    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
+        model = model_
+        contextToken = token
+        //progress = Progress(parent: prog)
+        super.init()
+        progress.totalUnitCount = taskUnits
+    }
+    
+    // protocol: UtilityTaskRunnable
+    let TU: Int64 =  1000 // generate this as approx msec execution time on my device; only relative size matters
     var isEnabled: Bool { return false }
     var taskName: String { return "UT2017_07_10_BULLETINS_REGEN_U4_SOURCE_PICTID_DIFFTABLE" }
-    func runUtilityTask(_ model: CollectionStore) -> String {
-        return regenPictidDifferencesTable(model)
+
+    private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
+    
+    func runUtilityTask() -> String {
+        runner.startTask(self)
+        // now it's safe to create our progress monitor
+        progress = Progress(parent: Progress.current(), userInfo: nil)
+        let result = run()
+        runner.completeTask(self)
+        return result
     }
     
     func register(with: UtilityTaskRunner) {
         // register with the runner object
         with.registerUtilityTask(self as UtilityTaskRunnable)
+        runner = with
     }
     
-    private func regenPictidDifferencesTable(_ model: CollectionStore) -> String {
+    private func run() -> String {
         var result = ""
         if true {
-            let objects = model.fetchInfoInCategory(CATEG_BULLETINS)
+            let objects = model.fetchInfoInCategory(CATEG_BULLETINS, withSearching: [], andSorting: .none, fromContext: contextToken)
             let objects2 = objects.filter() { x in
                 return x.pictid! != U4Task.getThePictidFixup(x.id!)
             }
