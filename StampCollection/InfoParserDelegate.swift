@@ -27,6 +27,7 @@ protocol CSVDataSink {
 
 class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     let name : String
+    let progress : Progress
     var recordCount = 0
     var lastRecordNumber = -1
     fileprivate var currentRecordNumber = -1
@@ -40,9 +41,10 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     var sequencePropertyName : String?
     var sequenceCounter = 0
     
-    init(name name2: String) {
+    init(name name_: String, progress progress_: Progress) {
         // NOTE: for the reasoning about the bug in Swift 2/XCode 7 regarding errors in calling this, see here: http://stackoverflow.com/questions/32658812/string-literals-in-lazy-vars-in-swift-2-xcode-7-cannot-convert-value-of-type
-        name = name2
+        name = name_
+        progress = progress_
         super.init()
     }
     
@@ -99,7 +101,7 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
             if let dataSink = dataSink {
                 dataSink.parserDelegate(self, foundData: currentRecord, inContext: contextToken)
             }
-            
+            progress.completedUnitCount += 1 // don't count the header line
         }
         recordCount += 1
         lastRecordNumber = Int(recordNumber)
