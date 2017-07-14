@@ -94,6 +94,8 @@
 		A6B34CFF1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFC1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx */; };
 		A6B34D001C671407001296F3 /* Stamp Diagram X.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFD1C671407001296F3 /* Stamp Diagram X.txt */; };
 		A6B34D011C671407001296F3 /* Stamp Diagram Y.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */; };
+		A6C433991F1890B000E6FC5B /* UtilityTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */; };
+		A6C4339B1F18920200E6FC5B /* UtilityTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C4339A1F18920200E6FC5B /* UtilityTask.swift */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
 		A6D095611AFA92C6007A1186 /* DealerItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */; };
 		A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */; };
@@ -216,6 +218,8 @@
 		A6B34CFC1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Stamp Collection Presentation by Michael L. Mehr.docx"; sourceTree = "<group>"; };
 		A6B34CFD1C671407001296F3 /* Stamp Diagram X.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Stamp Diagram X.txt"; sourceTree = "<group>"; };
 		A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Stamp Diagram Y.txt"; sourceTree = "<group>"; };
+		A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTaskRunner.swift; sourceTree = "<group>"; };
+		A6C4339A1F18920200E6FC5B /* UtilityTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTask.swift; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
 		A6D095601AFA92C6007A1186 /* DealerItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DealerItem+Ex.swift"; sourceTree = "<group>"; };
 		A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InventoryItem+Ex.swift"; sourceTree = "<group>"; };
@@ -261,13 +265,11 @@
 				A672C90A1BF9343700D0E031 /* BaseEntities */,
 				A662C1B91AFAE5630067792F /* CoreDataRegeneratedEntities */,
 				A672C9091BF933F800D0E031 /* EntityExtensions */,
-				A60DBC761ADC463400D4959D /* ImportExport.swift */,
+				A6C4339C1F1892CA00E6FC5B /* Batch UtilityTasks */,
 				A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */,
-				A68104051F0EDC480000272B /* ATMUtilities.swift */,
-				A68104091F11F3050000272B /* BulletinUtilities.swift */,
+				A60DBC761ADC463400D4959D /* ImportExport.swift */,
 				A632CBB61AF2E96F00565686 /* Filtering.swift */,
 				A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */,
-				A68104031F0ED8720000272B /* InfoFolderUtilities.swift */,
 				A632CBBA1AF538FD00565686 /* InfoUtilities.swift */,
 				A66348141B236FDA00A4D225 /* Regex.swift */,
 				A632CBB11AEFE8F800565686 /* Basics.swift */,
@@ -414,6 +416,18 @@
 				A6AA4EC81B4F756A007D9558 /* TMMemoryCache.m */,
 			);
 			name = TMCache;
+			sourceTree = "<group>";
+		};
+		A6C4339C1F1892CA00E6FC5B /* Batch UtilityTasks */ = {
+			isa = PBXGroup;
+			children = (
+				A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */,
+				A6C4339A1F18920200E6FC5B /* UtilityTask.swift */,
+				A68104051F0EDC480000272B /* ATMUtilities.swift */,
+				A68104091F11F3050000272B /* BulletinUtilities.swift */,
+				A68104031F0ED8720000272B /* InfoFolderUtilities.swift */,
+			);
+			name = "Batch UtilityTasks";
 			sourceTree = "<group>";
 		};
 		A6E198391AD6EEEC0090FDB1 = {
@@ -645,6 +659,7 @@
 				A66DE5C91EF9E556000A0066 /* InventoryUtilities.swift in Sources */,
 				A66FD2991BEB45B400C7A2FD /* UIImageView+NetworkExtensions.swift in Sources */,
 				A68104041F0ED8720000272B /* InfoFolderUtilities.swift in Sources */,
+				A6C4339B1F18920200E6FC5B /* UtilityTask.swift in Sources */,
 				A662C1CB1AFEAB010067792F /* Category.swift in Sources */,
 				A66FD2911BE86DE400C7A2FD /* InventoryItemCell.swift in Sources */,
 				A66FD28F1BE85CC600C7A2FD /* AlbumPageViewController.swift in Sources */,
@@ -682,6 +697,7 @@
 				A67977DC1BB11994007F298D /* AlbumRef+CoreDataProperties.swift in Sources */,
 				A61C115C1AE6DBB400063025 /* BTDealerStore.swift in Sources */,
 				A61C11601AEA217400063025 /* InfoCategoriesTableViewController.swift in Sources */,
+				A6C433991F1890B000E6FC5B /* UtilityTaskRunner.swift in Sources */,
 				A67977DE1BB11994007F298D /* AlbumPage+CoreDataProperties.swift in Sources */,
 				A6AA4EC91B4F756A007D9558 /* TMCache.m in Sources */,
 				A67977DD1BB11994007F298D /* AlbumType+CoreDataProperties.swift in Sources */,
