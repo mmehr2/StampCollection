@@ -84,12 +84,6 @@ class ImportExport: CSVDataSink {
 
     fileprivate var bundleCategoryURL: URL { return  bundleURL.appendingPathComponent("baitcfg.csv") }
     
-    lazy fileprivate var infoParser: InfoParserDelegate = InfoParserDelegate(name: "INFO")
-    
-    lazy fileprivate var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "CATEGORY")
-    
-    lazy fileprivate var inventoryParser: InfoParserDelegate = InfoParserDelegate(name: "INVENTORY")
-    
     fileprivate var infoURL : URL {
         let ad = UIApplication.shared.delegate! as! AppDelegate
         return ad.applicationDocumentsDirectory.appendingPathComponent("info.csv")
@@ -108,30 +102,32 @@ class ImportExport: CSVDataSink {
     // MARK: - CSVDataSink protocol implementation (internal link to 3rd party CSV file parser)
     internal func parserDelegate(_ parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
         // OPTIONAL: create persistent data objects for the parsed info
-        if parserDelegate === categoryParser {
+        guard let parserDelegate = parserDelegate as? InfoParserDelegate else { return }
+        if parserDelegate.name == "CATEGORY" {
             dataModel?.addObjectType(.categories, withData: data, toContext: token)
         }
-        else if parserDelegate === infoParser {
+        else if parserDelegate.name == "INFO" {
             dataModel?.addObjectType(.info, withData: data, toContext: token)
         }
-        else if parserDelegate === inventoryParser {
+        else if parserDelegate.name == "INVENTORY" {
             dataModel?.addObjectType(.inventory, withData: data, toContext: token)
         }
     }
 
     internal func parserDelegate( _ parserDelegate: CHCSVParserDelegate, shouldAddSequenceData seqname: inout String, fromCount start: inout Int, inContext token: CollectionStore.ContextToken) -> Bool {
         var result = false
-        if parserDelegate === categoryParser {
+        guard let parserDelegate = parserDelegate as? InfoParserDelegate else { return result }
+        if parserDelegate.name == "CATEGORY" {
             seqname = "exOrder"
             start = dataModel?.getCountForType(.categories, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
         }
-        else if parserDelegate === infoParser {
+        else if parserDelegate.name == "INFO" {
             seqname = "exOrder"
             start = dataModel?.getCountForType(.info, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
         }
-        else if parserDelegate === inventoryParser {
+        else if parserDelegate.name == "INVENTORY" {
             seqname = "exOrder"
             start = dataModel?.getCountForType(.inventory, fromCategory: CollectionStore.CategoryAll, inContext: token) ?? 0
             result = true
@@ -259,20 +255,31 @@ class ImportExport: CSVDataSink {
     /// Import the data (back-end) from CSV files in the user's Documents folder
     func importData( _ sourceType: Source,
         toModel dataModel: ImportDataSink,
-        completion: (() -> Void)? )
+        completion: (() -> Void)? ) -> Progress
     {
+        let progress = Progress() // create a progress object to report progress
         if true { //let dataModel = self.dataModel {
             self.dataModel = dataModel // save this for use by protocol functions
             // set the context token for this thread
             let token = dataModel.prepareStorageContext(forExport: false)
+            let catPD = InfoParserDelegate(name: "CATEGORY", progress: progress)
+            let infoPD = InfoParserDelegate(name: "INFO", progress: progress)
+            let invPD = InfoParserDelegate(name: "INVENTORY", progress: progress)
+            let catRecs = countLinesInFile(categoryURL.path)
+            let infoRecs = countLinesInFile(infoURL.path)
+            let invRecs = countLinesInFile(inventoryURL.path)
+            print("Reading \(catRecs) categories, \(infoRecs) info items, and \(invRecs) inventory items...")
+            progress.totalUnitCount += Int64(catRecs)
+            progress.totalUnitCount += Int64(infoRecs)
+            progress.totalUnitCount += Int64(invRecs)
             // do this on the background thread provided by the data model
             dataModel.addOperationToContext(token) {
                 // this does blocking (synchronous) parsing of the files
                 if self.prepareImportFromSource(sourceType) {
                     // load the data using our saved value of the token
-                    self.loadData(self.categoryParser, fromFile: self.categoryURL, withContext: token)
-                    self.loadData(self.infoParser, fromFile: self.infoURL, withContext: token)
-                    self.loadData(self.inventoryParser, fromFile: self.inventoryURL, withContext: token)
+                    self.loadData(catPD, fromFile: self.categoryURL, withContext: token)
+                    self.loadData(infoPD, fromFile: self.infoURL, withContext: token)
+                    self.loadData(invPD, fromFile: self.inventoryURL, withContext: token)
                     // finalize the data for this context token (perform save, release context)
                     dataModel.finalizeStorageContext(token, forExport: false)
                 }
@@ -282,6 +289,7 @@ class ImportExport: CSVDataSink {
                 }
             }
         }
+        return progress
     }
 
     // MARK: - data export
@@ -429,6 +437,11 @@ class ImportExport: CSVDataSink {
         }
         if error != nil {
             print("Unable to rename INVENTORY temp copy to original: \(error!.localizedDescription).")
+        } else {
+            let catRecs = countLinesInFile(categoryURL.path)
+            let infoRecs = countLinesInFile(infoURL.path)
+            let invRecs = countLinesInFile(inventoryURL.path)
+            print("Wrote total \(catRecs) categories, \(infoRecs) info items, and \(invRecs) inventory items (from line count).")
         }
     }
     

@@ -432,7 +432,7 @@
                         <viewControllerLayoutGuide type="bottom" id="tgc-FE-nn3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pdn-th-VbF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -975,7 +975,7 @@
         <image name="noimage.png" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="j1b-8c-TrU"/>
         <segue reference="aA6-XJ-1cy"/>
-        <segue reference="6jo-MX-zwe"/>
     </inferredMetricsTieBreakers>
 </document>
