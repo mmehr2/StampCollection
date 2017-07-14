@@ -335,3 +335,29 @@ class PagingDataCounter {
         return index >= count ? nil : index
     }
 }
+
+// counting lines in a file (useful for CSV record counts)
+// returns -1 if errors occur on file open (usu.not found)
+func countLinesInFile(_ path: String) -> Int {
+    // Modified for Swift 3.1 from code at: https://stackoverflow.com/questions/24581517/read-a-file-url-line-by-line-in-swift
+    // Scroll down to answer by @dankogai on Jul 10, 2014
+    // changes were made in memory allocation and added binding
+    //import Darwin
+    let bufsize = 4096 // maximum size of line in file
+    var lineCount = 0
+    // if fopen() returns nil (file prob.not found), return -1 line count
+    if let hfile = fopen(path, "r") {
+        // NOTE: the following code comes from the Swift documentation for the bindMemory(:to:capacity) function
+        let bytesPointer = UnsafeMutableRawPointer.allocate(
+            bytes: bufsize,
+            alignedTo: MemoryLayout<Int8>.alignment)
+        let buf = bytesPointer.bindMemory(to: Int8.self, capacity: bufsize)
+        // end of new memory buffer code
+        while (fgets(buf, Int32(bufsize-1), hfile) != nil) {
+            //print(String.fromCString(CString(buf)))
+            lineCount += 1
+        }
+        buf.deinitialize() // destroy() was renamed too
+    }
+    return lineCount - 1
+}
