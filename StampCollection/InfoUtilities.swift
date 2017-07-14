@@ -411,7 +411,7 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
 
     // new way - NO PROTOCOLS since you have to be dynamic to be KVO-observable, and this requires the object to be Objective-C compatible, not pure Swift, so no protocols
     func registerUtilityTask(_ utask: UtilityTask ) {
-        utRegistrations.append(utask)
+        //utRegistrations.append(utask) // no, this is counter-intuitive; let the original call do the append
         progress.addChild(utask.progress, withPendingUnitCount: utask.taskUnits)
         progress.totalUnitCount += utask.taskUnits
     }

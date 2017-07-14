@@ -171,7 +171,8 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
          A better article can be found here (June 4, 2016, about a year old): https://www.allaboutswift.com/dev/2016/6/4/working-with-nsprogress
          */
         progress = Progress(totalUnitCount: 100)
-        self.progressViewBar.observedProgress = progress
+        progressViewBar.observedProgress = progress
+        progressViewBar.isHidden = false
         progress.becomeCurrent(withPendingUnitCount: 10) // for initial fetch (short)
         // load the category data from CoreData
         title = "Collection Categories"
@@ -193,6 +194,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
            // make sure we update our progress bar viewer with the task's progress indicator
             // run the tasks on a background thread with a completion handler
             utr.callUtilityTasks() { uresult in
+                self.progressViewBar.isHidden = true
                 // tell the user about the task results last
                 if !uresult.isEmpty {
                     messageBoxWithTitle("Utility Task Results", andBody: uresult, forController: self)
