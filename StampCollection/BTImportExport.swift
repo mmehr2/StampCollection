@@ -9,10 +9,8 @@
 import Foundation
 import UIKit
 
-private let infoName = "BTINFO"
-private let categoryName = "BTCATS"
-private let nameOfCategoryFile = "\(categoryName).CSV"
-private let nameOfInfoFile = "\(infoName).CSV"
+private let nameOfCategoryFile = "BTCATS.CSV"
+private let nameOfInfoFile = "BTINFO.CSV"
 
 private func getFile(_ name: String) -> URL {
     let ad = UIApplication.shared.delegate! as! AppDelegate
@@ -22,8 +20,9 @@ private func getFile(_ name: String) -> URL {
 // MARK: data import
 class BTImporter: CSVDataSink {
     
-    let infoParserName = infoName
-    let categoryParserName = categoryName
+    lazy fileprivate var infoParser: InfoParserDelegate = InfoParserDelegate(name: "BTINFO")
+    
+    lazy fileprivate var categoryParser: InfoParserDelegate = InfoParserDelegate(name: "BTCATS")
     
     
     fileprivate var categories: [Int:BTCategory] = [:]
@@ -42,8 +41,7 @@ class BTImporter: CSVDataSink {
    
     // MARK: - CSVDataSink protocol implementation
     func parserDelegate(_ parserDelegate: CHCSVParserDelegate, foundData data: [String : String], inContext token: CollectionStore.ContextToken) {
-        guard let parserDelegate = parserDelegate as? InfoParserDelegate else { return }
-        if parserDelegate.name == categoryParserName {
+        if parserDelegate === self.categoryParser {
             // we have a new category object's basic data
             let newObject = BTCategory()
             newObject.importFromData(data)
@@ -51,7 +49,7 @@ class BTImporter: CSVDataSink {
             let catnum = newObject.number
             categories[catnum] = newObject
         }
-        else if parserDelegate.name == infoParserName {
+        else if parserDelegate === self.infoParser {
             // we have a new dealer item object's data
             let newObject = BTDealerItem()
             let catnum = newObject.importFromData(data)
@@ -80,27 +78,19 @@ class BTImporter: CSVDataSink {
         }
     }
     
-    func importData( _ completion: (() -> Void)? ) -> Progress
+    func importData( _ completion: (() -> Void)? )
     {
         // do this on a background thread
-        let progress = Progress()
-        let catsPD = InfoParserDelegate(name: categoryParserName, progress: progress)
-        let infoPD = InfoParserDelegate(name: infoParserName, progress: progress)
         OperationQueue().addOperation({
             // this does blocking (synchronous) parsing of the files
             let fileCats = getFile(nameOfCategoryFile)
             let fileInfo = getFile(nameOfInfoFile)
-            let catRecs = countLinesInFile(fileCats.path)
-            let infoRecs = countLinesInFile(fileInfo.path)
-            print("Reading \(catRecs) BT categories and \(infoRecs) BT info items...")
-            progress.totalUnitCount += Int64(catRecs)
-            progress.totalUnitCount += Int64(infoRecs)
             // set the context token for this thread
             let token = 0 // we only get it back, we don't care to use it until we use CoreData
             // load the data using our saved value of the token
             self.categories = [:]
-            self.loadData(catsPD, fromFile: fileCats, withContext: token)
-            self.loadData(infoPD, fromFile: fileInfo, withContext: token)
+            self.loadData(self.categoryParser, fromFile: fileCats, withContext: token)
+            self.loadData(self.infoParser, fromFile: fileInfo, withContext: token)
             // finalize the data for this context token
             //CollectionStore.sharedInstance.finalizeStorageContext(token) // removed - not using CoreData
             // run the completion block, if any, on the main queue
@@ -108,7 +98,7 @@ class BTImporter: CSVDataSink {
                 OperationQueue.main.addOperation(completion)
             }
         })
-        return progress
+        
     }
     
 }
@@ -116,7 +106,7 @@ class BTImporter: CSVDataSink {
 // MARK: data export
 class BTExporter {
     
-    fileprivate func exportCatalogData(_ data: [BTCategory], toFile file: URL, usingProgress progress: Progress) {
+    fileprivate func exportCatalogData(_ data: [BTCategory], toFile file: URL) {
         // 1. determine file name and path
         // 2. get the header list for the category file
         // 3. for each category
@@ -133,12 +123,11 @@ class BTExporter {
                     }
                 }
                 basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
-                progress.completedUnitCount += 1
             }
         }
     }
     
-    fileprivate func exportItemData(_ data: [BTCategory], toFile file: URL, usingProgress progress: Progress) {
+    fileprivate func exportItemData(_ data: [BTCategory], toFile file: URL) {
         // 1. determine file name and path
         // 2. get the header list for the item file
         // 3. for each category (incl.JS category)
@@ -158,16 +147,12 @@ class BTExporter {
                         }
                     }
                     basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
-                    progress.completedUnitCount += 1
                 }
             }
         }
     }
     
-    func exportData(_ data: [BTCategory], completion: (() -> Void)? ) -> Progress {
-        let progress = Progress()
-        progress.totalUnitCount += data.reduce(0) { total, item in return total + 1 }
-        progress.totalUnitCount += data.reduce(0) { total, item in return total + Int64(item.dataItems.count) }
+    func exportData(_ data: [BTCategory], completion: (() -> Void)? ) {
         let fileCats = getFile(nameOfCategoryFile)
         let fileInfo = getFile(nameOfInfoFile)
         let tempfileCats = getFile(nameOfCategoryFile + ".tmp")
@@ -176,8 +161,8 @@ class BTExporter {
         // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
         OperationQueue().addOperation({
             print("Exporting BT category and info files to path: \(fileCats.path)")
-            self.exportCatalogData(data, toFile: tempfileCats, usingProgress: progress)
-            self.exportItemData(data, toFile: tempfileInfo, usingProgress: progress)
+            self.exportCatalogData(data, toFile: tempfileCats)
+            self.exportItemData(data, toFile: tempfileInfo)
             // delete the original files and rename the temp files to be the original files (with error handling - atomic somehow?)
             let fileManager = FileManager.default
             var error : NSError?
@@ -226,6 +211,5 @@ class BTExporter {
                 OperationQueue.main.addOperation(completion)
             }
         })
-        return progress
     }
 }

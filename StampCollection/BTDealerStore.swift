@@ -237,17 +237,16 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         return categories[num]
     }
     
-    func exportData( _ completion: (() -> Void)? = nil ) -> Progress {
+    func exportData( _ completion: (() -> Void)? = nil ) {
         let exporter = BTExporter()
         let data = categories + [JSCategory]
-        let progress = exporter.exportData(data, completion: completion)
-        return progress
+        exporter.exportData(data, completion: completion)
     }
     
-    func importData( _ completion: (() -> Void)? = nil ) -> Progress {
+    func importData( _ completion: (() -> Void)? = nil ) {
         print("Importing data from CSV files")
         let importer = BTImporter()
-        let progress = importer.importData() {
+        importer.importData() {
             // when it's done, we need to copy the data out
             // NOTE: this is already running on the UI thread (completion block from importData())
             self.categories = importer.getBTCategories()
@@ -260,6 +259,5 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                 completion()
             }
         }
-        return progress
     }
 }

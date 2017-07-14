@@ -83,11 +83,9 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
                     // since we are majorly changing the model, we must notify all top level VCs of the change (including ourselves)
                     appDel.restartUI()
                     // load the new data from CSV files
-                    self.progressViewBar.isHidden = false
-                    self.progressViewBar.observedProgress = self.csvFileImporter.importData(sourceType, toModel: self.model) {
+                    self.csvFileImporter.importData(sourceType, toModel: self.model) {
                         // save all the imported data to its persistence layer
                         self.model.saveMainContext()
-                        self.progressViewBar.isHidden = true
                         // trigger the app delegate to update all the top-level UI's with new model data (including self)
                         appDel.restartUI()
                     }
