@@ -12,14 +12,18 @@ let CATEG_INFOLDERS:Int16 = 29
 
 // U1, Utility to remove duplicate dates YYYY YYYY at start of InfoBulletin descriptionX fields (code feXXXX in category 29)
 class U1Task: NSObject, UtilityTaskRunnable {
-    var progress: Progress!
-    var taskUnits: Int64 { return TU }
-    private var model: CollectionStore
-    private var contextToken: Int
     
-    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
-        model = model_
-        contextToken = token
+    var task: UtilityTask! {
+        didSet(old) {
+            // set up the proxy once we know the object's reference
+            task.reportedTaskUnits = TU
+            task.isEnabled = isEnabled
+            task.taskName = taskName
+            task.taskUnits = 1
+        }
+    }
+    
+    required override init() {
         //progress = Progress(parent: prog) // actually this shouldn't be used however
         super.init()
         //progress.totalUnitCount = taskUnits
@@ -32,26 +36,11 @@ class U1Task: NSObject, UtilityTaskRunnable {
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
     
-    func runUtilityTask() -> String {
-        runner.startTask(self)
-        // now it's safe to create our progress monitor
-        progress = Progress(parent: Progress.current(), userInfo: nil)
-        let result = run()
-        runner.completeTask(self)
-        return result
-    }
-    
-    func register(with: UtilityTaskRunner) {
-        // save and register with the runner object
-        with.registerUtilityTask(self as UtilityTaskRunnable)
-        runner = with
-    }
-    
-    private func run() -> String {
+    func run() -> String {
         var result = ""
         if true {
-            runner.updateTask(self, step: 0, of: 1)
-            let objects = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [], andSorting: .none, fromContext: contextToken)
+            task.updateTask(step: 0, of: 1)
+            let objects = task.model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [], andSorting: .none, fromContext: task.contextToken)
             let objects2 = objects.filter() { x in
                 return filterDuplicateDatePrefix(x.descriptionX!)
             }
@@ -59,7 +48,7 @@ class U1Task: NSObject, UtilityTaskRunnable {
             let objects4 = objects3.joined(separator: "\n")
             result = "Found \(objects3.count) info folder objects with duplicate dates out of total \(objects.count) objects."
             print("\(result)\n\(objects4)")
-            runner.updateTask(self, step: 1, of: 1)
+            task.updateTask(step: 1, of: 1)
         }
         return result
     }
@@ -99,17 +88,15 @@ let CATEG_SETS:Int16 = 2
 // 953 rabbi ovadiah comes after 954-957 (fix by hand needed)
 
 class U2Task: NSObject, UtilityTaskRunnable {
-    var progress: Progress!
-    var taskUnits: Int64 { return TU }
-    private var model: CollectionStore
-    private var contextToken: Int
     
-    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
-        model = model_
-        contextToken = token
-        //progress = Progress(parent: prog)
-        super.init()
-        progress.totalUnitCount = taskUnits
+    var task: UtilityTask! {
+        didSet(old) {
+            // set up the proxy once we know the object's reference
+            task.reportedTaskUnits = TU
+            task.isEnabled = isEnabled
+            task.taskName = taskName
+            //task.taskUnits = 1
+        }
     }
     
     // protocol: UtilityTaskRunnable
@@ -119,27 +106,13 @@ class U2Task: NSObject, UtilityTaskRunnable {
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
     
-    func runUtilityTask() -> String {
-        runner.startTask(self)
-        // now it's safe to create our progress monitor
-        progress = Progress(parent: Progress.current(), userInfo: nil)
-        let result = run()
-        runner.completeTask(self)
-        return result
-    }
-    
-    func register(with: UtilityTaskRunner) {
-        // register with the runner object
-        with.registerUtilityTask(self as UtilityTaskRunnable)
-        runner = with
-    }
-    
-    private func run() -> String {
+    func run() -> String {
         let startingFolderNumber = 927 // Greenland S/S, first one not in old Morgenstein catalog
         let startingCodeNumber = 1215
         // estimate how many folders examined by total
         let currentFolderNumber = 1050 // this is only used for task estimation, ok to update occasionally or make it bigger for growth
-        let totalWorkSteps = currentFolderNumber - startingFolderNumber
+        let totalWorkSteps = Int64(currentFolderNumber - startingFolderNumber)
+        task.taskUnits = totalWorkSteps
         var folderNum = startingFolderNumber
         var setCodeNum = startingCodeNumber
         var result = ""
@@ -154,10 +127,10 @@ class U2Task: NSObject, UtilityTaskRunnable {
         while true {
             total += 1
             let codeID = "6110s\(setCodeNum)"
-            if let item = model.fetchInfoItemByID(codeID, inContext: contextToken) {
+            if let item = task.model.fetchInfoItemByID(codeID, inContext: task.contextToken) {
                 // make sure folder doesn't already exist for this set
                 let fecode = getFolderCode(from: folderNum)
-                if model.fetchInfoItemByID(fecode, inContext: contextToken) == nil {
+                if task.model.fetchInfoItemByID(fecode, inContext: task.contextToken) == nil {
                     printFolderCSVEntry(folderNum, fromSetItem: item)
                     if firstCode.isEmpty {
                         firstCode = codeID
@@ -172,7 +145,7 @@ class U2Task: NSObject, UtilityTaskRunnable {
                     // else this has already been done, don't count it, just on to the next one
                 }
                 folderNum += 1
-                runner.updateTask(self, step: folderNum, of: totalWorkSteps) // update estimated count
+                task.updateTask(step: Int64(folderNum - startingFolderNumber), of: totalWorkSteps) // update estimated count
                 missingCounter = 0
             } else {
                 // count missed items in a row, if we miss 3 in a row, stop

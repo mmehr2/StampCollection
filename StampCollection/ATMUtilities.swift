@@ -49,17 +49,15 @@ import Foundation
 
 let CATEG_ATM:Int16 = 26
 class U3Task: NSObject, UtilityTaskRunnable {
-    var progress: Progress!
-    var taskUnits: Int64 { return TU }
-    private var model: CollectionStore
-    private var contextToken: Int
     
-    required init(forModel model_: CollectionStore, inContext token: Int = CollectionStore.mainContextToken, withProgress prog: Progress? = nil) {
-        model = model_
-        contextToken = token
-        //progress = Progress(parent: prog)
-        super.init()
-        progress.totalUnitCount = taskUnits
+    var task: UtilityTask! {
+        didSet(old) {
+            // set up the proxy once we know the object's reference
+            task.reportedTaskUnits = TU
+            task.isEnabled = isEnabled
+            task.taskName = taskName
+            //task.taskUnits = 1
+        }
     }
     
     let TU:Int64 = 5000 // generate this as approx msec execution time on my device; only relative size matters
@@ -69,46 +67,32 @@ class U3Task: NSObject, UtilityTaskRunnable {
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
     
-    func runUtilityTask() -> String {
-        runner.startTask(self)
-        // now it's safe to create our progress monitor
-        progress = Progress(parent: Progress.current(), userInfo: nil)
-        let result = run()
-        runner.completeTask(self)
-        return result
-    }
-    
-    func register(with: UtilityTaskRunner) {
-        // register with the runner object
-        with.registerUtilityTask(self as UtilityTaskRunnable)
-        runner = with
-    }
-    
     // MARK: Task data and functions
     
     let ignores = [ "6110k0707", "6110k0708", "6110k0803", "6110k0804", "6110k0805", "6110k0806", ]
     
-    private func run() -> String {
+    func run() -> String {
         var result = ""
         var firstCode = ""
         var lastCode = ""
         var firstDesc = ""
         var lastDesc = ""
         var totalAdded = 0
-        let objects1 = model.fetchInfoInCategory(CATEG_ATM, withSearching: [.keyWordListAny(["Sima", "Inbar"])], andSorting: .byImport(true), fromContext: contextToken)
+        let objects1 = task.model.fetchInfoInCategory(CATEG_ATM, withSearching: [.keyWordListAny(["Sima", "Inbar"])], andSorting: .byImport(true), fromContext: task.contextToken)
         let objects2 = objects1.filter() { x in
             return !(x.descriptionX!.contains("FDC") || x.id!.contains("m") || x.id!.contains("bl"))
         }
         let objects3 = objects2.filter() { x in
             return !ignores.contains(x.id!)
         }
-        let totalSteps = objects3.count
-        var stepCount = 0
+        let totalSteps = Int64(objects3.count)
+        task.taskUnits = totalSteps
+        var stepCount:Int64 = 0
         for item in objects3 {
             // test for and create blanco label if needed
             let blIdCode = "\(item.id!)bl"
             let descCore = getCoreOfATMDescription(item)
-            if model.fetchInfoItemByID(blIdCode, inContext: contextToken) == nil {
+            if task.model.fetchInfoItemByID(blIdCode, inContext: task.contextToken) == nil {
                 printATMBlancoCSVEntry(fromSetItem: item)
                 totalAdded += 1
                 if firstCode.isEmpty {
@@ -126,7 +110,7 @@ class U3Task: NSObject, UtilityTaskRunnable {
             // also test for and create related machine sets for the same base sets
             printATM_MachineSets_CSVEntries(fromSetItem: item)
             stepCount += 1
-            runner.updateTask(self, step: stepCount, of: totalSteps)
+            task.updateTask(step: stepCount, of: totalSteps)
         }
         if totalAdded > 0 {
             result = "Created \(totalAdded) CSV entries for ATM blanco labels for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
@@ -304,7 +288,7 @@ class U3Task: NSObject, UtilityTaskRunnable {
             for macnum in macnums {
                 let msetCode = "\(idCode)\(rcString)m\(macnum)"
                 // probe for existence of individual mset entry and only add if not already exists
-                if model.fetchInfoItemByID(msetCode, inContext: contextToken) == nil {
+                if task.model.fetchInfoItemByID(msetCode, inContext: task.contextToken) == nil {
                     if let macname = macnames[macnum] {
                         print("\(msetCode),\"\(desc1), \(macname) machine \(macnum) -\(desc2)\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",\"C --\",\"B --\",55.00,,,,0,0,0,0,,,,,26")
                     }

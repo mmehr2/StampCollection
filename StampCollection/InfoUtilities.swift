@@ -323,27 +323,12 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
  The calls can be placed at the appropriate point in the runtime code, but can be cut off here, funneled through the master funcion.
  */
 
-protocol UtilityTaskRunnable: ProgressReporting {
-    // this is how to set up the object
-    init(forModel model_: CollectionStore, inContext token: Int, withProgress prog: Progress?)
-    // this will tell whether or not to run the task
-    var isEnabled: Bool { get }
-    // this will be the name of the task
-    var taskName: String { get }
-    // the progress reporter units assigned (approx msec to execute typically)
-    var taskUnits: Int64 { get }
-    // the task runner will call this function to run the task at startup point
-    // return value will be printed and displayed on the UI when all functions are completed; this should be just a summary
-    func runUtilityTask() -> String
-    // this will be used for runtime registration
-    func register(with: UtilityTaskRunner)
+protocol UtilityTaskRunnable {
+    // how to get to the proxy
+    var task: UtilityTask! { get set }
+    // run the task and track progress via proxy
+    func run() -> String
 }
-//
-//protocol UTR2: UtilityTaskRunnable {
-//    // this is how to set up the object
-//    init(forModel model_: CollectionStore, inContext token: Int, withRunner runner: UtilityTaskRunner)
-//    // this protocol runs during the init, so progress creation and reporting are all tied together
-//}
 
 class UtilityTaskRunner: NSObject, ProgressReporting {
 
@@ -366,13 +351,14 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
         super.init()
         if utRegistrations.isEmpty {
             // call for all known registrations (creates progress objects with this one as parent)
-//            U1Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-//            U2Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-//            U3Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-//            U4Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-//            U5Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-//            U6Task(forModel: model, inContext: contextToken, withProgress: progress).register(with: self)
-            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self))
+//            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self))
+//            utRegistrations[0].taskUnits = 3
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U1Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U2Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U3Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U4Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U5Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U6Task()))
             
         }
         progress.isCancellable = false // for now - might want a mechanism tho
@@ -383,9 +369,6 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
         var result = ""
         // filter out those who will not be running
         let tasks = utRegistrations.filter{ $0.isEnabled }
-        // task units are accumulated incrementally as part of registration
-        //let totalUnits = tasks.reduce(0) { total, x in return total + x.taskUnits }
-        //progress.totalUnitCount = totalUnits
         // launch this on a background queue too
         model.addOperationToContext(contextToken) {
             // this code runs on the background thread associated with the context passed
@@ -404,52 +387,33 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
         }
     }
 
-    // old way
-    func registerUtilityTask(_ utask: UtilityTaskRunnable ) {
-        //utRegistrations.append(utask)
-    }
-
-    // new way - NO PROTOCOLS since you have to be dynamic to be KVO-observable, and this requires the object to be Objective-C compatible, not pure Swift, so no protocols
+    // new way - NO PROTOCOLS since you have to be dynamic to be KVO-observable, and this requires the object to be Objective-C compatible, not pure Swift, so no protocols here
     func registerUtilityTask(_ utask: UtilityTask ) {
         //utRegistrations.append(utask) // no, this is counter-intuitive; let the original call do the append
-        progress.addChild(utask.progress, withPendingUnitCount: utask.taskUnits)
-        progress.totalUnitCount += utask.taskUnits
+        progress.addChild(utask.progress, withPendingUnitCount: utask.reportedTaskUnits)
+        progress.totalUnitCount += utask.reportedTaskUnits
     }
 
-    // MARK: client services: also need to add statistics functions here
-    
-    // client task must call this at start of operation to set current progress object for thread
-    // client should therefore create any progress objects after this call
-    func startTask(_ utask: UtilityTaskRunnable ) {
-        print("Started task \(utask.taskName) progress with 0 of pending \(utask.taskUnits) work units.")
-        progress.becomeCurrent(withPendingUnitCount: utask.taskUnits)
-    }
-    
-    // client task can call this in middle of operation for finer grained progress; can be used to start if number of steps is known; will end task if step == of
-    func updateTask(_ utask: UtilityTaskRunnable, step: Int, of: Int ) {
-        let units = utask.taskUnits * Int64(step) / Int64(of)
-        utask.progress.completedUnitCount = units
-        //progress.completedUnitCount = units // is this also needed? should be automatic due to parent/child, shouldn't it?
-        let funcname = (step == 0) ? "Started" : (step == of) ? "Completed" : "Continued"
-        print("\(funcname) task \(utask.taskName) progress at step \(step) of \(of) with \(units) of pending \(utask.taskUnits) work units.")
-    }
-    
-    // client task must call this at end of operation to resign parent progress for thread, even if task is completed, unit-wise
-    func completeTask(_ utask: UtilityTaskRunnable ) {
-        progress.resignCurrent()
-        utask.progress.completedUnitCount = utask.taskUnits
-        print("Completed task \(utask.taskName) progress with all of \(utask.taskUnits) work units.")
-   }
 }
 
-// generic task, to test the progress mechanism
+// generic task, acts as a proxy for the running task, keeps track of its model, token, progress, etc.
 class UtilityTask: NSObject {
     
+    private var task: UtilityTaskRunnable?
+    
     // create, register
-    required init(forModel model_: CollectionStore, inContext token: Int, withRunner runner_: UtilityTaskRunner) {
+    required init(forModel model_: CollectionStore, inContext token: Int,
+                  withRunner runner_: UtilityTaskRunner,
+                  toRun task_: UtilityTaskRunnable? = nil) {
         progress = Progress()
         runner = runner_
+        task = task_
+        model = model_
+        contextToken = token
         super.init()
+        if var task = task {
+            task.task = self
+        }
         progress.totalUnitCount = taskUnits
         register(with: runner_) // hooks up the progress object hierarchy also
     }
@@ -460,7 +424,17 @@ class UtilityTask: NSObject {
     
     var isEnabled: Bool = true  // set this if it should respond to registration and running
     
-    var taskUnits: Int64 = 10
+    var reportedTaskUnits: Int64 = 100
+    
+    var taskUnits: Int64 = 10 {
+        didSet(oldValue) {
+            progress.totalUnitCount = taskUnits
+            reportedTaskUnits = taskUnits
+        }
+    }
+    
+    var model: CollectionStore! // TBD: make non-optional once backwards compat is removed
+    var contextToken: Int
     
     var progress: Progress
     
@@ -471,7 +445,9 @@ class UtilityTask: NSObject {
         isEnabled = true // set this if it should respond to registration and running
         taskName = "GENERIC TASK"
         taskUnits = 10
+        task = nil
         progress = Progress()
+        contextToken = 0
         super.init()
     }
     // END OF BACKWARDS COMPATIBILITY INIT
@@ -479,7 +455,7 @@ class UtilityTask: NSObject {
     func runUtilityTask() -> String {
         startTask()
         // now it's safe to create our progress monitor
-        let result = run()
+        result = task?.run() ?? run()
         completeTask()
         return result
     }
@@ -491,6 +467,7 @@ class UtilityTask: NSObject {
         runner = with
     }
 
+    // generic method to test the mechanism (if task is nil / not provided)
     func run() -> String {
         // do the (fake) task here
         for step in 0...taskUnits {
