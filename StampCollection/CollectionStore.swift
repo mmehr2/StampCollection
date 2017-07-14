@@ -619,9 +619,10 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     }
 
     // MARK: main functionality
-    func exportAllData(_ completion: (() -> Void)? = nil) {
+    func exportAllData(_ completion: (() -> Void)? = nil) -> Progress {
         let exporter = ImportExport()
-        exporter.exportData(false, fromModel: self, completion: completion)
+        let progress = exporter.exportData(false, fromModel: self, completion: completion)
+        return progress
     }
     
     func fetchType(_ type: DataType, category: Int16 = CategoryAll, searching: [SearchType] = [], completion: (() -> Void)? = nil) {

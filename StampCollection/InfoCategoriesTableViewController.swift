@@ -114,9 +114,11 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
             act = UIAlertAction(title: "CSV", style: .default) { _ in
                 self.exportButton.isEnabled = false
                 self.setProgressView(true)
-                self.model.exportAllData() {
+                self.progressViewBar.isHidden = false
+                self.progressViewBar.observedProgress = self.model.exportAllData() {
                     self.exportButton.isEnabled = true
                     self.setProgressView(false)
+                    self.progressViewBar.isHidden = true
                }
             }
             ac.addAction(act)
@@ -133,7 +135,9 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
                     self.exportButton.isEnabled = true
                 }
                 // send the data from CoreData to the CSV files
-                self.model.exportAllData() {
+                self.progressViewBar.isHidden = false
+                self.progressViewBar.observedProgress = self.model.exportAllData() {
+                    self.progressViewBar.isHidden = true
                     // when done, send the CSV files on their way
                     emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
                 }

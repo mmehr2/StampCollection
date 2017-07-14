@@ -288,7 +288,8 @@ class ImportExport: CSVDataSink {
     
     // NOTE: exports to CSV files in user's Documents folder
     fileprivate func writeDataOfType( _ dataType: CollectionStore.DataType, toCSVFile file: URL,
-        withContext token: CollectionStore.ContextToken )
+                                      withContext token: CollectionStore.ContextToken,
+                                      viaProgress progress: Progress )
     {
         if let dataSource = dataSource, let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = dataSource.headersForItemsOfDataType(dataType, withContext: token)
@@ -304,18 +305,24 @@ class ImportExport: CSVDataSink {
                     }
                 }
                 basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
+                progress.completedUnitCount += 1
             }
         }
     }
     
     func exportData( _ compare: Bool = false,
         fromModel dataSource: ExportDataSource,
-        completion: (() -> Void)? )
+        completion: (() -> Void)? ) -> Progress
     {
+        // create a Progress object for data counting
+        let progress = Progress()
         if true { //let dataSource = self.dataSource {
             self.dataSource = dataSource // save the data object for use by protocols
             // set the context token for this thread
             let token = dataSource.prepareStorageContext(forExport: true)
+            progress.totalUnitCount += Int64(dataSource.numberOfItemsOfDataType(.categories, withContext: token))
+            progress.totalUnitCount += Int64(dataSource.numberOfItemsOfDataType(.info, withContext: token))
+            progress.totalUnitCount += Int64(dataSource.numberOfItemsOfDataType(.inventory, withContext: token))
             // do this on a background thread
             // NOTE: data source can manage memory footprint by only doing batches of INFO and INVENTORY at a time
             dataSource.addOperationToContext(token) {
@@ -324,11 +331,11 @@ class ImportExport: CSVDataSink {
                 let infoFileTmp = self.infoURL.appendingPathExtension("tmp")
                 let inventoryFileTmp = self.inventoryURL.appendingPathExtension("tmp")
                 print("Exporting files to \(self.categoryURL.path)")
-                self.writeDataOfType(.categories, toCSVFile: categoryFileTmp, withContext: token)
+                self.writeDataOfType(.categories, toCSVFile: categoryFileTmp, withContext: token, viaProgress: progress)
                 print("Completed writing \(categoryFileTmp.lastPathComponent)")
-                self.writeDataOfType(.info, toCSVFile: infoFileTmp, withContext: token)
+                self.writeDataOfType(.info, toCSVFile: infoFileTmp, withContext: token, viaProgress: progress)
                 print("Completed writing \(infoFileTmp.lastPathComponent)")
-                self.writeDataOfType(.inventory, toCSVFile: inventoryFileTmp, withContext: token)
+                self.writeDataOfType(.inventory, toCSVFile: inventoryFileTmp, withContext: token, viaProgress: progress)
                 print("Completed writing \(inventoryFileTmp.lastPathComponent)")
                 // finalize the data for this context token
                 dataSource.finalizeStorageContext(token, forExport: true)
@@ -357,6 +364,7 @@ class ImportExport: CSVDataSink {
                 }
             } // end of operation block
         }
+        return progress
     }
     
     fileprivate func finalizeFiles(_ categoryFileTmp: URL, _ infoFileTmp: URL, _ inventoryFileTmp: URL) {
