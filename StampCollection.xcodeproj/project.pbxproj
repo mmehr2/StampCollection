@@ -101,7 +101,7 @@
 		A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D095621AFA92E3007A1186 /* InventoryItem+Ex.swift */; };
 		A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */; };
 		A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6E198491AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld */; };
-		A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */; };
+		A6E1984D1AD6EEEC0090FDB1 /* BTCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1984C1AD6EEEC0090FDB1 /* BTCategoriesTableViewController.swift */; };
 		A6E198501AD6EEEC0090FDB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E1984E1AD6EEEC0090FDB1 /* Main.storyboard */; };
 		A6E198521AD6EEEC0090FDB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E198511AD6EEEC0090FDB1 /* Images.xcassets */; };
 		A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E198531AD6EEEC0090FDB1 /* LaunchScreen.xib */; };
@@ -227,7 +227,7 @@
 		A6E198461AD6EEEC0090FDB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E198471AD6EEEC0090FDB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6E1984A1AD6EEEC0090FDB1 /* StampCollection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StampCollection.xcdatamodel; sourceTree = "<group>"; };
-		A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A6E1984C1AD6EEEC0090FDB1 /* BTCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCategoriesTableViewController.swift; sourceTree = "<group>"; };
 		A6E1984F1AD6EEEC0090FDB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6E198511AD6EEEC0090FDB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6E198541AD6EEEC0090FDB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 		A672C9071BF932B500D0E031 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */,
+				A6E1984C1AD6EEEC0090FDB1 /* BTCategoriesTableViewController.swift */,
 				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
 				A66348101B20DAB900A4D225 /* InfoItemViewController.swift */,
 				A69C300F1BE76E2900A9D39D /* AlbumCollectionViewController.swift */,
@@ -655,7 +655,7 @@
 				A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */,
 				A681040C1F1365B50000272B /* BTItemDetails.swift in Sources */,
 				A662C1EE1B049DD90067792F /* ioapi.c in Sources */,
-				A6E1984D1AD6EEEC0090FDB1 /* ViewController.swift in Sources */,
+				A6E1984D1AD6EEEC0090FDB1 /* BTCategoriesTableViewController.swift in Sources */,
 				A66DE5C91EF9E556000A0066 /* InventoryUtilities.swift in Sources */,
 				A66FD2991BEB45B400C7A2FD /* UIImageView+NetworkExtensions.swift in Sources */,
 				A68104041F0ED8720000272B /* InfoFolderUtilities.swift in Sources */,
