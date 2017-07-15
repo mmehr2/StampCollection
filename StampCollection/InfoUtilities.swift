@@ -231,3 +231,141 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
     //println("Found [\(found)] as YearRange[fmt=\(fmtFound), \(startYear)...\(endYear)]") //\(descr2)")
     return (fmtFound, startYear...endYear, startMonth...endMonth, startDay...endDay)
 }
+
+// Functions dealing with numeric ranges (ignoring literal suffixes for now)
+typealias XlationRange = Int // hope to make this generic when I learn how
+func translateNumberToRange(_ input: String) -> CountableClosedRange<XlationRange>? {
+    // accepts numeric strings of a single number "N"
+    // returns the range N...N
+    // accepts numeric strings of two single numbers "M-N"
+    // returns the range M...N, where N is adjusted so it is >= M
+    let comps = input.components(separatedBy: "-")
+    if comps.count > 2 || comps.count == 0 {
+        return nil
+    }
+    // also want to weed out non-numeric subparts for now
+    let first = comps.first!
+    let numstr = String(first.characters.filter{getCharacterClass($0) == .numeric})
+    if numstr != first {
+        return nil
+    }
+    // first part OK: convert to int
+    let m = XlationRange(first)!
+    if comps.count == 1 {
+        // if only one part, return it as a complete range
+        return m...m
+    }
+    let second = comps[1]
+    let numstr2 = String(second.characters.filter{getCharacterClass($0) == .numeric})
+    if numstr2 != second {
+        return nil
+    }
+    var n = XlationRange(second)!
+    if m > n {
+        // string could have been like 120-4 or 120-24, or even 1234-5 oe 1234-42 or 1234-311
+        // we want to parse individual characters of the input to compensate, I believe
+        // we have access to comps0 and comps1 characters individually
+        // basically, to get N', we substitute the last len(N) digits of M with 0's and add the resulting number to N
+        let lenM = first.characters.count
+        let lenN = second.characters.count
+        let diffN = lenM - lenN
+        if diffN == 0 {
+            return nil
+        } // disallow items of form 234-223 or 29-12 where a range cannot be formed
+        // ALT: we could just swap M and N to get the range, hmmm, no too hard to get decent input
+        let part1 = String(first.characters.prefix(diffN))
+        let part2 = String("00000".characters.suffix(lenN))
+        let factor = XlationRange(part1 + part2)!
+        n += factor
+    }
+    return m...n
+}
+
+func translateNumberListToRanges(_ input: String) -> [CountableClosedRange<XlationRange>] {
+    let comps = input.components(separatedBy: ",")
+    var result = [CountableClosedRange<XlationRange>]()
+    for comp in comps {
+        if let rng = translateNumberToRange(comp) {
+            result += [ rng ]
+        }
+    }
+    return result
+}
+
+func printRange(_ input: CountableClosedRange<XlationRange>) -> String {
+    let result = input.flatMap{String($0)}.joined(separator: " ")
+    return result
+}
+
+func printRanges(_ input: [CountableClosedRange<XlationRange>]) -> String {
+    let result = input.map{printRange($0)}.joined(separator: " ")
+    return result
+}
+
+// parse tests: to see if the right range (or nil) can be created from the left string
+let tests = [
+    "1": 1...1,
+    "1m": nil,
+    "13": 13...13,
+    "10-15": 10...15,
+    "11-5": 11...15,
+    "19-23": 19...23,
+    "32-19": nil,
+    "123-4": 123...124,
+    "1123-4": 1123...1124,
+    "136-8": 136...138,
+    "139-42": 139...142,
+    "1139-42": 1139...1142,
+    "32A-191": nil,
+    "32-191x": nil,
+]
+
+// print tests: to see if the left string can get created by the right range
+let rtests = [
+    "1": [1...1],
+    "123 124": [123...124],
+    "1139 1140 1141 1142": [1139...1142],
+    "1 2 3 5 6 7 8": [1...3, 5...8]
+]
+
+func UnitTestRanges() {
+    var count = 0
+    var pc = 0
+    var fc = 0
+    var result = ""
+    var failed = false
+    for (answer, test) in tests {
+        result = ""
+        failed = false
+        if let test = test {
+            result += ("Test #\(count+1): String to Range of [\(answer)] to [\(test.description)]")
+            if let cand1 = translateNumberToRange(answer) {
+                if cand1 == test { result += ("PASSED"); pc += 1 } else { result += ("FAILED"); fc += 1; failed = true }
+            } else { result += ("FAILED(nil)"); fc += 1; failed = true }
+        } else {
+            // check for failure
+            result += ("Test #\(count): String to Range of \(answer) to nil")
+            if let _ = translateNumberToRange(answer) {
+                result += ("FAILED"); fc += 1; failed = true
+            } else { result += ("PASSED"); pc += 1 }
+        }
+        if failed {
+            print(result)
+        }
+        count += 1
+    }
+    for (answer, test) in rtests {
+        result = ""
+        failed = false
+        result += ("Test #\(count+1): Range to String of [\(test.description)] to [\(answer)]")
+        let cand = printRanges(test)
+        if !cand.isEmpty {
+            if cand == answer { result += ("PASSED"); pc += 1 } else { result += ("FAILED"); fc += 1; failed = true }
+        } else { result += ("FAILED(empty)"); fc += 1; failed = true }
+        count += 1
+        if failed {
+            print(result)
+        }
+    }
+    print("Performed \(count) Range parse/print unit tests: \(pc) passed, \(fc) failed.")
+}

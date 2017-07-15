@@ -28,6 +28,8 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
     required init(withModel model_: CollectionStore) {
         model = model_
         progress = Progress()
+        // run some unit tests on the basics (supposedly quick)
+        UnitTestRanges()
         // reconfigure each time called
         utRegistrations = []
         contextToken = model.getNewContextTokenForThread()
