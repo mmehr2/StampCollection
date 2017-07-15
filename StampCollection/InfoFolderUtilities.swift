@@ -19,7 +19,8 @@ class U1Task: NSObject, UtilityTaskRunnable {
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_INFOLDERS]) > 0 ? 1 : 0
         }
     }
     
@@ -95,7 +96,8 @@ class U2Task: NSObject, UtilityTaskRunnable {
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            //task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_INFOLDERS])
         }
     }
     

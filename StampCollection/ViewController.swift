@@ -11,36 +11,48 @@ import WebKit
 
 // NOTE: WebKit project code from http://www.appcoda.com/webkit-framework-intro/
 
+// ON THE NAME OF THIS CLASS (7/14/17)
+//=======
+// This class should really be renamed BTCategoriesTableViewController, but Xcode doesn't seem to allow this very well.
+// When I tried, I had multiple issues:
+// 1. Unable to have Automatic Assistant Editor follow from the storyboard any more
+// 2. Issues with automatically loading the progressView (although this may have been a timing issue pre/post viewDidLoad())
+// 3. Screwy use of Source Repo configuration when I tried to back off (bad to back off without using revert!)
+// #1 was probably the valid issue, not sure why making changes to the XML file didn't follow thru when Xcode was restarted
 class ViewController: UITableViewController {
     
     var storeModel = BTDealerStore.model
+    @IBOutlet weak var progressView: UIProgressView!
     
-    var spinner: UIActivityIndicatorView? {
-        didSet {
-            self.tableView.tableHeaderView = spinner
-        }
-    }
-    
-    func setSpinnerView(_ onOff: Bool = false) {
-        if !onOff {
-            spinner?.stopAnimating()
-            spinner = nil
-            return
-        }
-        let sp = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        sp.hidesWhenStopped = true
-        sp.startAnimating()
-        spinner = sp
-    }
+//    var spinner: UIActivityIndicatorView? {
+//        didSet {
+//            self.tableView.tableHeaderView = spinner
+//        }
+//    }
+//    
+//    func setSpinnerView(_ onOff: Bool = false) {
+//        if !onOff {
+//            spinner?.stopAnimating()
+//            spinner = nil
+//            return
+//        }
+//        let sp = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+//        sp.hidesWhenStopped = true
+//        sp.startAnimating()
+//        spinner = sp
+//    }
 
     // NOTE: the app delegate will send this message to all top-level VCs when starting up
     // we can use this to autoload the persisted data before the user actually loads this
+    // NOTE: this happens before the progressView has been loaded
     func setModel(_ store: CollectionStore) {
         // use persisted copy with manual updates from web
-        setSpinnerView(true)
-        storeModel.importData() {
+        //setSpinnerView(true)
+        progressView?.isHidden = false
+        progressView?.observedProgress = storeModel.importData() {
             self.tableView.reloadData()
-            self.setSpinnerView(false)
+            //self.setSpinnerView(false)
+            self.progressView?.isHidden = true
         }
     }
     
@@ -51,34 +63,40 @@ class ViewController: UITableViewController {
         self.navigationController?.isToolbarHidden = false
 
         title = "Dealer Categories"
+        progressView.isHidden = false
     }
     
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // reload the BT categories page
-        setSpinnerView(true)
+        //setSpinnerView(true)
         storeModel.loadStore(.justCategories) {
             self.tableView.reloadData()
-            self.setSpinnerView(false)
+            //self.setSpinnerView(false)
         }
     }
     
     @IBAction func reloadButtonPressed(_ sender: UIBarButtonItem) {
-        setSpinnerView(true)
+        //setSpinnerView(true)
         storeModel.loadStore(.populate) {
             self.tableView.reloadData()
-            self.setSpinnerView(false)
+            //self.setSpinnerView(false)
         }
     }
     
     @IBAction func exportButtonPressed(_ sender: UIBarButtonItem) {
-        storeModel.exportData()
+        progressView.isHidden = false
+        progressView.observedProgress = storeModel.exportData() {
+            self.progressView.isHidden = true
+        }
     }
     
     @IBAction func importButtonPressed(_ sender: UIBarButtonItem) {
-        setSpinnerView(true)
-        storeModel.importData() {
+        //setSpinnerView(true)
+        progressView.isHidden = false
+        progressView.observedProgress = storeModel.importData() {
             self.tableView.reloadData()
-            self.setSpinnerView(false)
+            //self.setSpinnerView(false)
+            self.progressView.isHidden = true
         }
     }
 

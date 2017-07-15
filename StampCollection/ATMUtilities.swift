@@ -51,12 +51,13 @@ let CATEG_ATM:Int16 = 26
 class U3Task: NSObject, UtilityTaskRunnable {
     
     var task: UtilityTask! {
-        didSet(old) {
+        didSet {
             // set up the proxy once we know the object's reference
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            //task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_ATM])
         }
     }
     

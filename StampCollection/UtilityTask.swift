@@ -103,4 +103,17 @@ class UtilityTask: NSObject {
         if !debugging { return }
         print("Completed task \(taskName) progress with all of \(taskUnits) work units.")
     }
+    
+    // client task can ask to check if any database category (or list of categories) has data
+    // this can be used for initial setup of taskUnits
+    // convention is for categories >0 are .info, and if <0, represent .inventory when negated
+    func countCategories(_ catlist:[Int16]) -> Int64 {
+        var result: Int64 = 0
+        for cat in catlist {
+            let cata = abs(cat)
+            let typex = cat < 0 ? CollectionStore.DataType.inventory : .info
+            result += Int64(model.getCountForType(typex, fromCategory: cata, inContext: contextToken))
+        }
+        return result
+    }
 }

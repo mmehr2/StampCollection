@@ -8,7 +8,6 @@
 
 import Foundation
 
-//let CATEG_BULLETINS:Int16 = 30
 let CATEG_BULLETINS:Int16 = 30
 
 // U4, Utility to add a pictfile ref to blanks in INFO items in the bulletins category (30)
@@ -23,7 +22,8 @@ class U4Task: NSObject, UtilityTaskRunnable {
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_BULLETINS]) > 0 ? 1 : 0
         }
     }
     
@@ -146,7 +146,8 @@ class U5Task: NSObject, UtilityTaskRunnable {
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_BULLETINS]) > 0 ? 1 : 0
         }
     }
     
@@ -205,7 +206,8 @@ class U6Task: NSObject, UtilityTaskRunnable {
             task.reportedTaskUnits = TU
             task.isEnabled = isEnabled
             task.taskName = taskName
-            task.taskUnits = 1
+            // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
+            task.taskUnits = !isEnabled ? 0 : task.countCategories([CATEG_BULLETINS]) > 0 ? 1 : 0
         }
     }
     

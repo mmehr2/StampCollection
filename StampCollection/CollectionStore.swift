@@ -348,7 +348,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     }
 
     // MARK: object removal
-    func removeAllItemsInStore(_ completion: (()-> Void)?) {
+    func removeAllItemsInStore(_ completion: (()-> Void)?) -> Progress {
         // NOTE: BE VERY CAREFUL IN USING THIS FUNCTION
         /*
         What we probably want to do with CoreData on Import is:
@@ -362,57 +362,86 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         // Then use the CoreData context to wipe the database as well
         // Use private queue context for this operation (may take time)
         let token = getNewContextTokenForThread()
+        let progress = Progress()
         addOperationToContext(token) {
             if let context = self.getContextForThread(token) {
                 // Then remove all INVENTORY objects
                 self.inventory = fetch("InventoryItem", inContext: context)
                 print("Deleting \(self.inventory.count) inventory items")
+                progress.totalUnitCount = Int64(self.inventory.count)
+                progress.completedUnitCount = 0
                 for obj in self.inventory {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
                 self.inventory = []
                 //saveMainContext() // commit those changes
                 // Then remove all INFO objects
                 self.info = fetch("DealerItem", inContext: context)
                 print("Deleting \(self.info.count) info items")
+                progress.totalUnitCount = Int64(self.info.count)
+                progress.completedUnitCount = 0
                 for obj in self.info {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
                 self.info = []
                 //saveMainContext() // commit those changes
                 // Then remove all CATEGORY objects
                 self.categories = fetch("Category", inContext: context)
                 print("Deleting \(self.categories.count) category items")
+                progress.totalUnitCount = Int64(self.categories.count)
+                progress.completedUnitCount = 0
                 for obj in self.categories {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
                 self.categories = []
                 // disassemble the derived Album Location hierarchy, from bottom to top
                 let pages = fetch("AlbumPage", inContext: context)
                 print("Deleting \(pages.count) album pages")
+                progress.totalUnitCount = Int64(pages.count)
+                progress.completedUnitCount = 0
                 for obj in pages {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
                 let sections = fetch("AlbumSection", inContext: context)
                 print("Deleting \(sections.count) album sections")
+                progress.totalUnitCount = Int64(sections.count)
+                progress.completedUnitCount = 0
                 for obj in sections {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
+                self.albumSections = []
                 let albums = fetch("AlbumRef", inContext: context)
                 print("Deleting \(albums.count) album refs")
+                progress.totalUnitCount = Int64(albums.count)
+                progress.completedUnitCount = 0
                 for obj in albums {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
+                self.albums = []
                 let families = fetch("AlbumFamily", inContext: context)
                 print("Deleting \(families.count) album families")
+                progress.totalUnitCount = Int64(families.count)
+                progress.completedUnitCount = 0
                 for obj in families {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
+                self.albumFamilies = []
                 let types = fetch("AlbumType", inContext: context)
                 print("Deleting \(types.count) album types")
+                progress.totalUnitCount = Int64(types.count)
+                progress.completedUnitCount = 0
                 for obj in types {
                     context.delete(obj)
+                    progress.completedUnitCount += 1
                 }
+                self.albumTypes = []
                 self.saveContext(context, userCompletion: nil) // save all these deletes to the local child context's parent
                 self.removeContextForThread(token) // finally done with the local child context, release it
                 //self.saveMainContext() // commit those changes to the parent and its background saver
@@ -422,6 +451,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                 }
             }
         }
+        return progress
     }
 
     // single-item remove (if commit is set, will call saveContext() afterward to commit change)
