@@ -32,7 +32,7 @@ don't need a lot of the functionality that was provided in the PHP system to dea
 that were really just copied and pasted from the website in a browser on Windows.
 
 I may need to revisit the decision about re-creating from scratch. First I must decide about the need for extending the additional info (not carried by the website). Consider each in turn:
----
+
 Folders and bulletins: (MOProcess)
 ---
 The Morgenstin catalog was scanned in and tweaked into a CSV file (via OCR project). This only took us up to 2009.
@@ -43,7 +43,7 @@ There is a newer Morgenstin catalog available in online form, but not clear how 
 The 2009 catalog used Bale catalog numbers for reference, but prob.from Bale 2006. My extension data in PHP used Bale 2013 references (I think). In 2016 this will again be a problem, no doubt. :)
 Moving forward, usage of the FE folder with new FDC shipment entry is well understood. Each FDC and FE item share a page in my FDC albums. Data entry must continue to allow updating of FE data alongside FDC data, some of which may not yet be available in the Sets base category either.
 
----
+
 SIMA data: (MOProcess)
 ---
 The website category for SIMA provides basic items (code 6110m) for a full set of mint labels and for the FDC of a single label, from IPS machine 001. This is in the same category with data from Klussendorf, Frama, MASSAD, and other vending labels (not DALIA). Only MASSAD is still being produced, so these items change the numbering.
@@ -52,7 +52,7 @@ In my correspondence with Tari Chelouche, he had developed a private catalog of 
 I created a never version of it, in which I kept adding as much as I knew about new issues, and whether or not I had them. I also added support for blanco labels (now a hot area of collection effort 5/2015).
 Moving forward, I would like to have the ability to import this data from the CSV as I change it. Alternatively, I could have a way of entering the needed L1 data from the presence of website data, but I would need to implement a screen for determining which machines were involved, and what rate sets were in use (these change throughout the year). Plus, the SIMA machines are being replaced this year, and this may have major consequences. At first, Yuval Assif at IPS said they wouldn't ship these, but then they arrived in my April shipment. The machines are dying and need to be replaced, since the manufacturer has obsoleted the design. So only time will tell how the changes will affect me.
 
----
+
 IRCs (International Reply Coupons)
 ---
 The website only sells 20 of these. Bale lists ~150. I've tried to gather a collection, so there was a need to add more info.
@@ -60,36 +60,34 @@ Currently there is only one standardized coupon in use, and its design changes s
 The PHP code was designed to fill in the blanks by supplementing the BT data enough to make the Bale equivalent. This had to account for anomalies in the Bale numbering scheme as well as the fact that I didn't want to re-enter all the Bale data. So I only used generic prices and descriptions that would need fixups later. Only I never got around to writing the fixup code. Editing could be performed one item at a time.
 Moving forward, this is mostly about editing the 100 or so fixups in some easier fashion. A batch editing screen would be useful here. The ongoing changes could be dealt with by a single-item editor. Pricing data would mostly have to come from Bale (3 year updates) when BT was not available (only 20, a lot less than were on the site when I scanned it back in 2013). Of course, if BT started selling more of these, the needs could change.
 
----
+
 Full Sheet data
 ---
 This is a major project. I doubt BT will ever sell these, and no comprehensive dealer has emerged. But I have amassed a nearly complete collection back to the early days, so this is worth indexing properly.
 BT provides the PHP code with the basic set data, including catalog descriptions in many cases (see FE data). The Sets category uses Scott and Carmel catalog data. I parsed these fields in the PHP code to tell how many denominations were in each set, and provided an entry in L1 (coded 6110t) for each individual denom in the set. I made some extensions to the description fields generated, and created these generically. However, I wanted more in the inventory, so I added screens to easily update the basic entries with more info regarding plate numbers and dates, as well as layout formats (rows, cols). I had only completed fixup of maybe the first few years, so this work is ongoing.
 Moving forward, each new shipment from IPC contains all relevant sheets as well. Any irregular (non 5x3 format) sheets will also have FDCs generated (and some 5x3 as well) that I may be interested in. BT will sell these special sheets in a separate category (the only sheets they sell), with mint and FDC versions in most cases.
 So I need to deal with the facts of BT selling some sheets (code 6110e) and the rest needing regular entries in my 6110t category.
---
+
 Bul Sheli Extensions (My Own Stamp sheets)
 --
 Plus there is the issue of My Own Stamp sheets, of which BT sells some (generic and preprinted by IPC), but not the full set of what I collect (date varieties). I never really dealt with that in the PHP code so far. There are more dates needed than on regular sheets. The same basic design (stamp portion) gets reused for years and only the designs of the pictures and inner stamps change, and sometimes the layout changes (WITHOUT a plate number change).
 
----
+
 Souvenir Folders
 ---
 IPC generates these ongoing. There are two types (at least): 
 Joint Issue items issued by IPC, usually containing the FE folder, souvenir leaf, and mint items (set or S/S), in a velveteen folder. 
 Bigger folders, usually containing a preprinted Bul Sheli sheet and some CDs or other items.
 
-======
-NOTE ON ID CODE USAGE FOR THESE EXTENSIONS
+### NOTE ON ID CODE USAGE FOR THESE EXTENSIONS
 This can use the refItem field (in INV records) to link these, but ideally that should be in L1 data. In the PHP code, I managed to generate the ID codes for the base set from the given code in the BT data directly. There was one case where a fixup was needed (joint issue item didn't match its base set number for some reason).
-======
 
----
+
 Souvenir Leaves
 ---
 In general, these are produced a lot by IPC but I am only interested in those related to Joint Issues. (See which)
 
----
+
 Joint Issue items
 ---
 This is a complex topic and I am interested in a lot of it. So much detail needed here.
@@ -97,7 +95,7 @@ BT provides some basic data and a numbering scheme that seemed to work for the b
 The system was quite complicated, and could generate special coded ID numbers for 6110jNNNxZZZZZ, where the 'x' was the special character indicating my new ID. Tables would allow me to pick all the various item types that were relevant to this particular issue, and generate wants for the things if not directly entering a location.
 Moving forward, IPC continues to do 3-4 of these a year, and sometimes the foreign country takes a while to get its issues out. (Ecuador has yet to issue its orchids joint, which Israel came out with last Oct.) Often FDCs are issued by both countries (not always), and even joint FDCs (with both countries items) can have designs by both Israel and the foreign country. So there is rich variety here to support. The Joint Issues category is for all items issued by the foreign government, plus any Israel items that contain both countries' items. Typically I want a Scott catalog number for the foreign stamp when available, although this may take years to find out.
 
----
+
 Varieties and Variants
 ---
 The ongoing output from IPC showing up on BT site here includes:
