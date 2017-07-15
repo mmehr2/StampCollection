@@ -346,14 +346,14 @@
 			isa = PBXGroup;
 			children = (
 				A6E1984C1AD6EEEC0090FDB1 /* ViewController.swift */,
-				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
-				A66348101B20DAB900A4D225 /* InfoItemViewController.swift */,
-				A69C300F1BE76E2900A9D39D /* AlbumCollectionViewController.swift */,
-				A66FD28E1BE85CC600C7A2FD /* AlbumPageViewController.swift */,
-				A66FD29A1BEC78EA00C7A2FD /* InventoryItemViewController.swift */,
-				A6AA4E4E1B4DC43D007D9558 /* WebItemViewController.swift */,
 				A60DBCB31AE38AD900D4959D /* BTItemsTableViewController.swift */,
 				A61C115F1AEA217400063025 /* InfoCategoriesTableViewController.swift */,
+				A61C11611AEA219B00063025 /* InfoItemsTableViewController.swift */,
+				A66348101B20DAB900A4D225 /* InfoItemViewController.swift */,
+				A66FD29A1BEC78EA00C7A2FD /* InventoryItemViewController.swift */,
+				A69C300F1BE76E2900A9D39D /* AlbumCollectionViewController.swift */,
+				A66FD28E1BE85CC600C7A2FD /* AlbumPageViewController.swift */,
+				A6AA4E4E1B4DC43D007D9558 /* WebItemViewController.swift */,
 				A6856E731B111AB6004B506E /* UpdatesTableViewController.swift */,
 			);
 			name = ViewControllers;
