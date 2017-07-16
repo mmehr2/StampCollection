@@ -22,29 +22,35 @@ class BTItemDetails {
         // Unfortunately, we can't make the object constant with 'let' because the compiler doesn't know these names are the only ones.
         // TBD - Is there a Swift 3?4? way to say this yet? I guess, make a class out of it and set up the fields in the init() call; nope we have done that, and it still needs to be mutable. Oh well...
         data =  [
-                "xtitle" : "", //raw, temporary
-                "info": "", //raw, temporary
-                "titleRaw": "", //raw
-                "ssCount": "",
-                "jointWith": "",
-                "subTitle": "",
-                "xinfoRaw": "", //raw (all following)
-                "issueDatesRaw": "", //raw
-                "issueDates": "",
-                "designersRaw": "", //raw
-                "designers": "",
-                "plateNumbersRaw": "", //raw
-                "plateNumbers": "",
-                "bulletinsRaw": "", //raw
-                "bulletins": "",
-                "leafletsRaw": "", //raw
-                "leaflets": "",
-                "sheetFormatRaw": "", //raw
-                "numStamps": "",
-                "numTabs": "",
-                "souvenirSheetFormatRaw": "", //raw
-                "ssWidth": "",
-                "ssHeight": ""
+            "xtitle" : "", //raw, temporary
+            "info": "", //raw, temporary
+            "titleRaw": "", //raw
+            "ssCount": "",
+            "jointWith": "",
+            "subTitle": "",
+            "xinfoRaw": "", //raw (all following)
+            "issueDatesRaw": "", //raw - basic format (Hebrew) is DD.MM.YYYY, and comma-separated list
+            "issueDateStartList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
+            "issueDateEndList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
+            "designersRaw": "", //raw
+            "designers": "",
+            "plateNumbersRaw": "", //raw
+            "plateNumbers": "", // space-separated list of plate numbers (no suffixes I believe)
+            "bulletinsRaw": "", //raw
+            "bulletins": "", // space-separated list of designators, each of which might contain a suffix letter, such as "123 123a 123b"
+            "leafletsRaw": "", //raw
+            "leaflets": "", // space-separated list of leaflet numbers (no suffixes I believe)
+            "sheetFormatRaw": "", //raw
+            "numStampsList": "", // list of Ints, separated by spaces
+            "numTabsList": "", // same
+            "numRowsList": "", // list of Ints, separated by spaces
+            "numColumnsList": "", // same
+            "sheetFormatList": "", // space separated list of formats such as "(3x5)" taken from "15s 5t"
+            "sheetFormatCount": "", // so that all the answers can coordinate properly
+            "souvenirSheetFormatRaw": "", //raw
+            "ssWidthList": "", // space-separated list of: Float number with 1 DP, minus the "cm", such as "13.0"
+            "ssHeightList": "", // same
+            "ssUnits": "",
         ]
         // typically, bulletin and/or leaflet line will be missing - will all dates be there? who knows?
         // if we're a Souvenir Sheet (see lines[1]), the plate number line is replaced by a size line in cm (HxW, floating point with 1 decimal optional) (so far, no S/S has a plate number...)
@@ -63,13 +69,9 @@ class BTItemDetails {
         //  "numTabs" = TT (sheet format, number of tabs)
         //  "setCardinality" = N for purposes of splitting, how many things are in this set? diff.#s needed for set, FDC, and sheet, but we can't really tell here, so just one guess (or can we?)
         //     for now, I would define it as the number of plate numbers present, and if no P# line, then the # of S/S
-        // * These CSV lists should be normalized to include all values, separated by commas, instead of the shorthand method used by the website; parse something like "255-7,263,279-81" into "255,256,257,263,279,280,281"
+        // * These CSV lists should be normalized to include all values, separated by commas, instead of the shorthand method used by the website; parse something like "255-7,263,279-81" into "255 256 257 263 279 280 281"
         //    NOTE: remember bulletins can have non-numeric suffixes too, and maybe the early leaflets too; see Morgenstein for the excruciating details!
         
-        // create regex test patterns to apply
-        let regexSheetFormat = Regex(pattern: "/^(\\d\\d*)s(\\s(\\d\\d*)t)+/") // typ:100s[ 10t], \1 and \3 are individual measurements (stamps and optional tabs)
-        // the above if repeated, are separated by commas; this one should match only one pattern
-        let regexSouvenirSheetFormat = Regex(pattern: "/^(\\d\\d*(\\.\\d)+)x(\\d\\d*(\\.\\d)+)cm$/") // typ: NN.nxMM.mcm -- extract \1 and \3 to get individual measurements
         let infoData = infoLine.components(separatedBy: "/")
         data["xtitle"] = titleLine
         data["info"] = infoData.joined(separator: "||") // temporary placeholder version
@@ -91,9 +93,11 @@ class BTItemDetails {
                     parseBulletinList(component)
                 } else if component.hasPrefix("leaflet") {
                     parseLeafletList(component)
-                } else if component.test(regexSheetFormat) {
+                } else if component.hasSuffix("s") {
                     parseSheetFormat(component)
-                } else if component.test(regexSouvenirSheetFormat) {
+                } else if component.hasSuffix("t") {
+                    parseSheetFormat(component)
+                } else if component.hasSuffix("cm") {
                     parseSouvenirSheetFormat(component)
                 } else {
                     print("Couldn't parse the DealerItem detailed info line: \(component)")
@@ -102,7 +106,7 @@ class BTItemDetails {
         }
     }
     
-    func parseTitleField(_ input: String) {
+    fileprivate func parseTitleField(_ input: String) {
         //
         print("Parse the Title field: \(input)")
         data["titleRaw"] = input
@@ -190,60 +194,209 @@ class BTItemDetails {
         data["subTitle"] = subtitleBuffer.joined(separator: " ")
     }
     
-    func parseDateList(_ input: String) {
+    fileprivate func parseDateList(_ input: String) {
         //
         print("Parse the Issue Date list: \(input)")
         
         data["issueDatesRaw"] = input
-        
+        // convert each comma-separated component from DD.MM.YYYY to YYYY.MM.DD format, space-separated
+        let comps = input.components(separatedBy: ",")
+        var starts = [String]()
+        var ends = [String]()
+        for comp in comps {
+            let (_, yr, mr, dr) = extractDateRangesFromDescription(comp)
+            let start = "\(yr.lowerBound).\(mr.lowerBound).\(dr.lowerBound)"
+            starts.append(start)
+            let end = "\(yr.upperBound).\(mr.upperBound).\(dr.upperBound)"
+            ends.append(end)
+        }
+        /*
+        "issueDateStartList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
+        "issueDateEndList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
+         */
+        data["issueDateStartList"] = starts.joined(separator: " ")
+        data["issueDateEndList"] = ends.joined(separator: " ")
     }
     
-    func parseDesignerList(_ input: String) {
+    var dateRange: String {
+        var result = [String]()
+        if let slist = data["issueDateStartList"]?.components(separatedBy: " "),
+            let elist = data["issueDateEndList"]?.components(separatedBy: " "),
+            slist.count == elist.count
+        {
+            for i in 0..<slist.count {
+                if slist[i] == elist[i] {
+                    result.append(slist[i])
+                } else {
+                    result.append("\(slist[i])-\(elist[i])")
+                }
+            }
+        }
+        return result.joined(separator: ", ")
+    }
+    
+    fileprivate func parseDesignerList(_ input: String) {
         //
         print("Parse the Designer list: \(input)")
         
         data["designersRaw"] = input
+        data["designers"] = input // no processing for now
         
     }
     
-    func parsePlateNumberList(_ input: String) {
+    fileprivate func parsePlateNumberList(_ input: String) {
         //
         print("Parse the Plate Number list: \(input)")
         
         data["plateNumbersRaw"] = input
         
+        if input.hasPrefix("p") {
+            let plist = String(input.characters.dropFirst())
+            let output = expandNumberList(plist)
+            data["plateNumbers"] = output
+        } else {
+            data["plateNumbers"] = ""
+        }
+        
     }
     
-    func parseBulletinList(_ input: String) {
+    fileprivate func parseBulletinList(_ input: String) {
         //
         print("Parse the Bulletin list: \(input)")
         
         data["bulletinsRaw"] = input
         
+        let name = "bulletin "
+        if input.hasPrefix(name) {
+            let plist = String(input.characters.dropFirst(name.characters.count))
+            let output = expandNumberList(plist)
+            data["bulletins"] = output
+        } else {
+            data["bulletins"] = ""
+        }
+        
     }
     
-    func parseLeafletList(_ input: String) {
+    fileprivate func parseLeafletList(_ input: String) {
         //
         print("Parse the Leaflet list: \(input)")
         
         data["leafletsRaw"] = input
         
+        let name = "leaflet "
+        if input.hasPrefix(name) {
+            let plist = String(input.characters.dropFirst(name.characters.count))
+            let output = expandNumberList(plist)
+            data["leaflets"] = output
+        } else {
+            data["leaflets"] = ""
+        }
+        
     }
     
-    func parseSheetFormat(_ input: String) {
+    fileprivate class func parseSheetFormatSingle(_ input: String) -> (String, String, String, String)? {
+        // try to return (nStamps nTabs nRows nCols) from a single "Ns Mt" or "Ns" designator
+        if input.hasSuffix("s") {
+            // simple count w/o tabs, no idea of format
+            let nStamps = String(input.characters.dropLast())
+            return (nStamps, "?", "?", "?")
+        } else if input.hasSuffix("t") {
+            let comps = input.components(separatedBy: " ")
+            if comps.count == 2 {
+                let stamps = comps[0]
+                let tabs = comps[1]
+                if stamps.hasSuffix("s") && tabs.hasSuffix("t") {
+                    let nStamps = String(stamps.characters.dropLast())
+                    let nTabs = String(tabs.characters.dropLast())
+                    if let nS = Int(nStamps), let nT = Int(nTabs) {
+                        // assuming tabs in rows across the bottom, the # of cols is the same as the number of tabs, and the number of rows is stamps/tabs
+                        // NOTE: for modern cases where this is not the case, let's see how BT handles it - hand editing the output may be required
+                        let nR = nS / nT
+                        let nRows = "\(nR)"
+                        return (nStamps, nTabs, nRows, nTabs)
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    fileprivate func parseSheetFormat(_ input: String) {
         //
         print("Parse the Sheet Format list: \(input)")
         
         data["sheetFormatRaw"] = input
         
+        /*       "sheetFormatRaw": "", //raw
+         "numStampsList": "", // list of Ints, separated by spaces
+         "numTabsList": "", // same
+         "numRowsList": "", // list of Ints, separated by spaces
+         "numColumnsList": "", // same
+         "sheetFormatList": "", // space separated list of formats such as "(3x5)" taken from "15s 5t"
+         "sheetFormatCount": "", // so that all the answers can coordinate properly
+         */
+        let comps = input.components(separatedBy: ",")
+        var stamps = [String]()
+        var tabs = [String]()
+        var rows = [String]()
+        var cols = [String]()
+        var formats = [String]()
+        var count = 0
+        for comp in comps {
+            if let (s, t, r, c) = BTItemDetails.parseSheetFormatSingle(comp) {
+                stamps.append(s)
+                tabs.append(t)
+                rows.append(r)
+                cols.append(c)
+                formats.append("(\(r)x\(c))")
+                count += 1
+            }
+        }
+        data["numStampsList"] = stamps.joined(separator: " ")
+        data["numTabsList"] = tabs.joined(separator: " ")
+        data["numRowsList"] = rows.joined(separator: " ")
+        data["numColumnsList"] = cols.joined(separator: " ")
+        data["sheetFormatList"] = formats.joined(separator: " ")
+        data["sheetFormatCount"] = "\(count)"
+    }
+
+    fileprivate class func parseSouvenirSheetFormatSingle(_ input: String) -> (String, String)? {
+        let comps = input.components(separatedBy: "x")
+        if comps.count == 2 {
+            let width = comps[0]
+            let height = comps[1]
+            return (width, height)
+        }
+        return nil
     }
     
-    func parseSouvenirSheetFormat(_ input: String) {
+    fileprivate func parseSouvenirSheetFormat(_ input: String) {
         //
         print("Parse the Souvenir Sheet Format list: \(input)")
         
         data["souvenirSheetFormatRaw"] = input
-        
+        /*          "souvenirSheetFormatRaw": "", //raw 19.3x10.0cm (possible comma-separated list?)
+         "ssWidthList": "", // space-separated list of: Float number with 1 DP, minus the "cm", such as "13.0"
+         "ssHeightList": "", // same
+         "ssUnits": "cm",
+         */
+        var widths = [String]()
+        var heights = [String]()
+        var units = ""
+        if input.hasSuffix("cm") {
+            units = "cm"
+            let plist = String(input.characters.dropLast(2))
+            let comps = plist.components(separatedBy: ",")
+            for comp in comps {
+                if let (w, h) = BTItemDetails.parseSouvenirSheetFormatSingle(comp) {
+                    widths.append(w)
+                    heights.append(h)
+                }
+            }
+        }
+        data["ssUnits"] = units
+        data["ssWidthList"] = widths.joined(separator: " ")
+        data["ssHeightList"] = heights.joined(separator: " ")
     }
     
 }
