@@ -20,27 +20,23 @@ import WebKit
 // 3. Screwy use of Source Repo configuration when I tried to back off (bad to back off without using revert!)
 // #1 was probably the valid issue, not sure why making changes to the XML file didn't follow thru when Xcode was restarted
 class ViewController: UITableViewController {
+    // This class should really be renamed BTCategoriesTableViewController
     
     var storeModel = BTDealerStore.model
     @IBOutlet weak var progressView: UIProgressView!
     
-//    var spinner: UIActivityIndicatorView? {
-//        didSet {
-//            self.tableView.tableHeaderView = spinner
-//        }
-//    }
-//    
-//    func setSpinnerView(_ onOff: Bool = false) {
-//        if !onOff {
-//            spinner?.stopAnimating()
-//            spinner = nil
-//            return
-//        }
-//        let sp = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-//        sp.hidesWhenStopped = true
-//        sp.startAnimating()
-//        spinner = sp
-//    }
+    
+    var uiEnabled: Bool = true {
+        willSet(newValue) {
+            // enable buttons when variable set to T
+            importButton.isEnabled = newValue
+            exportButton.isEnabled = newValue
+            refreshButton.isEnabled = newValue
+            reloadButton.isEnabled = newValue
+            // hide progress view when variable set to T
+            progressView.isHidden = newValue
+        }
+    }
 
     // NOTE: the app delegate will send this message to all top-level VCs when starting up
     // we can use this to autoload the persisted data before the user actually loads this
@@ -63,40 +59,43 @@ class ViewController: UITableViewController {
         self.navigationController?.isToolbarHidden = false
 
         title = "Dealer Categories"
-        progressView.isHidden = false
+        uiEnabled = true
     }
     
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // reload the BT categories page
-        //setSpinnerView(true)
+        uiEnabled = false
         storeModel.loadStore(.justCategories) {
             self.tableView.reloadData()
-            //self.setSpinnerView(false)
+            self.uiEnabled = true
         }
     }
     
+    @IBOutlet weak var reloadButton: UIBarButtonItem!
     @IBAction func reloadButtonPressed(_ sender: UIBarButtonItem) {
-        //setSpinnerView(true)
+        uiEnabled = false
         storeModel.loadStore(.populate) {
             self.tableView.reloadData()
-            //self.setSpinnerView(false)
+            self.uiEnabled = true
         }
     }
     
+    @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBAction func exportButtonPressed(_ sender: UIBarButtonItem) {
-        progressView.isHidden = false
+        uiEnabled = false
         progressView.observedProgress = storeModel.exportData() {
-            self.progressView.isHidden = true
+            self.uiEnabled = true
         }
     }
     
+    @IBOutlet weak var importButton: UIBarButtonItem!
     @IBAction func importButtonPressed(_ sender: UIBarButtonItem) {
         //setSpinnerView(true)
-        progressView.isHidden = false
+        uiEnabled = false
         progressView.observedProgress = storeModel.importData() {
             self.tableView.reloadData()
-            //self.setSpinnerView(false)
-            self.progressView.isHidden = true
+            self.uiEnabled = true
         }
     }
 

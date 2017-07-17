@@ -83,7 +83,11 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="exportButton" destination="Swq-39-xqr" id="jkO-4P-LXk"/>
+                        <outlet property="importButton" destination="6nE-70-UK2" id="Evk-A1-2Fx"/>
                         <outlet property="progressView" destination="a4d-Yc-AGo" id="NTo-lt-UwF"/>
+                        <outlet property="refreshButton" destination="Ph2-p7-ASZ" id="Nbe-Pk-6E0"/>
+                        <outlet property="reloadButton" destination="1sP-fy-eFC" id="btN-km-pro"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol5-bT-cr4" userLabel="First Responder" sceneMemberID="firstResponder"/>
