@@ -44,6 +44,9 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate var JSCategory = BTCategory()
     fileprivate var siteJSHandler = JSMessageDelegate()
     fileprivate var jsProgress: Progress!
+    fileprivate var startQueue = DispatchQueue.main
+    fileprivate var utilQueue = DispatchQueue.global(qos: .background)
+    //fileprivate var utilQueue = DispatchQueue(label: "com.azuresults.StampCollection.qUtil", qos: .utility, attributes: .concurrent)
 
     init() {
         siteHandler.delegate = self;
@@ -56,12 +59,17 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate var lsStyle: LoadStoreStyle = .justCategories
     
     func loadStore(_ type: LoadStoreStyle, whenDone: @escaping () -> Void) -> Progress {
-        siteProgress = siteHandler.loadCategoriesFromWeb()
-        jsProgress = siteJSHandler.loadItemsFromWeb()
+        siteProgress = Progress()
         progressCounter = 0 // simpler than array of boolean indicators, for now
         lsStyle = type
         completion = whenDone
         loadingInProgress = true
+        siteHandler.configToLoadCategoriesFromWeb()
+        siteJSHandler.configToLoadItemsFromWeb()
+        startQueue.async{
+            self.siteHandler.run()
+            self.siteJSHandler.run()
+        }
         return siteProgress
     }
     
@@ -69,12 +77,13 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         completion = whenDone
         loadMultiple = false
         if categoryNum == JSCategoryAll {
-            jsProgress = siteJSHandler.loadItemsFromWeb()
+            self.siteJSHandler.configToLoadItemsFromWeb()
+            utilQueue.async(execute: self.siteJSHandler.run)
         } else {
-            let handler = categoryHandlers[categoryNum]
-            let category = getCategoryByNumber(categoryNum)!
-            let _/*progress*/ = handler.loadItemsFromWeb(category.href, forCategory: category.number)
-            //catProgress.append(progress) // at index categoryNum, as long as we're loading the entire set
+            let handler = self.categoryHandlers[categoryNum]
+            let category = self.getCategoryByNumber(categoryNum)!
+            handler.configToLoadItemsFromWeb(category.href, forCategory: category.number)
+            utilQueue.async(execute: handler.run)
         }
         loadingInProgress = true
     }
@@ -120,7 +129,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     
     // MARK: - BTMessageProtocol
     func messageHandler(_ handler: BTMessageDelegate, willLoadDataForCategory category: Int) {
-        //print("WillLoad Message received for cat=\(category)")
+        print("WillLoad Message received for cat=\(category)")
         if category == BTCategoryAll {
             reloadCategories = []
             categoryHandlers = []
@@ -138,19 +147,23 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             let numItems = Int64(dataItem.items)
            // load each category's basic information, one at a time
             reloadCategories.append(dataItem)
-            // create a handler to load the category's items
-            let handler = BTMessageDelegate()
-            handler.delegate = self
-            categoryHandlers.append(handler)
             copyCategoryDataToStore(category, basicOnly: true)
             // trigger the load of this category's item data
             if lsStyle != .justCategories {
-                let _/*progress*/ = handler.loadItemsFromWeb(dataItem.href, forCategory: catnum)
-                //progress.totalUnitCount = numItems
-                //catProgress.append(progress)
-                //siteProgress.addChild(progress, withPendingUnitCount: numItems)
-                siteProgress.totalUnitCount += numItems
-                print("Added progress for \(numItems) items to category \(catnum)--#\(category)")
+                DispatchQueue.main.sync {
+                    // create a handler to load the category's items (must run on main thread for hidden WK UI)
+                    let handler = BTMessageDelegate()
+                    handler.delegate = self
+                    categoryHandlers.append(handler)
+                    handler.configToLoadItemsFromWeb("http://www.google.com", forCategory: category) // dummy URL will be replaced
+                    print("Loaded category handler for Category \(category): \(dataItem.name)")
+                    utilQueue.async{
+                        handler.url = URL(string: dataItem.href)
+                        handler.run()
+                    }
+                    siteProgress.totalUnitCount += numItems
+                    print("Added progress for \(numItems) items to category \(catnum)--#\(category)")
+                }
             }
         } else {
             let dataItem = data as! BTDealerItem
@@ -187,13 +200,13 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             }
             // run the completion routine here for styles .JustCategories and .Populate
             if let completion = completion , lsStyle != .populateAndWait {
-                completion()
+                DispatchQueue.main.async(execute: completion)
             }
         } else if !loadMultiple {
             // we finished loading the items for single category mode
             copyCategoryDataToStore(category, basicOnly: false)
             if let completion = completion {
-                completion()
+                DispatchQueue.main.async(execute: completion)
             }
             loadingInProgress = false
         } else {
@@ -209,7 +222,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                 progressCounter = progressCounterMax
                 // run the completion routine here for style .PopulateAndWait
                 if let completion = completion , lsStyle == .populateAndWait {
-                    completion()
+                    DispatchQueue.main.async(execute: completion)
                 }
                 loadingInProgress = false
             }

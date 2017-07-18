@@ -23,14 +23,14 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
     var delegate: JSMessageProtocol?
     
     fileprivate var internalWebView: WKWebView?
+    fileprivate var url: URL!
     
     fileprivate var categoryNumber = JSCategoryAll
     
     fileprivate let itemsJSMessage = "getJSItems" // process non-BT site
     
-    func loadItemsFromWeb() -> Progress {
-        let progress = Progress()
-        let url = URL(string:"http://www.judaicasales.com/judaica/austrian.asp?on_load=1")
+    func configToLoadItemsFromWeb() {
+        url = URL(string:"http://www.judaicasales.com/judaica/austrian.asp?on_load=1")
         //    categoryNumber = JSCategory;
         let config = WKWebViewConfiguration()
         let scriptURL = Bundle.main.path(forResource: "getJSItems", ofType: "js")
@@ -39,13 +39,15 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemsJSMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+    }
+    
+    func run() {
         internalWebView!.load(URLRequest(url: url!))
         if let delegate = delegate {
             delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
         }
         // clear the category array in preparation of reload
         //storeModel.categories = []
-        return progress
     }
     
     // MARK: WKScriptMessageHandler

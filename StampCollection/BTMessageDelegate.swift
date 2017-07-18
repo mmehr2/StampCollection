@@ -28,16 +28,17 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     var categoryNumber = BTCategoryAll // indicates all categories in site, or specific category number being loaded by handler object
     
     fileprivate var internalWebView: WKWebView?
+    var url: URL!
     
     // message names received from JS scripts
     let categoriesMessage = "getCategories"
     fileprivate let itemsMessage = "getItems"
     fileprivate let itemDetailsMessage = "getItemDetails"
     
-    func loadCategoriesFromWeb() -> Progress {
-        let progress = Progress()
-        let url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
-        categoryNumber = BTCategoryAll;
+    func configToLoadCategoriesFromWeb() {
+        // NOTE: this must run on the main queue since it manipulates the (hidden) UI in the WKWebView
+        url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
+        categoryNumber = BTCategoryAll
         let config = WKWebViewConfiguration()
         let scriptURL = Bundle.main.path(forResource: "getCategories", ofType: "js")
         let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
@@ -45,18 +46,11 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: categoriesMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
-        internalWebView!.load(URLRequest(url: url!))
-        if let delegate = delegate as? BTMessageProtocol {
-            delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
-        }
-        // clear the category array in preparation of reload
-        //storeModel.categories = []
-        return progress
     }
     
-    func loadItemsFromWeb( _ href: String, forCategory category: Int ) -> Progress {
-        let progress = Progress()
-        let url = URL(string: href)
+    func configToLoadItemsFromWeb( _ href: String, forCategory category: Int ) {
+        // NOTE: this must run on the main queue since it manipulates the (hidden) UI in the WKWebView
+        url = URL(string: href)
         categoryNumber = category
         let config = WKWebViewConfiguration()
         let scriptURL = Bundle.main.path(forResource: "getItems", ofType: "js")
@@ -65,13 +59,16 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemsMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+    }
+    
+    func run() {
+        // NOTE: this does the work and can be run on the background thread
         internalWebView!.load(URLRequest(url: url!))
         if let delegate = delegate as? BTMessageProtocol {
             delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
         }
         // clear the category array in preparation of reload
         //category.dataItems = []
-        return progress
     }
     
     func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {

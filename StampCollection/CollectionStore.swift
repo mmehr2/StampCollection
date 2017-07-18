@@ -111,7 +111,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let psc = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+        DispatchQueue.global(qos: .background).async {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex-1]
             /* The directory the application uses to store the Core Data store file.
