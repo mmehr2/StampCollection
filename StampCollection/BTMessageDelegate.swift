@@ -9,13 +9,14 @@
 import WebKit
 
 protocol BTInfoProtocol {
-    func messageHandler( _ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int)
 }
 
 protocol BTMessageProtocol : BTInfoProtocol {
     func messageHandler( _ handler: BTMessageDelegate, willLoadDataForCategory category: Int)
     func messageHandler( _ handler: BTMessageDelegate, didLoadDataForCategory category: Int)
-    //func messageHandler( _ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, receivedCategoryData data: BTCategory, forCategory category: Int)
+    func messageHandler( _ handler: BTMessageDelegate, receivedData data: BTDealerItem, forCategory category: Int)
     func messageHandler( _ handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
@@ -149,8 +150,8 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                             category.href = href as String
                             category.number = Int(number)!
                             category.items = Int(items)!
-                            if let delegate = delegate {
-                                delegate.messageHandler(self, receivedData: category, forCategory: categoryNumber)
+                            if let delegate = delegate as? BTMessageProtocol {
+                                delegate.messageHandler(self, receivedCategoryData: category, forCategory: categoryNumber)
                             }
                             //println("Category \(category.number): \(category.name) - \(category.items) items @ \(category.href)")
                         }
@@ -198,7 +199,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                             }
                             // add any fixup of item property fields here
                             dealerItem.fixupBTItem(categoryNumber)
-                            if let delegate = delegate {
+                            if let delegate = delegate as? BTMessageProtocol {
                                 delegate.messageHandler(self, receivedData: dealerItem, forCategory: categoryNumber)
                             }
                         }
@@ -239,7 +240,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
                 // processing needed to make sure we have all possible lines all the time
                 let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine)
                 if let delegate = delegate {
-                    delegate.messageHandler(self, receivedData: info as AnyObject, forCategory: categoryNumber)
+                    delegate.messageHandler(self, receivedDetails: info, forCategory: categoryNumber)
                 }
             }
         }

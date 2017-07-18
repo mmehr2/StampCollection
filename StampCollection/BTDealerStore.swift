@@ -127,6 +127,11 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         jsCompletionRun(catnum, webJSCategory: self.JSCategory)
     }
     
+    // MARK: - BTInfoProtocol
+    func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
+        // this may be used in the future to enhance the dealer items downloaded, and to assure the info is saved in the CSV files
+    }
+    
     // MARK: - BTMessageProtocol
     func messageHandler(_ handler: BTMessageDelegate, willLoadDataForCategory category: Int) {
         print("WillLoad Message received for cat=\(category)")
@@ -139,40 +144,42 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         }
     }
     
-    func messageHandler(_ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int) {
+    func messageHandler(_ handler: BTMessageDelegate, receivedCategoryData dataItem: BTCategory, forCategory category: Int) {
         //print("Data Message received for cat=\(category) => \(data)")
         if category == BTCategoryAll {
-            let dataItem = data as! BTCategory
             let catnum = dataItem.number
+            let catname = dataItem.name
             let numItems = Int64(dataItem.items)
-           // load each category's basic information, one at a time
+            // load each category's basic information, one at a time
             reloadCategories.append(dataItem)
             copyCategoryDataToStore(category, basicOnly: true)
             // trigger the load of this category's item data
             if lsStyle != .justCategories {
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     // create a handler to load the category's items (must run on main thread for hidden WK UI)
                     let handler = BTMessageDelegate()
                     handler.delegate = self
-                    categoryHandlers.append(handler)
-                    handler.configToLoadItemsFromWeb("http://www.google.com", forCategory: category) // dummy URL will be replaced
-                    print("Loaded category handler for Category \(category): \(dataItem.name)")
-                    utilQueue.async{
+                    self.categoryHandlers.append(handler)
+                    handler.configToLoadItemsFromWeb("http://www.google.com", forCategory: catnum) // dummy URL will be replaced
+                    print("Loaded category handler for Category \(catnum): \(catname)")
+                    self.utilQueue.async {
                         handler.url = URL(string: dataItem.href)
                         handler.run()
                     }
-                    siteProgress.totalUnitCount += numItems
-                    print("Added progress for \(numItems) items to category \(catnum)--#\(category)")
+                    self.siteProgress.totalUnitCount += numItems
+                    print("Added progress for \(numItems) items to category \(catnum): \(catname)")
                 }
             }
-        } else {
-            let dataItem = data as! BTDealerItem
-            // load each category's dealer items, one at a time
-            let categoryObject = getReloadCategoryByNumber(category)
-            categoryObject.dataItems.append(dataItem)
-            //catProgress[category-1].completedUnitCount += 1
-            siteProgress.completedUnitCount += 1
         }
+    }
+    
+    
+    func messageHandler(_ handler: BTMessageDelegate, receivedData dataItem: BTDealerItem, forCategory category: Int) {
+        // load each category's dealer items, one at a time
+        let categoryObject = getReloadCategoryByNumber(category)
+        categoryObject.dataItems.append(dataItem)
+        //catProgress[category-1].completedUnitCount += 1
+        siteProgress.completedUnitCount += 1
     }
 
     func messageHandler(_ handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int) {

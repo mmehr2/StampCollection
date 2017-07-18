@@ -113,8 +113,8 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
     }
     
     // MARK: BTInfoProtocol
-    func messageHandler(_ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int) {
-        if let data = data as? BTItemDetails, let info = data.dataObject["info"] {
+    func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
+        if let info = data.dataObject["info"] {
             print("Data received from infoNode:\(data)")
             extraInfo = info
             let dr = data.dateRange
