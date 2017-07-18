@@ -15,7 +15,18 @@ class BTItemsTableViewController: UITableViewController {
     var storeModel = BTDealerStore.model
     var category : BTCategory!
     
+    @IBOutlet weak var progressView: UIProgressView!
     //private var items : [BTDealerItem] = []
+    
+    var uiEnabled: Bool = true {
+        willSet(newValue) {
+            // enable buttons when variable set to T
+            notesButton.isEnabled = newValue
+            refreshButton.isEnabled = newValue
+            // hide progress view when variable set to T
+            progressView.isHidden = newValue
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +40,24 @@ class BTItemsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        uiEnabled = true
     }
 
     func updateUI() {
+        uiEnabled = true
         tableView.reloadData()
     }
     
+    @IBOutlet weak var notesButton: UIBarButtonItem!
     @IBAction func notesButtonPressed(_ sender: UIBarButtonItem) {
         messageBoxWithTitle("Notes", andBody: category.notes, forController: self)
     }
     
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // load the BT category items page for scraping
-        storeModel.loadStoreCategory(category.number, whenDone: updateUI)
+        uiEnabled = false
+        progressView.observedProgress = storeModel.loadStoreCategory(category.number, whenDone: updateUI)
     }
     
     // MARK: - Table view data source

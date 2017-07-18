@@ -73,9 +73,18 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         return siteProgress
     }
     
-    func loadStoreCategory(_ categoryNum: Int, whenDone: @escaping () -> Void) {
+    func loadStoreCategory(_ categoryNum: Int, whenDone: @escaping () -> Void) -> Progress {
+        siteProgress = Progress()
         completion = whenDone
         loadMultiple = false
+        guard let categ = getCategoryByNumber(categoryNum) else {
+            // categories have not been loaded the 1st time yet - TBD: should do a 1st-time load
+            siteProgress.totalUnitCount = 1
+            siteProgress.completedUnitCount = 1
+            return siteProgress
+        }
+        // estimated count is the same as before
+        siteProgress.totalUnitCount = Int64(categ.dataItems.count)
         if categoryNum == JSCategoryAll {
             self.siteJSHandler.configToLoadItemsFromWeb()
             utilQueue.async(execute: self.siteJSHandler.run)
@@ -86,6 +95,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             utilQueue.async(execute: handler.run)
         }
         loadingInProgress = true
+        return siteProgress
     }
     
     // MARK: - JSMessageProtocol
