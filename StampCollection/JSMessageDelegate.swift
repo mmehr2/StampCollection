@@ -28,7 +28,8 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
     
     fileprivate let itemsJSMessage = "getJSItems" // process non-BT site
     
-    func loadItemsFromWeb() {
+    func loadItemsFromWeb() -> Progress {
+        let progress = Progress()
         let url = URL(string:"http://www.judaicasales.com/judaica/austrian.asp?on_load=1")
         //    categoryNumber = JSCategory;
         let config = WKWebViewConfiguration()
@@ -44,6 +45,7 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
         }
         // clear the category array in preparation of reload
         //storeModel.categories = []
+        return progress
     }
     
     // MARK: WKScriptMessageHandler

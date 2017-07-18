@@ -38,9 +38,12 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate var completion : (() -> Void)?
     fileprivate var loadMultiple = true
     fileprivate var loadingInProgress = false
+    fileprivate var siteProgress: Progress!
+    //fileprivate var catProgress: [Progress] = []
     
     fileprivate var JSCategory = BTCategory()
     fileprivate var siteJSHandler = JSMessageDelegate()
+    fileprivate var jsProgress: Progress!
 
     init() {
         siteHandler.delegate = self;
@@ -52,41 +55,43 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     enum LoadStoreStyle { case justCategories, populate, populateAndWait }
     fileprivate var lsStyle: LoadStoreStyle = .justCategories
     
-    func loadStore(_ type: LoadStoreStyle, whenDone: @escaping () -> Void) {
-        siteHandler.loadCategoriesFromWeb()
-        siteJSHandler.loadItemsFromWeb()
+    func loadStore(_ type: LoadStoreStyle, whenDone: @escaping () -> Void) -> Progress {
+        siteProgress = siteHandler.loadCategoriesFromWeb()
+        jsProgress = siteJSHandler.loadItemsFromWeb()
         progressCounter = 0 // simpler than array of boolean indicators, for now
         lsStyle = type
         completion = whenDone
         loadingInProgress = true
+        return siteProgress
     }
     
     func loadStoreCategory(_ categoryNum: Int, whenDone: @escaping () -> Void) {
         completion = whenDone
         loadMultiple = false
         if categoryNum == JSCategoryAll {
-            siteJSHandler.loadItemsFromWeb()
+            jsProgress = siteJSHandler.loadItemsFromWeb()
         } else {
             let handler = categoryHandlers[categoryNum]
             let category = getCategoryByNumber(categoryNum)!
-            handler.loadItemsFromWeb(category.href, forCategory: category.number)
+            let _/*progress*/ = handler.loadItemsFromWeb(category.href, forCategory: category.number)
+            //catProgress.append(progress) // at index categoryNum, as long as we're loading the entire set
         }
         loadingInProgress = true
     }
     
     // MARK: - JSMessageProtocol
     func messageHandler(_ handler: JSMessageDelegate, willLoadDataForCategory category: Int) {
-        //println("WillLoad Message received for cat=\(category)")
+        //print("WillLoad Message received for cat=\(category)")
         JSCategory.dataItems = []
     }
     
     func messageHandler(_ handler: JSMessageDelegate, receivedData data: BTDealerItem, forCategory category: Int) {
-        //println("Data Message received for cat=\(category) => \(data)")
+        //print("Data Message received for cat=\(category) => \(data)")
         JSCategory.dataItems.append(data)
     }
     
     func messageHandler(_ handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int) {
-        //println("Update Message received for cat=\(category) => \(data)")
+        //print("Update Message received for cat=\(category) => \(data)")
         JSCategory.number = category
         JSCategory.name = "(X)Austria Judaica Tabs"
         JSCategory.headers = data.headers
@@ -108,14 +113,14 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     }
     
     func messageHandler(_ handler: JSMessageDelegate, didLoadDataForCategory category: Int) {
-        print("DidLoad Message received for cat=\(category)")
+        //print("DidLoad Message received for cat=\(category)")
         let catnum = BTCategory.translateNumberToInfoCategory(category)
         jsCompletionRun(catnum, webJSCategory: self.JSCategory)
     }
     
     // MARK: - BTMessageProtocol
     func messageHandler(_ handler: BTMessageDelegate, willLoadDataForCategory category: Int) {
-        //println("WillLoad Message received for cat=\(category)")
+        //print("WillLoad Message received for cat=\(category)")
         if category == BTCategoryAll {
             reloadCategories = []
             categoryHandlers = []
@@ -126,10 +131,12 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     }
     
     func messageHandler(_ handler: BTMessageDelegate, receivedData data: AnyObject, forCategory category: Int) {
-        //println("Data Message received for cat=\(category) => \(data)")
+        //print("Data Message received for cat=\(category) => \(data)")
         if category == BTCategoryAll {
             let dataItem = data as! BTCategory
-            // load each category's basic information, one at a time
+            let catnum = dataItem.number
+            let numItems = Int64(dataItem.items)
+           // load each category's basic information, one at a time
             reloadCategories.append(dataItem)
             // create a handler to load the category's items
             let handler = BTMessageDelegate()
@@ -138,26 +145,38 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             copyCategoryDataToStore(category, basicOnly: true)
             // trigger the load of this category's item data
             if lsStyle != .justCategories {
-                handler.loadItemsFromWeb(dataItem.href, forCategory: dataItem.number)
+                let _/*progress*/ = handler.loadItemsFromWeb(dataItem.href, forCategory: catnum)
+                //progress.totalUnitCount = numItems
+                //catProgress.append(progress)
+                //siteProgress.addChild(progress, withPendingUnitCount: numItems)
+                siteProgress.totalUnitCount += numItems
+                print("Added progress for \(numItems) items to category \(catnum)--#\(category)")
             }
         } else {
             let dataItem = data as! BTDealerItem
             // load each category's dealer items, one at a time
             let categoryObject = getReloadCategoryByNumber(category)
             categoryObject.dataItems.append(dataItem)
+            //catProgress[category-1].completedUnitCount += 1
+            siteProgress.completedUnitCount += 1
         }
     }
 
     func messageHandler(_ handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int) {
-        //println("Update Message received for cat=\(category) => \(data)")
+        //print("Update Message received for cat=\(category) => \(data)")
         let categoryObject = getReloadCategoryByNumber(category)
         // update the headers and notes properties (nothing else is guaranteed to be set here)
         categoryObject.headers = data.headers
         categoryObject.notes = data.notes
     }
     
+    fileprivate var lastRecvd: Int64 = 0
+    
     func messageHandler(_ handler: BTMessageDelegate, didLoadDataForCategory category: Int) {
-        //println("DidLoad Message received for cat=\(category)")
+        let addedData = siteProgress.completedUnitCount - lastRecvd
+        let added = category < 0 ? "" : " (added \(addedData))"
+        print("DidLoad Message received for cat=\(category): prog=\(siteProgress.completedUnitCount) of \(siteProgress.totalUnitCount)\(added)")
+        lastRecvd = siteProgress.completedUnitCount
         if category == BTCategoryAll {
             // we just finished loading the master category data
             // load the progress counter's done indicator (how many categories have to load their data items)

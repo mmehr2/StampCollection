@@ -66,7 +66,7 @@ class ViewController: UITableViewController {
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // reload the BT categories page
         uiEnabled = false
-        storeModel.loadStore(.justCategories) {
+        progressView.observedProgress = storeModel.loadStore(.justCategories) {
             self.tableView.reloadData()
             self.uiEnabled = true
         }
@@ -75,7 +75,7 @@ class ViewController: UITableViewController {
     @IBOutlet weak var reloadButton: UIBarButtonItem!
     @IBAction func reloadButtonPressed(_ sender: UIBarButtonItem) {
         uiEnabled = false
-        storeModel.loadStore(.populate) {
+        progressView.observedProgress = storeModel.loadStore(.populateAndWait) {
             self.tableView.reloadData()
             self.uiEnabled = true
         }

@@ -34,7 +34,8 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     fileprivate let itemsMessage = "getItems"
     fileprivate let itemDetailsMessage = "getItemDetails"
     
-    func loadCategoriesFromWeb() {
+    func loadCategoriesFromWeb() -> Progress {
+        let progress = Progress()
         let url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
         categoryNumber = BTCategoryAll;
         let config = WKWebViewConfiguration()
@@ -50,9 +51,11 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         }
         // clear the category array in preparation of reload
         //storeModel.categories = []
+        return progress
     }
     
-    func loadItemsFromWeb( _ href: String, forCategory category: Int ) {
+    func loadItemsFromWeb( _ href: String, forCategory category: Int ) -> Progress {
+        let progress = Progress()
         let url = URL(string: href)
         categoryNumber = category
         let config = WKWebViewConfiguration()
@@ -68,6 +71,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         }
         // clear the category array in preparation of reload
         //category.dataItems = []
+        return progress
     }
     
     func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
