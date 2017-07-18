@@ -146,7 +146,7 @@ class InfoItemsTableViewController: UITableViewController {
                     // first selection: run the box to delete the item if possible
                     let delMenuItems : [MenuBoxEntry] = [
                         ("!Delete Item", { x in
-                            self.model.removeInfoItem(infoitem, commit: true)
+                            let _ = self.model.removeInfoItem(infoitem, commit: true)
                             self.refetchData()
                         }),
                         ]
@@ -192,7 +192,7 @@ class InfoItemsTableViewController: UITableViewController {
                     let items = self.getRelatedItemsFromMain(invitem)
                     // create a menu controller to hold the list of IDs
                     let menu = self.createBaseAssignmentMenu(items, forItem: invitem) {
-                        self.model.saveMainContext()
+                        let _ = self.model.saveMainContext()
                         self.tableView.reloadRows(at: [path], with: .automatic)
                     }
                     //  (action is to call the function that would assign the base item to this ID)

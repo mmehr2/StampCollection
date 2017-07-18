@@ -73,7 +73,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
                     // this is the active progress object we wish to observe to completion
                     self.progressViewBar.observedProgress = self.csvFileImporter.importData(sourceType, toModel: self.model) {
                         // save all the imported data to its persistence layer
-                        self.model.saveMainContext()
+                        let _ = self.model.saveMainContext()
                         self.uiEnabled = true
                         self.progressViewBar.observedProgress = nil
                         // trigger the app delegate to update all the top-level UI's with new model data (including self)
@@ -127,7 +127,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
                     self.uiEnabled = true
                     self.progressViewBar.observedProgress = nil
                     // when done, send the CSV files on their way
-                    emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
+                    let _ = emailer.sendFiles() // WILL ONLY WORK ON DEVICE, NO EMAIL ON SIMULATOR!!
                 }
             }
             ac.addAction(act)

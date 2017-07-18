@@ -37,7 +37,7 @@ class InventoryItemViewController: UIViewController {
     /// call after any changes on the item target
     fileprivate func reload() {
         // save the data and update the UI
-        model.saveMainContext()
+        let _ = model.saveMainContext()
         updateUI()
     }
 

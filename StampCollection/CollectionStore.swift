@@ -442,7 +442,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                     progress.completedUnitCount += 1
                 }
                 self.albumTypes = []
-                self.saveContext(context, userCompletion: nil) // save all these deletes to the local child context's parent
+                let _ = self.saveContext(context, userCompletion: nil) // save all these deletes to the local child context's parent
                 self.removeContextForThread(token) // finally done with the local child context, release it
                 //self.saveMainContext() // commit those changes to the parent and its background saver
                 
@@ -457,7 +457,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     // single-item remove (if commit is set, will call saveContext() afterward to commit change)
     func removeInfoItemByID( _ itemID: String, commit: Bool = true, fromContext token: ContextToken = mainContextToken ) {
         if let obj = fetchInfoItemByID(itemID, inContext: token) {
-            removeInfoItem(obj, commit: commit)
+            let _ = removeInfoItem(obj, commit: commit)
         }
     }
     
@@ -488,7 +488,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     
     func finalizeStorageContext(_ token: ContextToken, forExport: Bool = false) {
         if !forExport {
-            saveContextForThread(token)
+            let _ = saveContextForThread(token)
         }
         removeContextForThread(token) // NOTE: do NOT use token after this point
     }
@@ -516,7 +516,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
         let mocForThread = getContextForThread(token)
         switch type {
         case .categories:
-            Category.makeObjectFromData(data, inContext: mocForThread)
+            let _ = Category.makeObjectFromData(data, inContext: mocForThread)
             //let valstr = ", ".join(data.values)
             //println("Made Category from \(valstr)")
             break
@@ -527,7 +527,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
             {
                     // pass the related object(s) in a Dictionary to make the new item in the moc
                     let relations = ["category": obj]
-                    DealerItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+                    let _ = DealerItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
                     //let valstr = ", ".join(data.values)
                     //println("Made DealerItem from \(valstr)")
             }
@@ -550,7 +550,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                     {
                         relations.updateValue(robj, forKey: "referredItem")
                     }
-                    InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
+                    let _ = InventoryItem.makeObjectFromData(data, withRelationships: relations, inContext: mocForThread)
                     //let valstr = ", ".join(data.values)
                     //println("Made InventoryItem from \(valstr)")
                 }
@@ -842,7 +842,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
                 let cats = self.fetchCategoriesEx(catnum, inContext: context)
                 output.processUpdateComparison(cats)
             }
-            self.saveContextForThread(token)
+            let _ = self.saveContextForThread(token)
             self.removeContextForThread(token)
             // and then call the completion routine
             if let completion = completion {
