@@ -63,7 +63,7 @@ class U3Task: NSObject, UtilityTaskRunnable {
     
     let TU:Int64 = 5000 // generate this as approx msec execution time on my device; only relative size matters
     // protocol: UtilityTaskRunnable
-    var isEnabled: Bool { return true }
+    var isEnabled: Bool { return false }
     var taskName: String { return "UT2017_07_05_ADD_MISSING_ATM_BLANCO_LABELS_AND_SETS" }
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
