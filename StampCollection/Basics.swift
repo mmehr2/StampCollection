@@ -205,35 +205,59 @@ public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
 }
 
 // MARK: date extensions and helpers
-// full set of comparison operators for NSDate pairs
-public func <(d1: Date, d2: Date) -> Bool {
-    let res = d1.compare(d2)
-    return res == .orderedAscending
+// date range classes with limited functionality
+struct ClosedDateRange {
+    let lowerBound: Date
+    let upperBound: Date
+    
+    init(from lower:Date, to upper:Date) {
+        lowerBound = lower
+        upperBound = upper
+    }
+    
+    init(once: Date) {
+        lowerBound = once
+        upperBound = once
+    }
+    
+    func contains(_ dd: Date) -> Bool {
+        return dd >= lowerBound && dd <= upperBound
+    }
 }
 
-//public func ==(d1: NSDate, d2: NSDate) -> Bool {
-//    let res = d1.compare(d2)
-//    return res == .OrderedSame
-//}
-//
-//extension NSDate: Equatable { }
-// NOTE: the protocols take care of defining the rest...
-//func >(d1: NSDate, d2: NSDate) -> Bool {
-//    let res = d1.compare(d2)
-//    return res == .OrderedDescending
-//}
-//
-//func !=(d1: NSDate, d2: NSDate) -> Bool {
-//    return !(d1 == d2)
-//}
-//
-//func >=(d1: NSDate, d2: NSDate) -> Bool {
-//    return !(d1 < d2)
-//}
-//
-//func <=(d1: NSDate, d2: NSDate) -> Bool {
-//    return !(d1 > d2)
-//}
+extension ClosedDateRange: Equatable {
+    static func ==(_ lhs: ClosedDateRange, _ rhs: ClosedDateRange) -> Bool {
+        return lhs.lowerBound == rhs.lowerBound && lhs.upperBound == rhs.upperBound
+    }
+}
+
+extension ClosedDateRange: CustomStringConvertible {
+    var description: String {
+        let lbdesc = "\(self.lowerBound)"
+        let ubdesc = "\(self.upperBound)"
+        return "\(lbdesc)-\(ubdesc)"
+    }
+}
+
+// special date extension to create a Date from our normalized Gregorian-calendar-based string YYYY.MM.DD
+// era assumed to be AD, TZ assumed to be UTC maybe (or should it be Israeli? local? who cares?)
+extension Date {
+    init?(gregorianString fmtYYYY_MM_DD: String) {
+        let gc = Calendar(identifier: .gregorian)
+        let comps = fmtYYYY_MM_DD.components(separatedBy: ".")
+        if comps.count == 3 {
+            let y = Int(comps.first!)
+            let d = Int(comps.last!)
+            let m = Int(comps[1])
+            let dc = DateComponents(calendar: gc, year: y, month: m, day: d )
+            if let ddd = gc.date(from: dc), dc.isValidDate {
+                self = ddd
+                return
+            }
+        }
+        return nil
+    }
+}
 
 // MARK: linear scaling function
 func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: ClosedRange<Double> ) -> Double {
