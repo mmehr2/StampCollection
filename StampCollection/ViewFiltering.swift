@@ -257,10 +257,12 @@ private func getMemorySearchTypes( _ types: [SearchType] ) -> [SearchType] {
 }
 
 private func CompareYearInRange( _ input: String, range: ClosedRange<Int> ) -> Bool {
-    let (fmt, extractedRange, _, _) = extractDateRangesFromDescription(input)
+    let (fmt, extractedRange) = extractDateRangesFromDescription(input)
     if fmt != 0 {
-        let startInside = range.contains(extractedRange.lowerBound)
-        let endInside = range.contains(extractedRange.upperBound)
+        let (yl, _, _) = componentsFromDate(extractedRange.lowerBound)
+        let (yu, _, _) = componentsFromDate(extractedRange.upperBound)
+        let startInside = range.contains(yl)
+        let endInside = range.contains(yu)
         if startInside && endInside {
             // fully contained
             return true

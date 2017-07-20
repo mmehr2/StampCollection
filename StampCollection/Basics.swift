@@ -205,40 +205,6 @@ public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
 }
 
 // MARK: date extensions and helpers
-// date range classes with limited functionality
-struct ClosedDateRange {
-    let lowerBound: Date
-    let upperBound: Date
-    
-    init(from lower:Date, to upper:Date) {
-        lowerBound = lower
-        upperBound = upper
-    }
-    
-    init(once: Date) {
-        lowerBound = once
-        upperBound = once
-    }
-    
-    func contains(_ dd: Date) -> Bool {
-        return dd >= lowerBound && dd <= upperBound
-    }
-}
-
-extension ClosedDateRange: Equatable {
-    static func ==(_ lhs: ClosedDateRange, _ rhs: ClosedDateRange) -> Bool {
-        return lhs.lowerBound == rhs.lowerBound && lhs.upperBound == rhs.upperBound
-    }
-}
-
-extension ClosedDateRange: CustomStringConvertible {
-    var description: String {
-        let lbdesc = "\(self.lowerBound)"
-        let ubdesc = "\(self.upperBound)"
-        return "\(lbdesc)-\(ubdesc)"
-    }
-}
-
 // special date extension to create a Date from our normalized Gregorian-calendar-based string YYYY.MM.DD
 // era assumed to be AD, TZ assumed to be UTC maybe (or should it be Israeli? local? who cares?)
 extension Date {

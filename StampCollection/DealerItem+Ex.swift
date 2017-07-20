@@ -16,9 +16,6 @@ Currently it seems that these generated classes are all @NSManaged properties, a
 
 class InfoDependentVars {
     var _normalizedCode: String?
-    var _exYearRange: ClosedRange<Int>?
-    var _exMonthRange: ClosedRange<Int>?
-    var _exDayRange: ClosedRange<Int>?
     var _exNormalizedStartDate: String?
     var _exNormalizedEndDate: String?
     var _exNormalizedDate: String?
@@ -46,26 +43,11 @@ class InfoDependentVars {
         if keyPath == "descriptionX" {
             // Update date range vars from descriptionX
             // NOTE: if start is set, end is set; if year is set, month and day will also be set; if not recognized, Y=M=D=0
-            let (_, range, mrange, drange) = extractDateRangesFromDescription(value)
-            _exYearRange = range
-            _exMonthRange = mrange
-            _exDayRange = drange
-            // NOTE: this function will turn (0,0,0) into ""
-            var converted = normalizedStringFromDateComponents(range.lowerBound, month: mrange.lowerBound, day: drange.lowerBound)
-            // sort items with no date (alpha) AFTER items with date (numeric)
-            if converted.isEmpty {
-                _exNormalizedStartDate = "_NO_DATE__" // follows all numeric date strings
-            } else {
-                _exNormalizedStartDate = converted
-                _exStartDate = dateFromComponents(range.lowerBound, month: mrange.lowerBound, day: drange.lowerBound)
-            }
-            converted = normalizedStringFromDateComponents(range.upperBound, month: mrange.upperBound, day: drange.upperBound)
-            if converted.isEmpty {
-                _exNormalizedEndDate = "_NO_DATE__"
-            } else {
-                _exNormalizedEndDate = converted
-                _exEndDate = dateFromComponents(range.upperBound, month: mrange.upperBound, day: drange.upperBound)
-            }
+            let (_, daterange) = extractDateRangesFromDescription(value)
+            _exStartDate = daterange.lowerBound
+            _exEndDate = daterange.upperBound
+            _exNormalizedStartDate = normalizedStringFromDate(_exStartDate!)
+            _exNormalizedEndDate = normalizedStringFromDate(_exEndDate!)
             _exNormalizedDate = _exNormalizedStartDate! + "-" + _exNormalizedEndDate!
         } else if keyPath == "id" {
             // Update _normalizedCode from id (NOTE: requires date range to be set 1st!)
@@ -74,7 +56,10 @@ class InfoDependentVars {
             let id = value
             if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
                 if String(id.characters.prefix(4)) == "6110e" {
-                    postE1K = _exYearRange!.lowerBound >= 2000
+                    if let exd = _exStartDate {
+                        let (y, _, _) = componentsFromDate(exd)
+                        postE1K = y >= 2000
+                    }
                 }
             }
             //println("Normalizing ID=\(id) catnum=\(catgDisplayNum), E1K=\(postE1K)")
@@ -104,16 +89,6 @@ extension DealerItem: SortTypeSortable {
     var normalizedDate: String {
         if _transientVars == nil { updateDependentVars() }
         return _transientVars!._exNormalizedDate!
-    }
-    
-    var exYearStart: Int16 {
-        if _transientVars == nil { updateDependentVars() }
-        return Int16(_transientVars!._exYearRange!.lowerBound)
-    }
-    
-    var exYearEnd: Int16 {
-        if _transientVars == nil { updateDependentVars() }
-        return Int16(_transientVars!._exYearRange!.upperBound)
     }
     
     var isJS: Bool {

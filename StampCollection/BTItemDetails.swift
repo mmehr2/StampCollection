@@ -200,11 +200,9 @@ class BTItemDetails {
         var starts = [String]()
         var ends = [String]()
         for comp in comps {
-            let (_, yr, mr, dr) = extractDateRangesFromDescription(comp)
-            let start = "\(yr.lowerBound).\(mr.lowerBound).\(dr.lowerBound)"
-            starts.append(start)
-            let end = "\(yr.upperBound).\(mr.upperBound).\(dr.upperBound)"
-            ends.append(end)
+            let (_, rng) = extractDateRangesFromDescription(comp)
+            starts.append("\(rng.lowerBound)")
+            ends.append("\(rng.upperBound)")
         }
         /*
         "issueDateStartList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
@@ -406,8 +404,8 @@ extension BTItemDetails: CustomDebugStringConvertible {
 extension BTItemDetails {
         
     // converts the lists of issued date ranges for this set to an array of ClosedDateRange
-    var dateRanges: [ClosedDateRange] {
-        var result = [ClosedDateRange]()
+    var dateRanges: [ClosedRange<Date>] {
+        var result = [ClosedRange<Date>]()
         if let slist = data["issueDateStartList"]?.components(separatedBy: " "),
             let elist = data["issueDateEndList"]?.components(separatedBy: " "),
             slist.count == elist.count
@@ -415,12 +413,12 @@ extension BTItemDetails {
             for i in 0..<slist.count {
                 if slist[i] == elist[i] {
                     if let d = Date(gregorianString: slist[i]) {
-                        result.append(ClosedDateRange(once: d))
+                        result.append(d...d)
                     }
                 } else {
                     if let s = Date(gregorianString: slist[i]),
                         let e = Date(gregorianString: elist[i]) {
-                        result.append(ClosedDateRange(from: s, to: e))
+                        result.append(s...e)
                     }
                 }
             }
@@ -482,15 +480,24 @@ extension BTItemDetails {
     // the sheet series string decides from the dateRanges of the set which of the four sheet series this set belongs to (1948+, 1960+, 1981+, 1986+) and returns it as a string in "YYYY+" format; best dates were used by studying the stamp data.
     var sheetSeries: String {
         //let years = [ 1948, 1960, 1980, 1986 ] // start year when plate numbers were reset to 1
-        // actually want OpenDateRange's between pairs of these
-        let seriesRanges: [ClosedDateRange] = [
-            ClosedDateRange( from: Date(gregorianString: "1948.5.16")!, to: Date(gregorianString: "1959.12.31")! ),
+        let eventDates = [
+            // first issue of State of Israel
+            Date(gregorianString: "1948.5.16")!,
             // 1960 Provisional stamps p.1-6 were issued on 1960.1.6 (one value came out in July that year)
-            ClosedDateRange( from: Date(gregorianString: "1960.1.6")!, to: Date(gregorianString: "1981.2.9")! ),
+            Date(gregorianString: "1960.1.6")!,
             // Golda Meir issue s363 plate #1 dated 1981.2.10
-            ClosedDateRange( from: Date(gregorianString: "1981.2.10")!, to: Date(gregorianString: "1985.12.31")! ),
+            Date(gregorianString: "1981.2.10")!,
             // Archeology def.issue s444 p6-7 but date was 1986.1.1, p1 was Artur Rubenstein on 1986.3.4, so use 1.1
-            ClosedDateRange( from: Date(gregorianString: "1986.1.1")!, to: Date(timeIntervalSinceNow: 0) ),
+            Date(gregorianString: "1986.1.1")!,
+            //...Date(timeIntervalSinceNow: 0),
+       ]
+        // actually want OpenDateRange's between pairs of these
+        //let seriesRanges: [OpenRange<Date>] = []
+        let seriesRanges = [
+            eventDates[0]..<eventDates[1],
+            eventDates[1]..<eventDates[2],
+            eventDates[2]..<eventDates[3],
+            eventDates[3]..<Date(timeIntervalSinceNow: 0),
         ]
         let resultX = seriesRanges.filter {
             // this object most likely has a single date in its dateRanges, but sets somtimes have multiple issue dates and/or ranges, thus the list aspect

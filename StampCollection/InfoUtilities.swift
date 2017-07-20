@@ -47,16 +47,17 @@ func fixupCenturyYY( _ yy: Int ) -> Int {
     return yy >= startEpochYY ? startCentury : endCentury
 }
 
-func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Int>, ClosedRange<Int>, ClosedRange<Int>) {
-    var startYear = 0
-    var endYear = 0
+func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Date>) {
+    // NOTE: these defaults are picked to prevent a crash if no date exists in the input descr
     var fmtFound = 0
+    var startYear = 1948
+    var endYear = 1948
     var found = ""
     //var descr2 = "" // DEBUG
-    var startMonth = 0
-    var startDay = 0
-    var endMonth = 0
-    var endDay = 0
+    var startMonth = 1
+    var startDay = 1
+    var endMonth = 1
+    var endDay = 1
     // begin testing here; order of tests IS IMPORTANT
     if let match = descr.range(of: "[0-9][0-9][0-9][0-9]\\.[0-9][0-9]?\\.[0-9][0-9]?$", options: .regularExpression) {
         fmtFound = 11 // which is YYYY.MM.DD at the END of the description; this is from Folders and Bulletins (cat.29,30), Morgenstein format
@@ -300,80 +301,90 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
     }
     //println("Found [\(found)] as YearRange[fmt=\(fmtFound), \(startYear)...\(endYear)]") //\(descr2)")
     // this code will prevent crashes, but points up the real limitations of this data format
-    var swapY = false
-    var dmy = ""
-    if startYear > endYear { swap(&startYear, &endYear); swapY = true; dmy += "Y" }
-    if startMonth > endMonth { swap(&startMonth, &endMonth); swapY = true; dmy += "M" }
-    if startDay > endDay { swap(&startDay, &endDay); swapY = true; dmy += "D" }
-    // TBD: invent a proper date range format to use, and replace this
-    if swapY {
-        print("Swapped date range! \(dmy)")
+//    var swapY = false
+//    var dmy = ""
+//    if startYear > endYear { swap(&startYear, &endYear); swapY = true; dmy += "Y" }
+//    if startMonth > endMonth { swap(&startMonth, &endMonth); swapY = true; dmy += "M" }
+//    if startDay > endDay { swap(&startDay, &endDay); swapY = true; dmy += "D" }
+//    // TBD: invent a proper date range format to use, and replace this
+//    if swapY {
+//        print("Swapped date range! \(dmy)")
+//    }
+    if let d1 = Date(gregorianString: "\(startYear).\(startMonth).\(startDay)"),
+        let d2 = Date(gregorianString: "\(endYear).\(endMonth).\(endDay)") {
+        return (fmtFound, d1...d2)
+    } else {
+        return (0, Date(gregorianString: "1948.1.1")!...Date(gregorianString: "1948.1.1")!)
     }
-    return (fmtFound, startYear...endYear, startMonth...endMonth, startDay...endDay)
 }
 
-fileprivate let dtests : [String: (Int, ClosedRange<Int>, ClosedRange<Int>, ClosedRange<Int>)] = [
+fileprivate let dtests : [String: (Int, String, String)] = [
     // in no particular order...
-    "1985 Tester": (1, 1985...1985, 1...12, 1...31),
-    "1985 Tester 2005.06.03": (11, 2005...2005, 6...6, 3...3),
-    "1985 Tester 2005.6.3": (11, 2005...2005, 6...6, 3...3),
-    "1980s Tester": (2, 1980...1989, 1...12, 1...31),
-    "2001-2002 Tester": (3, 2001...2002, 1...12, 1...31),
-    "1887-1987 Marc Chagall Centennary": (3, 1987...1987, 1...12, 1...31),
+    "1985 Tester": (1, "1985.1.1", "1985.12.31"),//
+    "1985 Tester 2005.06.03": (11, "2005.6.3", "2005.6.3"),
+    "1985 Tester 2005.6.3": (11, "2005.6.3", "2005.6.3"),
+    "1980s Tester": (2, "1980.1.1", "1989.12.31"),
+    "2001-2002 Tester": (3, "2001.1.1", "2002.12.31"),
+    "1887-1987 Marc Chagall Centennary": (3, "1987.1.1", "1987.12.31"),
     //"": (5, yy...yy, mm...mm, dd...dd), // DD.MM.YYYY
-    "29.11.2003 Tester": (5, 2003...2003, 11...11, 29...29),
-    "9.11.2003 Tester": (5, 2003...2003, 11...11, 9...9),
-    "29.3.2003 Tester": (5, 2003...2003, 3...3, 29...29),
-    "09.11.2003 Tester": (5, 2003...2003, 11...11, 9...9),
-    "29.03.2003 Tester": (5, 2003...2003, 3...3, 29...29),
+    "29.11.2003 Tester": (5, "2003.11.29", "2003.11.29"),//2003...2003, 11...11, 29...29),
+    "9.11.2003 Tester": (5, "2003.11.9", "2003.11.9"),//2003...2003, 11...11, 9...9),
+    "29.3.2003 Tester": (5, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 29...29),
+    "09.11.2003 Tester": (5, "2003.11.9", "2003.11.9"),//2003...2003, 11...11, 9...9),
+    "29.03.2003 Tester": (5, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 29...29),
     //"": (4, yy...yy, mm...mm, dd...dd), // DD.MM.YY
-    "29.11.03 Tester": (4, 2003...2003, 11...11, 29...29),
-    "9.11.03 Tester": (4, 2003...2003, 11...11, 9...9),
-    "29.3.03 Tester": (4, 2003...2003, 3...3, 29...29),
-    "09.11.03 Tester": (4, 2003...2003, 11...11, 9...9),
-    "29.03.03 Tester": (4, 2003...2003, 3...3, 29...29),
+    "29.11.03 Tester": (4, "2003.11.29", "2003.11.29"),//2003...2003, 11...11, 29...29),
+    "9.11.03 Tester": (4, "2003.11.9", "2003.11.9"),//2003...2003, 11...11, 9...9),
+    "29.3.03 Tester": (4, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 29...29),
+    "09.11.03 Tester": (4, "2003.11.9", "2003.11.9"),//003...2003, 11...11, 9...9),
+    "29.03.03 Tester": (4, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 29...29),
     //"": (6, yy...yy, mm...MM, dd...DD), // dd-DD.MM.YYYY
-    "22-29.11.2003 Tester": (6, 2003...2003, 11...11, 22...29),
-    "9-13.11.2003 Tester": (6, 2003...2003, 11...11, 9...13),
-    "09-14.11.2003 Tester": (6, 2003...2003, 11...11, 9...14),
-    "3-29.03.2003 Tester": (6, 2003...2003, 3...3, 3...29),
-    "03-29.03.2003 Tester": (6, 2003...2003, 3...3, 3...29),
+    "22-29.11.2003 Tester": (6, "2003.11.29", "2003.11.29"),//2003...2003, 11...11, 22...29),
+    "9-13.11.2003 Tester": (6, "2003.11.9", "2003.11.9"),//2003...2003, 11...11, 9...13),
+    "09-14.11.2003 Tester": (6, "2003.3.29", "2003.3.29"),//2003...2003, 11...11, 9...14),
+    "3-29.03.2003 Tester": (6, "2003.11.9", "2003.11.9"),//2003...2003, 3...3, 3...29),
+    "03-29.03.2003 Tester": (6, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 3...29),
     //"": (7, yy...yy, mm...MM, dd...DD), // dd-DD.MM.YY
-    "22-29.11.03 Tester": (7, 2003...2003, 11...11, 22...29),
-    "9-13.11.03 Tester": (7, 2003...2003, 11...11, 9...13),
-    "09-14.11.03 Tester": (7, 2003...2003, 11...11, 9...14),
-    "3-29.03.03 Tester": (7, 2003...2003, 3...3, 3...29),
-    "03-29.03.03 Tester": (7, 2003...2003, 3...3, 3...29),
+    "22-29.11.03 Tester": (7, "2003.11.29", "2003.11.29"),//2003...2003, 11...11, 22...29),
+    "9-13.11.03 Tester": (7, "2003.11.9", "2003.11.9"),//2003...2003, 11...11, 9...13),
+    "09-14.11.03 Tester": (7, "2003.3.29", "2003.3.29"),//2003...2003, 11...11, 9...14),
+    "3-29.03.03 Tester": (7, "2003.11.9", "2003.11.9"),//2003...2003, 3...3, 3...29),
+    "03-29.03.03 Tester": (7, "2003.3.29", "2003.3.29"),//2003...2003, 3...3, 3...29),
     //"": (8, yy...yy, mm...MM, dd...DD), // 'YY preceded by space, anywhere in string
-    "Real '85 Tester": (8, 1985...1985, 1...12, 1...31),
-    "Real '48 Tester": (8, 1948...1948, 1...12, 1...31),
-    "Real '47 Tester": (8, 2047...2047, 1...12, 1...31),
+    "Real '85 Tester": (8, "1985.1.1", "1985.12.31"),//1985...1985, 1...12, 1...31),
+    "Real '48 Tester": (8, "1948.1.1", "1948.12.31"),//1948...1948, 1...12, 1...31),
+    "Real '47 Tester": (8, "2047.1.1", "2047.12.31"),//2047...2047, 1...12, 1...31),
     //"": (9, yy...yy, mm...MM, dd...DD), // YY' preceded by space, anywhere in string
-    "Real 85' Tester": (9, 1985...1985, 1...12, 1...31),
-    "Real 48' Tester": (9, 1948...1948, 1...12, 1...31),
-    "Real 47' Tester": (9, 2047...2047, 1...12, 1...31),
+    "Real 85' Tester": (9, "1985.1.1", "1985.12.31"),//1985...1985, 1...12, 1...31),
+    "Real 48' Tester": (9, "1948.1.1", "1948.12.31"),//1948...1948, 1...12, 1...31),
+    "Real 47' Tester": (9, "2047.1.1", "2047.12.31"),//2047...2047, 1...12, 1...31),
     //"": (10, yy...yy, mm...MM, dd...DD), // which is 'Date DDMMYY', anywhere in string (also accepts 1st letter LC
-    "Intense date 010577 Tester": (10, 1977...1977, 5...5, 1...1),
-    "Intense Date 010577 Tester": (10, 1977...1977, 5...5, 1...1),
+    "Intense date 010577 Tester": (10, "1977.5.1", "1977.5.1"),//1977...1977, 5...5, 1...1),
+    "Intense Date 010577 Tester": (10, "1977.5.1", "1977.5.1"),//1977...1977, 5...5, 1...1),
     // new format 12: overlapping months dd.mm-DD.MM.YYYY
     //"13.3-9.11.2003 Tester": (12, yy...yy, mm...MM, dd...DD), // dd.mm-DD.MM.YYYY
     // NOTE: This points up a total inadequacy of the date representation used
     // Ranges must always be ordered m<=n for m...n
     // However date ranges of the form 13.3-9.11.2000 have to be ordered M=3...11 but D=9...13, which is Mar 9-Nov 13, NOT Mar 13-Nov 9 as originally stated (else the range of days will crash) - same with the months and prob years too
     // consider Dec 31, 1999 - Jan 1, 2000 in dd.mm.yy-DD.MM.YY format - years will be fine, but days and months will crash
-    "22.11-29.12.2003 Tester": (12, 2003...2003, 11...12, 22...29),
-    "9.3-13.11.2003 Tester": (12, 2003...2003, 3...11, 9...13),
-    "09.3-13.11.2003 Tester": (12, 2003...2003, 3...11, 9...13),
+    "22.11-29.12.2003 Tester": (12, "2003.11.22", "2003.12.29"),//2003...2003, 11...12, 22...29),
+    "9.3-13.11.2003 Tester": (12, "2003.3.9", "2003.11.13"),//2003...2003, 3...11, 9...13),
+    "09.3-13.11.2003 Tester": (12, "2003.3.9", "2003.11.13"),//2003...2003, 3...11, 9...13),
     // new format 13: overlapping months dd.mm-DD.MM.YY (2-digit year variant)
-    "22.11-29.12.03 Tester": (13, 2003...2003, 11...12, 22...29),
-    "9.3-13.11.03 Tester": (13, 2003...2003, 3...11, 9...13),
-    "09.3-13.11.03 Tester": (13, 2003...2003, 3...11, 9...13),
+    "22.11-29.12.03 Tester": (13, "2003.11.22", "2003.12.29"),//2003...2003, 11...12, 22...29),
+    "9.3-13.11.03 Tester": (13, "2003.3.9", "2003.11.13"),//2003...2003, 3...11, 9...13),
+    "09.3-13.11.03 Tester": (13, "2003.3.9", "2003.11.13"),//2003...2003, 3...11, 9...13),
     // new format 14 - full dd.mm.yyyy-DD.MM.YYYY range
-    "9.3.2001-13.11.2003 Tester": (14, 2001...2003, 3...11, 9...13),
-    "09.03.2001-13.11.2003 Tester": (14, 2001...2003, 3...11, 9...13),
+    "9.3.2001-13.11.2003 Tester": (14, "2001.3.9", "2003.11.13"),//2001...2003, 3...11, 9...13),
+    "09.03.2001-13.11.2003 Tester": (14, "2001.3.9", "2003.11.13"),//2001...2003, 3...11, 9...13),
     // new format 15 - full dd.mm.yy-DD.MM.YY range (year variant)
-    "9.3.01-13.11.03 Tester": (15, 2001...2003, 3...11, 9...13),
-    "09.03.01-13.11.03 Tester": (15, 2001...2003, 3...11, 9...13),
+    "9.3.01-13.11.03 Tester": (15, "2001.3.9", "2003.11.13"),//2001...2003, 3...11, 9...13),
+    "09.03.01-13.11.03 Tester": (15, "2001.3.9", "2003.11.13"),//2001...2003, 3...11, 9...13),
+    // now that we have fixed the date bug above, here are tests for the split date ranges that test this
+    "29.11-2.12.2003 Tester": (12, "2003.11.29", "2003.12.2"),//2003...2003, 11...12, 29...2(crash!),
+    "13.3-9.11.2003 Tester": (12, "2003.3.13", "2003.11.9"),//2003...2003, 3...11, 13...9(crash!),
+    "13.3-09.11.2003 Tester": (12, "2003.3.13", "2003.11.9"),//2003...2003, 3...11, 13...9(crash!),
+    "This string has no date": (0, "1948.1.1", "1948.1.1"),
 ]
 
 func UnitTestDateRanges() {
@@ -388,7 +399,11 @@ func UnitTestDateRanges() {
         failed = false
         result += ("Test #\(count+1): Range to String of [\(test)] to [\(answer)]")
         let cand = extractDateRangesFromDescription(test)
-        if cand == answer { result += ("PASSED"); pc += 1 } else { result += ("FAILED: \(cand)"); fc += 1; failed = true }
+        let (f, str1, str2) = answer
+        if let d1 = Date(gregorianString: str1), let d2 = Date(gregorianString: str2), d1 <= d2 {
+            let anscvt = (f, d1...d2)
+            if cand == anscvt { result += ("PASSED"); pc += 1 } else { result += ("FAILED: \(cand)"); fc += 1; failed = true }
+        } else { result += ("FAILED(bad pgmg): \(cand) for \(str1) <= \(str2)"); fc += 1; failed = true }
         count += 1
         if failed {
             print(result)
