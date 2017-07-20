@@ -66,45 +66,6 @@ func getFormattedStringFromDate(_ input: Date, withTime: Bool = false) -> String
     return nf.string(from: input)
 }
 
-func dateFromComponents( _ year: Int, month: Int, day: Int ) -> Date {
-    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-    var comp = DateComponents()
-    comp.year = year
-    comp.month = month
-    comp.day = day
-    return gregorian.date(from: comp)!
-}
-
-func componentsFromDate( _ date: Date ) -> (Int, Int, Int) { // as Y, M, D
-    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-    let comp = (gregorian as NSCalendar).components(
-        [NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day], from: date)
-    return (comp.year!, comp.month!, comp.day!)
-}
-
-func normalizedStringFromDateComponents( _ year: Int, month: Int, day: Int ) -> String {
-    if year == 0 || month == 0 || day == 0 {
-        return ""
-    }
-    return String(format: "%4d.%02d.%02d", year, month, day) // as YYYY.MM.DD
-}
-
-func dateComponentsFromNormalizedString( _ date: String ) -> (Int, Int, Int) { // as Y, M, D
-    if !date.isEmpty {
-        let ix0 = date.startIndex
-        let ix1 = date.index(date.startIndex, offsetBy: 3)
-        let yyyy = Int(date[ix0...ix1])!
-        let ix2 = date.index(date.startIndex, offsetBy: 5)
-        let ix3 = date.index(date.startIndex, offsetBy: 6)
-        let mm = Int(date[ix2...ix3])!
-        let ix4 = date.index(date.startIndex, offsetBy: 8)
-        let ix5 = date.index(date.startIndex, offsetBy: 9)
-        let dd = Int(date[ix4...ix5])!
-        return (yyyy, mm, dd)
-    }
-    return (0, 0, 0)
-}
-
 
 // MARK: message box services
 typealias MenuBoxEntry = (String, (UIAlertAction?)->Void)

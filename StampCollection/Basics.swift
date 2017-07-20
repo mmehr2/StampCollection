@@ -259,6 +259,48 @@ extension Date {
     }
 }
 
+// MARK: date formatting services
+func dateFromComponents( _ year: Int, month: Int, day: Int ) -> Date {
+    let gregorian = Calendar(identifier: .gregorian)
+    var comp = DateComponents()
+    comp.year = year
+    comp.month = month
+    comp.day = day
+    return gregorian.date(from: comp)!
+}
+
+func componentsFromDate( _ date: Date ) -> (Int, Int, Int) { // as Y, M, D
+    let gregorian = Calendar(identifier: .gregorian)
+    let comp = gregorian.dateComponents(
+        [.year, .month, .day], from: date)
+    return (comp.year!, comp.month!, comp.day!)
+}
+
+func normalizedStringFromDateComponents( _ year: Int, month: Int, day: Int ) -> String {
+    if year == 0 || month == 0 || day == 0 {
+        return ""
+    }
+    return String(format: "%4d.%02d.%02d", year, month, day) // as YYYY.MM.DD
+}
+
+func dateComponentsFromNormalizedString( _ date: String ) -> (Int, Int, Int) { // as Y, M, D
+    if !date.isEmpty {
+        if let gdate = Date(gregorianString: date) {
+            return componentsFromDate(gdate)
+        }
+    }
+    return (0, 0, 0)
+}
+
+func normalizedStringFromDate( _ date: Date ) -> String {
+    let (year, month, day) = componentsFromDate(date)
+    if year == 0 || month == 0 || day == 0 {
+        return ""
+    }
+    return String(format: "%4d.%02d.%02d", year, month, day) // as YYYY.MM.DD
+}
+
+
 // MARK: linear scaling function
 func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: ClosedRange<Double> ) -> Double {
     let x0 = fromRange.lowerBound
