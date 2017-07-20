@@ -299,6 +299,16 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<In
         //descr2 = descr // DEBUG
     }
     //println("Found [\(found)] as YearRange[fmt=\(fmtFound), \(startYear)...\(endYear)]") //\(descr2)")
+    // this code will prevent crashes, but points up the real limitations of this data format
+    var swapY = false
+    var dmy = ""
+    if startYear > endYear { swap(&startYear, &endYear); swapY = true; dmy += "Y" }
+    if startMonth > endMonth { swap(&startMonth, &endMonth); swapY = true; dmy += "M" }
+    if startDay > endDay { swap(&startDay, &endDay); swapY = true; dmy += "D" }
+    // TBD: invent a proper date range format to use, and replace this
+    if swapY {
+        print("Swapped date range! \(dmy)")
+    }
     return (fmtFound, startYear...endYear, startMonth...endMonth, startDay...endDay)
 }
 
