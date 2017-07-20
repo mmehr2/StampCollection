@@ -114,14 +114,13 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
     
     // MARK: BTInfoProtocol
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
-        if let info = data.dataObject["info"] {
-            print("Data received from infoNode:\(data)")
-            extraInfo = info
-            let dr = data.dateRange
-            if !dr.isEmpty {
-                yearRangeLabel.text = dr
-            }
+        print("Data received from infoNode:\(data)")
+        extraInfo = data.debugDescription
+        let dr = data.dateRange
+        if !dr.isEmpty {
+            yearRangeLabel.text = dr
         }
+        print("Full sheet list:\n\(data.fullSheetDetails)")
     }
 
     // MARK: image file manipulations

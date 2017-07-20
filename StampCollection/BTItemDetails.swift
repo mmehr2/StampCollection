@@ -11,11 +11,7 @@ import Foundation
 class BTItemDetails {
     
     typealias InfoObject = [String:String]
-    private var data: InfoObject
-    
-    var dataObject: InfoObject {
-        return data // publicly read-only
-    }
+    fileprivate var data: InfoObject
     
     init(titleLine: String, infoLine: String) {
         // NOTE: All the processing work is done here.
@@ -125,7 +121,7 @@ class BTItemDetails {
         var completedJoint = false
         var unlinkSubtitle = false
         var unlinkKeywords = 0
-         for word in input.components(separatedBy: " ") {
+        for word in input.components(separatedBy: " ") {
             subtitleBuffer += [word] // never cleared completely, just when keywords are recognized
             
             switch word {
@@ -216,23 +212,6 @@ class BTItemDetails {
          */
         data["issueDateStartList"] = starts.joined(separator: " ")
         data["issueDateEndList"] = ends.joined(separator: " ")
-    }
-    
-    var dateRange: String {
-        var result = [String]()
-        if let slist = data["issueDateStartList"]?.components(separatedBy: " "),
-            let elist = data["issueDateEndList"]?.components(separatedBy: " "),
-            slist.count == elist.count
-        {
-            for i in 0..<slist.count {
-                if slist[i] == elist[i] {
-                    result.append(slist[i])
-                } else {
-                    result.append("\(slist[i])-\(elist[i])")
-                }
-            }
-        }
-        return result.joined(separator: ", ")
     }
     
     fileprivate func parseDesignerList(_ input: String) {
@@ -404,7 +383,7 @@ class BTItemDetails {
 extension BTItemDetails: CustomStringConvertible {
     var description: String {
         var result = "Item details:\n"
-        let obj = self.dataObject
+        let obj = self.data
         let keys = obj.keys.sorted()
         
         for k in keys {
@@ -413,4 +392,148 @@ extension BTItemDetails: CustomStringConvertible {
         }
         return result
     }
+}
+
+// MARK: Publically accessible properties
+extension BTItemDetails: CustomDebugStringConvertible {
+    
+    var debugDescription: String {
+        return data["info"] ?? ""
+    }
+    
+}
+
+extension BTItemDetails {
+        
+    // converts the lists of issued date ranges for this set to an array of ClosedDateRange
+    var dateRanges: [ClosedDateRange] {
+        var result = [ClosedDateRange]()
+        if let slist = data["issueDateStartList"]?.components(separatedBy: " "),
+            let elist = data["issueDateEndList"]?.components(separatedBy: " "),
+            slist.count == elist.count
+        {
+            for i in 0..<slist.count {
+                if slist[i] == elist[i] {
+                    if let d = Date(gregorianString: slist[i]) {
+                        result.append(ClosedDateRange(once: d))
+                    }
+                } else {
+                    if let s = Date(gregorianString: slist[i]),
+                        let e = Date(gregorianString: elist[i]) {
+                        result.append(ClosedDateRange(from: s, to: e))
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    // converts that list to a string of ranges separated by ", "
+    var dateRange: String {
+        var result = [String]()
+        if let slist = data["issueDateStartList"]?.components(separatedBy: " "),
+            let elist = data["issueDateEndList"]?.components(separatedBy: " "),
+            slist.count == elist.count
+        {
+            for i in 0..<slist.count {
+                if slist[i] == elist[i] {
+                    result.append(slist[i])
+                } else {
+                    result.append("\(slist[i])-\(elist[i])")
+                }
+            }
+        }
+        return result.joined(separator: ", ")
+    }
+    
+    // returns whether any specific (Optional) date is in any of the ranges covered by this set
+    func isDateInRange(_ date: Date?) -> Bool {
+        var result = false
+        if let date = date {
+            // scan the list of date ranges and search for any match
+            for rng in dateRanges {
+                if rng.contains(date) {
+                    result = true
+                    break
+                }
+            }
+        }
+        return result
+    }
+    
+    // converts the list of plate numbers into an array of Int plate numbers
+    var plateNumberList: [Int] {
+        var result = [Int]()
+        if let xlist = data["plateNumbers"], !xlist.isEmpty {
+            result = xlist.components(separatedBy: " ").map{ Int($0) }.flatMap{ $0 }
+        }
+        return result
+    }
+    
+    // separates the sheet format list into an array of format strings of the form "(RxC)" where R is # of rows, C is # of columns
+    var sheetFormatList: [String] {
+        var result = [String]()
+        if let xlist = data["sheetFormatList"], !xlist.isEmpty {
+            result = xlist.components(separatedBy: " ")
+        }
+        return result
+    }
+    
+    // the sheet series string decides from the dateRanges of the set which of the four sheet series this set belongs to (1948+, 1960+, 1981+, 1986+) and returns it as a string in "YYYY+" format; best dates were used by studying the stamp data.
+    var sheetSeries: String {
+        //let years = [ 1948, 1960, 1980, 1986 ] // start year when plate numbers were reset to 1
+        // actually want OpenDateRange's between pairs of these
+        let seriesRanges: [ClosedDateRange] = [
+            ClosedDateRange( from: Date(gregorianString: "1948.5.16")!, to: Date(gregorianString: "1959.12.31")! ),
+            // 1960 Provisional stamps p.1-6 were issued on 1960.1.6 (one value came out in July that year)
+            ClosedDateRange( from: Date(gregorianString: "1960.1.6")!, to: Date(gregorianString: "1981.2.9")! ),
+            // Golda Meir issue s363 plate #1 dated 1981.2.10
+            ClosedDateRange( from: Date(gregorianString: "1981.2.10")!, to: Date(gregorianString: "1985.12.31")! ),
+            // Archeology def.issue s444 p6-7 but date was 1986.1.1, p1 was Artur Rubenstein on 1986.3.4, so use 1.1
+            ClosedDateRange( from: Date(gregorianString: "1986.1.1")!, to: Date(timeIntervalSinceNow: 0) ),
+        ]
+        let resultX = seriesRanges.filter {
+            // this object most likely has a single date in its dateRanges, but sets somtimes have multiple issue dates and/or ranges, thus the list aspect
+            // to evaluate which of our four choices is the valid series, we want to apply each range from dateRanges to 
+            //   the above OpenDateRange objects (using Closed for now) and get the "majority" vote
+            // I'm not aware of any set split over series boundaries, so this shouldn't be a problem
+            for rng in dateRanges {
+                let v1 = $0.contains(rng.lowerBound)
+                let v2 = $0.contains(rng.upperBound)
+                if v1 || v2 {
+                    // T: one of the bounds of one of this object's dateRanges is in this series range
+                    return true
+                }
+            }
+            // F: this series range does NOT overlap any of the date ranges in this object
+            return false
+        }
+        let result = resultX.map { x -> String in
+            // we are passed the seriesRange object, we want to extract the year of the lowerBound and show it as "YYYY+"
+            let gc = Calendar(identifier: .gregorian)
+            let date = x.lowerBound
+            let yy = gc.component(.year, from: date)
+            let result_ = "\(yy)+"
+            return result_
+        }
+        return result.first ?? "Unknown"
+    }
+    
+    // a multiline string array containing a sheet description for each sheet in the set (as best we know it from the BT detail data)
+    var fullSheetDetails: String {
+        var tempList = [String]()
+        let series = sheetSeries
+        let pnlist = plateNumberList
+        let sflist = sheetFormatList
+        let sheetFormat = sflist.first ?? "(Unknown)" // first is probably most used in the bigger sets (less hand fixup)
+        let N = pnlist.count
+        for M in 0..<N {
+            let P = pnlist[M]
+            let numstr = N == 1 ? "" : " (#\(M+1)/\(N))"
+            let result = "Full sheet (<denom>\(numstr) [Pl.No.\(P) (\(series)), Format=\(sheetFormat)])"
+            tempList.append(result)
+        }
+        return tempList.joined(separator: "\n")
+    }
+    
 }
