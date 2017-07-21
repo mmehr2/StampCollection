@@ -95,7 +95,7 @@ class BTItemDetails {
                     parseSheetFormat(component)
                 } else if component.hasSuffix("cm") {
                     parseSouvenirSheetFormat(component)
-                } else {
+                } else if !component.isEmpty {
                     print("Couldn't parse the DealerItem detailed info line: \(component)")
                 }
             }
@@ -201,8 +201,8 @@ class BTItemDetails {
         var ends = [String]()
         for comp in comps {
             let (_, rng) = extractDateRangesFromDescription(comp)
-            starts.append("\(rng.lowerBound)")
-            ends.append("\(rng.upperBound)")
+            starts.append("\(normalizedStringFromDate(rng.lowerBound))")
+            ends.append("\(normalizedStringFromDate(rng.upperBound))")
         }
         /*
         "issueDateStartList": "", // space-separated list, format YYYY.MM.DD where MM and DD use leading zeroes
@@ -537,7 +537,7 @@ extension BTItemDetails {
         for M in 0..<N {
             let P = pnlist[M]
             let numstr = N == 1 ? "" : " (#\(M+1)/\(N))"
-            let result = "Full sheet (<denom>\(numstr) [Pl.No.\(P) (\(series)), Format=\(sheetFormat)])"
+            let result = "Full sheet\(numstr) [Pl.No.\(P) (\(series)), Format=\(sheetFormat)] Design:\(data["designers"]!)"
             tempList.append(result)
         }
         return tempList.joined(separator: "\n")
