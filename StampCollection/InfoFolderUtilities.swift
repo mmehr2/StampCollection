@@ -87,6 +87,7 @@ let CATEG_SETS:Int16 = 2
 // Created 83 entries of missing folders #943 to #1025 for sets from 6110s1236: 2014 Mateh Yehuda to 6110s1353: 2017 Music Love Songs with 40 gap codes from set of 123.
 // RESULT MISNUMBERS:
 // 953 rabbi ovadiah comes after 954-957 (fix by hand needed)
+// TBD Bait-tov website provides this info encoded in the BTItemDetails data; some method to use that would work better.
 
 class U2Task: NSObject, UtilityTaskRunnable {
     
@@ -103,7 +104,7 @@ class U2Task: NSObject, UtilityTaskRunnable {
     
     // protocol: UtilityTaskRunnable
     let TU: Int64 = 3300 // generate this as approx msec execution time on my device; only relative size matters
-    var isEnabled: Bool { return true }
+    var isEnabled = false
     var taskName: String { return "UT2017_07_05_ADD_MISSING_INFO_FOLDERS" }
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables

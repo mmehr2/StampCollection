@@ -108,6 +108,7 @@
 		A6E198611AD6EEEC0090FDB1 /* StampCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198601AD6EEEC0090FDB1 /* StampCollectionTests.swift */; };
 		A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E198741AD712630090FDB1 /* CHCSVParser.m */; };
 		A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */; };
+		A6FA23C31F21C37900626C96 /* FullSheetUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FA23C21F21C37900626C96 /* FullSheetUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		A6E198741AD712630090FDB1 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StampCollection-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoParserDelegate.swift; sourceTree = "<group>"; };
+		A6FA23C21F21C37900626C96 /* FullSheetUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSheetUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +426,7 @@
 				A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */,
 				A6C4339A1F18920200E6FC5B /* UtilityTask.swift */,
 				A68104051F0EDC480000272B /* ATMUtilities.swift */,
+				A6FA23C21F21C37900626C96 /* FullSheetUtilities.swift */,
 				A68104091F11F3050000272B /* BulletinUtilities.swift */,
 				A68104031F0ED8720000272B /* InfoFolderUtilities.swift */,
 			);
@@ -675,6 +678,7 @@
 				A662C1F11B049DD90067792F /* zip.c in Sources */,
 				A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */,
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
+				A6FA23C31F21C37900626C96 /* FullSheetUtilities.swift in Sources */,
 				A6856E5E1B070D56004B506E /* InventoryItem.swift in Sources */,
 				A681040A1F11F3050000272B /* BulletinUtilities.swift in Sources */,
 				A66FD29B1BEC78EA00C7A2FD /* InventoryItemViewController.swift in Sources */,

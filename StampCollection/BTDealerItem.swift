@@ -104,6 +104,8 @@ class BTDealerItem: NSObject {
         //   [0] is offset into catfield (ignoring prefix chars such as 'S ' or 'C ')
         //   [1] is 'sub' for substitution, or 'ins' for insertion
         //   [2] is the string to substitute, currently all a single comma
+        //   [3] is a flag that controls if the rule is used if found in the input
+        //     NOTE: This, while not strictly needed, prevents the default RULE1 from ever being looked up in input.
         let errorIDs = [
             "6110s377cat2" : (3,"sub",",", true),
             "6110s665cat2" : (4,"ins",",", true),
