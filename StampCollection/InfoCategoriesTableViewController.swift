@@ -145,6 +145,9 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // if we are viewing progress, disable the UI, else enable it
+        uiEnabled = (progressViewBar.observedProgress == nil)
     }
     
     /// special function to kick-start the UI after the data model has been properly set up
