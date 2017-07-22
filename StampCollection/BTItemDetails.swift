@@ -104,7 +104,7 @@ class BTItemDetails {
     
     fileprivate func parseTitleField(_ input: String) {
         //
-        print("Parse the Title field: \(input)")
+        //print("Parse the Title field: \(input)")
         data["titleRaw"] = input
         // look for "- Souvenir Sheet" OR "- N Souvenir Sheets" to set ssCount to "N" or "1" or "0"
         // look for "- XXXX YYY ZZ Joint Issue" to set jointWith to "XXXX YYY ZZ"
@@ -192,7 +192,7 @@ class BTItemDetails {
     
     fileprivate func parseDateList(_ input: String) {
         //
-        print("Parse the Issue Date list: \(input)")
+        //print("Parse the Issue Date list: \(input)")
         
         data["issueDatesRaw"] = input
         // convert each comma-separated component from DD.MM.YYYY to YYYY.MM.DD format, space-separated
@@ -214,7 +214,7 @@ class BTItemDetails {
     
     fileprivate func parseDesignerList(_ input: String) {
         //
-        print("Parse the Designer list: \(input)")
+        //print("Parse the Designer list: \(input)")
         
         data["designersRaw"] = input
         data["designers"] = input // no processing for now
@@ -223,7 +223,7 @@ class BTItemDetails {
     
     fileprivate func parsePlateNumberList(_ input: String) {
         //
-        print("Parse the Plate Number list: \(input)")
+        //print("Parse the Plate Number list: \(input)")
         
         data["plateNumbersRaw"] = input
         
@@ -239,7 +239,7 @@ class BTItemDetails {
     
     fileprivate func parseBulletinList(_ input: String) {
         //
-        print("Parse the Bulletin list: \(input)")
+        //print("Parse the Bulletin list: \(input)")
         
         data["bulletinsRaw"] = input
         
@@ -256,7 +256,7 @@ class BTItemDetails {
     
     fileprivate func parseLeafletList(_ input: String) {
         //
-        print("Parse the Leaflet list: \(input)")
+        //print("Parse the Leaflet list: \(input)")
         
         data["leafletsRaw"] = input
         
@@ -300,7 +300,7 @@ class BTItemDetails {
     
     fileprivate func parseSheetFormat(_ input: String) {
         //
-        print("Parse the Sheet Format list: \(input)")
+        //print("Parse the Sheet Format list: \(input)")
         
         data["sheetFormatRaw"] = input
         
@@ -349,7 +349,7 @@ class BTItemDetails {
     
     fileprivate func parseSouvenirSheetFormat(_ input: String) {
         //
-        print("Parse the Souvenir Sheet Format list: \(input)")
+        //print("Parse the Souvenir Sheet Format list: \(input)")
         
         data["souvenirSheetFormatRaw"] = input
         /*          "souvenirSheetFormatRaw": "", //raw 19.3x10.0cm (possible comma-separated list?)
@@ -378,8 +378,9 @@ class BTItemDetails {
     
 }
 
-extension BTItemDetails: CustomStringConvertible {
-    var description: String {
+// MARK: protocol overrides
+extension BTItemDetails: CustomDebugStringConvertible {
+    var debugDescription: String {
         var result = "Item details:\n"
         let obj = self.data
         let keys = obj.keys.sorted()
@@ -392,15 +393,15 @@ extension BTItemDetails: CustomStringConvertible {
     }
 }
 
-// MARK: Publically accessible properties
-extension BTItemDetails: CustomDebugStringConvertible {
+extension BTItemDetails: CustomStringConvertible {
     
-    var debugDescription: String {
+    var description: String {
         return data["info"] ?? ""
     }
     
 }
 
+// MARK: Publically accessible properties
 extension BTItemDetails {
         
     // converts the lists of issued date ranges for this set to an array of ClosedDateRange

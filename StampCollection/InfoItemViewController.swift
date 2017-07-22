@@ -115,7 +115,7 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
     // MARK: BTInfoProtocol
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
         print("Data received from infoNode:\(data)")
-        extraInfo = data.debugDescription
+        extraInfo = data.description
         let dr = data.dateRange
         if !dr.isEmpty {
             yearRangeLabel.text = dr
