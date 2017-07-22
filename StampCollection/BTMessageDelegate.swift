@@ -72,8 +72,8 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         //category.dataItems = []
     }
     
-    func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
-        let url = URL(string: href) // of the form: http://www.bait-tov.com/store/pic.php?ID=6110s1006 for item ID 6110s1006
+    func configToLoadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
+        url = URL(string: href) // of the form: http://www.bait-tov.com/store/pic.php?ID=6110s1006 for item ID 6110s1006
         categoryNumber = Int(category) // TBD - should this be Int16 internally tho?
         let config = WKWebViewConfiguration()
         let scriptURL = Bundle.main.path(forResource: "getItemDetails", ofType: "js")
@@ -82,7 +82,21 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemDetailsMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+    }
+    
+    func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
+        configToLoadItemDetailsFromWeb(href, forCategory: category)
         internalWebView!.load(URLRequest(url: url!))
+    }
+    
+    func runInfo() {
+        // NOTE: this does the work and can be run on the background thread
+        internalWebView!.load(URLRequest(url: url!))
+//        if let delegate = delegate {
+//            delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
+//        }
+        // clear the category array in preparation of reload
+        //category.dataItems = []
     }
     
     // MARK: WKScriptMessageHandler

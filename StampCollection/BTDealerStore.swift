@@ -40,6 +40,8 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate var loadingInProgress = false
     fileprivate var siteProgress: Progress!
     //fileprivate var catProgress: [Progress] = []
+    fileprivate var detailer: BTItemDetailsLoader?
+    fileprivate var detailMap: [BTMessageDelegate:BTDealerItem] = [:]
     
     fileprivate var JSCategory = BTCategory()
     fileprivate var siteJSHandler = JSMessageDelegate()
@@ -139,7 +141,18 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     
     // MARK: - BTInfoProtocol
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
-        // this may be used in the future to enhance the dealer items downloaded, and to assure the info is saved in the CSV files
+        // find the BTDealerItem from the handler and set its details field to the data
+        // sanity check: should be for category 2
+        if category != Int(CATEG_SETS) {
+            print("Received details item outside of category 2 = \(category)")
+        }
+        if let btitem = detailMap[handler] {
+            print("Assigned detail item to item =\(btitem.code) \(btitem.descr): data:\(data)")
+            btitem.details = data
+            detailMap[handler] = nil
+        } else {
+            print("Couldn't find BT item to assign data to: \(data)")
+        }
     }
     
     // MARK: - BTMessageProtocol
@@ -148,6 +161,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         if category == BTCategoryAll {
             reloadCategories = []
             categoryHandlers = []
+            detailer = nil
         } else {
             let categoryObject = getReloadCategoryByNumber(category)
             categoryObject.dataItems = []
@@ -172,6 +186,17 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                     self.categoryHandlers.append(handler)
                     handler.configToLoadItemsFromWeb("http://www.google.com", forCategory: catnum) // dummy URL will be replaced
                     print("Loaded category handler for Category \(catnum): \(catname)")
+                    if Int16(catnum) == CATEG_SETS {
+                        self.detailer = BTItemDetailsLoader()
+                        if let detailer = self.detailer {
+                            // transfer responsibility for completion to the detailer
+                            detailer.completion = self.completion
+                            self.completion = nil
+                            // set ourselves up to receive info details messages
+                            detailer.delegate = self
+                        }
+                        print("Added ItemDetails Loader for category \(catnum): \(catname)")
+                    }
                     self.utilQueue.async {
                         handler.url = URL(string: dataItem.href)
                         handler.run()
@@ -189,6 +214,16 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let categoryObject = getReloadCategoryByNumber(category)
         categoryObject.dataItems.append(dataItem)
         //catProgress[category-1].completedUnitCount += 1
+        // TEMPORARY DEBUG - limit number of items by year for testing the mechanism
+        let year = Int(String(dataItem.descr.characters.prefix(4)))
+        let limitYearRange = 1971...1973 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, let year = year, limitYearRange.contains(year), Int16(category) == CATEG_SETS {
+            // add and remember a detail loader item for this dataItem
+            let btmd = detailer.addItem(withHref: href)
+            // map the loader item to its data item
+            detailMap[btmd] = dataItem
+            print("Added item to detailer: details at \(href)")
+        }
         siteProgress.completedUnitCount += 1
     }
 
@@ -216,14 +251,20 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                 copyCategoryDataToStore(category, basicOnly: true)
             }
             // run the completion routine here for styles .JustCategories and .Populate
-            if let completion = completion , lsStyle != .populateAndWait {
-                DispatchQueue.main.async(execute: completion)
+            if lsStyle != .populateAndWait {
+                if let completion = completion {
+                    DispatchQueue.main.async(execute: completion)
+                } else if let detailer = detailer {
+                    detailer.run()
+                }
             }
         } else if !loadMultiple {
             // we finished loading the items for single category mode
             copyCategoryDataToStore(category, basicOnly: false)
             if let completion = completion {
                 DispatchQueue.main.async(execute: completion)
+            } else if let detailer = detailer {
+                detailer.run()
             }
             loadingInProgress = false
         } else {
@@ -240,6 +281,8 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                 // run the completion routine here for style .PopulateAndWait
                 if let completion = completion , lsStyle == .populateAndWait {
                     DispatchQueue.main.async(execute: completion)
+                } else if let detailer = detailer {
+                    detailer.run()
                 }
                 loadingInProgress = false
             }

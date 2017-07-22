@@ -110,6 +110,14 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
             // download image file if needed (on background thread) to display later
             downloadAndDisplayImage()
         }
+        if usingBT {
+            let lflst = btitem.leafletList
+            print("BT leaflets = <\(lflst)>")
+            if let dt = btitem.details {
+                print("BT Bulletin list:\n\(dt.bulletinList.joined(separator: "-"))")
+                print("BT Full sheet list:\n\(dt.fullSheetDetails)")
+            }
+        }
     }
     
     // MARK: BTInfoProtocol
@@ -120,7 +128,9 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
         if !dr.isEmpty {
             yearRangeLabel.text = dr
         }
-        print("Full sheet list:\n\(data.fullSheetDetails)")
+        if !usingBT {
+            print("Full sheet list:\n\(data.fullSheetDetails)")
+        }
     }
 
     // MARK: image file manipulations

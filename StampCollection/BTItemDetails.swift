@@ -469,6 +469,24 @@ extension BTItemDetails {
         return result
     }
     
+    // converts the list of leaflets into an array of String leaflet numbers
+    var leafletList: [String] {
+        var result = [String]()
+        if let xlist = data["leaflets"], !xlist.isEmpty {
+            result = xlist.components(separatedBy: " ")
+        }
+        return result
+    }
+    
+    // converts the list of bulletins into an array of String bulletin numbers
+    var bulletinList: [String] {
+        var result = [String]()
+        if let xlist = data["bulletins"], !xlist.isEmpty {
+            result = xlist.components(separatedBy: " ")
+        }
+        return result
+    }
+    
     // separates the sheet format list into an array of format strings of the form "(RxC)" where R is # of rows, C is # of columns
     var sheetFormatList: [String] {
         var result = [String]()

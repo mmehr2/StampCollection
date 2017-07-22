@@ -109,6 +109,7 @@
 		A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E198741AD712630090FDB1 /* CHCSVParser.m */; };
 		A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */; };
 		A6FA23C31F21C37900626C96 /* FullSheetUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FA23C21F21C37900626C96 /* FullSheetUtilities.swift */; };
+		A6FA23C51F22DA1C00626C96 /* BTItemDetailsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FA23C41F22DA1C00626C96 /* BTItemDetailsLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,6 +241,7 @@
 		A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StampCollection-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6E198781AD7A42D0090FDB1 /* InfoParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoParserDelegate.swift; sourceTree = "<group>"; };
 		A6FA23C21F21C37900626C96 /* FullSheetUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSheetUtilities.swift; sourceTree = "<group>"; };
+		A6FA23C41F22DA1C00626C96 /* BTItemDetailsLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemDetailsLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 			children = (
 				A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */,
 				A61C115B1AE6DBB400063025 /* BTDealerStore.swift */,
+				A6FA23C41F22DA1C00626C96 /* BTItemDetailsLoader.swift */,
 				A6856E711B0EAB40004B506E /* BTImportExport.swift */,
 				A632CBAD1AEF2B8800565686 /* JSMessageDelegate.swift */,
 				A61C115D1AE6F0F900063025 /* BTMessageDelegate.swift */,
@@ -713,6 +716,7 @@
 				A6856E681B070DE9004B506E /* AlbumType.swift in Sources */,
 				A68104061F0EDC480000272B /* ATMUtilities.swift in Sources */,
 				A6D095631AFA92E3007A1186 /* InventoryItem+Ex.swift in Sources */,
+				A6FA23C51F22DA1C00626C96 /* BTItemDetailsLoader.swift in Sources */,
 				A61C11641AEADCD900063025 /* CollectionStore.swift in Sources */,
 				A632CBB91AF35D2A00565686 /* ViewFiltering.swift in Sources */,
 				A632CBB01AEFE15900565686 /* EmailAttachmentExporter.swift in Sources */,

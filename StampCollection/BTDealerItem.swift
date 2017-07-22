@@ -31,6 +31,12 @@ class BTDealerItem: NSObject {
     var status = ""
     var picref = ""
     var catnum = 0
+    
+    var details: BTItemDetails?
+    
+    var leafletList: String {
+        return details?.leafletList.joined(separator: ",") ?? ""
+    }
 
     var isJS: Bool {
         if code.characters.count > 2 {
