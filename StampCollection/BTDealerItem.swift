@@ -31,8 +31,13 @@ class BTDealerItem: NSObject {
     var status = ""
     var picref = ""
     var catnum = 0
+    var info = "" // holds raw info to initialize details (with descr)
     
-    var details: BTItemDetails?
+    var details: BTItemDetails? {
+        didSet {
+            self.info = details?.originalInfo ?? ""
+        }
+    }
     
     var leafletList: String {
         return details?.leafletList.joined(separator: ",") ?? ""
@@ -250,7 +255,9 @@ class BTDealerItem: NSObject {
         case "OldPriceOther": return "oldprice4"
         case "Status": return "status"
         case "Pic": return "picref"
+        case "Info": return "info"
             
+        case "info": return "Info"
         case "picref": return "Pic"
         case "status": return "Status"
         case "oldprice4": return "OldPriceOther"
@@ -316,6 +323,7 @@ class BTDealerItem: NSObject {
         output.append("oldprice3")
         output.append("oldprice4")
         output.append("catgDisplayNum")
+        output.append("info")
         return output
     }
     
@@ -340,6 +348,7 @@ class BTDealerItem: NSObject {
         output["oldprice2"] = self.oldprice2
         output["oldprice3"] = self.oldprice3
         output["oldprice4"] = self.oldprice4
+        output["info"] = self.info
         return output
     }
     
@@ -365,6 +374,13 @@ class BTDealerItem: NSObject {
         if let inputStr = data["oldprice3"] { refObj.oldprice3 = inputStr }
         if let inputStr = data["oldprice4"] { refObj.oldprice4 = inputStr }
         if let inputStr = data["catgDisplayNum"], let inputNum = Int(inputStr) { catnum = inputNum }
+        if let inputStr = data["info"] {
+            refObj.info = inputStr // will be overwritten by property observer if not empty, should be same tho
+            // if we have info, recreate the optional BTItemDetails
+            if !inputStr.isEmpty {
+                refObj.details = BTItemDetails(titleLine: refObj.descr, infoLine: inputStr)
+            }
+        }
         return catnum
     }
 }

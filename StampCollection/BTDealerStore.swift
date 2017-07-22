@@ -216,7 +216,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         //catProgress[category-1].completedUnitCount += 1
         // TEMPORARY DEBUG - limit number of items by year for testing the mechanism
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1971...1973 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        let limitYearRange = 1948...1948 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, let year = year, limitYearRange.contains(year), Int16(category) == CATEG_SETS {
             // add and remember a detail loader item for this dataItem
             let btmd = detailer.addItem(withHref: href)

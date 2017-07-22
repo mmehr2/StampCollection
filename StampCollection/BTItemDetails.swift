@@ -18,8 +18,9 @@ class BTItemDetails {
         // Unfortunately, we can't make the object constant with 'let' because the compiler doesn't know these names are the only ones.
         // TBD - Is there a Swift 3?4? way to say this yet? I guess, make a class out of it and set up the fields in the init() call; nope we have done that, and it still needs to be mutable. Oh well...
         data =  [
-            "xtitle" : "", //raw, temporary
-            "info": "", //raw, temporary
+            "xtitle" : "", //raw, original init
+            "xinfo": "", //raw, original init
+            "info": "", //all items display description
             "titleRaw": "", //raw
             "ssCount": "",
             "jointWith": "",
@@ -70,6 +71,7 @@ class BTItemDetails {
         
         let infoData = infoLine.components(separatedBy: "/")
         data["xtitle"] = titleLine
+        data["xinfo"] = infoLine // save original for reconstruction
         data["info"] = infoData.joined(separator: "||") // temporary placeholder version
         parseTitleField(titleLine)
         let numInfo = infoData.count
@@ -403,7 +405,16 @@ extension BTItemDetails: CustomStringConvertible {
 
 // MARK: Publically accessible properties
 extension BTItemDetails {
-        
+ 
+    // these two can be used to initialize a new object equal to this one
+    // NOTE: original title is just the description field with all annotations of the original set BTDealerItem
+    var originalTitle: String {
+        return data["xtitle"] ?? ""
+    }
+    var originalInfo: String {
+        return data["xinfo"] ?? ""
+    }
+    
     // converts the lists of issued date ranges for this set to an array of ClosedDateRange
     var dateRanges: [ClosedRange<Date>] {
         var result = [ClosedRange<Date>]()
