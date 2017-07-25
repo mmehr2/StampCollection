@@ -147,7 +147,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             print("Received details item outside of category 2 = \(category)")
         }
         if let btitem = detailMap[handler] {
-            print("Assigned detail item to item =\(btitem.code) \(btitem.descr): data:\(data)")
+            print("Assigned detail item to item \(btitem.code) (\(btitem.descr)): data:[\(data)]")
             btitem.details = data
             detailMap[handler] = nil
         } else {
@@ -214,10 +214,19 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let categoryObject = getReloadCategoryByNumber(category)
         categoryObject.dataItems.append(dataItem)
         //catProgress[category-1].completedUnitCount += 1
-        // TEMPORARY DEBUG - limit number of items by year for testing the mechanism
+        let allowDetailsSet = Int16(category) == CATEG_SETS
+        let allowDetailsDebug = true // set this to TRUE to enable debug year limits for testing (else entire set list will be loaded)
+        // DEBUG - limit number of items by year for testing the mechanism
+        let allowDetailsYear: Bool
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1948...1948 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
-        if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, let year = year, limitYearRange.contains(year), Int16(category) == CATEG_SETS {
+        let limitYearRange = 1963...1977 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        if let year = year, limitYearRange.contains(year) {
+            allowDetailsYear = true
+        } else {
+            allowDetailsYear = false
+        }
+        let allowDetailsPolicy = allowDetailsDebug ? (allowDetailsYear && allowDetailsSet) : allowDetailsSet
+        if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, allowDetailsPolicy {
             // add and remember a detail loader item for this dataItem
             let btmd = detailer.addItem(withHref: href)
             // map the loader item to its data item

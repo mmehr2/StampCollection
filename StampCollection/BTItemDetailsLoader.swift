@@ -63,7 +63,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
     func run() {
         if !batch.isEmpty {
             // within a batch, just send the next one
-            print("DetailsLoader queued next \(batch.count) with \(count) left. ")
+            print("DetailsLoader queued next 1 of \(batch.count) with \(count) left. ")
             self.queue.async{
                 self.batch.first!.runInfo()
             }
@@ -84,7 +84,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
         let N = min(items.count, batchSize)
         batch = Set(items.prefix(N))
         items = Set(items.dropFirst(N))
-        print("DetailsLoader queued next \(batch.count) with \(count) left. ")
+        print("DetailsLoader queued next batch of \(batch.count) with \(count) left to run after \(timeInterval) secs delay. ")
         queue.asyncAfter(deadline: DispatchTime.now() + timeInterval) {
             self.batch.first!.runInfo()
         }
@@ -93,12 +93,12 @@ class BTItemDetailsLoader: BTInfoProtocol {
     // RUNTIME: receiver of the message response forwards the detail object to the delegate
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
         // count progress
-        print("DetailsLoader received cat \(category) data \(data)")
+        //print("DetailsLoader received cat \(category) data \(data)")
         progress.completedUnitCount += 1
         if let delegate = delegate {
             // pass the received item on to our delegate
             delegate.messageHandler(handler, receivedDetails: data, forCategory: category)
-            print("DetailsLoader passed cat \(category) data to delegate \(data)")
+            //print("DetailsLoader passed cat \(category) data to delegate \(data)")
         }
         // remove this handler from current batch list
         self.batch.remove(handler)
