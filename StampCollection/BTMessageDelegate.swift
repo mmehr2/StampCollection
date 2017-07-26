@@ -21,6 +21,7 @@ protocol BTMessageProtocol : BTInfoProtocol {
 }
 
 let BTCategoryAll = -1
+let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
 class BTMessageDelegate: NSObject, WKScriptMessageHandler {
 

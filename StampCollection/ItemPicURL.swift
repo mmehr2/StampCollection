@@ -95,7 +95,7 @@ func populateJSDictionary( _ jsDealerCat: Category, jsWebCat: BTCategory? = nil 
     if let items = Array(jsDealerCat.dealerItems) as? [DealerItem] {
         // set up cache of IDs to locate BTDealerItems by ID
         var jsToBTIDCache: [String: String] = [:]
-        let dataItems = jsWebCat?.dataItems ?? []
+        let dataItems = jsWebCat?.getAllDataItems() ?? []
         for btitem in dataItems {
             jsToBTIDCache[btitem.code] = btitem.picref
         }

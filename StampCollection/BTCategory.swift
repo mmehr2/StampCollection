@@ -18,7 +18,45 @@ class BTCategory: NSObject {
     // the following is data added by the getItems message for the individual category
     var notes = ""
     var headers : [String] = []
-    var dataItems : [BTDealerItem] = []
+    
+    private var dataItems : [BTDealerItem] = []
+    private var dataIndex : [String:BTDealerItem] = [:]
+    var integrityViolationDetected = false
+    
+    var dataItemCount: Int {
+        return dataItems.count
+    }
+    
+    func resetDataItems() {
+        dataItems = []
+        dataIndex = [:]
+    }
+    
+    func getAllDataItems() -> [BTDealerItem] {
+        return dataItems
+    }
+    
+    func addDataItem(_ item: BTDealerItem) {
+        // NOTE: must check for uniqueness here and throw if it already exists
+        // REASON IT COULD HAPPEN: BT MIGHT MISTAKENLY REUSE AN ID NUMBER OR HAVE SOME OTHER NEED TO REUSE ONE
+        // ALSO - look into their use of temporary ID numbers before catalog numbers come out - what category was that again?
+        // For now, I'll just refuse to clobber an existing item (prefer old working data to new updates)
+//        integrityViolationDetected = false
+//        guard dataItems[item.code] == nil else {
+//            print("Data integrity violation prevented; refused to append item with ID=\(item.code)")
+//            print("Old item:\(dataItems[item.code]!)")
+//            print("Attempted new item \(item.code):\(item.descr)")
+//            integrityViolationDetected = true
+//            // TBD - this should throw
+//            return
+//        }
+        dataItems.append(item)
+        dataIndex[item.code] = item
+    }
+    
+    func fetchData(withCode code:String) -> BTDealerItem? {
+        return dataIndex[code]
+    }
     
     var infoNumber: Int16 {
         return BTCategory.translateNumberToInfoCategory(number)

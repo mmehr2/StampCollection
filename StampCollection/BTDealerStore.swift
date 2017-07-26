@@ -41,7 +41,6 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     fileprivate var siteProgress: Progress!
     //fileprivate var catProgress: [Progress] = []
     fileprivate var detailer: BTItemDetailsLoader?
-    fileprivate var detailMap: [BTMessageDelegate:BTDealerItem] = [:]
     
     fileprivate var JSCategory = BTCategory()
     fileprivate var siteJSHandler = JSMessageDelegate()
@@ -86,7 +85,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             return siteProgress
         }
         // estimated count is the same as before
-        siteProgress.totalUnitCount = Int64(categ.dataItems.count)
+        siteProgress.totalUnitCount = Int64(categ.dataItemCount)
         if categoryNum == JSCategoryAll {
             self.siteJSHandler.configToLoadItemsFromWeb()
             utilQueue.async(execute: self.siteJSHandler.run)
@@ -103,12 +102,12 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     // MARK: - JSMessageProtocol
     func messageHandler(_ handler: JSMessageDelegate, willLoadDataForCategory category: Int) {
         //print("WillLoad Message received for cat=\(category)")
-        JSCategory.dataItems = []
+        JSCategory.resetDataItems()
     }
     
     func messageHandler(_ handler: JSMessageDelegate, receivedData data: BTDealerItem, forCategory category: Int) {
         //print("Data Message received for cat=\(category) => \(data)")
-        JSCategory.dataItems.append(data)
+        JSCategory.addDataItem(data)
     }
     
     func messageHandler(_ handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int) {
@@ -117,7 +116,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         JSCategory.name = "(X)Austria Judaica Tabs"
         JSCategory.headers = data.headers
         JSCategory.notes = data.notes
-        JSCategory.items = JSCategory.dataItems.count
+        JSCategory.items = JSCategory.dataItemCount
     }
 
     fileprivate func jsCompletionRun( _ catnum: Int16, webJSCategory: BTCategory ) {
@@ -143,13 +142,20 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
         // find the BTDealerItem from the handler and set its details field to the data
         // sanity check: should be for category 2
-        if category != Int(CATEG_SETS) {
+        guard category != Int(CATEG_SETS) else {
             print("Received details item outside of category 2 = \(category)")
+            return
         }
-        if let btitem = detailMap[handler] {
+        let urlcodeX = handler.url.absoluteString.components(separatedBy: "=")
+        guard let code = urlcodeX.last, code.hasPrefix("6110s") else {
+            print("Received non-category item from cat 2 = \(urlcodeX.last ?? "")")
+            return
+        }
+        // remember, during the load process, we use the backup store categories
+        let cat = getReloadCategoryByNumber(Int(CATEG_SETS))
+        if let btitem = cat.fetchData(withCode: code) {
             print("Assigned detail item to item \(btitem.code) (\(btitem.descr)): data:[\(data)]")
             btitem.details = data
-            detailMap[handler] = nil
         } else {
             print("Couldn't find BT item to assign data to: \(data)")
         }
@@ -164,7 +170,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             detailer = nil
         } else {
             let categoryObject = getReloadCategoryByNumber(category)
-            categoryObject.dataItems = []
+            categoryObject.resetDataItems()
         }
     }
     
@@ -186,6 +192,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                     self.categoryHandlers.append(handler)
                     handler.configToLoadItemsFromWeb("http://www.google.com", forCategory: catnum) // dummy URL will be replaced
                     print("Loaded category handler for Category \(catnum): \(catname)")
+                    // create the detail loader for set info details
                     if Int16(catnum) == CATEG_SETS {
                         self.detailer = BTItemDetailsLoader()
                         if let detailer = self.detailer {
@@ -212,14 +219,14 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     func messageHandler(_ handler: BTMessageDelegate, receivedData dataItem: BTDealerItem, forCategory category: Int) {
         // load each category's dealer items, one at a time
         let categoryObject = getReloadCategoryByNumber(category)
-        categoryObject.dataItems.append(dataItem)
+        categoryObject.addDataItem(dataItem)
         //catProgress[category-1].completedUnitCount += 1
         let allowDetailsSet = Int16(category) == CATEG_SETS
         let allowDetailsDebug = true // set this to TRUE to enable debug year limits for testing (else entire set list will be loaded)
         // DEBUG - limit number of items by year for testing the mechanism
         let allowDetailsYear: Bool
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1963...1977 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        let limitYearRange = 1963...1966 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let year = year, limitYearRange.contains(year) {
             allowDetailsYear = true
         } else {
@@ -228,9 +235,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let allowDetailsPolicy = allowDetailsDebug ? (allowDetailsYear && allowDetailsSet) : allowDetailsSet
         if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, allowDetailsPolicy {
             // add and remember a detail loader item for this dataItem
-            let btmd = detailer.addItem(withHref: href)
-            // map the loader item to its data item
-            detailMap[btmd] = dataItem
+            let _ = detailer.addItem(withHref: href)
             print("Added item to detailer: details at \(href)")
         }
         siteProgress.completedUnitCount += 1

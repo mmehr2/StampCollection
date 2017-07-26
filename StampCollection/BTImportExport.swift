@@ -57,7 +57,7 @@ class BTImporter: CSVDataSink {
             let catnum = newObject.importFromData(data)
             // add it to the appropriate category
             if let cat = categories[catnum] {
-                cat.dataItems.append(newObject)
+                cat.addDataItem(newObject)   //dataItems.append(newObject)
             }
         }
     }
@@ -148,7 +148,7 @@ class BTExporter {
             basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
             for cat in data {
                 let catnum = cat.number
-                let items = cat.dataItems
+                let items = cat.getAllDataItems()
                 for item in items {
                     let dictObject = item.getExportData(catnum)
                     var fields: [String] = []
@@ -167,7 +167,7 @@ class BTExporter {
     func exportData(_ data: [BTCategory], completion: (() -> Void)? ) -> Progress {
         let progress = Progress()
         progress.totalUnitCount += data.reduce(0) { total, item in return total + 1 }
-        progress.totalUnitCount += data.reduce(0) { total, item in return total + Int64(item.dataItems.count) }
+        progress.totalUnitCount += data.reduce(0) { total, item in return total + Int64(item.dataItemCount) }
         let fileCats = getFile(nameOfCategoryFile)
         let fileInfo = getFile(nameOfInfoFile)
         let tempfileCats = getFile(nameOfCategoryFile + ".tmp")

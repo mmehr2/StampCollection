@@ -634,7 +634,7 @@ class UpdateComparisonTable {
             return output
         }
         let webtcat = webtcatX!
-        let newRecs = webtcat.dataItems
+        let newRecs = webtcat.getAllDataItems()
         if newRecs.count == 0 {
             print("No Website records to compare in category \(category) = website category \(webtcatnum)")
             return output

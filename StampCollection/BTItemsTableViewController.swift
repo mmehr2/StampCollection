@@ -69,7 +69,7 @@ class BTItemsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return category.dataItems.count
+        return category.dataItemCount
     }
 
     
@@ -77,7 +77,7 @@ class BTItemsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BT Item Cell", for: indexPath) 
 
         // Configure the cell...
-        let item = category.dataItems[indexPath.row]
+        let item = category.getAllDataItems()[indexPath.row]
         cell.textLabel?.text = "\(item.descr)"
         cell.detailTextLabel?.text = formatBTDetail(item)
 //        let useDisclosure = true
@@ -132,7 +132,7 @@ class BTItemsTableViewController: UITableViewController {
                     // create an info item for the dealer item selected, if possible
                     let indexPath = tableView.indexPath(for: cell)!
                     let row = indexPath.row
-                    let btitem = category.dataItems[row]
+                    let btitem = category.getAllDataItems()[row]
                     dvc.btitem = btitem
                     dvc.btcat = category
             }
