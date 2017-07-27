@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GameKit // for random functions
 
 // class that is responsible for loading item details to go with BTDealerItems in category 2 (Sets)
 // these are done by running a dedicated BTMessageDelegate for each item
@@ -56,12 +57,12 @@ import Foundation
 
 class BTItemDetailsLoader: BTInfoProtocol {
 
-    var demo: Bool = true
+    var demo: Bool = false
     let progress: Progress
     var delegate: BTInfoProtocol?
     var completion: (() -> Void)?
     var batchSize = 10
-    var timeInterval: TimeInterval = 10.0 // secs delay from when batch is emptied and starts to send again
+    var timeInterval: TimeInterval = 2.0 // secs delay from when batch is emptied and starts to send again
     
     var count: Int {
         return items.count
@@ -174,10 +175,15 @@ class BTItemDetailsLoader: BTInfoProtocol {
     private func runItem(withCodeNumber cnum: Int16) {
         let handler = getNextHandler()
         handler.url = getURL(fromCodeNumber: cnum)
-        if demo {
-            print("Running item \(cnum) at URL \(handler.url.absoluteString)")
-        } else {
+        print("Running item \(cnum) at URL \(handler.url.absoluteString)")
+        if !demo {
             handler.runInfo()
+        }
+    }
+    
+    private func runBatch() {
+        for item in items[currentBatchStart..<currentBatchEnd] {
+            runItem(withCodeNumber: item)
         }
     }
     
@@ -222,11 +228,11 @@ class BTItemDetailsLoader: BTInfoProtocol {
             // within a batch, just queue up the next one to be sent
             if addDelay {
                 queue.asyncAfter(deadline: DispatchTime.now() + timeInterval) {
-                    self.runItem(withCodeNumber: self.items[self.currentBatchStart])
+                    self.runBatch()
                 }
             } else {
-                self.queue.async{
-                    self.runItem(withCodeNumber: self.items[self.currentBatchStart])
+                queue.async{
+                    self.runBatch()
                     // NOTE: nextWorkItem() will be run by message handler when response is received
                 }
             }
@@ -249,8 +255,8 @@ class BTItemDetailsLoader: BTInfoProtocol {
             //print("DetailsLoader passed cat \(category) data to delegate \(data)")
         }
         // increment the position in the queue
-        self.nextWorkItem()
+        nextWorkItem()
         // see if more is left to do and do it
-        self.run()
+        run()
     }
 }

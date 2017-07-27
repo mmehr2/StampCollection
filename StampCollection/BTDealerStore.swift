@@ -90,6 +90,8 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             self.siteJSHandler.configToLoadItemsFromWeb()
             utilQueue.async(execute: self.siteJSHandler.run)
         } else {
+            // TBD - make sure categoryHandlers[] and reloadCatetories[] are loaded 
+            // (typical use after import - NOT; but OK for intended use after loadStore() has been done once)
             let handler = self.categoryHandlers[categoryNum]
             let category = self.getCategoryByNumber(categoryNum)!
             handler.configToLoadItemsFromWeb(category.href, forCategory: category.number)
@@ -226,7 +228,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         // DEBUG - limit number of items by year for testing the mechanism
         let allowDetailsYear: Bool
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1963...1966 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        let limitYearRange = 1963...1964 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let year = year, limitYearRange.contains(year) {
             allowDetailsYear = true
         } else {
