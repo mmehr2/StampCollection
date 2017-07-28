@@ -84,7 +84,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemDetailsMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
-        internalWebView!.uiDelegate = (self as! WKUIDelegate) // for debugging messages
+        internalWebView!.navigationDelegate = (self) // as! WKNavigationDelegate) // for debugging messages
     }
     
     func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
