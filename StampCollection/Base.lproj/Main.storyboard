@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="24" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pH7-au-2Yt" id="ErN-06-hnN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="faz-m3-79P">
@@ -67,6 +67,12 @@
                                 <action selector="exportButtonPressed:" destination="K8c-AD-Du4" id="nAg-l3-MKZ"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Fqz-jU-Owp"/>
+                        <barButtonItem title="Details" id="BzB-KO-7FK">
+                            <connections>
+                                <action selector="detailsButtonPressed:" destination="K8c-AD-Du4" id="how-yV-ZJ0"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Y7L-q1-FRe"/>
                         <barButtonItem title="Reload All" id="1sP-fy-eFC">
                             <connections>
@@ -83,6 +89,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="detailsButton" destination="BzB-KO-7FK" id="AQP-XL-6A4"/>
                         <outlet property="exportButton" destination="Swq-39-xqr" id="jkO-4P-LXk"/>
                         <outlet property="importButton" destination="6nE-70-UK2" id="Evk-A1-2Fx"/>
                         <outlet property="progressView" destination="a4d-Yc-AGo" id="NTo-lt-UwF"/>
@@ -283,7 +290,7 @@
                                 <rect key="frame" x="0.0" y="24" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nnw-nY-dV8" id="TRU-gv-g0x">
-                                    <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Ha-t1-GgQ">

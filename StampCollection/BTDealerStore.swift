@@ -76,28 +76,65 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     
     func loadStoreCategory(_ categoryNum: Int, whenDone: @escaping () -> Void) -> Progress {
         siteProgress = Progress()
-        completion = whenDone
-        loadMultiple = false
+        siteProgress.totalUnitCount = 1
         guard let categ = getCategoryByNumber(categoryNum) else {
             // categories have not been loaded the 1st time yet - TBD: should do a 1st-time load
-            siteProgress.totalUnitCount = 1
-            siteProgress.completedUnitCount = 1
+            print("Unable to reload individual category \(categoryNum) - object not found.")
+            siteProgress.completedUnitCount = siteProgress.totalUnitCount
+            if let completion = completion {
+                DispatchQueue.main.async(execute: completion)
+                self.completion = nil // release memory ref after this use rather than waiting till next use
+            }
             return siteProgress
         }
         // estimated count is the same as before
         siteProgress.totalUnitCount = Int64(categ.dataItemCount)
+        completion = whenDone
+        loadMultiple = false
         if categoryNum == JSCategoryAll {
             self.siteJSHandler.configToLoadItemsFromWeb()
             startQueue.async(execute: self.siteJSHandler.run)
         } else {
-            // TBD - make sure categoryHandlers[] and reloadCatetories[] are loaded 
-            // (typical use after import - NOT; but OK for intended use after loadStore() has been done once)
+            // TBD - make sure categoryHandlers[] and reloadCatetories[] are loaded
+            // (typical use after import - NOT; but OK for intended use after loadStore(NOT.justCategories) has been done once)
+            guard !categoryHandlers.isEmpty && !reloadCategories.isEmpty else {
+                print("Unable to reload individual category \(categoryNum) - object arrays not found.")
+                siteProgress.completedUnitCount = siteProgress.totalUnitCount
+                if let completion = completion {
+                    DispatchQueue.main.async(execute: completion)
+                    self.completion = nil // release memory ref after this use rather than waiting till next use
+                }
+                return siteProgress
+            }
             let handler = self.categoryHandlers[categoryNum]
             let category = self.getCategoryByNumber(categoryNum)!
             handler.configToLoadItemsFromWeb(category.href, forCategory: category.number)
             startQueue.async(execute: handler.run)
         }
         loadingInProgress = true
+        return siteProgress
+    }
+    
+    func loadDataDetails(_ whenDone: @escaping () -> Void) -> Progress {
+        siteProgress = Progress()
+        siteProgress.totalUnitCount = 1
+        completion = whenDone
+        guard let detailer = self.detailer else {
+            print("Unable to start Sets Category detail loader, object not found.")
+            if let completion = completion {
+                DispatchQueue.main.async(execute: completion)
+                self.completion = nil // release memory ref after this use rather than waiting till next use
+            }
+            return siteProgress
+        }
+//        progressCounter = 0 // simpler than array of boolean indicators, for now
+//        loadingInProgress = true
+        // transfer responsibility for completion to the detailer
+        detailer.completion = completion
+        completion = nil
+        startQueue.async{
+            detailer.run()
+        }
         return siteProgress
     }
     
@@ -198,9 +235,6 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                     if Int16(catnum) == CATEG_SETS {
                         self.detailer = BTItemDetailsLoader()
                         if let detailer = self.detailer {
-                            // transfer responsibility for completion to the detailer
-                            detailer.completion = self.completion
-                            self.completion = nil
                             // set ourselves up to receive info details messages
                             detailer.delegate = self
                         }
@@ -270,8 +304,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             if lsStyle != .populateAndWait {
                 if let completion = completion {
                     DispatchQueue.main.async(execute: completion)
-                } else if let detailer = detailer {
-                    detailer.run()
+                    self.completion = nil // release memory ref after this use rather than waiting till next use
                 }
             }
         } else if !loadMultiple {
@@ -279,8 +312,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
             copyCategoryDataToStore(category, basicOnly: false)
             if let completion = completion {
                 DispatchQueue.main.async(execute: completion)
-            } else if let detailer = detailer {
-                detailer.run()
+                self.completion = nil // release memory ref after this use rather than waiting till next use
             }
             loadingInProgress = false
         } else {
@@ -297,8 +329,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
                 // run the completion routine here for style .PopulateAndWait
                 if let completion = completion , lsStyle == .populateAndWait {
                     DispatchQueue.main.async(execute: completion)
-                } else if let detailer = detailer {
-                    detailer.run()
+                    self.completion = nil // release memory ref after this use rather than waiting till next use
                 }
                 loadingInProgress = false
             }

@@ -33,6 +33,7 @@ class ViewController: UITableViewController {
             exportButton.isEnabled = newValue
             refreshButton.isEnabled = newValue
             reloadButton.isEnabled = newValue
+            detailsButton.isEnabled = newValue
             // hide progress view when variable set to T
             progressView.isHidden = newValue
         }
@@ -99,6 +100,16 @@ class ViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var detailsButton: UIBarButtonItem!
+    @IBAction func detailsButtonPressed(_ sender: UIBarButtonItem) {
+        uiEnabled = false
+        progressView.observedProgress = storeModel.loadDataDetails() {
+            self.tableView.reloadData()
+            self.uiEnabled = true
+        }
+    }
+    
+    
     // MARK: - Table view data source
     
     func getCategoryIndexForIndexPath( _ indexPath: IndexPath ) -> Int {
