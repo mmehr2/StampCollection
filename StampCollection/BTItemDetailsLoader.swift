@@ -108,7 +108,8 @@ class BTItemDetailsLoader: BTInfoProtocol {
     init(_ comp: (() -> Void)? = nil) {
         progress = Progress()
         // the queue operates as a serial queue, so items are requested
-        queue = DispatchQueue(label: "com.azuresults.BTLoadDetailsQueue", qos: .background)
+        //queue = DispatchQueue(label: "com.azuresults.BTLoadDetailsQueue", qos: .background)
+        queue = DispatchQueue.main
         completion = comp
         currentBatchStart = items.startIndex
         currentBatchEnd = currentBatchStart
