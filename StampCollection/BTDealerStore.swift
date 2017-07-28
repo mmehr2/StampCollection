@@ -88,14 +88,14 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         siteProgress.totalUnitCount = Int64(categ.dataItemCount)
         if categoryNum == JSCategoryAll {
             self.siteJSHandler.configToLoadItemsFromWeb()
-            utilQueue.async(execute: self.siteJSHandler.run)
+            startQueue.async(execute: self.siteJSHandler.run)
         } else {
             // TBD - make sure categoryHandlers[] and reloadCatetories[] are loaded 
             // (typical use after import - NOT; but OK for intended use after loadStore() has been done once)
             let handler = self.categoryHandlers[categoryNum]
             let category = self.getCategoryByNumber(categoryNum)!
             handler.configToLoadItemsFromWeb(category.href, forCategory: category.number)
-            utilQueue.async(execute: handler.run)
+            startQueue.async(execute: handler.run)
         }
         loadingInProgress = true
         return siteProgress
