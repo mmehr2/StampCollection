@@ -56,15 +56,15 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Export" id="Swq-39-xqr">
-                            <connections>
-                                <action selector="exportButtonPressed:" destination="K8c-AD-Du4" id="nAg-l3-MKZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pal-dG-SkJ"/>
                         <barButtonItem title="Import" id="6nE-70-UK2">
                             <connections>
                                 <action selector="importButtonPressed:" destination="K8c-AD-Du4" id="Alo-OM-m0U"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pal-dG-SkJ"/>
+                        <barButtonItem title="Export" id="Swq-39-xqr">
+                            <connections>
+                                <action selector="exportButtonPressed:" destination="K8c-AD-Du4" id="nAg-l3-MKZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Y7L-q1-FRe"/>
