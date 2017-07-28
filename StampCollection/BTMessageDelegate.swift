@@ -23,7 +23,7 @@ protocol BTMessageProtocol : BTInfoProtocol {
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
-class BTMessageDelegate: NSObject, WKScriptMessageHandler {
+class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
 
     var delegate: BTInfoProtocol?
     
@@ -31,6 +31,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
     
     fileprivate var internalWebView: WKWebView?
     var url: URL!
+    var debug = true // set this to T to print console messages during navigation phases using the navigation delegate
     
     // message names received from JS scripts
     let categoriesMessage = "getCategories"
@@ -83,6 +84,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemDetailsMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+        internalWebView!.uiDelegate = (self as! WKUIDelegate) // for debugging messages
     }
     
     func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
@@ -98,6 +100,55 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler {
 //        }
         // clear the category array in preparation of reload
         //category.dataItems = []
+    }
+    
+    // MARK: WKNavigationDelegate
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webViewWebContentProcessDidTerminate() for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didCommit:nav=\(navigation!)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didFinish:nav=\(navigation!)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didStartProvisionalNavigation:nav=\(navigation!)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didFail:nav=\(navigation!):withError\(error)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didReceiveServerRedirectForProvisionalNavigation:nav=\(navigation!)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didFailProvisionalNavigation:nav=\(navigation!):withError\(error)) for handler \(self)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if let wiView = self.internalWebView, webView === wiView {
+            print("Inside webView(:didReceive(challenge=\(challenge):completion) for handler \(self)")
+        }
     }
     
     // MARK: WKScriptMessageHandler
