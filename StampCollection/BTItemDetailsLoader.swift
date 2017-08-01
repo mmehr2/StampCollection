@@ -55,6 +55,14 @@ import GameKit // for random functions
  Once I am confident that the scheme will work, I intend to randomly perturb both the batchSize (up to the poolSize) and the inter-batch delay factor to avoid deluging the internet with traffic and/or triggering anti-spam blocking behavior on the site. Perhaps this is also needed in the item download, will consider adapting this scheme later for category item use.
  */
 
+/*
+ Design Update (not Architecture):
+ The entire design of the BTMessageDelegate subsystem has been called into question and found wanting.
+ Using hidden WKWebViews with script injection, a novel technique I designed, is not considered standard practice. Specifically, it seems it cannot be used to fully automate updates from a background task as I have attempted to do here. It is a much better design to download the webpage text as a normal data task in a URLSession, and then parse it with a library such as SwiftSoup that can parse HTML into a parse tree like what Javascript would do to create the DOM.
+ I can redesign the details loader to use this method more simply because it uses minimal Javascript and simple parsing on the body text. It currently finds line 4 of the body text. I can possibly even put something together without using the library (and CocoaPods) at all.
+ Later on, I can work this library into the BTMessageDelegate class, replacing the three JS files and message generation design with a Swift-based parsing module that can use a delegate setup to retain much of its existing design. Then I can fully background-automate the ReloadAll function of the BT (and JS) categories VC. This may take some time to get right, and I need to figure out the best testing for it (will using Update with no changes triggered be sufficient proof?).
+ */
+
 class BTItemDetailsLoader: BTInfoProtocol {
 
     var demo: Bool = false
@@ -108,8 +116,8 @@ class BTItemDetailsLoader: BTInfoProtocol {
     init(_ comp: (() -> Void)? = nil) {
         progress = Progress()
         // the queue operates as a serial queue, so items are requested
-        //queue = DispatchQueue(label: "com.azuresults.BTLoadDetailsQueue", qos: .background)
-        queue = DispatchQueue.main
+        queue = DispatchQueue(label: "com.azuresults.StampCollection.BTLoadDetailsQueue", qos: .utility)
+        //queue = DispatchQueue.main
         completion = comp
         currentBatchStart = items.startIndex
         currentBatchEnd = currentBatchStart
