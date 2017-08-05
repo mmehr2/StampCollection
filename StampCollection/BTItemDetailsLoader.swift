@@ -218,7 +218,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
                     let response = response as? HTTPURLResponse,
                     response.statusCode == 200 {
                     // parse the response HTML that is in the data buffer
-                    let html = String(data: data, encoding: .utf8)
+                    let html = String(data: data, encoding: .ascii)
                     // generate a BTItemDetails from lines 2 and 4 of the body text
                     let lastLineOfInterest = 37 // as in HTML lines, not text lines, numbered from 0 (View Page Source numbers from 1)
                     if let hlines = html?.components(separatedBy: "\n"),

@@ -262,7 +262,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         // DEBUG - limit number of items by year for testing the mechanism
         let allowDetailsYear: Bool
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1963...1964 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        let limitYearRange = 1963...1999 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let year = year, limitYearRange.contains(year) {
             allowDetailsYear = true
         } else {
@@ -272,7 +272,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, allowDetailsPolicy {
             // add and remember a detail loader item for this dataItem
             let _ = detailer.addItem(withHref: href)
-            print("Added item to detailer: details at \(href)")
+            print("Added item #\(detailer.count) to detailer: details at \(href)")
         }
         siteProgress.completedUnitCount += 1
     }
