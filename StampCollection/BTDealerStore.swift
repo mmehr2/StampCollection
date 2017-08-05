@@ -262,7 +262,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         // DEBUG - limit number of items by year for testing the mechanism
         let allowDetailsYear: Bool
         let year = Int(String(dataItem.descr.characters.prefix(4)))
-        let limitYearRange = 1963...1999 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
+        let limitYearRange = 2000...2017 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let year = year, limitYearRange.contains(year) {
             allowDetailsYear = true
         } else {
