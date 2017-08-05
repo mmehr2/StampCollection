@@ -61,6 +61,15 @@ import GameKit // for random functions
  Using hidden WKWebViews with script injection, a novel technique I designed, is not considered standard practice. Specifically, it seems it cannot be used to fully automate updates from a background task as I have attempted to do here. It is a much better design to download the webpage text as a normal data task in a URLSession, and then parse it with a library such as SwiftSoup that can parse HTML into a parse tree like what Javascript would do to create the DOM.
  I can redesign the details loader to use this method more simply because it uses minimal Javascript and simple parsing on the body text. It currently finds line 4 of the body text. I can possibly even put something together without using the library (and CocoaPods) at all.
  Later on, I can work this library into the BTMessageDelegate class, replacing the three JS files and message generation design with a Swift-based parsing module that can use a delegate setup to retain much of its existing design. Then I can fully background-automate the ReloadAll function of the BT (and JS) categories VC. This may take some time to get right, and I need to figure out the best testing for it (will using Update with no changes triggered be sufficient proof?).
+ 
+ UPDATE:
+ I will use the BTMessageDelegate as a holder for the URL, not actively use it to load the URL. This will allow the dealer store to extract the code from the URL and route the BTItemDetails to the proper BTDealerItem. I could change the BTInfoProtocol instead, and may do so after converting the entire download process, but for now, this is sufficient.
+ I use an internal (ephemeral) URLSession to dispatch URLSessionDataTasks. I chose ephemeral because the extra features are probably not needed in the default session, but if I am mistaken, a .default configuration should be fine. Eventually, we will want .background to be used for the dealer store's overall download task (ReloadAll).
+ To keep the data tasks from being deleted during processing, their references are kept in an internal table indexed by code number. When the completion handler is run, it will remove the internal reference and release the object memory.
+ The task completion handler (since we are not using any delegates) must deal with parsing the data, which comes in as raw HTML. For purposes of this project, the fixed format HTML has title and detail lines in known locations in the lines array (lines 32 and 38), and as long as BT doesn't change this format, we can parse the info we need by stripping HTML tags from the returned text. When we have a full HTML parsing library on board, this can be replaced to get the proper structure (which also is at the BT site's whim to change if they have a need).
+ Once the data is parsed and a BTItemDetails object is created, we can simulate the receipt of the BTMessageDelegate's BTInfoProtocol message, which will send the item and its chosen BTMD handler to the recipient (dealer store).
+ 
+ TBD - we can stop the page loading (for now) once 38 lines have been received. This will require use of the delegates to the data task, but may significantly shorten the time needed overall, especially when having to download the images, and the long text of the leaflet that is included after the summary line we want.
  */
 
 class BTItemDetailsLoader: BTInfoProtocol {
@@ -88,12 +97,14 @@ class BTItemDetailsLoader: BTInfoProtocol {
     private var handlers: [BTMessageDelegate] = []
     private var currentHandler: Array<BTMessageDelegate>.Index
     
-    private let queue: DispatchQueue
     private typealias ItemCollection = Array<Int16>
     private var items = ItemCollection()
     private var currentBatchStart: ItemCollection.Index
     private var currentBatchEnd: ItemCollection.Index
-    private var addDelay = false
+    private var initialBatchSize = 0
+    
+    private var session: URLSession!
+    private var activeTasks: [Int16:URLSessionDataTask] = [:] // hashed by internal code number
     
     private func firstItem() {
         currentBatchStart = items.startIndex
@@ -101,8 +112,13 @@ class BTItemDetailsLoader: BTInfoProtocol {
         nextBatch()
     }
     
+    private func setLastItem() {
+        currentBatchStart = items.endIndex
+        currentBatchEnd = currentBatchStart
+    }
+    
     private func nextItem() {
-        currentBatchStart = items.index(currentBatchStart, offsetBy: 1)
+        currentBatchStart = items.index(after: currentBatchStart)
     }
     
     private func nextBatch() {
@@ -111,13 +127,11 @@ class BTItemDetailsLoader: BTInfoProtocol {
         } else {
             currentBatchEnd = items.endIndex
         }
+        initialBatchSize = remainingBatchItemsCount
     }
     
     init(_ comp: (() -> Void)? = nil) {
         progress = Progress()
-        // the queue operates as a serial queue, so items are requested
-        queue = DispatchQueue(label: "com.azuresults.StampCollection.BTLoadDetailsQueue", qos: .utility)
-        //queue = DispatchQueue.main
         completion = comp
         currentBatchStart = items.startIndex
         currentBatchEnd = currentBatchStart
@@ -126,6 +140,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
         // set up the pool of handler objects: configure each to talk back to us for details usage
         // NOTE: this object must be created on the main thread; else there must be a configure() function to do this
         configureHandlers()
+        // configure the session object here? no, wait until runtime
         // set up the window (for empty array) so that we can always call run()
         firstItem()
     }
@@ -135,19 +150,26 @@ class BTItemDetailsLoader: BTInfoProtocol {
         print("Configuring pool of \(batchSize) message delegates")
         for _ in 0..<batchSize {
             let handler = BTMessageDelegate()
-            // point the handler to us so we get message traffic
-            handler.delegate = self
-            // configure the hidden UI of the webpage proxy
-            handler.configToLoadItemsFromWeb(BTURLPlaceHolder, forCategory: Int(CATEG_SETS))
+            // UPDATE: now we are only using the handler as a holder for the URL instead of an active object
+            // Note that the URL will be supplied later at run() time
+            handler.categoryNumber = Int(CATEG_SETS)
             handlers.append(handler)
         }
+    }
+    
+    private func configureSession() {
+        // adding a URLSession to convert over to using data tasks instead of script injection
+        // in case of cancellation, or first time after init(), the ref will be nil and we can create a new session
+        guard session == nil else { return }
+        print("Created new URL session in ephemeral configuration.")
+        session = URLSession(configuration: .ephemeral)
     }
     
     private func getNextHandler() -> BTMessageDelegate {
         // result is current handler
         let result = handlers[currentHandler]
-        let hd = currentHandler - handlers.startIndex
-        print("Assigning handler #\(hd+1)")
+        //let hd = currentHandler - handlers.startIndex
+        //print("Assigning handler #\(hd+1)")
         // bump current handler pointer (implements round-robin dispatcher for handler pool)
         currentHandler = handlers.index(currentHandler, offsetBy: 1)
         if currentHandler == handlers.endIndex {
@@ -186,7 +208,50 @@ class BTItemDetailsLoader: BTInfoProtocol {
         handler.url = getURL(fromCodeNumber: cnum)
         print("Running item \(cnum) at URL \(handler.url.absoluteString)")
         if !demo {
-            handler.runInfo()
+            // create a data task
+            let dataTask = session.dataTask(with: handler.url) { data, response, error in
+                // this closure will run when a response is received by the task
+                if let error = error {
+                    // accumulate error message
+                    print("DataTask for \(handler.url.absoluteString) got client-side error: \(error.localizedDescription)\n")
+                } else if let data = data,
+                    let response = response as? HTTPURLResponse,
+                    response.statusCode == 200 {
+                    // parse the response HTML that is in the data buffer
+                    let html = String(data: data, encoding: .utf8)
+                    // generate a BTItemDetails from lines 2 and 4 of the body text
+                    let lastLineOfInterest = 37 // as in HTML lines, not text lines, numbered from 0 (View Page Source numbers from 1)
+                    if let hlines = html?.components(separatedBy: "\n"),
+                        hlines.count > lastLineOfInterest {
+                        // this seems to always be on lines 32 and 38 of the HTML as currently formatted by the BT site
+                        // NOTE: VERY KLUDGEY, BUT we can get away without an HTML parsing library for now
+                        let titleLineRaw = hlines[lastLineOfInterest - 6]
+                        let detailLineRaw = hlines[lastLineOfInterest]
+                        let titleLine = stripCRs(stripTags(titleLineRaw))
+                        let detailLine = stripCRs(stripTags(detailLineRaw))
+                        //print("Found title line 6110s\(cnum): raw=[\(titleLineRaw)], stripped=[\(titleLine)]")
+                        //print("Found info line 6110s\(cnum): raw=[\(detailLineRaw)], stripped=[\(detailLine)]")
+                        let details = BTItemDetails(titleLine: titleLine, infoLine: detailLine)
+                        // simulate the BTInfoProtocol message from the BTMessageDelegate supplied here
+                        self.messageHandler(handler, receivedDetails: details, forCategory: Int(CATEG_SETS))
+                    } else {
+                        print("DataTask for \(handler.url.absoluteString) received less than 38 lines of HTML data.")
+                    }
+                } else {
+                    print("DataTask for \(handler.url.absoluteString) received null data or response, or code other than 200.")
+                }
+                // in all cases, remove the saved task from the reference list
+                self.activeTasks[cnum] = nil
+                // increment the position in the queue for every item
+                // NOTE: items will possibly finish out of order, but we only need to make sure we count each one
+                self.nextWorkItem()
+                // see if more is left to do and do it
+                self.run()
+            }
+            // save the data task object ref so it won't crash while loading
+            activeTasks[cnum] = dataTask
+            // resume the data task so it will run
+            dataTask.resume()
         }
     }
     
@@ -198,6 +263,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
     
     private func nextWorkItem() {
         // an item has just been executed; advance the pointer to the next one, if any
+        //print("Pointers at start of nextWorkItem(): CBS=\(currentBatchStart). CBE=\(currentBatchEnd), IBS=\(initialBatchSize)")
         // advance just the item pointer within the batch window first
         nextItem()
         // count progress
@@ -205,17 +271,14 @@ class BTItemDetailsLoader: BTInfoProtocol {
         if remainingBatchItemsCount == 0 {
             // if no items left in batch, reposition the batch window to the next frame, if any
             nextBatch()
-            // flag that next item should be run with delay
-            addDelay = true
-            if remainingItemsCount > 0 {
-                print("DetailsLoader queued next batch of \(remainingBatchItemsCount) with \(remainingItemsCount) left to run after \(timeInterval) secs delay. ")
-            }
+//            if remainingItemsCount > 0 {
+//                print("DetailsLoader queued next batch of \(remainingBatchItemsCount) with \(remainingItemsCount) left to run after \(timeInterval) secs delay. ")
+//            }
         } else {
-            // normal batch items require no delay
-            addDelay = false
             // due to nature of the operation, if we have more batch items, we have more items, so unconditionally print
-            print("DetailsLoader queued next 1 of \(remainingBatchItemsCount) with \(remainingItemsCount) left. ")
+            //print("DetailsLoader queued next 1 of \(remainingBatchItemsCount) with \(remainingItemsCount) left. ")
         }
+        //print("Pointers at end of nextWorkItem(): CBS=\(currentBatchStart). CBE=\(currentBatchEnd), IBS=\(initialBatchSize)")
     }
 
     // ** The client calls this to begin the process of loading detail items
@@ -234,25 +297,44 @@ class BTItemDetailsLoader: BTInfoProtocol {
                 return
             }
             // async version (non-demo)
-            // within a batch, just queue up the next one to be sent
-            if addDelay {
-                queue.asyncAfter(deadline: DispatchTime.now() + timeInterval) {
-                    self.runBatch()
-                }
-            } else {
-                queue.async{
-                    self.runBatch()
-                    // NOTE: nextWorkItem() will be run by message handler when response is received
-                }
+            configureSession()
+            // At this point, nextWorkItem() has either just updated the batch size for the next batch
+            // OR, it has counted one of the items of the current batch and the count is smaller but nonzero
+            if remainingBatchItemsCount == initialBatchSize {
+                runBatch()
+                // NOTE: nextWorkItem() will be run by message handler when response is received
             }
         } else {
             // empty batch AND empty items: when all items have been removed, we are done
-            print("DetailsLoader: no more items, running any completion handler.")
+            // release the session object
+            self.session = nil
+            //print("DetailsLoader: no more items, running any completion handler.")
             if let completion = completion {
                 self.completion = nil // don't need to keep the reference here
                 DispatchQueue.main.async(execute: completion)
             }
         }
+    }
+
+    // cancel remaining active tasks and run the completion handler
+    // we can also reinitialize the items[] list in case client wants to call run() again to restart later
+    func cancel() {
+        // now that we are using tasks, we can cancel them
+        session.invalidateAndCancel()
+        // PROBLEM: session is now useless and cannot be reused next time; we need to replace to rerun
+        session = nil
+        // the items that haven't completed need to be saved for later restart
+        // we can generate a new items array from these few numbers and the remaining uncompleted batches
+        let resumeInfo1 = Array(activeTasks.keys).sorted()
+        activeTasks = [:]
+        let resumeInfo = items[currentBatchEnd..<items.endIndex]
+        items = resumeInfo1 + resumeInfo
+        // now that we have saved our state, we can run the completion handler
+        setLastItem() // places pointers at end so moreWork will return false and run() will call the completion handler
+        run()
+        // and then we can put the pointers back to the beginning
+        firstItem()
+        // now it's okay to call run() again to "resume" where we left off
     }
     
     // RUNTIME: receiver of the message response forwards the detail object to the delegate
@@ -263,9 +345,5 @@ class BTItemDetailsLoader: BTInfoProtocol {
             delegate.messageHandler(handler, receivedDetails: data, forCategory: category)
             //print("DetailsLoader passed cat \(category) data to delegate \(data)")
         }
-        // increment the position in the queue
-        nextWorkItem()
-        // see if more is left to do and do it
-        run()
     }
 }

@@ -393,3 +393,13 @@ func countLinesInFile(_ path: String) -> Int {
     }
     return lineCount - 1
 }
+
+func stripTags(_ input: String) -> String {
+    // boldly stolen from @Rajat on SO: https://stackoverflow.com/questions/40530745/swift-3-take-out-html-tags-from-string-taken-from-json-web-url
+    return input.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+}
+
+func stripCRs(_ input: String) -> String {
+    return input.replacingOccurrences(of: "\r", with: "")
+}
+

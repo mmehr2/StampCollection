@@ -181,7 +181,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
         // find the BTDealerItem from the handler and set its details field to the data
         // sanity check: should be for category 2
-        guard category != Int(CATEG_SETS) else {
+        guard category == Int(CATEG_SETS) else {
             print("Received details item outside of category 2 = \(category)")
             return
         }
@@ -193,10 +193,10 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         // remember, during the load process, we use the backup store categories
         let cat = getReloadCategoryByNumber(Int(CATEG_SETS))
         if let btitem = cat.fetchData(withCode: code) {
-            print("Assigned detail item to item \(btitem.code) (\(btitem.descr)): data:[\(data)]")
+            //print("Assigned detail item to item \(btitem.code) (\(btitem.descr)): data:[\(data)]")
             btitem.details = data
         } else {
-            print("Couldn't find BT item to assign data to: \(data)")
+            print("Couldn't find BT item to assign data with code \(code) to: \(data)")
         }
     }
     
