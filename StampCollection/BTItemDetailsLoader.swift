@@ -179,14 +179,22 @@ class BTItemDetailsLoader: BTInfoProtocol {
     }
 
     // ** The client calls this to add a new item href to the list of details to load
-    func addItem(withHref href: String) {
+    func addItem(withHref href: String) -> Bool {
+        var added = false
         let codeNum = getCodeNumber(fromHref: href)
-        if codeNum > 0 {
+        let filterPolicy = (codeNum > 0) // set to T to ignore all but exceptional items for testing
+        var process = true
+        if filterPolicy {
+            process = BTItemDetails.isExceptional(codeNumber: codeNum)
+        }
+        if process  {
             items.append(codeNum)
             progress.totalUnitCount += 1
             // update initial window so we are always ready to have run() called
             firstItem()
+            added = true
         }
+        return added
     }
     
     private func getURL(fromCodeNumber cnum: Int16) -> URL {
@@ -231,7 +239,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
                         let detailLine = stripCRs(stripTags(detailLineRaw))
                         //print("Found title line 6110s\(cnum): raw=[\(titleLineRaw)], stripped=[\(titleLine)]")
                         //print("Found info line 6110s\(cnum): raw=[\(detailLineRaw)], stripped=[\(detailLine)]")
-                        let details = BTItemDetails(titleLine: titleLine, infoLine: detailLine)
+                        let details = BTItemDetails(titleLine: titleLine, infoLine: detailLine, codeNum: cnum)
                         // simulate the BTInfoProtocol message from the BTMessageDelegate supplied here
                         self.messageHandler(handler, receivedDetails: details, forCategory: Int(CATEG_SETS))
                     } else {

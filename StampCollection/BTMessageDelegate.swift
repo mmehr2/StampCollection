@@ -32,7 +32,18 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
     fileprivate var internalWebView: WKWebView?
     var url: URL!
     var debug = false // set this to T to print console messages during navigation phases using the navigation delegate
+
+    var codeNumber: Int16 {
+        if let href = url?.absoluteString {
+         let (_, hnum) = splitNumericEndOfString(href)
+         if let hh = Int16(hnum), !hnum.isEmpty {
+            return hh
+            }
+        }
+        return 0
+    }
     
+   
     // message names received from JS scripts
     let categoriesMessage = "getCategories"
     fileprivate let itemsMessage = "getItems"
@@ -312,7 +323,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
                 let titleLine = lines1[1]
                 let infoLine = lines1[3]
                 // processing needed to make sure we have all possible lines all the time
-                let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine)
+                let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine, codeNum: codeNumber)
                 if let delegate = delegate {
                     delegate.messageHandler(self, receivedDetails: info, forCategory: categoryNumber)
                 }

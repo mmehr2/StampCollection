@@ -12,15 +12,19 @@ class BTItemDetails {
     
     typealias InfoObject = [String:String]
     fileprivate var data: InfoObject
+    fileprivate let codeHint: Int16
+    fileprivate var infoLines: [String] = []
     
-    init(titleLine: String, infoLine: String) {
+    init(titleLine: String, infoLine: String, codeNum cnum: Int16 = 0) {
         // NOTE: All the processing work is done here.
         // Unfortunately, we can't make the object constant with 'let' because the compiler doesn't know these names are the only ones.
         // TBD - Is there a Swift 3?4? way to say this yet? I guess, make a class out of it and set up the fields in the init() call; nope we have done that, and it still needs to be mutable. Oh well...
+        // add a hint for exceptions during download creation (this is the code number from "6110s" in the URL)
+        codeHint = cnum
         data =  [
             "xtitle" : "", //raw, original init
             "xinfo": "", //raw, original init
-            "info": "", //all items display description
+            "info": "", //all items display description (as corrected)
             "titleRaw": "", //raw
             "ssCount": "",
             "jointWith": "",
@@ -71,8 +75,6 @@ class BTItemDetails {
         
         let infoData = infoLine.components(separatedBy: "/")
         data["xtitle"] = titleLine
-        data["xinfo"] = infoLine // save original for reconstruction
-        data["info"] = infoData.joined(separator: "||") // temporary placeholder version
         parseTitleField(titleLine)
         let numInfo = infoData.count
         if numInfo > 0 {
@@ -98,9 +100,82 @@ class BTItemDetails {
                 } else if component.hasSuffix("cm") {
                     parseSouvenirSheetFormat(component)
                 } else if !component.isEmpty {
-                    print("Couldn't parse the DealerItem detailed info line: \(component)")
+                    parseException(component)
                 }
             }
+        }
+        // once everyone has parsed, concatenate the raw inputs found
+        data["info"] = assembleInfoField(withSeparator: "||") // display version
+        data["xinfo"] = assembleInfoField(withSeparator: "/") // reconstruction (import/export) version
+    }
+
+    // special exception handling for certain data errors from the BT site
+    enum ExceptionAction : CustomStringConvertible {
+        case InvertedSheetStampFormat,
+         ParenSheetFormat,
+         BadPlateNumberPrefix,
+         LabeledSheetFormat
+        
+        var description: String {
+            switch self {
+            case .InvertedSheetStampFormat: return "InvertedSheetStampFormat"
+            case .ParenSheetFormat: return "ParenSheetFormat"
+            case .BadPlateNumberPrefix: return "BadPlateNumberPrefix"
+            case .LabeledSheetFormat: return "LabeledSheetFormat"
+            }
+        }
+    }
+    
+    fileprivate static let exceptions: [Int16:ExceptionAction] = [
+        475:.InvertedSheetStampFormat, // sheet format "sX" should be "Xs" for X numeric
+        738:.ParenSheetFormat, // parens on sheet format tabs "40s (4t)"
+        739:.ParenSheetFormat, // parens on sheet format tabs "40s (4t)"
+        1032:.BadPlateNumberPrefix, // plate number list is missing initial 'p'
+        1101:.LabeledSheetFormat, // sheet format is "6s+3l", needs to use "6s 6t" like others (but ignore labels for now)
+    ]
+
+    // to allow other classes to test if an exceptional condition exists for this detail item (code number is part of URL)
+    static func isExceptional(codeNumber cnum: Int16) -> Bool {
+        return exceptions.keys.contains(cnum)
+    }
+    
+    fileprivate func parseException(_ input: String) {
+        // deal with certain discovered exceptions in the BT data (as of Aug 2017)
+        if let action = BTItemDetails.exceptions[codeHint] {
+            // perform custom action as required
+            switch action {
+            case .InvertedSheetStampFormat:
+                let (p, x) = splitNumericEndOfString(input)
+                let newInput = x + p
+                print("Exception \(action) - passing \(newInput) to parseSheetFormat()")
+                parseSheetFormat(newInput)
+                break
+            case .ParenSheetFormat:
+                // remove '(' and ')'
+                let newInput = input.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
+                print("Exception \(action) - passing \(newInput) to parseSheetFormat()")
+                parseSheetFormat(newInput)
+                break
+            case .BadPlateNumberPrefix:
+                let newInput = "p" + input
+                print("Exception \(action) - passing \(newInput) to parsePlateNumberList()")
+                parsePlateNumberList(newInput)
+                break
+            case .LabeledSheetFormat:
+                // NOTE: This is hard to generalize without knowing what BT might do in the future. Simpler is better.
+                // remove label string (between '+' and 'l' inclusive)
+                let input1 = input.replacingOccurrences(of: "\\+[^l]l", with: "", options: .regularExpression, range: nil)
+                // add the same number of tabs as a suffix
+                // to do this, we double the string with a space in the middle, then drop the final 's' and add a 't'
+                let input2 = "\(input1) \(input1)"
+                let input3 = String(input2.characters.dropLast())
+                let newInput = input3 + "t"
+                print("Exception \(action) - passing \(newInput) to parseSheetFormat()")
+                parseSheetFormat(newInput)
+                break
+            }
+        } else {
+            print("Couldn't parse the DealerItem detailed info line: \(input)")
         }
     }
     
@@ -191,12 +266,33 @@ class BTItemDetails {
         data["jointWith"] = jointWith
         data["subTitle"] = subtitleBuffer.joined(separator: " ")
     }
+
+    // to allow reprocessing, we add each component by name so the order of the final info is preserved,
+    // but we don't allow duplicates
+    fileprivate func addRawInfo(_ input: String, named name: String) {
+        data[name] = input
+        if !infoLines.contains(name) {
+            infoLines.append(name)
+        }
+    }
+
+    // once everyone is finally parsed, assemble the raw input fields named into the info field
+    // this is what will be persisted in Export and reconstructed in Import
+    fileprivate func assembleInfoField(withSeparator sep: String) -> String {
+        var result : [String] = []
+        for name in infoLines {
+            if let value = data[name] {
+                result.append(value)
+            }
+        }
+        return result.joined(separator: sep)
+    }
     
     fileprivate func parseDateList(_ input: String) {
         //
         //print("Parse the Issue Date list: \(input)")
         
-        data["issueDatesRaw"] = input
+        addRawInfo(input, named: "issueDatesRaw")
         // convert each comma-separated component from DD.MM.YYYY to YYYY.MM.DD format, space-separated
         let comps = input.components(separatedBy: ",")
         var starts = [String]()
@@ -218,7 +314,7 @@ class BTItemDetails {
         //
         //print("Parse the Designer list: \(input)")
         
-        data["designersRaw"] = input
+        addRawInfo(input, named: "designersRaw")
         data["designers"] = input // no processing for now
         
     }
@@ -227,7 +323,7 @@ class BTItemDetails {
         //
         //print("Parse the Plate Number list: \(input)")
         
-        data["plateNumbersRaw"] = input
+        addRawInfo(input, named: "plateNumbersRaw")
         
         if input.hasPrefix("p") {
             let plist = String(input.characters.dropFirst())
@@ -243,7 +339,7 @@ class BTItemDetails {
         //
         //print("Parse the Bulletin list: \(input)")
         
-        data["bulletinsRaw"] = input
+        addRawInfo(input, named: "bulletinsRaw")
         
         let name = "bulletin "
         if input.hasPrefix(name) {
@@ -260,7 +356,7 @@ class BTItemDetails {
         //
         //print("Parse the Leaflet list: \(input)")
         
-        data["leafletsRaw"] = input
+        addRawInfo(input, named: "leafletsRaw")
         
         let name = "leaflet "
         if input.hasPrefix(name) {
@@ -304,7 +400,7 @@ class BTItemDetails {
         //
         //print("Parse the Sheet Format list: \(input)")
         
-        data["sheetFormatRaw"] = input
+        addRawInfo(input, named: "sheetFormatRaw")
         
         /*       "sheetFormatRaw": "", //raw
          "numStampsList": "", // list of Ints, separated by spaces
@@ -353,7 +449,8 @@ class BTItemDetails {
         //
         //print("Parse the Souvenir Sheet Format list: \(input)")
         
-        data["souvenirSheetFormatRaw"] = input
+        addRawInfo(input, named: "souvenirSheetFormatRaw")
+        
         /*          "souvenirSheetFormatRaw": "", //raw 19.3x10.0cm (possible comma-separated list?)
          "ssWidthList": "", // space-separated list of: Float number with 1 DP, minus the "cm", such as "13.0"
          "ssHeightList": "", // same
@@ -556,7 +653,7 @@ extension BTItemDetails {
         return result.first ?? "Unknown"
     }
     
-    // a multiline string array containing a sheet description for each sheet in the set (as best we know it from the BT detail data)
+    // a multiline string containing a sheet description for each sheet in the set (as best we know it from the BT detail data)
     var fullSheetDetails: String {
         var tempList = [String]()
         let series = sheetSeries
