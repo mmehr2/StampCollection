@@ -33,7 +33,12 @@ class ViewController: UITableViewController {
             exportButton.isEnabled = newValue
             refreshButton.isEnabled = newValue
             reloadButton.isEnabled = newValue
-            detailsButton.isEnabled = newValue
+            detailsButton.isEnabled = true
+            if newValue {
+                detailsButton.title = "Details"
+            } else {
+                detailsButton.title = "Cancel"
+            }
             // hide progress view when variable set to T
             progressView.isHidden = newValue
         }
@@ -102,10 +107,17 @@ class ViewController: UITableViewController {
 
     @IBOutlet weak var detailsButton: UIBarButtonItem!
     @IBAction func detailsButtonPressed(_ sender: UIBarButtonItem) {
-        uiEnabled = false
-        progressView.observedProgress = storeModel.loadDataDetails() {
-            self.tableView.reloadData()
-            self.uiEnabled = true
+        if uiEnabled {
+            // details button pressed
+            uiEnabled = false
+            progressView.observedProgress = storeModel.loadDataDetails() {
+                self.tableView.reloadData()
+                self.uiEnabled = true
+            }
+        } else {
+            // cancel button pressed
+            print("Data detail loader cancellation request sent.")
+            storeModel.cancelLoadDetails()
         }
     }
     

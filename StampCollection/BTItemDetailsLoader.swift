@@ -75,10 +75,10 @@ import GameKit // for random functions
 class BTItemDetailsLoader: BTInfoProtocol {
 
     var demo: Bool = false
-    let progress: Progress
+    private(set) var progress: Progress
     var delegate: BTInfoProtocol?
     var completion: (() -> Void)?
-    var batchSize = 10
+    var batchSize = 25
     var timeInterval: TimeInterval = 2.0 // secs delay from when batch is emptied and starts to send again
     
     var count: Int {
@@ -105,6 +105,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
     
     private var session: URLSession!
     private var activeTasks: [Int16:URLSessionDataTask] = [:] // hashed by internal code number
+    private var cancelling = false
     
     private func firstItem() {
         currentBatchStart = items.startIndex
@@ -178,11 +179,18 @@ class BTItemDetailsLoader: BTInfoProtocol {
         return result
     }
 
+    // ** The client calls this to reset the internal data prior to calling addItem() to accumulate items to run
+    func clear() {
+        items = []
+        firstItem()
+        progress = Progress()
+    }
+
     // ** The client calls this to add a new item href to the list of details to load
     func addItem(withHref href: String) -> Bool {
         var added = false
         let codeNum = getCodeNumber(fromHref: href)
-        let filterPolicy = (codeNum > 0) // set to T to ignore all but exceptional items for testing
+        let filterPolicy = !(codeNum > 0) // set to T to ignore all but exceptional items for testing
         var process = true
         if filterPolicy {
             process = BTItemDetails.isExceptional(codeNumber: codeNum)
@@ -250,11 +258,27 @@ class BTItemDetailsLoader: BTInfoProtocol {
                 }
                 // in all cases, remove the saved task from the reference list
                 self.activeTasks[cnum] = nil
-                // increment the position in the queue for every item
-                // NOTE: items will possibly finish out of order, but we only need to make sure we count each one
-                self.nextWorkItem()
-                // see if more is left to do and do it
-                self.run()
+                if self.cancelling {
+                    // during cancellation, we just let the tasks delete themselves
+                    // when the active task map is empty, we are done cancelling
+                    if self.activeTasks.isEmpty {
+                        // okay to finally finish the cancellation process and run the UI completion handler
+                        // now that we have saved our state, we can run the completion handler
+                        self.setLastItem() // places pointers at end so moreWork will return false and run() will call the completion handler
+                        self.cancelling = false // run() will only do the completion if not cancelling
+                        self.run()
+                        // and then we can put the pointers back to the beginning
+                        self.firstItem()
+                        // now it's okay to allow the user to call run() again to "resume" where we left off
+                        print("Cancellation of active tasks complete.")
+                   }
+                } else {
+                    // increment the position in the queue for every item
+                    // NOTE: items will possibly finish out of order, but we only need to make sure we count each one
+                    self.nextWorkItem()
+                    // see if more is left to do and do it
+                    self.run()
+                }
             }
             // save the data task object ref so it won't crash while loading
             activeTasks[cnum] = dataTask
@@ -293,7 +317,7 @@ class BTItemDetailsLoader: BTInfoProtocol {
     // it is also called internally 
     // function will determine if more items need to be run and queue the next, or call the completion handler
     func run() {
-        if moreWork {
+        if moreWork && !cancelling {
             if demo {
                 // run all the items in a synchronous loop
                 while moreWork {
@@ -312,10 +336,10 @@ class BTItemDetailsLoader: BTInfoProtocol {
                 runBatch()
                 // NOTE: nextWorkItem() will be run by message handler when response is received
             }
-        } else {
+        } else if !cancelling {
             // empty batch AND empty items: when all items have been removed, we are done
             // release the session object
-            self.session = nil
+            session = nil
             //print("DetailsLoader: no more items, running any completion handler.")
             if let completion = completion {
                 self.completion = nil // don't need to keep the reference here
@@ -327,22 +351,27 @@ class BTItemDetailsLoader: BTInfoProtocol {
     // cancel remaining active tasks and run the completion handler
     // we can also reinitialize the items[] list in case client wants to call run() again to restart later
     func cancel() {
+        // make sure we are running
+        if session == nil || cancelling {
+            print("Detail loader ignored canecallation request while cancelling or not running.")
+            return
+        }
+        // prevent active threads from retriggering new calls
+        cancelling = true
+        print("Starting cancellation of active tasks...")
         // now that we are using tasks, we can cancel them
         session.invalidateAndCancel()
         // PROBLEM: session is now useless and cannot be reused next time; we need to replace to rerun
         session = nil
-        // the items that haven't completed need to be saved for later restart
-        // we can generate a new items array from these few numbers and the remaining uncompleted batches
+        // PROBLEM2: the cancellation requires some time as all active threads finish running and give cancelled errors
+        //   We can let the regular mechanism empty the activeTasks array as usual
+        //   When it is finally empty, the cancellation is complete
+        //   However, all the items that haven't completed need to be saved for later restart
+        // We can generate a new items array from these few numbers and the remaining uncompleted batches
         let resumeInfo1 = Array(activeTasks.keys).sorted()
-        activeTasks = [:]
         let resumeInfo = items[currentBatchEnd..<items.endIndex]
         items = resumeInfo1 + resumeInfo
-        // now that we have saved our state, we can run the completion handler
-        setLastItem() // places pointers at end so moreWork will return false and run() will call the completion handler
-        run()
-        // and then we can put the pointers back to the beginning
-        firstItem()
-        // now it's okay to call run() again to "resume" where we left off
+        // NOTE: the cancellation process continues until all the active tasks have errored out
     }
     
     // RUNTIME: receiver of the message response forwards the detail object to the delegate

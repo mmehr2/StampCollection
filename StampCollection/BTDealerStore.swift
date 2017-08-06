@@ -135,7 +135,13 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         startQueue.async{
             detailer.run()
         }
-        return siteProgress
+        return detailer.progress
+    }
+    
+    func cancelLoadDetails() {
+        if let detailer = detailer {
+            detailer.cancel()
+        }
     }
     
     // MARK: - JSMessageProtocol
