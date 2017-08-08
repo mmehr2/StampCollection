@@ -193,6 +193,8 @@ function parseData( row, headers ) {
     return output;
 }
 
+var debug = []
+var dataSkip = 0
 for (var i=0; i<tables.length; ++i) {
     switch (i) {
         case 0:
@@ -207,7 +209,12 @@ for (var i=0; i<tables.length; ++i) {
         case 3:
             rowCounts.push("NOTES = " + tables[i].rows.length + "," + tables[i].rows[0].cells.length);
             // get the bulleted item list
-            var text = tables[i].rows[0].cells[1].innerHTML;
+            var list = tables[i].rows[0].cells[1]
+            var text = list.innerHTML;
+            // NOTE: in cats 5,7,8 (cancellations), there are additional table elements in the last LI element of the text
+            // count the presence of any tables here and set the dataskip count accordingly
+            dataSkip = list.getElementsByTagName("TABLE").length
+            debug.push("DATASKIP found " + dataSkip + " tables in NOTES.")
             // remove all the HTML tags, leaving lines separated by /n
             bulletedList = removeHTMLTags(text);
             break;
@@ -218,6 +225,10 @@ for (var i=0; i<tables.length; ++i) {
             rowCounts.push("FOOTER2 = " + tables[i].rows.length + "," + tables[i].rows[0].cells.length);
             break;
         default:
+            if (i <= dataSkip + 3) {
+                debug.push("DATASKIP ignored (of " + dataSkip + ") a data table at number " + i + " in body.")
+                break;
+            }
             var rows = tables[i].rows;
             rowCounts.push("DATA[" + (++dataTableCount) + "] = " + rows.length + "," + rows[0].cells.length);
             for (var j=0; j< rows.length; ++j) {
@@ -236,6 +247,6 @@ for (var i=0; i<tables.length; ++i) {
     }
 }
 
-var result = { "dataCount": (tables.length > 0? dataItemCount: -1), "notes": bulletedList, "headers": headers, "items": items };
+var result = { "dataCount": (tables.length > 0? dataItemCount: -1), "notes": bulletedList, "headers": headers, "items": items, "rowCounts": rowCounts, "debug": debug };
 webkit.messageHandlers.getItems.postMessage(result);
 
