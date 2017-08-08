@@ -198,13 +198,14 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             //                let tableCols = rawCategories["tableCols"] as! NSArray;
             //                let tableRows = rawCategories["tableRows"] as! NSArray;
             //                println("Category names: \(tableCols) => \(tableRows)")
+            print("Raw categories message received:\(rawCategories)")
             if let trows = rawCategories["tableRows"] as? NSArray,
                 let tcols = rawCategories["tableCols"] as? NSArray,
                 let column1Header = tcols[0] as? NSString,
                 let column2Header = tcols[1] as? NSString,
                 let column3Header = tcols[2] as? NSString {
-                    //println("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
-                    // println("There are \(tcols) column names for the table of Categories = \(trows)")
+                    //print("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
+                    // print("There are \(tcols) column names for the table of Categories = \(trows)")
                     let
                     col1Header = column1Header as String,
                     col2Header = column2Header as String,
@@ -258,6 +259,7 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             //  items - NSArray of NSDictionary, each of which has properties equal to the column headers, plus some extra price fields (OldX and BuyX)
             //    NOTE: there is one OldX prop and one BuyX prob for each PriceX prop that is present, e.g., PriceUsed + BuyUsed + OldPriceUsed
             //    X can be "", "FDC", "Used" or "Other"
+            print("Raw category data message received:\(reply)")
             if let dataCountNS = reply["dataCount"] as? NSNumber {
                 let dataCount = dataCountNS.intValue
                 if dataCount == -1 {
