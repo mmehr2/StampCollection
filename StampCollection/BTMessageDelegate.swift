@@ -169,23 +169,27 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             print("Inside webView(:didReceive(challenge=\(challenge):completion) for handler \(self)")
         }
     }
+
+    typealias SiteMessage = Dictionary<String, Any>
+    typealias SiteData = Dictionary<String, String>
     
     // MARK: WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        let smsg =  message.body as? SiteMessage
         if (message.name == categoriesMessage) {
-            categoriesMessageHandler(message)
+            categoriesMessageHandler(smsg)
         }
         if (message.name == itemsMessage) {
-            itemsMessageHandler(message)
+            itemsMessageHandler(smsg)
         }
         if (message.name == itemDetailsMessage) {
-            itemMessageHandler(message)
+            itemMessageHandler(smsg)
         }
     }
     
-    fileprivate func categoriesMessageHandler( _ message: WKScriptMessage ) {
+    fileprivate func categoriesMessageHandler( _ message: SiteMessage? ) {
         //println("Received \(message.name) message")
-        if let rawCategories = message.body as? NSDictionary {
+        if let rawCategories = message {
             // Structure: contains two NSArrays
             // "tableRows" is an array of NSString, each representing a column name (#, Name, Items)
             // "tableCols" is an array of NSDictionary, each representing a category object
@@ -199,17 +203,14 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             //                let tableRows = rawCategories["tableRows"] as! NSArray;
             //                println("Category names: \(tableCols) => \(tableRows)")
             print("Raw categories message received:\(rawCategories)")
-            if let trows = rawCategories["tableRows"] as? NSArray,
-                let tcols = rawCategories["tableCols"] as? NSArray,
-                let column1Header = tcols[0] as? NSString,
-                let column2Header = tcols[1] as? NSString,
-                let column3Header = tcols[2] as? NSString {
+            if let trows = rawCategories["tableRows"] as? Array<SiteData>,
+                let tcols = rawCategories["tableCols"] as? Array<String> {
                     //print("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
                     // print("There are \(tcols) column names for the table of Categories = \(trows)")
                     let
-                    col1Header = column1Header as String,
-                    col2Header = column2Header as String,
-                    col3Header = column3Header as String
+                    col1Header = tcols[0],
+                    col2Header = tcols[1],
+                    col3Header = tcols[2]
                     for row in trows {
                         /*
                         Typical row:
@@ -220,20 +221,16 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
                         href = "http://www.bait-tov.com/store/products.php?SubCat=868&Mark=&Page=1";
                         },
                         */
-                        if let row = row as? NSDictionary,
-                            let numberN = row.value(forKey: col1Header) as? NSString,
-                            let nameN = row.value(forKey: col2Header) as? NSString,
-                            let itemsN = row.value(forKey: col3Header) as? NSString,
-                            let hrefN = row.value(forKey: "href") as? NSString
+                        if let number = row[col1Header],
+                            let name = row[col2Header],
+                            let items = row[col3Header],
+                            let href = row["href"]
                         {
                             //println("Row = \(row)")
-                            let name = nameN as String,
-                            number = numberN as String,
-                            items = itemsN as String,
-                            href = hrefN as String
                             let category = BTCategory()
-                            category.name = name as String
-                            category.href = href as String
+                            category.name = name
+                            let href2 = href.replacingOccurrences(of: "Page=1", with: "Page=ALL")
+                            category.href = href2
                             category.number = Int(number)!
                             category.items = Int(items)!
                             if let delegate = delegate as? BTMessageProtocol {
@@ -249,9 +246,9 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         }
     }
     
-    fileprivate func itemsMessageHandler( _ message: WKScriptMessage ) {
+    fileprivate func itemsMessageHandler( _ message: SiteMessage? ) {
         //println("Received \(message.name) message")
-        if let reply = message.body as? NSDictionary {
+        if let reply = message {
             // Structure of reply - NSDictionary with props:
             //  dataCount - NSNumber carrying an int = -1 if no data tables (main frame msg), or 0-N length of items array
             //  notes - NSString containing list of notes (separated by \n)
@@ -259,16 +256,15 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             //  items - NSArray of NSDictionary, each of which has properties equal to the column headers, plus some extra price fields (OldX and BuyX)
             //    NOTE: there is one OldX prop and one BuyX prob for each PriceX prop that is present, e.g., PriceUsed + BuyUsed + OldPriceUsed
             //    X can be "", "FDC", "Used" or "Other"
-            print("Raw category data message received:\(reply)")
+            print("==@==@==@==@==> Raw category data message received:") // divider for auto-slicing the 28 output messages
+            print("\(reply)")
             if let dataCountNS = reply["dataCount"] as? NSNumber {
                 let dataCount = dataCountNS.intValue
                 if dataCount == -1 {
                     //println("Received null \(message.name) message from main frame")
-                } else if let headersNS = reply["headers"] as? NSArray,
-                    let headers = headersNS as? [String],
-                    let notesNS = reply["notes"] as? NSString,
-                    let itemsNS = reply["items"] as? NSArray,
-                    let btitems = itemsNS as? [NSDictionary]
+                } else if let headers = reply["headers"] as? [String],
+                    let notesNS = reply["notes"] as? String,
+                    let btitems = reply["items"] as? [SiteData]
                 {
                     let notes = notesNS as String
                     let category = BTCategory()
@@ -276,19 +272,17 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
                     //println("Received \(message.name) in cat=\(categoryNumber) with \(dataCount) items with HEADERS \(headers)\n=== NOTES ===\n\(notes)\n============")//\n\(btitems)")
                     category.notes = notes
                     category.headers = headers
-                    for itemX in btitems {
-                        if let item = itemX as? [String: AnyObject] {
-                            let dealerItem = BTDealerItem()
-                            for propName in headers {
-                                if let value: AnyObject = item[propName] {
-                                    dealerItem.setValue(value, forKey: BTDealerItem.translatePropertyName(propName))
-                                }
+                    for item in btitems {
+                        let dealerItem = BTDealerItem()
+                        for propName in headers {
+                            if let value = item[propName] {
+                                dealerItem.setValue(value, forKey: BTDealerItem.translatePropertyName(propName))
                             }
-                            // add any fixup of item property fields here
-                            dealerItem.fixupBTItem(categoryNumber)
-                            if let delegate = delegate as? BTMessageProtocol {
-                                delegate.messageHandler(self, receivedData: dealerItem, forCategory: categoryNumber)
-                            }
+                        }
+                        // add any fixup of item property fields here
+                        dealerItem.fixupBTItem(categoryNumber)
+                        if let delegate = delegate as? BTMessageProtocol {
+                            delegate.messageHandler(self, receivedData: dealerItem, forCategory: categoryNumber)
                         }
                     }
                     if let delegate = delegate as? BTMessageProtocol {
@@ -313,9 +307,9 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
      6. This info can be added to the DealerItem extensions via the transient vars feature and used in other contexts
      7. This can be shown for Full Sheets category 31 since it uses the base set pic URL from category 2 already
      */
-    fileprivate func itemMessageHandler( _ message: WKScriptMessage ) {
+    fileprivate func itemMessageHandler( _ message: SiteMessage? ) {
         //println("Received \(message.name) message")
-        if let reply = message.body as? NSDictionary, let text = reply["data"] as? String, let html = reply["dom"] as? String {
+        if let reply = message, let text = reply["data"] as? String, let html = reply["dom"] as? String {
             let lines1 = text.components(separatedBy: "\n")
             let result1 = lines1.joined(separator: "\n")
             let lines2 = html.components(separatedBy: "\n")
