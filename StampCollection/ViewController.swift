@@ -25,6 +25,23 @@ class ViewController: UITableViewController {
     var storeModel = BTDealerStore.model
     @IBOutlet weak var progressView: UIProgressView!
     
+    enum CancellableOperation {
+        case None, Import, Export, ReloadAll, Refresh, Details
+    }
+    private var opInProgress: CancellableOperation = .None
+    
+    private func setupButton(_ btn: UIBarButtonItem, title: String, forOp opn: CancellableOperation, enabled: Bool) {
+        if enabled {
+            btn.isEnabled = true
+            btn.title = title
+        } else if opn == opInProgress {
+            btn.isEnabled = true
+            btn.title = "Cancel"
+        } else {
+            btn.isEnabled = false
+            btn.title = title
+        }
+    }
     
     var uiEnabled: Bool = true {
         willSet(newValue) {
@@ -33,12 +50,7 @@ class ViewController: UITableViewController {
             exportButton.isEnabled = newValue
             refreshButton.isEnabled = newValue
             reloadButton.isEnabled = newValue
-            detailsButton.isEnabled = true
-            if newValue {
-                detailsButton.title = "Details"
-            } else {
-                detailsButton.title = "Cancel"
-            }
+            setupButton(detailsButton, title: "Details", forOp: .Details, enabled: newValue)
             // hide progress view when variable set to T
             progressView.isHidden = newValue
         }
@@ -51,10 +63,12 @@ class ViewController: UITableViewController {
         // use persisted copy with manual updates from web
         //setSpinnerView(true)
         progressView?.isHidden = false
+        opInProgress = .Import
         progressView?.observedProgress = storeModel.importData() {
             self.tableView.reloadData()
             //self.setSpinnerView(false)
             self.progressView?.isHidden = true
+            self.opInProgress = .None
         }
     }
     
@@ -71,36 +85,43 @@ class ViewController: UITableViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         // reload the BT categories page
+        opInProgress = .Refresh
         uiEnabled = false
         progressView.observedProgress = storeModel.loadStore(.justCategories) {
             self.tableView.reloadData()
+            self.opInProgress = .None
             self.uiEnabled = true
         }
     }
     
     @IBOutlet weak var reloadButton: UIBarButtonItem!
     @IBAction func reloadButtonPressed(_ sender: UIBarButtonItem) {
+        opInProgress = .ReloadAll
         uiEnabled = false
         progressView.observedProgress = storeModel.loadStore(.populateAndWait) {
             self.tableView.reloadData()
+            self.opInProgress = .None
             self.uiEnabled = true
         }
     }
     
     @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBAction func exportButtonPressed(_ sender: UIBarButtonItem) {
+        opInProgress = .Export
         uiEnabled = false
         progressView.observedProgress = storeModel.exportData() {
+            self.opInProgress = .None
             self.uiEnabled = true
         }
     }
     
     @IBOutlet weak var importButton: UIBarButtonItem!
     @IBAction func importButtonPressed(_ sender: UIBarButtonItem) {
-        //setSpinnerView(true)
+        opInProgress = .Import
         uiEnabled = false
         progressView.observedProgress = storeModel.importData() {
             self.tableView.reloadData()
+            self.opInProgress = .None
             self.uiEnabled = true
         }
     }
@@ -109,9 +130,11 @@ class ViewController: UITableViewController {
     @IBAction func detailsButtonPressed(_ sender: UIBarButtonItem) {
         if uiEnabled {
             // details button pressed
+            opInProgress = .Details
             uiEnabled = false
             progressView.observedProgress = storeModel.loadDataDetails() {
                 self.tableView.reloadData()
+                self.opInProgress = .None
                 self.uiEnabled = true
             }
         } else {
