@@ -12,6 +12,25 @@ protocol BTInfoProtocol {
     func messageHandler( _ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int)
 }
 
+/*
+ BTMessageProtocol
+ This is used to communicate data loading events as the BT site web pages are scanned.
+ The BT site has one main page of interest, listing the categories, and 28 pages that list the content of each category.
+ A complete reload/update of the website involves the following events, and 29 BTMessageDelegate objects:
+ -- primary BTMessageDelegate (main page loader) -->
+ 1. Before the main page is loaded, willLoadDataForCategory is sent with category number -1
+ 2. After the HTML is loaded and processed, one receivedCategoryData is sent for each category found (data: BTCategory)
+ 3. At the end of the category page load cycle, didLoadDataForCategory(-1) is sent
+ -- each secondary BTMessageDelegate (category data page loader) -->
+ 4i. Before the data page starts to load, willLoadDataForCategory is sent with a category number i>1
+ 5i. After the HTML is loaded and processed, one receivedData is sent for each item found (data: BTDealerItem)
+ 6i. After all the data items are sent, one receivedUpdate is sent for the category for notes, etc. (data: BTCategory)
+ 7i. At the end of the data page load cyc;e. didLoadDataForCategory(i) is sent
+ 
+ BTInfoProtocol
+ In the special case of Category 2 (Sets,S/S,FDC), there are detail web pages that have additional info that is useful.
+ Currently there are 1124 of these pages, and a batch load is required. The mechanism involves the BTItemDetailsLoader class (check there for details). It sends the receivedDetails:forCategory(2) message when one of these web pages has been loaded and processed (data: BTItemDetails). The BTMessageDelegate object is only used as an intermediary to hold the URL and forward this message to the delegate object.
+ */
 protocol BTMessageProtocol : BTInfoProtocol {
     func messageHandler( _ handler: BTMessageDelegate, willLoadDataForCategory category: Int)
     func messageHandler( _ handler: BTMessageDelegate, didLoadDataForCategory category: Int)
@@ -23,13 +42,13 @@ protocol BTMessageProtocol : BTInfoProtocol {
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
-class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
+class BTMessageDelegate: NSObject {
 
     var delegate: BTInfoProtocol?
     
     var categoryNumber = BTCategoryAll // indicates all categories in site, or specific category number being loaded by handler object
     
-    fileprivate var internalWebView: WKWebView?
+    private var internalWebView: WKWebView?
     var url: URL!
     var debug = false // set this to T to print console messages during navigation phases using the navigation delegate
 
@@ -43,11 +62,10 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         return 0
     }
     
-   
     // message names received from JS scripts
     let categoriesMessage = "getCategories"
-    fileprivate let itemsMessage = "getItems"
-    fileprivate let itemDetailsMessage = "getItemDetails"
+    let itemsMessage = "getItems"
+    let itemDetailsMessage = "getItemDetails"
     
     func configToLoadCategoriesFromWeb() {
         // NOTE: this must run on the main queue since it manipulates the (hidden) UI in the WKWebView
@@ -95,7 +113,6 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         config.userContentController.addUserScript(script)
         config.userContentController.add(self, name: itemDetailsMessage)
         internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
-        internalWebView!.navigationDelegate = (self) // as! WKNavigationDelegate) // for debugging messages
     }
     
     func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
@@ -112,68 +129,13 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         // clear the category array in preparation of reload
         //category.dataItems = []
     }
-    
-    // MARK: WKNavigationDelegate
-    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webViewWebContentProcessDidTerminate() for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didCommit:nav=\(navigation!)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didFinish:nav=\(navigation!)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didStartProvisionalNavigation:nav=\(navigation!)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didFail:nav=\(navigation!):withError\(error)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didReceiveServerRedirectForProvisionalNavigation:nav=\(navigation!)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didFailProvisionalNavigation:nav=\(navigation!):withError\(error)) for handler \(self)")
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if let wiView = self.internalWebView, webView === wiView {
-            if !debug { return }
-            print("Inside webView(:didReceive(challenge=\(challenge):completion) for handler \(self)")
-        }
-    }
+}
 
+// MARK: WKScriptMessageHandler
+extension BTMessageDelegate: WKScriptMessageHandler {
     typealias SiteMessage = Dictionary<String, Any>
     typealias SiteData = Dictionary<String, String>
     
-    // MARK: WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let smsg =  message.body as? SiteMessage
         if (message.name == categoriesMessage) {
@@ -184,6 +146,18 @@ class BTMessageDelegate: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         }
         if (message.name == itemDetailsMessage) {
             itemMessageHandler(smsg)
+        }
+    }
+    
+    func setParseResult(_ message: SiteMessage, forMessage name:String) {
+        if (name == categoriesMessage) {
+            categoriesMessageHandler(message)
+        }
+        if (name == itemsMessage) {
+            itemsMessageHandler(message)
+        }
+        if (name == itemDetailsMessage) {
+            itemMessageHandler(message)
         }
     }
     
