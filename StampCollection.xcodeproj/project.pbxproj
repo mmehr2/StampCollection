@@ -94,6 +94,7 @@
 		A6B34CFF1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFC1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx */; };
 		A6B34D001C671407001296F3 /* Stamp Diagram X.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFD1C671407001296F3 /* Stamp Diagram X.txt */; };
 		A6B34D011C671407001296F3 /* Stamp Diagram Y.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */; };
+		A6BFDEC11F3BF86500F8449B /* BTCategoryMessageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */; };
 		A6C433991F1890B000E6FC5B /* UtilityTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */; };
 		A6C4339B1F18920200E6FC5B /* UtilityTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C4339A1F18920200E6FC5B /* UtilityTask.swift */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
@@ -224,6 +225,7 @@
 		A6B34CFC1C671407001296F3 /* Stamp Collection Presentation by Michael L. Mehr.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Stamp Collection Presentation by Michael L. Mehr.docx"; sourceTree = "<group>"; };
 		A6B34CFD1C671407001296F3 /* Stamp Diagram X.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Stamp Diagram X.txt"; sourceTree = "<group>"; };
 		A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Stamp Diagram Y.txt"; sourceTree = "<group>"; };
+		A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCategoryMessageProcessor.swift; sourceTree = "<group>"; };
 		A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTaskRunner.swift; sourceTree = "<group>"; };
 		A6C4339A1F18920200E6FC5B /* UtilityTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTask.swift; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */,
+				A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */,
 				A61C115B1AE6DBB400063025 /* BTDealerStore.swift */,
 				A6FA23C41F22DA1C00626C96 /* BTItemDetailsLoader.swift */,
 				A6856E711B0EAB40004B506E /* BTImportExport.swift */,
@@ -754,6 +757,7 @@
 				A6856E561B06FE3E004B506E /* AlbumRef+Ex.swift in Sources */,
 				A632CBB71AF2E96F00565686 /* Filtering.swift in Sources */,
 				A662C1F11B049DD90067792F /* zip.c in Sources */,
+				A6BFDEC11F3BF86500F8449B /* BTCategoryMessageProcessor.swift in Sources */,
 				A6E198481AD6EEEC0090FDB1 /* AppDelegate.swift in Sources */,
 				A6E1984B1AD6EEEC0090FDB1 /* StampCollection.xcdatamodeld in Sources */,
 				A6FA23C31F21C37900626C96 /* FullSheetUtilities.swift in Sources */,

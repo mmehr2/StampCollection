@@ -8,10 +8,6 @@
 
 import WebKit
 
-protocol BTInfoProtocol {
-    func messageHandler( _ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int)
-}
-
 /*
  BTMessageProtocol
  This is used to communicate data loading events as the BT site web pages are scanned.
@@ -24,13 +20,17 @@ protocol BTInfoProtocol {
  -- each secondary BTMessageDelegate (category data page loader) -->
  4i. Before the data page starts to load, willLoadDataForCategory is sent with a category number i>1
  5i. After the HTML is loaded and processed, one receivedData is sent for each item found (data: BTDealerItem)
- 6i. After all the data items are sent, one receivedUpdate is sent for the category for notes, etc. (data: BTCategory)
+ 6i. After all the data items are sent, a single receivedUpdate is sent for the category for notes, etc. (data: BTCategory)
  7i. At the end of the data page load cyc;e. didLoadDataForCategory(i) is sent
  
  BTInfoProtocol
  In the special case of Category 2 (Sets,S/S,FDC), there are detail web pages that have additional info that is useful.
  Currently there are 1124 of these pages, and a batch load is required. The mechanism involves the BTItemDetailsLoader class (check there for details). It sends the receivedDetails:forCategory(2) message when one of these web pages has been loaded and processed (data: BTItemDetails). The BTMessageDelegate object is only used as an intermediary to hold the URL and forward this message to the delegate object.
  */
+protocol BTInfoProtocol {
+    func messageHandler( _ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int)
+}
+
 protocol BTMessageProtocol : BTInfoProtocol {
     func messageHandler( _ handler: BTMessageDelegate, willLoadDataForCategory category: Int)
     func messageHandler( _ handler: BTMessageDelegate, didLoadDataForCategory category: Int)
@@ -39,18 +39,26 @@ protocol BTMessageProtocol : BTInfoProtocol {
     func messageHandler( _ handler: BTMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
+protocol BTMessageProcessor {
+    func processWebData(_ html:String)
+}
+
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
 class BTMessageDelegate: NSObject {
+    
+    private static let session = URLSession(configuration: .default)
+    private static var activeTasks: [String:URLSessionDataTask] = [:] // hashed by internal code number
+    private static var cancelling = false
 
-    var delegate: BTInfoProtocol?
+    var delegate: BTInfoProtocol? // also does BTMessageProtocol duties if setup
+    var htmlHandler: BTMessageProcessor?
     
     var categoryNumber = BTCategoryAll // indicates all categories in site, or specific category number being loaded by handler object
     
-    private var internalWebView: WKWebView?
     var url: URL!
-    var debug = false // set this to T to print console messages during navigation phases using the navigation delegate
+    var debug = true // set this to T to enable debug behavior (saves HTML to files)
 
     var codeNumber: Int16 {
         if let href = url?.absoluteString {
@@ -62,106 +70,118 @@ class BTMessageDelegate: NSObject {
         return 0
     }
     
-    // message names received from JS scripts
-    let categoriesMessage = "getCategories"
-    let itemsMessage = "getItems"
-    let itemDetailsMessage = "getItemDetails"
-    
     func configToLoadCategoriesFromWeb() {
-        // NOTE: this must run on the main queue since it manipulates the (hidden) UI in the WKWebView
         url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
         categoryNumber = BTCategoryAll
-        let config = WKWebViewConfiguration()
-        let scriptURL = Bundle.main.path(forResource: "getCategories", ofType: "js")
-        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
-        let script = WKUserScript(source: scriptContent!, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        config.userContentController.addUserScript(script)
-        config.userContentController.add(self, name: categoriesMessage)
-        internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+        // set up to deal with the main Categories page load
+        htmlHandler = BTCategoryMessageProcessor(self)
     }
     
     func configToLoadItemsFromWeb( _ href: String, forCategory category: Int ) {
-        // NOTE: this must run on the main queue since it manipulates the (hidden) UI in the WKWebView
         url = URL(string: href)
         categoryNumber = category
-        let config = WKWebViewConfiguration()
-        let scriptURL = Bundle.main.path(forResource: "getItems", ofType: "js")
-        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
-        let script = WKUserScript(source: scriptContent!, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        config.userContentController.addUserScript(script)
-        config.userContentController.add(self, name: itemsMessage)
-        internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
-    }
-    
-    func run() {
-        // NOTE: this does the work and can be run on the background thread
-        internalWebView!.load(URLRequest(url: url!))
-        if let delegate = delegate as? BTMessageProtocol {
-            delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
-        }
-        // clear the category array in preparation of reload
-        //category.dataItems = []
+        // set up to deal with an individual data page load
     }
     
     func configToLoadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
+        // NOTE: this is NOT used by the BTItemDetailsLoader, JUST by the WebItem VC
         url = URL(string: href) // of the form: http://www.bait-tov.com/store/pic.php?ID=6110s1006 for item ID 6110s1006
         categoryNumber = Int(category) // TBD - should this be Int16 internally tho?
-        let config = WKWebViewConfiguration()
-        let scriptURL = Bundle.main.path(forResource: "getItemDetails", ofType: "js")
-        let scriptContent = try? String(contentsOfFile:scriptURL!, encoding:String.Encoding.utf8)
-        let script = WKUserScript(source: scriptContent!, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        config.userContentController.addUserScript(script)
-        config.userContentController.add(self, name: itemDetailsMessage)
-        internalWebView = WKWebView(frame: CGRect.zero, configuration: config)
+        // set up to deal with an individual data details page load
     }
     
-    func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
-        configToLoadItemDetailsFromWeb(href, forCategory: category)
-        internalWebView!.load(URLRequest(url: url!))
+    func run() {
+        // setup and run a data task to load the URL
+        runInfo()
+        // and also send the willLoadData message for our category
+        if let delegate = delegate as? BTMessageProtocol {
+            delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
+        }
     }
     
     func runInfo() {
-        // NOTE: this does the work and can be run on the background thread
-        internalWebView!.load(URLRequest(url: url!))
-//        if let delegate = delegate {
-//            delegate.messageHandler(self, willLoadDataForCategory: categoryNumber)
-//        }
-        // clear the category array in preparation of reload
-        //category.dataItems = []
+        // setup and run a data task to load the URL
+        // create a data task
+        let dataTask = BTMessageDelegate.session.dataTask(with: url) { data, response, error in
+            // this closure will run when a response is received by the task
+            let urlString = self.url.absoluteString
+            if let error = error {
+                // accumulate error message
+                print("DataTask for \(urlString) got client-side error: \(error.localizedDescription)\n")
+            } else if let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
+                // parse the response HTML that is in the data buffer
+                if let html = String(data: data, encoding: .ascii) {
+                    // DEBUG: save the HTML in a data file
+                    if self.debug {
+                        self.processWebData(html)
+                    }
+                    // send html data to parser object
+                    if let htmlHandler = self.htmlHandler {
+                        htmlHandler.processWebData(html)
+                    }
+                }
+            } else {
+                print("DataTask for \(self.url.absoluteString) received null data or response, or code other than 200.")
+            }
+            // in all cases, remove the saved task from the reference list
+            BTMessageDelegate.activeTasks[urlString] = nil
+            if BTMessageDelegate.cancelling {
+                // during cancellation, we just let the tasks delete themselves
+                // when the active task map is empty, we are done cancelling
+                if BTMessageDelegate.activeTasks.isEmpty {
+                    // okay to finally finish the cancellation process and run the UI completion handler
+                    BTMessageDelegate.cancelling = false
+                   // now it's okay to allow the user to call run() again to "resume" where we left off
+                    print("Cancellation of active BT site loader tasks complete.")
+                }
+            } else {
+                // increment to next thing to do?
+            }
+        }
+        // save the data task object ref so it won't crash while loading
+        BTMessageDelegate.activeTasks[url.absoluteString] = dataTask
+        // resume the data task so it will run
+        dataTask.resume()
+    }
+
+    // this is a convenience function for the use of the WebItem VC
+    func loadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
+        configToLoadItemDetailsFromWeb(href, forCategory: category)
+        runInfo()
     }
 }
 
-// MARK: WKScriptMessageHandler
-extension BTMessageDelegate: WKScriptMessageHandler {
-    typealias SiteMessage = Dictionary<String, Any>
-    typealias SiteData = Dictionary<String, String>
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        let smsg =  message.body as? SiteMessage
-        if (message.name == categoriesMessage) {
-            categoriesMessageHandler(smsg)
-        }
-        if (message.name == itemsMessage) {
-            itemsMessageHandler(smsg)
-        }
-        if (message.name == itemDetailsMessage) {
-            itemMessageHandler(smsg)
-        }
-    }
-    
-    func setParseResult(_ message: SiteMessage, forMessage name:String) {
-        if (name == categoriesMessage) {
+// MARK: BTSiteMessageHandler
+typealias BTSiteMessage = Dictionary<String, Any>
+typealias BTSiteData = Dictionary<String, String>
+
+// message names received from HTML parser
+let BTCategoriesMessage = "getCategories"
+let BTItemsMessage = "getItems"
+let BTItemDetailsMessage = "getItemDetails"
+
+protocol BTSiteMessageHandler {
+    // HTML parser will send this to specify the parsed results for each type of web page load
+    func setParseResult(_ message: BTSiteMessage, forMessage name:String)
+}
+
+extension BTMessageDelegate: BTSiteMessageHandler {
+
+    func setParseResult(_ message: BTSiteMessage, forMessage name:String) {
+        if (name == BTCategoriesMessage) {
             categoriesMessageHandler(message)
         }
-        if (name == itemsMessage) {
+        if (name == BTItemsMessage) {
             itemsMessageHandler(message)
         }
-        if (name == itemDetailsMessage) {
+        if (name == BTItemDetailsMessage) {
             itemMessageHandler(message)
         }
     }
     
-    fileprivate func categoriesMessageHandler( _ message: SiteMessage? ) {
+    fileprivate func categoriesMessageHandler( _ message: BTSiteMessage? ) {
         //println("Received \(message.name) message")
         if let rawCategories = message {
             // Structure: contains two NSArrays
@@ -177,7 +197,7 @@ extension BTMessageDelegate: WKScriptMessageHandler {
             //                let tableRows = rawCategories["tableRows"] as! NSArray;
             //                println("Category names: \(tableCols) => \(tableRows)")
             print("Raw categories message received:\(rawCategories)")
-            if let trows = rawCategories["tableRows"] as? Array<SiteData>,
+            if let trows = rawCategories["tableRows"] as? Array<BTSiteData>,
                 let tcols = rawCategories["tableCols"] as? Array<String> {
                     //print("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
                     // print("There are \(tcols) column names for the table of Categories = \(trows)")
@@ -220,7 +240,7 @@ extension BTMessageDelegate: WKScriptMessageHandler {
         }
     }
     
-    fileprivate func itemsMessageHandler( _ message: SiteMessage? ) {
+    fileprivate func itemsMessageHandler( _ message: BTSiteMessage? ) {
         //println("Received \(message.name) message")
         if let reply = message {
             // Structure of reply - NSDictionary with props:
@@ -238,7 +258,7 @@ extension BTMessageDelegate: WKScriptMessageHandler {
                     //println("Received null \(message.name) message from main frame")
                 } else if let headers = reply["headers"] as? [String],
                     let notesNS = reply["notes"] as? String,
-                    let btitems = reply["items"] as? [SiteData]
+                    let btitems = reply["items"] as? [BTSiteData]
                 {
                     let notes = notesNS as String
                     let category = BTCategory()
@@ -281,7 +301,7 @@ extension BTMessageDelegate: WKScriptMessageHandler {
      6. This info can be added to the DealerItem extensions via the transient vars feature and used in other contexts
      7. This can be shown for Full Sheets category 31 since it uses the base set pic URL from category 2 already
      */
-    fileprivate func itemMessageHandler( _ message: SiteMessage? ) {
+    fileprivate func itemMessageHandler( _ message: BTSiteMessage? ) {
         //println("Received \(message.name) message")
         if let reply = message, let text = reply["data"] as? String, let html = reply["dom"] as? String {
             let lines1 = text.components(separatedBy: "\n")
@@ -301,4 +321,21 @@ extension BTMessageDelegate: WKScriptMessageHandler {
         }
     }
 
+}
+
+// MARK: BTMessageProcessor
+extension BTMessageDelegate: BTMessageProcessor {
+    // provide default behavior: save the HTML in a file
+    func processWebData(_ html: String) {
+        // what file name to use? based on category number (ALL for -1)
+        let name = (categoryNumber == BTCategoryAll) ? "BTCatsHtml.txt": "BTCat\(categoryNumber)Html.txt"
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        let fileurl = ad.applicationDocumentsDirectory.appendingPathComponent(name)
+        print("Saving raw HTML to file \(fileurl.absoluteString)")
+        do {
+            try html.write(to: fileurl, atomically: false, encoding: .ascii)
+        } catch let error {
+            print("Unable to write HTML to file \(name): \(error.localizedDescription)")
+        }
+    }
 }
