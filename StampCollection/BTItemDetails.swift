@@ -12,15 +12,15 @@ class BTItemDetails {
     
     typealias InfoObject = [String:String]
     fileprivate var data: InfoObject
-    fileprivate let codeHint: Int16
+    fileprivate let codeNumber: Int16
     fileprivate var infoLines: [String] = []
     
-    init(titleLine: String, infoLine: String, codeNum cnum: Int16 = 0) {
+    init(titleLine: String, infoLine: String, codeNum cnum: Int16) {
         // NOTE: All the processing work is done here.
         // Unfortunately, we can't make the object constant with 'let' because the compiler doesn't know these names are the only ones.
         // TBD - Is there a Swift 3?4? way to say this yet? I guess, make a class out of it and set up the fields in the init() call; nope we have done that, and it still needs to be mutable. Oh well...
         // add a hint for exceptions during download creation (this is the code number from "6110s" in the URL)
-        codeHint = cnum
+        codeNumber = cnum
         data =  [
             "xtitle" : "", //raw, original init
             "xinfo": "", //raw, original init
@@ -141,7 +141,7 @@ class BTItemDetails {
     
     fileprivate func parseException(_ input: String) {
         // deal with certain discovered exceptions in the BT data (as of Aug 2017)
-        if let action = BTItemDetails.exceptions[codeHint] {
+        if let action = BTItemDetails.exceptions[codeNumber] {
             // perform custom action as required
             switch action {
             case .InvertedSheetStampFormat:
@@ -319,6 +319,15 @@ class BTItemDetails {
         
     }
     
+    private let specialPlateNumbers: [Int16:String] = [
+        1: "1 1 1 1 1 1", // '48 Coins: all sheets had plate number 1
+        2: "1 1 1", // '48 Coins (hi values): all sheets had plate number 1
+        4: "1 1 1 1 1", // '48 Postage dues (coins): all sheets had plate number 1
+        5: "1:6 1:6 1:6 1:6 1:6", // '48 Festivals: five sheets of 300, ea.consisting of 6 panes of 50 (50s 10t) numbered 1-6
+        13: "1:2 1:2 1:2 1:2 1:2 1:2", // '49 Coins (MERED): ea.sheet had plate numbers 1 and 2 on left and right
+        20: "1:6 1:6 1:6 1:6 1:6 1:6", // '50 Airmail Birds: ea.sheet had all plate numbers 1-6
+    ]
+    
     fileprivate func parsePlateNumberList(_ input: String) {
         //
         //print("Parse the Plate Number list: \(input)")
@@ -326,7 +335,12 @@ class BTItemDetails {
         addRawInfo(input, named: "plateNumbersRaw")
         
         if input.hasPrefix("p") {
-            let plist = String(input.characters.dropFirst())
+            let plist : String
+            if let plistX = specialPlateNumbers[codeNumber] {
+                plist = plistX
+            } else {
+                plist = String(input.characters.dropFirst())
+            }
             let output = expandNumberList(plist)
             data["plateNumbers"] = output
         } else {
@@ -569,10 +583,10 @@ extension BTItemDetails {
     }
     
     // converts the list of plate numbers into an array of Int plate numbers
-    var plateNumberList: [Int] {
-        var result = [Int]()
+    var plateNumberList: [String] {
+        var result = [String]()
         if let xlist = data["plateNumbers"], !xlist.isEmpty {
-            result = xlist.components(separatedBy: " ").map{ Int($0) }.flatMap{ $0 }
+            result = xlist.components(separatedBy: " ") //.map{ Int($0) }.flatMap{ $0 }
         }
         return result
     }

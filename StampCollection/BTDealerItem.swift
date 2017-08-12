@@ -378,7 +378,9 @@ class BTDealerItem: NSObject {
             refObj.info = inputStr // will be overwritten by property observer if not empty, should be same tho
             // if we have info, recreate the optional BTItemDetails
             if !inputStr.isEmpty {
-                refObj.details = BTItemDetails(titleLine: refObj.descr, infoLine: inputStr)
+                let (_, cnums) = splitNumericEndOfString(refObj.code)
+                let cnum =  Int16(cnums) ?? 0
+                refObj.details = BTItemDetails(titleLine: refObj.descr, infoLine: inputStr, codeNum: cnum)
             }
         }
         return catnum
