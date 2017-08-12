@@ -277,10 +277,10 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let allowDetailsPolicy = allowDetailsDebug ? (allowDetailsYear && allowDetailsSet) : allowDetailsSet
         if let detailer = detailer, let href = dataItem.picPageURL?.absoluteString, allowDetailsPolicy {
             // add and remember a detail loader item for this dataItem
-            let added = detailer.addItem(withHref: href)
-            if added {
-                print("Added item #\(detailer.count) to detailer: details at \(href)")
-            }
+            let _ = detailer.addItem(withHref: href)
+//            if added {
+//                print("Added item #\(detailer.count) to detailer: details at \(href)")
+//            }
         }
         siteProgress.completedUnitCount += 1
     }

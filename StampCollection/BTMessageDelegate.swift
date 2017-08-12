@@ -58,7 +58,8 @@ class BTMessageDelegate: NSObject {
     var categoryNumber = BTCategoryAll // indicates all categories in site, or specific category number being loaded by handler object
     
     var url: URL!
-    var debug = true // set this to T to enable debug behavior (saves HTML to files)
+    var debug = false // set this to T to enable debug output behavior (saves HTML to files)
+    var debugInput = true // set this to T to enable debug input behavior (reads from HTML files instead of loading sites)
 
     var codeNumber: Int16 {
         if let href = url?.absoluteString {
@@ -81,6 +82,9 @@ class BTMessageDelegate: NSObject {
         url = URL(string: href)
         categoryNumber = category
         // set up to deal with an individual data page load
+        htmlHandler = BTItemsMessageProcessor(self, forCategory: category)
+        // limit size of operation queue to 1 to save timeout errors
+        BTMessageDelegate.session.delegateQueue.maxConcurrentOperationCount = 1
     }
     
     func configToLoadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
@@ -88,6 +92,7 @@ class BTMessageDelegate: NSObject {
         url = URL(string: href) // of the form: http://www.bait-tov.com/store/pic.php?ID=6110s1006 for item ID 6110s1006
         categoryNumber = Int(category) // TBD - should this be Int16 internally tho?
         // set up to deal with an individual data details page load
+//        htmlHandler = BTItemDetailsMessageProcessor(self)
     }
     
     func run() {
@@ -196,7 +201,7 @@ extension BTMessageDelegate: BTSiteMessageHandler {
             //                let tableCols = rawCategories["tableCols"] as! NSArray;
             //                let tableRows = rawCategories["tableRows"] as! NSArray;
             //                println("Category names: \(tableCols) => \(tableRows)")
-            print("Raw categories message received:\(rawCategories)")
+            //print("Raw categories message received:\(rawCategories)")
             if let trows = rawCategories["tableRows"] as? Array<BTSiteData>,
                 let tcols = rawCategories["tableCols"] as? Array<String> {
                     //print("Headers = [\(col1Header), \(col2Header), \(col3Header)]")
@@ -224,7 +229,8 @@ extension BTMessageDelegate: BTSiteMessageHandler {
                             let category = BTCategory()
                             category.name = name
                             let href2 = href.replacingOccurrences(of: "Page=1", with: "Page=ALL")
-                            category.href = href2
+                            let href3 = href2.replacingOccurrences(of: "products.php", with: "proddet.php")
+                            category.href = href3
                             category.number = Int(number)!
                             category.items = Int(items)!
                             if let delegate = delegate as? BTMessageProtocol {
@@ -250,17 +256,16 @@ extension BTMessageDelegate: BTSiteMessageHandler {
             //  items - NSArray of NSDictionary, each of which has properties equal to the column headers, plus some extra price fields (OldX and BuyX)
             //    NOTE: there is one OldX prop and one BuyX prob for each PriceX prop that is present, e.g., PriceUsed + BuyUsed + OldPriceUsed
             //    X can be "", "FDC", "Used" or "Other"
-            print("==@==@==@==@==> Raw category data message received:") // divider for auto-slicing the 28 output messages
-            print("\(reply)")
+            //print("==@==@==@==@==> Raw category data message received:") // divider for auto-slicing the 28 output messages
+            //print("\(reply)")
             if let dataCountNS = reply["dataCount"] as? NSNumber {
                 let dataCount = dataCountNS.intValue
                 if dataCount == -1 {
                     //println("Received null \(message.name) message from main frame")
                 } else if let headers = reply["headers"] as? [String],
-                    let notesNS = reply["notes"] as? String,
+                    let notes = reply["notes"] as? String,
                     let btitems = reply["items"] as? [BTSiteData]
                 {
-                    let notes = notesNS as String
                     let category = BTCategory()
                     category.number = categoryNumber
                     //println("Received \(message.name) in cat=\(categoryNumber) with \(dataCount) items with HEADERS \(headers)\n=== NOTES ===\n\(notes)\n============")//\n\(btitems)")
@@ -333,7 +338,7 @@ extension BTMessageDelegate: BTMessageProcessor {
         let fileurl = ad.applicationDocumentsDirectory.appendingPathComponent(name)
         print("Saving raw HTML to file \(fileurl.absoluteString)")
         do {
-            try html.write(to: fileurl, atomically: false, encoding: .ascii)
+            try html.write(to: fileurl, atomically: false, encoding: .utf8)
         } catch let error {
             print("Unable to write HTML to file \(name): \(error.localizedDescription)")
         }
