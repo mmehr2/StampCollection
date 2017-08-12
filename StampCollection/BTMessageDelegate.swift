@@ -98,6 +98,7 @@ class BTMessageDelegate: NSObject {
         htmlHandler = BTItemsMessageProcessor(self, forCategory: category)
         // limit size of operation queue to 1 to save timeout errors
         BTMessageDelegate.session.delegateQueue.maxConcurrentOperationCount = 1
+        BTMessageDelegate.session.delegateQueue.qualityOfService = .userInitiated
     }
     
     func configToLoadItemDetailsFromWeb( _ href: String, forCategory category: Int16 ) {
