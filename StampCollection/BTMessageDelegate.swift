@@ -60,6 +60,19 @@ class BTMessageDelegate: NSObject {
     var url: URL!
     var debug = false // set this to T to enable debug output behavior (saves HTML to files)
     var debugInput = true // set this to T to enable debug input behavior (reads from HTML files instead of loading sites)
+    
+    fileprivate var debugFileName: String {
+        // what file name to use? based on category number (ALL for -1)
+        let name = (categoryNumber == BTCategoryAll) ? "BTCatsHtml.txt": "BTCat\(categoryNumber)Html.txt"
+        return name
+    }
+    
+    fileprivate func getDebugFile(forCategory cnum: Int) -> URL {
+        let name = debugFileName
+        let ad = UIApplication.shared.delegate! as! AppDelegate
+        let fileurl = ad.applicationDocumentsDirectory.appendingPathComponent(name)
+        return fileurl
+    }
 
     var codeNumber: Int16 {
         if let href = url?.absoluteString {
@@ -105,6 +118,22 @@ class BTMessageDelegate: NSObject {
     }
     
     func runInfo() {
+        // DEBUG FEATURE: load input directly from file
+        if debugInput {
+            BTMessageDelegate.session.delegateQueue.addOperation {
+                let inputFile = self.getDebugFile(forCategory: self.categoryNumber)
+                do {
+                    let html = try String(contentsOf: inputFile, encoding: .utf8)
+                    // send html data to parser object
+                    if let htmlHandler = self.htmlHandler {
+                        htmlHandler.processWebData(html)
+                    }
+                } catch {
+                    print("Unable to read debug HTML from file \(self.debugFileName): \(error.localizedDescription)")
+                }
+           }
+            return
+        }
         // setup and run a data task to load the URL
         // create a data task
         let dataTask = BTMessageDelegate.session.dataTask(with: url) { data, response, error in
@@ -332,15 +361,12 @@ extension BTMessageDelegate: BTSiteMessageHandler {
 extension BTMessageDelegate: BTMessageProcessor {
     // provide default behavior: save the HTML in a file
     func processWebData(_ html: String) {
-        // what file name to use? based on category number (ALL for -1)
-        let name = (categoryNumber == BTCategoryAll) ? "BTCatsHtml.txt": "BTCat\(categoryNumber)Html.txt"
-        let ad = UIApplication.shared.delegate! as! AppDelegate
-        let fileurl = ad.applicationDocumentsDirectory.appendingPathComponent(name)
+        let fileurl = getDebugFile(forCategory: categoryNumber)
         print("Saving raw HTML to file \(fileurl.absoluteString)")
         do {
             try html.write(to: fileurl, atomically: false, encoding: .utf8)
         } catch let error {
-            print("Unable to write HTML to file \(name): \(error.localizedDescription)")
+            print("Unable to write HTML to file \(debugFileName): \(error.localizedDescription)")
         }
     }
 }
