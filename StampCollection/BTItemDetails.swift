@@ -175,7 +175,7 @@ class BTItemDetails {
                 break
             }
         } else {
-            print("Couldn't parse the DealerItem detailed info line: \(input)")
+            print("Couldn't parse the DealerItem detailed info line: [\(input)]")
         }
     }
     
@@ -326,6 +326,7 @@ class BTItemDetails {
         5: "1:6 1:6 1:6 1:6 1:6", // '48 Festivals: five sheets of 300, ea.consisting of 6 panes of 50 (50s 10t) numbered 1-6
         13: "1:2 1:2 1:2 1:2 1:2 1:2", // '49 Coins (MERED): ea.sheet had plate numbers 1 and 2 on left and right
         20: "1:6 1:6 1:6 1:6 1:6 1:6", // '50 Airmail Birds: ea.sheet had all plate numbers 1-6
+        91: "1-10,29", // '60 Provisionals: additional sheet not mentioned by BT info
     ]
     
     fileprivate func parsePlateNumberList(_ input: String) {
@@ -400,8 +401,11 @@ class BTItemDetails {
                     if let nS = Int(nStamps), let nT = Int(nTabs) {
                         // assuming tabs in rows across the bottom, the # of cols is the same as the number of tabs, and the number of rows is stamps/tabs
                         // NOTE: for modern cases where this is not the case, let's see how BT handles it - hand editing the output may be required
-                        let nR = nS / nT
-                        let nRows = "\(nR)"
+                        var nRows = "0" // theoretically possible to have a sheet without tabs in the data, just unlikely
+                        if nT > 0 {
+                            let nR = nS / nT
+                            nRows = "\(nR)"
+                        }
                         return (nStamps, nTabs, nRows, nTabs)
                     }
                 }
