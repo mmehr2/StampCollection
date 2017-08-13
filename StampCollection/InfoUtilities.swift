@@ -47,6 +47,14 @@ func fixupCenturyYY( _ yy: Int ) -> Int {
     return yy >= startEpochYY ? startCentury : endCentury
 }
 
+fileprivate let monthEnds = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
+func endDayOfMonth(_ mm: Int) -> Int {
+    guard mm >= 1 && mm <= 12 else {
+        return 31
+    }
+    return monthEnds[mm-1]
+}
+
 func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Date>) {
     // NOTE: these defaults are picked to prevent a crash if no date exists in the input descr
     var fmtFound = 0
@@ -187,6 +195,19 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
         let dd = Int(dmy[0])!
         startDay = dd
         endDay = startDay
+    }
+    else if let match = descr.range(of: "^-[-]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
+        fmtFound = 16 // which is -.MM.YYYY - this MUST precede its YY counterpart, which would match all of these strings too
+        found = descr.substring(with: match)
+        let dmy = found.components(separatedBy: ".")
+        let yyyy = Int(dmy[2])!
+        startYear = yyyy
+        endYear = startYear
+        let mm = Int(dmy[1])!
+        startMonth = mm
+        endMonth = startMonth
+        startDay = 1
+        endDay = endDayOfMonth(startMonth)
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 4 // which is DD.MM.YY - this must follow format 5 YYYY counterpart, so that it doesn't pre-empt that test
@@ -385,6 +406,8 @@ fileprivate let dtests : [String: (Int, String, String)] = [
     "13.3-9.11.2003 Tester": (12, "2003.3.13", "2003.11.9"),//2003...2003, 3...11, 13...9(crash!),
     "13.3-09.11.2003 Tester": (12, "2003.3.13", "2003.11.9"),//2003...2003, 3...11, 13...9(crash!),
     "This string has no date": (0, "1948.1.1", "1948.1.1"),
+    "-.12.1977 Info details of 6110s320": (16, "1977.12.01", "1977.12.31"), // stolen from 6110s320 (1977 0.75 StandBy)
+    "--.6.1992 Tester": (16, "1992.06.01", "1992.06.30"),
 ]
 
 func UnitTestDateRanges() {
