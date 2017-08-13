@@ -96,6 +96,7 @@
 		A6B34D011C671407001296F3 /* Stamp Diagram Y.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */; };
 		A6BFDEC11F3BF86500F8449B /* BTCategoryMessageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */; };
 		A6BFDEC31F3C278B00F8449B /* BTItemsMessageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BFDEC21F3C278B00F8449B /* BTItemsMessageProcessor.swift */; };
+		A6BFDEC51F401E8800F8449B /* BTItemDetailsMessageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BFDEC41F401E8800F8449B /* BTItemDetailsMessageProcessor.swift */; };
 		A6C433991F1890B000E6FC5B /* UtilityTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */; };
 		A6C4339B1F18920200E6FC5B /* UtilityTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C4339A1F18920200E6FC5B /* UtilityTask.swift */; };
 		A6D0955F1AFA91F0007A1186 /* Category+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */; };
@@ -228,6 +229,7 @@
 		A6B34CFE1C671407001296F3 /* Stamp Diagram Y.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Stamp Diagram Y.txt"; sourceTree = "<group>"; };
 		A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCategoryMessageProcessor.swift; sourceTree = "<group>"; };
 		A6BFDEC21F3C278B00F8449B /* BTItemsMessageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemsMessageProcessor.swift; sourceTree = "<group>"; };
+		A6BFDEC41F401E8800F8449B /* BTItemDetailsMessageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTItemDetailsMessageProcessor.swift; sourceTree = "<group>"; };
 		A6C433981F1890B000E6FC5B /* UtilityTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTaskRunner.swift; sourceTree = "<group>"; };
 		A6C4339A1F18920200E6FC5B /* UtilityTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityTask.swift; sourceTree = "<group>"; };
 		A6D0955E1AFA91F0007A1186 /* Category+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+Ex.swift"; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				A6AA4E481B4CF882007D9558 /* ItemPicURL.swift */,
 				A6BFDEC01F3BF86500F8449B /* BTCategoryMessageProcessor.swift */,
+				A6BFDEC41F401E8800F8449B /* BTItemDetailsMessageProcessor.swift */,
 				A6BFDEC21F3C278B00F8449B /* BTItemsMessageProcessor.swift */,
 				A61C115B1AE6DBB400063025 /* BTDealerStore.swift */,
 				A6FA23C41F22DA1C00626C96 /* BTItemDetailsLoader.swift */,
@@ -740,6 +743,7 @@
 				A6AA4ECA1B4F756A007D9558 /* TMDiskCache.m in Sources */,
 				A662C1CF1AFEAB020067792F /* DealerItem.swift in Sources */,
 				A632CBBB1AF538FD00565686 /* InfoUtilities.swift in Sources */,
+				A6BFDEC51F401E8800F8449B /* BTItemDetailsMessageProcessor.swift in Sources */,
 				A6E198751AD712630090FDB1 /* CHCSVParser.m in Sources */,
 				A681040C1F1365B50000272B /* BTItemDetails.swift in Sources */,
 				A662C1EE1B049DD90067792F /* ioapi.c in Sources */,

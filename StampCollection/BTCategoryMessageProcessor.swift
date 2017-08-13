@@ -34,8 +34,6 @@
 import Foundation
 import SwiftSoup
 
-fileprivate let BTBaseURL = "http://www.bait-tov.com/store/"
-
 class BTCategoryMessageProcessor: BTMessageProcessor {
     
     var delegate: BTSiteMessageHandler?

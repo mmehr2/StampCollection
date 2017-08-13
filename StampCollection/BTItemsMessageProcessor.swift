@@ -50,8 +50,6 @@
 import Foundation
 import SwiftSoup
 
-fileprivate let BTBaseURL = "http://www.bait-tov.com/store/"
-
 class BTItemsMessageProcessor: BTMessageProcessor {
     
     private var delegate: BTSiteMessageHandler?

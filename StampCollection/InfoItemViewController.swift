@@ -98,7 +98,7 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
         yearRangeLabel.text = usingBT ? "" : item.normalizedDate
         descriptionLabel.text = itemDescription
         webInfoButton.isEnabled = picPageURL != nil
-        if let nodeUrl = picPageURL?.absoluteString {
+        if let nodeUrl = picPageURL?.absoluteString, (itemCategoryNumber == CATEG_SETS || itemCategoryNumber == CATEG_SHEETS) {
             var catnumToUse = itemCategoryNumber
             if itemCategoryNumber == CATEG_SHEETS {
                 catnumToUse = CATEG_SETS
@@ -122,14 +122,16 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
     
     // MARK: BTInfoProtocol
     func messageHandler(_ handler: BTMessageDelegate, receivedDetails data: BTItemDetails, forCategory category: Int) {
-        print("Data received from infoNode:\(data)")
-        extraInfo = data.description
-        let dr = data.dateRange
-        if !dr.isEmpty {
-            yearRangeLabel.text = dr
-        }
-        if !usingBT {
-            print("Full sheet list:\n\(data.fullSheetDetails)")
+        DispatchQueue.main.async {
+            print("Data received from infoNode:\(data)")
+            self.extraInfo = data.description
+            let dr = data.dateRange
+            if !dr.isEmpty {
+                self.yearRangeLabel.text = dr
+            }
+            if !self.usingBT {
+                print("Full sheet list:\n\(data.fullSheetDetails)")
+            }
         }
     }
 

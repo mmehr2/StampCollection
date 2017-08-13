@@ -46,6 +46,8 @@ protocol BTMessageProcessor {
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
+let BTBaseURL = "http://www.bait-tov.com/store/"
+
 class BTMessageDelegate: NSObject {
     
     private static let session = URLSession(configuration: .default)
@@ -61,13 +63,25 @@ class BTMessageDelegate: NSObject {
     var debug = false // set this to T to enable debug output behavior (saves HTML to files)
     var debugInput = true // set this to T to enable debug input behavior (reads from HTML files instead of loading sites)
     
+    private var details = false
+    private var allowDebugInput: Bool {
+        return !details && debugInput
+    }
+    private var allowDebugOutput: Bool {
+        return !details && debug
+    }
+    
     fileprivate var debugFileName: String {
         // what file name to use? based on category number (ALL for -1)
-        let name = (categoryNumber == BTCategoryAll) ? "BTCatsHtml.txt": "BTCat\(categoryNumber)Html.txt"
+        var name = (categoryNumber == BTCategoryAll) ? "BTCatsHtml.txt": "BTCat\(categoryNumber)Html.txt"
+        if details {
+            let codeName = String(format: "%04d", codeNumber)
+            name = "BTD\(codeName)Html.txt"
+        }
         return name
     }
     
-    fileprivate func getDebugFile(forCategory cnum: Int) -> URL {
+    fileprivate var debugFile: URL {
         let name = debugFileName
         let ad = UIApplication.shared.delegate! as! AppDelegate
         let fileurl = ad.applicationDocumentsDirectory.appendingPathComponent(name)
@@ -106,7 +120,8 @@ class BTMessageDelegate: NSObject {
         url = URL(string: href) // of the form: http://www.bait-tov.com/store/pic.php?ID=6110s1006 for item ID 6110s1006
         categoryNumber = Int(category) // TBD - should this be Int16 internally tho?
         // set up to deal with an individual data details page load
-//        htmlHandler = BTItemDetailsMessageProcessor(self)
+        htmlHandler = BTItemDetailsMessageProcessor(self)
+        details = true
     }
     
     func run() {
@@ -120,9 +135,9 @@ class BTMessageDelegate: NSObject {
     
     func runInfo() {
         // DEBUG FEATURE: load input directly from file
-        if debugInput {
+        if allowDebugInput {
             BTMessageDelegate.session.delegateQueue.addOperation {
-                let inputFile = self.getDebugFile(forCategory: self.categoryNumber)
+                let inputFile = self.debugFile
                 do {
                     let html = try String(contentsOf: inputFile, encoding: .utf8)
                     // send html data to parser object
@@ -149,7 +164,7 @@ class BTMessageDelegate: NSObject {
                 // parse the response HTML that is in the data buffer
                 if let html = String(data: data, encoding: .ascii) {
                     // DEBUG: save the HTML in a data file
-                    if self.debug {
+                    if self.allowDebugOutput {
                         self.processWebData(html)
                     }
                     // send html data to parser object
@@ -338,20 +353,11 @@ extension BTMessageDelegate: BTSiteMessageHandler {
      */
     fileprivate func itemMessageHandler( _ message: BTSiteMessage? ) {
         //println("Received \(message.name) message")
-        if let reply = message, let text = reply["data"] as? String, let html = reply["dom"] as? String {
-            let lines1 = text.components(separatedBy: "\n")
-            let result1 = lines1.joined(separator: "\n")
-            let lines2 = html.components(separatedBy: "\n")
-            let result2 = lines2.joined(separator: "\n")
-            let _ = result1 + result2 //print("BT item = {{TEXT:\n\(result1)}}\n{{HTML:\n\(result2)}}")
-            if categoryNumber == 2 && lines1.count > 3 {
-                let titleLine = lines1[1]
-                let infoLine = lines1[3]
-                // processing needed to make sure we have all possible lines all the time
-                let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine, codeNum: codeNumber)
-                if let delegate = delegate {
-                    delegate.messageHandler(self, receivedDetails: info, forCategory: categoryNumber)
-                }
+        if let reply = message, let titleLine = reply["title"] as? String, let infoLine = reply["info"] as? String {
+            // processing needed to make sure we have all possible lines all the time
+            let info = BTItemDetails(titleLine: titleLine, infoLine: infoLine, codeNum: codeNumber)
+            if let delegate = delegate {
+                delegate.messageHandler(self, receivedDetails: info, forCategory: categoryNumber)
             }
         }
     }
@@ -362,7 +368,7 @@ extension BTMessageDelegate: BTSiteMessageHandler {
 extension BTMessageDelegate: BTMessageProcessor {
     // provide default behavior: save the HTML in a file
     func processWebData(_ html: String) {
-        let fileurl = getDebugFile(forCategory: categoryNumber)
+        let fileurl = debugFile
         print("Saving raw HTML to file \(fileurl.absoluteString)")
         do {
             try html.write(to: fileurl, atomically: false, encoding: .utf8)
