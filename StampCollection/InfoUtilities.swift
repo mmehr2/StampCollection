@@ -410,7 +410,7 @@ fileprivate let dtests : [String: (Int, String, String)] = [
     "--.6.1992 Tester": (16, "1992.06.01", "1992.06.30"),
 ]
 
-func UnitTestDateRanges() {
+fileprivate func UnitTestDateRanges() {
     var count = 0
     var pc = 0
     var fc = 0
@@ -514,13 +514,13 @@ func translateNumberListToRanges(_ input: String) -> [CountableClosedRange<Xlati
     return result
 }
 
-// outputs a string with all the numbers listed in the numeric range, separated by spaces
+// outputs an array of numeric strings with all the numbers listed in the numeric range
 func printRangeToArray(_ input: CountableClosedRange<XlationRange>) -> [String] {
     let result = input.flatMap{String($0)}
     return result
 }
 
-// outputs a single string formed from multiple ranges of numbers
+// outputs a single array of numeric strings formed from multiple ranges of numbers
 func printRangesToArray(_ input: [CountableClosedRange<XlationRange>]) -> [String] {
     let result = input.flatMap{printRangeToArray($0)}
     return result
@@ -599,6 +599,7 @@ fileprivate let rtests = [
 
 func UnitTestRanges() {
     UnitTestDateRanges()
+    UnitTestCatalogRanges()
     var count = 0
     var pc = 0
     var fc = 0
@@ -646,23 +647,126 @@ func parseCatalogRange(_ input:String) -> [String] {
     // components are separated by ','
     // each component can be a single number (with optional prefix and/or suffix), or a range (two of the previous separated by '-')
     // the entire thing is prefixed by a two-letter code designating catalog type, where the second char is a space
-    // interestingly enough, removing the code, and the Scott prefix letters (C,J, or O), and you have a regular range list
+    // interestingly enough, removing the code, and the Scott prefix letters (B,C,J, or O), and you have a regular range list
     // the main challenge is to deal well with components that have varying numbers of digits
     // the rule here should be that if any component has less digits than the first one, it has to be converted to have the same number
     // for example, "1234,5,6" should convert to be the same as "1234,1235,1236"; this is true of the list as well as subranges
     // another challenge: allow lower-case suffixes of letters only separated by '-' to remain untouched as single items, i.e.123a-e
     var result: [String] = []
-    result.append("TEST DEBUG")
-//    if input.characters.count > 2 {
-//        let listIndex = input.index(input.startIndex, offsetBy: 2)
-//        let catPrefix = input.substring(to: listIndex)
-//        var catList = input.substring(from: listIndex)
-//        var scottPfx = ""
-//        // remember and remove any Scott or Carmel prefix
-//        let scotts = CharacterSet(charactersIn: "BOCJ") // actually, B is used by Carmel, but can also be a suffix in Scott, hmmm
-//        // we only want to remove these characters if they are at the start of a component OR at the start of each part of a range
-//        // the result can be processed into a list of ranges, with the added requirement that all components are normalized to the first one
-//        // thus B12-B14 becomes 12-14 (w.prefix set to "B"), but 171B stays 171B and no change to prefix letter
-//    }
+    if input.characters.count > 2 {
+        let listIndex = input.index(input.startIndex, offsetBy: 2)
+        let catPrefix = input.substring(to: listIndex)
+        let catList = input.substring(from: listIndex)
+        // remember and remove any Scott or Carmel prefix
+        let (newList, compPfx) = removeCatalogPrefixInRange(catList)
+        // now expand to an array of numeric strings
+        var numList = expandNumberListToArray(newList)
+        // normalize the numbers to the first one, if possible
+        if let firstNum = Int(numList.first!) {
+            numList = numList.map{ x -> String in
+                if let num = Int(x) {
+                    let x = normalize(num, toDigitsOf: firstNum)
+                    return "\(x)"
+                }
+                return x
+            }
+        }
+        // add back in the prefixes
+        let pfx:String
+        if let cp = compPfx {
+            pfx = catPrefix + String(cp)
+        } else {
+            pfx = catPrefix
+        }
+        result = numList.map{ pfx + $0 }
+    }
     return result
+}
+
+func removeCatalogPrefixInRange(_ input:String) -> (String, Character?) {
+    // we only want to remove these characters if they are at the start of a component OR at the start of each part of a range
+    // the result can be processed into a list of ranges, with the added requirement that all components are normalized to the first one
+    // thus B12-B14 becomes 12-14 (w.prefix set to "B"), but 171B stays 171B and no change to prefix letter
+    // let's assume that if the 1st character of the sequence is one of the Scott/Carmel characters, we need to attack the whole list
+    if input.isEmpty { return (input, nil) }
+    let scotts = CharacterSet(charactersIn: "BOCJ") // actually, B is used by Carmel, but can also be a suffix in Scott, hmmm
+    if let firstLetter = input.characters.first {
+        if !scotts.contains(firstLetter) {
+            return (input, nil)
+        } else {
+            let components = input.components(separatedBy: ",")
+            let results = components.map{ x -> String in
+                let rangeComps = x.components(separatedBy: "-")
+                if rangeComps.count == 0 { return x } // should never happen
+                if rangeComps.count > 2 { return x } // should never happen
+                if let rc = rangeComps.last,
+                    rc.characters.count == 1,
+                    let z = rc.characters.first,
+                    CharacterSet.lowercaseLetters.contains( z ) {
+                    // this is probably a component like "123a-f" and should be left alone
+                    return x
+                }
+                // for the other cases, one or two components, test and remove any leading members of the charset "scotts"
+                if let comp = rangeComps.first, rangeComps.count == 1 {
+                    let rc = dropStart(comp)
+                    return "\(rc)"
+                }
+                if let comp1 = rangeComps.first, let comp2 = rangeComps.last, rangeComps.count == 2 {
+                    let rc1 = dropStart(comp1)
+                    let rc2 = dropStart(comp2)
+                    return "\(rc1)-\(rc2)"
+                }
+                return x
+            }
+            return (results.joined(separator: ","), firstLetter)
+        }
+    }
+    return (input, nil) // should never happen
+}
+
+fileprivate func dropStart(_ input: String) -> String {
+    return String(input.characters.dropFirst())
+}
+
+fileprivate extension CharacterSet {
+    // this is probably a no-no for Unicode, but for ASCII, we should be just fine
+    
+    func contains(_ ch: Character) -> Bool {
+        return self.contains(String(ch))
+    }
+    
+    func contains(_ str: String) -> Bool {
+        return self.contains(UnicodeScalar(str)!)
+    }
+}
+
+fileprivate let ctests = [
+    "": [],
+    "S 123": ["S 123"],
+    "S 1809a-c": ["S 1809a-c"],
+    "C B24-B27": ["C B24","C B25","C B26","C B27"],
+    "S 1813-15": ["S 1813","S 1814","S 1815"], // 6110s1082
+    "C 2098-101": ["C 2098","C 2099","C 2100","C 2101",], // from 6110s1055 (!! - needs mod!)
+    "S 1598,99": ["S 1598","S 1599"], // 6110s919
+    "C 1796,98,99,1801": ["C 1796","C 1798","C 1799","C 1801"], // 6110s846 (mod)
+]
+
+fileprivate func UnitTestCatalogRanges() {
+    var count = 0
+    var pc = 0
+    var fc = 0
+    var result = ""
+    var failed = false
+    for (test, answer) in ctests {
+        result = ""
+        failed = false
+        result += ("Test #\(count+1): String to CatRange of [\(test)] to [\(answer)]")
+        let cand1 = parseCatalogRange(test)
+        if cand1 == answer { result += ("PASSED"); pc += 1 } else { result += ("FAILED"); fc += 1; failed = true }
+        if failed {
+            print(result)
+        }
+        count += 1
+    }
+    print("Performed \(count) Catalog Range parse/print unit tests: \(pc) passed, \(fc) failed.")
 }
