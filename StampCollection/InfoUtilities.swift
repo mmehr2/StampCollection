@@ -458,12 +458,29 @@ func translateNumberToRange(_ input: String) -> CountableClosedRange<XlationRang
         // if only one part, return it as a complete range
         return m...m
     }
-    let second = comps[1]
+    let second = comps.last!
     let numstr2 = String(second.characters.filter{getCharacterClass($0) == .numeric})
     if numstr2 != second {
         return nil
     }
     var n = XlationRange(second)!
+    if m > n {
+        let res = normalize(n, toDigitsOf: m)
+        if res < 0 {
+            return nil
+        }
+        n = res
+    }
+    return m...n
+}
+
+// convert a number so it has the same number of digits as a reference number, by assuming they are in the same range
+// for example, given 2 and 1001, will return 1002
+// or 98 and 1195 will return 1198
+func normalize(_ n:Int, toDigitsOf m:Int) -> Int {
+    let first = "\(m)"
+    let second = "\(n)"
+    var nout = n
     if m > n {
         // string could have been like 120-4 or 120-24, or even 1234-5 oe 1234-42 or 1234-311
         // we want to parse individual characters of the input to compensate, I believe
@@ -472,16 +489,18 @@ func translateNumberToRange(_ input: String) -> CountableClosedRange<XlationRang
         let lenM = first.characters.count
         let lenN = second.characters.count
         let diffN = lenM - lenN
-        if diffN == 0 {
-            return nil
-        } // disallow items of form 234-223 or 29-12 where a range cannot be formed
-        // ALT: we could just swap M and N to get the range, hmmm, no too hard to get decent input
-        let part1 = String(first.characters.prefix(diffN))
-        let part2 = String("00000".characters.suffix(lenN))
-        let factor = XlationRange(part1 + part2)!
-        n += factor
+        if diffN > 0 {
+            // ALT: we could just swap M and N to get the range, hmmm, no too hard to get decent input
+            let part1 = String(first.characters.prefix(diffN))
+            let part2 = String("00000".characters.suffix(lenN))
+            let factor = XlationRange(part1 + part2)!
+            nout += factor
+        } else {
+            // disallow items of form 234-223 or 29-12 where a range cannot be formed
+            nout = -1
+        }
     }
-    return m...n
+    return nout
 }
 
 func translateNumberListToRanges(_ input: String) -> [CountableClosedRange<XlationRange>] {
@@ -496,30 +515,59 @@ func translateNumberListToRanges(_ input: String) -> [CountableClosedRange<Xlati
 }
 
 // outputs a string with all the numbers listed in the numeric range, separated by spaces
+func printRangeToArray(_ input: CountableClosedRange<XlationRange>) -> [String] {
+    let result = input.flatMap{String($0)}
+    return result
+}
+
+// outputs a single string formed from multiple ranges of numbers
+func printRangesToArray(_ input: [CountableClosedRange<XlationRange>]) -> [String] {
+    let result = input.flatMap{printRangeToArray($0)}
+    return result
+}
+
+// in order to handle suffixes and other string-based entities in the list, we provide a better function
+// if a number component ("2-4" or "12a") isn't convertible to a range, it passes through as-is
+func expandNumberListToArray(_ input: String) -> [String] {
+    let comps = input.components(separatedBy: ",")
+    var result = [String]()
+    for comp in comps {
+        if let range = translateNumberToRange(comp) {
+            result += (printRangeToArray(range))
+        } else {
+            result.append(comp)
+        }
+    }
+    return result
+}
+
+// outputs a string with all the numbers listed in the numeric range, separated by spaces
 func printRange(_ input: CountableClosedRange<XlationRange>) -> String {
-    let result = input.flatMap{String($0)}.joined(separator: " ")
+//    let result = input.flatMap{String($0)}.joined(separator: " ")
+    let result = printRangeToArray(input).joined(separator: " ")
     return result
 }
 
 // outputs a single string formed from multiple ranges of numbers
 func printRanges(_ input: [CountableClosedRange<XlationRange>]) -> String {
-    let result = input.map{printRange($0)}.joined(separator: " ")
+//    let result = input.map{printRange($0)}.joined(separator: " ")
+    let result = printRangesToArray(input).joined(separator: " ")
     return result
 }
 
 // in order to handle suffixes and other string-based entities in the list, we provide a better function
 // if a number component ("2-4" or "12a") isn't convertible to a range, it passes through as-is
 func expandNumberList(_ input: String) -> String {
-    let comps = input.components(separatedBy: ",")
-    var result = [String]()
-    for comp in comps {
-        if let range = translateNumberToRange(comp) {
-            result.append(printRange(range))
-        } else {
-            result.append(comp)
-        }
-    }
-    let endresult = result.joined(separator: " ")
+//    let comps = input.components(separatedBy: ",")
+//    var result = [String]()
+//    for comp in comps {
+//        if let range = translateNumberToRange(comp) {
+//            result.append(printRange(range))
+//        } else {
+//            result.append(comp)
+//        }
+//    }
+    let endresult = expandNumberListToArray(input).joined(separator: " ")
     return endresult
 }
 
@@ -590,4 +638,31 @@ func UnitTestRanges() {
         }
     }
     print("Performed \(count) Range parse/print unit tests: \(pc) passed, \(fc) failed.")
+}
+
+// some utilities to deal with catalog field ranges
+func parseCatalogRange(_ input:String) -> [String] {
+    // input is a cat1 or cat2 string field with certain properties
+    // components are separated by ','
+    // each component can be a single number (with optional prefix and/or suffix), or a range (two of the previous separated by '-')
+    // the entire thing is prefixed by a two-letter code designating catalog type, where the second char is a space
+    // interestingly enough, removing the code, and the Scott prefix letters (C,J, or O), and you have a regular range list
+    // the main challenge is to deal well with components that have varying numbers of digits
+    // the rule here should be that if any component has less digits than the first one, it has to be converted to have the same number
+    // for example, "1234,5,6" should convert to be the same as "1234,1235,1236"; this is true of the list as well as subranges
+    // another challenge: allow lower-case suffixes of letters only separated by '-' to remain untouched as single items, i.e.123a-e
+    var result: [String] = []
+    result.append("TEST DEBUG")
+//    if input.characters.count > 2 {
+//        let listIndex = input.index(input.startIndex, offsetBy: 2)
+//        let catPrefix = input.substring(to: listIndex)
+//        var catList = input.substring(from: listIndex)
+//        var scottPfx = ""
+//        // remember and remove any Scott or Carmel prefix
+//        let scotts = CharacterSet(charactersIn: "BOCJ") // actually, B is used by Carmel, but can also be a suffix in Scott, hmmm
+//        // we only want to remove these characters if they are at the start of a component OR at the start of each part of a range
+//        // the result can be processed into a list of ranges, with the added requirement that all components are normalized to the first one
+//        // thus B12-B14 becomes 12-14 (w.prefix set to "B"), but 171B stays 171B and no change to prefix letter
+//    }
+    return result
 }
