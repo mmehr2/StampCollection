@@ -56,6 +56,7 @@ class BTDealerItem: NSObject {
     
     fileprivate let cat2exceptions = [
         "6110s323": "S 694a-v", // fill in missing final letter
+        "6110s1073": "S 1798-1800", // BT site says "C 1798-00"
         ]
     
     var catalog2List: [String] {
