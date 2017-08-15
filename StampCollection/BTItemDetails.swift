@@ -15,6 +15,19 @@ class BTItemDetails {
     fileprivate let codeNumber: Int16
     fileprivate var infoLines: [String] = []
     
+    var numCatalogItems = 0 {
+        didSet {
+            var plist: [String] = []
+            // expand special plate number list if BT doesn't specify
+            if let pn = data["plateNumbers"], pn == "--" {
+                for _ in 1...numCatalogItems {
+                    plist.append(pn)
+                }
+                data["plateNumbers"] = plist.joined(separator: " ")
+            }
+        }
+    }
+    
     init(titleLine: String, infoLine: String, codeNum cnum: Int16) {
         // NOTE: All the processing work is done here.
         // Unfortunately, we can't make the object constant with 'let' because the compiler doesn't know these names are the only ones.

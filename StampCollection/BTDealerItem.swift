@@ -36,6 +36,7 @@ class BTDealerItem: NSObject {
     var details: BTItemDetails? {
         didSet {
             self.info = details?.originalInfo ?? ""
+            details?.numCatalogItems = self.catalog1List.count
         }
     }
     
@@ -46,6 +47,7 @@ class BTDealerItem: NSObject {
     fileprivate let cat1exceptions = [
         "6110s323": "C 811-25", // BT site says "C ---"
         "6110s1055": "C 2098-109", // BT site says "C 2098-09"
+        "6110s1183": "C 2298-300", // BT site says "C 2298-00"
     ]
     
     var catalog1List: [String] {
