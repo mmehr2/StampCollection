@@ -43,6 +43,41 @@ class BTDealerItem: NSObject {
         return details?.leafletList.joined(separator: ",") ?? ""
     }
 
+    fileprivate let cat1exceptions = [
+        "6110s323": "C 811-25", // BT site says "C ---"
+        "6110s1055": "C 2098-109", // BT site says "C 2098-09"
+    ]
+    
+    var catalog1List: [String] {
+        return getPaddedCatalogList(catalog1, exceptions: cat1exceptions)
+    }
+    
+    fileprivate let cat2exceptions = [
+        "6110s323": "S 694a-v", // fill in missing final letter
+        ]
+    
+    var catalog2List: [String] {
+        return getPaddedCatalogList(catalog2, exceptions: cat2exceptions)
+    }
+    
+    fileprivate func getPaddedCatalogList(_ catField: String, exceptions: [String:String]) -> [String] {
+        let npn = details?.plateNumberList.count ?? 0
+        let input: String
+        if let cex = exceptions[code] {
+            input = cex
+        } else {
+            input = catField
+        }
+        var catList = parseCatalogRange(input)
+        let nc = catList.count
+        if npn > nc {
+            for _ in 1...(npn - nc) {
+                catList.append("")
+            }
+        }
+        return catList
+    }
+
     var isJS: Bool {
         if code.characters.count > 2 {
             return code.hasPrefix("AUI")

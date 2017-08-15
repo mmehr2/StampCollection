@@ -327,6 +327,7 @@ class BTItemDetails {
         13: "1:2 1:2 1:2 1:2 1:2 1:2", // '49 Coins (MERED): ea.sheet had plate numbers 1 and 2 on left and right
         20: "1:6 1:6 1:6 1:6 1:6 1:6", // '50 Airmail Birds: ea.sheet had all plate numbers 1-6
         91: "1-10,29", // '60 Provisionals: additional sheet not mentioned by BT info
+        197: "250-8,260-2", // '69 Town Emblems II - missing 259
     ]
     
     fileprivate func parsePlateNumberList(_ input: String) {
@@ -671,8 +672,8 @@ extension BTItemDetails {
         return result.first ?? "Unknown"
     }
     
-    // a multiline string containing a sheet description for each sheet in the set (as best we know it from the BT detail data)
-    var fullSheetDetails: String {
+    // a multiline string array containing a sheet description for each sheet in the set (as best we know it from the BT detail data)
+    var fullSheetDetails: [String] {
         var tempList = [String]()
         let series = sheetSeries
         let pnlist = plateNumberList
@@ -685,7 +686,14 @@ extension BTItemDetails {
             let result = "Full sheet\(numstr) [Pl.No.\(P) (\(series)), Format=\(sheetFormat)] Design:\(data["designers"]!)"
             tempList.append(result)
         }
-        return tempList.joined(separator: "\n")
+        return tempList
+    }
+    
+    var isSouvenirSheet: Bool {
+        if let ssc = data["ssCount"], let sscount = Int(ssc), sscount > 0 {
+            return true
+        }
+        return false
     }
     
 }

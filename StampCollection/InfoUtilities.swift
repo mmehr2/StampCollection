@@ -659,8 +659,10 @@ func parseCatalogRange(_ input:String) -> [String] {
         let catList = input.substring(from: listIndex)
         // remember and remove any Scott or Carmel prefix
         let (newList, compPfx) = removeCatalogPrefixInRange(catList)
+        // deal with expansion of special catalog ranges called out by BT
+        let mergedList = transformScottComponentList(newList)
         // now expand to an array of numeric strings
-        var numList = expandNumberListToArray(newList)
+        var numList = expandNumberListToArray(mergedList)
         // normalize the numbers to the first one, if possible
         if let firstNum = Int(numList.first!) {
             numList = numList.map{ x -> String in
@@ -679,11 +681,69 @@ func parseCatalogRange(_ input:String) -> [String] {
             pfx = catPrefix
         }
         result = numList.map{ pfx + $0 }
+        // remove any alpha range suffix (Scott uses this)
+        result = result.map(removeCatalogSuffix)
+    } else {
+        result.append("")
     }
     return result
 }
 
-func removeCatalogPrefixInRange(_ input:String) -> (String, Character?) {
+fileprivate func removeCatalogSuffix(_ input:String) -> String {
+    let rangeComps = input.components(separatedBy: "-")
+    if let rc = rangeComps.last,
+        rc.characters.count == 1,
+        let z = rc.characters.first,
+        CharacterSet.lowercaseLetters.contains( z ) {
+        // this is probably a component like "123a-f" and should have the alpha parts removed; assume always 3 chars
+        return String(input.characters.dropLast(3))
+    }
+    return input
+}
+
+fileprivate func transformScottComponentList(_ input:String) -> String {
+    // this will detect the presence of the '~' character in the BT listing and expand it to proper catalog numbers
+    let incomps = input.components(separatedBy: ",")
+    let outcomps = incomps.flatMap{ x -> [String] in
+        var outcomp: [String] = []
+        if x.range(of: "~") != nil {
+            // special handlers for  special ranges
+            if x == "386~393" {
+                // hardcoded list of Scott cat #s for Town Emblems II (1969)
+                outcomp.append("386-93")
+//                outcomp.append("")// TBD: where are the 'a' numbers?? Bale forgets to list them
+//                outcomp.append("")
+//                outcomp.append("")
+//                outcomp.append("")
+//                outcomp.append("")
+            }
+            if x == "461~474" {
+                // hardcoded list of Scott cat #s for Landscapes I and II (1971+)
+                outcomp.append("461-4")
+                outcomp.append("464a")
+                outcomp.append("465")
+                outcomp.append("465a")
+                outcomp.append("466")
+                outcomp.append("466a")
+                outcomp.append("467-9")
+                outcomp.append("469a")
+                outcomp.append("470")
+                outcomp.append("470a")
+                outcomp.append("471-2")
+                outcomp.append("472a")
+                outcomp.append("472b")
+                outcomp.append("472c")
+                outcomp.append("473-4")
+            }
+        } else {
+            outcomp.append(x)
+        }
+        return outcomp
+    }
+    return outcomps.joined(separator: ",")
+}
+
+fileprivate func removeCatalogPrefixInRange(_ input:String) -> (String, Character?) {
     // we only want to remove these characters if they are at the start of a component OR at the start of each part of a range
     // the result can be processed into a list of ranges, with the added requirement that all components are normalized to the first one
     // thus B12-B14 becomes 12-14 (w.prefix set to "B"), but 171B stays 171B and no change to prefix letter
@@ -699,13 +759,6 @@ func removeCatalogPrefixInRange(_ input:String) -> (String, Character?) {
                 let rangeComps = x.components(separatedBy: "-")
                 if rangeComps.count == 0 { return x } // should never happen
                 if rangeComps.count > 2 { return x } // should never happen
-                if let rc = rangeComps.last,
-                    rc.characters.count == 1,
-                    let z = rc.characters.first,
-                    CharacterSet.lowercaseLetters.contains( z ) {
-                    // this is probably a component like "123a-f" and should be left alone
-                    return x
-                }
                 // for the other cases, one or two components, test and remove any leading members of the charset "scotts"
                 if let comp = rangeComps.first, rangeComps.count == 1 {
                     let rc = dropStart(comp)
@@ -741,9 +794,9 @@ fileprivate extension CharacterSet {
 }
 
 fileprivate let ctests = [
-    "": [],
+    "": [""],
     "S 123": ["S 123"],
-    "S 1809a-c": ["S 1809a-c"],
+    "S 1809a-c": ["S 1809"],
     "C B24-B27": ["C B24","C B25","C B26","C B27"],
     "S 1813-15": ["S 1813","S 1814","S 1815"], // 6110s1082
     "C 2098-101": ["C 2098","C 2099","C 2100","C 2101",], // from 6110s1055 (!! - needs mod!)

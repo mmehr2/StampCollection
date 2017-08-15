@@ -115,7 +115,23 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
             print("BT leaflets = <\(lflst)>")
             if let dt = btitem.details {
                 print("BT Bulletin list:\n\(dt.bulletinList.joined(separator: "-"))")
-                print("BT Full sheet list:\n\(dt.fullSheetDetails)")
+                let cat1List = btitem.catalog1List
+                let cat2List = btitem.catalog2List
+                if dt.isSouvenirSheet {
+                    let cat1ListSS = cat1List.map{ "Souv.Sheet" + ($0.isEmpty ? "" : " - Catalog1: " + $0) }
+                    let cat2ListSS = cat2List.map{ ($0.isEmpty ? "" : ", Catalog2: " + $0) }
+                    let fs = zip(cat1ListSS, cat2ListSS).flatMap{ x, y in return x+y }
+                    let ssheetList = fs.joined(separator: "\n")
+                    print("BT Souvenir sheet list:\n\(ssheetList)")
+                } else {
+                    let fsdList = dt.fullSheetDetails
+                    let cat1ListSh = cat1List.map{ ($0.isEmpty ? "" : ", Catalog1: " + $0 + "full") }
+                    let cat2ListSh = cat2List.map{ ($0.isEmpty ? "" : ", Catalog2: " + $0 + "full") }
+                    let fs1 = zip(fsdList, cat1ListSh).flatMap{ x, y in return x+y }
+                    let fs2 = zip(fs1, cat2ListSh).flatMap{ x, y in return x+y }
+                    let sheetList = fs2.joined(separator: "\n")
+                    print("BT Full sheet list:\n\(sheetList)")
+                }
             }
         }
     }
