@@ -88,10 +88,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
     
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
-        //?? let catcount = model.categories.count
-        model.fetchType(.categories) {
-            self.updateUI()
-        }
+        startUI(model)
     }
     
     @IBOutlet weak var exportButton: UIBarButtonItem!

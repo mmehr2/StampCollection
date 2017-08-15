@@ -45,7 +45,8 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
             utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U4Task()))
             utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U5Task()))
             utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U6Task()))
-            
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U7Task()))
+            utRegistrations.append(UtilityTask(forModel: model, inContext: contextToken, withRunner: self, toRun: U8Task()))
         }
         progress.isCancellable = false // for now - might want a mechanism tho
         progress.isPausable = false // for now - might want a mechanism tho

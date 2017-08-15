@@ -47,9 +47,9 @@ import Foundation
  from:
  6110s352,"1980 Thistles","In Stock",6110s352,0,"Sets, SS, FDC","C 867-869","S 745-747",0.73,0.98,0.73,0.63,1,1,1,1,,,,,2
  This code should at minimum be able to add the BTItemDetails sheet info so it looks like this:
- 6110t352_01,"1980 Thistles- Full sheet (#1/3) [Pl.No.587(1960+) Format=(3x5)] Designer A.Glaser",Unavailable,6110s352,0,"(X)Full Sheets","C 867full","S 745full",10.00,0.00,,,0,0,0,0,,,,,31
- 6110t352_02,"1980 Thistles- Full sheet (#2/3) [Pl.No.588(1960+) Format=(3x5)] Designer A.Glaser",Unavailable,6110s352,0,"(X)Full Sheets","C 868full","S 746full",10.00,0.00,,,0,0,0,0,,,,,31
- 6110t352_03,"1980 Thistles- Full sheet (#3/3) [Pl.No.589(1960+) Format=(3x5)] Designer A.Glaser",Unavailable,6110s352,0,"(X)Full Sheets","C 869full","S 747full",10.00,0.00,,,0,0,0,0,,,,,31
+ 6110t352_01,"1980 Thistles- Full sheet (#1/3) [Pl.No.587(1960+) Format=(3x5)] Designer A.Glaser",Catalog,6110s352,0,"(X)Full Sheets","C 867full","S 745full",10.00,0.00,,,0,0,0,0,,,,,31
+ 6110t352_02,"1980 Thistles- Full sheet (#2/3) [Pl.No.588(1960+) Format=(3x5)] Designer A.Glaser",Catalog,6110s352,0,"(X)Full Sheets","C 868full","S 746full",10.00,0.00,,,0,0,0,0,,,,,31
+ 6110t352_03,"1980 Thistles- Full sheet (#3/3) [Pl.No.589(1960+) Format=(3x5)] Designer A.Glaser",Catalog,6110s352,0,"(X)Full Sheets","C 869full","S 747full",10.00,0.00,,,0,0,0,0,,,,,31
 
 
  The tasks involved:
@@ -77,14 +77,82 @@ class U7Task: NSObject, UtilityTaskRunnable {
     
     let TU:Int64 = 35000 // generate this as approx msec execution time on my device; only relative size matters
     // protocol: UtilityTaskRunnable
-    var isEnabled = false
-    var taskName: String { return "UT2017_07_20_MODIFY_EXISTING_FULL_SHEETS" }
+    var isEnabled = true
+    var taskName: String { return "UT2017_08_14_MODIFY_EXISTING_FULL_SHEETS" }
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
-    
-    // MARK: Task data and functions
+        // MARK: Task data and functions
     func run() -> String {
-        return ""
+        var result = ""
+        var firstCode = ""
+        var lastCode = ""
+        var firstDesc = ""
+        var lastDesc = ""
+        var totalAdded = 0
+        let objects1 = task.model.fetchInfoInCategory(CATEG_SETS, withSearching: [], andSorting: .none, fromContext: task.contextToken)
+        guard objects1.count > 0 else {
+            print("Empty database - don't run task \(taskName) yet.")
+            return result
+        }
+        let store = BTDealerStore.model
+        let cats = store.categories
+        let category = Int(CATEG_SETS) // numbered from 1
+        guard cats.count > category else {
+            print("No category \(category) object to process.")
+            return result
+        }
+        let objects = cats[category-1].getAllDataItems()
+        if objects.count > 0 {
+            let totalSteps = Int64(objects.count)
+            task.taskUnits = totalSteps
+            var stepCount:Int64 = 0
+            for item in objects {
+                if let details = item.details {
+                    if !details.isSouvenirSheet {
+                        // for every non-S/S set in the BT inventory, create a set of sheet listings
+                        let (_, cnumStr) = splitNumericEndOfString(item.code)
+                        let cnum = Int(cnumStr)!
+                        let codeFormat = "6110t\(cnum)_%02d,"
+                        let descPrefix = "\"\(item.descr)- "
+                        let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
+                        let cat1Suffix = ","
+                        let cat2Suffix = ",10.00,20.00,,,0,0,0,0,,,,,31"
+                        let descList = details.fullSheetDetails
+                        let cat1List = item.catalog1List
+                        let cat2List = item.catalog2List
+                        let cardinality = descList.count
+                        // create the properly formatted colums of data
+                        let numList = Array(1...cardinality).map{ String(format: codeFormat, $0) }
+                        let descs = descList.map{ descPrefix + $0 + descSuffix }
+                        let cat1s = cat1List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat1Suffix }
+                        let cat2s = cat2List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat2Suffix }
+                        // perform a 4-way zip of these formatted columns
+                        let fs1 = zip(numList, descs).flatMap{ x, y in return x+y }
+                        let fs2 = zip(fs1, cat1s).flatMap{ x, y in return x+y }
+                        let fs3 = zip(fs2, cat2s).flatMap{ x, y in return x+y }
+                        let sheetList = fs3.joined(separator: "\n")
+                        print("\(sheetList)")
+                        
+                        if firstCode.isEmpty {
+                            firstCode = item.code
+                        }
+                        lastCode = item.code
+                        if firstDesc.isEmpty {
+                            firstDesc = item.descr
+                        }
+                        lastDesc = item.descr
+                        totalAdded += 1
+                    }
+                }
+                stepCount += 1
+                task.updateTask(step: stepCount, of: totalSteps)
+            }
+        }
+        if totalAdded > 0 {
+            result = "Created \(totalAdded) CSV entries for full sheets for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
+            print(result)
+        }
+        return result
     }
 }
 
@@ -98,14 +166,10 @@ class U8Task: NSObject, UtilityTaskRunnable {
             task.taskName = taskName
             // protocol: set initial taskUnits to non-0 if we have work, 0 if we don't (database category empty)
             // NOTE: this will be way off, so a better estimate method should be designed
-            // We want to count how many unique 6110t entries there are, ignoring the "_NN" part,
-            // and subtract this from the number of 6110s entries (ignoring S/S but that's probably a small adjustment)
-            // Alternatively, if we could count on bulk BTItemDetails, we could use the set cardinality concept.
-            //   This basically counts plate numbers OR (if none) uses indications in the description (see Stand-by issues)
-            //   These would include a number in parens at the end of the string, e.g. "(5)" or "Coins 5)", indicating 5 items
-            //   Several times the denominations are listed, separated by spaces, e.g. "10 20 50" for 3 values
-            // NOTE: This would still require a table of exceptions for issues like Songbirds or Anemone (no pl.nos.)
-            task.taskUnits = task.countCategories([CATEG_SETS])
+            // The real amount of work is the difference between the number of sheets in the data model and the number of
+            //   sheets that can come from the BT store items in the set category.
+            // A method can be devised to add up set cardinality numbers from the BT store category items.
+            task.taskUnits = task.countCategories([CATEG_SHEETS])
         }
     }
     
