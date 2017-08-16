@@ -112,7 +112,8 @@ class U7Task: NSObject, UtilityTaskRunnable {
                         // for every non-S/S set in the BT inventory, create a set of sheet listings
                         let (_, cnumStr) = splitNumericEndOfString(item.code)
                         let cnum = Int(cnumStr)!
-                        let codeFormat = "6110t\(cnum)_%02d,"
+                        let codeFormat1 = "6110t\(cnum),"
+                        let codeFormatN = "6110t\(cnum)_%02d,"
                         let descPrefix = "\"\(item.descr)- "
                         let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
                         let cat1Suffix = ","
@@ -121,6 +122,7 @@ class U7Task: NSObject, UtilityTaskRunnable {
                         let cat1List = item.catalog1List
                         let cat2List = item.catalog2List
                         let cardinality = descList.count
+                        let codeFormat = (cardinality == 1 ? codeFormat1 : codeFormatN)
                         // create the properly formatted colums of data
                         let numList = Array(1...cardinality).map{ String(format: codeFormat, $0) }
                         let descs = descList.map{ descPrefix + $0 + descSuffix }
