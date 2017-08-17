@@ -77,7 +77,7 @@ class U7Task: NSObject, UtilityTaskRunnable {
     
     let TU:Int64 = 35000 // generate this as approx msec execution time on my device; only relative size matters
     // protocol: UtilityTaskRunnable
-    var isEnabled = true
+    var isEnabled = false
     var taskName: String { return "UT2017_08_14_MODIFY_EXISTING_FULL_SHEETS" }
     
     private weak var runner: UtilityTaskRunner! // prevent circular refs, we're in each other's tables
