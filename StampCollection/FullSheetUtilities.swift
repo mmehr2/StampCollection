@@ -117,7 +117,7 @@ class U7Task: NSObject, UtilityTaskRunnable {
                         let descPrefix = "\"\(item.descr)- "
                         let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
                         let cat1Suffix = ","
-                        let cat2Suffix = ",10.00,20.00,,,0,0,0,0,,,,,31"
+                        let cat2Suffix = ",10.00,,20.00,,0,0,0,0,,,,,31"
                         let descList = details.fullSheetDetails
                         let cat1List = item.catalog1List
                         let cat2List = item.catalog2List
