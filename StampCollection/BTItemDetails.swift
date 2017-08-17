@@ -600,11 +600,12 @@ extension BTItemDetails {
         return result
     }
     
-    // converts the list of plate numbers into an array of Int plate numbers
+    // converts the list of plate numbers into an array of String plate numbers
+    // NOTE: with adjustments for numCatalogItems already taken into account (once set), the count of this list is also the cardinality of the set
     var plateNumberList: [String] {
         var result = [String]()
         if let xlist = data["plateNumbers"], !xlist.isEmpty {
-            result = xlist.components(separatedBy: " ") //.map{ Int($0) }.flatMap{ $0 }
+            result = xlist.components(separatedBy: " ")
         }
         return result
     }
@@ -625,6 +626,21 @@ extension BTItemDetails {
             result = xlist.components(separatedBy: " ")
         }
         return result
+    }
+
+    // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones - are there any?)
+    var plateNumberListInt: [Int] {
+        return plateNumberList.map{ Int($0) }.flatMap{ $0 }
+    }
+    
+    // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones - are there any?)
+    var leafletListInt: [Int] {
+        return leafletList.map{ Int($0) }.flatMap{ $0 }
+    }
+    
+    // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones)
+    var bulletinListInt: [Int] {
+        return bulletinList.map{ Int($0) }.flatMap{ $0 }
     }
     
     // separates the sheet format list into an array of format strings of the form "(RxC)" where R is # of rows, C is # of columns
