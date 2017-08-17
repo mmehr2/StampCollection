@@ -600,6 +600,7 @@ fileprivate let rtests = [
 func UnitTestRanges() {
     UnitTestDateRanges()
     UnitTestCatalogRanges()
+    UnitTestCSVExport()
     var count = 0
     var pc = 0
     var fc = 0
@@ -822,4 +823,44 @@ fileprivate func UnitTestCatalogRanges() {
         count += 1
     }
     print("Performed \(count) Catalog Range parse/print unit tests: \(pc) passed, \(fc) failed.")
+}
+
+// To prepare a description field for the CSV import process when generating lines of text via batch utilities, for example
+// Ideally, we would use the Export library, but that use is complicated, and all we need to do is double the double-quote characters ('"')
+func prepFieldForCSVExport(_ input: String) -> String {
+    let result = input.characters.flatMap { x -> [Character] in
+        let set = CharacterSet(charactersIn: "\"")
+        if set.contains(x) {
+            return [x, x]
+        }
+        return [x]
+    }
+    return String(result)
+}
+
+fileprivate let csvtests = [
+    "This field has \"quotes\" in it.": "This field has \"\"quotes\"\" in it.",
+    "Just one quote\" in it.": "Just one quote\"\" in it.",
+    "\"Leading quote in it.": "\"\"Leading quote in it.",
+    "Trailing quote in it.\"": "Trailing quote in it.\"\"",
+]
+
+fileprivate func UnitTestCSVExport() {
+    var count = 0
+    var pc = 0
+    var fc = 0
+    var result = ""
+    var failed = false
+    for (test, answer) in csvtests {
+        result = ""
+        failed = false
+        result += ("Test #\(count+1): String to CSV String of [\(test)] to [\(answer)]")
+        let cand1 = prepFieldForCSVExport(test)
+        if cand1 == answer { result += ("PASSED"); pc += 1 } else { result += ("FAILED"); fc += 1; failed = true }
+        if failed {
+            print(result)
+        }
+        count += 1
+    }
+    print("Performed \(count) CSV export unit tests: \(pc) passed, \(fc) failed.")
 }

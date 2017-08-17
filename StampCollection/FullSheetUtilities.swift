@@ -59,6 +59,12 @@ import Foundation
         pictid: set equal to 6110s id
         group: set to "(X)Full Sheets"
         cat1,cat2: After every individual cat item, add the word "full" (my convention)
+ 
+ UPDATE 8/17/2017
+ One description (6110s1220) contains double quotes; this causes full sheets generated from this to be improperly escaped, failing the overall import at that point.
+ The CHCSVParser option used (sanitizesFields) requires internal qoutes to be doubled when a field (such as Descr) is quoted in double qoutes.
+ There is a need to prep every field that COULD contain double-qoutes with a function that does this. There may be other requirements, but for now we will just prep the descr field.
+
  */
 
 let CATEG_SHEETS:Int16 = 31
@@ -114,7 +120,8 @@ class U7Task: NSObject, UtilityTaskRunnable {
                         let cnum = Int(cnumStr)!
                         let codeFormat1 = "6110t\(cnum),"
                         let codeFormatN = "6110t\(cnum)_%02d,"
-                        let descPrefix = "\"\(item.descr)- "
+                        let descPrep = prepFieldForCSVExport(item.descr)
+                        let descPrefix = "\"\(descPrep)- "
                         let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
                         let cat1Suffix = ","
                         let cat2Suffix = ",10.00,,20.00,,0,0,0,0,,,,,31"
