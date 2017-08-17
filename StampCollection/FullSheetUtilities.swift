@@ -113,45 +113,20 @@ class U7Task: NSObject, UtilityTaskRunnable {
             task.taskUnits = totalSteps
             var stepCount:Int64 = 0
             for item in objects {
-                if let details = item.details {
-                    if !details.isSouvenirSheet {
-                        // for every non-S/S set in the BT inventory, create a set of sheet listings
-                        let (_, cnumStr) = splitNumericEndOfString(item.code)
-                        let cnum = Int(cnumStr)!
-                        let codeFormat1 = "6110t\(cnum),"
-                        let codeFormatN = "6110t\(cnum)_%02d,"
-                        let descPrep = prepFieldForCSVExport(item.descr)
-                        let descPrefix = "\"\(descPrep)- "
-                        let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
-                        let cat1Suffix = ","
-                        let cat2Suffix = ",10.00,,20.00,,0,0,0,0,,,,,31"
-                        let descList = details.fullSheetDetails
-                        let cat1List = item.catalog1List
-                        let cat2List = item.catalog2List
-                        let cardinality = descList.count
-                        let codeFormat = (cardinality == 1 ? codeFormat1 : codeFormatN)
-                        // create the properly formatted colums of data
-                        let numList = Array(1...cardinality).map{ String(format: codeFormat, $0) }
-                        let descs = descList.map{ descPrefix + $0 + descSuffix }
-                        let cat1s = cat1List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat1Suffix }
-                        let cat2s = cat2List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat2Suffix }
-                        // perform a 4-way zip of these formatted columns
-                        let fs1 = zip(numList, descs).flatMap{ x, y in return x+y }
-                        let fs2 = zip(fs1, cat1s).flatMap{ x, y in return x+y }
-                        let fs3 = zip(fs2, cat2s).flatMap{ x, y in return x+y }
-                        let sheetList = fs3.joined(separator: "\n")
-                        print("\(sheetList)")
-                        
-                        if firstCode.isEmpty {
-                            firstCode = item.code
-                        }
-                        lastCode = item.code
-                        if firstDesc.isEmpty {
-                            firstDesc = item.descr
-                        }
-                        lastDesc = item.descr
-                        totalAdded += 1
+                let sheets = createSetOfSheets(for: item)
+                if !sheets.isEmpty {
+                    let sheetList = sheets.joined(separator: "\n")
+                    print("\(sheetList)")
+                    
+                    if firstCode.isEmpty {
+                        firstCode = item.code
                     }
+                    lastCode = item.code
+                    if firstDesc.isEmpty {
+                        firstDesc = item.descr
+                    }
+                    lastDesc = item.descr
+                    totalAdded += 1
                 }
                 stepCount += 1
                 task.updateTask(step: stepCount, of: totalSteps)
@@ -163,6 +138,39 @@ class U7Task: NSObject, UtilityTaskRunnable {
         }
         return result
     }
+}
+
+fileprivate func createSetOfSheets(for item:BTDealerItem) -> [String] {
+    if let details = item.details {
+        if !details.isSouvenirSheet {
+            // for every non-S/S set in the BT inventory, create a set of sheet listings
+            let (_, cnumStr) = splitNumericEndOfString(item.code)
+            let cnum = Int(cnumStr)!
+            let codeFormat1 = "6110t\(cnum),"
+            let codeFormatN = "6110t\(cnum)_%02d,"
+            let descPrep = prepFieldForCSVExport(item.descr)
+            let descPrefix = "\"\(descPrep)- "
+            let descSuffix = "\",Catalog,\(item.code),0,\"(X)Full Sheets\","
+            let cat1Suffix = ","
+            let cat2Suffix = ",10.00,,20.00,,0,0,0,0,,,,,31"
+            let descList = details.fullSheetDetails
+            let cat1List = item.catalog1List
+            let cat2List = item.catalog2List
+            let cardinality = descList.count
+            let codeFormat = (cardinality == 1 ? codeFormat1 : codeFormatN)
+            // create the properly formatted colums of data
+            let numList = Array(1...cardinality).map{ String(format: codeFormat, $0) }
+            let descs = descList.map{ descPrefix + $0 + descSuffix }
+            let cat1s = cat1List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat1Suffix }
+            let cat2s = cat2List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat2Suffix }
+            // perform a 4-way zip of these formatted columns
+            let fs1 = zip(numList, descs).flatMap{ x, y in return x+y }
+            let fs2 = zip(fs1, cat1s).flatMap{ x, y in return x+y }
+            let sheetList = zip(fs2, cat2s).flatMap{ x, y in return x+y }
+            return sheetList
+        }
+    }
+    return []
 }
 
 class U8Task: NSObject, UtilityTaskRunnable {
@@ -191,6 +199,66 @@ class U8Task: NSObject, UtilityTaskRunnable {
     
     // MARK: Task data and functions
     func run() -> String {
-        return ""
+        var result = ""
+        var firstCode = ""
+        var lastCode = ""
+        var firstDesc = ""
+        var lastDesc = ""
+        var totalAdded = 0
+        // A: get the ID code of the last item in the Full Sheets category (31)
+        let objects1 = task.model.fetchInfoInCategory(CATEG_SHEETS, withSearching: [], andSorting: .byImport(true), fromContext: task.contextToken)
+        guard let lastModelItem = objects1.last else {
+            print("\(taskName): No category \(CATEG_SHEETS) items to process.")
+            return result
+        }
+        let barComps = lastModelItem.id!.components(separatedBy: "-")
+        let simpleID = barComps.first!
+        let (_, cnumAstr) = splitNumericEndOfString(simpleID)
+        // B: get the ID code of the last item in the BT dealer store Sets category (2)
+        let store = BTDealerStore.model
+        let cats = store.categories
+        let category = Int(CATEG_SETS) // numbered from 1
+        guard cats.count > category else {
+            print("\(taskName): No category \(category) object to process.")
+            return result
+        }
+        let btcat2 = cats[category-1]
+        let objects2 = btcat2.getAllDataItems()
+        guard let lastDealerItem = objects2.last else {
+            print("\(taskName): No category \(category) items to process.")
+            return result
+        }
+        let (_, cnumBstr) = splitNumericEndOfString(lastDealerItem.code)
+        // convert to numbers and for any numbers from A ..< B, call createSetOfSheets() as above
+        if let cnumA = Int(cnumAstr), let cnumB = Int(cnumBstr), cnumA <= cnumB {
+            let objects = (cnumA..<cnumB).map{ btcat2.fetchData(withCode: "6110s\($0)")! }
+            let totalSteps = Int64(objects.count)
+            task.taskUnits = totalSteps
+            var stepCount:Int64 = 0
+            for item in objects {
+                let sheets = createSetOfSheets(for: item)
+                if !sheets.isEmpty {
+                    let sheetList = sheets.joined(separator: "\n")
+                    print("\(sheetList)")
+                    
+                    if firstCode.isEmpty {
+                        firstCode = item.code
+                    }
+                    lastCode = item.code
+                    if firstDesc.isEmpty {
+                        firstDesc = item.descr
+                    }
+                    lastDesc = item.descr
+                    totalAdded += 1
+                }
+                stepCount += 1
+                task.updateTask(step: stepCount, of: totalSteps)
+            }
+        }
+        if totalAdded > 0 {
+            result = "Created \(totalAdded) CSV entries for full sheets for sets from \(firstCode): \(firstDesc) to \(lastCode): \(lastDesc)."
+            print(result)
+        }
+        return result
     }
 }
