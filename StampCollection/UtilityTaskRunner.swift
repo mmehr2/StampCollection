@@ -61,7 +61,7 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
             // this code runs on the background thread associated with the context passed
             // parent progress must becomeCurrent() here before creating any child progress object
             for task in tasks {
-                //print("Running Task \(task.taskName) synchronously on background thread.")
+                print("Running Task \(task.taskName) synchronously on background thread.")
                 // run the task (will update its own progress accordingly - needs the context token tho
                 result += task.runUtilityTask()
             }
