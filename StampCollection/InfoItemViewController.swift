@@ -146,7 +146,7 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
                 self.yearRangeLabel.text = dr
             }
             if !self.usingBT {
-                print("Full sheet list:\n\(data.fullSheetDetails)")
+                print("Full sheet list:\n\(data.fullSheetDetails.joined(separator: "\n"))")
             }
         }
     }

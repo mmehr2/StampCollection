@@ -60,8 +60,8 @@ class BTMessageDelegate: NSObject {
     var categoryNumber = BTCategoryAll // indicates all categories in site, or specific category number being loaded by handler object
     
     var url: URL!
-    var debug = false // set this to T to enable debug output behavior (saves HTML to files)
-    var debugInput = true // set this to T to enable debug input behavior (reads from HTML files instead of loading sites)
+    var debug = true // set this to T to enable debug output behavior (saves HTML to files)
+    var debugInput = false // set this to T to enable debug input behavior (reads from HTML files instead of loading sites)
     
     private var details = false
     private var allowDebugInput: Bool {
