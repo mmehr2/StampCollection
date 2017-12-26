@@ -92,7 +92,7 @@ class U3Task: NSObject, UtilityTaskRunnable {
         for item in objects3 {
             // test for and create blanco label if needed
             let blIdCode = "\(item.id!)bl"
-            let descCore = getCoreOfATMDescription(item)
+            let descCore = getCoreOfATMDescription(item.descriptionX!)
             if task.model.fetchInfoItemByID(blIdCode, inContext: task.contextToken) == nil {
                 printATMBlancoCSVEntry(fromSetItem: item)
                 totalAdded += 1
@@ -120,14 +120,14 @@ class U3Task: NSObject, UtilityTaskRunnable {
         return result
     }
     
-    private func getCoreOfATMDescription(_ item: DealerItem) -> String {
-        let desclines = item.descriptionX!.components(separatedBy: ",")
+    private func getCoreOfATMDescription(_ itemDesc: String) -> String {
+        let desclines = itemDesc.components(separatedBy: ",")
         return desclines[0]
     }
     
     private func printATMBlancoCSVEntry(fromSetItem item: DealerItem) {
         let idCode = item.id!
-        let desc = getCoreOfATMDescription(item)
+        let desc = getCoreOfATMDescription(item.descriptionX!)
         print("\(idCode)bl,\"\(desc), blanco label\",Unavailable,\(idCode),-1,\"Vending Machine Labels\",,,45.00,,,,0,0,0,0,,,,,26")
     }
     

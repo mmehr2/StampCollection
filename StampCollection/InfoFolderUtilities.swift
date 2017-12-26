@@ -169,6 +169,7 @@ class U2Task: NSObject, UtilityTaskRunnable {
     }
     
     private func getFolderCode(from folderNum:Int) -> String {
+        // assumes folderNum > 100
         let fepref = folderNum > 999 ? "" : "0"
         let fecode = "fe\(fepref)\(folderNum)"
         return fecode
