@@ -23,7 +23,7 @@ class UtilityTaskRunner: NSObject, ProgressReporting {
     // map of types to their functions (use nil to prevent execution)
     // NOTE: In spite of the name, the facility can be used with multiple calls and/or even running them every time. It's all in the source code here.
     // This must be dynamic so that the UI can do KVO on this object
-    private dynamic var utRegistrations:[UtilityTask] = []
+    @objc private dynamic var utRegistrations:[UtilityTask] = []
     
     required init(withModel model_: CollectionStore) {
         model = model_

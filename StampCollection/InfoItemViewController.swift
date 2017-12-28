@@ -128,7 +128,7 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
                     let cat1ListSh = cat1List.map{ ($0.isEmpty ? "" : ", Catalog1: " + $0 + "full") }
                     let cat2ListSh = cat2List.map{ ($0.isEmpty ? "" : ", Catalog2: " + $0 + "full") }
                     let fs1 = zip(fsdList, cat1ListSh).flatMap{ x, y in return x+y }
-                    let fs2 = zip(fs1, cat2ListSh).flatMap{ x, y in return x+y }
+                    let fs2 = zip(fs1, cat2ListSh).flatMap{ (arg) -> <#Result#> in let (x, y) = arg; return x+y }
                     let sheetList = fs2.joined(separator: "\n")
                     print("BT Full sheet list:\n\(sheetList)")
                 }

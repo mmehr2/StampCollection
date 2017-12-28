@@ -199,7 +199,7 @@ class BTItemsMessageProcessor: BTMessageProcessor {
                 let si = picref.index(after: range.lowerBound) // ignore leading quote
                 let se = picref.index(before: range.upperBound) // ignore trailing quote
                 let picurl = picref[si..<se]
-                result = picurl
+                result = String(picurl)
             }
         }
         return result

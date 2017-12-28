@@ -97,7 +97,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         // This resource is the same name as your xcdatamodeld contained in your project.
-        guard let modelURL = Bundle.main.url(forResource: moduleName, withExtension:"momd") else {
+        guard let modelURL = Bundle.main.url(forResource: CollectionStore.moduleName, withExtension:"momd") else {
             fatalError("Error loading object model from bundle")
         }
         // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
@@ -117,7 +117,7 @@ class CollectionStore: NSObject, ExportDataSource, ImportDataSink {
             /* The directory the application uses to store the Core Data store file.
             This code uses a file named "*.sqlite" in the application's documents directory.
             */
-            let storeURL = self.applicationDocumentsDirectory.appendingPathComponent(moduleName+".sqlite")
+            let storeURL = self.applicationDocumentsDirectory.appendingPathComponent(CollectionStore.moduleName+".sqlite")
             do {
                 try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL,
                     options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])

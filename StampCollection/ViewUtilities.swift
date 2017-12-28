@@ -584,7 +584,7 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
     } else {
         let ix2 = rest.index(before: rest.endIndex)
         let ix1 = rest.index(before: ix2)
-        finrest_ = rest[ix1...ix2]
+        finrest_ = String(rest[ix1...ix2])
     }
     let finrest = finrest_
     let finrest1 = finrest.characters.last!
