@@ -82,7 +82,7 @@ class BTDealerItem: NSObject {
     }
 
     var isJS: Bool {
-        if code.characters.count > 2 {
+        if code.count > 2 {
             return code.hasPrefix("AUI")
         }
         return false
@@ -134,18 +134,18 @@ class BTDealerItem: NSObject {
         var retval = catfieldx
         // make sure we are in proper catalog format; if not, just return field as-is
         // length must be longer than prefix length (2)
-        let cflen = retval.characters.count
+        let cflen = retval.count
         if cflen < 2 { return retval }
         // TBD: first char must be a known catalog abbreviation code (this info can change slowly over time as BT adds catalog references)
         // second char must be a space
         let rvidx1 = retval.index(after: retval.startIndex)
         if retval[rvidx1...rvidx1] != " " { return retval }
         // split the prefix (cat type and space) from the data
-        var splitIndex = catfieldx.index(after: catfieldx.characters.index(after: catfieldx.startIndex))
-        let prefix = catfieldx.substring(to: splitIndex)
-        let catfield = catfieldx.substring(from: splitIndex)
+        var splitIndex = catfieldx.index(after: catfieldx.index(after: catfieldx.startIndex))
+        let prefix = catfieldx[..<splitIndex]
+        let catfield = String(catfieldx[splitIndex...])
         let (part1, part2) = splitNumericEndOfString(catfield)
-        let lencf = part2.characters.count
+        let lencf = part2.count
         let is8digitField = lencf == 8 && part1.isEmpty
         // the function detects the need for missing commas, and puts them in the proper places
         // the type (field name 'cat1' or 'cat2') and ID fields are used to detect certain known problems that don't fit the rules,
@@ -169,7 +169,7 @@ class BTDealerItem: NSObject {
         // (currently no other rules are implemented, just the above exceptions)
         let exceptionKey = id + fname
         let (pos, type, char, found) = errorIDs[exceptionKey] ?? errorIDs["RULE1"]!
-        let len = char.characters.count
+        let len = char.count
         // determine if we should do this at all
         var ok = is8digitField || found // yes if we have 8 digits (use Rule#1) OR if we found another rule via lookup
         // double-check if the problem hasn't already been corrected by BT or us (found case)
@@ -193,7 +193,7 @@ class BTDealerItem: NSObject {
                 // whereas with sub, we must advance splitIndex past the same number of chars that were in 'char' string (len)
                 splitIndex = catfield.index(splitIndex, offsetBy: len)
             }
-            retval += catfield[splitIndex..<catfield.endIndex]
+            retval += catfield[splitIndex...]
         }
         return retval
     }

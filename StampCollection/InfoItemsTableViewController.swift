@@ -121,7 +121,7 @@ class InfoItemsTableViewController: UITableViewController {
         var menuItems : [MenuBoxEntry] = []
         for item in items {
             let apos = item.descriptionX.index(item.descriptionX.startIndex, offsetBy: 16)
-            let title = item.id + ":" + item.descriptionX.substring(from: apos)
+            let title = item.id + ":" + item.descriptionX[apos...]
             menuItems.append( (title, { x in
                 print("Assigning new base item=\(item.id): \(item.descriptionX) \nto INV\(invItem.baseItem): \(invItem.desc).")
                 invItem.updateBaseItem(item)
@@ -353,7 +353,7 @@ class InfoItemsTableViewController: UITableViewController {
         case (.info, _): exwh = "Info"
         case (.inventory, .all): exwh = "Inv"
         case (.inventory, .haves),
-            (.inventory, .wants): exwh = "Inv" + String("\(nitype)".characters.first!)
+            (.inventory, .wants): exwh = "Inv" + String("\(nitype)".first!)
         default: break
         }
         infoButtonItem.title = "To:" + exwh

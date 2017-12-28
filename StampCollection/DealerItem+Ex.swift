@@ -55,7 +55,7 @@ class InfoDependentVars {
             let catgDisplayNum = extra
             let id = value
             if catgDisplayNum == 3 || catgDisplayNum == 24 || catgDisplayNum == 25 {
-                if String(id.characters.prefix(4)) == "6110e" {
+                if String(id.prefix(4)) == "6110e" {
                     if let exd = _exStartDate {
                         let (y, _, _) = componentsFromDate(exd)
                         postE1K = y >= 2000
@@ -92,7 +92,7 @@ extension DealerItem: SortTypeSortable {
     }
     
     var isJS: Bool {
-        if id.characters.count > 2 {
+        if id.count > 2 {
             return id.hasPrefix("AUI")
         }
         return false

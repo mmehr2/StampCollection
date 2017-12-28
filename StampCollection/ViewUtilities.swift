@@ -80,7 +80,7 @@ func menuBoxWithTitle( _ title: String, andBody body: [MenuBoxEntry], forControl
             var style = UIAlertActionStyle.default
             // any provided title string that starts with a "!" will be Destructive style (and the "!" will be removed)
             if menuItem.hasPrefix("!") {
-                menuTitle = String(menuItem.characters.suffix(menuItem.characters.count - 1))
+                menuTitle = String(menuItem.suffix(menuItem.count - 1))
                 style = UIAlertActionStyle.destructive
             }
             act = UIAlertAction(title: menuTitle, style: style, handler: menuFunc)
@@ -448,11 +448,11 @@ private func splitDealerCode( _ code: String, special: Bool = false ) -> [String
     var output: [String] = []
     var field = ""
     var state: CodeFieldClass = .unknown
-    for char in code.characters {
+    for char in code {
         let charClass = getCharacterClass(char)
         if special {
             // detect field == "RC" and wait until "m" is detected, accumulating digits and suffixes into field
-            if field.characters.count >= 2 && field.hasPrefix("RC") {
+            if field.count >= 2 && field.hasPrefix("RC") {
                 if char != "m" {
                     field.append(char)
                     continue
@@ -478,12 +478,12 @@ private func splitDealerCode( _ code: String, special: Bool = false ) -> [String
 }
 
 private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, String) {
-    let firstCharClass = getCharacterClass(code.characters.first!)
-    let shorthand = String(code.characters.prefix(2))
+    let firstCharClass = getCharacterClass(code.first!)
+    let shorthand = String(code.prefix(2))
     let splitAt: Int
     if firstCharClass == .numeric {
         // assumes 6110z where z is single character alpha
-        if String(code.characters.prefix(6)) == "6110pb" {
+        if String(code.prefix(6)) == "6110pb" {
             splitAt = 6
         } else {
             splitAt = 5
@@ -498,8 +498,8 @@ private func splitCatCode( _ code: String, forCat catnum: Int16 ) -> (String, St
         // assumes 2-digit alpha (ps, fe, bu)
         splitAt = 2
     }
-    let part1 = String(code.characters.prefix(splitAt))
-    let part2 = String(code.characters.suffix(splitAt))
+    let part1 = String(code.prefix(splitAt))
+    let part2 = String(code.suffix(splitAt))
     return (part1, part2)
 }
 
@@ -508,7 +508,7 @@ private func normalizeCatCode( _ codePart: String, forCat catnum: Int16 ) -> Str
 }
 
 private func paddington( _ len: Int, input: String, char: Character = " ", trailing: Bool = false ) -> String {
-    let inlen = input.characters.count
+    let inlen = input.count
     if inlen >= len {
         return input
     }
@@ -541,7 +541,7 @@ struct IDParser {
         self.catcode = catcode
         fields = splitDealerCode(rest, special: catnum == CATNUM_ATM) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
         let firstField = fields.first!
-        let hasPrefix = getCharacterClass(firstField.characters.first!) == .alpha
+        let hasPrefix = getCharacterClass(firstField.first!) == .alpha
         if hasPrefix {
             prefix = firstField
             fields.remove(at: 0)
@@ -577,7 +577,7 @@ Needing special handling:
 func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = false ) -> String {
     let (catcode, rest) = splitCatCode(code, forCat: catnum)
     let normcat = normalizeCatCode(catcode, forCat: catnum)
-    let lenrest = rest.characters.count
+    let lenrest = rest.count
     var finrest_ = ""
     if lenrest < 2 {
         finrest_ = "  "
@@ -587,10 +587,10 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
         finrest_ = String(rest[ix1...ix2])
     }
     let finrest = finrest_
-    let finrest1 = finrest.characters.last!
+    let finrest1 = finrest.last!
     let fields = splitDealerCode(rest, special: catnum == CATNUM_ATM) // special handling invoked for Vending category 6110kNNNRC[..]mMMM case
     let data = fields.map { x in
-        (normcat, catcode, x, getCharacterClass(x.characters.first!))
+        (normcat, catcode, x, getCharacterClass(x.first!))
     }
     //println("Data for normID \(data)")
     var output = ""
@@ -648,7 +648,7 @@ func normalizeIDCode( _ code: String, forCat catnum: Int16, isPostE1K: Bool = fa
                 output += paddington(8, input: "", char: padder)
             }
         }
-        let flen = field.characters.count
+        let flen = field.count
         switch fieldClass {
         case .alpha: if !skip { output += paddington(8, input: field, char: padder, trailing: true) }
         case .numeric:

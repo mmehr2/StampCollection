@@ -52,7 +52,7 @@ struct Regex {
     }
     
     fileprivate static func testMatch(_ left: String, right: Regex) -> Bool {
-        let range = NSMakeRange(0, left.characters.count)
+        let range = NSMakeRange(0, left.count)
         if let regex = right.regex {
             let matches = regex.matches(in: left, options: right.matchingOptions, range: range) // as! [NSTextCheckingResult]
             return matches.count > 0
@@ -63,7 +63,7 @@ struct Regex {
     
     fileprivate static func replacePattern(_ left:String, right: (regex:Regex, template:String) ) -> String{
         if Regex.testMatch(left, right: right.regex) {
-            let range = NSMakeRange(0, left.characters.count)
+            let range = NSMakeRange(0, left.count)
             if let regex = right.regex.regex {
                 return regex.stringByReplacingMatches(in: left, options: right.regex.matchingOptions, range: range, withTemplate: right.template)
             }

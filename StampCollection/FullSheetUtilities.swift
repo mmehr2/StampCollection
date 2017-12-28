@@ -164,9 +164,9 @@ fileprivate func createSetOfSheets(for item:BTDealerItem) -> [String] {
             let cat1s = cat1List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat1Suffix }
             let cat2s = cat2List.map{ ($0.isEmpty ? "" : "\"\($0)\"" ) + cat2Suffix }
             // perform a 4-way zip of these formatted columns
-            let fs1 = zip(numList, descs).flatMap{ x, y in return x+y }
-            let fs2 = zip(fs1, cat1s).flatMap{ (arg) -> <#Result#> in let (x, y) = arg; return x+y }
-            let sheetList = zip(fs2, cat2s).flatMap{ x, y in return x+y }
+            let fs1 = zip(numList, descs).map{ x, y in return x+y }
+            let fs2 = zip(fs1, cat1s).map{ x, y in return x+y }
+            let sheetList = zip(fs2, cat2s).map{ x, y in return x+y }
             return sheetList
         }
     }

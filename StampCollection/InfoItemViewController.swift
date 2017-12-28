@@ -117,18 +117,20 @@ class InfoItemViewController: UIViewController, BTInfoProtocol {
                 print("BT Bulletin list:\n\(dt.bulletinList.joined(separator: "-"))")
                 let cat1List = btitem.catalog1List
                 let cat2List = btitem.catalog2List
+                //@NUT@ Needs unit test
+                // Swift 4 usage of flatMap seems to differ now - using map over a string array is preferred, otherwise you get an array of the individual characters
                 if dt.isSouvenirSheet {
                     let cat1ListSS = cat1List.map{ "Souv.Sheet" + ($0.isEmpty ? "" : " - Catalog1: " + $0) }
                     let cat2ListSS = cat2List.map{ ($0.isEmpty ? "" : ", Catalog2: " + $0) }
-                    let fs = zip(cat1ListSS, cat2ListSS).flatMap{ x, y in return x+y }
+                    let fs = zip(cat1ListSS, cat2ListSS).map{ x, y in return x+y }
                     let ssheetList = fs.joined(separator: "\n")
                     print("BT Souvenir sheet list:\n\(ssheetList)")
                 } else {
                     let fsdList = dt.fullSheetDetails
                     let cat1ListSh = cat1List.map{ ($0.isEmpty ? "" : ", Catalog1: " + $0 + "full") }
                     let cat2ListSh = cat2List.map{ ($0.isEmpty ? "" : ", Catalog2: " + $0 + "full") }
-                    let fs1 = zip(fsdList, cat1ListSh).flatMap{ x, y in return x+y }
-                    let fs2 = zip(fs1, cat2ListSh).flatMap{ (arg) -> <#Result#> in let (x, y) = arg; return x+y }
+                    let fs1 = zip(fsdList, cat1ListSh).map{ x, y in return x+y }
+                    let fs2 = zip(fs1, cat2ListSh).map{ x, y in return x+y }
                     let sheetList = fs2.joined(separator: "\n")
                     print("BT Full sheet list:\n\(sheetList)")
                 }

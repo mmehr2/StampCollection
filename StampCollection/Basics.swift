@@ -61,6 +61,7 @@ func trimSpaces( _ input: String ) -> String {
     return temp3
 }
 
+//@NUT@ (needs unit test)
 // splits a string into a numeric suffix and non-numeric prefix
 func splitNumericEndOfString( _ input: String ) -> (String, String) {
     var indexSplit = input.endIndex
@@ -73,14 +74,15 @@ func splitNumericEndOfString( _ input: String ) -> (String, String) {
             break
         }
     }
-    let textString = input.substring(to: indexSplit)
-    let numberString = input.substring(from: indexSplit)
+    let textString = String(input[..<indexSplit])
+    let numberString = String(input[indexSplit...])
     return (textString, numberString)
 }
 
+//@NUT@ (needs unit test)
 func makeStringFit(_ input: String, length: Int) -> String {
-    if input.characters.count > length-2 {
-        return String(input.characters.prefix(length - 2)) + ".."
+    if input.count > length-2 {
+        return String(input.prefix(length - 2)) + ".."
     }
     return input
 }
@@ -183,10 +185,11 @@ extension String {
         let res = rcvr.range(of: str, options: NSString.CompareOptions.caseInsensitive)
         return (res.location == 0)
     }
+    //@NUT@ (needs unit test)
     func endsWithCI( _ str: String ) -> Bool {
         let rcvr = self as NSString
         let res = rcvr.range(of: str, options: [NSString.CompareOptions.backwards, NSString.CompareOptions.caseInsensitive])
-        return (res.location == NSNotFound ? false : (res.location + res.length == self.characters.count))
+        return (res.location == NSNotFound ? false : (res.location + res.length == self.count))
     }
 }
 
@@ -296,7 +299,7 @@ func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: Clos
 //    return true
 //}
 
-func isValue<T: Comparable>( _ input: T, inOpenRange range: Range<T>) -> Bool {
+func isValue<T>( _ input: T, inOpenRange range: Range<T>) -> Bool {
     if input < range.lowerBound {
         return false
     } else if input >= range.upperBound {

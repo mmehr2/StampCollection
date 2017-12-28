@@ -267,7 +267,7 @@ class BTDealerStore: BTMessageProtocol, JSMessageProtocol {
         let allowDetailsDebug = false // set this to TRUE to enable debug year limits for testing (else entire set list will be loaded)
         // DEBUG - limit number of items by year for testing the mechanism
         let allowDetailsYear: Bool
-        let year = Int(String(dataItem.descr.characters.prefix(4)))
+        let year = Int(String(dataItem.descr.prefix(4)))
         let limitYearRange = 1948...2017 // TEST: <1948, 0 sets; <1949, 4 sets, <1950, 11 sets
         if let year = year, limitYearRange.contains(year) {
             allowDetailsYear = true

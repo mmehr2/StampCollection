@@ -116,7 +116,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         let pageCount = sections.reduce(0) { (total, section) -> Int in
             return total + section.thePages.count
         }
-        let secnames = sections.reduce("") { (x, y) -> String in return "\(x)\(x.characters.count > 0 ? ", " : "")\(y.code!)" }
+        let secnames = sections.reduce("") { (x, y) -> String in return "\(x)\(x.count > 0 ? ", " : "")\(y.code!)" }
         print("Displaying album \(album.code!) with \(pageCount) pages in \(sections.count) sections: [\(secnames)].")
         
         // and go there ...

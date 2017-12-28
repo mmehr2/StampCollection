@@ -230,7 +230,7 @@ class InventoryBuilder {
     
     func findRelatedFolder(in model: CollectionStore) {
         // look up the Info Folder item, if any, with the same description as the base DealerItem we are building
-        let descWords = dealerItem.descriptionX!.components(separatedBy: " ").filter() { $0.characters.count > 5 }
+        let descWords = dealerItem.descriptionX!.components(separatedBy: " ").filter() { $0.count > 5 }
         let search = SearchType.keyWordListAll(descWords)
         let fitems = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [search], andSorting: .byCode(false))
         if fitems.count == 0 {

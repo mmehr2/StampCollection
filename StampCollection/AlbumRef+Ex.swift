@@ -33,7 +33,7 @@ extension AlbumRef {
     }
     
     var displayIndex: String {
-        var idx = AlbumRef.getIndex(fromRef: code!)
+        let idx = AlbumRef.getIndex(fromRef: code!)
         // get number of albums in family
         let albumCount = family!.theRefs.count
         // if there is only one album in the family, return ""
@@ -42,7 +42,7 @@ extension AlbumRef {
         }
         // if there are <10, return index of code as single digit
         else if albumCount < 10 {
-            return String(idx.characters.last!)
+            return String(idx.last!)
         }
         // else return as index of code
         return idx
@@ -83,7 +83,7 @@ extension AlbumRef {
     // get the Album family:String and ref:String (of a number) from the data's AlbumRef property
     static func getRefNameAndNumberFromData( _ data: [String:String] ) -> (String, String)? {
         // finds the data for "AlbumRef" and strips off the number at the end, if any
-        if let name = data[entityName] , name.characters.count > 2 {
+        if let name = data[entityName] , name.count > 2 {
             return (getFamily(fromRef: name), getIndex(fromRef: name))
         }
         return nil

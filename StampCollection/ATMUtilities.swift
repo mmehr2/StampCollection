@@ -249,8 +249,8 @@ class U3Task: NSObject, UtilityTaskRunnable {
     private func printATM_MachineSets_CSVEntries(fromSetItem item: DealerItem) {
         let idCode = item.id!
         let kRange = idCode.range(of: "6110k")!
-        let ycodeX = idCode.substring(from: kRange.upperBound)
-        let ycode = String(ycodeX.characters.prefix(2))
+        let ycodeX = idCode[kRange.upperBound...]
+        let ycode = String(ycodeX.prefix(2))
         
         let desc = item.descriptionX!
         let isSima = desc.range(of: "'Sima ") != nil
@@ -276,8 +276,8 @@ class U3Task: NSObject, UtilityTaskRunnable {
         let idCode = item.id!
         let desc = item.descriptionX!
         if let valRange = desc.range(of: "values") {
-            let desc1 = desc.substring(to: valRange.upperBound)
-            var desc2 = desc.substring(from: valRange.upperBound)
+            let desc1 = String(desc[..<valRange.upperBound])
+            var desc2 = String(desc[valRange.upperBound...])
             var rcString = ""
             if !rsCode.isEmpty {
                 desc2 = rateSets[rsCode]!

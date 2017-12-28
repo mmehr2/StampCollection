@@ -125,9 +125,9 @@ class U4Task: NSObject, UtilityTaskRunnable {
         // the pictid is like "bu234" or "bu001", the name should be "bul234" or "bul1" (yes lower-case L AND 1 :)
         var nameToUse = x
         var finalSuffix = ""
-        if getCharacterClass(nameToUse.characters.last!) != .numeric {
-            finalSuffix = String(nameToUse.characters.last!)
-            nameToUse = String(nameToUse.characters.dropLast())
+        if getCharacterClass(nameToUse.last!) != .numeric {
+            finalSuffix = String(nameToUse.last!)
+            nameToUse = String(nameToUse.dropLast())
         }
         let (_, numS) = splitNumericEndOfString(nameToUse)
         if let num = Int(numS) {
@@ -176,13 +176,13 @@ class U5Task: NSObject, UtilityTaskRunnable {
     
     private func filterDuplicateDatePrefix(_ test: String) -> Bool {
         var result = false
-        guard test.characters.count >= 9 else { return result }
-        guard let c1 = test.characters.first, getCharacterClass(c1) == .numeric else { return result }
+        guard test.count >= 9 else { return result }
+        guard let c1 = test.first, getCharacterClass(c1) == .numeric else { return result }
         let splitPt1 = test.index(test.startIndex, offsetBy: 4)
         let splitPt2 = test.index(splitPt1, offsetBy: 1)
         let splitPt3 = test.index(splitPt2, offsetBy: 4)
-        let firstFour = test.substring(to: splitPt1)
-        let nextFour = test.substring(with: splitPt2..<splitPt3)
+        let firstFour = test[..<splitPt1]
+        let nextFour = test[splitPt2..<splitPt3]
         if firstFour == nextFour {
             result = true
         }
@@ -191,7 +191,7 @@ class U5Task: NSObject, UtilityTaskRunnable {
     
     private func fixTheDuplicatePrefix(_ x: DealerItem) -> DealerItem {
         let item = x
-        item.descriptionX = String(x.descriptionX.characters.dropFirst(5))
+        item.descriptionX = String(x.descriptionX.dropFirst(5))
         return item
         
     }

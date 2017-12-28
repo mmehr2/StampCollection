@@ -181,7 +181,7 @@ class BTItemDetails {
                 // add the same number of tabs as a suffix
                 // to do this, we double the string with a space in the middle, then drop the final 's' and add a 't'
                 let input2 = "\(input1) \(input1)"
-                let input3 = String(input2.characters.dropLast())
+                let input3 = String(input2.dropLast())
                 let newInput = input3 + "t"
                 print("Exception \(action) - passing \(newInput) to parseSheetFormat()")
                 parseSheetFormat(newInput)
@@ -354,7 +354,7 @@ class BTItemDetails {
             if let plistX = specialPlateNumbers[codeNumber] {
                 plist = plistX
             } else {
-                plist = String(input.characters.dropFirst())
+                plist = String(input.dropFirst())
             }
             let output = expandNumberList(plist)
             data["plateNumbers"] = output
@@ -372,7 +372,7 @@ class BTItemDetails {
         
         let name = "bulletin "
         if input.hasPrefix(name) {
-            let plist = String(input.characters.dropFirst(name.characters.count))
+            let plist = String(input.dropFirst(name.count))
             let output = expandNumberList(plist)
             data["bulletins"] = output
         } else {
@@ -389,7 +389,7 @@ class BTItemDetails {
         
         let name = "leaflet "
         if input.hasPrefix(name) {
-            let plist = String(input.characters.dropFirst(name.characters.count))
+            let plist = String(input.dropFirst(name.count))
             let output = expandNumberList(plist)
             data["leaflets"] = output
         } else {
@@ -402,7 +402,7 @@ class BTItemDetails {
         // try to return (nStamps nTabs nRows nCols) from a single "Ns Mt" or "Ns" designator
         if input.hasSuffix("s") {
             // simple count w/o tabs, no idea of format
-            let nStamps = String(input.characters.dropLast())
+            let nStamps = String(input.dropLast())
             return (nStamps, "?", "?", "?")
         } else if input.hasSuffix("t") {
             let comps = input.components(separatedBy: " ")
@@ -410,8 +410,8 @@ class BTItemDetails {
                 let stamps = comps[0]
                 let tabs = comps[1]
                 if stamps.hasSuffix("s") && tabs.hasSuffix("t") {
-                    let nStamps = String(stamps.characters.dropLast())
-                    let nTabs = String(tabs.characters.dropLast())
+                    let nStamps = String(stamps.dropLast())
+                    let nTabs = String(tabs.dropLast())
                     if let nS = Int(nStamps), let nT = Int(nTabs) {
                         // assuming tabs in rows across the bottom, the # of cols is the same as the number of tabs, and the number of rows is stamps/tabs
                         // NOTE: for modern cases where this is not the case, let's see how BT handles it - hand editing the output may be required
@@ -493,7 +493,7 @@ class BTItemDetails {
         var units = ""
         if input.hasSuffix("cm") {
             units = "cm"
-            let plist = String(input.characters.dropLast(2))
+            let plist = String(input.dropLast(2))
             let comps = plist.components(separatedBy: ",")
             for comp in comps {
                 if let (w, h) = BTItemDetails.parseSouvenirSheetFormatSingle(comp) {

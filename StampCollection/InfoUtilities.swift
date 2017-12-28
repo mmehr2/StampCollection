@@ -72,7 +72,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
         // this MUST precede format 1,2 finds, because these strings always start with a YYYY date as well
         // if this is found in another category, it is probably mistaken (but let's see what happens)
         // in this format the size of DD and YY is always 2, since leading zeroes are used
-        found = descr.substring(with: match)
+        found = String(descr[match]) //.substring(with: match)
         let dmy = found.components(separatedBy: ".")
         let yyyy = Int(dmy[0])!
         startYear = yyyy
@@ -86,7 +86,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 14 // which is dd.mm.yyyy-DD.MM.YYYY
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yyyy2 = Int(dmy[4])!
         endYear = yyyy2
@@ -104,7 +104,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 15 // which is dd.mm.yy-DD.MM.YY
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yy2 = Int(dmy[4])!
         endYear = yy2 + fixupCenturyYY(yy2)
@@ -122,7 +122,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 12 // which is dd.mm-DD.MM.YYYY
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yyyy = Int(dmy[3])!
         startYear = yyyy
@@ -139,7 +139,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 13 // which is dd.mm-DD.MM.YY
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yy = Int(dmy[3])!
         startYear = yy + fixupCenturyYY(yy)
@@ -155,10 +155,10 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
         startDay = dd
     }
     else if let match = descr.range(of: "^[0-9][0-9][0-9][0-9][s ]", options: .regularExpression) {
-        found = descr.substring(with: match)
-        let yyyy = Int(String(found.characters.prefix(4)))!        //let yyyy = Int(found[0...3])!
+        found = String(descr[match])
+        let yyyy = Int(String(found.prefix(4)))!        //let yyyy = Int(found[0...3])!
         startYear = yyyy
-        let sep = String(found.characters.suffix(1))        //let sep = found[4...4]
+        let sep = String(found.suffix(1))        //let sep = found[4...4]
         endYear = sep == "s" ? startYear+9 : startYear // such as 1960...1969, ten years long
         fmtFound = sep == "s" ? 2 : 1 // which is either YYYYs (2) or YYYY (1)
         // specify range of an entire year or range of years
@@ -167,7 +167,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9][0-9][0-9]\\-[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 3 // which is YYYY-YYYY
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let years = found.components(separatedBy: "-")
         let yyyy = Int(years[0])!
         startYear = yyyy;
@@ -184,7 +184,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 5 // which is DD.MM.YYYY - this MUST precede the format 4 YY counterpart, which would match all of these strings too
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yyyy = Int(dmy[2])!
         startYear = yyyy
@@ -198,7 +198,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^-[-]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 16 // which is -.MM.YYYY - this MUST precede its YY counterpart, which would match all of these strings too
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yyyy = Int(dmy[2])!
         startYear = yyyy
@@ -211,7 +211,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 4 // which is DD.MM.YY - this must follow format 5 YYYY counterpart, so that it doesn't pre-empt that test
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yy = Int(dmy[2])!
         startYear = yy + fixupCenturyYY(yy);
@@ -225,7 +225,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 6 // which is DD-DD.MM.YYYY (same note for YYYY preceding YY as above)
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yyyy = Int(dmy[2])!
         startYear = yyyy;
@@ -241,7 +241,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: "^[0-9][0-9]?\\-[0-9][0-9]?\\.[0-9][0-9]?\\.[0-9][0-9]", options: .regularExpression) {
         fmtFound = 7 // which is DD-DD.MM.YY (same note for YY following YYYY as above)
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let dmy = found.components(separatedBy: ".")
         let yy = Int(dmy[2])!
         startYear = yy + fixupCenturyYY(yy);
@@ -257,8 +257,8 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     }
     else if let match = descr.range(of: " \\'[0-9][0-9]", options: .regularExpression) {
         fmtFound = 8 // which is 'YY preceded by space, anywhere in string
-        found = descr.substring(with: match)
-        let yy = Int(String(found.characters.suffix(2)))!
+        found = String(descr[match])
+        let yy = Int(String(found.suffix(2)))!
         startYear = yy + fixupCenturyYY(yy);
         endYear = startYear
         //descr2 = descr // DEBUG
@@ -269,7 +269,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     else if let match = descr.range(of: " [0-9][0-9]\\'", options: .regularExpression) {
         fmtFound = 9 // which is YY' preceded by space, anywhere in string
         // NOTE: this will create false positives in Vending Labels, where the strings often contain things like 'Klussendorf 11' or 'Doarmat 23'
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let yidx1 = found.index(found.startIndex, offsetBy: 1)
         let yidx2 = found.index(found.startIndex, offsetBy: 3)
         let yy = Int(found[yidx1..<yidx2])!
@@ -283,7 +283,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     else if let match = descr.range(of: "[Dd]ate.[0-9][0-9][0-9][0-9][0-9][0-9]", options: .regularExpression) {
         fmtFound = 10 // which is 'Date DDMMYY', anywhere in string (also accepts 1st letter LC)
         // NOTE: this is used by one booklet item that specifies nothing but "print date 100989" for 10 Sep 1989 (Olive Branch booklet reprint)
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let yidx1 = found.index(found.startIndex, offsetBy: 9)
         let yidx2 = found.index(found.startIndex, offsetBy: 10)
         let yy = Int(found[yidx1...yidx2])!
@@ -304,7 +304,7 @@ func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Da
     else if let match = descr.range(of: " [0-9][0-9][0-9][0-9][^0-9]", options: .regularExpression) {
         // NOTE: this causes some false positives in AUI class (no dates given), only one of which is a date (e.g., "Jerusalem 3000")
         // SANITY RANGE CHECK REQUIRED - we only want dates between 1948 and 2015 (or current year, whatever it is!)
-        found = descr.substring(with: match)
+        found = String(descr[match])
         let yidx1 = found.index(found.startIndex, offsetBy: 1)
         let yidx2 = found.index(found.startIndex, offsetBy: 4)
         let yyyy = Int(found[yidx1...yidx2])!
@@ -448,7 +448,7 @@ func translateNumberToRange(_ input: String) -> CountableClosedRange<XlationRang
     }
     // also want to weed out non-numeric subparts for now
     let first = comps.first!
-    let numstr = String(first.characters.filter{getCharacterClass($0) == .numeric})
+    let numstr = String(first.filter{getCharacterClass($0) == .numeric})
     if numstr != first {
         return nil
     }
@@ -459,7 +459,7 @@ func translateNumberToRange(_ input: String) -> CountableClosedRange<XlationRang
         return m...m
     }
     let second = comps.last!
-    let numstr2 = String(second.characters.filter{getCharacterClass($0) == .numeric})
+    let numstr2 = String(second.filter{getCharacterClass($0) == .numeric})
     if numstr2 != second {
         return nil
     }
@@ -486,13 +486,13 @@ func normalize(_ n:Int, toDigitsOf m:Int) -> Int {
         // we want to parse individual characters of the input to compensate, I believe
         // we have access to comps0 and comps1 characters individually
         // basically, to get N', we substitute the last len(N) digits of M with 0's and add the resulting number to N
-        let lenM = first.characters.count
-        let lenN = second.characters.count
+        let lenM = first.count
+        let lenN = second.count
         let diffN = lenM - lenN
         if diffN > 0 {
             // ALT: we could just swap M and N to get the range, hmmm, no too hard to get decent input
-            let part1 = String(first.characters.prefix(diffN))
-            let part2 = String("00000".characters.suffix(lenN))
+            let part1 = String(first.prefix(diffN))
+            let part2 = String("00000".suffix(lenN))
             let factor = XlationRange(part1 + part2)!
             nout += factor
         } else {
@@ -655,10 +655,10 @@ func parseCatalogRange(_ input:String) -> [String] {
     // for example, "1234,5,6" should convert to be the same as "1234,1235,1236"; this is true of the list as well as subranges
     // another challenge: allow lower-case suffixes of letters only separated by '-' to remain untouched as single items, i.e.123a-e
     var result: [String] = []
-    if input.characters.count > 2 {
+    if input.count > 2 {
         let listIndex = input.index(input.startIndex, offsetBy: 2)
-        let catPrefix = input.substring(to: listIndex)
-        let catList = input.substring(from: listIndex)
+        let catPrefix = String(input[..<listIndex])
+        let catList = String(input[listIndex...])
         // remember and remove any Scott or Carmel prefix
         let (newList, compPfx) = removeCatalogPrefixInRange(catList)
         // deal with expansion of special catalog ranges called out by BT
@@ -694,11 +694,11 @@ func parseCatalogRange(_ input:String) -> [String] {
 fileprivate func removeCatalogSuffix(_ input:String) -> String {
     let rangeComps = input.components(separatedBy: "-")
     if let rc = rangeComps.last,
-        rc.characters.count == 1,
-        let z = rc.characters.first,
+        rc.count == 1,
+        let z = rc.first,
         CharacterSet.lowercaseLetters.contains( z ) {
         // this is probably a component like "123a-f" and should have the alpha parts removed; assume always 3 chars
-        return String(input.characters.dropLast(3))
+        return String(input.dropLast(3))
     }
     return input
 }
@@ -755,7 +755,7 @@ fileprivate func removeCatalogPrefixInRange(_ input:String) -> (String, Characte
     // let's assume that if the 1st character of the sequence is one of the Scott/Carmel characters, we need to attack the whole list
     if input.isEmpty { return (input, nil) }
     let scotts = CharacterSet(charactersIn: "BOCJ") // actually, B is used by Carmel, but can also be a suffix in Scott, hmmm
-    if let firstLetter = input.characters.first {
+    if let firstLetter = input.first {
         if !scotts.contains(firstLetter) {
             return (input, nil)
         } else {
@@ -783,7 +783,7 @@ fileprivate func removeCatalogPrefixInRange(_ input:String) -> (String, Characte
 }
 
 fileprivate func dropStart(_ input: String) -> String {
-    return String(input.characters.dropFirst())
+    return String(input.dropFirst())
 }
 
 fileprivate extension CharacterSet {
@@ -832,7 +832,7 @@ fileprivate func UnitTestCatalogRanges() {
 // To prepare a description field for the CSV import process when generating lines of text via batch utilities, for example
 // Ideally, we would use the Export library, but that use is complicated, and all we need to do is double the double-quote characters ('"')
 func prepFieldForCSVExport(_ input: String) -> String {
-    let result = input.characters.flatMap { x -> [Character] in
+    let result = input.flatMap { x -> [Character] in
         let set = CharacterSet(charactersIn: "\"")
         if set.contains(x) {
             return [x, x]

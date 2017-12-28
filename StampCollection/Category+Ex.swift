@@ -39,7 +39,7 @@ extension Category {
     }
     
     var numPriceTypes : Int {
-        return prices.characters.count
+        return prices.count
     }
     
     var usedPriceType : String? {
@@ -73,9 +73,9 @@ extension Category {
         case "number": name = "#"
         default:
             // need to lowercase/uppercase the 1st character in the name
-            let index = name.characters.index(after: name.startIndex)
-            let firstChar = forExport ? name.substring(to: index).uppercased() : name.substring(to: index).lowercased()
-            let rest = name.substring(from: index)
+            let index = name.index(after: name.startIndex)
+            let firstChar = forExport ? name[..<index].uppercased() : name[..<index].lowercased()
+            let rest = name[index...]
             name = firstChar + rest
         }
         return name

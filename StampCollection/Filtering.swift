@@ -32,10 +32,10 @@ func sortKVONSArray( _ input: NSArray, keyNames: [String] ) -> NSArray {
     for keyName in keyNames {
         var asc = true
         var kname = keyName
-        let klen = kname.characters.count
+        let klen = kname.count
         if kname.hasPrefix("-") {
             asc = false
-            kname = String(kname.characters.suffix(klen - 1))
+            kname = String(kname.suffix(klen - 1))
         }
         sortDes.append(NSSortDescriptor(key: kname, ascending: asc))
     }
