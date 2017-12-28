@@ -190,20 +190,6 @@ extension String {
     }
 }
 
-// MARK: NSRange Equatable extension for string comparisons
-// WHY DOESN'T APPLE PROVIDE THIS???
-extension NSRange: Equatable {
-    
-}
-
-public func ==( lhs: NSRange, rhs: NSRange ) -> Bool {
-    return lhs.length == rhs.length && lhs.location == rhs.location
-}
-
-public func !=( lhs: NSRange, rhs: NSRange ) -> Bool {
-    return !(lhs == rhs)
-}
-
 // MARK: date extensions and helpers
 // special date extension to create a Date from our normalized Gregorian-calendar-based string YYYY.MM.DD
 // era assumed to be AD, TZ assumed to be UTC maybe (or should it be Israeli? local? who cares?)
@@ -280,34 +266,35 @@ func linearScale( _ input: Double, fromRange: ClosedRange<Double>, toRange: Clos
     return result
 }
 
-// MARK: generic range comparisons
-// Isn't this in Swift already? I can't tell yet!
-func isValue<T: Comparable>( _ input: T, inClosedRange range: ClosedRange<T>) -> Bool {
-    if input < range.lowerBound {
-        return false
-    } else if input > range.upperBound {
-        return false
-    }
-    return true
-}
-
-func isValue<T: Comparable>( _ input: T, inOpenRange range: ClosedRange<T>) -> Bool {
-    if input < range.lowerBound {
-        return false
-    } else if input >= range.upperBound {
-        return false
-    }
-    return true
-}
-
-func isValue<T: Comparable>( _ input: T, inClosedRange range: Range<T>) -> Bool {
-    if input < range.lowerBound {
-        return false
-    } else if input > range.upperBound {
-        return false
-    }
-    return true
-}
+// Swift 4 - finally!
+//// MARK: generic range comparisons
+//// Isn't this in Swift already? I can't tell yet!
+//func isValue<T: Comparable>( _ input: T, inClosedRange range: ClosedRange<T>) -> Bool {
+//    if input < range.lowerBound {
+//        return false
+//    } else if input > range.upperBound {
+//        return false
+//    }
+//    return true
+//}
+//
+//func isValue<T: Comparable>( _ input: T, inOpenRange range: ClosedRange<T>) -> Bool {
+//    if input < range.lowerBound {
+//        return false
+//    } else if input >= range.upperBound {
+//        return false
+//    }
+//    return true
+//}
+//
+//func isValue<T: Comparable>( _ input: T, inClosedRange range: Range<T>) -> Bool {
+//    if input < range.lowerBound {
+//        return false
+//    } else if input > range.upperBound {
+//        return false
+//    }
+//    return true
+//}
 
 func isValue<T: Comparable>( _ input: T, inOpenRange range: Range<T>) -> Bool {
     if input < range.lowerBound {

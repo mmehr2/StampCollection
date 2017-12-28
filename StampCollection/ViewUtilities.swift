@@ -179,7 +179,7 @@ func histogram<T>(_ items: [T]) -> [T:Int] where T: Hashable {
     return output
 }
 
-func showHistogram<T>(_ input: [T:Int]) -> String where T:Hashable {
+func showHistogram<T>(_ input: [T:Int]) -> String {
     var output: [String] = []
     for (item, counter) in input {
         let ctr = counter > 1 ? "(\(counter))" : ""
