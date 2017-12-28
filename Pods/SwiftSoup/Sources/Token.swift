@@ -15,7 +15,7 @@ open class Token {
 	}
 
 	func tokenType() -> String {
-		return String(describing: type(of: self))
+		return String(describing: Swift.type(of: self))
 	}
 
 	/**
@@ -32,7 +32,7 @@ open class Token {
 	}
 
 	open func toString()throws->String {
-		return String(describing: type(of: self))
+		return String(describing: Swift.type(of: self))
 	}
 
 	final class Doctype: Token {
@@ -385,4 +385,14 @@ open class Token {
 		case Char
 		case EOF
 	}
+}
+
+extension Token: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        do{
+            return try self.toString()
+        }catch{
+            return "Error while get string debug"
+        }
+    }
 }
