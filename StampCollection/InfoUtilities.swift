@@ -515,8 +515,9 @@ func translateNumberListToRanges(_ input: String) -> [CountableClosedRange<Xlati
 }
 
 // outputs an array of numeric strings with all the numbers listed in the numeric range
+// i.e., converts 113...116 to ['113','114','115','116']
 func printRangeToArray(_ input: CountableClosedRange<XlationRange>) -> [String] {
-    let result = input.flatMap{String($0)}
+    let result = input.map{ String($0) }
     return result
 }
 
