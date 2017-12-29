@@ -128,6 +128,28 @@ extension String {
     
 }
 
+func escapeForRegex(_ input: String) -> String {
+    let r = Regex(pattern: "([\\-\\.\\?\\(\\)\\{\\}\\[\\]])")
+    return input.replace(r, withTemplate: "\\\\$0")
+}
+
+// I did find this Swift4 matching function here: https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
+// I modified it to return just the Range array instead of actual strings referred to (best for my usage)
+func matches(for regex: String, in text: String) -> [Range<String.Index>] {
+    
+   do {
+        let regex = try NSRegularExpression(pattern: regex)
+        let results = regex.matches(in: text,
+                                    range: NSRange(text.startIndex..., in: text))
+        return results.map {
+            Range($0.range, in: text)!
+        }
+    } catch { // let error
+        //print("invalid regex: \(error.localizedDescription)")
+        return []
+    }
+}
+
 /*
 USAGE:
 
