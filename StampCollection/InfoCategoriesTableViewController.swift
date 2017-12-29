@@ -12,7 +12,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
     
     lazy var csvFileImporter = ImportExport()
     
-    var model: CollectionStore! {
+    @objc var model: CollectionStore! {
         didSet {
             BTDealerStore.collection = model // allows generation of JS category pic fixups
         }
@@ -158,7 +158,7 @@ class InfoCategoriesTableViewController: UITableViewController, ProgressReportin
      before finally calling resignCurrent().
      A better article can be found here (June 4, 2016, about a year old): https://www.allaboutswift.com/dev/2016/6/4/working-with-nsprogress
      */
-    func startUI(_ dataModel: CollectionStore) {
+    @objc func startUI(_ dataModel: CollectionStore) {
         // save the now-properly-initialized data model object reference
         model = dataModel
         print("startUI triggered in \(self)")

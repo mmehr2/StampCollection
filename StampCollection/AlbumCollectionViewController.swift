@@ -10,9 +10,9 @@ import UIKit
 
 class AlbumCollectionViewController: UICollectionViewController {
     
-    var model: CollectionStore!
+    @objc var model: CollectionStore!
     
-    func startUI(_ store: CollectionStore) {
+    @objc func startUI(_ store: CollectionStore) {
         prepAlbumLists()
         families = model.albumFamilies
         print("Started with \(families.count) album family groups")

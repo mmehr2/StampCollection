@@ -59,7 +59,7 @@ class ViewController: UITableViewController {
     // NOTE: the app delegate will send this message to all top-level VCs when starting up
     // we can use this to autoload the persisted data before the user actually loads this
     // NOTE: this happens before the progressView has been loaded
-    func setModel(_ store: CollectionStore) {
+    @objc func setModel(_ store: CollectionStore) {
         // use persisted copy with manual updates from web
         //setSpinnerView(true)
         progressView?.isHidden = false
