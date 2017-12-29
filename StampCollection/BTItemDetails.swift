@@ -106,9 +106,9 @@ class BTItemDetails {
                     parseBulletinList(component)
                 } else if component.hasPrefix("leaflet") {
                     parseLeafletList(component)
-                } else if component.hasSuffix("s") {
+                } else if component.hasSuffix("s") && component.count < 10 {
                     parseSheetFormat(component)
-                } else if component.hasSuffix("t") {
+                } else if component.hasSuffix("t") && component.count < 10 {
                     parseSheetFormat(component)
                 } else if component.hasSuffix("cm") {
                     parseSouvenirSheetFormat(component)

@@ -46,8 +46,14 @@ class BTItemDetailsMessageProcessor: BTMessageProcessor {
                             if let rr = elmtx1.range(of: title) {
                                 // start after that, skipping a space, and run to the end, minus any final space and '\r' CR chars
                                 let startField = elmtx1.index(after: rr.upperBound)
-                                let endField = elmtx1.endIndex
-                                info = elmtx1[startField..<endField].trimmingCharacters(in: CharacterSet(charactersIn: " \r"))
+                                var endField = elmtx1.endIndex
+                                if let rr2 = elmtx1.range(of: "RELATED ITEMS") {
+                                    // possibly terminate string with RELATED ITEMS section, if included
+                                    endField = elmtx1.index(before: rr2.lowerBound)
+                                    info = String(elmtx1[startField..<endField])
+                                } else {
+                                    info = elmtx1[startField..<endField].trimmingCharacters(in: CharacterSet(charactersIn: " \r"))
+                                }
                             }
                         }
                     }
