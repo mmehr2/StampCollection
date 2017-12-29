@@ -83,7 +83,7 @@
 
 /* Begin PBXFileReference section */
 		007D3C79D0CF0BE6FF2556B8846850EA /* ArrayExt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrayExt.swift; path = Sources/ArrayExt.swift; sourceTree = "<group>"; };
-		080C4CE5A9261C288EDA7E87269172CD /* Pods-StampCollection.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-StampCollection.modulemap"; sourceTree = "<group>"; };
+		080C4CE5A9261C288EDA7E87269172CD /* Pods-StampCollection.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StampCollection.modulemap"; sourceTree = "<group>"; };
 		0AEE3159671F061357B3988820992AB3 /* DataUtil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataUtil.swift; path = Sources/DataUtil.swift; sourceTree = "<group>"; };
 		17B21F720D6DA45CCA477E7C29B31536 /* Pods-StampCollection-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StampCollection-resources.sh"; sourceTree = "<group>"; };
 		1CEDF1B4C93C6BF04A8B3A376D824DF8 /* CharacterReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CharacterReader.swift; path = Sources/CharacterReader.swift; sourceTree = "<group>"; };
@@ -117,14 +117,14 @@
 		7D11884996774307AC571FE915381DDA /* DocumentType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentType.swift; path = Sources/DocumentType.swift; sourceTree = "<group>"; };
 		7E06B99125D7235986F5D7B72C6375A2 /* HtmlTreeBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HtmlTreeBuilder.swift; path = Sources/HtmlTreeBuilder.swift; sourceTree = "<group>"; };
 		7EC5D9A16A30A34A3F61C40E41DBD505 /* Pods-StampCollection-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StampCollection-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7F7FD406C16D40044B9C6C9CA8766FBC /* SwiftSoup.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftSoup.modulemap; sourceTree = "<group>"; };
+		7F7FD406C16D40044B9C6C9CA8766FBC /* SwiftSoup.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftSoup.modulemap; sourceTree = "<group>"; };
 		7FDCF5CC7CF2C5D8A9614A7594208FA7 /* Attributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Attributes.swift; path = Sources/Attributes.swift; sourceTree = "<group>"; };
 		85BA06715F85D033EEFF5E596790DFC3 /* OrderedDictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrderedDictionary.swift; path = Sources/OrderedDictionary.swift; sourceTree = "<group>"; };
 		86DC33BF4B47B4021DF6CA2F9FD66666 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AD2063C746E24C76A695124CB8F61C /* Cleaner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cleaner.swift; path = Sources/Cleaner.swift; sourceTree = "<group>"; };
 		891F553D19B720459C76E855199AE6A8 /* Collector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Collector.swift; path = Sources/Collector.swift; sourceTree = "<group>"; };
 		91F70944F55E23CA9F1AA9C3F5E543E6 /* Attribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Attribute.swift; path = Sources/Attribute.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		97B9BE6A120CF124AC947FD213458C40 /* TextNode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextNode.swift; path = Sources/TextNode.swift; sourceTree = "<group>"; };
 		9A1C5C6357B71AF5FED442F9E3F6C77C /* XmlDeclaration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XmlDeclaration.swift; path = Sources/XmlDeclaration.swift; sourceTree = "<group>"; };
 		9CF8CDB58FEC3DF8E9E9C788D7986C1A /* Evaluator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Evaluator.swift; path = Sources/Evaluator.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		AB9CFDFD9EC0461E0183230E7BD4D23C /* CombiningEvaluator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombiningEvaluator.swift; path = Sources/CombiningEvaluator.swift; sourceTree = "<group>"; };
 		B51CF4F383DFC1B1CC269330746BFE6C /* SwiftSoup-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSoup-prefix.pch"; sourceTree = "<group>"; };
 		B73A2A8A028F18D15A40B4C70BE05D3A /* Pods-StampCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StampCollection.debug.xcconfig"; sourceTree = "<group>"; };
-		B7A61B470E23AA36ABE52892CA0CF960 /* Pods_StampCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StampCollection.framework; path = "Pods-StampCollection.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A61B470E23AA36ABE52892CA0CF960 /* Pods_StampCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StampCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9A3D53B532045590E5A08A0039C63BB /* Pods-StampCollection-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StampCollection-umbrella.h"; sourceTree = "<group>"; };
 		BA80EA825456A85C5EAC81128B7D2A13 /* StreamReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StreamReader.swift; path = Sources/StreamReader.swift; sourceTree = "<group>"; };
 		BAD7FE9BBC26C485FA0644BE827A3819 /* SwiftSoup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSoup.swift; path = Sources/SwiftSoup.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		EB52349E8DBF3FCE89A138FFE5F1955F /* SwiftSoup-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSoup-umbrella.h"; sourceTree = "<group>"; };
 		EFD542FA9973BA73EB6305A1C4359F9C /* Pods-StampCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StampCollection.release.xcconfig"; sourceTree = "<group>"; };
 		F2005E18A17D8432D600D482946D4853 /* TreeBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TreeBuilder.swift; path = Sources/TreeBuilder.swift; sourceTree = "<group>"; };
-		F24A8A11031DAA7E8E984E3B403C8BC7 /* SwiftSoup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftSoup.framework; path = SwiftSoup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F24A8A11031DAA7E8E984E3B403C8BC7 /* SwiftSoup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftSoup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DF94B4A7E96608E4C28CA87594E86E /* HtmlTreeBuilderState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HtmlTreeBuilderState.swift; path = Sources/HtmlTreeBuilderState.swift; sourceTree = "<group>"; };
 		FA6624F64CD104A5B090FB1650EBBA42 /* OrderedSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrderedSet.swift; path = Sources/OrderedSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,7 +250,6 @@
 				579FD986C85730D8DF75FB2A4152B0BD /* XmlTreeBuilder.swift */,
 				BDA46F0D81E0F1D9995A5ED7DB62D096 /* Support Files */,
 			);
-			name = SwiftSoup;
 			path = SwiftSoup;
 			sourceTree = "<group>";
 		};
@@ -394,6 +393,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					6A5EFC3FEDC75B92E8AEDCFBAA66DBF6 = {
+						LastSwiftMigration = 0920;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
