@@ -43,7 +43,7 @@ class BTItemDetailsMessageProcessor: BTMessageProcessor {
                         let elements = try body.text().components(separatedBy: "\n")
                         if let elmtx1 = elements.first {
                             // find the title as a literal regex pattern (escape all special regex characters in the input like '-' and '()')
-                            let litTitle = escapeForRegex(title)
+                            let litTitle = escapeAllRegexCharacters(title)
                             let matches1 = matches(for: litTitle, in: elmtx1)
                             if matches1.count > 0 {
                                 let rr = matches1[0]

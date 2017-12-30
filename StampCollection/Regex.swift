@@ -129,7 +129,7 @@ extension String {
 }
 
 // prepare an input string (website data) for searching as a regex pattern - must escape all special characters with a "\\"
-func escapeForRegex(_ input: String) -> String {
+func escapeAllRegexCharacters(_ input: String) -> String {
     let r = Regex(pattern: "([\\-\\.\\?\\(\\)\\{\\}\\[\\]])") // one capture group of a single instance of any special RegEx character that might occur
     return input.replace(r, withTemplate: "\\\\$0")
 }
