@@ -82,7 +82,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s88,"1959 Festivals 5720 (of Seven Species)","In Stock",6110s88,0,"Sets, SS, FDC","C 200-202","S 162-164",0.60,0.36,0.34,0.34,1,1,1,1,,,,,2
 6110s89,"1959 Ben-Yehuda","In Stock",6110s89,0,"Sets, SS, FDC","C 203","S 156",0.29,0.19,0.21,0.13,1,1,1,1,,,,,2
 6110s90,"1959 Settlements","In Stock",6110s90,0,"Sets, SS, FDC","C 204-206","S 165-167",1.05,0.36,0.39,0.32,1,1,1,1,,,,,2
-6110s91,"1960 Provisional Stamps (11)","In Stock",6110s91,0,"Sets, SS, FDC","C 207-217","S 168-177,171A",1.05,0.48,0.52,0.42,1,1,1,1,,,,,2
+6110s91,"1960 Provisional Stamps (11)","In Stock",6110s91,0,"Sets, SS, FDC","C 207-217","S 168-177, 171A",1.05,0.48,0.52,0.42,1,1,1,1,,,,,2
 6110s93,"1960 Airmail Towns (9)","In Stock",6110s93,0,"Sets, SS, FDC","C 218-226","S C18-C26",7.80,1.85,2.10,1.30,1,1,1,1,,,,,2
 6110s94,"1960 Airmail Eilat","In Stock",6110s94,0,"Sets, SS, FDC","C 227","S C27",15.00,0.95,2.47,1.70,1,1,1,1,,,,,2
 6110s95,"1960 Refugee Year","In Stock",6110s95,0,"Sets, SS, FDC","C 228,229","S 178,179",0.32,0.24,0.21,0.21,1,1,1,1,,,,,2
@@ -136,7 +136,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s149,"1964 TABAI - Souvenir Sheet","In Stock",6110s149,0,"Sets, SS, FDC","C B5","S 271a",1.50,2.60,2.35,1.50,1,1,1,1,,,,,2
 6110s150,"1965 Masada","In Stock",6110s150,0,"Sets, SS, FDC","C 335-337","S 272-274",1.72,0.80,0.58,0.65,1,1,1,1,,,,,2
 6110s151,"1965 Book Fair","In Stock",6110s151,0,"Sets, SS, FDC","C 338","S 275",0.26,0.24,0.26,0.16,1,1,1,1,,,,,2
-6110s152,"1965 Town Emblems I (19)","In Stock",6110s152,0,"Sets, SS, FDC","C 339-357","S 276-291,334-336",7.00,1.60,1.40,1.60,1,1,1,1,,,,,2
+6110s152,"1965 Town Emblems I (19)","In Stock",6110s152,0,"Sets, SS, FDC","C 339-357","S 276-291, 334-336",7.00,1.60,1.40,1.60,1,1,1,1,,,,,2
 6110s154,"1965 17th Independence (Carrier)","In Stock",6110s154,0,"Sets, SS, FDC","C 370","S 293",0.16,0.19,0.21,0.13,1,1,1,1,,,,,2
 6110s155,"1965 Concentration Camps","In Stock",6110s155,0,"Sets, SS, FDC","C 371","S 292",0.37,0.19,0.24,0.16,1,1,1,1,,,,,2
 6110s156,"1965 Cooperation Year","In Stock",6110s156,0,"Sets, SS, FDC","C 372","S 295",0.26,0.19,0.24,0.13,1,1,1,1,,,,,2
@@ -215,7 +215,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s231,"1971 Emek Settlement","In Stock",6110s231,0,"Sets, SS, FDC","C 537","S 459",0.21,0.19,0.21,0.19,1,1,1,1,,,,,2
 6110s232,"1971 Festivals 5732 (Verses)","In Stock",6110s232,0,"Sets, SS, FDC","C 538-542","S 454-458",0.99,0.66,0.60,0.55,1,1,1,1,,,,,2
 6110s233,"1971 Volcani Institute","In Stock",6110s233,0,"Sets, SS, FDC","C 543","S 460",0.26,0.19,0.24,0.16,1,1,1,1,,,,,2
-6110s234,"1971 Israel Landscapes I & II (27)","In Stock",6110s234,0,"Sets, SS, FDC","C 544-566,748-751","S 461~474,592,649,664,672,743",9.00,3.95,8.40,5.50,1,1,1,1,,,,,2
+6110s234,"1971 Israel Landscapes I & II (27)","In Stock",6110s234,0,"Sets, SS, FDC","C 544-566, 748-751","S 461~474, 592,649, 664,672, 743",9.00,3.95,8.40,5.50,1,1,1,1,,,,,2
 6110s235,"1972 Education","In Stock",6110s235,0,"Sets, SS, FDC","C 575-578","S 475-478",0.34,0.39,0.34,0.32,1,1,1,1,,,,,2
 6110s236,"1972 Israeli Art (Painting 5)","In Stock",6110s236,0,"Sets, SS, FDC","C 579-583","S 479-483",1.04,0.87,0.94,0.68,1,1,1,1,,,,,2
 6110s237,"1972 Pesach","In Stock",6110s237,0,"Sets, SS, FDC","C 584-586","S 484-486",0.78,0.73,0.52,0.55,1,1,1,1,,,,,2
@@ -305,7 +305,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s321,"1978 Marriage Contracts","In Stock",6110s321,0,"Sets, SS, FDC","C 782-784","S 685-687",0.47,0.66,0.50,0.42,1,1,1,1,,,,,2
 6110s322,"1978 Painting","In Stock",6110s322,0,"Sets, SS, FDC","C 785-787","S 682-684",0.55,0.76,0.63,0.50,1,1,1,1,,,,,2
 6110s323,"1978 Memorial Day (Yad Lebanim)","In Stock",6110s323,0,"Sets, SS, FDC","C ---","S 694a-",0.16,0.12,0.52,0.13,1,1,1,1,,,,,2
-6110s325,"1978 Personalities (14)","In Stock",6110s325,0,"Sets, SS, FDC","C 788-801","S 688-692,695,696,699,700,705,706,712-714",2.00,1.58,2.10,1.56,1,1,1,1,,,,,2
+6110s325,"1978 Personalities (14)","In Stock",6110s325,0,"Sets, SS, FDC","C 788-801","S 688-692, 695,696, 699,700, 705,706, 712-714",2.00,1.58,2.10,1.56,1,1,1,1,,,,,2
 6110s326,"1978 TABIR 78' - Souvenir Sheet","In Stock",6110s326,0,"Sets, SS, FDC","C B17","S 693",1.56,3.20,3.12,1.56,1,1,1,1,,,,,2
 6110s327,"1978 Stand-By 5.40","In Stock",6110s327,0,"Sets, SS, FDC","C 573","S 589",0.16,0.09,0.19,0.13,1,1,1,1,,,,,2
 6110s328,"1978 Y.M.C.A.","In Stock",6110s328,0,"Sets, SS, FDC","C 826","S 698",0.24,0.28,0.24,0.19,1,1,1,1,,,,,2
@@ -350,7 +350,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s367,"1981 11th Maccabiah","In Stock",6110s367,0,"Sets, SS, FDC","C 920-922","S 779-781",1.48,1.60,1.48,1.43,1,1,1,1,,,,,2
 6110s368,"1981 Memorial Day (Biqat Ha-Yarden)","In Stock",6110s368,0,"Sets, SS, FDC","C 923","S 782",0.29,0.24,0.32,0.26,1,1,1,1,,,,,2
 6110s369,"1981 Jewish Family","In Stock",6110s369,0,"Sets, SS, FDC","C 924","S 783",0.34,0.48,0.37,0.32,1,1,1,1,,,,,2
-6110s370,"1981 Stand-By - Sheqel 0.70 0.90 3.00 4.00","In Stock",6110s370,0,"Sets, SS, FDC","C 895-898","S 762A,784-786",0.42,0.35,0.70,0.39,1,1,1,1,,,,,2
+6110s370,"1981 Stand-By - Sheqel 0.70 0.90 3.00 4.00","In Stock",6110s370,0,"Sets, SS, FDC","C 895-898","S 762A, 784-786",0.42,0.35,0.70,0.39,1,1,1,1,,,,,2
 6110s371,"1981 Festivals 5742 (Moses)","In Stock",6110s371,0,"Sets, SS, FDC","C 925-928","S 787-790",1.10,1.07,1.15,1.02,1,1,1,1,,,,,2
 6110s372,"1981 Roses","In Stock",6110s372,0,"Sets, SS, FDC","C 929-931","S 791-793",1.17,1.24,1.17,1.10,1,1,1,1,,,,,2
 6110s373,"1981 Ha-Shiv'a Interchange","In Stock",6110s373,0,"Sets, SS, FDC","C 932","S 794",0.73,1.07,0.73,0.70,1,1,1,1,,,,,2
@@ -371,7 +371,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s389,"1982 Beautiful Israel","In Stock",6110s389,0,"Sets, SS, FDC","C 975","S 830",0.89,1.08,0.96,0.84,1,1,1,1,,,,,2
 6110s390,"1982 Beer Sheva 82' - Souvenir Sheet","In Stock",6110s390,0,"Sets, SS, FDC","C B22","S 830a",1.82,2.90,2.86,1.82,1,1,1,1,,,,,2
 6110s391,"1982 Martyrs - Souvenir Sheet","In Stock",6110s391,0,"Sets, SS, FDC","C B23","S 831",4.68,6.60,7.02,4.68,1,1,1,1,,,,,2
-6110s392,"1983 Stand-By - Seven Species 0.40-15.00","In Stock",6110s392,0,"Sets, SS, FDC","C 955-961","S 805,806,810-814",0.73,0.54,1.30,0.70,1,1,1,1,,,,,2
+6110s392,"1983 Stand-By - Seven Species 0.40-15.00","In Stock",6110s392,0,"Sets, SS, FDC","C 955-961","S 805,806, 810-814",0.73,0.54,1.30,0.70,1,1,1,1,,,,,2
 6110s393,"1983 Bees","In Stock",6110s393,0,"Sets, SS, FDC","C 1000","S 833",1.48,1.70,1.62,1.43,1,1,1,1,,,,,2
 6110s394,"1983 Anti Smoking Campaign","In Stock",6110s394,0,"Sets, SS, FDC","C 996","S 832",0.39,0.44,0.55,0.37,1,1,1,1,,,,,2
 6110s395,"1983 Settling","In Stock",6110s395,0,"Sets, SS, FDC","C 997-999","S 834-836",2.30,2.60,2.42,2.14,1,1,1,1,,,,,2
@@ -383,7 +383,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s401,"1983 Raoul Wallenberg","In Stock",6110s401,0,"Sets, SS, FDC","C 1006","S 842",0.84,0.95,0.89,0.78,1,1,1,1,,,,,2
 6110s402,"1983 Babi Yar (Painting)","In Stock",6110s402,0,"Sets, SS, FDC","C 1007","S 843",1.30,1.60,1.36,1.25,1,1,1,1,,,,,2
 6110s403,"1983 The Holocaust - Souvenir Sheet","In Stock",6110s403,0,"Sets, SS, FDC","C B25","S 841",2.60,4.50,3.77,2.60,1,1,1,1,,,,,2
-6110s404,"1983 Settlements 11.00 13.00","In Stock",6110s404,0,"Sets, SS, FDC","C 1015-1016","S 849,850",0.89,1.25,0.89,0.84,1,1,1,1,,,,,2
+6110s404,"1983 Settlements 11.00 13.00","In Stock",6110s404,0,"Sets, SS, FDC","C 1015- 1016","S 849,850",0.89,1.25,0.89,0.84,1,1,1,1,,,,,2
 6110s405,"1983 Festivals 5744 (Synagogues)","In Stock",6110s405,0,"Sets, SS, FDC","C 1011-1014","S 844-847",1.82,2.40,1.90,1.74,1,1,1,1,,,,,2
 6110s406,"1983 Afula","In Stock",6110s406,0,"Sets, SS, FDC","C 1017","S 848",0.60,0.66,0.65,0.55,1,1,1,1,,,,,2
 6110s407,"1983 Tel Aviv 83' - Souvenir Sheet","In Stock",6110s407,0,"Sets, SS, FDC","C B26","S 851",5.46,8.70,7.80,5.46,1,1,1,1,,,,,2
@@ -398,7 +398,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s416,"1984 Stand-By - Seven Species 30 50 100 500","In Stock",6110s416,0,"Sets, SS, FDC","C 962-965","S 876-879",3.12,1.57,3.90,2.86,1,1,1,1,,,,,2
 6110s417,"1984 Los Angeles 84'","In Stock",6110s417,0,"Sets, SS, FDC","C 1037","S 883",1.10,1.12,1.15,1.04,1,1,1,1,,,,,2
 6110s418,"1984 Los Angeles 84' - Souvenir Sheet","In Stock",6110s418,0,"Sets, SS, FDC","C B27","S 884",4.68,7.60,6.00,4.68,1,1,1,1,,,,,2
-6110s419,"1984 Pinsker, Wingate","In Stock",6110s419,0,"Sets, SS, FDC","C 1036,1039","S 880,881",0.89,1.21,0.89,0.84,1,1,1,1,,,,,2
+6110s419,"1984 Pinsker, Wingate","In Stock",6110s419,0,"Sets, SS, FDC","C 1036 1039","S 880,881",0.89,1.21,0.89,0.84,1,1,1,1,,,,,2
 6110s420,"1984 JDC","In Stock",6110s420,0,"Sets, SS, FDC","C 1040","S 882",0.52,0.66,0.52,0.50,1,1,1,1,,,,,2
 6110s421,"1984 Nahalal","In Stock",6110s421,0,"Sets, SS, FDC","C 1041","S 889",0.78,0.96,0.78,0.73,1,1,1,1,,,,,2
 6110s422,"1984 David Wolffsohn","In Stock",6110s422,0,"Sets, SS, FDC","C 1042","S 888",1.30,1.74,1.30,1.25,1,1,1,1,,,,,2
@@ -421,7 +421,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s441,"1985 The Kibbutz","In Stock",6110s441,0,"Sets, SS, FDC","C 1081","S 921",1.30,1.40,1.36,1.30,1,1,1,1,,,,,2
 6110s442,"1985 Gedera","In Stock",6110s442,0,"Sets, SS, FDC","C 1083","S 920",0.86,0.97,0.91,0.78,1,1,1,1,,,,,2
 6110s443,"1986 Stand-By - New Shekel - Herzl (8)","In Stock",6110s443,0,"Sets, SS, FDC","C 1085-1092","S 922-929",2.08,1.45,2.14,1.95,1,1,1,1,,,,,2
-6110s444,"1986 Archaeology 1.00 3.00","In Stock",6110s444,0,"Sets, SS, FDC","C 1106,1108","S 930,931",3.12,0.79,4.50,2.86,1,1,1,1,,,,,2
+6110s444,"1986 Archaeology 1.00 3.00","In Stock",6110s444,0,"Sets, SS, FDC","C 1106 1108","S 930,931",3.12,0.79,4.50,2.86,1,1,1,1,,,,,2
 6110s445,"1986 Red Sea Corals","In Stock",6110s445,0,"Sets, SS, FDC","C 1113-1115","S 932-934",1.67,1.40,1.82,1.56,1,1,1,1,,,,,2
 6110s446,"1986 Voice of Israel","In Stock",6110s446,0,"Sets, SS, FDC","C 1112","S 936",0.99,1.07,1.10,0.96,1,1,1,1,,,,,2
 6110s447,"1986 Arthur Rubinstein","In Stock",6110s447,0,"Sets, SS, FDC","C 1111","S 935",2.86,1.07,1.69,2.34,1,1,1,1,,,,,2
@@ -438,7 +438,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s458,"1986 Netanya 86' - Souvenir Sheet","In Stock",6110s458,0,"Sets, SS, FDC","C B33","S 951",4.40,6.00,6.00,4.40,1,1,1,1,,,,,2
 6110s459,"1986 Nazareth","In Stock",6110s459,0,"Sets, SS, FDC","C 1136","S 953",1.25,1.26,1.30,1.17,1,1,1,1,,,,,2
 6110s460,"1986 Meteorological Service","In Stock",6110s460,0,"Sets, SS, FDC","C 1135","S 952",0.73,0.95,0.94,0.68,1,1,1,1,,,,,2
-6110s461,"1986 Huberman, Toscanini","In Stock",6110s461,0,"Sets, SS, FDC","C 1133-1134","S 954,955",4.16,4.50,4.30,3.90,1,1,1,1,,,,,2
+6110s461,"1986 Huberman, Toscanini","In Stock",6110s461,0,"Sets, SS, FDC","C 1133- 1134","S 954,955",4.16,4.50,4.30,3.90,1,1,1,1,,,,,2
 6110s463,"1987 Owls","In Stock",6110s463,0,"Sets, SS, FDC","C 1137-1140","S 956-959",4.00,2.60,4.00,3.76,1,1,1,1,,,,,2
 6110s464,"1987 Owls - Souvenir Sheet","In Stock",6110s464,0,"Sets, SS, FDC","C B34","S 960",4.94,6.20,6.00,4.94,1,1,1,1,,,,,2
 6110s465,"1987 Memorial Day (Givat Ha-Tahmoshet)","In Stock",6110s465,0,"Sets, SS, FDC","C 1147","S 961",0.72,0.60,0.91,0.58,1,1,1,1,,,,,2
@@ -471,7 +471,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s492,"1988 Kristallnacht","In Stock",6110s492,0,"Sets, SS, FDC","C 1194","S 999",0.99,0.97,1.17,0.96,1,1,1,1,,,,,2
 6110s493,"1988 Moshe Dayan","In Stock",6110s493,0,"Sets, SS, FDC","C 1192","S 1000",2.34,0.55,1.69,1.69,1,1,1,1,,,,,2
 6110s494,"1988 The Jewish Legion","In Stock",6110s494,0,"Sets, SS, FDC","C 1193","S 1001",2.34,2.00,2.52,2.26,1,1,1,1,,,,,2
-6110s496,"1988 Archaeology 0.40 0.60","In Stock",6110s496,0,"Sets, SS, FDC","C 1101-1102","S 1002-1003",1.17,0.26,2.86,1.12,1,1,1,1,,,,,2
+6110s496,"1988 Archaeology 0.40 0.60","In Stock",6110s496,0,"Sets, SS, FDC","C 1101- 1102","S 1002- 1003",1.17,0.26,2.86,1.12,1,1,1,1,,,,,2
 6110s497,"1988 Agricultural Achievements","In Stock",6110s497,0,"Sets, SS, FDC","C 1195-1197","S 1004-1006",2.20,2.00,2.86,2.14,1,1,1,1,,,,,2
 6110s498,"1989 Tourism","In Stock",6110s498,0,"Sets, SS, FDC","C 1198-1201","S 1007-1010",4.00,3.60,4.16,3.90,1,1,1,1,,,,,2
 6110s499,"1989 Rabbi Maimon","In Stock",6110s499,0,"Sets, SS, FDC","C 1202","S 1011",1.82,2.30,2.18,1.74,1,1,1,1,,,,,2
@@ -481,7 +481,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s503,"1989 Memorial Day (Air Forces)","In Stock",6110s503,0,"Sets, SS, FDC","C 1204","S 1013",0.73,0.54,0.99,0.65,1,1,1,1,,,,,2
 6110s504,"1989 Moshe Smoira","In Stock",6110s504,0,"Sets, SS, FDC","C 1206","S 1023",1.04,1.05,1.38,0.99,1,1,1,1,,,,,2
 6110s505,"1989 13th Maccabiah","In Stock",6110s505,0,"Sets, SS, FDC","C 1207","S 1024",0.89,1.05,1.25,0.84,1,1,1,1,,,,,2
-6110s506,"1989 Archaeology 0.70 0.80","In Stock",6110s506,0,"Sets, SS, FDC","C 1103-1104","S 1015-1016",1.69,0.26,2.00,1.40,1,1,1,1,,,,,2
+6110s506,"1989 Archaeology 0.70 0.80","In Stock",6110s506,0,"Sets, SS, FDC","C 1103- 1104","S 1015- 1016",1.69,0.26,2.00,1.40,1,1,1,1,,,,,2
 6110s507,"1989 French Revolution - Souvenir Sheet","In Stock",6110s507,0,"Sets, SS, FDC","C B40","S 1027",6.76,10.00,10.40,6.76,1,1,1,1,,,,,2
 6110s508,"1989 Ducks","In Stock",6110s508,0,"Sets, SS, FDC","C 1210-1213","S 1025",3.90,3.50,4.16,3.64,1,1,1,1,,,,,2
 6110s510,"1989 Graphic Design","In Stock",6110s510,0,"Sets, SS, FDC","C 1208","S 1026",1.10,1.07,1.48,1.07,1,1,1,1,,,,,2
@@ -502,7 +502,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s527,"1990 Architecture 0.75","In Stock",6110s527,0,"Sets, SS, FDC","C 1231","S 1044",0.63,0.38,1.15,0.57,1,1,1,1,,,,,2
 6110s528,"1990 Greetings II - 0.55 0.80 1.00","In Stock",6110s528,0,"Sets, SS, FDC","C 1250-1252","S 1059-1061",1.72,1.50,2.47,1.62,1,1,1,1,,,,,2
 6110s529,"1990 Hagana","In Stock",6110s529,0,"Sets, SS, FDC","C 1249","S 1058",1.46,1.25,1.82,1.38,1,1,1,1,,,,,2
-6110s530,"1990 Folklore Festival","In Stock",6110s530,0,"Sets, SS, FDC","C 1247-1248","S 1057a",4.16,1.85,4.16,3.90,1,1,1,1,,,,,2
+6110s530,"1990 Folklore Festival","In Stock",6110s530,0,"Sets, SS, FDC","C 1247- 1248","S 1057a",4.16,1.85,4.16,3.90,1,1,1,1,,,,,2
 6110s533,"1990 Archaeology 2.00","In Stock",6110s533,0,"Sets, SS, FDC","C 1107","S 1019",1.56,0.35,2.34,1.51,1,1,1,1,,,,,2
 6110s534,"1990 Beer Sheva 90' - Souvenir Sheet","In Stock",6110s534,0,"Sets, SS, FDC","C B43","S 1067",4.30,5.90,7.00,4.30,1,1,1,1,,,,,2
 6110s535,"1990 Festivals 5751 (Spice Boxes)","In Stock",6110s535,0,"Sets, SS, FDC","C 1261-1263","S 1062-1064",2.34,1.80,2.60,2.20,1,1,1,1,,,,,2
@@ -510,7 +510,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s539,"1990 Electronic Mail","In Stock",6110s539,0,"Sets, SS, FDC","C 1264","S 1066",1.20,0.97,1.56,1.12,1,1,1,1,,,,,2
 6110s540,"1990 Zeev Jabotinsky","In Stock",6110s540,0,"Sets, SS, FDC","C 1268","S 1071",1.95,1.60,2.34,1.88,1,1,1,1,,,,,2
 6110s541,"1990 Philately Day (Yafo Post)","In Stock",6110s541,0,"Sets, SS, FDC","C 1267","S 1072",1.17,1.10,1.56,1.10,1,1,1,1,,,,,2
-6110s542,"1990 Architecture 1.10 1.20","In Stock",6110s542,0,"Sets, SS, FDC","C 1232-1233","S 1046-1047",1.72,0.88,2.60,1.66,1,1,1,1,,,,,2
+6110s542,"1990 Architecture 1.10 1.20","In Stock",6110s542,0,"Sets, SS, FDC","C 1232- 1233","S 1046- 1047",1.72,0.88,2.60,1.66,1,1,1,1,,,,,2
 6110s543,"1990 Computer Games","In Stock",6110s543,0,"Sets, SS, FDC","C 1269-1271","S 1068-1070",2.08,1.70,2.86,1.95,1,1,1,1,,,,,2
 6110s544,"1991 Hadera","In Stock",6110s544,0,"Sets, SS, FDC","C 1272","S 1079",2.34,1.85,2.73,2.20,1,1,1,1,,,,,2
 6110s545,"1991 Famous - Rahel, Goldberg, Aaronsohn","In Stock",6110s545,0,"Sets, SS, FDC","C 1276-1278","S 1076-1078",3.90,2.70,4.16,3.64,1,1,1,1,,,,,2
@@ -526,7 +526,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s555,"1991 Festivals 5752","In Stock",6110s555,0,"Sets, SS, FDC","C 1288-1290","S 1089-1091",2.60,1.85,3.00,2.47,1,1,1,1,,,,,2
 6110s556,"1991 Haifa 91' - Souvenir Sheet","In Stock",6110s556,0,"Sets, SS, FDC","C B45","S 1094",4.00,6.00,6.50,4.00,1,1,1,1,,,,,2
 6110s557,"1991 Mozart","In Stock",6110s557,0,"Sets, SS, FDC","C 1300","S 1101",1.95,1.60,2.34,1.82,1,1,1,1,,,,,2
-6110s559,"1991 Famous - Ben-Zvi, Gracia","In Stock",6110s559,0,"Sets, SS, FDC","C 1294-1295","S 1096-1097",1.95,1.40,2.30,1.88,1,1,1,1,,,,,2
+6110s559,"1991 Famous - Ben-Zvi, Gracia","In Stock",6110s559,0,"Sets, SS, FDC","C 1294- 1295","S 1096- 1097",1.95,1.40,2.30,1.88,1,1,1,1,,,,,2
 6110s560,"1991 Philately Day (Doar Ivri)","In Stock",6110s560,0,"Sets, SS, FDC","C 1296","S 1095",0.60,0.48,1.10,0.60,1,1,1,1,,,,,2
 6110s561,"1991 ETZEL","In Stock",6110s561,0,"Sets, SS, FDC","C 1298","S 1100",1.40,1.07,1.56,1.35,1,1,1,1,,,,,2
 6110s562,"1991 LEHI","In Stock",6110s562,0,"Sets, SS, FDC","C 1299","S 1099",1.40,1.07,1.56,1.35,1,1,1,1,,,,,2
@@ -535,7 +535,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s568,"1992 Kineret","In Stock",6110s568,0,"Sets, SS, FDC","C 1308-1310","S 1104-1106",2.86,1.50,2.86,2.60,1,1,1,1,,,,,2
 6110s570,"1992 Samaritans","In Stock",6110s570,0,"Sets, SS, FDC","C 1302","S 1109",2.20,2.00,2.68,2.16,1,1,1,1,,,,,2
 6110s571,"1992 PALMAH","In Stock",6110s571,0,"Sets, SS, FDC","C 1303","S 1108",1.40,1.09,1.82,1.36,1,1,1,1,,,,,2
-6110s572,"1992 Famous - Rovina, Guber","In Stock",6110s572,0,"Sets, SS, FDC","C 1306-1307","S 1102-1103",1.90,1.10,2.20,1.82,1,1,1,1,,,,,2
+6110s572,"1992 Famous - Rovina, Guber","In Stock",6110s572,0,"Sets, SS, FDC","C 1306- 1307","S 1102- 1103",1.90,1.10,2.20,1.82,1,1,1,1,,,,,2
 6110s573,"1992 Columbus","In Stock",6110s573,0,"Sets, SS, FDC","C 1314","S 1212",1.30,0.84,1.60,1.25,1,1,1,1,,,,,2
 6110s574,"1992 Architecture 1.60","In Stock",6110s574,0,"Sets, SS, FDC","C 1235","S 1051",1.10,0.52,1.56,1.04,1,1,1,1,,,,,2
 6110s575,"1992 Rabbi Azulai","In Stock",6110s575,0,"Sets, SS, FDC","C 1313","S 1110",0.73,0.36,1.12,0.65,1,1,1,1,,,,,2
@@ -551,16 +551,16 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s587,"1992 Railway - Souvenir Sheet","In Stock",6110s587,0,"Sets, SS, FDC","C B47","S 1118B",1.77,2.30,3.12,1.77,1,1,1,1,,,,,2
 6110s588,"1992 Hebrew Film","In Stock",6110s588,0,"Sets, SS, FDC","C 1338-1340","S 1130-1132",5.72,5.20,5.72,5.46,1,1,1,1,,,,,2
 6110s589,"1992 Philately - European Unification","In Stock",6110s589,0,"Sets, SS, FDC","C 1337","S 1129",1.25,0.83,1.56,1.17,1,1,1,1,,,,,2
-6110s590,"1992 Song Birds 0.10 0.20 0.30 0.90","In Stock",6110s590,0,"Sets, SS, FDC","C 1341-1343,1346","S 1133-1135,1142",1.12,0.40,1.56,1.07,1,1,1,1,,,,,2
+6110s590,"1992 Song Birds 0.10 0.20 0.30 0.90","In Stock",6110s590,0,"Sets, SS, FDC","C 1341-1343, 1346","S 1133-1135, 1142",1.12,0.40,1.56,1.07,1,1,1,1,,,,,2
 6110s591,"1993 Nature Reserves","In Stock",6110s591,0,"Sets, SS, FDC","C 1352-1354","S 1154-1156",3.38,2.80,3.77,3.12,1,1,1,1,,,,,2
 6110s592,"1993 Bahais","In Stock",6110s592,0,"Sets, SS, FDC","C 1355","S 1157",2.86,2.20,3.25,2.60,1,1,1,1,,,,,2
-6110s593,"1993 Song Birds 0.50 1.50","In Stock",6110s593,0,"Sets, SS, FDC","C 1344,1349","S 1137,1144",1.25,0.60,2.08,1.17,1,1,1,1,,,,,2
+6110s593,"1993 Song Birds 0.50 1.50","In Stock",6110s593,0,"Sets, SS, FDC","C 1344 1349","S 1137 1144",1.25,0.60,2.08,1.17,1,1,1,1,,,,,2
 6110s594,"1993 Menahem Begin","In Stock",6110s594,0,"Sets, SS, FDC","C 1351","S 1153",0.65,0.48,1.15,0.60,1,1,1,1,,,,,2
 6110s595,"1993 Ghettos Uprisings - Poland Joint Issue","In Stock",6110s595,0,"Sets, SS, FDC","C 1356","S 1163",0.94,0.62,1.38,0.86,1,1,1,1,,,,,2
 6110s596,"1993 Scientific Concepts","In Stock",6110s596,0,"Sets, SS, FDC","C 1357-1360","S 1159-1162",2.34,2.00,2.86,2.20,1,1,1,1,,,,,2
 6110s598,"1993 Memorial Day (Medical Corps)","In Stock",6110s598,0,"Sets, SS, FDC","C 1361","S 1158",0.68,0.39,1.12,0.54,1,1,1,1,,,,,2
 6110s599,"1993 45th Independence","In Stock",6110s599,0,"Sets, SS, FDC","C 1362","S 1164",2.92,2.40,3.25,3.00,1,1,1,1,,,,,2
-6110s600,"1993 Scientists - Katzir, Racah","In Stock",6110s600,0,"Sets, SS, FDC","C 1363-1364","S 1165-1166",2.20,1.45,2.60,1.82,1,1,1,1,,,,,2
+6110s600,"1993 Scientists - Katzir, Racah","In Stock",6110s600,0,"Sets, SS, FDC","C 1363- 1364","S 1165- 1166",2.20,1.45,2.60,1.82,1,1,1,1,,,,,2
 6110s601,"1993 Drugs","In Stock",6110s601,0,"Sets, SS, FDC","C 1368","S 1170",2.20,1.48,2.60,1.82,1,1,1,1,,,,,2
 6110s602,"1993 Road Safety","In Stock",6110s602,0,"Sets, SS, FDC","C 1365-1367","S 1167-1169",2.60,2.00,3.12,2.40,1,1,1,1,,,,,2
 6110s603,"1993 14th Maccabiah","In Stock",6110s603,0,"Sets, SS, FDC","C 1369","S 1171",2.86,2.00,3.32,2.20,1,1,1,1,,,,,2
@@ -571,7 +571,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s610,"1993 TELAFILA 93' - Souvenir Sheet","In Stock",6110s610,0,"Sets, SS, FDC","C B48","S 1178",3.00,3.60,4.94,3.00,1,1,1,1,,,,,2
 6110s611,"1993 Hanukka 93' (0.90 1.30 2.00)","In Stock",6110s611,0,"Sets, SS, FDC","C 1378-1380","S 1180-1182",3.12,2.00,3.50,2.40,1,1,1,1,,,,,2
 6110s612,"1993 Philately - Children Magazines","In Stock",6110s612,0,"Sets, SS, FDC","C 1381","S 1179",1.15,0.83,1.56,0.90,1,1,1,1,,,,,2
-6110s613,"1993 Song Birds 1.30 1.70","In Stock",6110s613,0,"Sets, SS, FDC","C 1348,1350","S 1143,1146",2.08,0.90,2.60,1.04,1,1,1,1,,,,,2
+6110s613,"1993 Song Birds 1.30 1.70","In Stock",6110s613,0,"Sets, SS, FDC","C 1348 1350","S 1143 1146",2.08,0.90,2.60,1.04,1,1,1,1,,,,,2
 6110s614,"1994 Health","In Stock",6110s614,0,"Sets, SS, FDC","C 1386-1388","S 1193-1195",2.60,2.40,3.04,2.40,1,1,1,1,,,,,2
 6110s615,"1994 Song Birds 0.85","In Stock",6110s615,0,"Sets, SS, FDC","C 1345","S 1141",0.55,0.25,1.04,0.30,1,1,1,1,,,,,2
 6110s616,"1994 Beetles","In Stock",6110s616,0,"Sets, SS, FDC","C 1382-1385","S 1189-1192",2.34,1.60,2.86,1.82,1,1,1,1,,,,,2
@@ -584,7 +584,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s627,"1994 Olympic Committee","In Stock",6110s627,0,"Sets, SS, FDC","C 1341","S 1208",1.62,1.40,2.08,1.46,1,1,1,1,,,,,2
 6110s628,"1994 Tarbut","In Stock",6110s628,0,"Sets, SS, FDC","C 1397","S 1206",0.96,0.62,1.43,0.72,1,1,1,1,,,,,2
 6110s629,"1994 Hot Air Ballons","In Stock",6110s629,0,"Sets, SS, FDC","C 1398-1400","S 1203-1205",1.82,1.35,2.20,1.46,1,1,1,1,,,,,2
-6110s630,"1994 Aliyot","In Stock",6110s630,0,"Sets, SS, FDC","C 1402-1403","S 1214-1215",2.20,1.60,2.60,1.82,1,1,1,1,,,,,2
+6110s630,"1994 Aliyot","In Stock",6110s630,0,"Sets, SS, FDC","C 1402- 1403","S 1214- 1215",2.20,1.60,2.60,1.82,1,1,1,1,,,,,2
 6110s631,"1994 Peace Process","In Stock",6110s631,0,"Sets, SS, FDC","C 1404","S 1209",0.78,0.48,1.82,0.60,1,1,1,1,,,,,2
 6110s632,"1994 Festivals 5755","In Stock",6110s632,0,"Sets, SS, FDC","C 1405-1407","S 1210-1212",2.60,2.20,3.00,2.40,1,1,1,1,,,,,2
 6110s633,"1994 Festivals 5755 - Souvenir Sheet","In Stock",6110s633,0,"Sets, SS, FDC","C B49","S 1213",2.86,3.90,4.94,2.86,1,1,1,1,,,,,2
@@ -594,9 +594,9 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s638,"1994 Philately - Post Computerization","In Stock",6110s638,0,"Sets, SS, FDC","C 1414","S 1220",2.20,1.20,2.60,1.36,1,1,1,1,,,,,2
 6110s639,"1994 Hanukka 94' (1.50)","In Stock",6110s639,0,"Sets, SS, FDC","C 1415","S 1183",1.04,0.59,1.56,0.72,1,1,1,1,,,,,2
 6110s640,"1995 Outdoor Sculpture","In Stock",6110s640,0,"Sets, SS, FDC","C 1416-1418","S 1222-1224",2.44,1.55,3.20,1.90,1,1,1,1,,,,,2
-6110s641,"1995 Musicians - Bernstein, Bloch","In Stock",6110s641,0,"Sets, SS, FDC","C 1419-1420","S 1225-1226",5.20,3.00,6.20,3.54,1,1,1,1,,,,,2
+6110s641,"1995 Musicians - Bernstein, Bloch","In Stock",6110s641,0,"Sets, SS, FDC","C 1419- 1420","S 1225- 1226",5.20,3.00,6.20,3.54,1,1,1,1,,,,,2
 6110s642,"1995 United Nations","In Stock",6110s642,0,"Sets, SS, FDC","C 1421","S 1230",0.96,0.59,1.48,0.70,1,1,1,1,,,,,2
-6110s643,"1995 Musicians - Schoenberg, Darius","In Stock",6110s643,0,"Sets, SS, FDC","C 1423-1424","S 1231-1232",3.12,1.85,3.64,2.28,1,1,1,1,,,,,2
+6110s643,"1995 Musicians - Schoenberg, Darius","In Stock",6110s643,0,"Sets, SS, FDC","C 1423- 1424","S 1231- 1232",3.12,1.85,3.64,2.28,1,1,1,1,,,,,2
 6110s644,"1995 Memorial Day (Ordnance Corps)","In Stock",6110s644,0,"Sets, SS, FDC","C 1422","S 1227",0.68,0.36,1.15,0.54,1,1,1,1,,,,,2
 6110s645,"1995 End of W.W.II","In Stock",6110s645,0,"Sets, SS, FDC","C 1426","S 1228",0.65,0.36,1.15,0.49,1,1,1,1,,,,,2
 6110s646,"1995 End of W.W.II - Souvenir Sheet","In Stock",6110s646,0,"Sets, SS, FDC","C B50","S 1229",1.85,1.85,2.34,1.85,1,1,1,1,,,,,2
@@ -612,12 +612,12 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s657,"1995 Yitzhak Rabin","In Stock",6110s657,0,"Sets, SS, FDC","C 1443","S 1249",3.12,1.85,4.16,2.28,1,1,1,1,,,,,2
 6110s658,"1995 Philately - Model Planes","In Stock",6110s658,0,"Sets, SS, FDC","C 1444","S 1252",1.15,0.73,1.62,0.84,1,1,1,1,,,,,2
 6110s659,"1995 Cinema","In Stock",6110s659,0,"Sets, SS, FDC","C 1447","S 1253",2.86,1.75,3.25,2.00,1,1,1,1,,,,,2
-6110s660,"1995 Fire & Rescue Services","In Stock",6110s660,0,"Sets, SS, FDC","C 1445-1446","S 1250-1251",1.30,0.77,1.72,0.91,1,1,1,1,,,,,2
+6110s660,"1995 Fire & Rescue Services","In Stock",6110s660,0,"Sets, SS, FDC","C 1445- 1446","S 1250- 1251",1.30,0.77,1.72,0.91,1,1,1,1,,,,,2
 6110s661,"1995 Hanukka 95' (1.50)","In Stock",6110s661,0,"Sets, SS, FDC","C 1451","S 1184",0.99,0.59,1.43,0.70,1,1,1,1,,,,,2
 6110s662,"1995 Jerusalem 3000 - Souvenir Sheet","In Stock",6110s662,0,"Sets, SS, FDC","C B52","S 1254",3.00,3.40,4.40,3.00,1,1,1,1,,,,,2
 6110s663,"1996 Cattle Breeding","In Stock",6110s663,0,"Sets, SS, FDC","C 1452","S 1267",2.86,1.87,3.25,2.24,1,1,1,1,,,,,2
 6110s664,"1996 Dura Synagogue - Souvenir Sheet","In Stock",6110s664,0,"Sets, SS, FDC","C B53","S 1266",3.25,3.60,3.64,3.25,1,1,1,1,,,,,2
-6110s665,"1996 Sport 1.05 1.90 2.00","In Stock",6110s665,0,"Sets, SS, FDC","C 1456-1458","S 1256,1258-59",2.86,1.87,3.38,2.24,1,1,1,1,,,,,2
+6110s665,"1996 Sport 1.05 1.90 2.00","In Stock",6110s665,0,"Sets, SS, FDC","C 1456- 1458","S 1256, 1258-59",2.86,1.87,3.38,2.24,1,1,1,1,,,,,2
 6110s666,"1996 Manufacturers Association","In Stock",6110s666,0,"Sets, SS, FDC","C 1471","S 1271",0.67,0.36,1.09,0.50,1,1,1,1,,,,,2
 6110s667,"1996 Metulla","In Stock",6110s667,0,"Sets, SS, FDC","C 1459","S 1273",1.20,0.77,1.64,0.88,1,1,1,1,,,,,2
 6110s668,"1996 Memorial Day (Police)","In Stock",6110s668,0,"Sets, SS, FDC","C 1460","S 1272",0.68,0.36,1.10,0.50,1,1,1,1,,,,,2
@@ -637,7 +637,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s684,"1996 Ahad Ha'am","In Stock",6110s684,0,"Sets, SS, FDC","C 1507","S 1290",0.70,0.39,1.25,0.54,1,1,1,1,,,,,2
 6110s685,"1996 Philately - Space","In Stock",6110s685,0,"Sets, SS, FDC","C 1506","S 1294",1.30,0.80,1.82,0.84,1,1,1,1,,,,,2
 6110s686,"1996 Disabilities","In Stock",6110s686,0,"Sets, SS, FDC","C 1505","S 1295",3.00,2.00,3.50,2.18,1,1,1,1,,,,,2
-6110s687,"1997 Sport 1.10 5.00","In Stock",6110s687,0,"Sets, SS, FDC","C 1511-1512","S 1257,1262",2.86,2.00,3.50,2.60,1,1,1,1,,,,,2
+6110s687,"1997 Sport 1.10 5.00","In Stock",6110s687,0,"Sets, SS, FDC","C 1511- 1512","S 1257 1262",2.86,2.00,3.50,2.60,1,1,1,1,,,,,2
 6110s690,"1997 Cervantes","In Stock",6110s690,0,"Sets, SS, FDC","C 1513","S 1300",1.82,1.25,2.34,1.28,1,1,1,1,,,,,2
 6110s691,"1997 Costumes","In Stock",6110s691,0,"Sets, SS, FDC","C 1514-1516","S 1297-1299",2.86,1.60,3.25,2.18,1,1,1,1,,,,,2
 6110s692,"1997 Hong Kong 97' - Souvenir Sheet","In Stock",6110s692,0,"Sets, SS, FDC","C B57","S 1296",1.95,2.10,2.60,1.95,1,1,1,1,,,,,2
@@ -656,14 +656,14 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s706,"1997 Festivals 5758 (Fathers)","In Stock",6110s706,0,"Sets, SS, FDC","C 1534-1536","S 1312-1314",2.73,1.60,3.12,2.00,1,1,1,1,,,,,2
 6110s708,"1997 Pushkin-Shlonsky - Russia Joint Issue - Souvenir Sheet","In Stock",6110s708,0,"Sets, SS, FDC","C B60","S 1319",2.86,2.80,3.38,2.86,1,1,1,1,,,,,2
 6110s709,"1997 Philately - Fractal","In Stock",6110s709,0,"Sets, SS, FDC","C 1543","S 1324",1.38,0.80,1.82,0.91,1,1,1,1,,,,,2
-6110s710,"1997 Hanukka 97' (1.80 2.10)","In Stock",6110s710,0,"Sets, SS, FDC","C 1541-1542","S 1185-1186",2.14,1.25,2.60,1.60,1,1,1,1,,,,,2
+6110s710,"1997 Hanukka 97' (1.80 2.10)","In Stock",6110s710,0,"Sets, SS, FDC","C 1541- 1542","S 1185- 1186",2.14,1.25,2.60,1.60,1,1,1,1,,,,,2
 6110s711,"1997 Srulik - Non Denominated","In Stock",6110s711,0,"Sets, SS, FDC","C 1544","S 1320",0.80,0.20,1.30,0.36,1,1,1,1,,,,,2
-6110s712,"1997 Machal and Gachal","In Stock",6110s712,0,"Sets, SS, FDC","C 1546-1547","S 1321-1322",1.64,1.00,2.16,1.10,1,1,1,1,,,,,2
+6110s712,"1997 Machal and Gachal","In Stock",6110s712,0,"Sets, SS, FDC","C 1546- 1547","S 1321- 1322",1.64,1.00,2.16,1.10,1,1,1,1,,,,,2
 6110s713,"1997 Chernobyl Children","In Stock",6110s713,0,"Sets, SS, FDC","C 1545","S 1323",1.15,0.60,1.64,0.73,1,1,1,1,,,,,2
 6110s714,"1998 Chaim Herzog","In Stock",6110s714,0,"Sets, SS, FDC","C 1551","S 1329",2.86,1.60,3.38,1.82,1,1,1,1,,,,,2
 6110s715,"1998 Independence War","In Stock",6110s715,0,"Sets, SS, FDC","C 1548-1550","S 1325-1327",1.95,1.20,2.34,1.36,1,1,1,1,,,,,2
 6110s716,"1998 Independence War - Souvenir Sheet","In Stock",6110s716,0,"Sets, SS, FDC","C B61","S 1328",3.90,4.40,4.40,3.90,1,1,1,1,,,,,2
-6110s717,"1998 Sport 1.80 2.20","In Stock",6110s717,0,"Sets, SS, FDC","C 1552-1553","S 1257B,1259A",1.82,1.40,2.60,1.47,1,1,1,1,,,,,2
+6110s717,"1998 Sport 1.80 2.20","In Stock",6110s717,0,"Sets, SS, FDC","C 1552- 1553","S 1257B, 1259A",1.82,1.40,2.60,1.47,1,1,1,1,,,,,2
 6110s720,"1998 Righteous Among the Nations","In Stock",6110s720,0,"Sets, SS, FDC","C 1563","S 1334",3.12,2.00,3.64,2.18,1,1,1,1,,,,,2
 6110s722,"1998 Culture Jewish Contributors I","In Stock",6110s722,0,"Sets, SS, FDC","C 1554-1559","S 1330a-f",2.86,1.64,3.28,2.86,1,1,1,1,,,,,2
 6110s723,"1998 Memorial Day","In Stock",6110s723,0,"Sets, SS, FDC","C 1560","S 1331",0.60,0.30,1.04,0.36,1,1,1,1,,,,,2
@@ -677,15 +677,15 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s734,"1998 Jubilee Exhibition","In Stock",6110s734,0,"Sets, SS, FDC","C 1579","S 1342",2.86,1.60,3.25,1.82,1,1,1,1,,,,,2
 6110s735,"1998 Mutual Respect","In Stock",6110s735,0,"Sets, SS, FDC","C 1583","S 1343",0.60,0.30,1.04,0.36,1,1,1,1,,,,,2
 6110s736,"1998 Festivals 5759 (Holy Ark Curtains)","In Stock",6110s736,0,"Sets, SS, FDC","C 1580-1582","S 1348-1350",2.60,1.40,3.12,1.64,1,1,1,1,,,,,2
-6110s737,"1998 Hebron, Jerusalem","In Stock",6110s737,0,"Sets, SS, FDC","C 1584-1585","S 1344-1345",2.08,1.40,2.60,1.46,1,1,1,1,,,,,2
+6110s737,"1998 Hebron, Jerusalem","In Stock",6110s737,0,"Sets, SS, FDC","C 1584- 1585","S 1344- 1345",2.08,1.40,2.60,1.46,1,1,1,1,,,,,2
 6110s738,"1998 Flag - Self Adhesive 1.15","In Stock",6110s738,0,"Sets, SS, FDC","C 1586","S 1351",0.65,0.20,1.04,0.36,1,1,1,1,,,,,2
 6110s739,"1998 Flag - Self Adhesive 2.15 3.25 5.35","In Stock",6110s739,0,"Sets, SS, FDC","C 1587-1589","S 1352-1354",6.24,2.00,6.50,3.64,1,1,1,1,,,,,2
 6110s740,"1999 Hanukkah 98' (2.15)","In Stock",6110s740,0,"Sets, SS, FDC","C 1590","S 1187",1.12,0.60,1.56,0.72,1,1,1,1,,,,,2
 6110s741,"1999 Rabbi Shabazi","In Stock",6110s741,0,"Sets, SS, FDC","C 1592","S 1357",1.15,0.60,1.56,0.72,1,1,1,1,,,,,2
 6110s742,"1999 Hyacinthus Orientalis - Non Denominated","In Stock",6110s742,0,"Sets, SS, FDC","C 1593","S 1355",0.60,0.20,1.04,0.36,1,1,1,1,,,,,2
 6110s743,"1999 Knesset","In Stock",6110s743,0,"Sets, SS, FDC","C 1591","S 1356",0.94,0.60,1.56,0.72,1,1,1,1,,,,,2
-6110s744,"1999 Costumes - Yemen, India","In Stock",6110s744,0,"Sets, SS, FDC","C 1596-1597","S 1359-1360",2.80,1.80,3.25,1.82,1,1,1,1,,,,,2
-6110s745,"1999 Zefat, Tiberias","In Stock",6110s745,0,"Sets, SS, FDC","C 1594-1595","S 1346-1347",3.38,1.80,3.90,1.80,1,1,1,1,,,,,2
+6110s744,"1999 Costumes - Yemen, India","In Stock",6110s744,0,"Sets, SS, FDC","C 1596- 1597","S 1359- 1360",2.80,1.80,3.25,1.82,1,1,1,1,,,,,2
+6110s745,"1999 Zefat, Tiberias","In Stock",6110s745,0,"Sets, SS, FDC","C 1594- 1595","S 1346- 1347",3.38,1.80,3.90,1.80,1,1,1,1,,,,,2
 6110s746,"1999 Jewish Colonial Trust","In Stock",6110s746,0,"Sets, SS, FDC","C 1598","S 1358",0.94,0.50,1.38,0.54,1,1,1,1,,,,,2
 6110s747,"1999 Australia 99' - Souvenir Sheet","In Stock",6110s747,0,"Sets, SS, FDC","C B75","S 1361",5.00,4.40,6.00,5.00,1,1,1,1,,,,,2
 6110s748,"1999 Memorial Day (Fallen Beduin)","In Stock",6110s748,0,"Sets, SS, FDC","C 1607","S 1363",0.62,0.40,1.10,0.46,1,1,1,1,,,,,2
@@ -697,7 +697,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s755,"1999 Rabbi Sharga","In Stock",6110s755,0,"Sets, SS, FDC","C 1617","S 1372",2.92,1.50,3.38,1.80,1,1,1,1,,,,,2
 6110s756,"1999 Pilgrimage I","In Stock",6110s756,0,"Sets, SS, FDC","C 1611-1613","S 1369-1371",4.68,2.40,5.20,2.72,1,1,1,1,,,,,2
 6110s758,"1999 Philately - Stamp Collecting","In Stock",6110s758,0,"Sets, SS, FDC","C 1618","S 1379",2.78,1.50,3.25,1.80,1,1,1,1,,,,,2
-6110s759,"1999 Costumes - Morocco, Bukhara","In Stock",6110s759,0,"Sets, SS, FDC","C 1619-1620","S 1373-1374",2.96,2.00,3.44,2.28,1,1,1,1,,,,,2
+6110s759,"1999 Costumes - Morocco, Bukhara","In Stock",6110s759,0,"Sets, SS, FDC","C 1619- 1620","S 1373- 1374",2.96,2.00,3.44,2.28,1,1,1,1,,,,,2
 6110s760,"1999 Festivals 5760 (Ushpizin)","In Stock",6110s760,0,"Sets, SS, FDC","C 1621-1624","S 1375-1378",5.72,3.20,6.24,3.64,1,1,1,1,,,,,2
 6110s762,"1999 Ceramic Urns - Slovakia Joint Issue","In Stock",6110s762,0,"Sets, SS, FDC","C 1625,26","S 1380,81",2.34,1.60,3.12,1.80,1,1,1,1,,,,,2
 6110s763,"1999 Kiryat Shemona","In Stock",6110s763,0,"Sets, SS, FDC","C 1627","S 1382",0.60,0.40,0.70,0.46,1,1,1,1,,,,,2
@@ -728,8 +728,8 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s792,"2001 Yavne'el","In Stock",6110s792,0,"Sets, SS, FDC","C 1707","S 1429",1.30,1.04,1.80,1.16,1,1,1,1,,,,,2
 6110s793,"2001 Menahamiya","In Stock",6110s793,0,"Sets, SS, FDC","C 1708","S 1430",2.60,2.10,3.10,2.34,1,1,1,1,,,,,2
 6110s794,"2001 Kefar Tabor","In Stock",6110s794,0,"Sets, SS, FDC","C 1709","S 1431",3.10,2.50,3.60,2.80,1,1,1,1,,,,,2
-6110s795,"2001 Alphabet","In Stock",6110s795,0,"Sets, SS, FDC","C 1679-1700","S 1432a-v",1.16,0.92,2.20,1.04,1,1,1,1,,,,,2
-6110s796,"2001 Alphabet - Ending Letters + 1 NIS","In Stock",6110s796,0,"Sets, SS, FDC","C 1701-05,1678","S 1433a-e,1434",0.84,0.66,1.30,0.76,1,1,1,1,,,,,2
+6110s795,"2001 Alphabet","In Stock",6110s795,0,"Sets, SS, FDC","C 1679- 1700","S 1432a-v",1.16,0.92,2.20,1.04,1,1,1,1,,,,,2
+6110s796,"2001 Alphabet - Ending Letters + 1 NIS","In Stock",6110s796,0,"Sets, SS, FDC","C 1701-05, 1678","S 1433a-e, 1434",0.84,0.66,1.30,0.76,1,1,1,1,,,,,2
 6110s798,"2001 Ilanyya 3.40","In Stock",6110s798,0,"Sets, SS, FDC","C 1706","S 1428",1.70,1.36,2.20,1.52,1,1,1,1,,,,,2
 6110s799,"2001 Wild Animals","In Stock",6110s799,0,"Sets, SS, FDC","C 1715-18","S 1435-38",4.20,3.40,5.20,3.80,1,1,1,1,,,,,2
 6110s801,"2001 Jerusalem 2001 - Souvenir Sheet","In Stock",6110s801,0,"Sets, SS, FDC","C B76","S 1440",5.20,5.20,5.70,5.20,1,1,1,1,,,,,2
@@ -768,10 +768,10 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s840,"2002 Festivals 5763 (Wine)","In Stock",6110s840,0,"Sets, SS, FDC","C 1780-82","S 1486-88",2.86,2.30,3.40,2.60,1,1,1,1,,,,,2
 6110s841,"2002 Kadoorie School 4.60","In Stock",6110s841,0,"Sets, SS, FDC","C 1779","S 1492",2.34,1.88,2.86,2.10,1,1,1,1,,,,,2
 6110s842,"2002 Jordan Valley Birds","In Stock",6110s842,0,"Sets, SS, FDC","C 1783-85","S 1489-91",3.40,2.70,3.90,2.06,1,1,1,1,,,,,2
-6110s843,"2002 Philately - Children Games","In Stock",6110s843,0,"Sets, SS, FDC","C 1788-91","S 1497-1500",4.50,3.60,5.50,3.20,1,1,1,1,,,,,2
+6110s843,"2002 Philately - Children Games","In Stock",6110s843,0,"Sets, SS, FDC","C 1788-91","S 1497 -1500",4.50,3.60,5.50,3.20,1,1,1,1,,,,,2
 6110s844,"2002 Political Journalists","In Stock",6110s844,0,"Sets, SS, FDC","C 1792-95","S 1493-96",7.80,6.20,8.80,7.00,1,1,1,1,,,,,2
-6110s845,"2002 Menorah 0.30, 1.00","In Stock",6110s845,0,"Sets, SS, FDC","C 1797,1800","S 1502,1505",0.65,0.52,1.16,0.58,1,1,1,1,,,,,2
-6110s846,"2003 Menorah 0.20, 0.40, 0.50, 1.30","In Stock",6110s846,0,"Sets, SS, FDC","C 1796,98,99,1801","S 1501,3,4,1506",1.20,0.96,1.70,1.06,1,1,1,1,,,,,2
+6110s845,"2002 Menorah 0.30, 1.00","In Stock",6110s845,0,"Sets, SS, FDC","C 1797 1800","S 1502 1505",0.65,0.52,1.16,0.58,1,1,1,1,,,,,2
+6110s846,"2003 Menorah 0.20, 0.40, 0.50, 1.30","In Stock",6110s846,0,"Sets, SS, FDC","C 1796,98, 99,1801","S 1501,3,4, 1506",1.20,0.96,1.70,1.06,1,1,1,1,,,,,2
 6110s847,"2003 Wright Brother's","In Stock",6110s847,0,"Sets, SS, FDC","C 1802-04","S 1510-12",5.60,4.60,6.10,5.00,1,1,1,1,,,,,2
 6110s849,"2003 11th September","In Stock",6110s849,0,"Sets, SS, FDC","C 1807","S 1508",1.15,0.92,1.65,1.00,1,1,1,1,,,,,2
 6110s850,"2003 Hesder Yeshivot","In Stock",6110s850,0,"Sets, SS, FDC","C 1805","S 1507",0.60,0.48,1.10,0.52,1,1,1,1,,,,,2
@@ -872,7 +872,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s983,"2007 World Heritage Sites I","In Stock",6110s983,0,"Sets, SS, FDC","C 2003-05","S 1688-90",7.00,5.60,7.50,6.00,1,1,1,1,,,,,2
 6110s985,"2007 Prison Service","In Stock",6110s985,0,"Sets, SS, FDC","C 1997","S 1686",1.25,1.00,1.75,1.10,1,1,1,1,,,,,2
 6110s986,"2007 Volunteer Organizations","In Stock",6110s986,0,"Sets, SS, FDC","C 2002","S 1685",0.75,0.60,1.25,0.66,1,1,1,1,,,,,2
-6110s987,"2007 Dance","In Stock",6110s987,0,"Sets, SS, FDC","C 1998-2001","S 1687a-d",4.40,3.50,4.90,3.80,1,1,1,1,,,,,2
+6110s987,"2007 Dance","In Stock",6110s987,0,"Sets, SS, FDC","C 1998- 2001","S 1687a-d",4.40,3.50,4.90,3.80,1,1,1,1,,,,,2
 6110s989,"2007 Festivals 5768 (Women in Bible)","In Stock",6110s989,0,"Sets, SS, FDC","C 2010-12","S 1696-98",3.00,2.40,3.50,2.70,1,1,1,1,,,,,2
 6110s990,"2007 Hashomer","In Stock",6110s990,0,"Sets, SS, FDC","C 2007","S 1693",1.65,1.32,2.15,1.45,1,1,1,1,,,,,2
 6110s991,"2007 Rabbi Messas","In Stock",6110s991,0,"Sets, SS, FDC","C 2008","S 1695",3.60,2.90,4.10,3.20,1,1,1,1,,,,,2
@@ -958,31 +958,31 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1109,"2010 Philately - Cinemas","In Stock",6110s1109,0,"Sets, SS, FDC","C 2180-81","S 1839-40",7.30,5.80,7.75,6.40,1,1,1,1,,,,,2
 6110s1110,"2010 Bible Stories","In Stock",6110s1110,0,"Sets, SS, FDC","C 2185-87","S 1841-43",2.75,2.20,3.35,2.40,1,1,1,1,,,,,2
 6110s1112,"2010 Flag","In Stock",6110s1112,0,"Sets, SS, FDC","C 2183","S 1838",0.95,0.75,1.50,0.80,1,1,1,1,,,,,2
-6110s1115,"2010 Animation","In Stock",6110s1115,0,"Sets, SS, FDC","C 2184",,0.95,0.75,1.50,0.80,1,1,1,1,,,,,2
+6110s1115,"2010 Animation","In Stock",6110s1115,0,"Sets, SS, FDC","C 2184","S 1845a-o",0.95,0.75,1.50,0.80,1,1,1,1,,,,,2
 6110s1118,"2010 Bible Stories - Souvenir Sheet","In Stock",6110s1118,0,"Sets, SS, FDC","C 2188","S 1844",4.40,4.40,5.00,4.40,1,1,1,1,,,,,2
-6110s1121,"2011 Chemistry Year","In Stock",6110s1121,0,"Sets, SS, FDC","C 2189-90",,5.75,4.55,6.25,5.00,1,1,1,1,,,,,2
-6110s1122,"2011 Leopard","In Stock",6110s1122,0,"Sets, SS, FDC","C 2191-94",,3.75,3.00,4.30,3.30,1,1,1,1,,,,,2
-6110s1124,"2011 Clalit Health","In Stock",6110s1124,0,"Sets, SS, FDC","C 2195",,5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
-6110s1125,"2011 Herod's Building","In Stock",6110s1125,0,"Sets, SS, FDC","C 2196-99",,4.65,3.70,5.20,4.10,1,1,1,1,,,,,2
-6110s1126,"2011 Hebrew","In Stock",6110s1126,0,"Sets, SS, FDC","C 2200",,2.00,1.65,2.55,1.80,1,1,1,1,,,,,2
-6110s1129,"2011 Ethiopian Jewry","In Stock",6110s1129,0,"Sets, SS, FDC","C 2201",,1.40,1.10,1.95,1.20,1,1,1,1,,,,,2
-6110s1131,"2011 Butterflies","In Stock",6110s1131,0,"Sets, SS, FDC","C 2202-07",,5.65,4.50,6.20,5.00,1,1,1,1,,,,,2
-6110s1133,"2011 Ephraim Katzir","In Stock",6110s1133,0,"Sets, SS, FDC","C 2208",,5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
-6110s1134,"2011 Tourism","In Stock",6110s1134,0,"Sets, SS, FDC","C 2211-13",,9.00,7.00,9.50,8.00,1,1,1,1,,,,,2
-6110s1136,"2011 Carmel Training","In Stock",6110s1136,0,"Sets, SS, FDC","C 2209",,2.80,2.20,3.35,2.45,1,1,1,1,,,,,2
-6110s1137,"2011 Memorial Day","In Stock",6110s1137,0,"Sets, SS, FDC","C 2210",,0.95,0.75,1.50,0.85,1,1,1,1,,,,,2
-6110s1139,"2011 Achievements Agriculture","In Stock",6110s1139,0,"Sets, SS, FDC","C 2214-16",,4.15,3.30,4.70,3.65,1,1,1,1,,,,,2
-6110s1140,"2011 Rabbi Shlomo Goren","In Stock",6110s1140,0,"Sets, SS, FDC","C 2227",,0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
-6110s1141,"2011 Clown Care","In Stock",6110s1141,0,"Sets, SS, FDC","C 2228",,5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
-6110s1142,"2011 Beaches","In Stock",6110s1142,0,"Sets, SS, FDC","C 2217-26",,9.40,7.50,11.50,8.20,1,1,1,1,,,,,2
-6110s1145,"2011 OECD Member","In Stock",6110s1145,0,"Sets, SS, FDC","C 2229",,5.10,4.10,5.65,4.50,1,1,1,1,,,,,2
-6110s1146,"2011 Music Albums","In Stock",6110s1146,0,"Sets, SS, FDC","C 2230-41",,11.00,9.00,12.80,10.00,1,1,1,1,,,,,2
-6110s1147,"2011 Festivals 5772 (Feast)","In Stock",6110s1147,0,"Sets, SS, FDC","C 2242-44",,6.45,5.15,7.00,5.65,1,1,1,1,,,,,2
-6110s1148,"2011 Children's Games","In Stock",6110s1148,0,"Sets, SS, FDC","C 2245-47",,4.30,3.45,4.80,3.80,1,1,1,1,,,,,2
-6110s1150,"2011 Football Legends","In Stock",6110s1150,0,"Sets, SS, FDC","C 2250-59",,9.40,7.50,11.50,8.30,1,1,1,1,,,,,2
-6110s1151,"2011 Philharmonic Orchestra","In Stock",6110s1151,0,"Sets, SS, FDC","C 2248",,2.20,1.75,2.75,1.95,1,1,1,1,,,,,2
-6110s1152,"2011 Rescue Forces","In Stock",6110s1152,0,"Sets, SS, FDC","C 2249",,2.10,1.70,2.65,1.85,1,1,1,1,,,,,2
-6110s1153,"2011 Philately - Valley Railway","In Stock",6110s1153,0,"Sets, SS, FDC","C 2260",,1.45,1.15,2.00,1.25,1,1,1,1,,,,,2
+6110s1121,"2011 Chemistry Year","In Stock",6110s1121,0,"Sets, SS, FDC","C 2189-90","S 1868-69",5.75,4.55,6.25,5.00,1,1,1,1,,,,,2
+6110s1122,"2011 Leopard","In Stock",6110s1122,0,"Sets, SS, FDC","C 2191-94","S 1876a-d",3.75,3.00,4.30,3.30,1,1,1,1,,,,,2
+6110s1124,"2011 Clalit Health","In Stock",6110s1124,0,"Sets, SS, FDC","C 2195","S 1871",5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
+6110s1125,"2011 Herod's Building","In Stock",6110s1125,0,"Sets, SS, FDC","C 2196-99","S 1872-75",4.65,3.70,5.20,4.10,1,1,1,1,,,,,2
+6110s1126,"2011 Hebrew","In Stock",6110s1126,0,"Sets, SS, FDC","C 2200","S 1870",2.00,1.65,2.55,1.80,1,1,1,1,,,,,2
+6110s1129,"2011 Ethiopian Jewry","In Stock",6110s1129,0,"Sets, SS, FDC","C 2201","S 1879",1.40,1.10,1.95,1.20,1,1,1,1,,,,,2
+6110s1131,"2011 Butterflies","In Stock",6110s1131,0,"Sets, SS, FDC","C 2202-07","S 1885a-f",5.65,4.50,6.20,5.00,1,1,1,1,,,,,2
+6110s1133,"2011 Ephraim Katzir","In Stock",6110s1133,0,"Sets, SS, FDC","C 2208","S 1881",5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
+6110s1134,"2011 Tourism","In Stock",6110s1134,0,"Sets, SS, FDC","C 2211-13","S 1882-84",9.00,7.00,9.50,8.00,1,1,1,1,,,,,2
+6110s1136,"2011 Carmel Training","In Stock",6110s1136,0,"Sets, SS, FDC","C 2209","S 1880",2.80,2.20,3.35,2.45,1,1,1,1,,,,,2
+6110s1137,"2011 Memorial Day","In Stock",6110s1137,0,"Sets, SS, FDC","C 2210","S 1878",0.95,0.75,1.50,0.85,1,1,1,1,,,,,2
+6110s1139,"2011 Achievements Agriculture","In Stock",6110s1139,0,"Sets, SS, FDC","C 2214-16","S 1894-96",4.15,3.30,4.70,3.65,1,1,1,1,,,,,2
+6110s1140,"2011 Rabbi Shlomo Goren","In Stock",6110s1140,0,"Sets, SS, FDC","C 2227","S 1892",0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
+6110s1141,"2011 Clown Care","In Stock",6110s1141,0,"Sets, SS, FDC","C 2228","S 1893",5.00,4.00,5.55,4.40,1,1,1,1,,,,,2
+6110s1142,"2011 Beaches","In Stock",6110s1142,0,"Sets, SS, FDC","C 2217-26","S 1897a-j",9.40,7.50,11.50,8.20,1,1,1,1,,,,,2
+6110s1145,"2011 OECD Member","In Stock",6110s1145,0,"Sets, SS, FDC","C 2229","S 1898",5.10,4.10,5.65,4.50,1,1,1,1,,,,,2
+6110s1146,"2011 Music Albums","In Stock",6110s1146,0,"Sets, SS, FDC","C 2230-41","S 1908a-l",11.00,9.00,12.80,10.00,1,1,1,1,,,,,2
+6110s1147,"2011 Festivals 5772 (Feast)","In Stock",6110s1147,0,"Sets, SS, FDC","C 2242-44","S 1899-01",6.45,5.15,7.00,5.65,1,1,1,1,,,,,2
+6110s1148,"2011 Children's Games","In Stock",6110s1148,0,"Sets, SS, FDC","C 2245-47","S 1902-04",4.30,3.45,4.80,3.80,1,1,1,1,,,,,2
+6110s1150,"2011 Football Legends","In Stock",6110s1150,0,"Sets, SS, FDC","C 2250-59","S 1912a-j",9.40,7.50,11.50,8.30,1,1,1,1,,,,,2
+6110s1151,"2011 Philharmonic Orchestra","In Stock",6110s1151,0,"Sets, SS, FDC","C 2248","S 1911",2.20,1.75,2.75,1.95,1,1,1,1,,,,,2
+6110s1152,"2011 Rescue Forces","In Stock",6110s1152,0,"Sets, SS, FDC","C 2249","S 1910",2.10,1.70,2.65,1.85,1,1,1,1,,,,,2
+6110s1153,"2011 Philately - Valley Railway","In Stock",6110s1153,0,"Sets, SS, FDC","C 2260","S 1909",1.45,1.15,2.00,1.25,1,1,1,1,,,,,2
 6110s1155,"2012 Pioneering Women I","In Stock",6110s1155,0,"Sets, SS, FDC","C 2261-62",,5.50,4.45,6.00,4.85,1,1,1,1,,,,,2
 6110s1156,"2012 Technion","In Stock",6110s1156,0,"Sets, SS, FDC","C 2263",,1.45,1.15,2.00,1.27,1,1,1,1,,,,,2
 6110s1157,"2012 In Memory","In Stock",6110s1157,0,"Sets, SS, FDC","C 2264",,0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
@@ -1123,6 +1123,16 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1350,"2017 WWI Allenby","In Stock",6110s1350,0,"Sets, SS, FDC",,,6.00,5.00,6.75,5.50,1,1,1,1,,,,,2
 6110s1351,"2017 20th Maccabiah","In Stock",6110s1351,0,"Sets, SS, FDC",,,1.30,1.00,1.85,1.15,1,1,1,1,,,,,2
 6110s1353,"2017 Music Love Songs","In Stock",6110s1353,0,"Sets, SS, FDC",,,15.50,12.50,16.00,14.00,1,1,1,1,,,,,2
+6110s1356,"2017 Flowers - Croatia Joint Issue","In Stock",6110s1356,0,"Sets, SS, FDC",,,3.55,2.85,4.10,3.10,1,1,1,1,,,,,2
+6110s1357,"2017 Habimah","In Stock",6110s1357,0,"Sets, SS, FDC",,,1.35,1.05,1.85,1.15,1,1,1,1,,,,,2
+6110s1358,"2017 Balfour Declaration","In Stock",6110s1358,0,"Sets, SS, FDC",,,2.75,2.20,3.30,2.40,1,1,1,1,,,,,2
+6110s1360,"2017 Festivals 5778 (Tishrei Month)","In Stock",6110s1360,0,"Sets, SS, FDC",,,10.00,8.00,10.50,8.50,1,1,1,1,,,,,2
+6110s1361,"2017 Shimon Peres","In Stock",6110s1361,0,"Sets, SS, FDC",,,1.35,1.00,1.85,1.15,1,1,1,1,,,,,2
+6110s1363,"2017 Gorny Convent - Russia Joint Issue","In Stock",6110s1363,0,"Sets, SS, FDC",,,3.55,2.90,4.10,3.15,1,1,1,1,,,,,2
+6110s1364,"2017 Submarines","In Stock",6110s1364,0,"Sets, SS, FDC",,,4.10,3.30,4.65,3.65,1,1,1,1,,,,,2
+6110s1365,"2017 Snakes","In Stock",6110s1365,0,"Sets, SS, FDC",,,6.80,5.50,7.20,6.00,1,1,1,1,,,,,2
+6110s1367,"2017 Integration into Society","In Stock",6110s1367,0,"Sets, SS, FDC",,,6.20,5.10,6.75,5.50,1,1,1,1,,,,,2
+6110s1368,"2017 Ancient Roman Arenas","In Stock",6110s1368,0,"Sets, SS, FDC",,,6.80,5.50,7.20,6.00,1,1,1,1,,,,,2
 6110bs1,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Tab Pairs",Unavailable,6110bs1,0,Booklets,"B SB.1","C --",620.00,----,,,0,0,0,0,,,,,3
 6110bs2,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Blocks of 4 Stamps",Unavailable,6110bs2,0,Booklets,"B SB.2","C --",135.00,----,,,0,0,0,0,,,,,3
 6110bs3,"1948 Doar Ivri IMABA Exhibition, Large Format",Unavailable,6110bs3,0,Booklets,"B SB.3","C --",400.00,----,,,0,0,0,0,,,,,3
@@ -1172,41 +1182,41 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e537,"07.08.90 Greetings - With Love - Booklet (10v) varied width 54-61 mm","1 In Stock",6110e537,0,Booklets,"B B.20","S 1036a",17.50,23.00,,,1,1,0,0,,,,,3
 6110e537A,"1990 Greetings - With Love - Booklet (10v) with blank tabs on left",Catalogue,,0,Booklets,"B B.20b","S 1036a",,----,,,0,0,0,0,,,,,3
 6110e558,"02.12.91 Mozart Bicentennial - Booklet (4v)","5 In Stock",6110e558,0,Booklets,"B B.24","S 1101a",16.00,20.00,,,1,1,0,0,,,,,3
-6110e567A,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Left phosphor, Flowers facing center",Available,6110e567A,0,Booklets,"B B.25ACL","S 1107booklet",20.00,30.00,,,1,1,0,0,,,,,3
-6110e567B,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Left phosphor, Flowers facing out",Soon...,6110e567B,0,Booklets,"B B.25ADL","S 1107booklet",25.00,Remark,,,0,0,0,0,,,,,3
-6110e567C,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Right phosphor, Flowers facing center","1 In Stock",6110e567C,0,Booklets,"B B.25ACR","S 1107booklet",20.00,Remark,,,1,0,0,0,,,,,3
-6110e567D,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Right phosphor, Flowers facing out",Available,6110e567D,0,Booklets,"B B.25ADR","S 1107booklet",20.00,Remark,,,1,0,0,0,,,,,3
-6110e567E,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Left phosphor, Flowers facing center",Available,6110e567E,0,Booklets,"B B.25BCL","S 1107booklet",20.00,----,,,1,0,0,0,,,,,3
-6110e567F,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Left phosphor, Flowers facing out",Available,6110e567F,0,Booklets,"B B.25BDL","S 1107booklet",60.00,----,,,1,0,0,0,,,,,3
-6110e567G,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Right phosphor, Flowers facing center",Available,6110e567G,0,Booklets,"B B.25BCR","S 1107booklet",160.00,----,,,1,0,0,0,,,,,3
-6110e567H,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Right phosphor, Flowers facing out",Soon...,6110e567H,0,Booklets,"B B.25BDR","S 1107booklet",,----,,,0,0,0,0,,,,,3
+6110e567A,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Left phosphor, Flowers facing center",Available,6110e567A,0,Booklets,"B B.25ACL","S 1107 booklet",20.00,30.00,,,1,1,0,0,,,,,3
+6110e567B,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Left phosphor, Flowers facing out",Soon...,6110e567B,0,Booklets,"B B.25ADL","S 1107 booklet",25.00,Remark,,,0,0,0,0,,,,,3
+6110e567C,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Right phosphor, Flowers facing center","1 In Stock",6110e567C,0,Booklets,"B B.25ACR","S 1107 booklet",20.00,Remark,,,1,0,0,0,,,,,3
+6110e567D,"18.02.92 Anemone - Booklet of Tete-Beche stamps (20v) Yellow gum, Right phosphor, Flowers facing out",Available,6110e567D,0,Booklets,"B B.25ADR","S 1107 booklet",20.00,Remark,,,1,0,0,0,,,,,3
+6110e567E,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Left phosphor, Flowers facing center",Available,6110e567E,0,Booklets,"B B.25BCL","S 1107 booklet",20.00,----,,,1,0,0,0,,,,,3
+6110e567F,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Left phosphor, Flowers facing out",Available,6110e567F,0,Booklets,"B B.25BDL","S 1107 booklet",60.00,----,,,1,0,0,0,,,,,3
+6110e567G,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Right phosphor, Flowers facing center",Available,6110e567G,0,Booklets,"B B.25BCR","S 1107 booklet",160.00,----,,,1,0,0,0,,,,,3
+6110e567H,"1992 Anemone - Booklet of Tete-Beche stamps (20v) White gum, Right phosphor, Flowers facing out",Soon...,6110e567H,0,Booklets,"B B.25BDR","S 1107 booklet",,----,,,0,0,0,0,,,,,3
 6110e580,"16.06.92 Jaffa-Jerusalem Railway - Booklet of Tete-Beche stamps (4v)","2 In Stock",6110e580,0,Booklets,"B B.26","S 1118a",5.20,7.70,,,1,1,0,0,,,,,3
 6110e605,"29.06.93 Greetings - See you again - Booklet (10v)","5 In Stock",6110e605,0,Booklets,"B B.21","S 1037a",8.00,12.20,,,1,1,0,0,,,,,3
 6110e617,"08.02.94 Beetles - Tete-Beche Booklet (8v)",Available,6110e617,0,Booklets,"B B.27","S 1192a",9.25,11.50,,,1,1,0,0,,,,,3
 6110e617A,"1994 Beetles - Tete-Beche Booklet (8v) pale cover",Available,6110e617A,0,Booklets,"B B.27a","S 1192a",30.00,----,,,1,0,0,0,,,,,3
 6110e625,"18.04.94 Greetings - Keep in touch - Booklet (10v)","4 In Stock",6110e625,0,Booklets,"B B.22","S 1074a",8.00,12.00,,,1,1,0,0,,,,,3
-6110e634,"23.08.94 New Year 5755 Festivals - Full Se-Tenant booklet (1+2+3v)","2 In Stock",6110e634,0,Booklets,"B B.28","S 1210-12booklet",6.70,12.00,,,1,1,0,0,,,,,3
-6110e676,"25.06.96 Atlanta 96' - Booklet (1+2+3v)","2 In Stock",6110e676,0,Booklets,"B B.29","S 1279a",7.20,10.70,,,1,1,0,0,,,,,3
+6110e634,"23.08.94 New Year 5755 Festivals - Full Se-Tenant booklet (1+2+3v)","1 In Stock",6110e634,0,Booklets,"B B.28","S 1210-12 booklet",6.70,12.00,,,1,1,0,0,,,,,3
+6110e676,"25.06.96 Atlanta 96' - Booklet (1+2+3v)",Available,6110e676,0,Booklets,"B B.29","S 1279a",7.20,10.70,,,1,1,0,0,,,,,3
 6110e688A,"13.02.97 Sport 1.10 - Booklet (20v) Horses facing out","3 In Stock",6110e688A,0,Booklets,"B B.31","S 1257a",13.50,19.00,,,1,1,0,0,,,,,3
 6110e688B,"13.02.97 Sport 1.10 - Booklet (20v) Horses facing center",Available,6110e688B,0,Booklets,"B B.31","S 1257a",13.50,Remark,,,1,0,0,0,,,,,3
-6110e707,"23.09.97 New Year 5758 Festivals - Se-Tenant Booklet (1+2+3v)","4 In Stock",6110e707,0,Booklets,"B B.30","S 1314a",6.70,10.00,,,1,1,0,0,,,,,3
+6110e707,"23.09.97 New Year 5758 Festivals - Se-Tenant Booklet (1+2+3v)","3 In Stock",6110e707,0,Booklets,"B B.30","S 1314a",6.70,10.00,,,1,1,0,0,,,,,3
 6110e718A,"17.02.98 'Srulik' Israel 50 Jubilee - Booklet (20v) Heads facing out","In Stock",6110e718A,0,Booklets,"B B.32A","S 1320b",20.00,30.00,,,1,1,0,0,,,,,3
 6110e718B,"17.02.98 'Srulik' Israel 50 Jubilee - Booklet (20v) Heads facing center","1 In Stock",6110e718B,0,Booklets,"B B.32B","S 1320b",25.00,Remark,,,1,0,0,0,,,,,3
 6110e718C,"1998 'Srulik' Israel 50 Jubilee - Booklet (20v) Heads facing center, No serial number",Available,6110e718C,0,Booklets,"B --","S 1320b",80.00,----,,,1,0,0,0,,,,,3
-6110e733,"13.05.98 Israel 50th Jubilee - Prestige Booklet (33v)","1 In Stock",6110e733,0,Booklets,"B PB.1","S see aft1339a",78.00,190.00,,,1,1,0,0,,,,,3
+6110e733,"13.05.98 Israel 50th Jubilee - Prestige Booklet (33v)","1 In Stock",6110e733,0,Booklets,"B PB.1","S see aft 1339a",78.00,190.00,,,1,1,0,0,,,,,3
 6110e733A,"1998 Israel 50th Jubilee - Prestige Booklet (33v) - Aircrafts stamps perforated 14:14 instead 13:14 - 250 exist - Bale MS.69x1a","In Stock",6110e733A,0,Booklets,"B PB.1a","S --",110.00,----,,,1,0,0,0,,,,,3
 6110e761,"01.09.99 New Year 5760 Festivals - Booklet (3+1+1+1v) Se-Tenant stamps",Available,6110e761,0,Booklets,"B B.33","S 1378a",7.80,13.50,,,1,1,0,0,,,,,3
-6110e780,"25.07.00 Israeli Food - Booklet (1+2+3v)","2 In Stock",6110e780,0,Booklets,"B B.34","S 1414a",7.60,11.60,,,1,1,0,0,,,,,3
+6110e780,"25.07.00 Israeli Food - Booklet (1+2+3v)","1 In Stock",6110e780,0,Booklets,"B B.34","S 1414a",7.60,11.60,,,1,1,0,0,,,,,3
 6110e800,"18.03.01 Wild Animals in Israel - Booklet 2 each (8v)",Available,6110e800,0,Booklets,"B B.35","S 1438a",8.70,14.50,,,1,1,0,0,,,,,3
 6110e827,"24.02.02 Months of the Year - Booklet (12v)","In Stock",6110e827,0,Booklets,"B B.36","S 1470",8.35,15.80,,,1,1,0,0,,,,,3
 6110e827A,"12.03.03 Months of the Year - Booklet dated 2003 on back (12v)","In Stock",6110e827A,0,Booklets,"B B.36a","S 1470",18.00,32.00,,,1,1,0,0,,,,,3
 6110e871,"09.09.03 New Year 5764 Festivals Booklet (1+2+3v)","1 In Stock",6110e871,0,Booklets,"B B.37","S 1538a",8.35,11.00,,,1,1,0,0,,,,,3
 6110e873,"04.11.03 Hyacinthus Orientalis Booklet (20v) all phosphor Holland printing","1 In Stock",6110e873,0,Booklets,"B B.38A","S 1540a",20.00,30.00,,,1,1,0,0,,,,,3
 6110e873A,"2004 Hyacinthus Orientalis Booklet (20v) one right phosphor band perf 11 Jerusalem printing",Available,6110e873A,0,Booklets,"B B.38B","S --",400.00,----,,,1,0,0,0,,,,,3
-6110e894,"03.05.04 Ottoman Clock Towers Prestige Booklet (10v) (Face Value Differ)",Available,6110e894,0,Booklets,"B PB.2","S 1563all",60.00,70.00,,,1,1,0,0,,,,,3
+6110e894,"03.05.04 Ottoman Clock Towers Prestige Booklet (10v) (Face Value Differ)",Available,6110e894,0,Booklets,"B PB.2","S 1563 all",60.00,70.00,,,1,1,0,0,,,,,3
 6110e923A,"07.06.05 Buildings and Historic Sites - Mitzpe Revivim Booklet (12v) continuous phosphor bands","Temp. Sold Out",6110e923A,0,Booklets,"B B.40A","S 1601a",18.00,24.50,,,0,0,0,0,,,,,3
 6110e923B,"2005 Buildings and Historic Sites - Mitzpe Revivim Booklet (12v) segmented phosphor bands",Available,6110e923B,0,Booklets,"B B.40B","S 1601a",20.00,----,,,1,0,0,0,,,,,3
-6110e937,"30.11.05 Gagea Commutate - no value - Booklet (20v) one right phosphor 20-21mm perf 13.5x14 with bar-code small numbers","In Stock",6110e937,0,Booklets,"B B39.A","S 1603booklet",25.00,35.00,,,1,1,0,0,,,,,3
+6110e937,"30.11.05 Gagea Commutate - no value - Booklet (20v) one right phosphor 20-21mm perf 13.5x14 with bar-code small numbers","In Stock",6110e937,0,Booklets,"B B39.A","S 1603 booklet",25.00,35.00,,,1,1,0,0,,,,,3
 6110e937A,"2005 Gagea Commutate - no value - Booklet (20v) one right phosphor 20-21mm perf 13.5x14 without bar-code","Temp. Sold Out",6110e937A,0,Booklets,"B --","S 1618a",25.00,----,,,0,0,0,0,,,,,3
 6110e937B,"2005 Gagea Commutate - no value - Booklet (20v) one right phosphor 26mm perf 13.5x14 without bar-code",Available,6110e937B,0,Booklets,"B B39.B","S --",190.00,----,,,1,0,0,0,,,,,3
 6110e937C,"2005 Gagea Commutate - no value - Booklet (20v) one short right phosphor 18mm perf 11x11 with bar-code large numbers","In Stock",6110e937C,0,Booklets,"B --","S --",60.00,----,,,1,0,0,0,,,,,3
@@ -1216,7 +1226,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e937F,"04.10.06 Gagea Commutate - no value - Large New Logo & Large Numbers Booklet (20v) one right phosphor 19mm perf 11x11","In Stock",6110e937F,0,Booklets,"B B39.H","S --",25.00,35.00,,,1,1,0,0,,,,,3
 6110e937G,"2007 Gagea Commutate - no value - Large New Logo & Medium Numbers Booklet (20v) one long right phosphor 26mm perf 13.5x14","In Stock",6110e937G,0,Booklets,"B B39.I","S --",30.00,----,,,1,0,0,0,,,,,3
 6110e937H,"2007 Gagea Commutate - no value - Large New Logo & Medium Numbers Booklet (20v) one right phosphor 22mm perf 13.5x14","In Stock",6110e937H,0,Booklets,"B B39.J","S --",30.00,----,,,1,0,0,0,,,,,3
-6110e976,"20.02.07 Israel Educational Television Booklet (6v)","1 In Stock",6110e976,0,Booklets,"B B.42","S 1677a",10.00,12.00,,,1,1,0,0,,,,,3
+6110e976,"20.02.07 Israel Educational Television Booklet (6v)",Available,6110e976,0,Booklets,"B B.42","S 1677a",10.00,12.00,,,1,1,0,0,,,,,3
 6110e1001,"05.12.07 Hula Nature Reserve Booklet (6v)",Available,6110e1001,0,Booklets,"B B.41","S 1711a",10.00,10.00,,,1,1,0,0,,,,,3
 6110e1018,"28.04.08 The Israeli Booklet (20v)","1 In Stock",6110e1018,0,Booklets,"B B.44","S 1721a",20.00,30.00,,,1,1,0,0,,,,,3
 6110e1026,"14.05.08 Tel-Aviv Centennial - Prestige Booklet (11v) Limited Edition","2 In Stock",6110e1026,0,Booklets,"B PB.3","S --",50.00,85.00,,,1,1,0,0,,,,,3
@@ -1237,18 +1247,18 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e074A,"11.04.10 Fruits Booklet (20v) 2nd print (two Menorah)",Available,6110e074A,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
 6110e074B,"11.04.10 Fruits Booklet (20v) 2nd print (two Menorah with blue square)",Available,6110e074B,0,Booklets,,"S --",20.00,Remark,,,1,0,0,0,,,,,3
 6110e074C,"01.06.10 Fruits Booklet (20v) 3rd print (three Menorah)","1 In Stock",6110e074C,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
-6110e074D,"2010 Fruits Booklet (20v) 3rd print (three Menorah) Serial Number printed in Center","3 In Stock",6110e074D,0,Booklets,,"S --",17.50,----,,,1,0,0,0,,,,,3
+6110e074D,"2010 Fruits Booklet (20v) 3rd print (three Menorah) Serial Number printed in Center","2 In Stock",6110e074D,0,Booklets,,"S --",17.50,----,,,1,0,0,0,,,,,3
 6110e1104,"25.08.10 Greetings Booklet (12v) 1st print (one Menorah)","1 In Stock",6110e1104,0,Booklets,,"S 1835a",10.00,16.00,,,1,1,0,0,,,,,3
 6110e074E,"12.09.10 Fruits Booklet (20v) 4th print (four Menorah)","1 In Stock",6110e074E,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
-6110e1117,"21.11.10 Animation Booklet (15v in Motion)","8 In Stock",6110e1117,0,Booklets,,,11.00,22.00,,,1,1,0,0,,,,,3
-6110e1120,"21.11.10 Jerusalem - Prestige Booklet (12v 9 of them differ with perf. from the regular issue)","1 In Stock",6110e1120,0,Booklets,,,22.00,40.00,,,1,1,0,0,,,,,3
-6110e074F,"01.12.10 Fruits Booklet (20v) 5th print (five Menorah)","1 In Stock",6110e074F,0,Booklets,,,20.00,30.00,,,1,1,0,0,,,,,3
-6110e037D,"31.01.11 Medical Herbs and Spices 'DOAR 24' Booklet (12v) Third print (three Menorah)","1 In Stock",6110e037D,0,Booklets,,,14.50,22.50,,,1,1,0,0,,,,,3
-6110e1128,"12.04.11 Flag Booklet (20v) 1st print 'HaTikva' (one Menorah)","1 In Stock",6110e1128,0,Booklets,,,20.00,30.00,,,1,1,0,0,,,,,3
-6110e1144,"27.06.11 Butterflies Booklet (20v) 1st print (one Menorah)",Available,6110e1144,0,Booklets,,,20.00,30.00,,,1,1,0,0,,,,,3
-6110e1149,"13.09.11 Children's Games Booklet (6v)","In Stock",6110e1149,0,Booklets,,,9.00,15.00,,,1,1,0,0,,,,,3
-6110e128A,"01.12.11 Flag Booklet (20v) 2nd print 'Israel Land' (two Menorah)",Available,6110e128A,0,Booklets,,,20.00,30.00,,,1,1,0,0,,,,,3
-6110e144A,"23.02.12 Butterflies Booklet (20v) 2nd print (two Menorah)","1 In Stock",6110e144A,0,Booklets,,,20.00,30.00,,,1,1,0,0,,,,,3
+6110e1117,"21.11.10 Animation Booklet (15v in Motion)","8 In Stock",6110e1117,0,Booklets,,"S 1846a",11.00,22.00,,,1,1,0,0,,,,,3
+6110e1120,"21.11.10 Jerusalem - Prestige Booklet (12v 9 of them differ with perf. from the regular issue)","1 In Stock",6110e1120,0,Booklets,,"S 1861a",22.00,40.00,,,1,1,0,0,,,,,3
+6110e074F,"01.12.10 Fruits Booklet (20v) 5th print (five Menorah)","1 In Stock",6110e074F,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
+6110e037D,"31.01.11 Medical Herbs and Spices 'DOAR 24' Booklet (12v) Third print (three Menorah)","1 In Stock",6110e037D,0,Booklets,,"S --",14.50,22.50,,,1,1,0,0,,,,,3
+6110e1128,"12.04.11 Flag Booklet (20v) 1st print 'HaTikva' (one Menorah)","1 In Stock",6110e1128,0,Booklets,,"S 1877a",20.00,30.00,,,1,1,0,0,,,,,3
+6110e1144,"27.06.11 Butterflies Booklet (20v) 1st print (one Menorah)",Available,6110e1144,0,Booklets,,"S 1886a",20.00,30.00,,,1,1,0,0,,,,,3
+6110e1149,"13.09.11 Children's Games Booklet (6v)","In Stock",6110e1149,0,Booklets,,"S 1905a",9.00,15.00,,,1,1,0,0,,,,,3
+6110e128A,"01.12.11 Flag Booklet (20v) 2nd print 'Israel Land' (two Menorah)",Available,6110e128A,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
+6110e144A,"23.02.12 Butterflies Booklet (20v) 2nd print (two Menorah)","1 In Stock",6110e144A,0,Booklets,,"S --",20.00,30.00,,,1,1,0,0,,,,,3
 6110e1176,"26.06.12 Birds of Israel - Prestige Booklet (18v perf of 2002 birds differ from the regular issue)","2 In Stock",6110e1176,0,Booklets,,,25.00,38.00,,,1,1,0,0,,,,,3
 6110e037E,"22.07.12 Medical Herbs and Spices 'DOAR 24' Booklet (12v) Fourth print (four Menorah)","1 In Stock",6110e037E,0,Booklets,,,16.00,22.50,,,1,1,0,0,,,,,3
 6110e1182,"04.09.12 Tourism Booklet (6v)",Available,6110e1182,0,Booklets,,,9.00,15.00,,,1,1,0,0,,,,,3
@@ -1261,7 +1271,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e1227,"03.12.13 Aviation Booklet (6v)","1 In Stock",6110e1227,0,Booklets,,,9.00,15.00,,,1,1,0,0,,,,,3
 6110e037G,"08.02.15 Medical Herbs and Spices 'DOAR 24' Booklet (12v) Sixth print (six Menorah)","In Stock",6110e037G,0,Booklets,,,20.00,27.00,,,1,1,0,0,,,,,3
 6110e144D,"20.08.14 Butterflies Booklet (20v) 5th print (five Menorah)","In Stock",6110e144D,0,Booklets,,,20.00,26.00,,,1,1,0,0,,,,,3
-6110e1245,"08.04.14 Sign Language Booklet (20v) 1st print (one Menorah)","1 In Stock",6110e1245,0,Booklets,,,20.00,26.50,,,1,1,0,0,,,,,3
+6110e1245,"08.04.14 Sign Language Booklet (20v) 1st print (one Menorah)",Unavailable,6110e1245,0,Booklets,,,20.00,26.50,,,0,0,0,0,,,,,3
 6110e245A,"01.01.15 Sign Language Booklet (20v) 2nd print (two Menorah)",Unavailable,6110e245A,0,Booklets,,,20.00,26.00,,,0,0,0,0,,,,,3
 6110e1254,"09.09.14 Fiddler on the Roof Booklet (6v)",Available,6110e1254,0,Booklets,,,9.00,15.00,,,1,1,0,0,,,,,3
 6110e1284,"16.06.15 Vegetables Booklet (20v) 1st print (one Menorah)","1 In Stock",6110e1284,0,Booklets,,,20.00,27.50,,,1,1,0,0,,,,,3
@@ -1271,10 +1281,12 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110e037I,"24.07.16 Medical Herbs and Spices 'DOAR 24' Booklet (12v) eighth print (eight Menorah)",Available,6110e037I,0,Booklets,,,20.00,27.00,,,1,1,0,0,,,,,3
 6110e245B,"15.01.17 Sign Language Booklet (20v) 3rd print (three Menorah)",Available,6110e245B,0,Booklets,,,20.00,27.50,,,1,1,0,0,,,,,3
 6110e284A,"16.08.16 Vegetables Booklet (20v) 2nd print (two Menorah)",Available,6110e284A,0,Booklets,,,20.00,29.00,,,1,1,0,0,,,,,3
-6110e1321,"13.09.16 Sages Parables Booklet (6v)","2 In Stock",6110e1321,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
+6110e1321,"13.09.16 Sages Parables Booklet (6v)","1 In Stock",6110e1321,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
 6110e1330,"13.11.16 Tourism in Jerusalem Booklet (10v)","2 In Stock",6110e1330,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
 6110e001e,"05.12.07 Hula Nature Reserve Booklet print error like white rainbow (6v)","In Stock",6110e001e,0,Booklets,"B --","S --",15.00,----,,,1,0,0,0,,,,,3
 6110e037J,"21.05.17 Medical Herbs and Spices 'DOAR 24' Booklet (12v) ninth print (nine Menorah)",Available,6110e037J,0,Booklets,,,20.00,27.00,,,1,1,0,0,,,,,3
+6110e037K,"29.10.17 Medical Herbs and Spices 'DOAR 24' Booklet (12v) tenth print (ten Menorah)",Available,6110e037K,0,Booklets,,,20.00,27.00,,,1,1,0,0,,,,,3
+6110e1355,"12.09.17 Aromatic Plants Booklet (6v)","1 In Stock",6110e1355,0,Booklets,,,12.00,20.00,,,1,1,0,0,,,,,3
 6110x1,"WIPA '81 Wien 22-31.5.1981",Unavailable,6110x1,0,"Exhibition Show Cards","C 1",,21.00,12.50,,,0,0,0,0,,,,,9
 6110x2,"ESSEN '82 Essen 28.4-2.5.1982",Unavailable,6110x2,0,"Exhibition Show Cards","C 2",,12.50,12.50,,,0,0,0,0,,,,,9
 6110x3,"PHILEXFRANCE '82 Paris 11-21.6.1982",Unavailable,6110x3,0,"Exhibition Show Cards","C 3",,175.00,70.00,,,0,0,0,0,,,,,9
@@ -1482,15 +1494,15 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110j708,"1997 Pushkin-Shlonsky - Joint Issue with Russia - Souvenir Sheet","In Stock",6110j708,0,"Joint Issues","C B60","S 6418",2.10,8.00,,,1,1,0,0,,,,,13
 6110j752,"1999 Paint by James Ensor - Joint Stamp Issue with Belgium","In Stock",6110j752,0,"Joint Issues","C 1610a","S 1738",1.20,,,,1,0,0,0,,,,,13
 6110j762,"1999 Ceramic Urns - Joint Issue with Slovakia","In Stock",6110j762,0,"Joint Issues","C 1625a,26a","S 344,45",2.20,,,,1,0,0,0,,,,,13
-6110j762A,"1999 Ceramic Urns - Joint Issue with Slovakia - Special Sheet","In Stock",6110j762A,0,"Joint Issues","C 1625a,26afull","S 345afull",9.00,,,,1,0,0,0,,,,,13
+6110j762A,"1999 Ceramic Urns - Joint Issue with Slovakia - Special Sheet","In Stock",6110j762A,0,"Joint Issues","C 1625a,26a full","S 345a full",9.00,,,,1,0,0,0,,,,,13
 6110j786,"2000 The Dohany Synagogue Budapest - Joint Issue with Hungary","In Stock",6110j786,0,"Joint Issues","C 1669a","S 3710",1.60,,,,1,0,0,0,,,,,13
 6110j814,"2001 Shota Rustaveli Georgian Poet - Joint Issue with Georgia - the Kutaisi Synagogue",Unavailable,6110j814,0,"Joint Issues","C 1738a","S 274",3.00,,,,0,0,0,0,,,,,13
-6110j895,"2004 Roma Synagogue Centenary - Joint Issue with Italy","In Stock",6110j895,0,"Joint Issues","C 1868a,69a","S 2607,08",4.00,9.00,,,1,1,0,0,,,,,13
+6110j895,"2004 Roma Synagogue Centenary - Joint Issue with Italy",Unavailable,6110j895,0,"Joint Issues","C 1868a,69a","S 2607,08",4.00,9.00,,,0,0,0,0,,,,,13
 6110j898,"2004 Theodor Herzl Centennial Anniversary of His Death - Joint Issue with Austria and Hungary, all 3 stamps on same FDC",Available,6110j898,0,"Joint Issues",,,----,16.00,,,0,1,0,0,,,,,13
 6110j898A,"2004 Theodor Herzl Centennial Anniversary of His Death - Joint Issue with Austria",Unavailable,6110j898A,0,"Joint Issues","C 1871a","S 1960",1.70,9.00,,,0,0,0,0,,,,,13
 6110j898B,"2004 Theodor Herzl Centennial Anniversary of His Death - Joint Issue with Hungary",Unavailable,6110j898B,0,"Joint Issues","C 1871b","S 3903",1.70,9.00,,,0,0,0,0,,,,,13
 6110j935,"2005 Israel Germany 40 Years of Diplomatic Relations - Joint Issue with Germany","In Stock",6110j935,0,"Joint Issues","C 1921a","S 2359",1.50,6.00,,,1,1,0,0,,,,,13
-6110j935A,"2005 Israel Germany 40 Years of Diplomatic Relations - Joint Issue with Germany - Full Small Sheet of 10 stamps",Available,6110j935A,0,"Joint Issues","C 1921a full","S 2359full",15.00,,,,1,0,0,0,,,,,13
+6110j935A,"2005 Israel Germany 40 Years of Diplomatic Relations - Joint Issue with Germany - Full Small Sheet of 10 stamps",Available,6110j935A,0,"Joint Issues","C 1921a full","S 2359 full",15.00,,,,1,0,0,0,,,,,13
 6110j1004,"2008 International Holocaust Remembrance Day - Joint Issue with United Nation New York, Geneva, Vienna, all 3 stamps on same FDC","In Stock",6110j1004,0,"Joint Issues",,,----,5.00,,,0,1,0,0,,,,,13
 6110j004A,"2008 International Holocaust Remembrance Day - Joint Issue with United Nation New York, Geneva, Vienna, all 4 stamps on same FDC, Silk FDC","Sold Out",6110j004A,0,"Joint Issues",,,----,11.00,,,0,0,0,0,,,,,13
 6110j004B,"2008 International Holocaust Remembrance Day - Joint Issue with United Nation New York","In Stock",6110j004B,0,"Joint Issues","C 2038a",,0.60,1.35,,,1,1,0,0,,,,,13
@@ -1577,6 +1589,8 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110j1311,"2016 Relations - Joint Issue with Spain","In Stock",6110j1311,0,"Joint Issues",,,4.50,,,,1,0,0,0,,,,,13
 6110j1318,"2016 Bird Migration - Joint Issue with Bulgaria","In Stock",6110j1318,0,"Joint Issues",,,6.50,,,,1,0,0,0,,,,,13
 6110j1343,"2017 Dolphin Research - Joint Issue with Portugal","In Stock",6110j1343,0,"Joint Issues",,,3.00,,,,1,0,0,0,,,,,13
+6110j1356,"2017 Flowers - Joint Issue with Croatia","In Stock",6110j1356,0,"Joint Issues",,,5.50,,,,1,0,0,0,,,,,13
+6110j1363,"2017 Gorny Convent - Joint Issue with Russia","In Stock",6110j1363,0,"Joint Issues",,,2.50,,,,1,0,0,0,,,,,13
 6110m1ip,"1988 Nature Reserves in the Negev - set of 3",Available,6110m1ip,0,"Maximum Cards",,,26.00,,,,1,0,0,0,,,,,14
 6110m2ip,"1989 Ducks in the Holy Land - set of 4","1 In Stock",6110m2ip,0,"Maximum Cards",,,3.20,,,,1,0,0,0,6.40,,,,14
 6110m3ip,"1990 Nature Reserves in Galil - set of 3","2 In Stock",6110m3ip,0,"Maximum Cards",,,4.80,,,,1,0,0,0,,,,,14
@@ -1614,6 +1628,7 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110m33ip,"2015 Rivers - set of 3",Available,6110m33ip,0,"Maximum Cards",,,7.00,,,,1,0,0,0,,,,,14
 6110m34ip,"2016 Markets - set of 3",Available,6110m34ip,0,"Maximum Cards",,,7.00,,,,1,0,0,0,,,,,14
 6110m35ip,"2016 Tourism in Jerusalem - set of 5",Available,6110m35ip,0,"Maximum Cards",,,8.00,,,,1,0,0,0,,,,,14
+6110m36ip,"2017 Ancient Roman Arenas - set of 3","1 In Stock",6110m36ip,0,"Maximum Cards",,,7.00,,,,1,0,0,0,,,,,14
 6110d1,"1952 Memorial Day - Facsimile Sign by Memorial Division",Available,6110d1,0,"Ministry of Defense Covers",,,18.00,,,,1,0,0,0,,,,,15
 6110d2,"1953 Memorial Day - Hand written facsimile letter Sign by President Izhak Ben-Zvi",Available,6110d2,0,"Ministry of Defense Covers",,,16.00,,,,1,0,0,0,,,,,15
 6110d3,"1954 Memorial Day - Facsimile Sign by Memorial Division",Soon...,6110d3,0,"Ministry of Defense Covers",,,15.00,,,,0,0,0,0,,,,,15
@@ -1676,7 +1691,7 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110d60,"2011 Memorial Day - Facsimile Sign by Ehud Barak",Soon...,6110d60,0,"Ministry of Defense Covers",,,18.00,,,,0,0,0,0,,,,,15
 6110d61,"2012 Memorial Day - Facsimile Sign by Ehud Barak",Soon...,6110d61,0,"Ministry of Defense Covers",,,18.00,,,,0,0,0,0,,,,,15
 6110d62,"2013 Memorial Day - Facsimile Sign by General adm. Ministry of Defense",Soon...,6110d62,0,"Ministry of Defense Covers",,,18.00,,,,0,0,0,0,,,,,15
-6110d63,"2014 Memorial Day - Facsimile Sign by Moshe (Bugi) Ya'alon","In Stock",6110d63,0,"Ministry of Defense Covers",,,22.00,,,,1,0,0,0,,,,,15
+6110d63,"2014 Memorial Day - Facsimile Sign by Moshe (Bugi) Ya'alon",Catalogue,6110d63,0,"Ministry of Defense Covers",,,22.00,,,,0,0,0,0,,,,,15
 6110d64,"2015 Memorial Day - Facsimile Sign by Moshe (Bugi) Ya'alon",Catalogue,6110d64,0,"Ministry of Defense Covers",,,22.00,,,,0,0,0,0,,,,,15
 6110d65,"2016 Memorial Day - Facsimile Sign by Moshe (Bugi) Ya'alon",Catalogue,6110d65,0,"Ministry of Defense Covers",,,22.00,,,,0,0,0,0,,,,,15
 6110d66,"2017 Memorial Day - Facsimile Sign by Avigdor Liberman",Catalogue,6110d66,0,"Ministry of Defense Covers",,,22.00,,,,0,0,0,0,,,,,15
@@ -1706,7 +1721,7 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110n08,"2008 A Happy New Year 5769 Card","1 In Stock",6110n08,0,"New Year Greeting Cards",,,5.00,,,,1,0,0,0,,,,,16
 6110n09n,"2009 A National Happy New Year Card","1 In Stock",6110n09n,0,"New Year Greeting Cards",,,3.50,,,,1,0,0,0,,,,,16
 6110n09,"2009 A Happy New Year 5770 Card","1 In Stock",6110n09,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
-6110n10n,"2010 A National Happy New Year Card","2 In Stock",6110n10n,0,"New Year Greeting Cards",,,3.50,,,,1,0,0,0,,,,,16
+6110n10n,"2010 A National Happy New Year Card","1 In Stock",6110n10n,0,"New Year Greeting Cards",,,3.50,,,,1,0,0,0,,,,,16
 6110n10,"2010 A Happy New Year 5771 Card","1 In Stock",6110n10,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
 6110n11,"2011 A Happy New Year 5772 Card","1 In Stock",6110n11,0,"New Year Greeting Cards",,,6.00,,,,1,0,0,0,,,,,16
 6110n12,"2012 A Happy New Year 5773 Card","Temp. Sold Out",6110n12,0,"New Year Greeting Cards",,,6.00,,,,0,0,0,0,,,,,16
@@ -1715,6 +1730,7 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110n14,"2014 A Happy New Year 5775 Card","Temp. Sold Out",6110n14,0,"New Year Greeting Cards",,,6.00,,,,0,0,0,0,,,,,16
 6110n15,"2015 A Happy New Year 5776 Card","Temp. Sold Out",6110n15,0,"New Year Greeting Cards",,,8.00,,,,0,0,0,0,,,,,16
 6110n16,"2016 A Happy New Year 5777 Card","Temp. Sold Out",6110n16,0,"New Year Greeting Cards",,,8.00,,,,0,0,0,0,,,,,16
+6110n17,"2017 A Happy New Year 5778 Card","Temp. Sold Out",6110n17,0,"New Year Greeting Cards",,,8.00,,,,0,0,0,0,,,,,16
 6110pb1,"1954 1st set of saving stamps","In Stock",6110pb1,0,"Postal Bank Stamps","B Bank.1-4",,30.00,,,,1,0,0,0,,,,,19
 6110pb2,"1960 2nd set of children's saving stamps","In Stock",6110pb2,0,"Postal Bank Stamps","B Bank.5-8",,10.00,,,,1,0,0,0,,,,,19
 psAL1,"02.07.50 Air Letter 25pr Flying Stag 1st type - Hebrew text","In Stock",psAL1,0,"Postal Stationery","B AS.1","P 1",7.50,20.00,,,1,1,0,0,,,,,20
@@ -1776,8 +1792,8 @@ psAL56,"14.06.82 Air Letter 6.00 Shekel Airplane design 1st type","In Stock",psA
 psAL57,"07.06.83 Air Letter 11.00 Shekel Kite design","In Stock",psAL57,0,"Postal Stationery","B AS.55","P 57",1.50,1.00,,,1,1,0,0,,,,,20
 psAL58,"08.04.84 Air Letter 25.00 + 7.00 Shekel Flying model design","In Stock",psAL58,0,"Postal Stationery","B AS.56","P 58",4.00,1.25,,,1,1,0,0,,,,,20
 psAL59,"08.10.84 Air Letter 60.00 + 35.00 Shekel Flying model design","In Stock",psAL59,0,"Postal Stationery","B AS.57","P 59",4.00,1.25,,,1,1,0,0,,,,,20
-psAL60,"05.02.85 Air Letter 60.00 + 50.00 Shekel Flying model design","Temp. Sold Out",psAL60,0,"Postal Stationery","B AS.58","P 60",20.00,20.00,,,0,0,0,0,,,,,20
-psAL61,"18.03.85 Air Letter 60.00 + 90.00 Shekel Flying model design",Catalogue,,0,"Postal Stationery","B AS.59","P 61",,,,,0,0,0,0,,,,,20
+psAL60,"05.02.85 Air Letter 60.00 + 50.00 Shekel Flying model design","Temp. Sold Out",psAL60,0,"Postal Stationery","B AS.58","P 60",12.00,20.00,,,0,0,0,0,,,,,20
+psAL61,"18.03.85 Air Letter 60.00 + 90.00 Shekel Flying model design",Catalogue,psAL61,0,"Postal Stationery","B AS.59","P 61",20.00,30.00,,,0,0,0,0,,,,,20
 psAL62,"16.04.85 Air Letter non denominational Air-Ballon design Green","In Stock",psAL62,0,"Postal Stationery","B AS.62","P 62",2.00,1.50,,,1,1,0,0,,,,,20
 psAL63,"09.03.88 Air Letter non denominational Air-Ballon design Violet","In Stock",psAL63,0,"Postal Stationery","B AS.63a","P 64",2.00,1.50,,,1,1,0,0,,,,,20
 psAL64,"18.06.85 Air Letter non denominational Airplane design 2nd type","In Stock",psAL64,0,"Postal Stationery","B AS.63","P 63",1.50,1.00,,,1,1,0,0,,,,,20
@@ -1900,14 +1916,14 @@ psPC60,"10.11.81 Postcard 0.60 Sheqel stamp","In Stock",psPC60,0,"Postal Station
 psPC61,"11.02.82 Postcard 0.80 Sheqel stamp","In Stock",psPC61,0,"Postal Stationery","B PC.38","P C30",1.00,1.50,,,1,1,0,0,,,,,20
 psPC62,"07.08.83 Postcard no denomination - Olive Branch stamp","In Stock",psPC62,0,"Postal Stationery","B PC.39","P C31",1.00,10.00,,,1,1,0,0,,,,,20
 psPC63,"14.02.89 Postcard no denomination - Sunflower stamp","In Stock",psPC63,0,"Postal Stationery","B PC39","P C32",1.00,1.25,,,1,1,0,0,,,,,20
-psPC64,"25.09.91 Postcard no denomination - Sunflower stamp added Haifa 91","In Stock",psPC64,0,"Postal Stationery","B PC.41","P C33",1.00,1.00,,,1,1,0,0,,,,,20
+psPC64,"25.09.91 Postcard no denomination - Sunflower stamp added Haifa 91","Temp. Sold Out",psPC64,0,"Postal Stationery","B PC.41","P C33",1.00,1.00,,,0,0,0,0,,,,,20
 psPC65,"22.08.93 Postcard no denomination - Jerusalem","In Stock",psPC65,0,"Postal Stationery","B PC.42c","P PC27",2.00,2.00,,,1,1,0,0,,,,,20
 psPC66,"22.08.93 Postcard no denomination - Tel-Aviv","In Stock",psPC66,0,"Postal Stationery","B PC.42b","P PC28",2.00,2.00,,,1,1,0,0,,,,,20
 psPC67,"22.08.93 Postcard no denomination - Elat","In Stock",psPC67,0,"Postal Stationery","B PC.42a","P PC29",2.00,2.00,,,1,1,0,0,,,,,20
-psPC68,"21.11.93 Change Address Postcard no denomination - Good Luck stamp","In Stock",psPC68,0,"Postal Stationery","B PC.43b","P C34",6.00,15.00,,,1,1,0,0,,,,,20
-psPC69,"21.11.93 Change Address Postcard no denomination - See You Again stamp","In Stock",psPC69,0,"Postal Stationery","B PC.43d","P C35",6.00,15.00,,,1,1,0,0,,,,,20
-psPC70,"21.11.93 Change Address Postcard no denomination - Greetings stamp","In Stock",psPC70,0,"Postal Stationery","B PC.43a","P C36",6.00,15.00,,,1,1,0,0,,,,,20
-psPC71,"21.11.93 Change Address Postcard no denomination - Keep in Touch stamp","In Stock",psPC71,0,"Postal Stationery","B PC.43c","P C37",6.00,15.00,,,1,1,0,0,,,,,20
+psPC68,"21.11.93 Change Address Postcard no denomination - Good Luck stamp","Temp. Sold Out",psPC68,0,"Postal Stationery","B PC.43b","P C34",6.00,15.00,,,0,0,0,0,,,,,20
+psPC69,"21.11.93 Change Address Postcard no denomination - See You Again stamp","Temp. Sold Out",psPC69,0,"Postal Stationery","B PC.43d","P C35",6.00,15.00,,,0,0,0,0,,,,,20
+psPC70,"21.11.93 Change Address Postcard no denomination - Greetings stamp","Temp. Sold Out",psPC70,0,"Postal Stationery","B PC.43a","P C36",6.00,15.00,,,0,0,0,0,,,,,20
+psPC71,"21.11.93 Change Address Postcard no denomination - Keep in Touch stamp","Temp. Sold Out",psPC71,0,"Postal Stationery","B PC.43c","P C37",6.00,15.00,,,0,0,0,0,,,,,20
 psPC72,"05.04.94 Air Mail Postcard no denomination - Tiberias","In Stock",psPC72,0,"Postal Stationery","B PC44.a","P PC30",1.50,1.00,,,1,1,0,0,,,,,20
 psPC73,"05.04.94 Air Mail Postcard no denomination - Nazareth","Temp. Sold Out",psPC73,0,"Postal Stationery","B PC.44c","P PC31",2.50,1.00,,,0,0,0,0,,,,,20
 psPC74,"05.04.94 Postcard no denomination - Dead Sea","In Stock",psPC74,0,"Postal Stationery","B PC.44b","P PC32",2.50,1.00,,,1,1,0,0,,,,,20
@@ -2143,28 +2159,29 @@ psIE40,"09.08.16 Envelope no denomination (4.30 NIS) - '24 Hours' Dahlia 16.2x23
 psIE41,"09.08.16 Envelope no denomination (4.50 NIS) - '24 Hours' Amaryllis 18x25cm","In Stock",psIE41,0,"Postal Stationery",,,2.50,2.75,,,1,1,0,0,,,,,20
 psAL160,"1970s Ministry of Tourism Air Letter - The Israel Aircraft Industries' 'Arava'",Catalogue,psAL160,0,"Postal Stationery",,,6.00,,,,0,0,0,0,,,,,20
 psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalogue,psAL182,0,"Postal Stationery",,,4.50,,,,0,0,0,0,,,,,20
-6110r1,"1948 Mils Currency, one color, complete set of 14",Unavailable,6110r1,0,"Revenue Stamps","B REV.1-14",WR1-14,420.00,,,,0,0,0,0,,,,,21
-6110r2,"1949 Prutot Currency, one color in smaller design, complete set of 4",Unavailable,6110r2,0,"Revenue Stamps","B REV.15-18",WR15-18,200.00,,,,0,0,0,0,,,,,21
-6110r3,"1952 Prutot Currency, two colors, basic set of 14","In Stock",6110r3,0,"Revenue Stamps","B REV.19~33",WR19-32,400.00,,,,1,0,0,0,,,,,21
-6110r4,"1958 Prutot Currency, two colors, complete previous set to 15 (30 Prutot)",Unavailable,6110r4,0,"Revenue Stamps","B REV.23","WR33 ?",380.00,,,,0,0,0,0,,,,,21
-6110r5,"1961 Agorot/Lira Currency, complete set of 12 with running stag watermark",Unavailable,6110r5,0,"Revenue Stamps","B REV.34~47A",WR34-45,180.00,,,,0,0,0,0,,,,,21
-6110r6,"1964 Agorot/Lira Currency, complete set of 19 no watermark","In Stock",6110r6,0,"Revenue Stamps","B REV.34~53B",WR47-65,200.00,,,,1,0,0,0,,,,,21
-6110r7,"1973 Agorot/Lira Currency, in smaller design, complete set of 5","In Stock",6110r7,0,"Revenue Stamps","B REV.54-58",WR66-70,10.00,,,,1,0,0,0,,,,,21
-6110r8,"1979 Agorot/Lira Currency, with wavy lines, basic set of 16","In Stock",6110r8,0,"Revenue Stamps","B REV.59~75",WR75~92,70.00,,,,1,0,0,0,,,,,21
-6110r9,"1980 Shekel Currency, with wavy lines, complete set of 13","In Stock",6110r9,0,"Revenue Stamps","B REV.80-92",WR95-107,70.00,,,,1,0,0,0,,,,,21
-6110r10,"1984 Shekel Currency, new design, complete set of 13","In Stock",6110r10,0,"Revenue Stamps","B REV.93-105","W R110-122",70.00,,,,1,0,0,0,,,,,21
-6110r11,"1986 New Shekel Currency, complete set of 10, Photogravure print",Available,6110r11,0,"Revenue Stamps","B REV.106-115",,220.00,,,,1,0,0,0,,,,,21
+psIE42,"02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inland Registered Letter 50gr","In Stock",psIE42,0,"Postal Stationery",,,5.50,7.50,,,1,1,0,0,,,,,20
+6110r1,"1948 Mils Currency, one color, complete set of 14",Unavailable,6110r1,0,"Revenue Stamps","B REV. 1-14","W R1-14",420.00,,,,0,0,0,0,,,,,21
+6110r2,"1949 Prutot Currency, one color in smaller design, complete set of 4",Unavailable,6110r2,0,"Revenue Stamps","B REV. 15-18","W R15-18",200.00,,,,0,0,0,0,,,,,21
+6110r3,"1952 Prutot Currency, two colors, basic set of 14","In Stock",6110r3,0,"Revenue Stamps","B REV. 19~33","W R19-32",400.00,,,,1,0,0,0,,,,,21
+6110r4,"1958 Prutot Currency, two colors, complete previous set to 15 (30 Prutot)",Unavailable,6110r4,0,"Revenue Stamps","B REV. 23","W R33 ?",380.00,,,,0,0,0,0,,,,,21
+6110r5,"1961 Agorot/Lira Currency, complete set of 12 with running stag watermark",Unavailable,6110r5,0,"Revenue Stamps","B REV. 34~47A","W R34-45",180.00,,,,0,0,0,0,,,,,21
+6110r6,"1964 Agorot/Lira Currency, complete set of 19 no watermark","In Stock",6110r6,0,"Revenue Stamps","B REV. 34~53B","W R47-65",200.00,,,,1,0,0,0,,,,,21
+6110r7,"1973 Agorot/Lira Currency, in smaller design, complete set of 5","In Stock",6110r7,0,"Revenue Stamps","B REV. 54-58","W R66-70",10.00,,,,1,0,0,0,,,,,21
+6110r8,"1979 Agorot/Lira Currency, with wavy lines, basic set of 16","In Stock",6110r8,0,"Revenue Stamps","B REV. 59~75","W R75~92",70.00,,,,1,0,0,0,,,,,21
+6110r9,"1980 Shekel Currency, with wavy lines, complete set of 13","In Stock",6110r9,0,"Revenue Stamps","B REV. 80-92","W R95-107",70.00,,,,1,0,0,0,,,,,21
+6110r10,"1984 Shekel Currency, new design, complete set of 13","In Stock",6110r10,0,"Revenue Stamps","B REV. 93-105","W R110 -122",70.00,,,,1,0,0,0,,,,,21
+6110r11,"1986 New Shekel Currency, complete set of 10, Photogravure print",Available,6110r11,0,"Revenue Stamps","B REV. 106-115",,220.00,,,,1,0,0,0,,,,,21
 6110r12,"2008 New Shekel Currency, set of 9 (new value 4 NIS), new design mainly with the Arabic Inscription, Offset print. The new design value of 80 NIS was put into circle only in 2010",Unavailable,6110r12,0,"Revenue Stamps",,,105.00,,,,0,0,0,0,,,,,21
 6110r12t,"2008 New Shekel Currency with TABS, set of 9 (new value 4 NIS), new design mainly with the Arabic Inscription, Offset print. The new design value of 80 NIS was put into circle only in 2010",Unavailable,6110r12t,0,"Revenue Stamps",,,120.00,,,,0,0,0,0,,,,,21
-6110r13,"1967 West Bank Military Administration - Fils/Dinar Currency, complete set of 13",Unavailable,6110r13,0,"Revenue Stamps","B W.REV.9-21",WZW1~13,150.00,,,,0,0,0,0,,,,,21
-6110r14,"1967 West Bank Military Administration - Fils/Dinar Currency, complete set of 8 second printing (colors change)",Unavailable,6110r14,0,"Revenue Stamps","B W.REV.9a~20a",WZW1~13,70.00,,,,0,0,0,0,,,,,21
-6110r15,"1986 West Bank Military Administration - New Shekel Currency, basic set of 6","In Stock",6110r15,0,"Revenue Stamps","B W.REV.1,4-8",,80.00,,,,1,0,0,0,,,,,21
-6110r16,"1987 West Bank Military Administration - New Shekel Currency, complete previous set to 8 (2x1 NIS)",Unavailable,6110r16,0,"Revenue Stamps","B W.REV.2-3",,10.00,,,,0,0,0,0,,,,,21
-6110r17,"1967 Gaza Strip & Golan Heights Military Administration - Agorot/Lira Currency, complete set of 10","In Stock",6110r17,0,"Revenue Stamps","B W.REV.22-31",WZS1-10,70.00,,,,1,0,0,0,,,,,21
-6110r18,"1973 Gaza Strip & Golan Heights Military Administration - Agorot/Lira Currency, smaller frame, basic set of 8","In Stock",6110r18,0,"Revenue Stamps","B W.REV.32-39",WZS11-18,30.00,,,,1,0,0,0,,,,,21
+6110r13,"1967 West Bank Military Administration - Fils/Dinar Currency, complete set of 13",Unavailable,6110r13,0,"Revenue Stamps","B W.REV. 9-21","W ZW1~13",150.00,,,,0,0,0,0,,,,,21
+6110r14,"1967 West Bank Military Administration - Fils/Dinar Currency, complete set of 8 second printing (colors change)",Unavailable,6110r14,0,"Revenue Stamps","B W.REV. 9a~20a","W ZW1~13",70.00,,,,0,0,0,0,,,,,21
+6110r15,"1986 West Bank Military Administration - New Shekel Currency, basic set of 6","In Stock",6110r15,0,"Revenue Stamps","B W.REV. 1,4-8",,80.00,,,,1,0,0,0,,,,,21
+6110r16,"1987 West Bank Military Administration - New Shekel Currency, complete previous set to 8 (2x1 NIS)",Unavailable,6110r16,0,"Revenue Stamps","B W.REV. 2-3",,10.00,,,,0,0,0,0,,,,,21
+6110r17,"1967 Gaza Strip & Golan Heights Military Administration - Agorot/Lira Currency, complete set of 10","In Stock",6110r17,0,"Revenue Stamps","B W.REV. 22-31","W ZS1-10",70.00,,,,1,0,0,0,,,,,21
+6110r18,"1973 Gaza Strip & Golan Heights Military Administration - Agorot/Lira Currency, smaller frame, basic set of 8","In Stock",6110r18,0,"Revenue Stamps","B W.REV. 32-39","W ZS11-18",30.00,,,,1,0,0,0,,,,,21
 6110r10p,"10 diff used Revenue stamps","10 In Stock",,0,"Revenue Stamps",,,2.50,,,,1,0,0,0,,,,,21
 6110r20p,"20 diff used Revenue stamps","1 In Stock",,0,"Revenue Stamps",,,10.00,,,,1,0,0,0,,,,,21
-6110rCT,"1948 Consular Tax stamps - complete set of 11",Catalogue,6110rCT,0,"Revenue Stamps","B SR.REV200-10",,2000.00,,,,0,0,0,0,,,,,21
+6110rCT,"1948 Consular Tax stamps - complete set of 11",Catalogue,6110rCT,0,"Revenue Stamps","B SR.REV 200-10",,2000.00,,,,0,0,0,0,,,,,21
 6110h1,"05.12.95 Commemorative stamp sheet issued for the memory of the Israeli Prime minister Yitzhak Rabin. The sheet embeds in a special pack issued by the Israeli postal authority on December the 5th 1995 to commemorate 30 days to his murder",Unavailable,6110h1,0,"Souvenir Folders",,,40.00,,,,0,0,0,0,,,,,22
 6110h2,"1996 'Jerusalem 3000' - this folder contains the Souvenir Leaf, two Souvenir Sheets, the stamps and the three FDC",Unavailable,6110h2,0,"Souvenir Folders",,,30.00,,,,0,0,0,0,,,,,22
 6110h3,"22.10.1996 Hanukkah - Joint Stamp Issue Israel-USA, this folder contains the Souvenir Leaf and the FDC",Available,6110h3,0,"Souvenir Folders",,,8.50,,,,1,0,0,0,,,,,22
@@ -2263,20 +2280,20 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110h1179xFLD,"2012 Highest & Lowest Place on Earth - Nepal Joint Issue, this folder contains the Souvenir Leaf and the 2 stamps",Unavailable,6110j1179,-1,"Souvenir Folders",,,20.00,,,,0,0,0,0,,,,,22
 6110h1185xFLD,"2012 Festivals of Lights - India Joint Issue, this folder contains the Souvenir Leaf and the 4 stamps",Unavailable,6110j1185,-1,"Souvenir Folders",,,20.00,,,,0,0,0,0,,,,,22
 6110h1206xFLD,"2013 Australian Light Horse - Australia Joint Issue, this folder contains the Souvenir Leaf and the 4 stamps",Unavailable,6110j1206,-1,"Souvenir Folders",,,20.00,,,,0,0,0,0,,,,,22
-6110l16,"1988 40th Anniversary of first Israeli Stamp - numbered 1000 exist",Available,6110l16,0,"Souvenir Leaves","C 16","M 16",30.00,,,,1,0,0,0,,,,,23
-6110l23,"1988 Israel 40th Anniversary Exhibition - 5000 exist",Available,6110l23,0,"Souvenir Leaves","C 23","M 23",18.00,,,,1,0,0,0,,,,,23
-6110l26,"1988 Towards the Negev, Beer Sheva - 1000 exist",Available,6110l26,0,"Souvenir Leaves","C 26","M 26",20.00,,,,1,0,0,0,,,,,23
-6110l27,"1988 Towards the Negev, Arad Song Festival - 1000 exist",Available,6110l27,0,"Souvenir Leaves","C 27","M 30",20.00,,,,1,0,0,0,,,,,23
-6110l28,"1988 Towards the Negev, Dimona - 1000 exist","Temp. Sold Out",6110l28,0,"Souvenir Leaves","C 28","M 27",20.00,,,,0,0,0,0,,,,,23
+6110l16,"1988 40th Anniversary of first Israeli Stamp - numbered 1000 exist",Unavailable,6110l16,0,"Souvenir Leaves","C 16","M 16",30.00,,,,0,0,0,0,,,,,23
+6110l23,"1988 Israel 40th Anniversary Exhibition - 5000 exist",Unavailable,6110l23,0,"Souvenir Leaves","C 23","M 23",18.00,,,,0,0,0,0,,,,,23
+6110l26,"1988 Towards the Negev, Beer Sheva - 1000 exist",Unavailable,6110l26,0,"Souvenir Leaves","C 26","M 26",20.00,,,,0,0,0,0,,,,,23
+6110l27,"1988 Towards the Negev, Arad Song Festival - 1000 exist",Unavailable,6110l27,0,"Souvenir Leaves","C 27","M 30",20.00,,,,0,0,0,0,,,,,23
+6110l28,"1988 Towards the Negev, Dimona - 1000 exist",Unavailable,6110l28,0,"Souvenir Leaves","C 28","M 27",20.00,,,,0,0,0,0,,,,,23
 6110l29,"1988 Towards the Negev, Park Eshkol - 1000 exist",Available,6110l29,0,"Souvenir Leaves","C 29","M 28",20.00,,,,1,0,0,0,,,,,23
-6110l30,"1988 Towards the Negev, Mizpe Ramon - 1000 exist",Available,6110l30,0,"Souvenir Leaves","C 30","M 29",20.00,,,,1,0,0,0,,,,,23
+6110l30,"1988 Towards the Negev, Mizpe Ramon - 1000 exist",Unavailable,6110l30,0,"Souvenir Leaves","C 30","M 29",20.00,,,,0,0,0,0,,,,,23
 6110l31,"1988 Towards the Negev, Tel Arad Hot Air Balloon - 1000 exist",Available,6110l31,0,"Souvenir Leaves","C 31","M 31",20.00,,,,1,0,0,0,,,,,23
 6110l37,"1988 Israel Stamp Week - Feast of Hanukka",Available,6110l37,0,"Souvenir Leaves","C 37","M 37",9.00,,,,1,0,0,0,,,,,23
 6110l38,"1988 Christmas '88 - Bet Lehem",Available,6110l38,0,"Souvenir Leaves","C 38","M 38",25.00,,,,1,0,0,0,,,,,23
 6110l38A,"1988 Christmas '88 - Bet Lehem - overprinted SPECIMEN","Sold Out",6110l38A,0,"Souvenir Leaves","C --","M --",37.50,,,,0,0,0,0,,,,,23
 6110l39,"1988 Christmas '88 - Nazareth",Available,6110l39,0,"Souvenir Leaves","C 39","M 39",25.00,,,,1,0,0,0,,,,,23
 6110l42,"1989 Arthur Rubinstein 6th International Piano Master Competition - numbered 1000 exist, appear within a binder with envelope added",Unavailable,6110l42,0,"Souvenir Leaves","C 42","M 42",35.00,,,,0,0,0,0,,,,,23
-6110l63,"1989 Joint 75 Years - numbered 2010 exist",Available,6110l63,0,"Souvenir Leaves","C 63","M 67",50.00,,,,1,0,0,0,,,,,23
+6110l63,"1989 Joint 75 Years - numbered 2010 exist",Unavailable,6110l63,0,"Souvenir Leaves","C 63","M 67",50.00,,,,0,0,0,0,,,,,23
 6110l66,"1989 Israel Stamp Week - Hanukka '89","1 In Stock",6110l66,0,"Souvenir Leaves","C 66","M 70",7.50,,,,1,0,0,0,,,,,23
 6110l70,"1990 National Labour Organization - numbered 1010 exist",Unavailable,6110l70,0,"Souvenir Leaves","C 70","M 74",25.00,,,,0,0,0,0,,,,,23
 6110l74,"1990 Rotary Israel 30th Conference - numbered 1010 exist",Unavailable,6110l74,0,"Souvenir Leaves","C 74","M 80",50.00,,,,0,0,0,0,,,,,23
@@ -2318,21 +2335,21 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110l322,"1998 12th Philatelic Conference - numbered 510 exist",Available,6110l322,0,"Souvenir Leaves","C 322","M 338",15.00,,,,1,0,0,0,,,,,23
 6110l323,"1998 Festival of Hanukkah '98",Available,6110l323,0,"Souvenir Leaves","C 323","M 339",5.00,,,,1,0,0,0,,,,,23
 6110l325,"1999 Inauguration of the Palmah Center & Museum - Harel - numbered 2010 exist","! NEW ! Available",6110l325,0,"Souvenir Leaves","C 325","M 343",15.00,,,,1,0,0,0,,,,,23
-6110l326,"1999 Inauguration of the Palmah Center & Museum - Yiftach - numbered 2010 exist","! NEW ! Available",6110l326,0,"Souvenir Leaves","C 326","M 342",13.00,,,,1,0,0,0,,,,,23
-6110l327,"1999 Inauguration of the Palmah Center & Museum - Hanegev - numbered 2010 exist","! NEW ! Available",6110l327,0,"Souvenir Leaves","C 327","M 341",13.00,,,,1,0,0,0,,,,,23
+6110l326,"1999 Inauguration of the Palmah Center & Museum - Yiftach - numbered 2010 exist","! NEW ! Available",6110l326,0,"Souvenir Leaves","C 326","M 342",16.00,,,,1,0,0,0,,,,,23
+6110l327,"1999 Inauguration of the Palmah Center & Museum - Hanegev - numbered 2010 exist","! NEW ! Available",6110l327,0,"Souvenir Leaves","C 327","M 341",15.00,,,,1,0,0,0,,,,,23
 6110l333,"1999 The Painter James Ensor 1860-1949 - Joint Issue with Belgium",Unavailable,6110l333,0,"Souvenir Leaves","C 333","M 349",5.00,,,,0,0,0,0,,,,,23
 6110l349,"1999 The Heritage of Slovakia Jewry - Joint Issue with Slovakia",Available,6110l349,0,"Souvenir Leaves","C 349","M 365",5.00,,,,1,0,0,0,,,,,23
 6110l354,"1999 13th Philatelic Conference - numbered 510 exist",Available,6110l354,0,"Souvenir Leaves","C 354","M 368",15.00,,,,1,0,0,0,,,,,23
 6110l356,"2000 Millennium","2 In Stock",6110l356,0,"Souvenir Leaves","C 356","M 372",5.00,,,,1,0,0,0,,,,,23
 6110l376,"2000 Beer Sheva 2000 National Stamp Exhibition - numbered 510 exist",Available,6110l376,0,"Souvenir Leaves","C 376","M 392",15.00,,,,1,0,0,0,,,,,23
-6110l383,"2000 The Dohany Synagogue Budapest - Joint Issue with Hungary",Available,6110l383,0,"Souvenir Leaves","C 383","M 399",5.00,,,,1,0,0,0,,,,,23
+6110l383,"2000 The Dohany Synagogue Budapest - Joint Issue with Hungary",Available,6110l383,0,"Souvenir Leaves","C 383","M 399",7.50,,,,1,0,0,0,,,,,23
 6110l392,"2001 Jerusalem 2001 Multinational Stamp Exhibition - numbered 810 exist",Available,6110l392,0,"Souvenir Leaves","C 392","M 408",15.00,,,,1,0,0,0,,,,,23
-6110l404a,"2001 Jubilee of the Exodus of the Iraqi Jews - Set of Three Leaves with additional Medals - numbered 1010 exist",Available,6110l404a,0,"Souvenir Leaves","C 404a-06a","M 420-25",150.00,,,,1,0,0,0,,,,,23
+6110l404a,"2001 Jubilee of the Exodus of the Iraqi Jews - Set of Three Leaves with additional Medals - numbered 1010 exist",Unavailable,6110l404a,0,"Souvenir Leaves","C 404a-06a","M 420-25",150.00,,,,0,0,0,0,,,,,23
 6110l415,"2001 Shota Rustaveli Georgian Poet - Joint Issue with Georgia - the Kutaisi Synagogue","1 In Stock",6110l415,0,"Souvenir Leaves","C 415","M 434",5.00,,,,1,0,0,0,,,,,23
 6110l421,"2002 10 Years, Israel-China, Diplomatic Relations","1 In Stock",6110l421,0,"Souvenir Leaves","C 421","M 440",5.00,,,,1,0,0,0,,,,,23
 6110l426,"2002 'HAKHEL' ISRAEL",Available,6110l426,0,"Souvenir Leaves","C 426","M 446",5.00,,,,1,0,0,0,,,,,23
 6110l440,"2002 16th Philatelic Conference - numbered 510 exist",Available,6110l440,0,"Souvenir Leaves","C 440","M 459",15.00,,,,1,0,0,0,,,,,23
-6110l441,"2003 Launch of the First Israeli Astronaut into Space - numbered 1010 exist",Available,6110l441,0,"Souvenir Leaves","C 441","M 460",80.00,,,,1,0,0,0,,,,,23
+6110l441,"2003 Launch of the First Israeli Astronaut into Space - numbered 1010 exist",Unavailable,6110l441,0,"Souvenir Leaves","C 441","M 460",80.00,,,,0,0,0,0,,,,,23
 6110l448,"2003 Israel 55th Independence","1 In Stock",6110l448,0,"Souvenir Leaves","C 448","M 468",5.00,,,,1,0,0,0,,,,,23
 6110l450,"2003 Warsaw Ghetto Uprising 60 Years - numbered 1110 exist",Unavailable,6110l450,0,"Souvenir Leaves","C 450","M 469",25.00,,,,0,0,0,0,,,,,23
 6110l461,"2003 17th Philatelic Conference - numbered 510 exist",Available,6110l461,0,"Souvenir Leaves","C 461","M 480",15.00,,,,1,0,0,0,,,,,23
@@ -2409,47 +2426,48 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110lne17,"2014 The 28th Conference of Israeli Philatelists - numbered 510 exist",Available,6110lne17,0,"Souvenir Leaves",,,15.00,,,,1,0,0,0,,,,,23
 6110lne18,"2015 The 29th Conference of Israeli Philatelists - numbered 510 exist",Available,6110lne18,0,"Souvenir Leaves",,,15.00,,,,1,0,0,0,,,,,23
 6110lne19,"2016 The 30th Conference of Israeli Philatelists - numbered 510 exist",Available,6110lne19,0,"Souvenir Leaves",,,15.00,,,,1,0,0,0,,,,,23
-6110e6,"26.09.48 Festivals horizontal TB (10)",Available,6110e6,0,"Special Sheets-Sheetlets-Combination","C 15a-19a","S 2x10-14",116.00,----,,,1,0,0,0,,,,,24
-6110e7,"26.09.48 Festivals vertical pairs with gutter (10)",Available,6110e7,0,"Special Sheets-Sheetlets-Combination","C 15b-19b","S 2x10-14",900.00,----,,,1,0,0,0,,,,,24
-6110e7A,"26.09.48 Festivals vertical pairs with gutter & tab (10)",Available,6110e7A,0,"Special Sheets-Sheetlets-Combination","C 15bT-19bT","S 2x10-14",7700.00,----,,,1,0,0,0,,,,,24
-6110e7B,"26.09.48 Festivals Cross gutter (20)",Available,6110e7B,0,"Special Sheets-Sheetlets-Combination","C 2x15a-19a","S 4x10-14",2220.00,----,,,1,0,0,0,,,,,24
-6110e14,"30.04.50 Mered Coins TB (8) + TB gutter (8)","In Stock",6110e14,0,"Special Sheets-Sheetlets-Combination","C 34TB-37TB,34TBG-37TBG","S 4x 18-21",98.00,----,,,1,0,0,0,,,,,24
-6110e17,"01.06.50 UPU TB (2) + TB gutter (4)","In Stock",6110e17,0,"Special Sheets-Sheetlets-Combination","C 39/40TB,39TBG,40TBG","S 2x32b",85.00,----,,,1,0,0,0,,,,,24
-6110e24,"26.02.53 Coins TB (12) + TB gutter (12)","In Stock",6110e24,0,"Special Sheets-Sheetlets-Combination","C 54TB-62TB,54TBG-62TBG","S 2x39a-42a,2x56a,59a",28.00,----,,,1,0,0,0,,,,,24
+6110lne20,"2017 The 31st Conference of Israeli Philatelists - numbered 510 exist","1 In Stock",6110lne20,0,"Souvenir Leaves",,,15.00,,,,1,0,0,0,,,,,23
+6110e6,"26.09.48 Festivals horizontal TB (10)",Available,6110e6,0,"Special Sheets-Sheetlets-Combination","C 15a-19a","S 2x 10-14",116.00,----,,,1,0,0,0,,,,,24
+6110e7,"26.09.48 Festivals vertical pairs with gutter (10)",Available,6110e7,0,"Special Sheets-Sheetlets-Combination","C 15b-19b","S 2x 10-14",900.00,----,,,1,0,0,0,,,,,24
+6110e7A,"26.09.48 Festivals vertical pairs with gutter & tab (10)",Available,6110e7A,0,"Special Sheets-Sheetlets-Combination","C 15bT -19bT","S 2x 10-14",7700.00,----,,,1,0,0,0,,,,,24
+6110e7B,"26.09.48 Festivals Cross gutter (20)",Available,6110e7B,0,"Special Sheets-Sheetlets-Combination","C 2x 15a-19a","S 4x 10-14",2220.00,----,,,1,0,0,0,,,,,24
+6110e14,"30.04.50 Mered Coins TB (8) + TB gutter (8)","In Stock",6110e14,0,"Special Sheets-Sheetlets-Combination","C 34TB -37TB, 34TBG -37TBG","S 4x 18-21",98.00,----,,,1,0,0,0,,,,,24
+6110e17,"01.06.50 UPU TB (2) + TB gutter (4)","In Stock",6110e17,0,"Special Sheets-Sheetlets-Combination","C 39/40TB, 39TBG, 40TBG","S 2x32b",85.00,----,,,1,0,0,0,,,,,24
+6110e24,"26.02.53 Coins TB (12) + TB gutter (12)","In Stock",6110e24,0,"Special Sheets-Sheetlets-Combination","C 54TB -62TB, 54TBG -62TBG","S 2x39a-42a, 2x56a,59a",28.00,----,,,1,0,0,0,,,,,24
 6110e128,"21.03.63 Freedom From Hunger - Full TB sheet",Available,6110e128,0,"Special Sheets-Sheetlets-Combination","C 299F","S 237",490.00,1180.00,,,1,1,0,0,,,,,24
 6110e129,"21.03.63 Freedom From Hunger - Heart TB",Available,6110e129,0,"Special Sheets-Sheetlets-Combination","C 299H","S 237",139.00,159.00,,,1,1,0,0,,,,,24
 6110e130,"21.03.63 Freedom From Hunger - pair with gutter",Available,6110e130,0,"Special Sheets-Sheetlets-Combination","C 299G","S 237",46.50,49.00,,,1,1,0,0,,,,,24
 6110e131,"21.03.63 Freedom From Hunger - TB","In Stock",6110e131,0,"Special Sheets-Sheetlets-Combination","C 299TB","S 237",17.30,18.90,,,1,1,0,0,,,,,24
 6110e134,"19.06.63 Halbanon - Full se-tenant Sheet (16v)","In Stock",6110e134,0,"Special Sheets-Sheetlets-Combination","C 303A","S 241a",52.00,94.00,,,1,1,0,0,,,,,24
-6110e105,"20.01.65 Zodiac Signs 0.08 + 0.12 full 2 TB sheets (72) print date 151064 + 010964","In Stock",6110e105,0,"Special Sheets-Sheetlets-Combination","C 245F,247F","S 194a,196a(uncut)",20.00,58.00,,,1,1,0,0,,,,,24
-6110e105D,"20.01.65 Zodiac Signs 0.08 + 0.12 full 2 TB sheets (72) print date 231264 + 211264","In Stock",6110e105D,0,"Special Sheets-Sheetlets-Combination","C 245F,247F","S 194a,196a(uncut)",19.00,Remark,,,1,0,0,0,,,,,24
-6110e105A,"20.01.65 Zodiac Signs TB (4) + TB gutter (4) + vertical gutter (4)","In Stock",6110e105A,0,"Special Sheets-Sheetlets-Combination","C 245,47TBTBG,TBP","S 194a,196a",5.00,,,,1,0,0,0,,,,,24
+6110e105,"20.01.65 Zodiac Signs 0.08 + 0.12 full 2 TB sheets (72) print date 151064 + 010964","In Stock",6110e105,0,"Special Sheets-Sheetlets-Combination","C 245F,247F","S 194a,196a (uncut)",20.00,58.00,,,1,1,0,0,,,,,24
+6110e105D,"20.01.65 Zodiac Signs 0.08 + 0.12 full 2 TB sheets (72) print date 231264 + 211264","In Stock",6110e105D,0,"Special Sheets-Sheetlets-Combination","C 245F,247F","S 194a,196a (uncut)",19.00,Remark,,,1,0,0,0,,,,,24
+6110e105A,"20.01.65 Zodiac Signs TB (4) + TB gutter (4) + vertical gutter (4)","In Stock",6110e105A,0,"Special Sheets-Sheetlets-Combination","C 245,47TB TBG,TBP","S 194a,196a",5.00,,,,1,0,0,0,,,,,24
 6110e105B,"20.01.65 Zodiac Signs Cross gutter (8)","In Stock",6110e105B,0,"Special Sheets-Sheetlets-Combination","C 245H,47H","S 194a,196a",9.00,,,,1,0,0,0,,,,,24
-6110e105C,"15.07.65 Zodiac Signs coils (18)","In Stock",6110e105C,0,"Special Sheets-Sheetlets-Combination","C 241c267c,246c","S 190,195,216",16.80,29.00,,,1,1,0,0,,,,,24
-6110e153,"14.03.66 Town Emblems 0.08 + 0.12 full 2 TB sheets (72)","In Stock",6110e153,0,"Special Sheets-Sheetlets-Combination","C 343F,345F","S 280a,282a(uncut)",21.00,"Contact Us",,,1,1,0,0,,,,,24
-6110e153A,"14.03.66 Town Emblems TB (4) + TB gutter (4) + vertical gutter (4)","In Stock",6110e153A,0,"Special Sheets-Sheetlets-Combination","C 343,45TBTBG,TBP","S 280a,282a",5.00,,,,1,0,0,0,,,,,24
+6110e105C,"15.07.65 Zodiac Signs coils (18)","In Stock",6110e105C,0,"Special Sheets-Sheetlets-Combination","C 241c 267c,246c","S 190, 195,216",16.80,29.00,,,1,1,0,0,,,,,24
+6110e153,"14.03.66 Town Emblems 0.08 + 0.12 full 2 TB sheets (72)","In Stock",6110e153,0,"Special Sheets-Sheetlets-Combination","C 343F,345F","S 280a,282a (uncut)",21.00,,,,1,1,0,0,,,,,24
+6110e153A,"14.03.66 Town Emblems TB (4) + TB gutter (4) + vertical gutter (4)","In Stock",6110e153A,0,"Special Sheets-Sheetlets-Combination","C 343,45TB TBG,TBP","S 280a,282a",5.00,,,,1,0,0,0,,,,,24
 6110e153B,"14.03.66 Town Emblems Cross gutter (8)","In Stock",6110e153B,0,"Special Sheets-Sheetlets-Combination","C 343H,45H","S 280a,282a",9.00,,,,1,0,0,0,,,,,24
-6110e153C,"10.01.67 Town Emblems coils (18)","In Stock",6110e153C,0,"Special Sheets-Sheetlets-Combination","C 339c341c,344c","S 276278,281",2.22,15.50,,,1,1,0,0,,,,,24
-6110e198,"25.05.71 Town Emblems 0.15 + 0.18 + 0.18 full 2 TB sheets (72)","In Stock",6110e198,0,"Special Sheets-Sheetlets-Combination","C 361/62F,362F","S 389c389Ad(uncut)",46.70,"Contact Us",,,1,1,0,0,,,,,24
-6110e198A,"25.05.71 Town Emblems TB (4) + TB gutter (4) + vertical gutter (6) + se-tenant (8)","In Stock",6110e198A,0,"Special Sheets-Sheetlets-Combination","C 361-62TBTBG,TBP","S 389c389Ad",15.00,,,,1,0,0,0,,,,,24
+6110e153C,"10.01.67 Town Emblems coils (18)","In Stock",6110e153C,0,"Special Sheets-Sheetlets-Combination","C 339c 341c,344c","S 276 278,281",2.22,15.50,,,1,1,0,0,,,,,24
+6110e198,"25.05.71 Town Emblems 0.15 + 0.18 + 0.18 full 2 TB sheets (72)","In Stock",6110e198,0,"Special Sheets-Sheetlets-Combination","C 361/62F, 362F","S 389c 389Ad (uncut)",46.70,,,,1,1,0,0,,,,,24
+6110e198A,"25.05.71 Town Emblems TB (4) + TB gutter (4) + vertical gutter (6) + se-tenant (8)","In Stock",6110e198A,0,"Special Sheets-Sheetlets-Combination","C 361- 62TB TBG,TBP","S 389c 389Ad",15.00,,,,1,0,0,0,,,,,24
 6110e198B,"25.05.71 Town Emblems Cross gutter (8)","In Stock",6110e198B,0,"Special Sheets-Sheetlets-Combination","C 361-62H","S 280a,282a",15.00,,,,1,0,0,0,,,,,24
-6110e202,"16.01.73 Town Emblems 0.10 + 0.18 full TB sheet (18)","In Stock",6110e202,0,"Special Sheets-Sheetlets-Combination","C 344/62F","S 389e(uncut)",0.67,3.78,,,1,1,0,0,,,,,24
-6110e202A,"16.01.73 Town Emblems TB gutter (4) + se-tenant (4)","In Stock",6110e202A,0,"Special Sheets-Sheetlets-Combination","C 344/62TBGW","S 389e",0.50,2.50,,,1,1,0,0,,,,,24
+6110e202,"16.01.73 Town Emblems 0.10 + 0.18 full TB sheet (18)","In Stock",6110e202,0,"Special Sheets-Sheetlets-Combination","C 344/62F","S 389e (uncut)",0.67,3.78,,,1,1,0,0,,,,,24
+6110e202A,"16.01.73 Town Emblems TB gutter (4) + se-tenant (4)","In Stock",6110e202A,0,"Special Sheets-Sheetlets-Combination","C 344 /62TBGW","S 389e",0.50,2.50,,,1,1,0,0,,,,,24
 6110e262,"1974 Jerusalem 73' - Souvenir Sheets thick paper matte gum","In Stock",6110e262,0,"Special Sheets-Sheetlets-Combination","C B11-B13","S 532-534",1.22,----,,,1,0,0,0,,,,,24
 6110e271,"1975 Arbor Day - Full 2 Sheets of different print dates (the only Israeli commemorative stamp was printed twice, the colors of second print are brightens)","! NEW ! In Stock",6110e271,0,"Special Sheets-Sheetlets-Combination","B 600a",,10.00,,,,1,0,0,0,,,,,24
 6110e324,"23.04.78 Memorial Day - Full se-tenant Sheet (15v)","In Stock",6110e324,0,"Special Sheets-Sheetlets-Combination","C 811-825","S 694",1.82,4.70,,,1,1,0,0,,,,,24
-6110e375,"29.12.81 Trees of the Holyland - full se-tenant sheetlet","In Stock",6110e375,0,"Special Sheets-Sheetlets-Combination","C 3x936-938","S 3x798-800",4.62,6.35,,,1,1,0,0,,,,,24
+6110e375,"29.12.81 Trees of the Holyland - full se-tenant sheetlet","In Stock",6110e375,0,"Special Sheets-Sheetlets-Combination","C 3x 936-938","S 3x 798-800",4.62,6.35,,,1,1,0,0,,,,,24
 6110e424,"04.09.84 Olive Branch - Full TB sheet dated 16.1.84 (32)","In Stock",6110e424,0,"Special Sheets-Sheetlets-Combination","C 970a","S 829a",23.00,29.50,,,1,1,0,0,,,,,24
 6110e424A,"04.09.84 Olive Branch - Full TB sheet dated 31.8.84 (32)","In Stock",6110e424A,0,"Special Sheets-Sheetlets-Combination","C 970b","S 829a",34.50,75.50,,,1,1,0,0,,,,,24
 6110e424B,"04.09.84 Olive Branch TB gutter (8)","In Stock",6110e424B,0,"Special Sheets-Sheetlets-Combination",,,10.00,,,,1,0,0,0,,,,,24
 6110e424C,"04.09.84 Olive Branch Cross gutter (4)","In Stock",6110e424C,0,"Special Sheets-Sheetlets-Combination",,,12.50,,,,1,0,0,0,,,,,24
 6110e435,"16.05.85 Israphil 85' - 3 numerated Souvenir Sheets I.P.F. ovptd. (10,000 exist)","In Stock",6110e435,0,"Special Sheets-Sheetlets-Combination","C B29a-B31a","S (see text)",104.00,144.00,,,1,1,0,0,,,,,24
-6110e462,"18.12.86 Bronislaw Huberman, Arturo Toscanini - Full Se-Tenant Sheetlet","In Stock",6110e462,0,"Special Sheets-Sheetlets-Combination","C 1133,1134(full)","S 954,955(full)",29.00,32.00,,,1,1,0,0,,,,,24
+6110e462,"18.12.86 Bronislaw Huberman, Arturo Toscanini - Full Se-Tenant Sheetlet","In Stock",6110e462,0,"Special Sheets-Sheetlets-Combination","C 1133,1134 (full)","S 954,955 (full)",29.00,32.00,,,1,1,0,0,,,,,24
 6110e509,"18.07.89 Ducks in the Holy Land - full se-tenant sheetlet (12)","In Stock",6110e509,0,"Special Sheets-Sheetlets-Combination","C 1213full","S 1025full",12.60,20.40,,,1,1,0,0,,,,,24
 6110e515,"12.10.89 TEVEL 89' - Youth Philately Exhibition - full special sheet","In Stock",6110e515,0,"Special Sheets-Sheetlets-Combination","C 1219full","S 1033full",4.90,7.20,,,1,1,0,0,,,,,24
-6110e526,"17.04.90 Ardon Windows - Souvenir Sheet Imperforate","In Stock",6110e526,0,"Special Sheets-Sheetlets-Combination","C B42a","S 1041note",53.00,288.00,,,1,1,0,0,,,,,24
-6110e531,"12.06.90 International Folklore Festival - 4 Se-Tenant Sheetlet","In Stock",6110e531,0,"Special Sheets-Sheetlets-Combination","C 1247/48full","S 1056/57full",15.00,39.00,,,1,1,0,0,31.00,,,,24
-6110e564,"02.12.91 Postal & Philatelic Museum - Imperforate, numerated Souvenir Sheet","In Stock",6110e564,0,"Special Sheets-Sheetlets-Combination","C B44a","S 1088see text",63.00,95.00,,,1,1,0,0,,,,,24
+6110e526,"17.04.90 Ardon Windows - Souvenir Sheet Imperforate","In Stock",6110e526,0,"Special Sheets-Sheetlets-Combination","C B42a","S 1041 note",53.00,288.00,,,1,1,0,0,,,,,24
+6110e531,"12.06.90 International Folklore Festival - 4 Se-Tenant Sheetlet","In Stock",6110e531,0,"Special Sheets-Sheetlets-Combination","C 1247/48 full","S 1056/57 full",15.00,39.00,,,1,1,0,0,31.00,,,,24
+6110e564,"02.12.91 Postal & Philatelic Museum - Imperforate, numerated Souvenir Sheet","In Stock",6110e564,0,"Special Sheets-Sheetlets-Combination","C B44a","S 1088 see text",63.00,95.00,,,1,1,0,0,,,,,24
 6110e566,"18.02.92 Anemone - Full Tete-Beche Sheet (40)","In Stock",6110e566,0,"Special Sheets-Sheetlets-Combination","C 1305a full","S 1107 full",40.00,98.00,,,1,1,0,0,95.00,,,,24
 6110e566A,"18.02.92 Anemone TB (4) TB gutter (4)","In Stock",6110e566A,0,"Special Sheets-Sheetlets-Combination",,,15.00,,,,1,0,0,0,40.00,,,,24
 6110e566B,"18.02.92 Anemone Heart TB (4v)","In Stock",6110e566B,0,"Special Sheets-Sheetlets-Combination",,,20.00,,,,1,0,0,0,50.00,,,,24
@@ -2463,7 +2481,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e624A,"18.04.94 Greetings - Keep in touch TB (2) TB gutter (2)","In Stock",6110e624A,0,"Special Sheets-Sheetlets-Combination",,,6.00,,,,1,0,0,0,,,,,24
 6110e625A,"1994 Greetings - Keep in touch - Tete-Beche sheet (10v) prepared for Booklets - not afixed","In Stock",6110e625A,0,"Special Sheets-Sheetlets-Combination","B BP9","S 1074a",9.80,----,,,1,0,0,0,,,,,24
 6110e645,"25.04.95 End of W.W.II & Liberation of the Camps Full Sheet of 10 stamps - it's known as the first Israeli small sheet format (Kleinbogen) issue",Available,6110e645,0,"Special Sheets-Sheetlets-Combination","C 1426 full","S 1228 full",122.00,140.00,,,1,1,0,0,,,,,24
-6110e647,"25.04.95 Yishuv Volunteers - Souvenir Sheet without crossing perforation at the bottom","In Stock",6110e647,0,"Special Sheets-Sheetlets-Combination","C B51without","S 1233without",7.80,20.00,,,1,1,0,0,,,,,24
+6110e647,"25.04.95 Yishuv Volunteers - Souvenir Sheet without crossing perforation at the bottom","In Stock",6110e647,0,"Special Sheets-Sheetlets-Combination","C B51 without","S 1233 without",7.80,20.00,,,1,1,0,0,,,,,24
 6110e650,"07.06.95 Kites - Full Se-Tenant Sheetlet of 9","In Stock",6110e650,0,"Special Sheets-Sheetlets-Combination","C 1428-30 full","S 1237a full",6.35,9.55,,,1,1,0,0,,,,,24
 6110e671,"17.04.96 75 Years Hebrew Writers Association - Full Tete-Beche Sheetlet (14) (FDC is differ from regular issue)","In Stock",6110e671,0,"Special Sheets-Sheetlets-Combination","C B55","S 1269",3.75,7.22,,,1,1,0,0,,,,,24
 6110e689,"13.02.97 Sport 1.10 - Full Tete-Beche Sheet (40)","In Stock",6110e689,0,"Special Sheets-Sheetlets-Combination","C 1511 full","S 1257 full",33.30,36.70,,,1,1,0,0,,,,,24
@@ -2485,61 +2503,61 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e771,"15.02.00 Pilgrimage to the Holy Land II - Full 3 Sheets of 10 stamps, decorated margins",Available,6110e771,0,"Special Sheets-Sheetlets-Combination","C 1647-49 full","S 1396-98 full",34.50,51.00,,,1,1,0,0,,,,,24
 6110e778,"03.05.00 Blanford fox - Full se-tenant Sheetlet (8v)","In Stock",6110e778,0,"Special Sheets-Sheetlets-Combination","C 1653-56 full","S 1404a",5.80,10.00,,,1,1,0,0,,,,,24
 6110e790,"05.12.00 Dinosaur Judean Hills - Full se-tenant Sheetlet of 9 decorated margins","In Stock",6110e790,0,"Special Sheets-Sheetlets-Combination","C 1674-76 full","S 1421-23 full",11.50,17.30,,,1,1,0,0,,,,,24
-6110e797,"13.02.01 The Hebrew Alphabet - 2 Full tete-beche Sheetlets decorated margins (FDC is differ from regular issue)","In Stock",6110e797,0,"Special Sheets-Sheetlets-Combination","C 1679-002x1701-05","S 1432,2x1433",1.90,5.80,,,1,1,0,0,,,,,24
-6110e803,"18.03.01 Flowers - 'My Own Stamp' Full Sheet (16v) - full perforated",Available,6110e803,0,"Special Sheets-Sheetlets-Combination","C 1711-14 full","S 1439full",18.00,26.00,,,1,1,0,0,,,,,24
-6110e803A,"18.03.01 Flowers - 'My Own Stamp' Full Sheet (16v) - not full perforated",Available,6110e803A,0,"Special Sheets-Sheetlets-Combination","C 1711-14 full","S 1439full",20.00,30.00,,,1,1,0,0,,,,,24
-6110e808,"23.05.01 Shrine of the Bab - Full Sheet of 10 stamps dated 26/03/01","In Stock",6110e808,0,"Special Sheets-Sheetlets-Combination","C 1720full","S 1443full",17.30,52.00,,,1,1,0,0,,,,,24
-6110e808A,"23.05.01 Shrine of the Bab - Full Sheet of 10 stamps dated 27/03/01","In Stock",6110e808A,0,"Special Sheets-Sheetlets-Combination","C 1720full","S 1443full",17.30,52.00,,,1,1,0,0,,,,,24
-6110e822,"11.12.01 Coastal Conservation - Full Sheet of 10 stamps",Available,6110e822,0,"Special Sheets-Sheetlets-Combination","C 1742full","S 1462full",72.00,107.00,,,1,1,0,0,,,,,24
+6110e797,"13.02.01 The Hebrew Alphabet - 2 Full tete-beche Sheetlets decorated margins (FDC is differ from regular issue)","In Stock",6110e797,0,"Special Sheets-Sheetlets-Combination","C 1679-00 2x1701-05","S 1432, 2x1433",1.90,5.80,,,1,1,0,0,,,,,24
+6110e803,"18.03.01 Flowers - 'My Own Stamp' Full Sheet (16v) - full perforated",Available,6110e803,0,"Special Sheets-Sheetlets-Combination","C 1711-14 full","S 1439 full",18.00,26.00,,,1,1,0,0,,,,,24
+6110e803A,"18.03.01 Flowers - 'My Own Stamp' Full Sheet (16v) - not full perforated",Available,6110e803A,0,"Special Sheets-Sheetlets-Combination","C 1711-14 full","S 1439 full",20.00,30.00,,,1,1,0,0,,,,,24
+6110e808,"23.05.01 Shrine of the Bab - Full Sheet of 10 stamps dated 26/03/01","In Stock",6110e808,0,"Special Sheets-Sheetlets-Combination","C 1720 full","S 1443 full",17.30,52.00,,,1,1,0,0,,,,,24
+6110e808A,"23.05.01 Shrine of the Bab - Full Sheet of 10 stamps dated 27/03/01","In Stock",6110e808A,0,"Special Sheets-Sheetlets-Combination","C 1720 full","S 1443 full",17.30,52.00,,,1,1,0,0,,,,,24
+6110e822,"11.12.01 Coastal Conservation - Full Sheet of 10 stamps",Available,6110e822,0,"Special Sheets-Sheetlets-Combination","C 1742 full","S 1462 full",72.00,107.00,,,1,1,0,0,,,,,24
 6110e826A,"2002 Months of the Year - tete-beche Sheetlet date 07-01-02","In Stock",6110e826A,0,"Special Sheets-Sheetlets-Combination","C 1747-58 full","S 1469",12.50,20.00,,,1,1,0,0,,,,,24
 6110e826B,"2002 Months of the Year - tete-beche Sheetlet dated 08-01-02","In Stock",6110e826B,0,"Special Sheets-Sheetlets-Combination","C 1747-58 full","S 1469",12.50,20.00,,,1,1,0,0,,,,,24
 6110e826C,"2002 Months of the Year - tete-beche Sheetlet dated 09-01-02","In Stock",6110e826C,0,"Special Sheets-Sheetlets-Combination","C 1747-58 full","S 1469",12.50,20.00,,,1,1,0,0,,,,,24
 6110e826D,"2002 Months of the Year - tete-beche Sheetlet dated 10-01-02","Temp. Sold Out",6110e826D,0,"Special Sheets-Sheetlets-Combination","C 1747-58 full","S 1469",25.00,37.00,,,0,0,0,0,,,,,24
-6110e829,"24.02.02 Flowers - Lily - Full Sheet decorated margins (24v)",Available,6110e829,0,"Special Sheets-Sheetlets-Combination","C 1746full","S 1463full",40.00,47.00,,,1,1,0,0,,,,,24
+6110e829,"24.02.02 Flowers - Lily - Full Sheet decorated margins (24v)",Available,6110e829,0,"Special Sheets-Sheetlets-Combination","C 1746 full","S 1463 full",40.00,47.00,,,1,1,0,0,,,,,24
 6110e848,"11.02.03 Wright Brother's Flight Centenary 3 full sheets of 10 stamps","In Stock",6110e848,0,"Special Sheets-Sheetlets-Combination","C 1802-04 full","S 1510-12 full",60.00,78.00,,,1,1,0,0,,,,,24
 6110e863,"24.06.03 The Flag Full 4 Sheets of 10 stamps","In Stock",6110e863,0,"Special Sheets-Sheetlets-Combination","C 1822-25 full","S 1530-33 full",82.00,96.50,,,1,1,0,0,,,,,24
 6110e872,"27.04.03, 26.06.03 Greetings I&II - 'My Own Stamp' Full 6 Generic Sheets",Available,6110e872,0,"Special Sheets-Sheetlets-Combination","C 1816a-21a","S 1521-26 full",275.00,325.00,,,1,1,0,0,,,,,24
-6110e865,"15.07.03 Lily - 'My Own Stamp' Full Generic Sheet (12v)","1 In Stock",6110e865,0,"Special Sheets-Sheetlets-Combination","C 1746mos","S 1463full",35.00,100.00,,,1,1,0,0,,,,,24
-6110e866,"15.07.03 Flowers - 'My Own Stamp' Full Generic Sheet (16v)",Available,6110e866,0,"Special Sheets-Sheetlets-Combination","C 1714mos","S 1439full",35.00,100.00,,,1,1,0,0,,,,,24
-6110e866A,"15.07.03 Flowers - 'My Own Stamp' Full Generic Sheet (16v) - not full perforated",Unavailable,6110e866A,0,"Special Sheets-Sheetlets-Combination","C 1714mos","S 1439full",40.00,140.00,,,0,0,0,0,,,,,24
+6110e865,"15.07.03 Lily - 'My Own Stamp' Full Generic Sheet (12v)","1 In Stock",6110e865,0,"Special Sheets-Sheetlets-Combination","C 1746 mos","S 1463 full",35.00,100.00,,,1,1,0,0,,,,,24
+6110e866,"15.07.03 Flowers - 'My Own Stamp' Full Generic Sheet (16v)",Available,6110e866,0,"Special Sheets-Sheetlets-Combination","C 1714 mos","S 1439 full",35.00,100.00,,,1,1,0,0,,,,,24
+6110e866A,"15.07.03 Flowers - 'My Own Stamp' Full Generic Sheet (16v) - not full perforated",Unavailable,6110e866A,0,"Special Sheets-Sheetlets-Combination","C 1714 mos","S 1439 full",40.00,140.00,,,0,0,0,0,,,,,24
 6110e868,"09.09.03 Yad Vashem Full se-tenant Sheetlet I (15v)","In Stock",6110e868,0,"Special Sheets-Sheetlets-Combination","C 1829-30 full","S 1534-35 full",24.00,30.00,,,1,1,0,0,,,,,24
 6110e876,"09.12.03 Children & Wheels Full se-tenant Sheetlet","In Stock",6110e876,0,"Special Sheets-Sheetlets-Combination","C 1838-41 full","S 1546",8.70,13.30,,,1,1,0,0,,,,,24
-6110e883,"24.02.04 Ilan Ramon Souvenir Sheetlet","In Stock",6110e883,0,"Special Sheets-Sheetlets-Combination","C 1851full","S 1552full",14.50,21.50,,,1,1,0,0,,,,,24
-6110e885,"24.02.04 Begin Heritage Center Souvenir Sheetlet","In Stock",6110e885,0,"Special Sheets-Sheetlets-Combination","C 1850full","S 1551full",12.50,18.70,,,1,1,0,0,,,,,24
+6110e883,"24.02.04 Ilan Ramon Souvenir Sheetlet","In Stock",6110e883,0,"Special Sheets-Sheetlets-Combination","C 1851 full","S 1552 full",14.50,21.50,,,1,1,0,0,,,,,24
+6110e885,"24.02.04 Begin Heritage Center Souvenir Sheetlet","In Stock",6110e885,0,"Special Sheets-Sheetlets-Combination","C 1850 full","S 1551 full",12.50,18.70,,,1,1,0,0,,,,,24
 6110e887,"30.03.04 Yad Vashem Full se-tenant Sheetlet II (6v)","In Stock",6110e887,0,"Special Sheets-Sheetlets-Combination","C 1829-30 full","S 1535b",8.00,20.00,,,1,1,0,0,13.30,,,,24
-6110e890,"03.05.04 FIFA Centenary Full Sheetlet","In Stock",6110e890,0,"Special Sheets-Sheetlets-Combination","C 1866full","S 1557full",14.00,21.00,,,1,1,0,0,,,,,24
+6110e890,"03.05.04 FIFA Centenary Full Sheetlet","In Stock",6110e890,0,"Special Sheets-Sheetlets-Combination","C 1866 full","S 1557 full",14.00,21.00,,,1,1,0,0,,,,,24
 6110e893,"03.05.04 Ottoman Clock Towers 5 Full Sheets of 10 stamps","In Stock",6110e893,0,"Special Sheets-Sheetlets-Combination","C 1856-60 full","S 1559-63 full",35.50,62.00,,,1,1,0,0,,,,,24
-6110e909,"03.05.04 TELABUL 2004 - 'Design a Stamp' full Generic sheet",Unavailable,6110e909,0,"Special Sheets-Sheetlets-Combination","C 1888full","S 1580full",1340.00,----,,,0,0,0,0,,,,,24
-6110e899,"06.07.04 Theodor Herzl Centennial Anniversary of His Death Full Sheet of 9 stamps","In Stock",6110e899,0,"Special Sheets-Sheetlets-Combination","C 1871full","S 1566full",12.50,18.50,,,1,1,0,0,,,,,24
-6110e903,"31.08.04 'HERZLIYA' - Hebrew High School Full Sheet of 10 stamps",Unavailable,6110e903,0,"Special Sheets-Sheetlets-Combination","C 1882full","S 1571full",40.00,50.00,,,0,0,0,0,,,,,24
-6110e905,"31.08.04 Ben-Gurion Heritage Institute Souvenir Sheetlet","In Stock",6110e905,0,"Special Sheets-Sheetlets-Combination","C 1878full","S 1572full",12.50,17.80,,,1,1,0,0,,,,,24
+6110e909,"03.05.04 TELABUL 2004 - 'Design a Stamp' full Generic sheet",Unavailable,6110e909,0,"Special Sheets-Sheetlets-Combination","C 1888 full","S 1580 full",1340.00,----,,,0,0,0,0,,,,,24
+6110e899,"06.07.04 Theodor Herzl Centennial Anniversary of His Death Full Sheet of 9 stamps","In Stock",6110e899,0,"Special Sheets-Sheetlets-Combination","C 1871 full","S 1566 full",12.50,18.50,,,1,1,0,0,,,,,24
+6110e903,"31.08.04 'HERZLIYA' - Hebrew High School Full Sheet of 10 stamps",Available,6110e903,0,"Special Sheets-Sheetlets-Combination","C 1882 full","S 1571 full",40.00,50.00,,,1,1,0,0,,,,,24
+6110e905,"31.08.04 Ben-Gurion Heritage Institute Souvenir Sheetlet","In Stock",6110e905,0,"Special Sheets-Sheetlets-Combination","C 1878 full","S 1572 full",12.50,17.80,,,1,1,0,0,,,,,24
 6110e912,"22.02.05 Animals in the Bible full 4 sheets of 10 stamps decorated margins","In Stock",6110e912,0,"Special Sheets-Sheetlets-Combination","C 1889-92 full","S 1589-92 full",39.00,58.00,,,1,1,0,0,,,,,24
-6110e915,"03.05.05 60 Years since the End of World War II - Full se-tenant Sheetlet","In Stock",6110e915,0,"Special Sheets-Sheetlets-Combination","C 1903-04 shlet","S 1597full",11.00,16.70,,,1,1,0,0,,,,,24
+6110e915,"03.05.05 60 Years since the End of World War II - Full se-tenant Sheetlet","In Stock",6110e915,0,"Special Sheets-Sheetlets-Combination","C 1903-04 shlet","S 1597 full",11.00,16.70,,,1,1,0,0,,,,,24
 6110e920,"03.05.05 Education Institutes in Eretz Israel Full 2 Sheets of 10 stamps",Available,6110e920,0,"Special Sheets-Sheetlets-Combination","C 1897-98 full","S 1598-99 full",80.00,110.00,,,1,1,0,0,,,,,24
-6110e922,"18.05.05 Pope John Paul II 1920-2005 Full Sheet of 6 stamps","In Stock",6110e922,0,"Special Sheets-Sheetlets-Combination","C 1902full","S 1600full",11.20,16.70,,,1,1,0,0,,,,,24
-6110e927,"26.07.05 800 Years since the Death of Maimonides Full Sheet of 6 stamps","In Stock",6110e927,0,"Special Sheets-Sheetlets-Combination","C 1909full","S 1604full",28.00,33.50,,,1,1,0,0,,,,,24
-6110e934,"27.09.05 Yitzhak Rabin Center Souvenir Sheetlet","In Stock",6110e934,0,"Special Sheets-Sheetlets-Combination","C 1911full","S 1608full",11.00,16.70,,,1,1,0,0,,,,,24
-6110e936,"03.11.05 Israel Germany 40 Years of Diplomatic Relations Full Sheet of 10 stamps, decorated margins","In Stock",6110e936,0,"Special Sheets-Sheetlets-Combination","C 1921full","S 1619full",11.70,18.00,,,1,1,0,0,,,,,24
-6110e944,"28.02.06 Children of America Paint Israel Full 4 Sheets of 10 stamps","In Stock",6110e944,0,"Special Sheets-Sheetlets-Combination","C 1933-36 full","S 1633-36 full",100.00,125.00,,,1,1,0,0,,,,,24
-6110e946,"28.02.06 World Chabad's Center Full Sheet of 8 stamps, decorated margins","In Stock",6110e946,0,"Special Sheets-Sheetlets-Combination","C 1932full","S 1631full",13.50,20.00,,,1,1,0,0,,,,,24
-6110e951,"08.05.06 Israel Post Souvenir Sheet Imperforated and Numerated","In Stock",6110e951,0,"Special Sheets-Sheetlets-Combination","C B84a","S 1630see text",55.50,83.00,,,1,1,0,0,,,,,24
-6110e953,"08.05.06 Flowers - 'My Own Stamp' Full 2 Generic sheets",Available,6110e953,0,"Special Sheets-Sheetlets-Combination","C 1942-43 full","S 1640a,41a",31.00,40.00,,,1,1,0,0,,,,,24
-6110e955,"08.05.06 Solar System Full tete-beche Sheetlet, decorated margins","In Stock",6110e955,0,"Special Sheets-Sheetlets-Combination","C 1944-49 full","S 1643",8.40,18.00,,,1,1,0,0,,,,,24
-6110e962,"25.07.06 Khamsa Full 3 Sheets of 10 stamps","In Stock",6110e962,0,"Special Sheets-Sheetlets-Combination","C 1958-60 full","S 1649-51 full",63.00,76.00,,,1,1,0,0,,,,,24
-6110e965,"12.09.06 Bezalel Academy of Arts Centennial full se-tenant Sheetlet, decorated margins","In Stock",6110e965,0,"Special Sheets-Sheetlets-Combination","C 1964-66 full","S 1656full",12.20,15.50,,,1,1,0,0,,,,,24
-6110e969,"17.12.06 Crusader Sites in Israel Full 4 Sheets of 8 stamps, decorated margins","In Stock",6110e969,0,"Special Sheets-Sheetlets-Combination","C 1972-75 full","S 1665-68 full",55.50,67.00,,,1,1,0,0,,,,,24
-6110e975,"20.02.07 Israel Educational Television - Full se-tenant Sheetlet of 9 decorated margins","In Stock",6110e975,0,"Special Sheets-Sheetlets-Combination","C 1987-89 full","S 1674 full",12.20,14.50,,,1,1,0,0,,,,,24
-6110e980,"17.04.07 Scouting Full Sheet of 8 stamps, decorated margins","In Stock",6110e980,0,"Special Sheets-Sheetlets-Combination","C 1982full","S 1679full",11.20,13.50,,,1,1,0,0,,,,,24
-6110e984,"20.06.07 UNESCO World Heritage Sites in Israel Full 3 Sheets of 10 stamps","In Stock",6110e984,0,"Special Sheets-Sheetlets-Combination","C 2003-05 full","S 1688-90 full",78.00,96.00,,,1,1,0,0,,,,,24
-6110e988,"20.06.07 Dance in Israel full se-tenant Sheetlet","In Stock",6110e988,0,"Special Sheets-Sheetlets-Combination","C 1998-01 full","S 1687 full",14.50,17.80,,,1,1,0,0,,,,,24
-6110e994,"27.08.07 Blue and White - 'My Own Stamp' full Generic sheet (12v)",Unavailable,6110e994,0,"Special Sheets-Sheetlets-Combination","C 2009full","S --",68.00,100.00,,,0,0,0,0,,,,,24
+6110e922,"18.05.05 Pope John Paul II 1920-2005 Full Sheet of 6 stamps","In Stock",6110e922,0,"Special Sheets-Sheetlets-Combination","C 1902 full","S 1600 full",11.20,16.70,,,1,1,0,0,,,,,24
+6110e927,"26.07.05 800 Years since the Death of Maimonides Full Sheet of 6 stamps","In Stock",6110e927,0,"Special Sheets-Sheetlets-Combination","C 1909 full","S 1604 full",28.00,33.50,,,1,1,0,0,,,,,24
+6110e934,"27.09.05 Yitzhak Rabin Center Souvenir Sheetlet","In Stock",6110e934,0,"Special Sheets-Sheetlets-Combination","C 1911 full","S 1608 full",11.00,16.70,,,1,1,0,0,,,,,24
+6110e936,"03.11.05 Israel Germany 40 Years of Diplomatic Relations Full Sheet of 10 stamps, decorated margins","In Stock",6110e936,0,"Special Sheets-Sheetlets-Combination","C 1921 full","S 1619 full",11.70,18.00,,,1,1,0,0,,,,,24
+6110e944,"28.02.06 Children of America Paint Israel Full 4 Sheets of 10 stamps","In Stock",6110e944,0,"Special Sheets-Sheetlets-Combination","C 1933- 36 full","S 1633-36 full",100.00,125.00,,,1,1,0,0,,,,,24
+6110e946,"28.02.06 World Chabad's Center Full Sheet of 8 stamps, decorated margins","In Stock",6110e946,0,"Special Sheets-Sheetlets-Combination","C 1932 full","S 1631 full",13.50,20.00,,,1,1,0,0,,,,,24
+6110e951,"08.05.06 Israel Post Souvenir Sheet Imperforated and Numerated","In Stock",6110e951,0,"Special Sheets-Sheetlets-Combination","C B84a","S 1630 see text",55.50,83.00,,,1,1,0,0,,,,,24
+6110e953,"08.05.06 Flowers - 'My Own Stamp' Full 2 Generic sheets",Available,6110e953,0,"Special Sheets-Sheetlets-Combination","C 1942- 43 full","S 1640a,41a",31.00,40.00,,,1,1,0,0,,,,,24
+6110e955,"08.05.06 Solar System Full tete-beche Sheetlet, decorated margins","In Stock",6110e955,0,"Special Sheets-Sheetlets-Combination","C 1944- 49 full","S 1643",8.40,18.00,,,1,1,0,0,,,,,24
+6110e962,"25.07.06 Khamsa Full 3 Sheets of 10 stamps","In Stock",6110e962,0,"Special Sheets-Sheetlets-Combination","C 1958- 60 full","S 1649-51 full",63.00,76.00,,,1,1,0,0,,,,,24
+6110e965,"12.09.06 Bezalel Academy of Arts Centennial full se-tenant Sheetlet, decorated margins","In Stock",6110e965,0,"Special Sheets-Sheetlets-Combination","C 1964- 66 full","S 1656 full",12.20,15.50,,,1,1,0,0,,,,,24
+6110e969,"17.12.06 Crusader Sites in Israel Full 4 Sheets of 8 stamps, decorated margins","In Stock",6110e969,0,"Special Sheets-Sheetlets-Combination","C 1972- 75 full","S 1665-68 full",55.50,67.00,,,1,1,0,0,,,,,24
+6110e975,"20.02.07 Israel Educational Television - Full se-tenant Sheetlet of 9 decorated margins","In Stock",6110e975,0,"Special Sheets-Sheetlets-Combination","C 1987- 89 full","S 1674 full",12.20,14.50,,,1,1,0,0,,,,,24
+6110e980,"17.04.07 Scouting Full Sheet of 8 stamps, decorated margins","In Stock",6110e980,0,"Special Sheets-Sheetlets-Combination","C 1982 full","S 1679 full",11.20,13.50,,,1,1,0,0,,,,,24
+6110e984,"20.06.07 UNESCO World Heritage Sites in Israel Full 3 Sheets of 10 stamps","In Stock",6110e984,0,"Special Sheets-Sheetlets-Combination","C 2003- 05 full","S 1688-90 full",78.00,96.00,,,1,1,0,0,,,,,24
+6110e988,"20.06.07 Dance in Israel full se-tenant Sheetlet","In Stock",6110e988,0,"Special Sheets-Sheetlets-Combination","C 1998- 01 full","S 1687 full",14.50,17.80,,,1,1,0,0,,,,,24
+6110e994,"27.08.07 Blue and White - 'My Own Stamp' full Generic sheet (12v)",Unavailable,6110e994,0,"Special Sheets-Sheetlets-Combination","C 2009 full","S --",68.00,100.00,,,0,0,0,0,,,,,24
 6110e443,"01.11.07 Stand-By New Shekel 5 Agurot self Adhesive Full Sheet - Herzl",Available,6110e443,0,"Special Sheets-Sheetlets-Combination","C 2014","S 1699 full",0.90,5.35,,,1,1,0,0,,,,,24
-6110e1000,"05.12.07 Hula Nature Reserve full se-tenant Sheetlet (9v)","In Stock",6110e1000,0,"Special Sheets-Sheetlets-Combination","C 2029-31 full","S 1708 full",12.50,15.50,,,1,1,0,0,,,,,24
-6110e1005,"27.01.08 International Holocaust Remembrance Day - Joint Stamp Issue Israel-United Nation, Souvenir Sheetlet (9v)","In Stock",6110e1005,0,"Special Sheets-Sheetlets-Combination","C 2038full","S 1715 full",22.50,30.00,,,1,1,0,0,,,,,24
-6110e1007,"27.01.08 World Heritage Sites in Israel Full 2 Sheets of 10 stamps","In Stock",6110e1007,0,"Special Sheets-Sheetlets-Combination","C 2036-37 full","S 1718-19 full",35.00,45.00,,,1,1,0,0,,,,,24
-6110e1012,"27.01.08 Tel-Aviv Centennial - 'Ahuzat-Bayit' Land Lottery Full Sheet of 9 stamps","In Stock",6110e1012,0,"Special Sheets-Sheetlets-Combination","C 2035full","S 1714 full",22.50,30.00,,,1,1,0,0,,,,,24
+6110e1000,"05.12.07 Hula Nature Reserve full se-tenant Sheetlet (9v)","In Stock",6110e1000,0,"Special Sheets-Sheetlets-Combination","C 2029- 31 full","S 1708 full",12.50,15.50,,,1,1,0,0,,,,,24
+6110e1005,"27.01.08 International Holocaust Remembrance Day - Joint Stamp Issue Israel-United Nation, Souvenir Sheetlet (9v)","In Stock",6110e1005,0,"Special Sheets-Sheetlets-Combination","C 2038 full","S 1715 full",22.50,30.00,,,1,1,0,0,,,,,24
+6110e1007,"27.01.08 World Heritage Sites in Israel Full 2 Sheets of 10 stamps","In Stock",6110e1007,0,"Special Sheets-Sheetlets-Combination","C 2036- 37 full","S 1718-19 full",35.00,45.00,,,1,1,0,0,,,,,24
+6110e1012,"27.01.08 Tel-Aviv Centennial - 'Ahuzat-Bayit' Land Lottery Full Sheet of 9 stamps","In Stock",6110e1012,0,"Special Sheets-Sheetlets-Combination","C 2035 full","S 1714 full",22.50,30.00,,,1,1,0,0,,,,,24
 6110e1014,"28.04.08 Independence Posters - Full tete-beche Sheetlet (FDC is differ from regular issue)","In Stock",6110e1014,0,"Special Sheets-Sheetlets-Combination","C 2042-47","S 1728",8.50,13.50,,,1,1,0,0,,,,,24
-6110e1021,"28.04.08 Flowers - 'My Own Stamp' Full 2 Generic sheets with Scent","1 In Stock",6110e1021,0,"Special Sheets-Sheetlets-Combination","C 2050a2051b","S --",26.50,34.00,,,1,1,0,0,,,,,24
+6110e1021,"28.04.08 Flowers - 'My Own Stamp' Full 2 Generic sheets with Scent","1 In Stock",6110e1021,0,"Special Sheets-Sheetlets-Combination","C 2050a 2051b","S --",26.50,34.00,,,1,1,0,0,,,,,24
 6110e1024,"14.05.08 Jerusalem of Gold imperforated numbered Souvenir Sheet (5000 exist)","In Stock",6110e1024,0,"Special Sheets-Sheetlets-Combination","C B91a","S --",90.00,100.00,,,1,1,0,0,,,,,24
 6110e1033,"14.07.08 Promenades in Israel Full 3 Sheets of 10 stamps","In Stock",6110e1033,0,"Special Sheets-Sheetlets-Combination",,"S 1735-37 full",95.00,112.00,,,1,1,0,0,,,,,24
 6110e1039,"06.11.08 Israel-France Friendship Full 2 Sheets of 9 stamps","In Stock",6110e1039,0,"Special Sheets-Sheetlets-Combination",,"S 1750-51 full",27.00,33.50,,,1,1,0,0,,,,,24
@@ -2549,7 +2567,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e1050,"17.02.09 Fruits of our Land full se-tenant Sheet","In Stock",6110e1050,0,"Special Sheets-Sheetlets-Combination",,"S 1767 full",22.50,27.00,,,1,1,0,0,,,,,24
 6110e1052,"22.04.09 Astronomy - Full Decorated Margins 3 Sheets (36)","In Stock",6110e1052,0,"Special Sheets-Sheetlets-Combination",,"S 1769-71 full",88.00,100.00,,,1,1,0,0,,,,,24
 6110e1055,"22.04.09 Music Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue)","1 In Stock",6110e1055,0,"Special Sheets-Sheetlets-Combination",,"S 1773",10.50,16.50,,,1,1,0,0,,,,,24
-6110eMEJ,"01.06.09 Mejujaim - 'My Own Stamp' Set of Eight, stamps are Rouletted self Adhesive and no Phosphor Bands","Sold Out",6110eMEJ,0,"Special Sheets-Sheetlets-Combination",,"M 9-16",300.00,"Contact Us",,,0,1,0,0,,,,,24
+6110eMEJ,"01.06.09 Mejujaim - 'My Own Stamp' Set of Eight, stamps are Rouletted self Adhesive and no Phosphor Bands","Sold Out",6110eMEJ,0,"Special Sheets-Sheetlets-Combination",,"M 9-16",300.00,,,,0,1,0,0,,,,,24
 6110e1058,"30.06.09 Environment full se-tenant Sheet","In Stock",6110e1058,0,"Special Sheets-Sheetlets-Combination",,"S 1778 full",11.00,14.50,,,1,1,0,0,,,,,24
 6110e1062,"30.06.09 Love - 'My Own Stamp' Full Generic sheet (12v)",Available,6110e1062,0,"Special Sheets-Sheetlets-Combination",,"S --",20.00,31.00,,,1,1,0,0,,,,,24
 6110e1064,"30.06.09 Dead Sea Full Sheet of 9 stamps","In Stock",6110e1064,0,"Special Sheets-Sheetlets-Combination",,"S 1775 full",11.00,14.50,,,1,1,0,0,,,,,24
@@ -2563,29 +2581,29 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e1095,"14.06.10 Rabbi Nachman of Breslev Decorated Margins full sheet","In Stock",6110e1095,0,"Special Sheets-Sheetlets-Combination",,"S 1819 full",7.50,10.00,,,1,1,0,0,,,,,24
 6110e1099,"25.08.10 150 Years Outside Old City Walls Full Sheet of 9 stamps","In Stock",6110e1099,0,"Special Sheets-Sheetlets-Combination",,"S 1827 full",18.00,26.00,,,1,1,0,0,,,,,24
 6110e1101,"25.08.10 Animals - Full se-tenant Sheetlet (6v) (FDC is differ from regular issue)","3 In Stock",6110e1101,0,"Special Sheets-Sheetlets-Combination",,"S 1836",5.65,13.50,,,1,1,0,0,,,,,24
-6110e1103,"25.08.10 Greetings - 'My Own Stamp' Full 2 Generic sheets",Available,6110e1103,0,"Special Sheets-Sheetlets-Combination",,"S 1832a-33a",32.00,36.00,,,1,1,0,0,,,,,24
+6110e1103,"25.08.10 Greetings - 'My Own Stamp' Full 2 Generic sheets",Available,6110e1103,0,"Special Sheets-Sheetlets-Combination",,"S 1832 a-33a",32.00,36.00,,,1,1,0,0,,,,,24
 6110e1108,"15.11.10 Garden of Gethsemane - Joint Stamp Issue Israel-Vatican, Souvenir Sheetlet (4v)","1 In Stock",6110e1108,0,"Special Sheets-Sheetlets-Combination",,"S 1837 full",9.50,12.50,,,1,1,0,0,,,,,24
 6110e1111,"21.11.10 Bible Stories - Full Decorated Margins 3 Sheets (18)","1 In Stock",6110e1111,0,"Special Sheets-Sheetlets-Combination",,"S 1841-43 full",13.50,20.00,,,1,1,0,0,,,,,24
 6110e1113,"21.11.10 Flag - 'My Own Stamp' Full Generic sheet (12v)",Available,6110e1113,0,"Special Sheets-Sheetlets-Combination",,"S --",12.50,21.50,,,1,1,0,0,,,,,24
 6110e1114,"21.11.10 Blue and White - 'My Own Stamp' Full small Generic sheet (8v)",Available,6110e1114,0,"Special Sheets-Sheetlets-Combination",,"S --",8.00,13.00,,,1,1,0,0,,,,,24
-6110e1116,"21.11.10 Animation full se-tenant Sheet (15v)",Available,6110e1116,0,"Special Sheets-Sheetlets-Combination",,,14.50,18.00,,,1,1,0,0,,,,,24
-6110e1119,"21.11.10 Bible Stoties Souvenir Sheet Imperforated and Numerated (5000 exist)",Available,6110e1119,0,"Special Sheets-Sheetlets-Combination",,,50.00,54.00,,,1,1,0,0,,,,,24
-6110e845I,"21.11.10 Menorah 1.00 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845I,0,"Special Sheets-Sheetlets-Combination",,,12.50,17.50,,,1,1,0,0,,,,,24
-6110e1082,"01.02.11 Innovations - Full Decorated Margins 3 Sheets imperforated, 999x3 exist (30)",Unavailable,6110e1082,0,"Special Sheets-Sheetlets-Combination",,,300.00,450.00,,,0,0,0,0,,,,,24
-6110e1123,"07.02.11 Leopard - Full se-tenant Sheetlet (8v)","2 In Stock",6110e1123,0,"Special Sheets-Sheetlets-Combination",,,7.55,13.00,,,1,1,0,0,,,,,24
-6110e1127,"07.02.11 Hebrew Language Full Sheet of 10 stamps","1 In Stock",6110e1127,0,"Special Sheets-Sheetlets-Combination",,,20.00,26.00,,,1,1,0,0,,,,,24
-6110e1130,"12.04.11 Ethiopian Jewry Full Sheet of 9 stamps","1 In Stock",6110e1130,0,"Special Sheets-Sheetlets-Combination",,,12.50,16.50,,,1,1,0,0,,,,,24
-6110e1132,"12.04.11 Butterflies - Full tete-beche Sheetlet (6v) decorated margins","1 In Stock",6110e1132,0,"Special Sheets-Sheetlets-Combination",,,5.65,9.00,,,1,1,0,0,,,,,24
-6110e1135,"12.04.11 Tourism Full 3 Sheets of 10 stamps, decorated margins","1 In Stock",6110e1135,0,"Special Sheets-Sheetlets-Combination",,,70.00,88.00,,,1,1,0,0,,,,,24
-6110e1138,"12.04.11 Visitors Center - 'My Own Stamp' Full small Generic sheet (3v)","1 In Stock",6110e1138,0,"Special Sheets-Sheetlets-Combination",,,6.80,10.00,,,1,1,0,0,,,,,24
-6110e845J,"19.06.11 Menorah 0.50 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845J,0,"Special Sheets-Sheetlets-Combination",,,6.50,10.00,,,1,1,0,0,,,,,24
-6110e1143,"27.06.11 Beaches - full se-tenant Sheet (10) (FDC is differ from regular issue)","1 In Stock",6110e1143,0,"Special Sheets-Sheetlets-Combination",,,9.40,13.80,,,1,1,0,0,,,,,24
-6110e1146,"13.09.11 Music Albums Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue)","1 In Stock",6110e1146,0,"Special Sheets-Sheetlets-Combination",,,11.00,16.50,,,1,1,0,0,,,,,24
-6110e1148,"13.09.11 Children's Games Full 3 Sheets of 12 stamps",Available,6110e1148,0,"Special Sheets-Sheetlets-Combination",,,45.00,60.00,,,1,1,0,0,,,,,24
-6110e1150,"06.12.11 Football Legends Full se-tenabt Sheet of 10 stamps (FDC is differ from regular issue)","1 In Stock",6110e1150,0,"Special Sheets-Sheetlets-Combination",,,9.40,14.00,,,1,1,0,0,,,,,24
-6110e1154,"06.12.11 The Valley Railway Full Sheet of 10 stamps, decorated margins","1 In Stock",6110e1154,0,"Special Sheets-Sheetlets-Combination",,,14.50,21.00,,,1,1,0,0,,,,,24
-6110e148B,"01.01.12 Children's Games - Full 3 Sheets imperforated, 1499x3 exist (36)","1 In Stock",6110e148B,0,"Special Sheets-Sheetlets-Combination",,,100.00,125.00,,,1,1,0,0,,,,,24
-6110e1158,"07.02.12 In Memory - 'My Own Stamp' Full Generic sheet (12v)","1 In Stock",6110e1158,0,"Special Sheets-Sheetlets-Combination",,,12.50,21.50,,,1,1,0,0,,,,,24
+6110e1116,"21.11.10 Animation full se-tenant Sheet (15v)",Available,6110e1116,0,"Special Sheets-Sheetlets-Combination",,"S 1845",14.50,18.00,,,1,1,0,0,,,,,24
+6110e1119,"21.11.10 Bible Stoties Souvenir Sheet Imperforated and Numerated (5000 exist)",Available,6110e1119,0,"Special Sheets-Sheetlets-Combination",,"S --",50.00,54.00,,,1,1,0,0,,,,,24
+6110e845I,"21.11.10 Menorah 1.00 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845I,0,"Special Sheets-Sheetlets-Combination",,"S --",12.50,17.50,,,1,1,0,0,,,,,24
+6110e1082,"01.02.11 Innovations - Full Decorated Margins 3 Sheets imperforated, 999x3 exist (30)",Unavailable,6110e1082,0,"Special Sheets-Sheetlets-Combination",,"S --",300.00,450.00,,,0,0,0,0,,,,,24
+6110e1123,"07.02.11 Leopard - Full se-tenant Sheetlet (8v)","2 In Stock",6110e1123,0,"Special Sheets-Sheetlets-Combination",,"S 1876",7.55,13.00,,,1,1,0,0,,,,,24
+6110e1127,"07.02.11 Hebrew Language Full Sheet of 10 stamps","1 In Stock",6110e1127,0,"Special Sheets-Sheetlets-Combination",,"S 1870 full",20.00,26.00,,,1,1,0,0,,,,,24
+6110e1130,"12.04.11 Ethiopian Jewry Full Sheet of 9 stamps","1 In Stock",6110e1130,0,"Special Sheets-Sheetlets-Combination",,"S 1879 full",12.50,16.50,,,1,1,0,0,,,,,24
+6110e1132,"12.04.11 Butterflies - Full tete-beche Sheetlet (6v) decorated margins","1 In Stock",6110e1132,0,"Special Sheets-Sheetlets-Combination",,"S 1885",5.65,9.00,,,1,1,0,0,,,,,24
+6110e1135,"12.04.11 Tourism Full 3 Sheets of 10 stamps, decorated margins","1 In Stock",6110e1135,0,"Special Sheets-Sheetlets-Combination",,"S 1882-84 full",70.00,88.00,,,1,1,0,0,,,,,24
+6110e1138,"12.04.11 Visitors Center - 'My Own Stamp' Full small Generic sheet (3v)","1 In Stock",6110e1138,0,"Special Sheets-Sheetlets-Combination",,"S --",6.80,10.00,,,1,1,0,0,,,,,24
+6110e845J,"19.06.11 Menorah 0.50 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845J,0,"Special Sheets-Sheetlets-Combination",,"S --",6.50,10.00,,,1,1,0,0,,,,,24
+6110e1143,"27.06.11 Beaches - full se-tenant Sheet (10) (FDC is differ from regular issue)","1 In Stock",6110e1143,0,"Special Sheets-Sheetlets-Combination",,"S 1897",9.40,13.80,,,1,1,0,0,,,,,24
+6110e1146,"13.09.11 Music Albums Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue)","1 In Stock",6110e1146,0,"Special Sheets-Sheetlets-Combination",,"S 1908",11.00,16.50,,,1,1,0,0,,,,,24
+6110e1148,"13.09.11 Children's Games Full 3 Sheets of 12 stamps",Available,6110e1148,0,"Special Sheets-Sheetlets-Combination",,"S 1902-04 full",45.00,60.00,,,1,1,0,0,,,,,24
+6110e1150,"06.12.11 Football Legends Full se-tenabt Sheet of 10 stamps (FDC is differ from regular issue)","1 In Stock",6110e1150,0,"Special Sheets-Sheetlets-Combination",,"S 1912",9.40,14.00,,,1,1,0,0,,,,,24
+6110e1154,"06.12.11 The Valley Railway Full Sheet of 10 stamps, decorated margins","1 In Stock",6110e1154,0,"Special Sheets-Sheetlets-Combination",,"S 1909 full",14.50,21.00,,,1,1,0,0,,,,,24
+6110e148B,"01.01.12 Children's Games - Full 3 Sheets imperforated, 1499x3 exist (36)","1 In Stock",6110e148B,0,"Special Sheets-Sheetlets-Combination",,"S --",100.00,125.00,,,1,1,0,0,,,,,24
+6110e1158,"07.02.12 In Memory - 'My Own Stamp' Full Generic sheet (12v)","1 In Stock",6110e1158,0,"Special Sheets-Sheetlets-Combination",,"S --",12.50,21.50,,,1,1,0,0,,,,,24
 6110e1160,"07.02.12 Rabbi Shneur Zalman Full Sheet of 10 stamps, decorated margins","1 In Stock",6110e1160,0,"Special Sheets-Sheetlets-Combination",,,9.00,14.00,,,1,1,0,0,,,,,24
 6110e1163,"07.02.12 Breastplate I Full 4 Sheets of 10 stamps","1 In Stock",6110e1163,0,"Special Sheets-Sheetlets-Combination",,,47.00,67.00,,,1,1,0,0,,,,,24
 6110e1166,"17.04.12 Children's Books Full se-tenabt Sheetlet of 8 stamps (FDC is differ from regular issue)","In Stock",6110e1166,0,"Special Sheets-Sheetlets-Combination",,,8.00,12.50,,,1,1,0,0,,,,,24
@@ -2607,7 +2625,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e1204,"01.05.13 Love - 'My Own Stamp' Full Generic sheet (9v)","1 In Stock",6110e1204,0,"Special Sheets-Sheetlets-Combination",,,15.00,25.00,,,1,1,0,0,,,,,24
 6110e1205,"01.05.13 Happy Holidays - 'My Own Stamp' Full Generic sheet (9v)","1 In Stock",6110e1205,0,"Special Sheets-Sheetlets-Combination",,,15.00,25.00,,,1,1,0,0,,,,,24
 6110e1209,"26.05.13 Postal Vehicles imperforated numbered Souvenir Sheet (5000 exist)","1 In Stock",6110e1209,0,"Special Sheets-Sheetlets-Combination",,,44.00,55.00,,,1,1,0,0,,,,,24
-6110e1212,"26.05.13 Israel National Trail Full se-tenabt Sheetlet of 10 stamps (FDC is differ from regular issue)","In Stock",6110e1212,0,"Special Sheets-Sheetlets-Combination",,,8.00,12.50,,,1,1,0,0,,,,,24
+6110e1212,"26.05.13 Israel National Trail Full se-tenabt Sheetlet of 10 stamps (FDC is differ from regular issue)","In Stock",6110e1212,0,"Special Sheets-Sheetlets-Combination",,,10.00,14.00,,,1,1,0,0,,,,,24
 6110eJET,"10.03.08 Jetix - 'My Own Stamp' full Sheet (12v)","1 In Stock",6110eJET,0,"Special Sheets-Sheetlets-Combination",,"M 1",30.00,45.00,,,1,1,0,0,,,,,24
 6110eSUR1,"14.05.08 Survivor - 'My Own Stamp' full Sheet (12v)",Available,6110eSUR1,0,"Special Sheets-Sheetlets-Combination",,"M 2",62.00,85.00,,,1,1,0,0,,,,,24
 6110eSUR2,"2008 Survivor - 'My Own Stamp' full Sheet (12v) date up weak colors",Unavailable,6110eSUR2,0,"Special Sheets-Sheetlets-Combination",,"M --",80.00,----,,,0,0,0,0,,,,,24
@@ -2669,8 +2687,8 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e845D,"08.09.09 Menorah 0.40 self Adhesive Full Sheet (1st print - one menorah)","1 In Stock",6110e845D,0,"Special Sheets-Sheetlets-Combination",,"S 1758A full",6.00,8.50,,,1,1,0,0,,,,,24
 6110e845E,"08.09.09 Menorah 0.50 self Adhesive Full Sheet (2nd print - two menorah)","3 In Stock",6110e845E,0,"Special Sheets-Sheetlets-Combination",,"S --",7.50,11.00,,,1,1,0,0,,,,,24
 6110e845F,"08.09.09 Menorah 1.00 self Adhesive Full Sheet (2nd print - two menorah)",Available,6110e845F,0,"Special Sheets-Sheetlets-Combination",,"S --",14.00,17.00,,,1,1,0,0,,,,,24
-6110e845K,"10.10.11 Menorah 0.30 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845K,0,"Special Sheets-Sheetlets-Combination",,,5.00,7.50,,,1,1,0,0,,,,,24
-6110e845N,"05.01.12 Menorah 0.50 self Adhesive Full Sheet (4th print - four menorah)","2 In Stock",6110e845N,0,"Special Sheets-Sheetlets-Combination",,,6.50,10.00,,,1,1,0,0,,,,,24
+6110e845K,"10.10.11 Menorah 0.30 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e845K,0,"Special Sheets-Sheetlets-Combination",,"S --",5.00,7.50,,,1,1,0,0,,,,,24
+6110e845N,"05.01.12 Menorah 0.50 self Adhesive Full Sheet (4th print - four menorah)","2 In Stock",6110e845N,0,"Special Sheets-Sheetlets-Combination",,"S --",6.50,10.00,,,1,1,0,0,,,,,24
 6110e845O,"16.04.12 Menorah 0.30 self Adhesive Full Sheet (4th print color change - four menorah)","1 In Stock",6110e845O,0,"Special Sheets-Sheetlets-Combination",,,4.00,6.00,,,1,1,0,0,,,,,24
 6110e845P,"16.04.12 Menorah 1.00 self Adhesive Full Sheet (5th print - five menorah)",Available,6110e845P,0,"Special Sheets-Sheetlets-Combination",,,9.00,12.50,,,1,1,0,0,,,,,24
 6110e845S,"21.10.12 Menorah 0.50 self Adhesive Full Sheet (5th print slight color change - five menorah)","2 In Stock",6110e845S,0,"Special Sheets-Sheetlets-Combination",,,5.00,7.50,,,1,1,0,0,,,,,24
@@ -2692,7 +2710,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e1244,"08.04.14 Sign Language - Full tete-beche Sheetlet (10v)",Available,6110e1244,0,"Special Sheets-Sheetlets-Combination",,,8.80,12.50,,,1,1,0,0,,,,,24
 6110e1249,"23.06.14 Amphibians Full se-tenabt Sheetlet of 8 stamps","1 In Stock",6110e1249,0,"Special Sheets-Sheetlets-Combination",,,6.50,9.50,,,1,1,0,0,,,,,24
 6110e1253,"09.09.14 Fiddler on the Roof Full 3 Sheets of 8 stamps",Available,6110e1253,0,"Special Sheets-Sheetlets-Combination",,,36.00,52.00,,,1,1,0,0,,,,,24
-6110e253A,"09.09.14 Fiddler on the Roof - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e253A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
+6110e253A,"09.09.14 Fiddler on the Roof - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e253A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e1256,"09.09.14 Tel Aviv Full Sheet of 10 stamps, decorated margins",Available,6110e1256,0,"Special Sheets-Sheetlets-Combination",,,20.00,30.00,,,1,1,0,0,,,,,24
 6110e1259,"28.09.14 Rabbi Ovadia Yosef Souvenir Sheetlet",Available,6110e1259,0,"Special Sheets-Sheetlets-Combination",,,9.00,14.50,,,1,1,0,0,,,,,24
 6110e1261,"16.12.14 Arik Einstein Souvenir Sheetlet",Available,6110e1261,0,"Special Sheets-Sheetlets-Combination",,,8.50,13.00,,,1,1,0,0,,,,,24
@@ -2708,9 +2726,9 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110ePOP4,"22.06.14 Pope Francis Visit - 'My Own Stamp' full 2nd Sheet (12v)",Available,6110ePOP4,0,"Special Sheets-Sheetlets-Combination",,,20.00,35.00,,,1,1,0,0,,,,,24
 6110e845A,"25.01.09 Menorah 0.30 self Adhesive Full Sheet (1st print - one Menorah)","1 In Stock",6110e845A,0,"Special Sheets-Sheetlets-Combination",,"S 1758 full",5.00,9.00,,,1,1,0,0,,,,,24
 6110e845C,"25.01.09 Menorah 1.00 self Adhesive Full Sheet (1st print - one Menorah)",Available,6110e845C,0,"Special Sheets-Sheetlets-Combination",,"S 1760 full",14.00,17.00,,,1,1,0,0,,,,,24
-6110e845L,"10.10.11 Menorah 1.00 self Adhesive Full Sheet (4th print - four menorah)",Available,6110e845L,0,"Special Sheets-Sheetlets-Combination",,,16.00,20.00,,,1,1,0,0,,,,,24
-6110e845M,"05.01.12 Menorah 0.40 self Adhesive Full Sheet (2nd print - two menorah)","3 In Stock",6110e845M,0,"Special Sheets-Sheetlets-Combination",,,5.00,7.50,,,1,1,0,0,,,,,24
-6110e277A,"14.04.15 Israel Museum - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e277A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
+6110e845L,"10.10.11 Menorah 1.00 self Adhesive Full Sheet (4th print - four menorah)",Available,6110e845L,0,"Special Sheets-Sheetlets-Combination",,"S --",16.00,20.00,,,1,1,0,0,,,,,24
+6110e845M,"05.01.12 Menorah 0.40 self Adhesive Full Sheet (2nd print - two menorah)","3 In Stock",6110e845M,0,"Special Sheets-Sheetlets-Combination",,"S --",5.00,7.50,,,1,1,0,0,,,,,24
+6110e277A,"14.04.15 Israel Museum - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e277A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e1291,"02.09.15 Rivers Full 3 Sheets of 8 stamps",Available,6110e1291,0,"Special Sheets-Sheetlets-Combination",,,49.00,67.00,,,1,1,0,0,,,,,24
 6110eDIS5,"18.08.15 Disney - 'My Own Stamp', Frozen & Cars full Sheet (9v)",Available,6110eDIS5,0,"Special Sheets-Sheetlets-Combination",,,25.00,38.00,,,1,1,0,0,,,,,24
 6110eDVO,"02.09.15 HaDvora Maya - 'My Own Stamp' (9v)",Available,6110eDVO,0,"Special Sheets-Sheetlets-Combination",,,21.00,35.00,,,1,1,0,0,,,,,24
@@ -2724,9 +2742,9 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e191R,"20.12.16 Gerbera 0.30 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e191R,0,"Special Sheets-Sheetlets-Combination",,,3.00,5.00,,,1,1,0,0,,,,,24
 6110e191S,"20.12.16 Gerbera 1.00 self Adhesive Full Sheet (7th print - seven menorah)",Available,6110e191S,0,"Special Sheets-Sheetlets-Combination",,,8.00,15.00,,,1,1,0,0,,,,,24
 6110e191T,"15.01.17 Gerbera 0.40 self Adhesive Full Sheet (3rd print - three menorah)",Available,6110e191T,0,"Special Sheets-Sheetlets-Combination",,,4.00,5.50,,,1,1,0,0,,,,,24
-6110e291A,"01.01.16 Rivers - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e291A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
-6110e310A,"19.04.16 Markets - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e310A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
-6110e320A,"15.01.17 Sages Parables - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e320A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
+6110e291A,"01.01.16 Rivers - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e291A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,1,1,0,0,,,,,24
+6110e310A,"19.04.16 Markets - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e310A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,1,1,0,0,,,,,24
+6110e320A,"15.01.17 Sages Parables - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e320A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e1298,"08.12.15 Israeli Nostalgia Full se-tenant Sheetlet of 6 stamps","1 In Stock",6110e1298,0,"Special Sheets-Sheetlets-Combination",,,6.20,9.00,,,1,1,0,0,,,,,24
 6110e1303,"09.02.16 Turtles Full se-tenabt Sheetlet of 8 stamps","1 In Stock",6110e1303,0,"Special Sheets-Sheetlets-Combination",,,7.00,13.00,,,1,1,0,0,,,,,24
 6110e1310,"19.04.16 Markets Full 3 Sheets of 8 stamps",Available,6110e1310,0,"Special Sheets-Sheetlets-Combination",,,49.00,67.00,,,1,1,0,0,,,,,24
@@ -2751,9 +2769,19 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110eTRUM,"28.05.17 Trump Visits - 'My Own Stamp' full Sheet (9v), numbered 1499 exist",Available,6110eTRUM,0,"Special Sheets-Sheetlets-Combination",,,22.50,37.00,,,1,1,0,0,,,,,24
 6110e1352,"13.06.17 20th Maccabiah Full Sheet of 10 stamps",Available,6110e1352,0,"Special Sheets-Sheetlets-Combination",,,10.00,14.00,,,1,1,0,0,,,,,24
 6110e1354,"13.06.17 Music Love Songs Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue)",Available,6110e1354,0,"Special Sheets-Sheetlets-Combination",,,15.50,22.00,,,1,1,0,0,,,,,24
+6110eMAC,"27.08.17 Maccabiah 2017 - 'My Own Stamp' full Sheet (9v), numbered 1499 exist",Available,6110eMAC,0,"Special Sheets-Sheetlets-Combination",,,22.50,37.00,,,1,1,0,0,,,,,24
+6110e70KT,"29.11.17 29th November 1947 - 'My Own Stamp' full four Sheets (36v), numbered 1499 exist",Available,6110e70KT,0,"Special Sheets-Sheetlets-Combination",,,90.00,150.00,,,1,1,0,0,,,,,24
+6110e191U,"22.10.17 Gerbera 1.00 self Adhesive Full Sheet (8th print - eight menorah)",Available,6110e191U,0,"Special Sheets-Sheetlets-Combination",,,8.00,15.00,,,1,1,0,0,,,,,24
+6110e346A,"25.06.17 Passover Haggadah - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e346A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
+6110e369A,"19.12.17 Ancient Roman Arenas - Full 3 Sheets imperforated, 999x3 exist (24)",Soon...,,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,0,0,0,0,,,,,24
+6110e1359,"12.09.17 Balfour Declaration Full Sheet of 9 stamps",Available,6110e1359,0,"Special Sheets-Sheetlets-Combination",,,18.00,25.00,,,1,1,0,0,,,,,24
+6110e1362,"12.09.17 Shimon Peres President Souvenir Sheetlet",Available,6110e1362,0,"Special Sheets-Sheetlets-Combination",,,10.00,15.00,,,1,1,0,0,,,,,24
+6110e1366,"19.12.17 Snakes Full se-tenant Sheetlet of 9 stamps","In Stock",6110e1366,0,"Special Sheets-Sheetlets-Combination",,,14.00,18.00,,,1,1,0,0,,,,,24
+6110e1369,"19.12.17 Ancient Roman Arenas Full 3 Sheets of 8 stamps",Available,6110e1369,0,"Special Sheets-Sheetlets-Combination",,,49.00,67.00,,,1,1,0,0,,,,,24
+6110eHAN6,"21.11.17 Hanukkah - 'My Own Stamp' full Sheet (9v)",Available,6110eHAN6,0,"Special Sheets-Sheetlets-Combination",,,17.50,30.00,,,1,1,0,0,,,,,24
 6110e1,"1948 Doar Ivri - Wrong Tabs inscription (2v)",Available,6110e1,0,"Varieties and Variants","B 3b,4b","C 3E,4E",65.00,48.00,----,----,1,1,0,0,,,,,25
 6110e2a,"1948 Doar Ivri - grey paper (2v)",Catalogue,,0,"Varieties and Variants","B 3a,6a","C 3p,6p",,,----,,0,0,0,0,,,,,25
-6110e2b,"1948 Doar Ivri - perforation 10x11 (4v)",Catalogue,,0,"Varieties and Variants","B 1d,3d5d,6d","C 1A,3A5A,6A",,,----,,0,0,0,0,,,,,25
+6110e2b,"1948 Doar Ivri - perforation 10x11 (4v)",Catalogue,,0,"Varieties and Variants","B 1d,3d 5d,6d","C 1A,3A 5A,6A",,,----,,0,0,0,0,,,,,25
 6110e2c,"1948 Doar Ivri - perforation 10 3/4 (1v)",Catalogue,,0,"Varieties and Variants","B 4e","C 1C (4C)",,,----,,0,0,0,0,,,,,25
 6110e2d,"1948 Doar Ivri - perforation 10 (1v)",Catalogue,,0,"Varieties and Variants","B 1f","C 1B",,,----,,0,0,0,0,,,,,25
 6110e3,"1948 Doar Ivri rouletted (Coins)","In Stock",6110e3,0,"Varieties and Variants","C 1D-3D","S 1a-3a",350.00,1.30,45.00,9.50,1,1,1,1,,,,,25
@@ -2761,9 +2789,9 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e61A,"1955 Tribe 10 pr watermark opposite to normal position","In Stock",6110e61A,0,"Varieties and Variants","B 118a","C --",2.20,,----,,1,0,0,0,,,,,25
 6110e61B,"1955 Tribe 20 pr watermark opposite to normal position","In Stock",6110e61B,0,"Varieties and Variants","B 119a","C --",2.20,,----,,1,0,0,0,,,,,25
 6110e61C,"1955 Tribe 250 pr watermark opposite to normal position","In Stock",6110e61C,0,"Varieties and Variants","B 129a","C --",6.50,,----,,1,0,0,0,,,,,25
-6110e62,"1955 Twelve Tribes - unwmk. (7)","In Stock",6110e62,0,"Varieties and Variants","B 118a~126a","C 145a~153a",52.00,1.25,----,1.50,1,1,0,1,,,,,25
-6110e71,"1957 Bezalel watermark opposite to normal position","In Stock",6110e71,0,"Varieties and Variants","B 143remark","C --",8.80,,----,,1,0,0,0,,,,,25
-6110e73,"1957 Festivals 50 pr watermark opposite to normal position","In Stock",6110e73,0,"Varieties and Variants","B 144remark","C --",2.20,,----,,1,0,0,0,,,,,25
+6110e62,"1955 Twelve Tribes - unwmk. (7)","In Stock",6110e62,0,"Varieties and Variants","B 118a ~126a","C 145a ~153a",52.00,1.25,----,1.50,1,1,0,1,,,,,25
+6110e71,"1957 Bezalel watermark opposite to normal position","In Stock",6110e71,0,"Varieties and Variants","B 143 remark","C --",8.80,,----,,1,0,0,0,,,,,25
+6110e73,"1957 Festivals 50 pr watermark opposite to normal position","In Stock",6110e73,0,"Varieties and Variants","B 144 remark","C --",2.20,,----,,1,0,0,0,,,,,25
 6110e76A,"1958 Ships 10 pr watermark straight position facing right","In Stock",6110e76A,0,"Varieties and Variants","B 148b","C --",2.20,,----,,1,0,0,0,,,,,25
 6110e76B,"1958 Ships 10 pr watermark straight position facing left",Unavailable,6110e76B,0,"Varieties and Variants","B 148a","C --",84.00,,----,,0,0,0,0,,,,,25
 6110e76C,"1958 Ships 10 pr watermark inverted facing left",Unavailable,6110e76C,0,"Varieties and Variants","B 148d","C --",120.00,,----,,0,0,0,0,,,,,25
@@ -2773,12 +2801,12 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e152C,"1965 1st Town Emblems 1.00 Tel Aviv-Yafo - thick paper matte gum two long phosphor bands 19.16.74","In Stock",6110e152C,0,"Varieties and Variants","B 323-IV","C --",30.00,1.00,----,,1,1,0,0,,,,,25
 6110e197A,"1969 2nd Town Emblems 0.20, 0.25, 0.80 - thick paper matte gum 2nd printing 1973-74","In Stock",6110e197A,0,"Varieties and Variants","B --","C --",17.50,1.50,----,,1,1,0,0,,,,,25
 6110e217,"1970 Festivals 5731 0.15 - perforation 14:14","In Stock",6110e217,0,"Varieties and Variants","B 467p","C --",50.00,2.50,----,,1,1,0,0,,,,,25
-6110e234A,"1971 Landscapes (10 values, 0.18 see separately) - thick paper matte gum - 2nd printing 1973-74","In Stock",6110e234A,0,"Varieties and Variants","B 505-II~573-II","C --",10.00,5.00,----,,1,1,0,0,,,,,25
+6110e234A,"1971 Landscapes (10 values, 0.18 see separately) - thick paper matte gum - 2nd printing 1973-74","In Stock",6110e234A,0,"Varieties and Variants","B 505-II ~573-II","C --",10.00,5.00,----,,1,1,0,0,,,,,25
 6110e234B,"1971 Landscapes 0.18 - thick paper matte gum - 2nd printing 1973","In Stock",6110e234B,0,"Varieties and Variants","B 506-II","C --",65.00,3.00,----,,1,1,0,0,,,,,25
-6110e234C,"1971 Landscapes 0.20, 0.25 - thick paper matte gum, one long phosphor 1974-75","In Stock",6110e234C,0,"Varieties and Variants","B 573-V597-III","C --",4.50,2.50,----,,1,1,0,0,,,,,25
+6110e234C,"1971 Landscapes 0.20, 0.25 - thick paper matte gum, one long phosphor 1974-75","In Stock",6110e234C,0,"Varieties and Variants","B 573-V 597-III","C --",4.50,2.50,----,,1,1,0,0,,,,,25
 6110e234D,"1971 Landscapes 2.00 - thick paper matte gum, two long phosphor 1975-77","In Stock",6110e234D,0,"Varieties and Variants","B 549-IV","C --",2.50,0.50,----,,1,1,0,0,,,,,25
-6110e234E,"1971 Landscapes (11 values) - thick paper matte gum, one short phosphor 1975-80","In Stock",6110e234E,0,"Varieties and Variants","B 507-IV~599-II","C --",25.00,5.00,----,,1,1,0,0,,,,,25
-6110e234F,"1971 Landscapes (6 values) - thick paper matte gum, two short phosphor 1975-77","In Stock",6110e234F,0,"Varieties and Variants","B 507-V~599-III","C --",22.50,3.00,----,,1,1,0,0,,,,,25
+6110e234E,"1971 Landscapes (11 values) - thick paper matte gum, one short phosphor 1975-80","In Stock",6110e234E,0,"Varieties and Variants","B 507-IV ~599-II","C --",25.00,5.00,----,,1,1,0,0,,,,,25
+6110e234F,"1971 Landscapes (6 values) - thick paper matte gum, two short phosphor 1975-77","In Stock",6110e234F,0,"Varieties and Variants","B 507-V ~599-III","C --",22.50,3.00,----,,1,1,0,0,,,,,25
 6110e234G,"1977 Landscapes 1.00 - one phosphor band","In Stock",6110e234G,0,"Varieties and Variants","B 641-III","C --",1.50,0.50,----,,1,1,0,0,,,,,25
 6110e234H,"1977 Landscapes 1.00 - no phosphor bands","In Stock",6110e234H,0,"Varieties and Variants","B 641-I","C --",1.50,0.25,----,,1,1,0,0,,,,,25
 6110e234I,"1978 Landscapes 20.00 - two phosphor bands","In Stock",6110e234I,0,"Varieties and Variants","B 714-II","C --",4.00,1.00,----,,1,1,0,0,,,,,25
@@ -2786,7 +2814,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e344,"1979 Stand-By - Magen David (2 Values) Changes with Phosphor bands",Available,6110e344,0,"Varieties and Variants","B SB.2-I,SB.5-I","C --",18.00,1.50,----,,1,1,0,0,,,,,25
 6110e362,"1981 Stand-By - Sheqel (13 Values) Changes with Phosphor bands",Available,6110e362,0,"Varieties and Variants","B 777-I~806-II","C --",77.00,4.00,----,,1,1,0,0,,,,,25
 6110e388A,"1982 Olive Branch Orange color","In Stock",6110e388A,0,"Varieties and Variants","B SB.17-I","C --",1.50,0.75,----,1.25,1,1,0,1,,,,,25
-6110e392,"1984 Stand-By - Seven Species (8 Values) Changes with Phosphor bands",Available,6110e392,0,"Varieties and Variants","B 841-I~897-I","C 957P~65P",82.00,5.00,----,,1,1,0,0,,,,,25
+6110e392,"1984 Stand-By - Seven Species (8 Values) Changes with Phosphor bands",Available,6110e392,0,"Varieties and Variants","B 841-I~897-I","C 957P ~65P",82.00,5.00,----,,1,1,0,0,,,,,25
 6110e443A,"1986 0.05 - Black","In Stock",6110e443A,0,"Varieties and Variants","B SB.12-I",,2.00,0.25,----,,1,1,0,0,,,,,25
 6110e443B,"1986 0.10 - Black","In Stock",,0,"Varieties and Variants","B SB.13-I",,,0.50,----,,0,1,0,0,,,,,25
 6110e443C,"1986 0.20 - Blue No Phosphor bands","In Stock",6110e443C,0,"Varieties and Variants","B SB.14-I",,11.00,0.75,----,,1,1,0,0,,,,,25
@@ -2805,14 +2833,14 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e527,"1990 Architecture 0.75 - No Phosphor bands","In Stock",6110e527,0,"Varieties and Variants","B 1022-II","C 1231.W",11.00,2.00,----,,1,1,0,0,,,,,25
 6110e527A,"1990 Architecture 0.75 - 1 Phosphor band on left","In Stock",6110e527A,0,"Varieties and Variants","B 1022-III","C 1231.L",55.00,3.50,----,,1,1,0,0,,,,,25
 6110e527B,"1990 Architecture 0.75 - 1 Phosphor band on right","In Stock",6110e527B,0,"Varieties and Variants","B 1022-I","C 1231.R",55.00,3.50,----,,1,1,0,0,,,,,25
-6110e528,"1992 Greetings II 0.80 1.00 - 1 Phosphor band on right","In Stock",6110e528,0,"Varieties and Variants","B 1029-I1030-I","C 1251r-52r",45.00,2.50,----,,1,1,0,0,,,,,25
+6110e528,"1992 Greetings II 0.80 1.00 - 1 Phosphor band on right","In Stock",6110e528,0,"Varieties and Variants","B 1029-I 1030-I","C 1251r-52r",45.00,2.50,----,,1,1,0,0,,,,,25
 6110e542,"1990 Architecture 1.10 - 1 Phosphor band on right","In Stock",6110e542,0,"Varieties and Variants","B 1037-I","C 1232.R",10.00,1.50,----,,1,1,0,0,,,,,25
 6110e542A,"1990 Architecture 1.20 - 1 Phosphor band on left","In Stock",6110e542A,0,"Varieties and Variants","B 1038-I","C 1233.L",4.50,0.50,----,,1,1,0,0,,,,,25
-6110e546,"1992 Greetings III no values - 1 Phosphor band on right (3v)","In Stock",6110e546,0,"Varieties and Variants","B SB-22-I-24-I","C 1273r-75r",80.00,4.50,----,,1,1,0,0,,,,,25
+6110e546,"1992 Greetings III no values - 1 Phosphor band on right (3v)","In Stock",6110e546,0,"Varieties and Variants","B SB-22-I -24-I","C 1273r-75r",80.00,4.50,----,,1,1,0,0,,,,,25
 6110e549,"1990 Architecture 1.40 - 1 Phosphor band on left","In Stock",6110e549,0,"Varieties and Variants","B 1047-I","C 1234.L",9.00,1.50,----,,1,1,0,0,,,,,25
-6110e565,"1992 Anemone no value stamp - 1 Phosphor band on right (both ref. catalogues should read R instead L)","In Stock",6110e565,0,"Varieties and Variants","B SB.25eph1","C 1305l",13.00,1.60,----,,1,1,0,0,,,,,25
-6110e565A,"1992 Anemone no value stamp - 1 Phosphor band on center","In Stock",6110e565A,0,"Varieties and Variants","B SB.25eph2","C --",8.00,0.80,----,,1,1,0,0,,,,,25
-6110e565B,"1992 Anemone no value stamp - 1 Green Phosphor band on right","In Stock",6110e565B,0,"Varieties and Variants","B SB.25eph3","C 1305g",13.00,1.60,----,,1,1,0,0,,,,,25
+6110e565,"1992 Anemone no value stamp - 1 Phosphor band on right (both ref. catalogues should read R instead L)","In Stock",6110e565,0,"Varieties and Variants","B SB.25 eph1","C 1305l",13.00,1.60,----,,1,1,0,0,,,,,25
+6110e565A,"1992 Anemone no value stamp - 1 Phosphor band on center","In Stock",6110e565A,0,"Varieties and Variants","B SB.25 eph2","C --",8.00,0.80,----,,1,1,0,0,,,,,25
+6110e565B,"1992 Anemone no value stamp - 1 Green Phosphor band on right","In Stock",6110e565B,0,"Varieties and Variants","B SB.25 eph3","C 1305g",13.00,1.60,----,,1,1,0,0,,,,,25
 6110e574,"1992 Architecture in Israel 1.60 - Lilac instead Violet, blue gum","In Stock",6110e574,0,"Varieties and Variants","B 1079b","C --",15.00,0.65,----,3.00,1,1,0,1,,,,,25
 6110e629A,"1994 Hot Air Ballons (tab show Basket) - No Phosphor band","In Stock",6110e629A,0,"Varieties and Variants","B 1154p","C --",28.00,,----,,1,0,0,0,,,,,25
 6110e629B,"1994 Hot Air Ballons (tab show Scales) - No Phosphor band",Catalogue,6110e629B,0,"Varieties and Variants","B 1155p","C --",28.00,,----,,0,0,0,0,,,,,25
@@ -2820,9 +2848,9 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e637B,"1994 Public Transportation 0.90 - Two Phosphor bands","In Stock",6110e637B,0,"Varieties and Variants","B 1163p1","C 1411w2",18.00,1.35,----,,1,1,0,0,,,,,25
 6110e677,"1996 Fruits 1.05 - Right Phosphor Band","In Stock",6110e677,0,"Varieties and Variants","B 1224p","C --",13.50,1.35,----,,1,1,0,0,,,,,25
 6110e678,"1996 Festivals 5757 1.05 - Left Phosphor Band","In Stock",6110e678,0,"Varieties and Variants","B 1231p","C --",13.50,1.35,----,,1,1,0,0,,,,,25
-6110e711,"1997 'Srulik' - small format perf. 14x14","In Stock",6110e711,0,"Varieties and Variants","B SB.21-IV","C 1544b14",4.00,0.50,32.00,1.25,1,1,1,1,,,,,25
-6110e711A,"1997 'Srulik' - small format perf. 13x14","In Stock",6110e711A,0,"Varieties and Variants","B SB.26-V","C 1544b13",4.00,0.50,----,1.25,1,1,0,1,,,,,25
-6110e711B,"1997 'Srulik' - Large format Left Phosphor","In Stock",6110e711B,0,"Varieties and Variants","B SB.26-II","C 1544a","Contact Us",7.50,,,1,1,0,0,,,,,25
+6110e711,"1997 'Srulik' - small format perf. 14x14","In Stock",6110e711,0,"Varieties and Variants","B SB.21 -IV","C 1544b 14",4.00,0.50,32.00,1.25,1,1,1,1,,,,,25
+6110e711A,"1997 'Srulik' - small format perf. 13x14","In Stock",6110e711A,0,"Varieties and Variants","B SB.26 -V","C 1544b 13",4.00,0.50,----,1.25,1,1,0,1,,,,,25
+6110e711B,"1997 'Srulik' - Large format Left Phosphor","In Stock",6110e711B,0,"Varieties and Variants","B SB.26-II","C 1544a",,7.50,,,1,1,0,0,,,,,25
 6110e711C,"1998 'Srulik' - Large format perf. 13x14 from Prestige Booklet",Available,6110e711C,0,"Varieties and Variants","B SB.26-III","C 1544A",45.00,,,,1,0,0,0,,,,,25
 6110e648,"1997 Songbird 1.00 - deep violet no Phosphor","In Stock",6110e648,0,"Varieties and Variants","B 1179-II","C --",1.50,0.50,----,0.75,1,1,0,1,,,,,25
 6110e613,"1997 Song Birds 1.30 - 1 Phosphor band on left","In Stock",6110e613,0,"Varieties and Variants","B 1133-I","C 1348.L",13.00,1.00,----,,1,1,0,0,,,,,25
@@ -2857,37 +2885,40 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110e037C,"2009 Medicinal Herbs and Spices POST24 self adhesive 2nd print and up from booklet","In Stock",6110e037C,0,"Varieties and Variants",,"S 1749B",----,0.80,3.20,2.20,0,1,1,1,,,,,25
 6110e845,"2009 Menorah 0.30 0.50 1.00 self Adhesive","In Stock",6110e845,0,"Varieties and Variants","B 1494-97","S 1758-60",----,1.35,6.00,1.35,0,1,1,1,,,,,25
 6110e845G,"2009 Menorah 0.40 self Adhesive","In Stock",6110e845G,0,"Varieties and Variants",,"S 1758A",----,0.45,2.70,0.45,0,1,1,1,,,,,25
-6110e1056,"2009 'My Own Stamp' Rouletted self Adhesive no Phosphor Band (8v)","Sold Out",6110e1056,0,"Varieties and Variants","B CgS.2","S --",300.00,,"Contact Us",,0,0,1,0,,,,,25
+6110e1056,"2009 'My Own Stamp' Rouletted self Adhesive no Phosphor Band (8v)","Sold Out",6110e1056,0,"Varieties and Variants","B CgS.2","S --",300.00,,,,0,0,1,0,,,,,25
 6110e1065,"2009 Animal Assisted Therapy from Booklet","In Stock",6110e1065,0,"Varieties and Variants","B BP.20","S 1789-91",----,3.00,7.50,,0,1,1,0,,,,,25
 6110e050A,"2010 Fruits self adhesive from booklet (5v) stronger colors","In Stock",6110e050A,0,"Varieties and Variants",,"S 1792-96",----,1.25,7.50,,0,1,1,0,,,,,25
 6110e1102,"2010 Greetings from Booklet","In Stock",6110e1102,0,"Varieties and Variants",,"S 1834-35",----,2.00,5.00,,0,1,1,0,,,,,25
-6110e1115,"2010 Animation from Booklet (15 diff stamps)","In Stock",,0,"Varieties and Variants",,,----,10.00,,,0,1,0,0,,,,,25
-6110e082A,"2011 Innovations imperforated",Unavailable,6110e082A,0,"Varieties and Variants",,,110.00,,150.00,20.00,0,0,0,0,,,,,25
-6110e1112,"2011 Flag from Booklet","In Stock",6110e1112,0,"Varieties and Variants",,,----,2.00,3.00,,0,1,1,0,,,,,25
-6110e1131,"2011 Butterflies self adhesive from booklet (6v)","In Stock",6110e1131,0,"Varieties and Variants",,,----,1.50,9.00,,0,1,1,0,,,,,25
-6110e148A,"2011 Children's Games self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,1.50,9.00,,0,1,1,0,,,,,25
-6110e148C,"2012 Children's Games imperforated","In Stock",6110e148C,0,"Varieties and Variants",,,30.00,,40.00,5.00,1,0,1,1,,,,,25
+6110e1115,"2010 Animation from Booklet (15 diff stamps)","In Stock",,0,"Varieties and Variants",,"S 1846-60",----,10.00,,,0,1,0,0,,,,,25
+6110e082A,"2011 Innovations imperforated",Unavailable,6110e082A,0,"Varieties and Variants",,"S --",110.00,,150.00,20.00,0,0,0,0,,,,,25
+6110e1112,"2011 Flag from Booklet","In Stock",6110e1112,0,"Varieties and Variants",,"S 1877",----,2.00,3.00,,0,1,1,0,,,,,25
+6110e1131,"2011 Butterflies self adhesive from booklet (6v)","In Stock",6110e1131,0,"Varieties and Variants",,"S 1886-91",----,1.50,9.00,,0,1,1,0,,,,,25
+6110e148A,"2011 Children's Games self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,"S 1905-07",----,5.00,9.00,,0,1,1,0,,,,,25
+6110e148C,"2012 Children's Games imperforated","In Stock",6110e148C,0,"Varieties and Variants",,"S --",30.00,,40.00,5.00,1,0,1,1,,,,,25
 6110e845Q,"2012 Menorah 0.30 self Adhesive (4th and up print color change)","In Stock",6110e845Q,0,"Varieties and Variants",,,----,0.45,----,0.45,0,1,0,1,,,,,25
 6110e168B,"2012 Jewish Seamanship imperforated","In Stock",6110e168B,0,"Varieties and Variants",,,20.00,,25.00,5.00,1,0,1,1,,,,,25
-6110e1180,"2012 Tourism self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,2.00,10.00,,0,1,1,0,,,,,25
+6110e1180,"2012 Tourism self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e181B,"2013 Tourism imperforated","In Stock",6110e181B,0,"Varieties and Variants",,,20.00,,25.00,5.00,1,0,1,1,,,,,25
 6110e199B,"2013 Vultures imperforated","In Stock",6110e199B,0,"Varieties and Variants",,,20.00,,25.00,5.00,1,0,1,1,,,,,25
-6110e518,"1990 Greetings I no values - 1 Phosphor band on left (3v)",Unavailable,6110e518,0,"Varieties and Variants","B SB-19-I-21-I","C 1221l-23l",300.00,4.50,----,,0,0,0,0,,,,,25
+6110e518,"1990 Greetings I no values - 1 Phosphor band on left (3v)",Unavailable,6110e518,0,"Varieties and Variants","B SB-19-I -21-I","C 1221l-23l",300.00,4.50,----,,0,0,0,0,,,,,25
 6110e1191,"2013 Gerbara self Adhesive (5v)","In Stock",6110e1191,0,"Varieties and Variants",,,----,1.80,10.00,1.80,0,1,1,1,,,,,25
-6110e1225,"2013 Aviation self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,2.00,10.00,,0,1,1,0,,,,,25
+6110e1225,"2013 Aviation self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e225B,"2014 Aviation imperforated",Catalogue,6110e225B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110e1229,"2014 Red Gerbara self Adhesive","In Stock",6110e1229,0,"Varieties and Variants",,,----,0.25,3.00,0.25,0,1,1,1,,,,,25
 6110e235B,"2014 Craters imperforated",Catalogue,6110e235B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110e1243,"2014 Sign Language self adhesive from booklet (5v) stronger colors","In Stock",6110e1243,0,"Varieties and Variants",,,----,1.25,7.50,,0,1,1,0,,,,,25
-6110e1252,"2014 Fiddler on the Roof self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,2.00,10.00,,0,1,1,0,,,,,25
+6110e1252,"2014 Fiddler on the Roof self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e253B,"2014 Fiddler on the Roof imperforated",Catalogue,6110e253B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110e1282,"2015 Vegetables self adhesive from booklet (5v)","In Stock",,0,"Varieties and Variants",,,----,1.25,7.50,,0,1,1,0,,,,,25
 6110e277B,"2015 Israel Museum imperforated",Catalogue,6110e277B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
-6110e1290,"2015 Rivers self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,3.00,10.00,,0,1,1,0,,,,,25
+6110e1290,"2015 Rivers self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e291B,"2016 Rivers imperforated",Catalogue,6110e291B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110e310B,"2016 Markets imperforated",Catalogue,6110e310B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110e320B,"2017 Sages Parables imperforated",Catalogue,6110e320B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
-6110e1319,"2016 Sages Parables self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,3.00,10.00,,0,1,1,0,,,,,25
+6110e1319,"2016 Sages Parables self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
+6110e355,"2017 Aromatic Plants self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
+6110e346B,"2017 Passover Haggadah imperforated",Catalogue,6110e346B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
+6110e369B,"2017 Ancient Roman Arenas imperforated",Soon...,,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110k8801,"17.11.88 'Frama 1' (first vending machine labels ATM used to 1998, every value could be printed) Definitive, tariff set of 3 values 00.40/00.60/00.70 (more 13 tariff sets could be made until 13.5.98)",Available,6110k8801,0,"Vending Machine Labels","C F.1.1","B F.1",3.50,,,,1,0,0,0,,,,,26
 6110k8802,"17.11.88 'Frama 1' Definitive, FDC 00.40/00.60/00.70","1 In Stock",6110k8802,0,"Vending Machine Labels",,,4.50,,,,1,0,0,0,,,,,26
 6110k9001,"09.07.90 'Klussendorf 1' (Second vending machine labels ATM, used to 1999 in 45 numbered machines in 37 locations, value 00.05 - 15.00 NIS could be printed) Definitive, tariff set of 4 values 0.55/0.80/1.00/2.35 (more 10 tariff sets could be made until 8.1.99)","Temp. Sold Out",6110k9001,0,"Vending Machine Labels","C page3","B K.1",38.00,,,,0,0,0,0,,,,,26
@@ -2908,7 +2939,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110k9302,"21.08.93 'Massad 3' Telafila, EMS 48.00 value","Temp. Sold Out",6110k9302,0,"Vending Machine Labels","C M4.E","B M.3",102.00,,,,0,0,0,0,,,,,26
 6110k9303,"21.08.93 'Massad 3' Telafila, FDC inland 0.80 value","1 In Stock",6110k9303,0,"Vending Machine Labels",,,3.00,,,,1,0,0,0,,,,,26
 6110k9304,"21.08.93 'Massad 3' Telafila, FDC Registered Mail 3.60 value","Temp. Sold Out",6110k9304,0,"Vending Machine Labels",,,5.00,,,,0,0,0,0,,,,,26
-6110k93E1,"21.08.93 'Massad 3' Telafila, FDC Registered Mail 3.60 value, ERROR with Opening Day 22/08/93 instead 21/08/93","1 In Stock",6110k93E1,0,"Vending Machine Labels",,"B seeM.3v1",38.00,,,,1,0,0,0,,,,,26
+6110k93E1,"21.08.93 'Massad 3' Telafila, FDC Registered Mail 3.60 value, ERROR with Opening Day 22/08/93 instead 21/08/93","1 In Stock",6110k93E1,0,"Vending Machine Labels",,"B see M.3v1",38.00,,,,1,0,0,0,,,,,26
 6110k9305,"16.11.93 'Klussendorf 3' Christmas '93, tariff set of 6 values 0.85/1.30/1.60/3.85/4.30/4.60","1 In Stock",6110k9305,0,"Vending Machine Labels","C C3","B K.16",62.50,,,,1,0,0,0,,,,,26
 6110k9306,"16.11.93 'Klussendorf 3' Christmas '93 Bethlehem, FDC inland 0.85 value","4 In Stock",6110k9306,0,"Vending Machine Labels",,,3.00,,,,1,0,0,0,,,,,26
 6110k9307,"16.11.93 'Klussendorf 3' Christmas '93 Nazareth, FDC inland 0.85 value",Available,6110k9307,0,"Vending Machine Labels",,,3.00,,,,1,0,0,0,,,,,26
@@ -2935,7 +2966,7 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110k9506,"16.12.95 'Massad 4' Jerusalem 3000, EMS 65.00 value",Unavailable,6110k9506,0,"Vending Machine Labels",,,80.00,,,,0,0,0,0,,,,,26
 6110k9507,"16.12.95 'Massad 4' Jerusalem 3000, FDC inland 1.00 value","1 In Stock",6110k9507,0,"Vending Machine Labels",,,3.00,,,,1,0,0,0,,,,,26
 6110k9508,"16.12.95 'Massad 4' Jerusalem 3000, FDC Registered Mail 4.40 value","1 In Stock",6110k9508,0,"Vending Machine Labels",,,5.50,,,,1,0,0,0,,,,,26
-6110k95E1,"16.12.95 'Massad 4' Jerusalem 3000, FDC Registered Mail 4.40 value, ERROR with Opening Day 17/12/95 instead 16/12/95",Available,6110k95E1,0,"Vending Machine Labels",,"B seeM.4v1",50.00,,,,1,0,0,0,,,,,26
+6110k95E1,"16.12.95 'Massad 4' Jerusalem 3000, FDC Registered Mail 4.40 value, ERROR with Opening Day 17/12/95 instead 16/12/95",Available,6110k95E1,0,"Vending Machine Labels",,"B see M.4v1",50.00,,,,1,0,0,0,,,,,26
 6110k9601,"22.10.96 'Massad 5' Definitive, tariff set of 6 values 1.05/1.60/1.90/4.65/5.20/5.50",Soon...,6110k9601,0,"Vending Machine Labels","C M19","B M.5",11.00,,,,0,0,0,0,,,,,26
 6110k9602,"22.10.96 'Massad 5' Definitive, EMS 68.00 value",Soon...,6110k9602,0,"Vending Machine Labels","C M19.E",,40.00,,,,0,0,0,0,,,,,26
 6110k9603,"22.10.96 'Massad 5' Definitive, FDC inland 1.05 value","2 In Stock",6110k9603,0,"Vending Machine Labels",,,3.00,,,,1,0,0,0,,,,,26
@@ -3595,82 +3626,87 @@ psAL182,"1970s Ministry of Tourism Air Letter - 30 Anniversary, Netanya",Catalog
 6110k1703m300,"07.02.17 'Inbar 14' Cross at the Crossing, full set of 6 values, Ashdod machine 300 - 2.40/4.00/6.50/7.40/8.30/9.00",Unavailable,6110k1703,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
 6110k1705m326,"04.04.17 'Inbar 15' Buckle up for Life, full set of 6 values, Rishon LeZion machine 326 - 2.40/4.00/6.50/7.40/8.30/9.00",Unavailable,6110k1705,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
 6110k1707m636,"13.06.17 'Inbar 16' Ride Safely, full set of 6 values, Netanya machine 636 - 2.40/4.00/6.50/7.40/8.30/9.00",Unavailable,6110k1707,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+6110k1709,"12.09.17 'Inbar 17' Life is Road Safety, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1709,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+6110k1710,"12.09.17 'Inbar 17' Life is Road Safety, FDC inland 2.40 value","1 In Stock",6110k1710,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
+6110k1711,"28.11.17 'Inbar 18' Christmas, full set of 6 values 2.40/4.00/6.50/7.40/8.30/9.00",Available,6110k1711,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+6110k1712,"28.11.17 'Inbar 18' Christmas, FDC inland 2.40 value","1 In Stock",6110k1712,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
 6110y48,"1948 19 stamps (FDC 14 stamps)",Available,6110y48,0,"Year Sets","C 1-19","S 1-14,J1-J5",10485.00,310.00,282.00,640.00,1,1,1,1,,,,,27
-6110y49,"1949 18 stamps (FDC 12 stamps) + 1 S/S","In Stock",6110y49,0,"Year Sets","C 20-38","S 15-22,24,27-30,J6-J11",1211.00,50.00,52.00,144.00,1,1,1,1,,,,,27
-6110y50,"1950 21 stamps","In Stock",6110y50,0,"Year Sets","C 39-58,69","S 23,25,31-43,C1-C6",1193.00,34.00,187.00,38.00,1,1,1,1,,,,,27
-6110y51,"1951 15 stamps","In Stock",6110y51,0,"Year Sets","C 70-84","S 44-54,O1-O4",205.00,3.00,4.30,2.10,1,1,1,1,,,,,27
-6110y52,"1952 29 stamps","In Stock",6110y52,0,"Year Sets","C 59-64,85-107","S 55-72,C7,C8,J12-J20",423.00,13.00,19.00,18.00,1,1,1,1,,,,,27
-6110y53,"1953 8 stamps","In Stock",6110y53,0,"Year Sets","C 115,117-123","S 73-79,C16",122.00,4.00,11.30,4.00,1,1,1,1,,,,,27
-6110y54,"1954 17 stamps","1 In Stock",6110y54,0,"Year Sets","C 65-68,108-113,124-130","S C9-C14,80-90",9.10,1.50,7.00,1.20,1,1,1,1,,,,,27
+6110y49,"1949 18 stamps (FDC 12 stamps) + 1 S/S","In Stock",6110y49,0,"Year Sets","C 20-38","S 15-22, 24,27-30, J6-J11",1211.00,50.00,52.00,144.00,1,1,1,1,,,,,27
+6110y50,"1950 21 stamps","In Stock",6110y50,0,"Year Sets","C 39-58,69","S 23,25, 31-43, C1-C6",1193.00,34.00,187.00,38.00,1,1,1,1,,,,,27
+6110y51,"1951 15 stamps","In Stock",6110y51,0,"Year Sets","C 70-84","S 44-54, O1-O4",205.00,3.00,4.30,2.10,1,1,1,1,,,,,27
+6110y52,"1952 29 stamps","In Stock",6110y52,0,"Year Sets","C 59-64,85-107","S 55-72, C7,C8, J12-J20",423.00,13.00,19.00,18.00,1,1,1,1,,,,,27
+6110y53,"1953 8 stamps","In Stock",6110y53,0,"Year Sets","C 115,117-123","S 73-79, C16",122.00,4.00,11.30,4.00,1,1,1,1,,,,,27
+6110y54,"1954 17 stamps","1 In Stock",6110y54,0,"Year Sets","C 65-68,108-113,124-130","S C9-C14, 80-90",9.10,1.50,7.00,1.20,1,1,1,1,,,,,27
 6110y55,"1955 26 stamps","In Stock",6110y55,0,"Year Sets","C 131-156","S 91-116",6.60,2.00,5.00,1.80,1,1,1,1,,,,,27
-6110y56,"1956 9 stamps","In Stock",6110y56,0,"Year Sets","C 157-163,114,116","S 117-123,C15,C17",2.10,1.35,1.92,0.96,1,1,1,1,,,,,27
+6110y56,"1956 9 stamps","In Stock",6110y56,0,"Year Sets","C 157-163, 114,116","S 117-123, C15,C17",2.10,1.35,1.92,0.96,1,1,1,1,,,,,27
 6110y57,"1957 8 stamps + 1 S/S","In Stock",6110y57,0,"Year Sets","C 164-171","S 124-132",1.68,1.62,1.58,1.47,1,1,1,1,,,,,27
 6110y58,"1958 13 stamps","In Stock",6110y58,0,"Year Sets","C 176-188","S 137-149",2.05,1.56,1.61,1.26,1,1,1,1,,,,,27
 6110y59,"1959 18 stamps","In Stock",6110y59,0,"Year Sets","C 189-206","M 150-167",3.57,2.27,2.27,1.84,1,1,1,1,,,,,27
-6110y60,"1960 33 stamps + 1 S/S","In Stock",6110y60,0,"Year Sets","C 207-240","S 168-189,171A,187a",49.50,19.50,46.30,25.20,1,1,1,1,,,,,27
+6110y60,"1960 33 stamps + 1 S/S","In Stock",6110y60,0,"Year Sets","C 207-240","S 168-189, 171A,187a",49.50,19.50,46.30,25.20,1,1,1,1,,,,,27
 6110y61,"1961 25 stamps","In Stock",6110y61,0,"Year Sets","C 241-265","S 190-213",10.00,3.36,3.23,2.62,1,1,1,1,,,,,27
-6110y62,"1962 20 stamps + 1 S/S","In Stock",6110y62,0,"Year Sets","C 266-282","S 215-234,228a",11.50,6.16,13.50,5.76,1,1,1,1,,,,,27
-6110y63,"1963 26 stamps","In Stock",6110y63,0,"Year Sets","C 287-311","S C28-C37,235-250",23.00,2.40,7.00,5.50,1,1,1,1,,,,,27
-6110y64,"1964 21 stamps + 1 S/S","In Stock",6110y64,0,"Year Sets","C 313-333","S 251-271,271a",14.60,7.40,7.20,5.30,1,1,1,1,,,,,27
-6110y65,"1965 39 stamps","In Stock",6110y65,0,"Year Sets","C 335-357,370-385","S 272-307,334-336",12.40,5.30,5.50,4.50,1,1,1,1,,,,,27
+6110y62,"1962 20 stamps + 1 S/S","In Stock",6110y62,0,"Year Sets","C 266-282","S 215-234, 228a",11.50,6.16,13.50,5.76,1,1,1,1,,,,,27
+6110y63,"1963 26 stamps","In Stock",6110y63,0,"Year Sets","C 287-311","S C28-C37, 235-250",23.00,2.40,7.00,5.50,1,1,1,1,,,,,27
+6110y64,"1964 21 stamps + 1 S/S","In Stock",6110y64,0,"Year Sets","C 313-333","S 251-271, 271a",14.60,7.40,7.20,5.30,1,1,1,1,,,,,27
+6110y65,"1965 39 stamps","In Stock",6110y65,0,"Year Sets","C 335-357, 370-385","S 272-307, 334-336",12.40,5.30,5.50,4.50,1,1,1,1,,,,,27
 6110y66,"1966 26 stamps","In Stock",6110y66,0,"Year Sets","C 386-411","S 308-333",13.60,4.60,5.40,4.50,1,1,1,1,,,,,27
 6110y67,"1967 24 stamps","In Stock",6110y67,0,"Year Sets","C 412-435","S 337-360",4.40,3.80,3.10,2.70,1,1,1,1,,,,,27
-6110y68,"1968 27 stamps + 1 S/S","In Stock",6110y68,0,"Year Sets","C 436-466","S C38-C47,361-377,375a",5.80,4.80,6.00,3.90,1,1,1,1,,,,,27
+6110y68,"1968 27 stamps + 1 S/S","In Stock",6110y68,0,"Year Sets","C 436-466","S C38-C47, 361-377, 375a",5.80,4.80,6.00,3.90,1,1,1,1,,,,,27
 6110y69,"1969 27 stamps","In Stock",6110y69,0,"Year Sets","C 464-478","S 378-400",8.20,4.50,4.45,4.20,1,1,1,1,,,,,27
 6110y70,"1970 35 stamps + 1 S/S","In Stock",6110y70,0,"Year Sets","C 479-514","S 401-435",11.00,11.00,11.60,7.40,1,1,1,1,,,,,27
-6110y71,"1971 52 stamps + 1 S/S","In Stock",6110y71,0,"Year Sets","C 515-566,748-751","S 436-474,592,649,664,6",19.40,15.40,19.20,13.20,1,1,1,1,,,,,27
+6110y71,"1971 52 stamps + 1 S/S","In Stock",6110y71,0,"Year Sets","C 515-566, 748-751","S 436-474, 592,649, 664,6",19.40,15.40,19.20,13.20,1,1,1,1,,,,,27
 6110y72,"1972 30 stamps + 1 S/S","In Stock",6110y72,0,"Year Sets","C 575-608","S 475-504",13.20,12.20,12.60,7.60,1,1,1,1,,,,,27
 6110y73,"1973 27 stamps + 1 S/S","In Stock",6110y73,0,"Year Sets","C 609-636","S 505-531",13.50,10.20,16.20,8.30,1,1,1,1,,,,,27
-6110y74,"1974 16 stamps + 3 S/S","In Stock",6110y74,0,"Year Sets","C 637-648,652-658","S 532-550",2.40,3.00,4.50,2.10,1,1,1,1,,,,,27
-6110y75,"1975 33 stamps","In Stock",6110y75,0,"Year Sets","C 649-651,659-687,569","S 551-582,585",4.00,4.40,4.50,3.30,1,1,1,1,,,,,27
-6110y76,"1976 28 stamps + 2 S/S","In Stock",6110y76,0,"Year Sets","C 688-720,570","S 593-620,586",5.20,6.30,8.00,4.70,1,1,1,1,,,,,27
-6110y77,"1977 36 stamps + 1 S/S","In Stock",6110y77,0,"Year Sets","C 721-781,567","S 621-681,677a,583",8.20,10.30,9.20,7.00,1,1,1,1,,,,,27
-6110y78,"1978 36 stamps + 1 S/S","In Stock",6110y78,0,"Year Sets","C 782~839,573","S 682-717,589",8.30,11.00,10.50,7.20,1,1,1,1,,,,,27
-6110y79,"1979 28 stamps + 1 S/S","In Stock",6110y79,0,"Year Sets","C 840-865,568,571,574","S 718-742,724a,584,587,590",6.13,7.80,6.40,5.28,1,1,1,1,,,,,27
-6110y80,"1980 26 stamps + 2 S/S","In Stock",6110y80,0,"Year Sets","C 866-894,572","S 744-769,749a,588",8.42,11.30,12.90,7.55,1,1,1,1,,,,,27
-6110y81,"1981 32 stamps","1 In Stock",6110y81,0,"Year Sets","C 911-938,895-898","S 770-800,762A",11.10,12.00,11.00,10.00,1,1,1,1,,,,,27
-6110y82,"1982 23 stamps + 3 S/S","In Stock",6110y82,0,"Year Sets","C 899,900,939-954,970-975","S 801-804,807-809,815-831,801a,830a",18.10,23.80,23.00,17.70,1,1,1,1,,,,,27
-6110y83,"1983 30 stamps + 3 S/S","In Stock",6110y83,0,"Year Sets","C 955-961,996-1024","S 805,806,810-814,832-856,838a",25.50,34.90,31.80,24.60,1,1,1,1,,,,,27
-6110y84,"1984 29 stamps + 1 S/S","2 In Stock",6110y84,0,"Year Sets","C 962-965,1025-1050","S 857-895",22.40,26.00,24.60,21.30,1,1,1,1,,,,,27
-6110y85,"1985 23 stamps + 4 S/S","In Stock",6110y85,0,"Year Sets","C 1051-1084","S 896-921,899A",42.00,41.60,41.50,34.50,1,1,1,1,,,,,27
-6110y86,"1986 32 stamps + 2 S/S","In Stock",6110y86,0,"Year Sets","C 1085-1092,1106,1108,1111-1136","S 922-955",36.60,35.60,43.40,34.40,1,1,1,1,,,,,27
+6110y74,"1974 16 stamps + 3 S/S","In Stock",6110y74,0,"Year Sets","C 637-648, 652-658","S 532-550",2.40,3.00,4.50,2.10,1,1,1,1,,,,,27
+6110y75,"1975 33 stamps","In Stock",6110y75,0,"Year Sets","C 649-651, 659-687, 569","S 551-582, 585",4.00,4.40,4.50,3.30,1,1,1,1,,,,,27
+6110y76,"1976 28 stamps + 2 S/S","In Stock",6110y76,0,"Year Sets","C 688-720, 570","S 593-620, 586",5.20,6.30,8.00,4.70,1,1,1,1,,,,,27
+6110y77,"1977 36 stamps + 1 S/S","In Stock",6110y77,0,"Year Sets","C 721-781, 567","S 621-681, 677a,583",8.20,10.30,9.20,7.00,1,1,1,1,,,,,27
+6110y78,"1978 36 stamps + 1 S/S","In Stock",6110y78,0,"Year Sets","C 782~839, 573","S 682-717, 589",8.30,11.00,10.50,7.20,1,1,1,1,,,,,27
+6110y79,"1979 28 stamps + 1 S/S","In Stock",6110y79,0,"Year Sets","C 840-865, 568,571, 574","S 718-742, 724a,584, 587,590",6.13,7.80,6.40,5.28,1,1,1,1,,,,,27
+6110y80,"1980 26 stamps + 2 S/S","In Stock",6110y80,0,"Year Sets","C 866-894, 572","S 744-769, 749a,588",8.42,11.30,12.90,7.55,1,1,1,1,,,,,27
+6110y81,"1981 32 stamps","1 In Stock",6110y81,0,"Year Sets","C 911-938, 895-898","S 770-800, 762A",11.10,12.00,11.00,10.00,1,1,1,1,,,,,27
+6110y82,"1982 23 stamps + 3 S/S","In Stock",6110y82,0,"Year Sets","C 899,900, 939-954, 970-975","S 801-804, 807-809, 815-831, 801a,830a",18.10,23.80,23.00,17.70,1,1,1,1,,,,,27
+6110y83,"1983 30 stamps + 3 S/S","In Stock",6110y83,0,"Year Sets","C 955-961, 996-1024","S 805,806, 810-814, 832-856, 838a",25.50,34.90,31.80,24.60,1,1,1,1,,,,,27
+6110y84,"1984 29 stamps + 1 S/S","2 In Stock",6110y84,0,"Year Sets","C 962-965, 1025-1050","S 857-895",22.40,26.00,24.60,21.30,1,1,1,1,,,,,27
+6110y85,"1985 23 stamps + 4 S/S","In Stock",6110y85,0,"Year Sets","C 1051-1084","S 896-921, 899A",42.00,41.60,41.50,34.50,1,1,1,1,,,,,27
+6110y86,"1986 32 stamps + 2 S/S","In Stock",6110y86,0,"Year Sets","C 1085-1092, 1106,1108, 1111-1136","S 922-955",36.60,35.60,43.40,34.40,1,1,1,1,,,,,27
 6110y87,"1987 20 stamps + 3 S/S","In Stock",6110y87,0,"Year Sets","C 1137-1164","S 956-978",37.80,36.40,44.40,36.20,1,1,1,1,,,,,27
-6110y88,"1988 26 stamps + 3 S/S","In Stock",6110y88,0,"Year Sets","C 1165-1197,1101,1102","S 979-1006,988a",32.90,31.40,42.20,31.30,1,1,1,1,,,,,27
-6110y89,"1989 29 stamps + 2 S/S","1 In Stock",6110y89,0,"Year Sets","C 1198-1227,1103-1105,1109","S 1007-1017,1020-1037",49.20,49.00,64.80,47.60,1,1,1,1,,,,,27
-6110y90,"1990 27 stamps + 2 S/S","1 In Stock",6110y90,0,"Year Sets","C 1228-1233,1241-1271,1107","S 1038-1072,1019",38.00,32.80,51.20,36.40,1,1,1,1,,,,,27
-6110y91,"1991 28 stamps + 2 S/S","3 In Stock",6110y91,0,"Year Sets","C 1272-1300,1234","S 1073-1101,1049",39.50,33.00,53.00,38.00,1,1,1,1,,,,,27
-6110y92,"1992 35 stamps + 2 S/S","3 In Stock",6110y92,0,"Year Sets","C 1302-1343,1346,1235","S 1102-1135,1142,1051",41.60,30.60,52.40,39.80,1,1,1,1,,,,,27
-6110y93,"1993 33 stamps + 1 S/S","In Stock",6110y93,0,"Year Sets","C 1351-1381,1344,1348-1350","S 1153-1182,1137,1143-1146",39.00,29.00,50.00,33.60,1,1,1,1,,,,,27
-6110y94,"1994 34 stamps + 1 S/S","In Stock",6110y94,0,"Year Sets","C 1382-1415,1345","S 1189-1221,1141,1183",44.00,33.80,55.00,35.60,1,1,1,1,,,,,27
-6110y95,"1995 32 stamps + 3 S/S","1 In Stock",6110y95,0,"Year Sets","C 1416-1451,1347","S 1222-1254,1142A,1184",47.00,30.40,59.00,34.60,1,1,1,1,,,,,27
-6110y96,"1996 42 stamps + 3 S/S","In Stock",6110y96,0,"Year Sets","C 1452-1510","S 1266-1295,1256,1258,1259,1152",48.00,37.00,58.00,38.00,1,1,1,1,,,,,27
-6110y97,"1997 32 stamps + 3 S/S","In Stock",6110y97,0,"Year Sets","C 1511-1547","S 1296-1324,1257,1260-1264,1185,1186",48.80,34.60,61.80,41.00,1,1,1,1,,,,,27
-6110y98,"1998 36 stamps + 4 S/S","In Stock",6110y98,0,"Year Sets","C 1548-1589","S 1325-1354,1257B,1259A",51.80,37.00,61.20,40.80,1,1,1,1,,,,,27
-6110y99,"1999 38 stamps + 1 S/S","In Stock",6110y99,0,"Year Sets","C 1590-1629B75","S 1355-1384,1187,1346,1347",50.00,31.60,60.40,35.20,1,1,1,1,,,,,27
-6110y00,"2000 43 stamps","In Stock",6110y00,0,"Year Sets","C 1630-381644-77","S 1385-1427",56.00,41.00,68.00,47.00,1,1,1,1,,,,,27
-6110y01,"2001 60 stamps + 3 S/S (8v)","In Stock",6110y01,0,"Year Sets","C 1678-1745B76-B78","S 1428-62",68.00,57.00,82.00,63.00,1,1,1,1,,,,,27
-6110y02,"2002 49 stamps + 1 S/S (3v)","1 In Stock",6110y02,0,"Year Sets","C 1746-1801 B79","S 1463-",62.00,49.00,74.00,55.00,1,1,1,1,,,,,27
-6110y03,"2003 45 stamps + 1 S/S (3v)","In Stock",6110y03,0,"Year Sets","C 1802-45 B80","S 1501,3,41506-46",64.60,51.20,78.20,57.80,1,1,1,1,,,,,27
-6110y04,"2004 38 stamps + 1 S/S (4v)","1 In Stock",6110y04,0,"Year Sets","C 1846-88 B81","S 1547-84",54.00,42.40,63.60,47.20,1,1,1,1,,,,,27
-6110y05,"2005 41 stamps + 2 S/S (5v)","In Stock",6110y05,0,"Year Sets","C 1889-930B82,B83",,75.00,59.00,86.00,66.00,1,1,1,1,,,,,27
-6110y06,"2006 43 stamps + 3 S/S (6v)","1 In Stock",6110y06,0,"Year Sets","C 1931-79B84-B86",,82.00,66.00,92.00,73.00,1,1,1,1,,,,,27
-6110y07,"2007 41 stamps + 3 S/S (10v)","1 In Stock",6110y07,0,"Year Sets","C 1984-2031B87,B88",,88.00,74.00,101.00,78.00,1,1,1,1,,,,,27
-6110y08,"2008 45 stamps + 3 S/S (5v)","2 In Stock",6110y08,0,"Year Sets","C 2032-B89-91",,115.00,95.00,130.00,105.00,1,1,1,1,,,,,27
+6110y88,"1988 26 stamps + 3 S/S","In Stock",6110y88,0,"Year Sets","C 1165-1197, 1101,1102","S 979-1006, 988a",32.90,31.40,42.20,31.30,1,1,1,1,,,,,27
+6110y89,"1989 29 stamps + 2 S/S","1 In Stock",6110y89,0,"Year Sets","C 1198-1227, 1103-1105, 1109","S 1007-1017, 1020-1037",49.20,49.00,64.80,47.60,1,1,1,1,,,,,27
+6110y90,"1990 27 stamps + 2 S/S","1 In Stock",6110y90,0,"Year Sets","C 1228-1233, 1241-1271, 1107","S 1038-1072, 1019",38.00,32.80,51.20,36.40,1,1,1,1,,,,,27
+6110y91,"1991 28 stamps + 2 S/S","3 In Stock",6110y91,0,"Year Sets","C 1272-1300, 1234","S 1073-1101, 1049",39.50,33.00,53.00,38.00,1,1,1,1,,,,,27
+6110y92,"1992 35 stamps + 2 S/S","3 In Stock",6110y92,0,"Year Sets","C 1302-1343, 1346,1235","S 1102-1135, 1142,1051",41.60,30.60,52.40,39.80,1,1,1,1,,,,,27
+6110y93,"1993 33 stamps + 1 S/S","In Stock",6110y93,0,"Year Sets","C 1351-1381, 1344, 1348-1350","S 1153-1182, 1137, 1143-1146",39.00,29.00,50.00,33.60,1,1,1,1,,,,,27
+6110y94,"1994 34 stamps + 1 S/S","In Stock",6110y94,0,"Year Sets","C 1382-1415, 1345","S 1189-1221, 1141,1183",44.00,33.80,55.00,35.60,1,1,1,1,,,,,27
+6110y95,"1995 32 stamps + 3 S/S","1 In Stock",6110y95,0,"Year Sets","C 1416-1451, 1347","S 1222-1254, 1142A,1184",47.00,30.40,59.00,34.60,1,1,1,1,,,,,27
+6110y96,"1996 42 stamps + 3 S/S","In Stock",6110y96,0,"Year Sets","C 1452-1510","S 1266-1295, 1256,1258, 1259,1152",48.00,37.00,58.00,38.00,1,1,1,1,,,,,27
+6110y97,"1997 32 stamps + 3 S/S","In Stock",6110y97,0,"Year Sets","C 1511-1547","S 1296-1324, 1257, 1260-1264, 1185,1186",48.80,34.60,61.80,41.00,1,1,1,1,,,,,27
+6110y98,"1998 36 stamps + 4 S/S","In Stock",6110y98,0,"Year Sets","C 1548-1589","S 1325-1354, 1257B,1259A",51.80,37.00,61.20,40.80,1,1,1,1,,,,,27
+6110y99,"1999 38 stamps + 1 S/S","In Stock",6110y99,0,"Year Sets","C 1590-1629 B75","S 1355-1384, 1187, 1346,1347",50.00,31.60,60.40,35.20,1,1,1,1,,,,,27
+6110y00,"2000 43 stamps","In Stock",6110y00,0,"Year Sets","C 1630-38 1644-77","S 1385-1427",56.00,41.00,68.00,47.00,1,1,1,1,,,,,27
+6110y01,"2001 60 stamps + 3 S/S (8v)","In Stock",6110y01,0,"Year Sets","C 1678-1745 B76-B78","S 1428-62",68.00,57.00,82.00,63.00,1,1,1,1,,,,,27
+6110y02,"2002 49 stamps + 1 S/S (3v)","1 In Stock",6110y02,0,"Year Sets","C 1746- 1801 B79","S 1463-",62.00,49.00,74.00,55.00,1,1,1,1,,,,,27
+6110y03,"2003 45 stamps + 1 S/S (3v)","In Stock",6110y03,0,"Year Sets","C 1802- 45 B80","S 1501,3,4 1506-46",64.60,51.20,78.20,57.80,1,1,1,1,,,,,27
+6110y04,"2004 38 stamps + 1 S/S (4v)","1 In Stock",6110y04,0,"Year Sets","C 1846- 88 B81","S 1547-84",54.00,42.40,63.60,47.20,1,1,1,1,,,,,27
+6110y05,"2005 41 stamps + 2 S/S (5v)","In Stock",6110y05,0,"Year Sets","C 1889-930 B82,B83",,75.00,59.00,86.00,66.00,1,1,1,1,,,,,27
+6110y06,"2006 43 stamps + 3 S/S (6v)","1 In Stock",6110y06,0,"Year Sets","C 1931-79 B84-B86",,82.00,66.00,92.00,73.00,1,1,1,1,,,,,27
+6110y07,"2007 41 stamps + 3 S/S (10v)","1 In Stock",6110y07,0,"Year Sets","C 1984-2031 B87,B88",,88.00,74.00,101.00,78.00,1,1,1,1,,,,,27
+6110y08,"2008 45 stamps + 3 S/S (5v)","2 In Stock",6110y08,0,"Year Sets","C 2032- B89-91",,115.00,95.00,130.00,105.00,1,1,1,1,,,,,27
 6110y09,"2009 52 stamps + 1 S/S (1v)","In Stock",6110y09,0,"Year Sets",,,103.00,82.00,116.00,92.00,1,1,1,1,,,,,27
 6110y10,"2010 47 stamps + 3 S/S (7v)","In Stock",6110y10,0,"Year Sets",,,101.00,81.00,119.00,89.00,1,1,1,1,,,,,27
 6110y11,"2011 72 stamps","In Stock",6110y11,0,"Year Sets",,,107.00,85.00,124.00,94.00,1,1,1,1,,,,,27
 6110y12,"2012 54 stamps + 1 S/S (1v)","In Stock",6110y12,0,"Year Sets",,,108.00,88.00,124.00,95.00,1,1,1,1,,,,,27
-6110y4859,"1948-1959 First 12 Years of Israel stamps - 201 stamps + 2 S/S (total 209 stamps)",Available,6110y4859,0,"Year Sets","C 1-206","S 1-167,C1-C17,J1-J20,O1-O4",13310.00,390.00,590.00,806.00,1,1,1,1,,,,,27
-6110y6069,"1960-1969 The 60's Israel stamps - 268 stamps + 4 S/S (total 272 stamps)","In Stock",6110y6069,0,"Year Sets","C 207-478","S 168-400,C18-C47",152.00,61.00,101.00,64.00,1,1,1,1,,,,,27
+6110y4859,"1948-1959 First 12 Years of Israel stamps - 201 stamps + 2 S/S (total 209 stamps)",Available,6110y4859,0,"Year Sets","C 1-206","S 1-167, C1-C17, J1-J20, O1-O4",13310.00,390.00,590.00,806.00,1,1,1,1,,,,,27
+6110y6069,"1960-1969 The 60's Israel stamps - 268 stamps + 4 S/S (total 272 stamps)","In Stock",6110y6069,0,"Year Sets","C 207-478","S 168-400, C18-C47",152.00,61.00,101.00,64.00,1,1,1,1,,,,,27
 6110y7079,"1970-1979 The 70's Israel stamps - 321 stamps + 12 S/S (total 349 stamps)","In Stock",6110y7079,0,"Year Sets","C 479-865","S 401-743",90.00,91.00,102.00,65.00,1,1,1,1,,,,,27
-6110y8089,"1980-1989 The 80's Israel stamps - 270 stamps + 23 S/S (total 343 stamps)","In Stock",6110y8089,0,"Year Sets","C 572866-1227","S 588744-1037",283.00,300.00,338.00,264.00,1,1,1,1,,,,,27
+6110y8089,"1980-1989 The 80's Israel stamps - 270 stamps + 23 S/S (total 343 stamps)","In Stock",6110y8089,0,"Year Sets","C 572 866-1227","S 588 744-1037",283.00,300.00,338.00,264.00,1,1,1,1,,,,,27
 6110y9099,"1990-1999 The 90's Israel stamps - 337 stamps + 22 S/S (total 386 stamps)","In Stock",6110y9099,0,"Year Sets","C 1228-1629","S 1038-1384",447.00,329.00,560.00,448.00,1,1,1,1,,,,,27
 6110y0009,"2000-2009 First 10 Millenium Years Israel stamps - 457 stamps + 18 S/S (total 502 stamps)","In Stock",6110y0009,0,"Year Sets",,,767.00,616.00,890.00,684.00,1,1,1,1,,,,,27
-6110y4899,"1948-1999 All Israel stamps until 2000 - 1397 stamps + 64 S/S (total 1559 stamps)",Available,,0,"Year Sets","C 1-1629","S 1-1384,C1-C47,J1-J20,O1-O4",14330.00,1220.00,1790.00,1690.00,1,1,1,1,,,,,27
+6110y4899,"1948-1999 All Israel stamps until 2000 - 1397 stamps + 64 S/S (total 1559 stamps)",Available,,0,"Year Sets","C 1-1629","S 1-1384, C1-C47, J1-J20, O1-O4",14330.00,1220.00,1790.00,1690.00,1,1,1,1,,,,,27
 6110y13,"2013 57 stamps + 2 S/S (4v)","In Stock",6110y13,0,"Year Sets",,,110.00,88.00,128.00,98.00,1,1,1,1,,,,,27
 6110y14,"2014 50 stamps","In Stock",6110y14,0,"Year Sets",,,105.00,85.00,120.00,95.00,1,1,1,1,,,,,27
 6110y15,"2015 41 stamps + 1 S/S (1v)","In Stock",6110y15,0,"Year Sets",,,110.00,90.00,125.00,100.00,1,1,1,1,,,,,27
 6110y16,"2016 43 stamps + 2 S/S (5v)","In Stock",6110y16,0,"Year Sets",,,118.00,95.00,130.00,105.00,1,1,1,1,,,,,27
+6110y17,"2017 49 stamps + 1 S/S (2v)","In Stock",6110y17,0,"Year Sets",,,118.00,94.00,130.00,104.00,1,1,1,1,,,,,27
 AUI001,"Herzl's 120th Birthday - Set of 2 tabs featuring first JNF stamp. FDC is beautifully embossed with special cancel on hi-value only","In stock",17020=1,1,"(X)Austria Judaica Tabs",,,10.00,15.00,,,1,1,0,0,,,,,28
 AUI002,"35th Anniversary State of Israel. Set of 2 features Israel flag stamp # 15 on tab","In stock",17021=2,1,"(X)Austria Judaica Tabs",,,10.00,12.50,,,1,1,0,0,,,,,28
 AUI002.1,"Same - 35th Anniversary State of Israel, special flight, few issued","FDC only",,1,"(X)Austria Judaica Tabs",,,N/A,20.00,,,0,0,0,0,,,,,28
