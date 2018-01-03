@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   This site describes my StampCollection project (Swift for iOS);
   any further notes go here.
 baseurl: "/StampCollection" # the subpath of your site, e.g. /blog
-url: "https://mmehr2.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mmehr2
 github_username:  mmehr2
 
@@ -33,9 +33,9 @@ plugins:
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 # exclude:
-Gemfile
-Gemfile.lock
-node_modules
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
 #   - vendor/bundle/
 #   - vendor/cache/
 #   - vendor/gems/
