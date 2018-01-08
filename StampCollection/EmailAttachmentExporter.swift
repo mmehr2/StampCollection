@@ -172,6 +172,7 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
         // dismiss the VC
         controller.dismiss(animated: true) {
             // try doing nothing here
+            print("Email controller should be dismissed now.")
         }
 //        if let errFunc = self.errFunc {
 //            if errHappened {
