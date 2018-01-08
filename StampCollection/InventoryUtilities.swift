@@ -113,7 +113,7 @@ func offsetAlbumIndexInData(_ data_: [String:String], by offset:Int = 1, restart
 func addPageOneOfNewSection(_ secname: String, toAlbumData data: [String:String]) -> [String:String] {
     var albumData = data
     albumData["albumSection"] = secname
-    return albumData
+    return offsetAlbumIndexInData(albumData, by: 0, restartPages: true)
 }
 
 func addPageOneOfNewSection(_ secname: String, toNextAlbumData data: [String:String]) -> [String:String] {

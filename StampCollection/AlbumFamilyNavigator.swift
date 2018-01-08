@@ -187,7 +187,7 @@ class AlbumFamilyNavigator {
     fileprivate var currentAlbum: AlbumRef! {
         didSet {
             //maxSectionIndex = currentAlbum.theSections.count
-            currentSectionIndex = 0
+            currentSectionIndex = 0 // sets the first section object as well
         }
     }
     
@@ -195,7 +195,7 @@ class AlbumFamilyNavigator {
         didSet {
             currentSection = currentAlbum.theSections[currentSectionIndex]
             // also reset the current page index
-            currentPageIndex = 0 // sets a page object as well
+            currentPageIndex = 0 // sets the first page object as well
         }
     }
     fileprivate var currentPageIndex = 0 {
@@ -260,24 +260,35 @@ class AlbumFamilyNavigator {
         // there is always an album, a section (possibly unnamed), and at least one page defined in every family
         // resolve this in top-down fashion from album thru section to page (property observers would otherwise interfere)
         // NOTE: this is rather inefficient if all bits are set, or both first and last (last will take precedence)
+        // first snapshot the current state
+        var newAlbumIndex = currentAlbumIndex
+        var newSectionIndex = currentSectionIndex
+        var newPageIndex = currentPageIndex
+        // now make intended changes
         if marker.contains(AlbumMarker.FirstAlbum) {
-            currentAlbumIndex = 0
+            newAlbumIndex = 0
         }
         if marker.contains(AlbumMarker.LastAlbum) {
-            currentAlbumIndex = maxAlbumIndex - 1
+            newAlbumIndex = maxAlbumIndex - 1
         }
+        currentAlbumIndex = newAlbumIndex // may change CSI and CPI, as well as maxSIIA indirectly
+        
         if marker.contains(AlbumMarker.FirstSection) {
-            currentSectionIndex = 0
+            newSectionIndex = 0
         }
         if marker.contains(AlbumMarker.LastSection) {
-            currentSectionIndex = maxSectionIndexInAlbum - 1
+            newSectionIndex = maxSectionIndexInAlbum - 1 // depends (?) on currentAlbum being up to date
         }
+        currentSectionIndex = newSectionIndex // may change CPI again, as well as maxPIIS indirectly
+        
         if marker.contains(AlbumMarker.FirstPage) {
-            currentPageIndex = 0
+            newPageIndex = 0
         }
         if marker.contains(AlbumMarker.LastPage) {
-            currentPageIndex = maxPageIndexInSection - 1
+            newPageIndex = maxPageIndexInSection - 1 // depends on currentSection being up to date
         }
+        currentPageIndex = newPageIndex
+        
         print("\(currentIndex) of \(maxIndex)")
     }
     
