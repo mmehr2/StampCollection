@@ -294,8 +294,8 @@ class AlbumPageViewController: UICollectionViewController {
                 addedNewAlbum = true
             case .NamedSection(let secname):
                 description += "page 1 of the new section [\(secname)] of the current album group."
-                // must be at end of section (across all albums in family)
-                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+                // must be at end of last section (across all albums in family)
+                nav.gotoMarkerAcrossVolumes([.SeriesEnd])
                 pageDataOrg = nav.getRefAsData()
                 pageData = addPageOneOfNewSection(secname, toAlbumData: pageDataOrg)
                 //debug = true
