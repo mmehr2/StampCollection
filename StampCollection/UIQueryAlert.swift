@@ -137,7 +137,7 @@ struct UIQueryAlertConfiguration {
         case .invAskSection(let secnames):
             // set up the single text field config
             title = "New Section Name"
-            body = "Enter the (required) name of the new Section.\n" +
+            body = "Enter the (required) name of the new Section in this Album.\n" +
             "Do not use one of the section names already used: \(secnames).\n"
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invSectionName))
             break
@@ -163,9 +163,9 @@ struct UIQueryAlertConfiguration {
         case .invAskPartialSetValues:
             // set up the single text field config
             title = "Partial Set Description"
-            body = "Enter the number of parts to split and which one (m of n).\n" +
-                "Then enter up to four values in order.\n" +
-                "Thee values describe each individual part, i.e, denomination, color.\n" +
+            body = "Enter the number of Parts to split the Set, and which one (m of n).\n" +
+                "Then enter up to four Values in order.\n" +
+                "Each Value describes an individual Part, i.e, denomination, color.\n" +
             "The description of the partial set will be added to the Inventory Item pending its location."
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetOfN))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetM))
