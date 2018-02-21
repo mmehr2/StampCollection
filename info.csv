@@ -1133,6 +1133,11 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1365,"2017 Snakes","In Stock",6110s1365,0,"Sets, SS, FDC",,,6.80,5.50,7.20,6.00,1,1,1,1,,,,,2
 6110s1367,"2017 Integration into Society","In Stock",6110s1367,0,"Sets, SS, FDC",,,6.20,5.10,6.75,5.50,1,1,1,1,,,,,2
 6110s1368,"2017 Ancient Roman Arenas","In Stock",6110s1368,0,"Sets, SS, FDC",,,6.80,5.50,7.20,6.00,1,1,1,1,,,,,2
+6110s1370,"2018 Gevatron","In Stock",6110s1370,0,"Sets, SS, FDC",,,5.50,4.40,6.10,4.85,1,1,1,1,,,,,2
+6110s1371,"2018 WWI Indian Cavalry","In Stock",6110s1371,0,"Sets, SS, FDC",,,1.55,1.10,1.90,1.20,1,1,1,1,,,,,2
+6110s1372,"2018 Chizbatron","In Stock",6110s1372,0,"Sets, SS, FDC",,,4.10,3.20,4.65,3.50,1,1,1,1,,,,,2
+6110s1373,"2018 Television","In Stock",6110s1373,0,"Sets, SS, FDC",,,2.20,1.75,2.75,2.00,1,1,1,1,,,,,2
+6110s1374,"2018 Hai-Bar","In Stock",6110s1374,0,"Sets, SS, FDC",,,4.10,3.30,4.65,3.65,1,1,1,1,,,,,2
 6110bs1,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Tab Pairs",Unavailable,6110bs1,0,Booklets,"B SB.1","C --",620.00,----,,,0,0,0,0,,,,,3
 6110bs2,"1948 Doar Ivri IMABA Exhibition, 3-50 Mil Blocks of 4 Stamps",Unavailable,6110bs2,0,Booklets,"B SB.2","C --",135.00,----,,,0,0,0,0,,,,,3
 6110bs3,"1948 Doar Ivri IMABA Exhibition, Large Format",Unavailable,6110bs3,0,Booklets,"B SB.3","C --",400.00,----,,,0,0,0,0,,,,,3
@@ -1590,7 +1595,7 @@ ILrc161,"01.07.13 Non Denominated",Catalogue,ILrc161,0,"International Reply Coup
 6110j1318,"2016 Bird Migration - Joint Issue with Bulgaria","In Stock",6110j1318,0,"Joint Issues",,,6.50,,,,1,0,0,0,,,,,13
 6110j1343,"2017 Dolphin Research - Joint Issue with Portugal","In Stock",6110j1343,0,"Joint Issues",,,3.00,,,,1,0,0,0,,,,,13
 6110j1356,"2017 Flowers - Joint Issue with Croatia","In Stock",6110j1356,0,"Joint Issues",,,5.50,,,,1,0,0,0,,,,,13
-6110j1363,"2017 Gorny Convent - Joint Issue with Russia","In Stock",6110j1363,0,"Joint Issues",,,2.50,,,,1,0,0,0,,,,,13
+6110j1363,"2017 Gorny Convent - Joint Issue with Russia","In Stock",6110j1363,0,"Joint Issues",,,1.50,,,,1,0,0,0,,,,,13
 6110m1ip,"1988 Nature Reserves in the Negev - set of 3",Available,6110m1ip,0,"Maximum Cards",,,26.00,,,,1,0,0,0,,,,,14
 6110m2ip,"1989 Ducks in the Holy Land - set of 4","1 In Stock",6110m2ip,0,"Maximum Cards",,,3.20,,,,1,0,0,0,6.40,,,,14
 6110m3ip,"1990 Nature Reserves in Galil - set of 3","2 In Stock",6110m3ip,0,"Maximum Cards",,,4.80,,,,1,0,0,0,,,,,14
@@ -1776,7 +1781,7 @@ psAL40,"23.05.74 Air Letter no stamp (Three Birds) design","In Stock",psAL40,0,"
 psAL41,"02.11.75 Air Letter 1.20 lira Stylized Birds 1st type","In Stock",psAL41,0,"Postal Stationery","B AS.40","P 41",1.50,1.00,,,1,1,0,0,,,,,20
 psAL42,"10.09.76 Air Letter 1.70 lira Stylized Birds 1st type","In Stock",psAL42,0,"Postal Stationery","B AS.41","P 42",4.00,1.50,,,1,1,0,0,,,,,20
 psAL43,"24.04.77 Air Letter 1.90 lira Stylized Birds 2nd type","In Stock",psAL43,0,"Postal Stationery","B AS.43","P 44",1.50,1.00,,,1,1,0,0,,,,,20
-psAL44,"27.10.77 Air Letter 2.40 lira Stylized Birds 2nd type","In Stock",psAL44,0,"Postal Stationery","B AS.44","P 45",1.50,1.00,,,1,1,0,0,,,,,20
+psAL44,"27.10.77 Air Letter 2.40 lira Stylized Birds 2nd type","Temp. Sold Out",psAL44,0,"Postal Stationery","B AS.44","P 45",1.50,1.00,,,0,0,0,0,,,,,20
 psAL45,"22.12.77 Air Letter 3.80 lira Stylized Flower","In Stock",psAL45,0,"Postal Stationery","B AS.45","P 46",1.00,1.00,,,1,1,0,0,,,,,20
 psAL46,"09.05.78 Air Letter 5.30 lira Stylized Flower","In Stock",psAL46,0,"Postal Stationery","B AS.46","P 47",1.00,1.00,,,1,1,0,0,,,,,20
 psAL47,"04.06.79 Air Letter 8.00 lira Stylized Flower","In Stock",psAL47,0,"Postal Stationery","B AS.47","P 48",1.00,1.00,,,1,1,0,0,,,,,20
@@ -1797,7 +1802,7 @@ psAL61,"18.03.85 Air Letter 60.00 + 90.00 Shekel Flying model design",Catalogue,
 psAL62,"16.04.85 Air Letter non denominational Air-Ballon design Green","In Stock",psAL62,0,"Postal Stationery","B AS.62","P 62",2.00,1.50,,,1,1,0,0,,,,,20
 psAL63,"09.03.88 Air Letter non denominational Air-Ballon design Violet","In Stock",psAL63,0,"Postal Stationery","B AS.63a","P 64",2.00,1.50,,,1,1,0,0,,,,,20
 psAL64,"18.06.85 Air Letter non denominational Airplane design 2nd type","In Stock",psAL64,0,"Postal Stationery","B AS.63","P 63",1.50,1.00,,,1,1,0,0,,,,,20
-psAL65,"15.05.89 Air Letter non denominational Airplane design 2nd type with marked 33 lines","In Stock",psAL65,0,"Postal Stationery","B AS.65","P 65",1.50,1.50,,,1,1,0,0,,,,,20
+psAL65,"15.05.89 Air Letter non denominational Airplane design 2nd type with marked 33 lines","Temp. Sold Out",psAL65,0,"Postal Stationery","B AS.65","P 65",1.50,1.50,,,0,0,0,0,,,,,20
 psAL66,"01.08.91 Air Letter non denominational Map design 1st type","Temp. Sold Out",psAL66,0,"Postal Stationery","B AS.66","P 66",1.50,1.50,,,0,0,0,0,,,,,20
 psAL67,"15.03.98 Air Letter non denominational Srulik design","Temp. Sold Out",psAL67,0,"Postal Stationery","B AS.67","P --",1.50,1.25,,,0,0,0,0,,,,,20
 psAL68,"25.07.06 Air Letter non denominational Map design 2nd type","In Stock",psAL68,0,"Postal Stationery",,"P 67",2.00,2.00,,,1,1,0,0,,,,,20
@@ -1832,13 +1837,13 @@ psIE17A,"19.09.00 Cachet envelope no denomination ( NIS) - Hyacinthus",Catalogue
 psIE17B,"11.03.03 Envelope no denomination ( NIS) - Ornithogalum 11x23cm with window",Catalogue,psIE17B,0,"Postal Stationery","B --","P --",,,,,0,0,0,0,,,,,20
 psIE18,"10.08.04 Envelope no denomination (2.30 NIS) - Florists Calla 11x23cm",Catalogue,psIE18,0,"Postal Stationery","B env18","P 19",4.50,7.00,,,0,0,0,0,,,,,20
 psIE19,"10.08.04 Envelope no denomination (2.45 NIS) - Lisianthus 18x25cm",Catalogue,psIE19,0,"Postal Stationery","B env19","P 20",5.00,7.00,,,0,0,0,0,,,,,20
-psIE20,"10.08.04 Envelope no denomination (2.60 NIS) - Gerbera 24x34cm","In Stock",psIE20,0,"Postal Stationery","B env20","P 21",5.50,7.00,,,1,1,0,0,,,,,20
+psIE20,"10.08.04 Envelope no denomination (2.60 NIS) - Gerbera 24x34cm","Temp. Sold Out",psIE20,0,"Postal Stationery","B env20","P 21",5.50,7.00,,,0,0,0,0,,,,,20
 psIE21,"22.05.05 Envelope no denomination (2.60 NIS) - '24 Hours' Dahlia 16.2x23.7cm type I",Catalogue,psIE21,0,"Postal Stationery","B env21","P 22",5.50,7.50,,,0,0,0,0,,,,,20
 psIE22,"22.05.05 Envelope no denomination (3.10 NIS) - '24 Hours' Amaryllis 24x34cm type I",Catalogue,psIE22,0,"Postal Stationery","B env22","P 23",6.00,11.00,,,0,0,0,0,,,,,20
 psIE23,"26.01.07 Envelope no denomination (2.60 NIS) - '24 Hours' Dahlia 16.2x23.7cm type II","In Stock",psIE23,0,"Postal Stationery","B env23","P --",6.00,8.00,,,1,1,0,0,,,,,20
 psIE24,"26.01.07 Envelope no denomination (3.10 NIS) - '24 Hours' Amaryllis 24x34cm type II","In Stock",psIE24,0,"Postal Stationery","B env24","P --",6.50,11.50,,,1,1,0,0,,,,,20
 psIE25,"01.07.07 Envelope no denomination (2.40 NIS) - Tulip 13x19cm","Temp. Sold Out",psIE25,0,"Postal Stationery",,"P 24",3.00,4.50,,,0,0,0,0,,,,,20
-psIE26,"30.03.08 Envelope no denomination (2.80 NIS) - '24 Hours' Aquilegia 11x23cm","In Stock",psIE26,0,"Postal Stationery",,"P 25",2.50,3.50,,,1,1,0,0,,,,,20
+psIE26,"30.03.08 Envelope no denomination (2.80 NIS) - '24 Hours' Aquilegia 11x23cm","Temp. Sold Out",psIE26,0,"Postal Stationery",,"P 25",2.50,3.50,,,0,0,0,0,,,,,20
 psIE27,"30.03.08 Envelope no denomination (2.80 NIS) - '24 Hours' Dahlia 16.2x23.7cm","Temp. Sold Out",psIE27,0,"Postal Stationery",,"P 26",2.50,3.50,,,0,0,0,0,,,,,20
 psIE28,"18.08.08 No denomination ( NIS) - '24 Hours' Amaryllis 14x14cm CD envelope joint creation with Hed Arzi type I","Temp. Sold Out",psIE28,0,"Postal Stationery",,,4.00,5.00,,,0,0,0,0,,,,,20
 psIE29,"18.08.08 No denomination ( NIS) - '24 Hours' Amaryllis 14x14cm CD envelope joint creation with Hed Arzi type II","Temp. Sold Out",psIE29,0,"Postal Stationery",,,4.00,5.00,,,0,0,0,0,,,,,20
@@ -1920,10 +1925,10 @@ psPC64,"25.09.91 Postcard no denomination - Sunflower stamp added Haifa 91","Tem
 psPC65,"22.08.93 Postcard no denomination - Jerusalem","In Stock",psPC65,0,"Postal Stationery","B PC.42c","P PC27",2.00,2.00,,,1,1,0,0,,,,,20
 psPC66,"22.08.93 Postcard no denomination - Tel-Aviv","In Stock",psPC66,0,"Postal Stationery","B PC.42b","P PC28",2.00,2.00,,,1,1,0,0,,,,,20
 psPC67,"22.08.93 Postcard no denomination - Elat","In Stock",psPC67,0,"Postal Stationery","B PC.42a","P PC29",2.00,2.00,,,1,1,0,0,,,,,20
-psPC68,"21.11.93 Change Address Postcard no denomination - Good Luck stamp","Temp. Sold Out",psPC68,0,"Postal Stationery","B PC.43b","P C34",6.00,15.00,,,0,0,0,0,,,,,20
-psPC69,"21.11.93 Change Address Postcard no denomination - See You Again stamp","Temp. Sold Out",psPC69,0,"Postal Stationery","B PC.43d","P C35",6.00,15.00,,,0,0,0,0,,,,,20
-psPC70,"21.11.93 Change Address Postcard no denomination - Greetings stamp","Temp. Sold Out",psPC70,0,"Postal Stationery","B PC.43a","P C36",6.00,15.00,,,0,0,0,0,,,,,20
-psPC71,"21.11.93 Change Address Postcard no denomination - Keep in Touch stamp","Temp. Sold Out",psPC71,0,"Postal Stationery","B PC.43c","P C37",6.00,15.00,,,0,0,0,0,,,,,20
+psPC68,"21.11.93 Change Address Postcard no denomination - Good Luck stamp","In Stock",psPC68,0,"Postal Stationery","B PC.43b","P C34",6.00,7.50,,,1,1,0,0,,,,,20
+psPC69,"21.11.93 Change Address Postcard no denomination - See You Again stamp","In Stock",psPC69,0,"Postal Stationery","B PC.43d","P C35",6.00,7.50,,,1,1,0,0,,,,,20
+psPC70,"21.11.93 Change Address Postcard no denomination - Greetings stamp","In Stock",psPC70,0,"Postal Stationery","B PC.43a","P C36",6.00,7.50,,,1,1,0,0,,,,,20
+psPC71,"21.11.93 Change Address Postcard no denomination - Keep in Touch stamp","In Stock",psPC71,0,"Postal Stationery","B PC.43c","P C37",6.00,7.50,,,1,1,0,0,,,,,20
 psPC72,"05.04.94 Air Mail Postcard no denomination - Tiberias","In Stock",psPC72,0,"Postal Stationery","B PC44.a","P PC30",1.50,1.00,,,1,1,0,0,,,,,20
 psPC73,"05.04.94 Air Mail Postcard no denomination - Nazareth","Temp. Sold Out",psPC73,0,"Postal Stationery","B PC.44c","P PC31",2.50,1.00,,,0,0,0,0,,,,,20
 psPC74,"05.04.94 Postcard no denomination - Dead Sea","In Stock",psPC74,0,"Postal Stationery","B PC.44b","P PC32",2.50,1.00,,,1,1,0,0,,,,,20
@@ -2773,12 +2778,13 @@ psIE42,"02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inl
 6110e70KT,"29.11.17 29th November 1947 - 'My Own Stamp' full four Sheets (36v), numbered 1499 exist",Available,6110e70KT,0,"Special Sheets-Sheetlets-Combination",,,90.00,150.00,,,1,1,0,0,,,,,24
 6110e191U,"22.10.17 Gerbera 1.00 self Adhesive Full Sheet (8th print - eight menorah)",Available,6110e191U,0,"Special Sheets-Sheetlets-Combination",,,8.00,15.00,,,1,1,0,0,,,,,24
 6110e346A,"25.06.17 Passover Haggadah - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e346A,0,"Special Sheets-Sheetlets-Combination",,,50.00,75.00,,,0,0,0,0,,,,,24
-6110e369A,"19.12.17 Ancient Roman Arenas - Full 3 Sheets imperforated, 999x3 exist (24)",Soon...,,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,0,0,0,0,,,,,24
+6110e369A,"19.12.17 Ancient Roman Arenas - Full 3 Sheets imperforated, 999x3 exist (24)",Catalogue,6110e369A,0,"Special Sheets-Sheetlets-Combination",,,68.00,88.00,,,0,0,0,0,,,,,24
 6110e1359,"12.09.17 Balfour Declaration Full Sheet of 9 stamps",Available,6110e1359,0,"Special Sheets-Sheetlets-Combination",,,18.00,25.00,,,1,1,0,0,,,,,24
 6110e1362,"12.09.17 Shimon Peres President Souvenir Sheetlet",Available,6110e1362,0,"Special Sheets-Sheetlets-Combination",,,10.00,15.00,,,1,1,0,0,,,,,24
 6110e1366,"19.12.17 Snakes Full se-tenant Sheetlet of 9 stamps","In Stock",6110e1366,0,"Special Sheets-Sheetlets-Combination",,,14.00,18.00,,,1,1,0,0,,,,,24
 6110e1369,"19.12.17 Ancient Roman Arenas Full 3 Sheets of 8 stamps",Available,6110e1369,0,"Special Sheets-Sheetlets-Combination",,,49.00,67.00,,,1,1,0,0,,,,,24
 6110eHAN6,"21.11.17 Hanukkah - 'My Own Stamp' full Sheet (9v)",Available,6110eHAN6,0,"Special Sheets-Sheetlets-Combination",,,17.50,30.00,,,1,1,0,0,,,,,24
+6110e1375,"06.02.18 Hai-Bar Full se-tenabt Sheetlet of 6 stamps","In Stock",6110e1375,0,"Special Sheets-Sheetlets-Combination",,,6.00,9.00,,,1,1,0,0,,,,,24
 6110e1,"1948 Doar Ivri - Wrong Tabs inscription (2v)",Available,6110e1,0,"Varieties and Variants","B 3b,4b","C 3E,4E",65.00,48.00,----,----,1,1,0,0,,,,,25
 6110e2a,"1948 Doar Ivri - grey paper (2v)",Catalogue,,0,"Varieties and Variants","B 3a,6a","C 3p,6p",,,----,,0,0,0,0,,,,,25
 6110e2b,"1948 Doar Ivri - perforation 10x11 (4v)",Catalogue,,0,"Varieties and Variants","B 1d,3d 5d,6d","C 1A,3A 5A,6A",,,----,,0,0,0,0,,,,,25
@@ -2918,7 +2924,7 @@ psIE42,"02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inl
 6110e1319,"2016 Sages Parables self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e355,"2017 Aromatic Plants self adhesive from booklet (3v)","In Stock",,0,"Varieties and Variants",,,----,5.00,10.00,,0,1,1,0,,,,,25
 6110e346B,"2017 Passover Haggadah imperforated",Catalogue,6110e346B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
-6110e369B,"2017 Ancient Roman Arenas imperforated",Soon...,,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
+6110e369B,"2017 Ancient Roman Arenas imperforated",Catalogue,6110e369B,0,"Varieties and Variants",,,20.00,,25.00,5.00,0,0,0,0,,,,,25
 6110k8801,"17.11.88 'Frama 1' (first vending machine labels ATM used to 1998, every value could be printed) Definitive, tariff set of 3 values 00.40/00.60/00.70 (more 13 tariff sets could be made until 13.5.98)",Available,6110k8801,0,"Vending Machine Labels","C F.1.1","B F.1",3.50,,,,1,0,0,0,,,,,26
 6110k8802,"17.11.88 'Frama 1' Definitive, FDC 00.40/00.60/00.70","1 In Stock",6110k8802,0,"Vending Machine Labels",,,4.50,,,,1,0,0,0,,,,,26
 6110k9001,"09.07.90 'Klussendorf 1' (Second vending machine labels ATM, used to 1999 in 45 numbered machines in 37 locations, value 00.05 - 15.00 NIS could be printed) Definitive, tariff set of 4 values 0.55/0.80/1.00/2.35 (more 10 tariff sets could be made until 8.1.99)","Temp. Sold Out",6110k9001,0,"Vending Machine Labels","C page3","B K.1",38.00,,,,0,0,0,0,,,,,26
@@ -3635,13 +3641,17 @@ psIE42,"02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inl
 6110k1711bl,"28.11.17 'Inbar 18' Christmas, blanco label",Unavailable,6110k1711,-1,"Vending Machine Labels",,,45.00,,,,0,0,0,0,,,,,26
 6110k1711m101,"28.11.17 'Inbar 18' Christmas, full set of 6 values, Jerusalem machine 101 - 2.40/4.00/6.50/7.40/8.30/9.00",Unavailable,6110k1711,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
 6110k1711m987,"28.11.17 'Inbar 18' Christmas, full set of 6 values, Nazareth machine 987 - 2.40/4.00/6.50/7.40/8.30/9.00",Unavailable,6110k1711,-1,"Vending Machine Labels","C --","B --",55.00,,,,0,0,0,0,,,,,26
+6110k1801,"01.01.18 'Inbar 19' Trains, full set of 6 values 2.50/4.10/6.50/7.40/8.30/9.00",Available,6110k1801,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+6110k1802,"01.01.18 'Inbar 19' Trains, FDC inland 2.50 value","1 In Stock",6110k1802,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
+6110k1803,"06.02.18 'Inbar 20' Valley Railway, full set of 6 values 2.50/4.10/6.50/7.40/8.30/9.00",Available,,0,"Vending Machine Labels",,,19.00,,,,1,0,0,0,,,,,26
+6110k1804,"06.02.18 'Inbar 20' Valley Railway, FDC inland 2.50 value","1 In Stock",6110k1804,0,"Vending Machine Labels",,,2.50,,,,1,0,0,0,,,,,26
 6110y48,"1948 19 stamps (FDC 14 stamps)",Available,6110y48,0,"Year Sets","C 1-19","S 1-14,J1-J5",10485.00,310.00,282.00,640.00,1,1,1,1,,,,,27
 6110y49,"1949 18 stamps (FDC 12 stamps) + 1 S/S","In Stock",6110y49,0,"Year Sets","C 20-38","S 15-22, 24,27-30, J6-J11",1211.00,50.00,52.00,144.00,1,1,1,1,,,,,27
 6110y50,"1950 21 stamps","In Stock",6110y50,0,"Year Sets","C 39-58,69","S 23,25, 31-43, C1-C6",1193.00,34.00,187.00,38.00,1,1,1,1,,,,,27
 6110y51,"1951 15 stamps","In Stock",6110y51,0,"Year Sets","C 70-84","S 44-54, O1-O4",205.00,3.00,4.30,2.10,1,1,1,1,,,,,27
 6110y52,"1952 29 stamps","In Stock",6110y52,0,"Year Sets","C 59-64,85-107","S 55-72, C7,C8, J12-J20",423.00,13.00,19.00,18.00,1,1,1,1,,,,,27
 6110y53,"1953 8 stamps","In Stock",6110y53,0,"Year Sets","C 115,117-123","S 73-79, C16",122.00,4.00,11.30,4.00,1,1,1,1,,,,,27
-6110y54,"1954 17 stamps","1 In Stock",6110y54,0,"Year Sets","C 65-68,108-113,124-130","S C9-C14, 80-90",9.10,1.50,7.00,1.20,1,1,1,1,,,,,27
+6110y54,"1954 17 stamps","In Stock",6110y54,0,"Year Sets","C 65-68,108-113,124-130","S C9-C14, 80-90",9.10,1.50,7.00,1.20,1,1,1,1,,,,,27
 6110y55,"1955 26 stamps","In Stock",6110y55,0,"Year Sets","C 131-156","S 91-116",6.60,2.00,5.00,1.80,1,1,1,1,,,,,27
 6110y56,"1956 9 stamps","In Stock",6110y56,0,"Year Sets","C 157-163, 114,116","S 117-123, C15,C17",2.10,1.35,1.92,0.96,1,1,1,1,,,,,27
 6110y57,"1957 8 stamps + 1 S/S","In Stock",6110y57,0,"Year Sets","C 164-171","S 124-132",1.68,1.62,1.58,1.47,1,1,1,1,,,,,27
