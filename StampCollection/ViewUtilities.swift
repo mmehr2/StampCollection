@@ -77,11 +77,11 @@ func menuBoxWithTitle( _ title: String, andBody body: [MenuBoxEntry], forControl
         ac.addAction(act)
         for (menuItem, menuFunc) in body {
             var menuTitle = menuItem
-            var style = UIAlertActionStyle.default
+            var style = UIAlertAction.Style.default
             // any provided title string that starts with a "!" will be Destructive style (and the "!" will be removed)
             if menuItem.hasPrefix("!") {
                 menuTitle = String(menuItem.suffix(menuItem.count - 1))
-                style = UIAlertActionStyle.destructive
+                style = UIAlertAction.Style.destructive
             }
             act = UIAlertAction(title: menuTitle, style: style, handler: menuFunc)
             ac.addAction(act)

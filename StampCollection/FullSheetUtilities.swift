@@ -231,7 +231,7 @@ class U8Task: NSObject, UtilityTaskRunnable {
         let (_, cnumBstr) = splitNumericEndOfString(lastDealerItem.code)
         // convert to numbers and for any numbers from A ..< B, call createSetOfSheets() as above
         if let cnumA = Int(cnumAstr), let cnumB = Int(cnumBstr), cnumA <= cnumB {
-            let objects = (cnumA..<cnumB).map{ btcat2.fetchData(withCode: "6110s\($0)") }.flatMap{$0}
+            let objects = (cnumA..<cnumB).map{ btcat2.fetchData(withCode: "6110s\($0)") }.compactMap{$0}
             let totalSteps = Int64(objects.count)
             task.taskUnits = totalSteps
             var stepCount:Int64 = 0

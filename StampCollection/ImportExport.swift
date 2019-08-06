@@ -301,7 +301,7 @@ class ImportExport: CSVDataSink {
     {
         if let dataSource = dataSource, let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = dataSource.headersForItemsOfDataType(dataType, withContext: token)
-            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration?)
             let itemCount = dataSource.numberOfItemsOfDataType(dataType, withContext: token)
             for index in 0..<itemCount {
                 let dictObject = dataSource.dataType(dataType, dataItemAtIndex: index, withContext: token)
@@ -312,7 +312,7 @@ class ImportExport: CSVDataSink {
                         fields.append(field)
                     }
                 }
-                basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
+                basicWriter.writeLine(ofFields: fields as NSFastEnumeration?)
                 progress.completedUnitCount += 1
             }
         }

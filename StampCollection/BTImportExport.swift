@@ -123,7 +123,7 @@ class BTExporter {
         // 4. output its base data
         if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = BTCategory.getExportNameList()
-            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration?)
             for item in data {
                 let dictObject = item.getExportData()
                 var fields: [String] = []
@@ -132,7 +132,7 @@ class BTExporter {
                         fields.append(field)
                     }
                 }
-                basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
+                basicWriter.writeLine(ofFields: fields as NSFastEnumeration?)
                 progress.completedUnitCount += 1
             }
         }
@@ -145,7 +145,7 @@ class BTExporter {
         // 4. output its item data in a loop, passing the category number
         if let basicWriter = CHCSVWriter(forWritingToCSVFile: file.path) {
             let headers = BTDealerItem.getExportNameList()
-            basicWriter.writeLine(ofFields: headers as NSFastEnumeration!)
+            basicWriter.writeLine(ofFields: headers as NSFastEnumeration?)
             for cat in data {
                 let catnum = cat.number
                 let items = cat.getAllDataItems()
@@ -157,7 +157,7 @@ class BTExporter {
                             fields.append(field)
                         }
                     }
-                    basicWriter.writeLine(ofFields: fields as NSFastEnumeration!)
+                    basicWriter.writeLine(ofFields: fields as NSFastEnumeration?)
                     progress.completedUnitCount += 1
                 }
             }

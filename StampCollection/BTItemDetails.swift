@@ -630,17 +630,17 @@ extension BTItemDetails {
 
     // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones - are there any?)
     var plateNumberListInt: [Int] {
-        return plateNumberList.map{ Int($0) }.flatMap{ $0 }
+        return plateNumberList.map{ Int($0) }.compactMap{ $0 }
     }
     
     // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones - are there any?)
     var leafletListInt: [Int] {
-        return leafletList.map{ Int($0) }.flatMap{ $0 }
+        return leafletList.map{ Int($0) }.compactMap{ $0 }
     }
     
     // the plate numbers, converted to Int (whenever possible; flatMap removes the non-converting ones)
     var bulletinListInt: [Int] {
-        return bulletinList.map{ Int($0) }.flatMap{ $0 }
+        return bulletinList.map{ Int($0) }.compactMap{ $0 }
     }
     
     // separates the sheet format list into an array of format strings of the form "(RxC)" where R is # of rows, C is # of columns

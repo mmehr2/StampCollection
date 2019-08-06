@@ -5,4 +5,6 @@ use_frameworks!
 
 target 'StampCollection' do
 	pod 'SwiftSoup'
+    pod 'TMCache'
+    pod 'CHCSVParser'
 end

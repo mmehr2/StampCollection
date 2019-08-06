@@ -362,7 +362,7 @@ class InfoItemsTableViewController: UITableViewController {
         moreButton.isEnabled = tableView.indexPathForSelectedRow != nil
         
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80.0
     }
 
@@ -439,7 +439,7 @@ class InfoItemsTableViewController: UITableViewController {
   
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let retval:[UITableViewRowAction]?
+        var retval:[UITableViewRowAction]?
         
         if ftype == .info {
             // actions for Info items

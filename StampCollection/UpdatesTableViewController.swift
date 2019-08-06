@@ -156,7 +156,7 @@ class UpdatesTableViewController: UITableViewController {
         title = text
         
         // automated row height calcs: taken from http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = showSection < 2 ? 50.0 : 160.0
     }
     

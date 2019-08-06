@@ -239,7 +239,7 @@ class BTDealerItem: NSObject {
         //   2. PF would be price1 and price2 as well
         //   3. Sets YrSets and Vars would use PUFS always as 1+2+3+4
         // So to make the correspondence work, any PU or PUFS cats need to adjust here (swap 2 and 3, or just move 3 to 2 in the PU case)
-        let foundPU = category.headers.index(of: "PriceUsed") != nil
+        let foundPU = category.headers.firstIndex(of: "PriceUsed") != nil
         if foundPU && !isJS {
             // in cases where PriceUsed appears, the Info/CSV form will be PU or PUFS
             // the Web form is always PFUS (so for PU, price2 is always blank)

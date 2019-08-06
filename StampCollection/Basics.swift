@@ -371,15 +371,15 @@ func countLinesInFile(_ path: String) -> Int {
     if let hfile = fopen(path, "r") {
         // NOTE: the following code comes from the Swift documentation for the bindMemory(:to:capacity) function
         let bytesPointer = UnsafeMutableRawPointer.allocate(
-            bytes: bufsize,
-            alignedTo: MemoryLayout<Int8>.alignment)
+            byteCount: bufsize,
+            alignment: MemoryLayout<Int8>.alignment)
         let buf = bytesPointer.bindMemory(to: Int8.self, capacity: bufsize)
         // end of new memory buffer code
         while (fgets(buf, Int32(bufsize-1), hfile) != nil) {
             //print(String.fromCString(CString(buf)))
             lineCount += 1
         }
-        buf.deinitialize() // destroy() was renamed too
+        buf.deinitialize(count:bufsize) // destroy() was renamed too
     }
     return lineCount - 1
 }

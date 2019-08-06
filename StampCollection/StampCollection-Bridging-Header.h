@@ -13,7 +13,7 @@
  This was the easiest to import. I just stole the .h and .m file and put them into my project.
  Source: https://github.com/davedelong/CHCSVParser
  */
-#import "CHCSVParser.h"
+#import "CHCSVParser.h" // using CocoaPods 8/5/2019
 
 /*
  Source: https://github.com/ZipArchive/ZipArchive
@@ -26,6 +26,6 @@
  Source: https://github.com/tumblr/TMCache
  I copied the files manually after cloning the project. Then I put the selection into subfolder (TMCache) but left them in the main folder physically to simplify the reference here.
  */
-#import "TMCache.h"
+#import "TMCache.h" // using CocoaPods 8/5/2019
 
 #endif
