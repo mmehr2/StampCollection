@@ -77,7 +77,7 @@ h,6110s85,price1,SCH,ISRAEL01,Tab,23,,,,2
 h,6110s90,price1,SCH,ISRAEL01,Tab,23,,,,2
 h,6110s88,price1,SCH,ISRAEL01,Tab,23,,,,2
 h,6110s91,price1,SCH,ISRAEL01,Tab,24,,,,2
-h,6110s93,price1,SCH,ISRAEL01,Tab,25,,"1960 values 0.15 0.20 0.65",,2
+h,6110s93,price1,SCH,ISRAEL01,Tab,25,,1960 values 0.15 0.20 0.65,,2
 h,6110s95,price1,SCH,ISRAEL01,Tab,25,,,,2
 h,6110s96,price1,SCH,ISRAEL01,Tab,25,,,,2
 h,6110s98,price1,SCH,ISRAEL01,Tab,26,,,,2
@@ -89,13 +89,13 @@ h,6110s102,price1,SCH,ISRAEL01,Tab,26,,,,2
 h,6110s104,price1,SCH,ISRAEL01,Tab,27,,,,2
 h,6110s107,price1,SCH,ISRAEL01,Tab,28,,,,2
 h,6110s106,price1,SCH,ISRAEL01,Tab,28,,,,2
-h,6110s93,price1,SCH,ISRAEL01,Tab,28,,"1961 values 0.25 0.30 0.35",,2
+h,6110s93,price1,SCH,ISRAEL01,Tab,28,,1961 values 0.25 0.30 0.35,,2
 h,6110s108,price1,SCH,ISRAEL01,Tab,29,,,,2
 h,6110s109,price1,SCH,ISRAEL01,Tab,29,,,,2
 h,6110s110,price1,SCH,ISRAEL01,Tab,29,,,,2
 h,6110s112,price1,SCH,ISRAEL01,Tab,30,,,,2
 h,6110s111,price1,SCH,ISRAEL01,Tab,30,,,,2
-h,6110s93,price1,SCH,ISRAEL01,Tab,30,,"1962 values 0.40 0.50 1.00",,2
+h,6110s93,price1,SCH,ISRAEL01,Tab,30,,1962 values 0.40 0.50 1.00,,2
 h,6110s94,price1,SCH,ISRAEL01,Tab,30,,,,2
 h,6110s114,price1,SCH,ISRAEL01,Tab,31,,,,2
 h,6110s115,price1,SCH,ISRAEL01,Tab,31,,,,2
@@ -108,15 +108,15 @@ h,6110s118,price1,SCH,ISRAEL01,Tab,32,,,,2
 h,6110s123,price1,SCH,ISRAEL01,Tab,32,,,,2
 h,6110s124,price1,SCH,ISRAEL01,Tab,32,,,,2
 h,6110s122,price1,SCH,ISRAEL01,Tab,33,,,,2
-h,6110s125,price1,SCH,ISRAEL01,Tab,33,,"Values 0.55 0.70 1.00",,2
+h,6110s125,price1,SCH,ISRAEL01,Tab,33,,Values 0.55 0.70 1.00,,2
 h,6110s126,price1,SCH,ISRAEL01,Tab,34,,,,2
 h,6110s127,price1,SCH,ISRAEL01,Tab,34,,,,2
 h,6110s132,price1,SCH,ISRAEL01,Tab,34,,,,2
-h,6110s125,price1,SCH,ISRAEL01,Tab,34,,"Values 0.05 0.20 0.28",,2
+h,6110s125,price1,SCH,ISRAEL01,Tab,34,,Values 0.05 0.20 0.28,,2
 h,6110s133,price1,SCH,ISRAEL01,Tab,35,,,,2
 h,6110s136,price1,SCH,ISRAEL01,Tab,35,,,,2
 h,6110s135,price1,SCH,ISRAEL01,Tab,35,,,,2
-h,6110s125,price1,SCH,ISRAEL01,Tab,35,,"Values 0.30 0.40 0.45 3.00",,2
+h,6110s125,price1,SCH,ISRAEL01,Tab,35,,Values 0.30 0.40 0.45 3.00,,2
 h,6110s138,price1,SCH,ISRAEL01,Tab,36,,,,2
 h,6110s137,price1,SCH,ISRAEL01,Tab,36,,,,2
 h,6110s139,price1,SCH,ISRAEL01,Tab,36,,,,2
@@ -138,7 +138,7 @@ h,6110s157,price1,SCH,ISRAEL01,Tab,39,,,,2
 h,6110s158,price1,SCH,ISRAEL01,Tab,40,,,,2
 h,6110s159,price1,SCH,ISRAEL01,Tab,40,,,,2
 h,6110s160,price1,SCH,ISRAEL01,Tab,40,,,,2
-h,6110s152,price1,SCH,ISRAEL01,Tab,41,,"1965-66 Values (16)",,2
+h,6110s152,price1,SCH,ISRAEL01,Tab,41,,1965-66 Values (16),,2
 h,6110s162,price1,SCH,ISRAEL01,Tab,42,,,,2
 h,6110s161,price1,SCH,ISRAEL01,Tab,42,,,,2
 h,6110s163,price1,SCH,ISRAEL01,Tab,42,,,,2
@@ -147,7 +147,7 @@ h,6110s166,price1,SCH,ISRAEL01,Tab,43,,,,2
 h,6110s167,price1,SCH,ISRAEL01,Tab,44,,,,2
 h,6110s165,price1,SCH,ISRAEL01,Tab,44,,,,2
 h,6110s168,price1,SCH,ISRAEL01,Tab,44,,,,2
-h,6110s152,price1,SCH,ISRAEL01,Tab,45,,"1967 Values 0.40 0.55 0.80",,2
+h,6110s152,price1,SCH,ISRAEL01,Tab,45,,1967 Values 0.40 0.55 0.80,,2
 h,6110s169,price1,SCH,ISRAEL01,Tab,45,,,,2
 h,6110s170,price1,SCH,ISRAEL01,Tab,45,,,,2
 h,6110s171,price1,SCH,ISRAEL01,Tab,46,,,,2
@@ -214,7 +214,7 @@ h,6110s222,price1,SCH,ISRAEL02,Tab,58,,,,2
 h,6110s219,price1,SCH,ISRAEL02,Tab,58,,,,2
 h,6110s220,price1,SCH,ISRAEL02,Tab,59,,,,2
 h,6110s223,price1,SCH,ISRAEL02,Tab,59,,,,2
-h,6110s197,price1,SCH,ISRAEL02,Tab,59,,"1970 Values 0.18 0.20 0.30 0.60",,2
+h,6110s197,price1,SCH,ISRAEL02,Tab,59,,1970 Values 0.18 0.20 0.30 0.60,,2
 h,6110s225,price1,SCH,ISRAEL02,Tab,60,,,,2
 h,6110s224,price1,SCH,ISRAEL02,Tab,60,,,,2
 h,6110s226,price1,SCH,ISRAEL02,Tab,60,,,,2
@@ -224,8 +224,8 @@ h,6110s229,price1,SCH,ISRAEL02,Tab,62,,,,2
 h,6110s230,price1,SCH,ISRAEL02,Tab,62,,,,2
 h,6110s232,price1,SCH,ISRAEL02,Tab,63,,,,2
 h,6110s233,price1,SCH,ISRAEL02,Tab,63,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,64,,"1971 Values (8) 0.03 0.05 0.15 0.18 0.22 0.30 0.45 0.50",,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,64.1,,"1971 Values (6) 0.55 0.70 0.88 0.95 2.00 3.00",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,64,,1971 Values (8) 0.03 0.05 0.15 0.18 0.22 0.30 0.45 0.50,,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,64.1,,1971 Values (6) 0.55 0.70 0.88 0.95 2.00 3.00,,2
 h,6110s237,price1,SCH,ISRAEL02,Tab,65,,,,2
 h,6110s235,price1,SCH,ISRAEL02,Tab,65,,,,2
 h,6110s236,price1,SCH,ISRAEL02,Tab,65.1,,,,2
@@ -251,7 +251,7 @@ h,6110s253,price1,SCH,ISRAEL02,Tab,70,,,,2
 h,6110s259,price1,SCH,ISRAEL02,Tab,70,,,,2
 h,6110s261,price1,SCH,ISRAEL02,Tab,71,,,,2
 h,6110s257,price1,SCH,ISRAEL02,Tab,71,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,71,,"1973 Values (4) 0.20 0.35 0.65 1.10",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,71,,1973 Values (4) 0.20 0.35 0.65 1.10,,2
 h,6110s265,price1,SCH,ISRAEL02,Tab,72,,,,2
 h,6110s269,price1,SCH,ISRAEL02,Tab,72,,,,2
 h,6110s263,price1,SCH,ISRAEL02,Tab,72,,,,2
@@ -260,7 +260,7 @@ h,6110s268,price1,SCH,ISRAEL02,Tab,73,,,,2
 h,6110s267,price1,SCH,ISRAEL02,Tab,73,,,,2
 h,6110s270,price1,SCH,ISRAEL02,Tab,74,,,,2
 h,6110s266,price1,SCH,ISRAEL02,Tab,74,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,74,,"1974 Values (3) 0.25 0.80 1.30",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,74,,1974 Values (3) 0.25 0.80 1.30,,2
 h,6110s272,price1,SCH,ISRAEL02,Tab,75,,,,2
 h,6110s273,price1,SCH,ISRAEL02,Tab,75,,,,2
 h,6110s271,price1,SCH,ISRAEL02,Tab,75,,,,2
@@ -277,11 +277,11 @@ h,6110s278,price1,SCH,ISRAEL02,Tab,78,,,,2
 h,6110s281,price1,SCH,ISRAEL02,Tab,78,,,,2
 h,6110s284,price1,SCH,ISRAEL02,Tab,79,,,,2
 h,6110s286,price1,SCH,ISRAEL02,Tab,79,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,79,,"1975 Value (1) 1.70",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,79,,1975 Value (1) 1.70,,2
 h,6110s287,price1,SCH,ISRAEL02,Tab,79,,,,2
 h,6110s289,price1,SCH,ISRAEL02,Tab,80,,,,2
 h,6110s288,price1,SCH,ISRAEL02,Tab,80,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,80,,"1976 Value (1) 10.00",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,80,,1976 Value (1) 10.00,,2
 h,6110s290,price1,SCH,ISRAEL02,Tab,80,,,,2
 h,6110s293,price1,SCH,ISRAEL02,Tab,81,,,,2
 h,6110s297,price1,SCH,ISRAEL02,Tab,81,,,,2
@@ -309,22 +309,22 @@ h,6110s313,price1,SCH,ISRAEL02,Tab,87,,,,2
 h,6110s317,price1,SCH,ISRAEL02,Tab,88,,,,2
 h,6110s319,price1,SCH,ISRAEL02,Tab,88,,,,2
 h,6110s316,price1,SCH,ISRAEL02,Tab,89,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,89,,"1977 Landscapes II (2) values 0.10 1.00",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,89,,1977 Landscapes II (2) values 0.10 1.00,,2
 h,6110s320,price1,SCH,ISRAEL02,Tab,89,,,,2
 h,6110s321,price1,SCH,ISRAEL02,Tab,90,,,,2
 h,6110s322,price1,SCH,ISRAEL02,Tab,90,,,,2
 h,6110s328,price1,SCH,ISRAEL02,Tab,90,,,,2
-h,6110s325,price1,SCH,ISRAEL02,Tab,92,,"1978 First (7) values",,2
+h,6110s325,price1,SCH,ISRAEL02,Tab,92,,1978 First (7) values,,2
 h,6110s330,price1,SCH,ISRAEL02,Tab,92,,,,2
-h,6110s325,price1,SCH,ISRAEL02,Tab,93,,"Next (4) values",,2
+h,6110s325,price1,SCH,ISRAEL02,Tab,93,,Next (4) values,,2
 h,6110s329,price1,SCH,ISRAEL02,Tab,93,,,,2
 h,6110s331,price1,SCH,ISRAEL02,Tab,93,,,,2
 h,6110s332,price1,SCH,ISRAEL02,Tab,94,,,,2
 h,6110s333,price1,SCH,ISRAEL02,Tab,94,,,,2
 h,6110s334,price1,SCH,ISRAEL02,Tab,94,,,,2
-h,6110s325,price1,SCH,ISRAEL02,Tab,95,,"Next (3) values",,2
+h,6110s325,price1,SCH,ISRAEL02,Tab,95,,Next (3) values,,2
 h,6110s335,price1,SCH,ISRAEL02,Tab,95,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,95,,"1978 Landscapes II 20.00",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,95,,1978 Landscapes II 20.00,,2
 h,6110s327,price1,SCH,ISRAEL02,Tab,95,,,,2
 h,6110s337,price1,SCH,ISRAEL02,Tab,96,,,,2
 h,6110s338,price1,SCH,ISRAEL02,Tab,96,,,,2
@@ -345,8 +345,8 @@ h,6110s221,price1,SCH,ISRAEL02,S/S,6,,,,2
 h,6110s228,price1,SCH,ISRAEL02,S/S,7,,,,2
 h,6110s241,price1,SCH,ISRAEL02,S/S,8,,,,2
 h,6110s255,price1,SCH,ISRAEL02,S/S,9,,,,2
-h,6110s262,price1,SCH,ISRAEL02,S/S,10,,"High values (2) 2.00 3.00",,2
-h,6110s262,price1,SCH,ISRAEL02,S/S,11,,"Low value (1) 1.00",,2
+h,6110s262,price1,SCH,ISRAEL02,S/S,10,,High values (2) 2.00 3.00,,2
+h,6110s262,price1,SCH,ISRAEL02,S/S,11,,Low value (1) 1.00,,2
 h,6110s291,price1,SCH,ISRAEL02,S/S,12,,,,2
 h,6110s292,price1,SCH,ISRAEL02,S/S,12,,,,2
 h,6110s318,price1,SCH,ISRAEL02,S/S,13,,,,2
@@ -356,7 +356,7 @@ h,6110s357,price1,SCH,ISRAEL02,Tab,99,,,,2
 h,6110s354,price1,SCH,ISRAEL02,Tab,99,,,,2
 h,6110s353,price1,SCH,ISRAEL02,Tab,99,,,,2
 h,6110s352,price1,SCH,ISRAEL02,Tab,99,,,,2
-h,6110s234,price1,SCH,ISRAEL02,Tab,99,,"1980 Landscapes II high value (1) 50.00 Sorek Cave",,2
+h,6110s234,price1,SCH,ISRAEL02,Tab,99,,1980 Landscapes II high value (1) 50.00 Sorek Cave,,2
 h,6110s358,price1,SCH,ISRAEL02,Tab,100,,,,2
 h,6110s359,price1,SCH,ISRAEL02,Tab,100,,,,2
 h,6110s355,price1,SCH,ISRAEL02,Tab,100,,,,2
@@ -389,7 +389,7 @@ h,6110s377,price1,SCH,ISRAEL02,Tab,108,,,,2
 h,6110s384,price1,SCH,ISRAEL02,Tab,108,,,,2
 h,6110s388,price1,SCH,ISRAEL02,Tab,108,,,,2
 h,6110s379,price1,SCH,ISRAEL02,Tab,108,,,,2
-h,6110s391,price1,SCH,ISRAEL02,Tab,109,,"exploded and mounted as individual stamps (15v + 5tabs)",,2
+h,6110s391,price1,SCH,ISRAEL02,Tab,109,,exploded and mounted as individual stamps (15v + 5tabs),,2
 h,6110s391,price1,SCH,ISRAEL02,Tab,109.1,,,,2
 h,6110s395,price1,SCH,ISRAEL02,Tab,110,,,,2
 h,6110s396,price1,SCH,ISRAEL02,Tab,110,,,,2
@@ -423,8 +423,8 @@ h,6110s425,price1,SCH,ISRAEL02,Tab,116,,,,2
 h,6110s423,price1,SCH,ISRAEL02,Tab,116,,,,2
 h,6110s426,price1,SCH,ISRAEL02,Tab,117,,,,2
 h,6110s427,price1,SCH,ISRAEL02,Tab,117,,,,2
-h,6110s416,price1,SCH,ISRAEL02,Tab,117,,"High values (2) 100 500",,2
-h,6110s416,price1,SCH,ISRAEL02,Tab,118,,"Lowvalues (2) 30.00 50.00",,2
+h,6110s416,price1,SCH,ISRAEL02,Tab,117,,High values (2) 100 500,,2
+h,6110s416,price1,SCH,ISRAEL02,Tab,118,,Lowvalues (2) 30.00 50.00,,2
 h,6110s428,price1,SCH,ISRAEL02,Tab,119,,,,2
 h,6110s431,price1,SCH,ISRAEL02,Tab,119,,,,2
 h,6110s432,price1,SCH,ISRAEL02,Tab,119,,,,2
@@ -509,9 +509,9 @@ h,6110s399,price1,SCH,ISRAEL02,S/S,19,,,,2
 h,6110s403,price1,SCH,ISRAEL02,S/S,19,,,,2
 h,6110s418,price1,SCH,ISRAEL02,S/S,20,,,,2
 h,6110s429,price1,SCH,ISRAEL02,S/S,21,,,,2
-h,6110s434,price1,SCH,ISRAEL02,S/S,21,,"One sheet (3) values x 200",,2
-h,6110s434,price1,SCH,ISRAEL02,S/S,22,,"One sheet (3) values x 350",,2
-h,6110s434,price1,SCH,ISRAEL02,S/S,23,,"One sheet (1) value x 800",,2
+h,6110s434,price1,SCH,ISRAEL02,S/S,21,,One sheet (3) values x 200,,2
+h,6110s434,price1,SCH,ISRAEL02,S/S,22,,One sheet (3) values x 350,,2
+h,6110s434,price1,SCH,ISRAEL02,S/S,23,,One sheet (1) value x 800,,2
 h,6110s451,price1,SCH,ISRAEL02,S/S,24,,,,2
 h,6110s458,price1,SCH,ISRAEL02,S/S,24,,,,2
 h,6110s464,price1,SCH,ISRAEL02,S/S,25,,,,2
@@ -531,7 +531,7 @@ h,6110s529,price1,SCH,ISRAEL03,Tab,136,,,,2
 h,6110s524,price1,SCH,ISRAEL03,Tab,137,,,,2
 h,6110s527,price1,SCH,ISRAEL03,Tab,137,,,,2
 h,6110s528,price1,SCH,ISRAEL03,Tab,137,,,,2
-h,6110s530,price1,SCH,ISRAEL03,Tab,137,,"se-tenant tab pair (2v)",,2
+h,6110s530,price1,SCH,ISRAEL03,Tab,137,,se-tenant tab pair (2v),,2
 h,6110s533,price1,SCH,ISRAEL03,Tab,137,,,,2
 h,6110s535,price1,SCH,ISRAEL03,Tab,138,,,,2
 h,6110s538,price1,SCH,ISRAEL03,Tab,138,,,,2
@@ -562,7 +562,7 @@ h,6110s570,price1,SCH,ISRAEL03,Tab,144,,,,2
 h,6110s571,price1,SCH,ISRAEL03,Tab,144,,,,2
 h,6110s572,price1,SCH,ISRAEL03,Tab,144,,,,2
 h,6110s565,price1,SCH,ISRAEL03,Tab,144,,,,2
-h,6110s568,price1,SCH,ISRAEL03,Tab,144,,"se-tenant tab row strip (3v)",,2
+h,6110s568,price1,SCH,ISRAEL03,Tab,144,,se-tenant tab row strip (3v),,2
 h,6110s570,price1,SCH,ISRAEL03,Tab,144,,,,2
 h,6110s571,price1,SCH,ISRAEL03,Tab,144,,,,2
 h,6110s572,price1,SCH,ISRAEL03,Tab,144,,,,2
@@ -572,7 +572,7 @@ h,6110s576,price1,SCH,ISRAEL03,Tab,145,,,,2
 h,6110s581,price1,SCH,ISRAEL03,Tab,145,,,,2
 h,6110s583,price1,SCH,ISRAEL03,Tab,145,,,,2
 h,6110s579,price1,SCH,ISRAEL03,Tab,146,,,,2
-h,6110s585,price1,SCH,ISRAEL03,Tab,146,,"se-tenant tab row strip (4v)",,2
+h,6110s585,price1,SCH,ISRAEL03,Tab,146,,se-tenant tab row strip (4v),,2
 h,6110s582,price1,SCH,ISRAEL03,Tab,147,,,,2
 h,6110s584,price1,SCH,ISRAEL03,Tab,147,,,,2
 h,6110s588,price1,SCH,ISRAEL03,Tab,147,,,,2
@@ -582,7 +582,7 @@ h,6110s591,price1,SCH,ISRAEL03,Tab,148,,,,2
 h,6110s592,price1,SCH,ISRAEL03,Tab,148,,,,2
 h,6110s594,price1,SCH,ISRAEL03,Tab,148,,,,2
 h,6110s595,price1,SCH,ISRAEL03,Tab,148,,,,2
-h,6110s596,price1,SCH,ISRAEL03,Tab,148,,"se-tenant tab row strip (4v)",,2
+h,6110s596,price1,SCH,ISRAEL03,Tab,148,,se-tenant tab row strip (4v),,2
 h,6110s598,price1,SCH,ISRAEL03,Tab,149,,,,2
 h,6110s599,price1,SCH,ISRAEL03,Tab,149,,,,2
 h,6110s600,price1,SCH,ISRAEL03,Tab,149,,,,2
@@ -605,7 +605,7 @@ h,6110s622,price1,SCH,ISRAEL03,Tab,153,,,,2
 h,6110s623,price1,SCH,ISRAEL03,Tab,153,,,,2
 h,6110s626,price1,SCH,ISRAEL03,Tab,153,,,,2
 h,6110s628,price1,SCH,ISRAEL03,Tab,153,,,,2
-h,6110s619,price1,SCH,ISRAEL03,Tab,153,,"se-tenant tab row strip (3v)",,2
+h,6110s619,price1,SCH,ISRAEL03,Tab,153,,se-tenant tab row strip (3v),,2
 h,6110s627,price1,SCH,ISRAEL03,Tab,154,,,,2
 h,6110s629,price1,SCH,ISRAEL03,Tab,154,,,,2
 h,6110s630,price1,SCH,ISRAEL03,Tab,154,,,,2
@@ -617,7 +617,7 @@ h,6110s638,price1,SCH,ISRAEL03,Tab,155,,,,2
 h,6110s639,price1,SCH,ISRAEL03,Tab,155,,,,2
 h,6110s615,price1,SCH,ISRAEL03,Tab,156,,,,2
 h,6110s637,price1,SCH,ISRAEL03,Tab,156,,,,2
-w,6110s533,price1,SCH,ISRAEL03,Tab,156,,"1993 later print (1v) 2.00/2Ph",,2
+w,6110s533,price1,SCH,ISRAEL03,Tab,156,,1993 later print (1v) 2.00/2Ph,,2
 h,6110s640,price1,SCH,ISRAEL03,Tab,157,,,,2
 h,6110s641,price1,SCH,ISRAEL03,Tab,157,,,,2
 h,6110s642,price1,SCH,ISRAEL03,Tab,157,,,,2
@@ -626,7 +626,7 @@ h,6110s644,price1,SCH,ISRAEL03,Tab,157,,,,2
 h,6110s645,price1,SCH,ISRAEL03,Tab,158,,,,2
 h,6110s652,price1,SCH,ISRAEL03,Tab,158,,,,2
 h,6110s653,price1,SCH,ISRAEL03,Tab,158,,,,2
-h,6110s649,price1,SCH,ISRAEL03,Tab,158,,"se-tenant tab row strip (3v)",,2
+h,6110s649,price1,SCH,ISRAEL03,Tab,158,,se-tenant tab row strip (3v),,2
 h,6110s651,price1,SCH,ISRAEL03,Tab,158,,,,2
 h,6110s654,price1,SCH,ISRAEL03,Tab,159,,,,2
 h,6110s655,price1,SCH,ISRAEL03,Tab,159,,,,2
@@ -681,14 +681,14 @@ h,6110s725,price1,SCH,ISRAEL03,Tab,169,,,,2
 h,6110s714,price1,SCH,ISRAEL03,Tab,170,,,,2
 h,6110s720,price1,SCH,ISRAEL03,Tab,170,,,,2
 h,6110s735,price1,SCH,ISRAEL03,Tab,170,,,,2
-h,6110s726,price1,SCH,ISRAEL03,Tab,170,,"se-tenant tab row strip (3v)",,2
+h,6110s726,price1,SCH,ISRAEL03,Tab,170,,se-tenant tab row strip (3v),,2
 h,6110s734,price1,SCH,ISRAEL03,Tab,172,,,,2
 h,6110s736,price1,SCH,ISRAEL03,Tab,172,,,,2
 h,6110s737,price1,SCH,ISRAEL03,Tab,172,,,,2
 h,6110s717,price1,SCH,ISRAEL03,Tab,173,,,,2
 h,6110s738,price1,SCH,ISRAEL03,Tab,173,,,,2
 h,6110s739,price1,SCH,ISRAEL03,Tab,173,,,,2
-h,6110s574,price1,SCH,ISRAEL03,Tab,173,,"1996 variety (1v) 1.60/2Ph white gum",,2
+h,6110s574,price1,SCH,ISRAEL03,Tab,173,,1996 variety (1v) 1.60/2Ph white gum,,2
 h,6110s740,price1,SCH,ISRAEL03,Tab,174,,,,2
 h,6110s743,price1,SCH,ISRAEL03,Tab,174,,,,2
 h,6110s744,price1,SCH,ISRAEL03,Tab,174,,,,2
@@ -706,11 +706,11 @@ h,6110s759,price1,SCH,ISRAEL03,Tab,176,,,,2
 h,6110s762,price1,SCH,ISRAEL03,Tab,176,,,,2
 h,6110s760,price1,SCH,ISRAEL03,Tab,177,,,,2
 h,6110s763,price1,SCH,ISRAEL03,Tab,177,,,,2
-h,6110s753,price1,SCH,ISRAEL03,Tab,177,,"se-tenant tab row strip (3v)",,2
+h,6110s753,price1,SCH,ISRAEL03,Tab,177,,se-tenant tab row strip (3v),,2
 h,6110s742,price1,SCH,ISRAEL03,Tab,178,,,,2
 h,6110s764,price1,SCH,ISRAEL03,Tab,178,,,,2
 h,6110s765,price1,SCH,ISRAEL03,Tab,178,,,,2
-h,6110s648,price1,SCH,ISRAEL03,Tab,178,,"1995 variety (1v) 1.00/1PhC",,2
+h,6110s648,price1,SCH,ISRAEL03,Tab,178,,1995 variety (1v) 1.00/1PhC,,2
 h,6110s766,price1,SCH,ISRAEL03,Tab,179,,,,2
 h,6110s767,price1,SCH,ISRAEL03,Tab,179,,,,2
 h,6110s769,price1,SCH,ISRAEL03,Tab,180,,,,2
@@ -736,9 +736,9 @@ h,6110s768,price1,SCH,ISRAEL03,Tab,183,,,,2
 h,6110s783,price1,SCH,ISRAEL03,Tab,183,,,,2
 h,6110s788,price1,SCH,ISRAEL03,Tab,183,,,,2
 h,6110s791,price1,SCH,ISRAEL03,Tab,183,,,,2
-h,6110s789,price1,SCH,ISRAEL03,Tab,183,,"se-tenant tab row strip (3v)",,2
-h,6110s796,price1,SCH,ISRAEL03,Tab,184,,"tab single (1v) 1.00",,2
-w,6110s796,price1,SCH,ISRAEL03,Tab,184,,"se-tenant tab row strip from final letters sheet (4v)",,2
+h,6110s789,price1,SCH,ISRAEL03,Tab,183,,se-tenant tab row strip (3v),,2
+h,6110s796,price1,SCH,ISRAEL03,Tab,184,,tab single (1v) 1.00,,2
+w,6110s796,price1,SCH,ISRAEL03,Tab,184,,se-tenant tab row strip from final letters sheet (4v),,2
 h,6110s792,price1,SCH,ISRAEL03,Tab,185,,,,2
 h,6110s793,price1,SCH,ISRAEL03,Tab,185,,,,2
 h,6110s794,price1,SCH,ISRAEL03,Tab,185,,,,2
@@ -746,7 +746,7 @@ h,6110s799,price1,SCH,ISRAEL03,Tab,185,,,,2
 h,6110s804,price1,SCH,ISRAEL03,Tab,185,,,,2
 h,6110s806,price1,SCH,ISRAEL03,Tab,185,,,,2
 h,6110s807,price1,SCH,ISRAEL03,Tab,186,,,,2
-w,6110s802,price1,SCH,ISRAEL03,Tab,186,,"se-tenant tab row strip (4v)+4 labels",,2
+w,6110s802,price1,SCH,ISRAEL03,Tab,186,,se-tenant tab row strip (4v)+4 labels,,2
 h,6110s810,price1,SCH,ISRAEL03,Tab,187,,,,2
 h,6110s812,price1,SCH,ISRAEL03,Tab,187,,,,2
 h,6110s815,price1,SCH,ISRAEL03,Tab,187,,,,2
@@ -799,8 +799,8 @@ h,6110s864,price1,SCH,ISRAEL03,Tab,200,,,,2
 h,6110s870,price1,SCH,ISRAEL03,Tab,201,,,,2
 h,6110s874,price1,SCH,ISRAEL03,Tab,201,,,,2
 h,6110s879,price1,SCH,ISRAEL03,Tab,201,,,,2
-h,6110s875,price1,SCH,ISRAEL03,Tab,201,,"se-tenant tab row strip (4v)",,2
-h,6110s867,price1,SCH,ISRAEL03,Tab,201,,"se-tenant tab pair (2v)",,2
+h,6110s875,price1,SCH,ISRAEL03,Tab,201,,se-tenant tab row strip (4v),,2
+h,6110s867,price1,SCH,ISRAEL03,Tab,201,,se-tenant tab pair (2v),,2
 h,6110s846,price1,SCH,ISRAEL03,Tab,202,,,,2
 h,6110s877,price1,SCH,ISRAEL03,Tab,202,,,,2
 h,6110s878,price1,SCH,ISRAEL03,Tab,202,,,,2
@@ -813,7 +813,7 @@ h,6110s889,price1,SCH,ISRAEL03,Tab,204,,,,2
 h,6110s891,price1,SCH,ISRAEL03,Tab,204,,,,2
 h,6110s898,price1,SCH,ISRAEL03,Tab,204,,,,2
 h,6110s909,price1,SCH,ISRAEL03,Tab,204,,,,2
-w,6110s909,price1,SCH,ISRAEL03,Tab,204,,"variety (custom design at show) (1v) 1.30/NoPh",,2
+w,6110s909,price1,SCH,ISRAEL03,Tab,204,,variety (custom design at show) (1v) 1.30/NoPh,,2
 h,6110s892,price1,SCH,ISRAEL03,Tab,205,,,,2
 h,6110s895,price1,SCH,ISRAEL03,Tab,205,,,,2
 h,6110s896,price1,SCH,ISRAEL03,Tab,206,,,,2
@@ -834,7 +834,7 @@ h,6110s918,price1,SCH,ISRAEL04,Tab,210,,,,2
 h,6110s916,price1,SCH,ISRAEL04,Tab,211,,,,2
 h,6110s928,price1,SCH,ISRAEL04,Tab,211,,,,2
 h,6110s933,price1,SCH,ISRAEL04,Tab,211,,,,2
-h,6110s914,price1,SCH,ISRAEL04,Tab,211,,"se-tenant tab pair (2v)",,2
+h,6110s914,price1,SCH,ISRAEL04,Tab,211,,se-tenant tab pair (2v),,2
 h,6110s924,price1,SCH,ISRAEL04,Tab,212,,,,2
 h,6110s926,price1,SCH,ISRAEL04,Tab,212,,,,2
 h,6110s929,price1,SCH,ISRAEL04,Tab,212,,,,2
@@ -856,7 +856,7 @@ h,6110s960,price1,SCH,ISRAEL04,Tab,216,,,,2
 h,6110s966,price1,SCH,ISRAEL04,Tab,216,,,,2
 h,6110s952,price1,SCH,ISRAEL04,Tab,217,,,,2
 h,6110s961,price1,SCH,ISRAEL04,Tab,217,,,,2
-h,6110s964,price1,SCH,ISRAEL04,Tab,217,,"se-tenant tab row strip (3v)",,2
+h,6110s964,price1,SCH,ISRAEL04,Tab,217,,se-tenant tab row strip (3v),,2
 h,6110s963,price1,SCH,ISRAEL04,Tab,218,,,,2
 h,6110s967,price1,SCH,ISRAEL04,Tab,218,,,,2
 h,6110s970,price1,SCH,ISRAEL04,Tab,218,,,,2
@@ -864,7 +864,7 @@ h,6110s968,price1,SCH,ISRAEL04,Tab,219,,,,2
 h,6110s971,price1,SCH,ISRAEL04,Tab,219,,,,2
 h,6110s972,price1,SCH,ISRAEL04,Tab,221,,,,2
 h,6110s973,price1,SCH,ISRAEL04,Tab,221,,,,2
-h,6110s974,price1,SCH,ISRAEL04,Tab,221,,"se-tenant tab row strip (3v)",,2
+h,6110s974,price1,SCH,ISRAEL04,Tab,221,,se-tenant tab row strip (3v),,2
 h,6110s977,price1,SCH,ISRAEL04,Tab,222,,,,2
 h,6110s978,price1,SCH,ISRAEL04,Tab,222,,,,2
 h,6110s979,price1,SCH,ISRAEL04,Tab,222,,,,2
@@ -873,7 +873,7 @@ h,6110s985,price1,SCH,ISRAEL04,Tab,222,,,,2
 h,6110s983,price1,SCH,ISRAEL04,Tab,223,,,,2
 h,6110s986,price1,SCH,ISRAEL04,Tab,223,,,,2
 h,6110s993,price1,SCH,ISRAEL04,Tab,223,,,,2
-h,6110s987,price1,SCH,ISRAEL04,Tab,223,,"se-tenant tab row strip (4v)",,2
+h,6110s987,price1,SCH,ISRAEL04,Tab,223,,se-tenant tab row strip (4v),,2
 h,6110s989,price1,SCH,ISRAEL04,Tab,224,,,,2
 h,6110s990,price1,SCH,ISRAEL04,Tab,224,,,,2
 h,6110s991,price1,SCH,ISRAEL04,Tab,224,,,,2
@@ -881,7 +881,7 @@ h,6110s992,price1,SCH,ISRAEL04,Tab,224,,,,2
 h,6110s1003,price1,SCH,ISRAEL04,Tab,224,,,,2
 h,6110s998,price1,SCH,ISRAEL04,Tab,225,,,,2
 h,6110s1002,price1,SCH,ISRAEL04,Tab,225,,,,2
-h,6110s999,price1,SCH,ISRAEL04,Tab,225,,"se-tenant tab row strip (3v)",,2
+h,6110s999,price1,SCH,ISRAEL04,Tab,225,,se-tenant tab row strip (3v),,2
 h,6110s996,price1,SCH,ISRAEL04,Tab,226,,,,2
 h,6110s525,price1,SCH,ISRAEL03,S/S,30,,,,2
 h,6110s534,price1,SCH,ISRAEL03,S/S,30,,,,2
@@ -919,14 +919,14 @@ h,6110s958,price1,SCH,ISRAEL04,S/S,52,,,,2
 h,6110s981,price1,SCH,ISRAEL04,S/S,53,,,,2
 h,6110s995,price1,SCH,ISRAEL04,S/S,53,,,,2
 h,6110s997,price1,SCH,ISRAEL04,S/S,54,,,,2
-h,6110s646,price1,SCH,ISRAEL03,S/S,41.1,,"variety green instead of brown",,2
+h,6110s646,price1,SCH,ISRAEL03,S/S,41.1,,variety green instead of brown,,2
 h,6110s1004,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1008,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1009,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1013,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1015,price1,SCH,ISRAEL04,Tab,227,,,,2
-h,6110s1006,price1,SCH,ISRAEL04,Tab,227,,"Partial set (1v) 2.25",,2
-h,6110s1006,price1,SCH,ISRAEL04,Tab,227.1,,"Partial set (1v) 3.40",,2
+h,6110s1006,price1,SCH,ISRAEL04,Tab,227,,Partial set (1v) 2.25,,2
+h,6110s1006,price1,SCH,ISRAEL04,Tab,227.1,,Partial set (1v) 3.40,,2
 h,6110s1010,price1,SCH,ISRAEL04,Tab,227.1,,,,2
 h,6110s1011,price1,SCH,ISRAEL04,Tab,227.1,,,,2
 h,6110s1016,price1,SCH,ISRAEL04,Tab,228,,,,2
@@ -944,11 +944,11 @@ h,6110s1044,price1,SCH,ISRAEL04,Tab,230,,,,2
 h,6110s1020,price1,SCH,ISRAEL04,Tab,231,,,,2
 h,6110s1036,price1,SCH,ISRAEL04,Tab,231,,,,2
 h,6110s1045,price1,SCH,ISRAEL04,Tab,231,,,,2
-w,6110s1006,price1,SCH,ISRAEL04,Tab,232,,"variety from prestige booklet",,2
-w,6110s1009,price1,SCH,ISRAEL04,Tab,232,,"variety from prestige booklet",,2
-w,6110s1010,price1,SCH,ISRAEL04,Tab,232,,"variety from prestige booklet",,2
-w,6110s1011,price1,SCH,ISRAEL04,Tab,232,,"variety from prestige booklet",,2
-w,6110s997,price4,SCH,ISRAEL04,Tab,233,,"variety from prestige booklet (6v)",,2
+w,6110s1006,price1,SCH,ISRAEL04,Tab,232,,variety from prestige booklet,,2
+w,6110s1009,price1,SCH,ISRAEL04,Tab,232,,variety from prestige booklet,,2
+w,6110s1010,price1,SCH,ISRAEL04,Tab,232,,variety from prestige booklet,,2
+w,6110s1011,price1,SCH,ISRAEL04,Tab,232,,variety from prestige booklet,,2
+w,6110s997,price4,SCH,ISRAEL04,Tab,233,,variety from prestige booklet (6v),,2
 h,6110s1046,price1,SCH,ISRAEL04,Tab,234,,,,2
 h,6110s1048,price1,SCH,ISRAEL04,Tab,234,,,,2
 h,6110s1051,price1,SCH,ISRAEL04,Tab,234,,,,2
@@ -958,26 +958,26 @@ h,6110s1060,price1,SCH,ISRAEL04,Tab,236,,,,2
 h,6110s1061,price1,SCH,ISRAEL04,Tab,236,,,,2
 h,6110s1063,price1,SCH,ISRAEL04,Tab,236,,,,2
 h,6110s1067,price1,SCH,ISRAEL04,Tab,236,,,,2
-h,6110s1057,price1,SCH,ISRAEL04,Tab,236,,"se-tenant tab row strip (3v)",,2
+h,6110s1057,price1,SCH,ISRAEL04,Tab,236,,se-tenant tab row strip (3v),,2
 h,6110s1065,price1,SCH,ISRAEL04,Tab,237,,,,2
 h,6110s1068,price1,SCH,ISRAEL04,Tab,237,,,,2
 h,6110s1069,price1,SCH,ISRAEL04,Tab,237,,,,2
 h,6110s1072,price1,SCH,ISRAEL04,Tab,238,,,,2
 h,6110s1073,price1,SCH,ISRAEL04,Tab,238,,,,2
 h,6110s1070,price1,SCH,ISRAEL04,Tab,239,,,,2
-h,6110s1049,price1,SCH,ISRAEL04,Tab,239,,"se-tenant tab row strip (5v)",,2
+h,6110s1049,price1,SCH,ISRAEL04,Tab,239,,se-tenant tab row strip (5v),,2
 h,6110s1075,price1,SCH,ISRAEL04,Tab,241,,,,2
 h,6110s1077,price1,SCH,ISRAEL04,Tab,241,,,,2
 h,6110s1078,price1,SCH,ISRAEL04,Tab,241,,,,2
 h,6110s1081,price1,SCH,ISRAEL04,Tab,241,,,,2
 h,6110s1089,price1,SCH,ISRAEL04,Tab,241,,,,2
-h,6110s1079,price1,SCH,ISRAEL04,Tab,241,,"se-tenant tab row strip (3v)",,2
+h,6110s1079,price1,SCH,ISRAEL04,Tab,241,,se-tenant tab row strip (3v),,2
 h,6110s1082,price1,SCH,ISRAEL04,Tab,242,,,,2
 h,6110s1084,price1,SCH,ISRAEL04,Tab,242,,,,2
 h,6110s1085,price1,SCH,ISRAEL04,Tab,242,,,,2
 h,6110s1088,price1,SCH,ISRAEL04,Tab,242,,,,2
 h,6110s1091,price1,SCH,ISRAEL04,Tab,242,,,,2
-h,6110s1092,price1,SCH,ISRAEL04,Tab,243,,"se-tenant tab row strip (5v)",,2
+h,6110s1092,price1,SCH,ISRAEL04,Tab,243,,se-tenant tab row strip (5v),,2
 h,6110s1094,price1,SCH,ISRAEL04,Tab,243,,,,2
 h,6110s1096,price1,SCH,ISRAEL04,Tab,243,,,,2
 h,6110s1097,price1,SCH,ISRAEL04,Tab,244,,,,2
@@ -988,17 +988,17 @@ h,6110s1112,price1,SCH,ISRAEL04,Tab,244,,,,2
 h,6110s1100,price1,SCH,ISRAEL04,Tab,245,,,,2
 h,6110s1106,price1,SCH,ISRAEL04,Tab,245,,,,2
 h,6110s1107,price1,SCH,ISRAEL04,Tab,245,,,,2
-h,6110s1115,price1,SCH,ISRAEL04,Tab,246,,"se-tenant tab row strip (5v)",,2
+h,6110s1115,price1,SCH,ISRAEL04,Tab,246,,se-tenant tab row strip (5v),,2
 h,6110s1109,price1,SCH,ISRAEL04,Tab,247,,,,2
 h,6110s1110,price1,SCH,ISRAEL04,Tab,247,,,,2
-w,6110s654,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet (2v) 1.50 1.80",,2
-w,6110s679,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet",,2
-w,6110s715,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet (1v) 1.15",,2
-w,6110s737,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet (1v) 2.20",,2
-w,6110s776,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet",,2
-w,6110s833,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet",,2
-w,6110s921,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet",,2
-w,6110s931,price4,SCH,ISRAEL04,Tab,248,,"2010 variety from prestige booklet",,2
+w,6110s654,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet (2v) 1.50 1.80,,2
+w,6110s679,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet,,2
+w,6110s715,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet (1v) 1.15,,2
+w,6110s737,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet (1v) 2.20,,2
+w,6110s776,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet,,2
+w,6110s833,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet,,2
+w,6110s921,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet,,2
+w,6110s931,price4,SCH,ISRAEL04,Tab,248,,2010 variety from prestige booklet,,2
 h,6110s1121,price1,SCH,ISRAEL04,Tab,250,,,,2
 h,6110s1124,price1,SCH,ISRAEL04,Tab,250,,,,2
 h,6110s1125,price1,SCH,ISRAEL04,Tab,250,,,,2
@@ -1026,7 +1026,7 @@ h,6110s1054,price1,SCH,ISRAEL04,S/S,58,,,,2
 h,6110s1086,price1,SCH,ISRAEL04,S/S,59,,,,2
 h,6110s1087,price1,SCH,ISRAEL04,S/S,59,,,,2
 h,6110s1118,price1,SCH,ISRAEL04,S/S,60,,,,2
-h,6110s2,price3,SS6,FDC01,,1,,"actually has #1-9 on tabless cover",,2
+h,6110s2,price3,SS6,FDC01,,1,,actually has #1-9 on tabless cover,,2
 h,6110s5,price3,SS6,FDC01,,3,,,,2
 h,6110s8,price3,SS6,FDC01,,4,,C=Jerusalem,,2
 h,6110s9,price3,SS6,FDC01,,5,,,,2
@@ -1036,11 +1036,11 @@ h,6110s12,price3,SS6,FDC01,,9,,,,2
 h,6110s13,price3,SS6,FDC01,,10,,tabbed,,2
 h,6110s13,price3,SS6,FDC01,,10,,,,2
 h,6110s16,price3,SS6,FDC01,,11,,,,2
-w,6110s18,price3,SS6,FDC01,,12,,,"Need undamaged specimen",2
+w,6110s18,price3,SS6,FDC01,,12,,,Need undamaged specimen,2
 h,6110s19,price3,SS6,FDC01,,13,,,,2
 h,6110s21,price3,SS6,FDC01,,14,,,,2
 w,6110s23,price3,SS6,FDC01,,15,,,,2
-w,6110s22,price3,SS6,FDC01,,16,,,"Y. Haft holding for me",2
+w,6110s22,price3,SS6,FDC01,,16,,,Y. Haft holding for me,2
 w,6110s25,price3,SS6,FDC01,,17,,,,2
 w,6110s26,price3,SS6,FDC01,,18,,,,2
 h,6110s27,price3,SS6,FDC01,,19,,,,2
@@ -1061,24 +1061,24 @@ h,6110s41,price3,SS6,FDC01,,33,,,,2
 h,6110s44,price3,SS6,FDC01,,34,,,,2
 h,6110s42,price3,SS6,FDC01,,35,,,,2
 h,6110s42,price3,SS6,FDC01,,35,,"tabbed, registered cvr",,2
-h,6110s48,price3,SS6,FDC01,,36,,"02.03.54 10pr (1v)",,2
-h,6110s48,price3,SS6,FDC01,,36,,"02.03.54 10pr (1v) tabbed",,2
+h,6110s48,price3,SS6,FDC01,,36,,02.03.54 10pr (1v),,2
+h,6110s48,price3,SS6,FDC01,,36,,02.03.54 10pr (1v) tabbed,,2
 h,6110s48,price3,SS6,FDC01,,37,,"02.03.54 100pr (1v) tabbed, registered cvr",,2
-h,6110s48,price3,SS6,FDC01,,37,,"02.03.54 100pr (1v)",,2
-h,6110s48,price3,SS6,FDC01,,38,,"02.03.54 500pr (1v)",,2
-h,6110s48,price3,SS6,FDC01,,38,,"02.03.54 500pr (1v) tabbed",,2
-w,6110s48,price3,SS6,FDC01,,39,,"06.04.54 70pr (1v)","Y. Haft holding for me",2
-w,6110s48,price3,SS6,FDC01,,39,,"06.04.54 70pr (1v) tabbed",,2
-w,6110s48,price3,SS6,FDC01,,40,,"06.04.54 150pr (1v)","Y. Haft holding for me",2
-h,6110s48,price3,SS6,FDC01,,40,,"06.04.54 150pr (1v) tabbed",,2
-w,6110s48,price3,SS6,FDC01,,41,,"06.04.54 350pr (1v)","Y. Haft holding for me",2
-h,6110s48,price3,SS6,FDC01,,41,,"06.04.54 350pr (1v) tabbed",,2
+h,6110s48,price3,SS6,FDC01,,37,,02.03.54 100pr (1v),,2
+h,6110s48,price3,SS6,FDC01,,38,,02.03.54 500pr (1v),,2
+h,6110s48,price3,SS6,FDC01,,38,,02.03.54 500pr (1v) tabbed,,2
+w,6110s48,price3,SS6,FDC01,,39,,06.04.54 70pr (1v),Y. Haft holding for me,2
+w,6110s48,price3,SS6,FDC01,,39,,06.04.54 70pr (1v) tabbed,,2
+w,6110s48,price3,SS6,FDC01,,40,,06.04.54 150pr (1v),Y. Haft holding for me,2
+h,6110s48,price3,SS6,FDC01,,40,,06.04.54 150pr (1v) tabbed,,2
+w,6110s48,price3,SS6,FDC01,,41,,06.04.54 350pr (1v),Y. Haft holding for me,2
+h,6110s48,price3,SS6,FDC01,,41,,06.04.54 350pr (1v) tabbed,,2
 h,6110s43,price3,SS6,FDC01,,42,,,,2
 h,6110s43,price3,SS6,FDC01,,42,,tabbed,,2
 h,6110s45,price3,SS6,FDC01,,43,,,,2
-h,6110s46,price3,SS6,FDC01,,44,,"w.event cancel",,2
+h,6110s46,price3,SS6,FDC01,,44,,w.event cancel,,2
 h,6110s46,price3,SS6,FDC01,,44,,"w.triangular militarycancel, tabbed",,2
-w,6110s47,price3,SS6,FDC01,,45,,,"Y. Haft holding for me",2
+w,6110s47,price3,SS6,FDC01,,45,,,Y. Haft holding for me,2
 h,6110s47,price3,SS6,FDC01,,45,,"tabbed, registered cvr",,2
 w,6110s49,price3,SS6,FDC01,,46,,,,2
 h,6110s50,price3,SS6,FDC01,,47,,,,2
@@ -1099,12 +1099,12 @@ h,6110s59,price3,SS6,FDC01,,55,,,,2
 h,6110s59,price3,SS6,FDC01,,55,,"tabbed, registered cvr",,2
 h,6110s60,price3,SS6,FDC01,,56,,tabbed,,2
 h,6110s60,price3,SS6,FDC01,,56,,,,2
-h,6110s61,price3,SS6,FDC01,,57,,"10/30/60/100pr (4v)",,2
-h,6110s61,price3,SS6,FDC01,,57,,"10/30/60/100pr (4v) tabbed",,2
-h,6110s61,price3,SS6,FDC01,,58,,"20/40/80/180pr (4v) tabbed",,2
-h,6110s61,price3,SS6,FDC01,,58,,"20/40/80/180pr (4v)",,2
-h,6110s61,price3,SS6,FDC01,,59,,"50/120/200/250pr (4v)",,2
-h,6110s61,price3,SS6,FDC01,,59,,"50/120/200/250pr (4v) tabbed",,2
+h,6110s61,price3,SS6,FDC01,,57,,10/30/60/100pr (4v),,2
+h,6110s61,price3,SS6,FDC01,,57,,10/30/60/100pr (4v) tabbed,,2
+h,6110s61,price3,SS6,FDC01,,58,,20/40/80/180pr (4v) tabbed,,2
+h,6110s61,price3,SS6,FDC01,,58,,20/40/80/180pr (4v),,2
+h,6110s61,price3,SS6,FDC01,,59,,50/120/200/250pr (4v),,2
+h,6110s61,price3,SS6,FDC01,,59,,50/120/200/250pr (4v) tabbed,,2
 h,6110s64,price3,SS6,FDC01,,60,,,,2
 h,6110s64,price3,SS6,FDC01,,60,,"tabbed, registered cvr",,2
 h,6110s63,price3,SS6,FDC01,,61,,tabbed,,2
@@ -1134,8 +1134,8 @@ h,6110s86,price3,SS6,FDC02,,82,,,,2
 h,6110s88,price3,SS6,FDC02,,83,,,,2
 h,6110s89,price3,SS6,FDC02,,84,,,,2
 h,6110s90,price3,SS6,FDC02,,85,,,,2
-h,6110s91,price3,SS6,FDC02,,86,,"06.07.60 0.07a only (1v)",,2
-h,6110s93,price3,SS6,FDC02,,87,,"1960 values 0.15 0.20 0.65",,2
+h,6110s91,price3,SS6,FDC02,,86,,06.07.60 0.07a only (1v),,2
+h,6110s93,price3,SS6,FDC02,,87,,1960 values 0.15 0.20 0.65,,2
 h,6110s95,price3,SS6,FDC02,,88,,,,2
 h,6110s96,price3,SS6,FDC02,,89,,,,2
 h,6110s97,price3,SS6,FDC02,,90,,,,2
@@ -1144,19 +1144,19 @@ h,6110s98,price3,SS6,FDC02,,92,,,,2
 h,6110s100,price3,SS6,FDC02,,93,,,,2
 h,6110s102,price3,SS6,FDC02,,94,,,,2
 h,6110s103,price3,SS6,FDC02,,95,,,,2
-h,6110s104,price3,SS6,FDC02,,96,,"Values 0.01 0.02 0.06 0.07 0.08 0.10 (6v)",,2
-h,6110s104,price3,SS6,FDC02,,97,,"Values 0.12 0.18 0.20 0.25 0.32 0.50 (6v)",,2
-h,6110s104,price3,SS6,FDC02,,98,,"Value 1.00 (1v)",,2
+h,6110s104,price3,SS6,FDC02,,96,,Values 0.01 0.02 0.06 0.07 0.08 0.10 (6v),,2
+h,6110s104,price3,SS6,FDC02,,97,,Values 0.12 0.18 0.20 0.25 0.32 0.50 (6v),,2
+h,6110s104,price3,SS6,FDC02,,98,,Value 1.00 (1v),,2
 h,6110s106,price3,SS6,FDC02,,99,,,,2
 h,6110s107,price3,SS6,FDC02,,100,,,,2
 h,6110s108,price3,SS6,FDC02,,101,,,,2
-h,6110s93,price3,SS6,FDC02,,102,,"1961 values 0.25 0.30 0.35",,2
+h,6110s93,price3,SS6,FDC02,,102,,1961 values 0.25 0.30 0.35,,2
 h,6110s109,price3,SS6,FDC02,,103,,,,2
 h,6110s110,price3,SS6,FDC02,,104,,,,2
-h,6110s93,price3,SS6,FDC02,,105,,"1961 values 0.40 0.50 1.00",,2
+h,6110s93,price3,SS6,FDC02,,105,,1961 values 0.40 0.50 1.00,,2
 h,6110s111,price3,SS6,FDC02,,106,,,,2
 h,6110s112,price3,SS6,FDC02,,107,,,,2
-h,6110s94,price3,SS6,FDC02,,108,,"21.2.62 3.00 (1v)",,2
+h,6110s94,price3,SS6,FDC02,,108,,21.2.62 3.00 (1v),,2
 h,6110s113,price3,SS6,FDC02,,109,,,,2
 h,6110s114,price3,SS6,FDC02,,110,,,,2
 h,6110s116,price3,SS6,FDC02,,111,,,,2
@@ -1167,16 +1167,16 @@ h,6110s119,price3,SS6,FDC02,,115,,,,2
 h,6110s120,price3,SS6,FDC02,,116,,,,2
 h,6110s123,price3,SS6,FDC02,,117,,,,2
 h,6110s124,price3,SS6,FDC02,,118,,,,2
-h,6110s125,price3,SS6,FDC02,,119,,"13.02.63 Values 0.55 0.70 1.00 (3v)",,2
+h,6110s125,price3,SS6,FDC02,,119,,13.02.63 Values 0.55 0.70 1.00 (3v),,2
 h,6110s126,price3,SS6,FDC02,,120,,,,2
 h,6110s127,price3,SS6,FDC02,,121,,,,2
-h,6110s125,price3,SS6,FDC02,,122,,"25.04.63 Values 0.05 0.20 0.28 (3v)",,2
+h,6110s125,price3,SS6,FDC02,,122,,25.04.63 Values 0.05 0.20 0.28 (3v),,2
 h,6110s132,price3,SS6,FDC02,,123,,,,2
 h,6110s133,price3,SS6,FDC02,,124,,,,2
-h,6110s125,price3,SS6,FDC02,,125,,"19.06.63 Values 0.30 0.40 0.45 (3v)",,2
+h,6110s125,price3,SS6,FDC02,,125,,19.06.63 Values 0.30 0.40 0.45 (3v),,2
 h,6110s136,price3,SS6,FDC02,,126,,,,2
 h,6110s135,price3,SS6,FDC02,,127,,,,2
-h,6110s125,price3,SS6,FDC02,,128,,"23.10.63 Value 3.00 (1v)",,2
+h,6110s125,price3,SS6,FDC02,,128,,23.10.63 Value 3.00 (1v),,2
 h,6110s137,price3,SS6,FDC02,,129,,,,2
 h,6110s139,price3,SS6,FDC03,,131,,,,2
 h,6110s140,price3,SS6,FDC03,,132,,,,2
@@ -1190,7 +1190,7 @@ h,6110s145,price3,SS6,FDC03,,139,,,,2
 h,6110s148,price3,SS6,FDC03,,140,,,,2
 h,6110s149,price3,SS6,FDC03,,141,,,,2
 h,6110s150,price3,SS6,FDC03,,142,,,,2
-h,6110s152,price3,SS6,FDC03,,143,,"24.03.65 Values (4v) 0.15 0.20 0.25 0.30",,2
+h,6110s152,price3,SS6,FDC03,,143,,24.03.65 Values (4v) 0.15 0.20 0.25 0.30,,2
 h,6110s151,price3,SS6,FDC03,,144,,,,2
 h,6110s155,price3,SS6,FDC03,,145,,,,2
 h,6110s154,price3,SS6,FDC03,,146,,,,2
@@ -1200,36 +1200,36 @@ h,6110s16,price3,SS6,FDC01,,11,,C=Haifa,,2
 h,6110s18,price3,SS6,FDC01,,12,,C=Haifa,,2
 h,6110s21,price3,SS6,FDC01,,14,,C=Haifa,,2
 h,6110s22,price3,SS6,FDC01,,16,,"express, registered cvr",,2
-h,6110s28,price3,SS6,FDC01,,20,,"C=Be'er Yaakov",,2
+h,6110s28,price3,SS6,FDC01,,20,,C=Be'er Yaakov,,2
 h,6110s30,price3,SS6,FDC01,,22,,C=Haifa,,2
 h,6110s32,price3,SS6,FDC01,,24,,C=Jerusalem,,2
-h,6110s35,price3,SS6,FDC01,,27,,"express cvr",,2
+h,6110s35,price3,SS6,FDC01,,27,,express cvr,,2
 h,6110s36,price3,SS6,FDC01,,28,,C=Jerusalem,,2
 h,6110s37,price3,SS6,FDC01,,29,,C=Haifa,,2
 h,6110s38,price3,SS6,FDC01,,30,,C=Tiberias,,2
 h,6110s41,price3,SS6,FDC01,,33,,C=Jerusalem,,2
 h,6110s41,price3,SS6,FDC01,,33,,tabbed,,2
 h,6110s44,price3,SS6,FDC01,,34,,C=Jerusalem,,2
-w,6110s54,price3,SS6,FDC01,,51,,tabbed,"Y. Haft holding for me",2
+w,6110s54,price3,SS6,FDC01,,51,,tabbed,Y. Haft holding for me,2
 h,6110s156,price3,SS6,FDC03,,148,,,,2
 h,6110s157,price3,SS6,FDC03,,149,,,,2
 h,6110s159,price3,SS6,FDC03,,150,,,,2
 h,6110s160,price3,SS6,FDC03,,151,,,,2
-h,6110s152,price3,SS6,FDC03,,152,,"15.12.65 Values (1v) 1.00",,2
-h,6110s152,price3,SS6,FDC03,,153,,"02.02.66 Values (3v) 0.12 0.37 0.50",,2
-h,6110s152,price3,SS6,FDC03,,154,,"02.02.66 Values (6v) 0.01 0.02 0.05 0. 06 0.08 0.10",,2
-h,6110s152,price3,SS6,FDC03,,155,,"02.02.66 Values (1v) 0.70",,2
-h,6110s152,price3,SS6,FDC03,,156,,"14.03.66 Values (1v) 3.00",,2
+h,6110s152,price3,SS6,FDC03,,152,,15.12.65 Values (1v) 1.00,,2
+h,6110s152,price3,SS6,FDC03,,153,,02.02.66 Values (3v) 0.12 0.37 0.50,,2
+h,6110s152,price3,SS6,FDC03,,154,,02.02.66 Values (6v) 0.01 0.02 0.05 0. 06 0.08 0.10,,2
+h,6110s152,price3,SS6,FDC03,,155,,02.02.66 Values (1v) 0.70,,2
+h,6110s152,price3,SS6,FDC03,,156,,14.03.66 Values (1v) 3.00,,2
 h,6110s161,price3,SS6,FDC03,,157,,,,2
 h,6110s162,price3,SS6,FDC03,,158,,,,2
 h,6110s163,price3,SS6,FDC03,,159,,,,2
 h,6110s164,price3,SS6,FDC03,,160,,,,2
 h,6110s165,price3,SS6,FDC03,,161,,,,2
-h,6110s166,price3,SS6,FDC03,,162,,"Partial set (2v) 0.55 0.80",,2
-h,6110s166,price3,SS6,FDC03,,163,,"Partial set (1v) 1.15",,2
+h,6110s166,price3,SS6,FDC03,,162,,Partial set (2v) 0.55 0.80,,2
+h,6110s166,price3,SS6,FDC03,,163,,Partial set (1v) 1.15,,2
 h,6110s167,price3,SS6,FDC03,,164,,,,2
 h,6110s168,price3,SS6,FDC03,,165,,,,2
-h,6110s152,price3,SS6,FDC03,,166,,"08.02.67 Values (3v) 0.40 0.55 0.80",,2
+h,6110s152,price3,SS6,FDC03,,166,,08.02.67 Values (3v) 0.40 0.55 0.80,,2
 h,6110s169,price3,SS6,FDC03,,167,,,,2
 h,6110s170,price3,SS6,FDC03,,168,,,,2
 h,6110s172,price3,SS6,FDC03,,169,,,,2
@@ -1239,9 +1239,9 @@ h,6110s174,price3,SS6,FDC03,,172,,,,2
 h,6110s176,price3,SS6,FDC03,,173,,,,2
 h,6110s175,price3,SS6,FDC03,,174,,,,2
 h,6110s177,price3,SS6,FDC03,,175,,,,2
-h,6110s178,price3,SS6,FDC03,,176,,"07.02.68 Values (1v) 3.00",,2
-h,6110s178,price3,SS6,FDC03,,177,,"11.03.68 Values (2v) 0.10 0.30",,2
-h,6110s178,price3,SS6,FDC03,,179,,"11.03.68 Values (2v) 0.40 0.50",,2
+h,6110s178,price3,SS6,FDC03,,176,,07.02.68 Values (1v) 3.00,,2
+h,6110s178,price3,SS6,FDC03,,177,,11.03.68 Values (2v) 0.10 0.30,,2
+h,6110s178,price3,SS6,FDC03,,179,,11.03.68 Values (2v) 0.40 0.50,,2
 h,6110s179,price3,SS6,FDC03,,180,,,,2
 h,6110s182,price3,SS6,FDC03,,181,,,,2
 h,6110s181,price3,SS6,FDC03,,182,,,,2
@@ -1250,32 +1250,32 @@ h,6110s180,price3,SS6,FDC03,,184,,,,2
 h,6110s184,price3,SS6,FDC03,,185,,,,2
 h,6110s185,price3,SS6,FDC03,,186,,,,2
 h,6110s186,price3,SS6,FDC03,,187,,,,2
-h,6110s187,price3,SS6,FDC03,,188,,"Partial set (3v) 0.12 0.15 0.35",,2
-h,6110s187,price3,SS6,FDC03,,189,,"Partial set (2v) 0.40 0.60",,2
+h,6110s187,price3,SS6,FDC03,,188,,Partial set (3v) 0.12 0.15 0.35,,2
+h,6110s187,price3,SS6,FDC03,,189,,Partial set (2v) 0.40 0.60,,2
 h,6110s190,price3,SS6,FDC03,,190,,,,2
 h,6110s188,price3,SS6,FDC03,,191,,,,2
 h,6110s189,price3,SS6,FDC03,,192,,,,2
 h,6110s191,price3,SS6,FDC03,,193,,,,2
-h,6110s178,price3,SS6,FDC03,,194,,"06.11.68 Values (2v) 0.55 0.60",,2
-h,6110s178,price3,SS6,FDC03,,195,,"06.11.68 Values (1v) 1.00",,2
-h,6110s178,price3,SS6,FDC03,,196,,"23.12.68 Values (1v) 0.80",,2
-h,6110s178,price3,SS6,FDC03,,197,,"23.12.68 Values (1v) 1.50",,2
-h,6110s192,price3,SS6,FDC04,,199,,"Partial set (1v) 0.30",,2
-h,6110s192,price3,SS6,FDC04,,200,,"Partial set (1v) 0.60",,2
-h,6110s192,price3,SS6,FDC04,,201,,"Partial set (1v) 1.00",,2
+h,6110s178,price3,SS6,FDC03,,194,,06.11.68 Values (2v) 0.55 0.60,,2
+h,6110s178,price3,SS6,FDC03,,195,,06.11.68 Values (1v) 1.00,,2
+h,6110s178,price3,SS6,FDC03,,196,,23.12.68 Values (1v) 0.80,,2
+h,6110s178,price3,SS6,FDC03,,197,,23.12.68 Values (1v) 1.50,,2
+h,6110s192,price3,SS6,FDC04,,199,,Partial set (1v) 0.30,,2
+h,6110s192,price3,SS6,FDC04,,200,,Partial set (1v) 0.60,,2
+h,6110s192,price3,SS6,FDC04,,201,,Partial set (1v) 1.00,,2
 h,6110s194,price3,SS6,FDC04,,202,,,,2
 h,6110s193,price3,SS6,FDC04,,203,,,,2
 h,6110s195,price3,SS6,FDC04,,204,,,,2
-h,6110s197,price3,SS6,FDC04,,205,,"09.07.69 Values (6v) 0.02 0.05 0.15 0.25 0.40 0.80",,2
+h,6110s197,price3,SS6,FDC04,,205,,09.07.69 Values (6v) 0.02 0.05 0.15 0.25 0.40 0.80,,2
 h,6110s196,price3,SS6,FDC04,,206,,,,2
-h,6110s199,price3,SS6,FDC04,,207,,"Partial set (3v) 0.12 0.15 0.35",,2
-h,6110s199,price3,SS6,FDC04,,208,,"Partial set (2v) 0.40 0.60",,2
+h,6110s199,price3,SS6,FDC04,,207,,Partial set (3v) 0.12 0.15 0.35,,2
+h,6110s199,price3,SS6,FDC04,,208,,Partial set (2v) 0.40 0.60,,2
 h,6110s200,price3,SS6,FDC04,,209,,,,2
 h,6110s201,price3,SS6,FDC04,,210,,,,2
-h,6110s197,price3,SS6,FDC04,,211,,"03.11.69 Values (2v) 0.03 0.50",,2
+h,6110s197,price3,SS6,FDC04,,211,,03.11.69 Values (2v) 0.03 0.50,,2
 h,6110s204,price3,SS6,FDC04,,212,,,,2
-h,6110s203,price3,SS6,FDC04,,213,,"Partial set (4v) 0.02 0.03 0.05 0.06",,2
-h,6110s203,price3,SS6,FDC04,,214,,"Partial set (1v) 0.30",,2
+h,6110s203,price3,SS6,FDC04,,213,,Partial set (4v) 0.02 0.03 0.05 0.06,,2
+h,6110s203,price3,SS6,FDC04,,214,,Partial set (1v) 0.30,,2
 h,6110s205,price3,SS6,FDC04,,215,,,,2
 h,6110s206,price3,SS6,FDC04,,216,,,,2
 h,6110s209,price3,SS6,FDC04,,217,,,,2
@@ -1285,48 +1285,48 @@ h,6110s210,price3,SS6,FDC04,,220,,,,2
 h,6110s211,price3,SS6,FDC04,,221,,,,2
 h,6110s212,price3,SS6,FDC04,,222,,,,2
 h,6110s213,price3,SS6,FDC04,,223,,,,2
-h,6110s197,price3,SS6,FDC04,,224,,"06.05.70 Values (1v) 0.30",,2
+h,6110s197,price3,SS6,FDC04,,224,,06.05.70 Values (1v) 0.30,,2
 h,6110s215,price3,SS6,FDC04,,225,,,,2
 h,6110s216,price3,SS6,FDC04,,226,,,,2
 h,6110s214,price3,SS6,FDC04,,227,,,,2
-h,6110s217,price3,SS6,FDC04,,228,,"Partial set (3v) 0.12 0.15 0.35",,2
-h,6110s217,price3,SS6,FDC04,,229,,"Partial set (2v) 0.40 0.60",,2
+h,6110s217,price3,SS6,FDC04,,228,,Partial set (3v) 0.12 0.15 0.35,,2
+h,6110s217,price3,SS6,FDC04,,229,,Partial set (2v) 0.40 0.60,,2
 h,6110s218,price3,SS6,FDC04,,230,,,,2
 h,6110s220,price3,SS6,FDC04,,231,,,,2
 h,6110s221,price3,SS6,FDC04,,232,,,,2
 h,6110s219,price3,SS6,FDC04,,233,,,,2
-h,6110s197,price3,SS6,FDC04,,234,,"18.10.70 Values (3v) 0.18 0.20 0.60",,2
+h,6110s197,price3,SS6,FDC04,,234,,18.10.70 Values (3v) 0.18 0.20 0.60,,2
 h,6110s222,price3,SS6,FDC04,,235,,,,2
-h,6110s223,price3,SS6,FDC04,,236,,"Partial set (1v) 0.85",,2
-h,6110s223,price3,SS6,FDC04,,237,,"Partial set (1v) 1.00",,2
-h,6110s223,price3,SS6,FDC04,,238,,"Partial set (1v) 2.00",,2
-h,6110s224,price3,SS6,FDC04,,239,,"Partial set (1v) 0.50 (#1/3)",,2
-h,6110s224,price3,SS6,FDC04,,240,,"Partial set (1v) 0.50 (#2/3)",,2
-h,6110s224,price3,SS6,FDC04,,241,,"Partial set (1v) 0.50 (#3/3)",,2
+h,6110s223,price3,SS6,FDC04,,236,,Partial set (1v) 0.85,,2
+h,6110s223,price3,SS6,FDC04,,237,,Partial set (1v) 1.00,,2
+h,6110s223,price3,SS6,FDC04,,238,,Partial set (1v) 2.00,,2
+h,6110s224,price3,SS6,FDC04,,239,,Partial set (1v) 0.50 (#1/3),,2
+h,6110s224,price3,SS6,FDC04,,240,,Partial set (1v) 0.50 (#2/3),,2
+h,6110s224,price3,SS6,FDC04,,241,,Partial set (1v) 0.50 (#3/3),,2
 h,6110s225,price3,SS6,FDC04,,242,,,,2
 h,6110s226,price3,SS6,FDC04,,243,,,,2
 h,6110s229,price3,SS6,FDC04,,244,,,,2
-h,6110s227,price3,SS6,FDC04,,245,,"Partial set (2v) 0.15 0.18",,2
-h,6110s227,price3,SS6,FDC04,,246,,"Partial set (2v) 0.35 0.85",,2
+h,6110s227,price3,SS6,FDC04,,245,,Partial set (2v) 0.15 0.18,,2
+h,6110s227,price3,SS6,FDC04,,246,,Partial set (2v) 0.35 0.85,,2
 h,6110s228,price3,SS6,FDC04,,247,,,,2
 h,6110s230,price3,SS6,FDC04,,248,,,,2
-h,6110s232,price3,SS6,FDC04,,249,,"Partial set (3v) 0.15 0.18 0.20",,2
-h,6110s232,price3,SS6,FDC04,,250,,"Partial set (2v) 0.40 0.65",,2
+h,6110s232,price3,SS6,FDC04,,249,,Partial set (3v) 0.15 0.18 0.20,,2
+h,6110s232,price3,SS6,FDC04,,250,,Partial set (2v) 0.40 0.65,,2
 h,6110s231,price3,SS6,FDC04,,251,,,,2
-h,6110s234,price3,SS6,FDC04,,252,,"25.10.71 Values (1v) 0.15",,2
-h,6110s234,price3,SS6,FDC04,,253,,"25.10.71 Values (3v) 0.18 0.50 0.88",,2
+h,6110s234,price3,SS6,FDC04,,252,,25.10.71 Values (1v) 0.15,,2
+h,6110s234,price3,SS6,FDC04,,253,,25.10.71 Values (3v) 0.18 0.50 0.88,,2
 h,6110s233,price3,SS6,FDC04,,254,,,,2
-h,6110s234,price3,SS6,FDC04,,255,,"04.01.72 Values (3v) 0.22 0.55 0.70",,2
+h,6110s234,price3,SS6,FDC04,,255,,04.01.72 Values (3v) 0.22 0.55 0.70,,2
 h,6110s235,price3,SS6,FDC04,,256,,,,2
-h,6110s236,price3,SS6,FDC04,,257,,"Partial set (1v) 0.40",,2
-h,6110s236,price3,SS6,FDC04,,258,,"Partial set (1v) 0.55",,2
-h,6110s236,price3,SS6,FDC04,,259,,"Partial set (1v) 0.70",,2
-h,6110s236,price3,SS6,FDC04,,260,,"Partial set (1v) 0.85",,2
-h,6110s236,price3,SS6,FDC04,,260,,"Partial set (1v) 1.00",,2
+h,6110s236,price3,SS6,FDC04,,257,,Partial set (1v) 0.40,,2
+h,6110s236,price3,SS6,FDC04,,258,,Partial set (1v) 0.55,,2
+h,6110s236,price3,SS6,FDC04,,259,,Partial set (1v) 0.70,,2
+h,6110s236,price3,SS6,FDC04,,260,,Partial set (1v) 0.85,,2
+h,6110s236,price3,SS6,FDC04,,260,,Partial set (1v) 1.00,,2
 h,6110s238,price3,SS6,FDC05,,261,,,,2
 h,6110s237,price3,SS6,FDC05,,262,,,,2
-h,6110s240,price3,SS6,FDC05,,263,,"Partial set (2v) 0.15 0.18",,2
-h,6110s240,price3,SS6,FDC05,,264,,"Partial set (2v) 0.45 0.55",,2
+h,6110s240,price3,SS6,FDC05,,263,,Partial set (2v) 0.15 0.18,,2
+h,6110s240,price3,SS6,FDC05,,264,,Partial set (2v) 0.45 0.55,,2
 h,6110s241,price3,SS6,FDC05,,265,,,,2
 h,6110s242,price3,SS6,FDC05,,266,,,,2
 h,6110s239,price3,SS6,FDC05,,267,,,,2
@@ -1335,51 +1335,51 @@ h,6110s244,price3,SS6,FDC05,,269,,,,2
 h,6110s245,price3,SS6,FDC05,,270,,,,2
 h,6110s247,price3,SS6,FDC05,,271,,,,2
 h,6110s246,price3,SS6,FDC05,,272,,,,2
-h,6110s234,price3,SS6,FDC05,,273,,"07.11.72 Values (4v) 0.03 0.05 0.30 3.00",,2
+h,6110s234,price3,SS6,FDC05,,273,,07.11.72 Values (4v) 0.03 0.05 0.30 3.00,,2
 h,6110s248,price3,SS6,FDC05,,274,,,,2
-h,6110s234,price3,SS6,FDC05,,275,,"16.01.73 Values (3v) 0.45 0.95 2.00",,2
+h,6110s234,price3,SS6,FDC05,,275,,16.01.73 Values (3v) 0.45 0.95 2.00,,2
 h,6110s250,price3,SS6,FDC05,,276,,,,2
 h,6110s249,price3,SS6,FDC05,,277,,,,2
-h,6110s251,price3,SS6,FDC05,,278,,"Partial set #1/3 (2v) 1.00 1.00",,2
-h,6110s251,price3,SS6,FDC05,,279,,"Partial set #2/3 (2v) 1.00 1.00",,2
-h,6110s251,price3,SS6,FDC05,,280,,"Partial set #3/3 (2v) 1.00 1.00",,2
+h,6110s251,price3,SS6,FDC05,,278,,Partial set #1/3 (2v) 1.00 1.00,,2
+h,6110s251,price3,SS6,FDC05,,279,,Partial set #2/3 (2v) 1.00 1.00,,2
+h,6110s251,price3,SS6,FDC05,,280,,Partial set #3/3 (2v) 1.00 1.00,,2
 h,6110s253,price3,SS6,FDC05,,281,,,,2
 h,6110s256,price3,SS6,FDC05,,282,,,,2
 h,6110s254,price3,SS6,FDC05,,283,,,,2
 h,6110s255,price3,SS6,FDC05,,284,,,,2
 h,6110s257,price3,SS6,FDC05,,285,,,,2
-h,6110s252,price3,SS6,FDC05,,286,,"Partial set #1/3 (2v) 1.00 1.00",,2
-h,6110s252,price3,SS6,FDC05,,287,,"Partial set #2/3 (2v) 1.00 1.00",,2
-h,6110s252,price3,SS6,FDC05,,288,,"Partial set #3/3 (2v) 1.00 1.00",,2
+h,6110s252,price3,SS6,FDC05,,286,,Partial set #1/3 (2v) 1.00 1.00,,2
+h,6110s252,price3,SS6,FDC05,,287,,Partial set #2/3 (2v) 1.00 1.00,,2
+h,6110s252,price3,SS6,FDC05,,288,,Partial set #3/3 (2v) 1.00 1.00,,2
 h,6110s258,price3,SS6,FDC05,,289,,,,2
-h,6110s234,price3,SS6,FDC05,,290,,"23.10.73 Values (2v) 0.20 0.65",,2
+h,6110s234,price3,SS6,FDC05,,290,,23.10.73 Values (2v) 0.20 0.65,,2
 h,6110s260,price3,SS6,FDC05,,291,,,,2
 h,6110s259,price3,SS6,FDC05,,292,,,,2
-h,6110s234,price3,SS6,FDC05,,293,,"20.12.73 Values (2v) 0.35 1.10",,2
+h,6110s234,price3,SS6,FDC05,,293,,20.12.73 Values (2v) 0.35 1.10,,2
 h,6110s261,price3,SS6,FDC05,,294,,,,2
-h,6110s262,price3,SS6,FDC05,,295,,"Partial set (1v) 1.00",,2
-h,6110s262,price3,SS6,FDC05,,296,,"Partial set (1v) 2.00",,2
-h,6110s262,price3,SS6,FDC05,,297,,"Partial set (1v) 3.00",,2
+h,6110s262,price3,SS6,FDC05,,295,,Partial set (1v) 1.00,,2
+h,6110s262,price3,SS6,FDC05,,296,,Partial set (1v) 2.00,,2
+h,6110s262,price3,SS6,FDC05,,297,,Partial set (1v) 3.00,,2
 h,6110s263,price3,SS6,FDC05,,298,,,,2
 h,6110s264,price3,SS6,FDC05,,299,,,,2
-h,6110s265,price3,SS6,FDC05,,300,,"Partial set (1v) 1.25",,2
-h,6110s265,price3,SS6,FDC05,,301,,"Partial set (1v) 2.00",,2
-h,6110s265,price3,SS6,FDC05,,302,,"Partial set (1v) 3.00",,2
+h,6110s265,price3,SS6,FDC05,,300,,Partial set (1v) 1.25,,2
+h,6110s265,price3,SS6,FDC05,,301,,Partial set (1v) 2.00,,2
+h,6110s265,price3,SS6,FDC05,,302,,Partial set (1v) 3.00,,2
 h,6110s266,price3,SS6,FDC05,,303,,,,2
 h,6110s268,price3,SS6,FDC05,,304,,,,2
-h,6110s267,price3,SS6,FDC05,,305,,"Partial set (2v) 0.25 1.45",,2
-h,6110s267,price3,SS6,FDC05,,306,,"Partial set (1v) 0.60",,2
-h,6110s269,price3,SS6,FDC05,,307,,"Partial set (1v) 0.25",,2
-h,6110s269,price3,SS6,FDC05,,308,,"Partial set (1v) 1.30",,2
+h,6110s267,price3,SS6,FDC05,,305,,Partial set (2v) 0.25 1.45,,2
+h,6110s267,price3,SS6,FDC05,,306,,Partial set (1v) 0.60,,2
+h,6110s269,price3,SS6,FDC05,,307,,Partial set (1v) 0.25,,2
+h,6110s269,price3,SS6,FDC05,,308,,Partial set (1v) 1.30,,2
 h,6110s270,price3,SS6,FDC05,,309,,,,2
-h,6110s234,price3,SS6,FDC05,,310,,"05.11.74 Values (3v) 0.25 0.80 1.30",,2
+h,6110s234,price3,SS6,FDC05,,310,,05.11.74 Values (3v) 0.25 0.80 1.30,,2
 h,6110s271,price3,SS6,FDC05,,311,,,,2
 h,6110s273,price3,SS6,FDC05,,312,,,,2
 h,6110s272,price3,SS6,FDC05,,313,,,,2
 h,6110s275,price3,SS6,FDC05,,314,,,,2
-h,6110s274,price3,SS6,FDC05,,315,,"Partial Set (2v) 0.80 1.70",,2
-h,6110s274,price3,SS6,FDC05,,316,,"Partial Set (1v) 1.30",,2
-h,6110s234,price3,SS6,FDC05,,321,,"17.06.75 Values (1v) 1.70","Oversize FDC stored in SS10 album.",2
+h,6110s274,price3,SS6,FDC05,,315,,Partial Set (2v) 0.80 1.70,,2
+h,6110s274,price3,SS6,FDC05,,316,,Partial Set (1v) 1.30,,2
+h,6110s234,price3,SS6,FDC05,,321,,17.06.75 Values (1v) 1.70,Oversize FDC stored in SS10 album.,2
 h,6110s285,price3,SS6,FDC05,,322,,,,2
 h,6110s284,price3,SS6,FDC05,,323,,,,2
 h,6110s286,price3,SS6,FDC05,,324,,,,2
@@ -1393,20 +1393,20 @@ h,6110s292,price3,SS6,FDC06,,331,,,,2
 h,6110s296,price3,SS6,FDC06,,332,,,,2
 h,6110s297,price3,SS6,FDC06,,333,,,,2
 h,6110s298,price3,SS6,FDC06,,334,,,,2
-h,6110s234,price3,SS6,FDC06,,334,,"17.08.76 Values (1v) 10.00",,2
+h,6110s234,price3,SS6,FDC06,,334,,17.08.76 Values (1v) 10.00,,2
 h,6110s299,price3,SS6,FDC06,,335,,,,2
-h,6110s300,price3,SS6,FDC06,,336,,"Partial Set (1v) 1.30",,2
-h,6110s300,price3,SS6,FDC06,,337,,"Partial Set (1v) 2.40",,2
-h,6110s300,price3,SS6,FDC06,,338,,"Partial Set (1v) 2.80",,2
+h,6110s300,price3,SS6,FDC06,,336,,Partial Set (1v) 1.30,,2
+h,6110s300,price3,SS6,FDC06,,337,,Partial Set (1v) 2.40,,2
+h,6110s300,price3,SS6,FDC06,,338,,Partial Set (1v) 2.80,,2
 h,6110s301,price3,SS6,FDC06,,339,,,,2
-h,6110s300,price3,SS6,FDC06,,340,,"Partial Set (1v) 0.70",,2
-h,6110s300,price3,SS6,FDC06,,341,,"Partial Set (1v) 5.00",,2
-h,6110s302,price3,SS6,FDC06,,342,,"Partial Set (3v) 0.05 0.10 0.60",,2
-h,6110s302,price3,SS6,FDC06,,343,,"Partial Set (2v) 1.40 1.80",,2
+h,6110s300,price3,SS6,FDC06,,340,,Partial Set (1v) 0.70,,2
+h,6110s300,price3,SS6,FDC06,,341,,Partial Set (1v) 5.00,,2
+h,6110s302,price3,SS6,FDC06,,342,,Partial Set (3v) 0.05 0.10 0.60,,2
+h,6110s302,price3,SS6,FDC06,,343,,Partial Set (2v) 1.40 1.80,,2
 h,6110s303,price3,SS6,FDC06,,344,,,,2
-h,6110s305,price3,SS6,FDC06,,345,,"Partial Set (1v) 1.70",,2
-h,6110s305,price3,SS6,FDC06,,346,,"Partial Set (1v) 1.80",,2
-h,6110s305,price3,SS6,FDC06,,347,,"Partial Set (1v) 2.10",,2
+h,6110s305,price3,SS6,FDC06,,345,,Partial Set (1v) 1.70,,2
+h,6110s305,price3,SS6,FDC06,,346,,Partial Set (1v) 1.80,,2
+h,6110s305,price3,SS6,FDC06,,347,,Partial Set (1v) 2.10,,2
 h,6110s304,price3,SS6,FDC06,,348,,,,2
 h,6110s306,price3,SS6,FDC06,,349,,,,2
 h,6110s307,price3,SS6,FDC06,,350,,,,2
@@ -1419,33 +1419,33 @@ h,6110s313,price3,SS6,FDC06,,356,,,,2
 h,6110s314,price3,SS6,FDC06,,357,,,,2
 h,6110s315,price3,SS6,FDC06,,358,,,,2
 h,6110s316,price3,SS6,FDC06,,359,,,,2
-h,6110s234,price3,SS6,FDC06,,360,,"18.10.77 Values (2v) 0.10 1.00",,2
-h,6110s317,price3,SS6,FDC06,,361,,"Partial Set (2v) 0.65 1.50",,2
-h,6110s317,price3,SS6,FDC06,,362,,"Partial Set (2v) 2.00 2.50",,2
+h,6110s234,price3,SS6,FDC06,,360,,18.10.77 Values (2v) 0.10 1.00,,2
+h,6110s317,price3,SS6,FDC06,,361,,Partial Set (2v) 0.65 1.50,,2
+h,6110s317,price3,SS6,FDC06,,362,,Partial Set (2v) 2.00 2.50,,2
 h,6110s318,price3,SS6,FDC06,,363,,,,2
 h,6110s319,price3,SS6,FDC06,,364,,,,2
-h,6110s322,price3,SS6,FDC06,,365,,"Partial Set (1v) 3.00",,2
-h,6110s322,price3,SS6,FDC06,,366,,"Partial Set (1v) 3.80",,2
-h,6110s322,price3,SS6,FDC06,,367,,"Partial Set (1v) 4.40",,2
+h,6110s322,price3,SS6,FDC06,,365,,Partial Set (1v) 3.00,,2
+h,6110s322,price3,SS6,FDC06,,366,,Partial Set (1v) 3.80,,2
+h,6110s322,price3,SS6,FDC06,,367,,Partial Set (1v) 4.40,,2
 h,6110s321,price3,SS6,FDC06,,368,,,,2
-h,6110s325,price3,SS6,FDC06,,369,,"23.04.78 Values (5v) 2.00 2.00 2.00 2.00 2.00",,2
-h,6110s323,price3,SS6,FDC06,,370,,"Partial Set (3v) 1.50 1.50 1.50",,2
-h,6110s323,price3,SS6,FDC06,,371,,"Partial Set (2v) 1.50 1.50",,2
+h,6110s325,price3,SS6,FDC06,,369,,23.04.78 Values (5v) 2.00 2.00 2.00 2.00 2.00,,2
+h,6110s323,price3,SS6,FDC06,,370,,Partial Set (3v) 1.50 1.50 1.50,,2
+h,6110s323,price3,SS6,FDC06,,371,,Partial Set (2v) 1.50 1.50,,2
 h,6110s326,price3,SS6,FDC06,,372,,,,2
 h,6110s327,price3,SS6,FDC06,,373,,,,2
-h,6110s325,price3,SS6,FDC06,,374,,"04.07.78 Values (2v) 2.00 2.00",,2
+h,6110s325,price3,SS6,FDC06,,374,,04.07.78 Values (2v) 2.00 2.00,,2
 h,6110s328,price3,SS6,FDC06,,375,,,,2
 h,6110s329,price3,SS6,FDC06,,376,,,,2
-h,6110s234,price3,SS6,FDC06,,377,,"04.07.78 Values (1v) 20.00",,2
+h,6110s234,price3,SS6,FDC06,,377,,04.07.78 Values (1v) 20.00,,2
 h,6110s331,price3,SS6,FDC06,,378,,,,2
 h,6110s330,price3,SS6,FDC06,,379,,,,2
-h,6110s325,price3,SS6,FDC06,,380,,"22.08.78 Values (2v) 2.00 2.00",,2
+h,6110s325,price3,SS6,FDC06,,380,,22.08.78 Values (2v) 2.00 2.00,,2
 h,6110s332,price3,SS6,FDC06,,381,,,,2
 h,6110s333,price3,SS6,FDC06,,382,,,,2
 h,6110s334,price3,SS6,FDC06,,383,,,,2
-h,6110s325,price3,SS6,FDC06,,384,,"31.10.78 Values (2v) 2.00 2.00",,2
+h,6110s325,price3,SS6,FDC06,,384,,31.10.78 Values (2v) 2.00 2.00,,2
 h,6110s335,price3,SS6,FDC06,,385,,,,2
-h,6110s325,price3,SS6,FDC06,,386,,"26.12.78 Values (3v) 2.00 2.00 2.00",,2
+h,6110s325,price3,SS6,FDC06,,386,,26.12.78 Values (3v) 2.00 2.00 2.00,,2
 h,6110s337,price3,SS6,FDC06,,387,,,,2
 h,6110s338,price3,SS6,FDC06,,388,,,,2
 h,6110s336,price3,SS6,FDC06,,389,,,,2
@@ -1462,7 +1462,7 @@ h,6110s349,price3,SS6,FDC07,,400,,,,2
 h,6110s350,price3,SS6,FDC07,,399,,,,2
 h,6110s348,price3,SS6,FDC07,,401,,,,2
 h,6110s351,price3,SS6,FDC07,,402,,,,2
-h,6110s234,price3,SS6,FDC07,,403,,"15.01.80 Values (1v) 50.00",,2
+h,6110s234,price3,SS6,FDC07,,403,,15.01.80 Values (1v) 50.00,,2
 h,6110s352,price3,SS6,FDC07,,404,,,,2
 h,6110s353,price3,SS6,FDC07,,405,,,Registered,2
 h,6110s354,price3,SS6,FDC07,,406,,,,2
@@ -1473,51 +1473,51 @@ h,6110s358,price3,SS6,FDC07,,410,,,,2
 h,6110s360,price3,SS6,FDC07,,411,,,,2
 h,6110s359,price3,SS6,FDC07,,412,,,,2
 h,6110s361,price3,SS6,FDC07,,413,,,,2
-h,6110s362,price3,SS6,FDC07,,414,,"Partial Set (4v) 0.05 0.10 0.20 0.30",,2
-h,6110s362,price3,SS6,FDC07,,415,,"Partial Set (3v) 0.50 0.60 1.00",,2
-h,6110s362,price3,SS6,FDC07,,416,,"Partial Set (3v) 2.00 2.80 3.20",,2
-h,6110s362,price3,SS6,FDC07,,417,,"Partial Set (3v) 4.20 5.00 10.00",,2
-h,6110s364,price3,SS6,FDC07,,418,,"Partial Set (1v) 0.50",,2
-h,6110s364,price3,SS6,FDC07,,419,,"Partial Set (1v) 1.50",,2
-h,6110s364,price3,SS6,FDC07,,420,,"Partial Set (1v) 2.50",,2
+h,6110s362,price3,SS6,FDC07,,414,,Partial Set (4v) 0.05 0.10 0.20 0.30,,2
+h,6110s362,price3,SS6,FDC07,,415,,Partial Set (3v) 0.50 0.60 1.00,,2
+h,6110s362,price3,SS6,FDC07,,416,,Partial Set (3v) 2.00 2.80 3.20,,2
+h,6110s362,price3,SS6,FDC07,,417,,Partial Set (3v) 4.20 5.00 10.00,,2
+h,6110s364,price3,SS6,FDC07,,418,,Partial Set (1v) 0.50,,2
+h,6110s364,price3,SS6,FDC07,,419,,Partial Set (1v) 1.50,,2
+h,6110s364,price3,SS6,FDC07,,420,,Partial Set (1v) 2.50,,2
 h,6110s363,price3,SS6,FDC07,,421,,,,2
 h,6110s366,price3,SS6,FDC07,,422,,,,2
-h,6110s365,price3,SS6,FDC07,,423,,"Partial Set (1v) 2.00",,2
-h,6110s365,price3,SS6,FDC07,,424,,"Partial Set (1v) 2.80",,2
-h,6110s365,price3,SS6,FDC07,,425,,"Partial Set (1v) 3.20",,2
+h,6110s365,price3,SS6,FDC07,,423,,Partial Set (1v) 2.00,,2
+h,6110s365,price3,SS6,FDC07,,424,,Partial Set (1v) 2.80,,2
+h,6110s365,price3,SS6,FDC07,,425,,Partial Set (1v) 3.20,,2
 h,6110s368,price3,SS6,FDC07,,426,,,,2
 h,6110s367,price3,SS6,FDC07,,427,,,,2
 h,6110s369,price3,SS6,FDC07,,428,,,,2
-h,6110s370,price3,SS6,FDC07,,429,,"05.05.81 Values (1v) 0.70",,2
+h,6110s370,price3,SS6,FDC07,,429,,05.05.81 Values (1v) 0.70,,2
 h,6110s371,price3,SS6,FDC07,,430,,,,2
-h,6110s370,price3,SS6,FDC07,,431,,"25.08.81 Values (3v) 0.90 3.00 4.00",,2
+h,6110s370,price3,SS6,FDC07,,431,,25.08.81 Values (3v) 0.90 3.00 4.00,,2
 h,6110s372,price3,SS6,FDC07,,432,,,,2
 h,6110s373,price3,SS6,FDC07,,433,,,,2
 h,6110s376,price3,SS6,FDC07,,434,,,,2
 h,6110s374,price3,SS6,FDC07,,435,,,,2
-h,6110s377,price3,SS6,FDC07,,436,,"11.02.82 Values (1v) 1.10",,2
-h,6110s378,price3,SS6,FDC07,,437,,"Partial Set (1v) 7.00",,2
-h,6110s378,price3,SS6,FDC07,,438,,"Partial Set (1v) 8.00",,2
-h,6110s378,price3,SS6,FDC07,,439,,"Partial Set (1v) 9.00",,2
+h,6110s377,price3,SS6,FDC07,,436,,11.02.82 Values (1v) 1.10,,2
+h,6110s378,price3,SS6,FDC07,,437,,Partial Set (1v) 7.00,,2
+h,6110s378,price3,SS6,FDC07,,438,,Partial Set (1v) 8.00,,2
+h,6110s378,price3,SS6,FDC07,,439,,Partial Set (1v) 9.00,,2
 h,6110s379,price3,SS6,FDC07,,440,,,,2
 h,6110s380,price3,SS6,FDC07,,441,,,,2
-h,6110s377,price3,SS6,FDC07,,442,,"16.03.82 Values (1v) 1.20",,2
+h,6110s377,price3,SS6,FDC07,,442,,16.03.82 Values (1v) 1.20,,2
 h,6110s381,price3,SS6,FDC07,,443,,,,2
-h,6110s383,price3,SS6,FDC07,,444,,"Partial Set (1v) 7.00",,2
-h,6110s383,price3,SS6,FDC07,,445,,"Partial Set (1v) 8.00",,2
-h,6110s383,price3,SS6,FDC07,,446,,"Partial Set (1v) 15.00",,2
+h,6110s383,price3,SS6,FDC07,,444,,Partial Set (1v) 7.00,,2
+h,6110s383,price3,SS6,FDC07,,445,,Partial Set (1v) 8.00,,2
+h,6110s383,price3,SS6,FDC07,,446,,Partial Set (1v) 15.00,,2
 h,6110s382,price3,SS6,FDC07,,447,,,,2
 h,6110s384,price3,SS6,FDC07,,448,,,,2
-h,6110s387,price3,SS6,FDC07,,449,,"Partial Set (1v) 2.50",,2
-h,6110s387,price3,SS6,FDC07,,450,,"Partial Set (1v) 3.50",,2
+h,6110s387,price3,SS6,FDC07,,449,,Partial Set (1v) 2.50,,2
+h,6110s387,price3,SS6,FDC07,,450,,Partial Set (1v) 3.50,,2
 h,6110s385,price3,SS6,FDC07,,451,,,,2
 h,6110s386,price3,SS6,FDC07,,452,,,,2
 h,6110s388,price3,SS6,FDC07,,453,,,,2
 h,6110s389,price3,SS6,FDC07,,454,,,,2
 h,6110s390,price3,SS6,FDC07,,455,,,,2
-h,6110s387,price3,SS6,FDC07,,456,,"Partial Set (1v) 6.00",,2
-h,6110s387,price3,SS6,FDC07,,457,,"Partial Set (1v) 9.00",,2
-h,6110s392,price3,SS6,FDC07,,458,,"11.01.83 Values (3v) 0.40 0.80 6.00",,2
+h,6110s387,price3,SS6,FDC07,,456,,Partial Set (1v) 6.00,,2
+h,6110s387,price3,SS6,FDC07,,457,,Partial Set (1v) 9.00,,2
+h,6110s392,price3,SS6,FDC07,,458,,11.01.83 Values (3v) 0.40 0.80 6.00,,2
 h,6110s395,price3,SS6,FDC08,,459,,,,2
 h,6110s394,price3,SS6,FDC08,,460,,,,2
 h,6110s393,price3,SS6,FDC08,,461,,,,2
@@ -1529,28 +1529,28 @@ h,6110s396,price3,SS6,FDC08,,466,,,,2
 h,6110s401,price3,SS6,FDC08,,467,,,,2
 h,6110s402,price3,SS6,FDC08,,468,,,,2
 h,6110s403,price3,SS6,FDC08,,469,,,,2
-h,6110s405,price3,SS6,FDC08,,470,,"Partial Set (2v) 3.00 12.00",,2
-h,6110s405,price3,SS6,FDC08,,471,,"Partial Set (2v) 16.00 20.00",,2
-h,6110s404,price3,SS6,FDC08,,472,,"Partial Set (1v) 11.00",,2
-h,6110s404,price3,SS6,FDC08,,473,,"Partial Set (1v) 13.00",,2
+h,6110s405,price3,SS6,FDC08,,470,,Partial Set (2v) 3.00 12.00,,2
+h,6110s405,price3,SS6,FDC08,,471,,Partial Set (2v) 16.00 20.00,,2
+h,6110s404,price3,SS6,FDC08,,472,,Partial Set (1v) 11.00,,2
+h,6110s404,price3,SS6,FDC08,,473,,Partial Set (1v) 13.00,,2
 h,6110s406,price3,SS6,FDC08,,474,,,,2
-h,6110s392,price3,SS6,FDC08,,475,,"11.10.83 Values (4v) 7.00 8.00 9.00 15.00",,2
+h,6110s392,price3,SS6,FDC08,,475,,11.10.83 Values (4v) 7.00 8.00 9.00 15.00,,2
 h,6110s407,price3,SS6,FDC08,,475.1,,,,2
 h,6110s410,price3,SS6,FDC08,,476,,,,2
 h,6110s409,price3,SS6,FDC08,,477,,,,2
 h,6110s408,price3,SS6,FDC08,,478,,,,2
 h,6110s411,price3,SS6,FDC08,,479,,,,2
-h,6110s413,price3,SS6,FDC08,,480,,"Partial Set (1v) 15 (#1/3)",,2
-h,6110s413,price3,SS6,FDC08,,481,,"Partial Set (1v) 15 (#2/3)",,2
-h,6110s413,price3,SS6,FDC08,,482,,"Partial Set (1v) 15 (#3/3)",,2
-h,6110s412,price3,SS6,FDC08,,483,,"Partial Set (1v) 15",,2
-h,6110s412,price3,SS6,FDC08,,484,,"Partial Set (1v) 7",,2
-h,6110s412,price3,SS6,FDC08,,485,,"Partial Set (1v) 16",,2
+h,6110s413,price3,SS6,FDC08,,480,,Partial Set (1v) 15 (#1/3),,2
+h,6110s413,price3,SS6,FDC08,,481,,Partial Set (1v) 15 (#2/3),,2
+h,6110s413,price3,SS6,FDC08,,482,,Partial Set (1v) 15 (#3/3),,2
+h,6110s412,price3,SS6,FDC08,,483,,Partial Set (1v) 15,,2
+h,6110s412,price3,SS6,FDC08,,484,,Partial Set (1v) 7,,2
+h,6110s412,price3,SS6,FDC08,,485,,Partial Set (1v) 16,,2
 h,6110s414,price3,SS6,FDC08,,486,,,,2
 h,6110s415,price3,SS6,FDC08,,487,,,,2
-h,6110s416,price3,SS6,FDC08,,488,,"26.04.84 Values (3v) 30 50 100",,2
-h,6110s419,price3,SS6,FDC08,,489,,"Partial Set (1v) 20 (Wingate)",,2
-h,6110s419,price3,SS6,FDC08,,490,,"Partial Set (1v) 20 (Pinsker)",,2
+h,6110s416,price3,SS6,FDC08,,488,,26.04.84 Values (3v) 30 50 100,,2
+h,6110s419,price3,SS6,FDC08,,489,,Partial Set (1v) 20 (Wingate),,2
+h,6110s419,price3,SS6,FDC08,,490,,Partial Set (1v) 20 (Pinsker),,2
 h,6110s420,price3,SS6,FDC08,,491,,,,2
 h,6110s417,price3,SS6,FDC08,,492,,,,2
 h,6110s418,price3,SS6,FDC08,,493,,,,2
@@ -1560,18 +1560,18 @@ h,6110s421,price3,SS6,FDC08,,496,,,,2
 h,6110s427,price3,SS6,FDC08,,497,,,,2
 h,6110s425,price3,SS6,FDC08,,498,,,,2
 h,6110s426,price3,SS6,FDC08,,499,,,,2
-h,6110s416,price3,SS6,FDC08,,500,,"27.11.84 Values (1v) 500",,2
-h,6110s428,price3,SS6,FDC08,,501,,"Partial Set (2v) 100 200",,2
-h,6110s428,price3,SS6,FDC08,,502,,"Partial Set (2v) 300 500",,2
+h,6110s416,price3,SS6,FDC08,,500,,27.11.84 Values (1v) 500,,2
+h,6110s428,price3,SS6,FDC08,,501,,Partial Set (2v) 100 200,,2
+h,6110s428,price3,SS6,FDC08,,502,,Partial Set (2v) 300 500,,2
 h,6110s429,price3,SS6,FDC08,,503,,,,2
-h,6110s430,price3,SS6,FDC08,,504,,"Partial Set (1v) 50",,2
-h,6110s430,price3,SS6,FDC08,,505,,"Partial Set (2v) 150 250",,2
-h,6110s430,price3,SS6,FDC08,,506,,"Partial Set (1v) 300",,2
+h,6110s430,price3,SS6,FDC08,,504,,Partial Set (1v) 50,,2
+h,6110s430,price3,SS6,FDC08,,505,,Partial Set (2v) 150 250,,2
+h,6110s430,price3,SS6,FDC08,,506,,Partial Set (1v) 300,,2
 h,6110s433,price3,SS6,FDC08,,507,,,,2
 h,6110s431,price3,SS6,FDC08,,508,,,,2
-h,6110s434,price3,SS6,FDC08,,509,,"Partial Set (1v) 200x3",,2
-h,6110s434,price3,SS6,FDC08,,511,,"Partial Set (1v) 800",,2
-h,6110s434,price3,SS6,FDC08,,513,,"Partial Set (1v) 350x3",,2
+h,6110s434,price3,SS6,FDC08,,509,,Partial Set (1v) 200x3,,2
+h,6110s434,price3,SS6,FDC08,,511,,Partial Set (1v) 800,,2
+h,6110s434,price3,SS6,FDC08,,513,,Partial Set (1v) 350x3,,2
 h,6110s432,price3,SS6,FDC08,,515,,,,2
 h,6110s436,price3,SS6,FDC08,,516,,,,2
 h,6110s438,price3,SS6,FDC08,,517,,,,2
@@ -1580,15 +1580,15 @@ h,6110s439,price3,SS6,FDC08,,519,,,,2
 h,6110s440,price3,SS6,FDC08,,520,,,,2
 h,6110s442,price3,SS6,FDC08,,521,,,,2
 h,6110s441,price3,SS6,FDC08,,522,,,,2
-h,6110s443,price3,SS6,FDC09,,523,,"Partial Set (4v) 0.01 0.02 0.03 0.50",,2
-h,6110s443,price3,SS6,FDC09,,524,,"Partial Set (4v) 0.05 0.10 0.20 0.30",,2
+h,6110s443,price3,SS6,FDC09,,523,,Partial Set (4v) 0.01 0.02 0.03 0.50,,2
+h,6110s443,price3,SS6,FDC09,,524,,Partial Set (4v) 0.05 0.10 0.20 0.30,,2
 h,6110s444,price3,SS6,FDC09,,525,,,,2
 h,6110s445,price3,SS6,FDC09,,526,,,,2
 w,6110s446,price3,SS6,FDC09,,527,,,,2
 h,6110s447,price3,SS6,FDC09,,528,,,,2
-h,6110s450,price3,SS6,FDC09,,529,,"Partial set (1v) 0.50 (#1/3)",,2
-h,6110s450,price3,SS6,FDC09,,530,,"Partial set (1v) 0.50 (#2/3)",,2
-h,6110s450,price3,SS6,FDC09,,531,,"Partial set (1v) 0.50 (#3/3)",,2
+h,6110s450,price3,SS6,FDC09,,529,,Partial set (1v) 0.50 (#1/3),,2
+h,6110s450,price3,SS6,FDC09,,530,,Partial set (1v) 0.50 (#2/3),,2
+h,6110s450,price3,SS6,FDC09,,531,,Partial set (1v) 0.50 (#3/3),,2
 h,6110s451,price3,SS6,FDC09,,532,,,,2
 h,6110s448,price3,SS6,FDC09,,533,,,,2
 h,6110s449,price3,SS6,FDC09,,534,,,,2
@@ -1602,8 +1602,8 @@ h,6110s458,price3,SS6,FDC09,,541,,,,2
 h,6110s459,price3,SS6,FDC09,,542,,,,2
 h,6110s460,price3,SS6,FDC09,,543,,,,2
 h,6110s461,price3,SS6,FDC09,,544,,,,2
-h,6110s463,price3,SS6,FDC09,,545,,"Partial Set (2v) 0.30 0.40",,2
-h,6110s463,price3,SS6,FDC09,,546,,"Partial Set (2v) 0.50 0.80",,2
+h,6110s463,price3,SS6,FDC09,,545,,Partial Set (2v) 0.30 0.40,,2
+h,6110s463,price3,SS6,FDC09,,546,,Partial Set (2v) 0.50 0.80,,2
 h,6110s464,price3,SS6,FDC09,,547,,,,2
 h,6110s465,price3,SS6,FDC09,,548,,,,2
 h,6110s467,price3,SS6,FDC09,,549,,,,2
@@ -1707,13 +1707,13 @@ h,6110s578,price3,SS6,FDC10,,653,,,,2
 h,6110s574,price3,SS6,FDC10,,655,,,,2
 h,6110s581,price3,SS6,FDC10,,656,,,,2
 h,6110s582,price3,SS6,FDC10,,657,,,,2
-h,6110s579,price3,SS6,FDC10,,658,,"Partial Set (2v) 0.85 1.00",,2
-h,6110s579,price3,SS6,FDC10,,659,,"Partial Set (2v) 1.30 1.60",,2
+h,6110s579,price3,SS6,FDC10,,658,,Partial Set (2v) 0.85 1.00,,2
+h,6110s579,price3,SS6,FDC10,,659,,Partial Set (2v) 1.30 1.60,,2
 h,6110s587,price3,SS6,FDC10,,660,,,,2
 h,6110s584,price3,SS6,FDC11,,661,,,,2
 h,6110s583,price3,SS6,FDC11,,662,,,,2
-h,6110s585,price3,SS6,FDC11,,663,,"Partial Set (2v) 0.50 0.50 (#1/2)",,2
-h,6110s585,price3,SS6,FDC11,,664,,"Partial Set (2v) 0.50 0.50 (#2/2)",,2
+h,6110s585,price3,SS6,FDC11,,663,,Partial Set (2v) 0.50 0.50 (#1/2),,2
+h,6110s585,price3,SS6,FDC11,,664,,Partial Set (2v) 0.50 0.50 (#2/2),,2
 h,6110s588,price3,SS6,FDC11,,665,,,,2
 h,6110s589,price3,SS6,FDC11,,666,,,,2
 h,6110s590,price3,SS6,FDC11,,667,,,,2
@@ -1738,8 +1738,8 @@ h,6110s611,price3,SS6,FDC11,,688,,,,2
 h,6110s612,price3,SS6,FDC11,,689,,,,2
 h,6110s613,price3,SS6,FDC11,,690,,,,2
 h,6110s614,price3,SS6,FDC11,,691,,,,2
-h,6110s616,price3,SS6,FDC11,,692,,"Partial Set (2v) 0.85 0.85 (#1/2)",,2
-h,6110s616,price3,SS6,FDC11,,693,,"Partial Set (2v) 0.85 0.85 (#2/2)",,2
+h,6110s616,price3,SS6,FDC11,,692,,Partial Set (2v) 0.85 0.85 (#1/2),,2
+h,6110s616,price3,SS6,FDC11,,693,,Partial Set (2v) 0.85 0.85 (#2/2),,2
 h,6110s618,price3,SS6,FDC11,,694,,,,2
 w,6110s615,price3,SS6,FDC11,,695,,,,2
 h,6110s623,price3,SS6,FDC11,,696,,,,2
@@ -1789,7 +1789,7 @@ h,6110s667,price3,SS6,FDC12,,739,,,,2
 h,6110s666,price3,SS6,FDC12,,740,,,,2
 h,6110s669,price3,SS6,FDC12,,741,,,,2
 h,6110s673,price3,SS6,FDC12,,742,,,,2
-h,6110s670,price3,SS6,FDC12,,744,,"Partial Set (7v) 0.40 0.40 0.40 0.40 0.40 0.40 0.40 (#2/2)",,2
+h,6110s670,price3,SS6,FDC12,,744,,Partial Set (7v) 0.40 0.40 0.40 0.40 0.40 0.40 0.40 (#2/2),,2
 h,6110s672,price3,SS6,FDC12,,745,,,,2
 h,6110s677,price3,SS6,FDC12,,746,,,,2
 h,6110s674,price3,SS6,FDC12,,747,,,,2
@@ -1811,7 +1811,7 @@ h,6110s695,price3,SS6,FDC12,,762,,,,2
 h,6110s697,price3,SS6,FDC12,,763,,,,2
 h,6110s693,price3,SS6,FDC12,,764,,,,2
 h,6110s696,price3,SS6,FDC12,,765,,,,2
-h,6110s670,price3,SS6,FDC12,,743,,"Partial Set (7v) 0.40 0.40 0.40 0.40 0.40 0.40 0.40 (#1/2)",,2
+h,6110s670,price3,SS6,FDC12,,743,,Partial Set (7v) 0.40 0.40 0.40 0.40 0.40 0.40 0.40 (#1/2),,2
 h,6110s698,price3,SS6,FDC12,,766,,,,2
 h,6110s702,price3,SS6,FDC12,,767,,,,2
 h,6110s701,price3,SS6,FDC12,,768,,,,2
@@ -1846,8 +1846,8 @@ h,6110s736,price3,SS6,FDC12,,799,,,,2
 h,6110s735,price3,SS6,FDC12,,800,,,,2
 h,6110s737,price3,SS6,FDC13,,801,,,,2
 h,6110s738,price3,SS6,FDC13,,802,,,,2
-h,6110s739,price3,SS6,FDC13,,803,,"Partial Set (2v) 2.15 3.25",,2
-h,6110s739,price3,SS6,FDC13,,804,,"Partial Set (1v) 5.35",,2
+h,6110s739,price3,SS6,FDC13,,803,,Partial Set (2v) 2.15 3.25,,2
+h,6110s739,price3,SS6,FDC13,,804,,Partial Set (1v) 5.35,,2
 h,6110s740,price3,SS6,FDC13,,805,,,,2
 h,6110s742,price3,SS6,FDC13,,806,,,,2
 h,6110s743,price3,SS6,FDC13,,807,,,,2
@@ -1865,25 +1865,25 @@ h,6110s753,price3,SS6,FDC13,,818,,,,2
 h,6110s756,price3,SS6,FDC13,,819,,,,2
 h,6110s755,price3,SS6,FDC13,,820,,,,2
 h,6110s759,price3,SS6,FDC13,,821,,,,2
-h,6110s760,price3,SS6,FDC13,,822,,"Partial Set (2v) 1.20 1.90",,2
-h,6110s760,price3,SS6,FDC13,,823,,"Partial Set (2v) 2.30 5.60",,2
+h,6110s760,price3,SS6,FDC13,,822,,Partial Set (2v) 1.20 1.90,,2
+h,6110s760,price3,SS6,FDC13,,823,,Partial Set (2v) 2.30 5.60,,2
 h,6110s758,price3,SS6,FDC13,,824,,,,2
 h,6110s762,price3,SS6,FDC13,,825,,,,2
 h,6110s763,price3,SS6,FDC13,,826,,,,2
 h,6110s765,price3,SS6,FDC13,,827,,,,2
 h,6110s764,price3,SS6,FDC13,,828,,,,2
-h,6110s766,price3,SS6,FDC13,,829,,"Partial Set (2v) 1.20 1.90",,2
-h,6110s766,price3,SS6,FDC13,,830,,"Partial Set (2v) 2.30 3.40",,2
-h,6110s767,price3,SS6,FDC13,,831,,"Partial Set (2v) 1.40 1.90",,2
-h,6110s767,price3,SS6,FDC13,,832,,"Partial Set (2v) 2.30 2.80",,2
+h,6110s766,price3,SS6,FDC13,,829,,Partial Set (2v) 1.20 1.90,,2
+h,6110s766,price3,SS6,FDC13,,830,,Partial Set (2v) 2.30 3.40,,2
+h,6110s767,price3,SS6,FDC13,,831,,Partial Set (2v) 1.40 1.90,,2
+h,6110s767,price3,SS6,FDC13,,832,,Partial Set (2v) 2.30 2.80,,2
 h,6110s769,price3,SS6,FDC13,,833,,,,2
 h,6110s772,price3,SS6,FDC13,,834,,,,2
 h,6110s770,price3,SS6,FDC13,,835,,,,2
 h,6110s768,price3,SS6,FDC13,,836,,,,2
 h,6110s773,price3,SS6,FDC13,,837,,,,2
 h,6110s774,price3,SS6,FDC13,,838,,,,2
-h,6110s777,price3,SS6,FDC13,,839,,"Partial Set (2v) 1.20 1.20 (#1/2)",,2
-h,6110s777,price3,SS6,FDC13,,840,,"Partial Set (2v) 1.20 1.20 (#2/2)",,2
+h,6110s777,price3,SS6,FDC13,,839,,Partial Set (2v) 1.20 1.20 (#1/2),,2
+h,6110s777,price3,SS6,FDC13,,840,,Partial Set (2v) 1.20 1.20 (#2/2),,2
 h,6110s775,price3,SS6,FDC13,,841,,,,2
 h,6110s776,price3,SS6,FDC13,,842,,,,2
 h,6110s782,price3,SS6,FDC13,,843,,,,2
@@ -1898,16 +1898,16 @@ h,6110s789,price3,SS6,FDC13,,851,,,,2
 h,6110s787,price3,SS6,FDC13,,852,,,,2
 h,6110s791,price3,SS6,FDC13,,853,,,,2
 h,6110s796,price3,SS6,FDC13,,854,,,,2
-h,6110s795,price3,SS6,FDC13,,855,,"Partial set (12v) 0.10 x12 (#1/2)",,2
-h,6110s795,price3,SS6,FDC13,,856,,"Partial set (12v) 0.10 x12 (#2/2)",,2
+h,6110s795,price3,SS6,FDC13,,855,,Partial set (12v) 0.10 x12 (#1/2),,2
+h,6110s795,price3,SS6,FDC13,,856,,Partial set (12v) 0.10 x12 (#2/2),,2
 h,6110s792,price3,SS6,FDC13,,857,,,,2
 h,6110s793,price3,SS6,FDC13,,858,,,,2
 h,6110s794,price3,SS6,FDC13,,859,,,,2
 h,6110s798,price3,SS6,FDC13,,860,,,,2
-h,6110s799,price3,SS6,FDC13,,861,,"Partial Set (2v) 1.20 1.70",,2
-h,6110s799,price3,SS6,FDC13,,862,,"Partial Set (2v) 2.10 2.50",,2
-h,6110s802,price3,SS6,FDC13,,863,,"Partial Set (2v) 1.20 1.20 (#1/2)",,2
-h,6110s802,price3,SS6,FDC13,,864,,"Partial Set (2v) 1.20 1.20 (#2/2)",,2
+h,6110s799,price3,SS6,FDC13,,861,,Partial Set (2v) 1.20 1.70,,2
+h,6110s799,price3,SS6,FDC13,,862,,Partial Set (2v) 2.10 2.50,,2
+h,6110s802,price3,SS6,FDC13,,863,,Partial Set (2v) 1.20 1.20 (#1/2),,2
+h,6110s802,price3,SS6,FDC13,,864,,Partial Set (2v) 1.20 1.20 (#2/2),,2
 h,6110s801,price3,SS6,FDC14,,865,,,,2
 h,6110s804,price3,SS6,FDC14,,867,,,,2
 h,6110s807,price3,SS6,FDC14,,868,,,,2
@@ -1915,8 +1915,8 @@ h,6110s806,price3,SS6,FDC14,,869,,,,2
 h,6110s809,price3,SS6,FDC14,,870,,,,2
 h,6110s805,price3,SS6,FDC14,,871,,,,2
 h,6110s810,price3,SS6,FDC14,,872,,,,2
-h,6110s812,price3,SS6,FDC14,,873,,"Partial Set (2v) 1.20 1.40",,2
-h,6110s812,price3,SS6,FDC14,,874,,"Partial Set (2v) 1.90 2.30",,2
+h,6110s812,price3,SS6,FDC14,,873,,Partial Set (2v) 1.20 1.40,,2
+h,6110s812,price3,SS6,FDC14,,874,,Partial Set (2v) 1.90 2.30,,2
 h,6110s811,price3,SS6,FDC14,,875,,,,2
 h,6110s815,price3,SS6,FDC14,,876,,,,2
 h,6110s814,price3,SS6,FDC14,,877,,,,2
@@ -1928,18 +1928,18 @@ h,6110s818,price3,SS6,FDC14,,883,,,,2
 h,6110s817,price3,SS6,FDC14,,882,,,,2
 h,6110s820,price3,SS6,FDC14,,884,,,,2
 h,6110s828,price3,SS6,FDC14,,887,,,,2
-h,6110s825,price3,SS6,FDC14,,888,,"Partial set (6v) 1.20 x6 (#1/2)",,2
-h,6110s825,price3,SS6,FDC14,,889,,"Partial set (6v) 1.20 x6 (#2/2)",,2
+h,6110s825,price3,SS6,FDC14,,888,,Partial set (6v) 1.20 x6 (#1/2),,2
+h,6110s825,price3,SS6,FDC14,,889,,Partial set (6v) 1.20 x6 (#2/2),,2
 h,6110s824,price3,SS6,FDC14,,890,,,,2
 h,6110s823,price3,SS6,FDC14,,891,,,,2
 h,6110s830,price3,SS6,FDC14,,892,,,,2
-h,6110s834,price3,SS6,FDC14,,893,,"Partial Set (2v) 2.20 2.20 (#1/2)",,2
-h,6110s834,price3,SS6,FDC14,,894,,"Partial Set (2v) 2.20 2.20 (#2/2)",,2
+h,6110s834,price3,SS6,FDC14,,893,,Partial Set (2v) 2.20 2.20 (#1/2),,2
+h,6110s834,price3,SS6,FDC14,,894,,Partial Set (2v) 2.20 2.20 (#2/2),,2
 h,6110s832,price3,SS6,FDC14,,895,,,,2
 h,6110s831,price3,SS6,FDC14,,896,,,,2
 h,6110s833,price3,SS6,FDC14,,897,,,,2
-h,6110s835,price3,SS6,FDC14,,898,,"Partial Set (2v) 2.20 2.20 (#1/2)",,2
-h,6110s835,price3,SS6,FDC14,,899,,"Partial Set (2v) 2.20 2.20 (#2/2)",,2
+h,6110s835,price3,SS6,FDC14,,898,,Partial Set (2v) 2.20 2.20 (#1/2),,2
+h,6110s835,price3,SS6,FDC14,,899,,Partial Set (2v) 2.20 2.20 (#2/2),,2
 h,6110s837,price3,SS6,FDC14,,900,,,,2
 h,6110s836,price3,SS6,FDC14,,901,,,,2
 h,6110s840,price3,SS6,FDC14,,902,,,,2
@@ -1947,10 +1947,10 @@ h,6110s839,price3,SS6,FDC14,,903,,,,2
 h,6110s838,price3,SS6,FDC14,,904,,,,2
 h,6110s842,price3,SS6,FDC14,,905,,,,2
 h,6110s841,price3,SS6,FDC14,,906,,,,2
-h,6110s844,price3,SS6,FDC14,,908,,"Partial Set (2v) 1.20 3.30",,2
-h,6110s844,price3,SS6,FDC14,,909,,"Partial Set (2v) 4.70 5.90",,2
-h,6110s843,price3,SS6,FDC14,,910,,"Partial Set (2v) 2.20 2.20 (#1/2)",,2
-h,6110s843,price3,SS6,FDC14,,911,,"Partial Set (2v) 2.20 2.20 (#2/2)",,2
+h,6110s844,price3,SS6,FDC14,,908,,Partial Set (2v) 1.20 3.30,,2
+h,6110s844,price3,SS6,FDC14,,909,,Partial Set (2v) 4.70 5.90,,2
+h,6110s843,price3,SS6,FDC14,,910,,Partial Set (2v) 2.20 2.20 (#1/2),,2
+h,6110s843,price3,SS6,FDC14,,911,,Partial Set (2v) 2.20 2.20 (#2/2),,2
 h,6110s845,price3,SS6,FDC14,,912,,,,2
 h,6110s846,price3,SS6,FDC14,,913,,,,2
 h,6110s850,price3,SS6,FDC14,,914,,,,2
@@ -1967,22 +1967,22 @@ h,6110s858,price3,SS6,FDC14,,924,,,,2
 h,6110s860,price3,SS6,FDC14,,925,,,,2
 h,6110s853,price3,SS6,FDC14,,926,,,,2
 h,6110s861,price3,SS6,FDC14,,927,,,,2
-h,6110s862,price3,SS6,FDC14,,928,,"Partial Set (2v) 1.90 2.50",,2
-h,6110s862,price3,SS6,FDC14,,929,,"Partial Set (2v) 4.70 5.90",,2
-h,6110s864,price3,SS6,FDC14,,930,,"Partial Set (1v) 3.30 (#1/3)",,2
-h,6110s864,price3,SS6,FDC14,,931,,"Partial Set (1v) 3.30 (#2/3)",,2
-h,6110s864,price3,SS6,FDC14,,932,,"Partial Set (1v) 3.30 (#3/3)",,2
+h,6110s862,price3,SS6,FDC14,,928,,Partial Set (2v) 1.90 2.50,,2
+h,6110s862,price3,SS6,FDC14,,929,,Partial Set (2v) 4.70 5.90,,2
+h,6110s864,price3,SS6,FDC14,,930,,Partial Set (1v) 3.30 (#1/3),,2
+h,6110s864,price3,SS6,FDC14,,931,,Partial Set (1v) 3.30 (#2/3),,2
+h,6110s864,price3,SS6,FDC14,,932,,Partial Set (1v) 3.30 (#3/3),,2
 h,6110s867,price3,SS6,FDC15,,938,,,,2
 h,6110s870,price3,SS6,FDC15,,939,,,,2
 h,6110s869,price3,SS6,FDC15,,940,,,,2
 h,6110s874,price3,SS6,FDC15,,943,,,,2
 h,6110s877,price3,SS6,FDC15,,944,,,,2
 h,6110s879,price3,SS6,FDC15,,945,,,,2
-h,6110s875,price3,SS6,FDC15,,946,,"Partial Set (2v) 1.30 1.30 (#1/2)",,2
-h,6110s875,price3,SS6,FDC15,,947,,"Partial Set (2v) 1.30 1.30 (#2/2)",,2
+h,6110s875,price3,SS6,FDC15,,946,,Partial Set (2v) 1.30 1.30 (#1/2),,2
+h,6110s875,price3,SS6,FDC15,,947,,Partial Set (2v) 1.30 1.30 (#2/2),,2
 h,6110s878,price3,SS6,FDC15,,948,,,,2
-h,6110s880,price3,SS6,FDC15,,949,,"Partial Set (2v) 1.30 1.30 (#1/2)",,2
-h,6110s880,price3,SS6,FDC15,,950,,"Partial Set (2v) 1.30 1.30 (#2/2)",,2
+h,6110s880,price3,SS6,FDC15,,949,,Partial Set (2v) 1.30 1.30 (#1/2),,2
+h,6110s880,price3,SS6,FDC15,,950,,Partial Set (2v) 1.30 1.30 (#2/2),,2
 h,6110s881,price3,SS6,FDC15,,950,,,,2
 h,6110s886,price3,SS6,FDC15,,951,,,,2
 h,6110s882,price3,SS6,FDC15,,952,,,,2
@@ -1991,8 +1991,8 @@ h,6110s888,price3,SS6,FDC15,,954,,,,2
 h,6110s889,price3,SS6,FDC15,,955,,,,2
 h,6110s891,price3,SS6,FDC15,,956,,,,2
 h,6110s895,price3,SS6,FDC15,,957,,,,2
-h,6110s892,price3,SS6,FDC15,,958,,"Partial Set (2v) 1.30 1.30 (#1/2)",,2
-h,6110s892,price3,SS6,FDC15,,959,,"Partial Set (2v) 1.30 1.30 (#2/2)",,2
+h,6110s892,price3,SS6,FDC15,,958,,Partial Set (2v) 1.30 1.30 (#1/2),,2
+h,6110s892,price3,SS6,FDC15,,959,,Partial Set (2v) 1.30 1.30 (#2/2),,2
 w,6110s898,price3,SS6,FDC15,,960,,,,2
 h,6110s896,price3,SS6,FDC15,,961,,,,2
 h,6110s897,price3,SS6,FDC15,,962,,,,2
@@ -2004,11 +2004,11 @@ h,6110s906,price3,SS6,FDC15,,967,,,,2
 h,6110s907,price3,SS6,FDC15,,968,,,,2
 h,6110s908,price3,SS6,FDC15,,969,,,,2
 h,6110s909,price3,SS6,FDC15,,970,,,,2
-h,6110s911,price3,SS6,FDC15,,971,,"Partial Set (2v) 1.30 1.30",,2
-h,6110s911,price3,SS6,FDC15,,972,,"Partial Set (2v) 2.20 2.20",,2
+h,6110s911,price3,SS6,FDC15,,971,,Partial Set (2v) 1.30 1.30,,2
+h,6110s911,price3,SS6,FDC15,,972,,Partial Set (2v) 2.20 2.20,,2
 h,6110s913,price3,SS6,FDC15,,973,,,,2
-h,6110s910,price3,SS6,FDC15,,974,,"Partial Set (2v) 2.10 2.20",,2
-h,6110s910,price3,SS6,FDC15,,975,,"Partial Set (2v) 3.30 6.20",,2
+h,6110s910,price3,SS6,FDC15,,974,,Partial Set (2v) 2.10 2.20,,2
+h,6110s910,price3,SS6,FDC15,,975,,Partial Set (2v) 3.30 6.20,,2
 h,6110s919,price3,SS6,FDC15,,976,,,,2
 h,6110s918,price3,SS6,FDC15,,977,,,,2
 h,6110s917,price3,SS6,FDC15,,978,,,,2
@@ -2021,27 +2021,27 @@ h,6110s925,price3,SS6,FDC15,,984,,,,2
 h,6110s926,price3,SS6,FDC15,,985,,,,2
 h,6110s933,price3,SS6,FDC15,,986,,,,2
 h,6110s930,price3,SS6,FDC15,,987,,,,2
-h,6110s932,price3,SS6,FDC15,,988,,"Partial Set (2v) 1.40 2.20",,2
-h,6110s932,price3,SS6,FDC15,,989,,"Partial Set (2v) 2.20 6.20",,2
+h,6110s932,price3,SS6,FDC15,,988,,Partial Set (2v) 1.40 2.20,,2
+h,6110s932,price3,SS6,FDC15,,989,,Partial Set (2v) 2.20 6.20,,2
 h,6110s931,price3,SS6,FDC15,,990,,,,2
 h,6110s929,price3,SS6,FDC15,,991,,,,2
 h,6110s935,price3,SS6,FDC15,,992,,,,2
-h,6110s938,price3,SS6,FDC15,,993,,"Partial Set (2v) 2.20 2.20",,2
-h,6110s938,price3,SS6,FDC15,,994,,"Partial Set (2v) 6.20 6.20",,2
+h,6110s938,price3,SS6,FDC15,,993,,Partial Set (2v) 2.20 2.20,,2
+h,6110s938,price3,SS6,FDC15,,994,,Partial Set (2v) 6.20 6.20,,2
 h,6110s939,price3,SS6,FDC15,,995,,,,2
 h,6110s940,price3,SS6,FDC15,,996,,,,2
 w,6110s941,price3,SS6,FDC15,,997,,,,2
 w,6110s947,price3,SS6,FDC16,,999,,,,2
 w,6110s945,price3,SS6,FDC16,,1000,,,,2
 w,6110s942,price3,SS6,FDC16,,1001,,,,2
-w,6110s943,price3,SS6,FDC16,,1002,,"Partial Set (2v) 1.50 2.40",,2
-w,6110s943,price3,SS6,FDC16,,1003,,"Partial Set (2v) 3.60 7.40",,2
+w,6110s943,price3,SS6,FDC16,,1002,,Partial Set (2v) 1.50 2.40,,2
+w,6110s943,price3,SS6,FDC16,,1003,,Partial Set (2v) 3.60 7.40,,2
 w,6110s948,price3,SS6,FDC16,,1004,,,,2
 w,6110s950,price3,SS6,FDC16,,1005,,,,2
 w,6110s952,price3,SS6,FDC16,,1006,,,,2
 w,6110s949,price3,SS6,FDC16,,1007,,,,2
-w,6110s954,price3,SS6,FDC16,,1008,,"Partial Set (3v) 2.50 2.50 2.50 (#1/2)",,2
-w,6110s954,price3,SS6,FDC16,,1009,,"Partial Set (3v) 2.50 2.50 2.50 (#2/2)",,2
+w,6110s954,price3,SS6,FDC16,,1008,,Partial Set (3v) 2.50 2.50 2.50 (#1/2),,2
+w,6110s954,price3,SS6,FDC16,,1009,,Partial Set (3v) 2.50 2.50 2.50 (#2/2),,2
 w,6110s957,price3,SS6,FDC16,,1010,,,,2
 w,6110s958,price3,SS6,FDC16,,1011,,,,2
 w,6110s961,price3,SS6,FDC16,,1012,,,,2
@@ -2050,16 +2050,16 @@ w,6110s960,price3,SS6,FDC16,,1014,,,,2
 w,6110s966,price3,SS6,FDC16,,1015,,,,2
 w,6110s963,price3,SS6,FDC16,,1016,,,,2
 w,6110s964,price3,SS6,FDC16,,1017,,,,2
-w,6110s968,price3,SS6,FDC16,,1018,,"Partial Set (3v) 2.50 2.50 (#1/2)",,2
-w,6110s968,price3,SS6,FDC16,,1019,,"Partial Set (3v) 2.50 2.50 (#2/2)",,2
+w,6110s968,price3,SS6,FDC16,,1018,,Partial Set (3v) 2.50 2.50 (#1/2),,2
+w,6110s968,price3,SS6,FDC16,,1019,,Partial Set (3v) 2.50 2.50 (#2/2),,2
 w,6110s971,price3,SS6,FDC16,,1022,,,,2
 w,6110s970,price3,SS6,FDC16,,1023,,,,2
-w,6110s967,price3,SS6,FDC16,,1020,,"Partial Set (2v) 1.50 2.50",,2
-w,6110s967,price3,SS6,FDC16,,1021,,"Partial Set (2v) 3.30 7.30",,2
+w,6110s967,price3,SS6,FDC16,,1020,,Partial Set (2v) 1.50 2.50,,2
+w,6110s967,price3,SS6,FDC16,,1021,,Partial Set (2v) 3.30 7.30,,2
 h,6110s973,price3,SS6,FDC16,,1024,,,,2
 h,6110s974,price3,SS6,FDC16,,1025,,,,2
-h,6110s972,price3,SS6,FDC16,,1026,,"Partial Set (1v) 2.50",,2
-h,6110s972,price3,SS6,FDC16,,1027,,"Partial Set (1v) 3.30",,2
+h,6110s972,price3,SS6,FDC16,,1026,,Partial Set (1v) 2.50,,2
+h,6110s972,price3,SS6,FDC16,,1027,,Partial Set (1v) 3.30,,2
 h,6110s981,price3,SS6,FDC16,,1028,,,,2
 h,6110s978,price3,SS6,FDC16,,1029,,,,2
 h,6110s977,price3,SS6,FDC16,,1030,,,,2
@@ -2068,8 +2068,8 @@ h,6110s982,price3,SS6,FDC16,,1032,,,,2
 h,6110s983,price3,SS6,FDC16,,1033,,,,2
 h,6110s985,price3,SS6,FDC16,,1034,,,,2
 h,6110s986,price3,SS6,FDC16,,1035,,,,2
-h,6110s987,price3,SS6,FDC16,,1036,,"Partial Set (2v) 2.20 2.20 (#1/2)",,2
-h,6110s987,price3,SS6,FDC16,,1037,,"Partial Set (2v) 2.20 2.20 (#2/2)",,2
+h,6110s987,price3,SS6,FDC16,,1036,,Partial Set (2v) 2.20 2.20 (#1/2),,2
+h,6110s987,price3,SS6,FDC16,,1037,,Partial Set (2v) 2.20 2.20 (#2/2),,2
 h,6110s992,price3,SS6,FDC16,,1038,,,,2
 h,6110s990,price3,SS6,FDC16,,1039,,,,2
 h,6110s995,price3,SS6,FDC16,,1040,,,,2
@@ -2077,8 +2077,8 @@ h,6110s991,price3,SS6,FDC16,,1041,,,,2
 h,6110s993,price3,SS6,FDC16,,1042,,,,2
 h,6110s989,price3,SS6,FDC16,,1043,,,,2
 h,6110s996,price3,SS6,FDC16,,1044,,,,2
-h,6110s997,price3,SS6,FDC16,,1046,,"Partial Set (3v) 2.25 2.25 2.25 (#1/2)",,2
-h,6110s997,price3,SS6,FDC16,,1047,,"Partial Set (3v) 2.25 2.25 2.25 (#2/2)",,2
+h,6110s997,price3,SS6,FDC16,,1046,,Partial Set (3v) 2.25 2.25 2.25 (#1/2),,2
+h,6110s997,price3,SS6,FDC16,,1047,,Partial Set (3v) 2.25 2.25 2.25 (#2/2),,2
 h,6110s997,price1,SS6,FDC16,,1047,,,,2
 h,6110s1003,price3,SS6,FDC16,,1048,,,,2
 h,6110s1002,price3,SS6,FDC16,,1049,,,,2
@@ -2094,16 +2094,16 @@ h,6110s1019,price3,SS6,FDC16,,1058,,,,2
 h,6110s1015,price3,SS6,FDC16,,1059,,,,2
 h,6110s1017,price3,SS6,FDC16,,1060,,,,2
 h,6110s1016,price3,SS6,FDC16,,1061,,,,2
-h,6110s1014,price3,SS6,FDC16,,1062,,"Partial Set (3v) 2.25 2.25 2.25 (#1/2)",,2
-h,6110s1014,price3,SS6,FDC16,,1063,,"Partial Set (3v) 2.25 2.25 2.25 (#2/2)",,2
+h,6110s1014,price3,SS6,FDC16,,1062,,Partial Set (3v) 2.25 2.25 2.25 (#1/2),,2
+h,6110s1014,price3,SS6,FDC16,,1063,,Partial Set (3v) 2.25 2.25 2.25 (#2/2),,2
 h,6110s1013,price3,SS6,FDC16,,1064,,,,2
 h,6110s1020,price3,SS6,FDC17,,1065,,,,2
 h,6110s1022,price3,SS6,FDC17,,1066,,,,2
 h,6110s1023,price3,SS6,FDC17,,1067,,,,2
 h,6110s1025,price3,SS6,FDC17,,1068,,,,2
 h,6110s1030,price3,SS6,FDC17,,1069,,,,2
-h,6110s1031,price3,SS6,FDC17,,1070,,"Partial Set (2v) 1.55 1.55",,2
-h,6110s1031,price3,SS6,FDC17,,1071,,"Partial Set (2v) 2.25 2.25",,2
+h,6110s1031,price3,SS6,FDC17,,1070,,Partial Set (2v) 1.55 1.55,,2
+h,6110s1031,price3,SS6,FDC17,,1071,,Partial Set (2v) 2.25 2.25,,2
 h,6110s1032,price3,SS6,FDC17,,1072,,,,2
 w,6110s1034,price3,SS6,FDC17,,1073,,,,2
 h,6110s1036,price3,SS6,FDC17,,1074,,,,2
@@ -2114,15 +2114,15 @@ h,6110s1044,price3,SS6,FDC17,,1078,,,,2
 h,6110s1040,price3,SS6,FDC17,,1079,,,,2
 h,6110s1042,price3,SS6,FDC17,,1080,,,,2
 h,6110s1046,price3,SS6,FDC17,,1081,,,,2
-h,6110s1049,price3,SS6,FDC17,,1082,,"Partial Set (3v) Avocado Orange Pomegranate",,2
-h,6110s1049,price3,SS6,FDC17,,1083,,"Partial Set (2v) Grape Lemon",,2
+h,6110s1049,price3,SS6,FDC17,,1082,,Partial Set (3v) Avocado Orange Pomegranate,,2
+h,6110s1049,price3,SS6,FDC17,,1083,,Partial Set (2v) Grape Lemon,,2
 h,6110s1048,price3,SS6,FDC17,,1084,,,,2
 h,6110s1053,price3,SS6,FDC17,,1085,,,,2
 h,6110s1051,price3,SS6,FDC17,,1086,,,,2
 h,6110s1054,price3,SS6,FDC17,,1087,,,,2
-h,6110s1055,price3,SS6,FDC17,,1088,,"Partial Set (4v) 1.60 1.60 1.60 1.60 (#1/3)",,2
-h,6110s1055,price3,SS6,FDC17,,1089,,"Partial Set (4v) 1.60 1.60 1.60 1.60 (#2/3)",,2
-h,6110s1055,price3,SS6,FDC17,,1089,,"Partial Set (4v) 1.60 1.60 1.60 1.60 (#3/3)",,2
+h,6110s1055,price3,SS6,FDC17,,1088,,Partial Set (4v) 1.60 1.60 1.60 1.60 (#1/3),,2
+h,6110s1055,price3,SS6,FDC17,,1089,,Partial Set (4v) 1.60 1.60 1.60 1.60 (#2/3),,2
+h,6110s1055,price3,SS6,FDC17,,1089,,Partial Set (4v) 1.60 1.60 1.60 1.60 (#3/3),,2
 h,6110s1063,price3,SS6,FDC17,,1091,,,,2
 h,6110s1060,price3,SS6,FDC17,,1092,,,,2
 h,6110s1059,price3,SS6,FDC17,,1093,,,,2
@@ -2134,8 +2134,8 @@ h,6110s1065,price3,SS6,FDC17,,1098,,,,2
 h,6110s1067,price3,SS6,FDC17,,1099,,,,2
 h,6110s1070,price3,SS6,FDC17,,1100,,,,2
 h,6110s1073,price3,SS6,FDC17,,1101,,,,2
-h,6110s1072,price3,SS6,FDC17,,1102,,"Partial Set (2v) 2.40 2..40",,2
-h,6110s1072,price3,SS6,FDC17,,1103,,"Partial Set (2v) 3.60 5.00",,2
+h,6110s1072,price3,SS6,FDC17,,1102,,Partial Set (2v) 2.40 2..40,,2
+h,6110s1072,price3,SS6,FDC17,,1103,,Partial Set (2v) 3.60 5.00,,2
 h,6110s1075,price3,SS6,FDC17,,1104,,,,2
 h,6110s1081,price3,SS6,FDC17,,1105,,,,2
 h,6110s1079,price3,SS6,FDC17,,1106,,,,2
@@ -2150,82 +2150,82 @@ h,6110s1087,price3,SS6,FDC17,,1114,,,,2
 h,6110s1097,price3,SS6,FDC17,,1115,,,,2
 h,6110s1096,price3,SS6,FDC17,,1116,,,,2
 h,6110s1089,price3,SS6,FDC17,,1117,,,,2
-h,6110s1092,price3,SS6,FDC17,,1118,,"Partial Set (3v) 1.70 1.70 1.70",,2
-h,6110s1092,price3,SS6,FDC17,,1119,,"Partial Set (2v) 1.70 1.70",,2
+h,6110s1092,price3,SS6,FDC17,,1118,,Partial Set (3v) 1.70 1.70 1.70,,2
+h,6110s1092,price3,SS6,FDC17,,1119,,Partial Set (2v) 1.70 1.70,,2
 h,6110s1094,price3,SS6,FDC17,,1120,,,,2
 h,6110s1091,price3,SS6,FDC17,,1121,,,,2
 h,6110s1105,price3,SS6,FDC17,,1122,,,,2
 h,6110s1100,price3,SS6,FDC17,,1123,,,,2
 h,6110s1102,price3,SS6,FDC17,,1124,,,,2
 h,6110s1106,price3,SS6,FDC17,,1125,,,,2
-h,6110s1101,price3,SS6,FDC17,,1126,,"Partial Set (2v) 1.70 1.70 (#1/3)",,2
-h,6110s1101,price3,SS6,FDC17,,1127,,"Partial Set (2v) 1.70 1.70 (#2/3)",,2
-h,6110s1101,price3,SS6,FDC17,,1127,,"Partial Set (2v) 1.70 1.70 (#3/3)",,2
+h,6110s1101,price3,SS6,FDC17,,1126,,Partial Set (2v) 1.70 1.70 (#1/3),,2
+h,6110s1101,price3,SS6,FDC17,,1127,,Partial Set (2v) 1.70 1.70 (#2/3),,2
+h,6110s1101,price3,SS6,FDC17,,1127,,Partial Set (2v) 1.70 1.70 (#3/3),,2
 h,6110s1098,price3,SS6,FDC17,,1128,,,,2
 h,6110s1107,price3,SS6,FDC18,,1129,,,,2
 h,6110s1112,price3,SS6,FDC18,,1130,,,,2
 h,6110s1118,price3,SS6,FDC18,,1131,,,,2
-h,6110s1115,price3,SS6,FDC18,,1132,,"Partial Set (3v) 1.70 1.70 1.70",,2
-h,6110s1115,price3,SS6,FDC18,,1133,,"Partial Set (2v) 1.70 1.70",,2
+h,6110s1115,price3,SS6,FDC18,,1132,,Partial Set (3v) 1.70 1.70 1.70,,2
+h,6110s1115,price3,SS6,FDC18,,1133,,Partial Set (2v) 1.70 1.70,,2
 h,6110s1109,price3,SS6,FDC18,,1134,,,,2
 h,6110s1110,price3,SS6,FDC18,,1135,,,,2
 h,6110s1121,price3,SS6,FDC18,,1136,,,,2
 h,6110s1126,price3,SS6,FDC18,,1137,,,,2
-h,6110s1125,price3,SS6,FDC18,,1138,,"Partial Set (2v) 1.70 1.70",,2
-h,6110s1125,price3,SS6,FDC18,,1139,,"Partial Set (2v) 2.50 2.50",,2
-h,6110s1122,price3,SS6,FDC18,,1140,,"Partial Set (2v) 1.70 1.70 (#1/2)",,2
-h,6110s1122,price3,SS6,FDC18,,1141,,"Partial Set (2v) 1.70 1.70 (#2/2)",,2
+h,6110s1125,price3,SS6,FDC18,,1138,,Partial Set (2v) 1.70 1.70,,2
+h,6110s1125,price3,SS6,FDC18,,1139,,Partial Set (2v) 2.50 2.50,,2
+h,6110s1122,price3,SS6,FDC18,,1140,,Partial Set (2v) 1.70 1.70 (#1/2),,2
+h,6110s1122,price3,SS6,FDC18,,1141,,Partial Set (2v) 1.70 1.70 (#2/2),,2
 h,6110s1124,price3,SS6,FDC18,,1142,,,,2
 h,6110s1134,price3,SS6,FDC18,,1143,,,,2
 h,6110s1137,price3,SS6,FDC18,,1144,,,,2
 h,6110s1133,price3,SS6,FDC18,,1145,,,,2
-h,6110s1131,price3,SS6,FDC18,,1146,,"Partial Set (3v) ND ND ND (#1/2)",,2
-h,6110s1131,price3,SS6,FDC18,,1147,,"Partial Set (3v) ND ND ND (#2/2)",,2
+h,6110s1131,price3,SS6,FDC18,,1146,,Partial Set (3v) ND ND ND (#1/2),,2
+h,6110s1131,price3,SS6,FDC18,,1147,,Partial Set (3v) ND ND ND (#2/2),,2
 h,6110s1129,price3,SS6,FDC18,,1148,,,,2
 h,6110s1136,price3,SS6,FDC18,,1149,,,,2
 h,6110s1140,price3,SS6,FDC18,,1150,,,,2
 h,6110s1139,price3,SS6,FDC18,,1151,,,,2
 h,6110s1141,price3,SS6,FDC18,,1152,,,,2
-h,6110s1142,price3,SS6,FDC18,,1154,,"Partial Set (2v) 1.70 1.70 (#1/5)",,2
-h,6110s1142,price3,SS6,FDC18,,1155,,"Partial Set (2v) 1.70 1.70 (#2/5)",,2
-h,6110s1142,price3,SS6,FDC18,,1155,,"Partial Set (2v) 1.70 1.70 (#3/5)",,2
-h,6110s1142,price3,SS6,FDC18,,1156,,"Partial Set (2v) 1.70 1.70 (#4/5)",,2
-h,6110s1142,price3,SS6,FDC18,,1156,,"Partial Set (2v) 1.70 1.70 (#5/5)",,2
+h,6110s1142,price3,SS6,FDC18,,1154,,Partial Set (2v) 1.70 1.70 (#1/5),,2
+h,6110s1142,price3,SS6,FDC18,,1155,,Partial Set (2v) 1.70 1.70 (#2/5),,2
+h,6110s1142,price3,SS6,FDC18,,1155,,Partial Set (2v) 1.70 1.70 (#3/5),,2
+h,6110s1142,price3,SS6,FDC18,,1156,,Partial Set (2v) 1.70 1.70 (#4/5),,2
+h,6110s1142,price3,SS6,FDC18,,1156,,Partial Set (2v) 1.70 1.70 (#5/5),,2
 h,6110s1145,price3,SS6,FDC18,,1157,,,,2
-h,6110s1146,price3,SS6,FDC18,,1158,,"Partial Set (4v) 1.70 1.70 1.70 1.70 (#1/3)",,2
-h,6110s1146,price3,SS6,FDC18,,1159,,"Partial Set (4v) 1.70 1.70 1.70 1.70 (#2/3)",,2
-h,6110s1146,price3,SS6,FDC18,,1159,,"Partial Set (4v) 1.70 1.70 1.70 1.70 (#3/3)",,2
+h,6110s1146,price3,SS6,FDC18,,1158,,Partial Set (4v) 1.70 1.70 1.70 1.70 (#1/3),,2
+h,6110s1146,price3,SS6,FDC18,,1159,,Partial Set (4v) 1.70 1.70 1.70 1.70 (#2/3),,2
+h,6110s1146,price3,SS6,FDC18,,1159,,Partial Set (4v) 1.70 1.70 1.70 1.70 (#3/3),,2
 h,6110s1147,price3,SS6,FDC18,,1160,,,,2
 h,6110s1148,price3,SS6,FDC18,,1161,,,,2
 h,6110s1153,price3,SS6,FDC18,,1162,,,,2
 h,6110s1151,price3,SS6,FDC18,,1163,,,,2
 h,6110s1152,price3,SS6,FDC18,,1164,,,,2
-h,6110s1150,price3,SS6,FDC18,,1165,,"Partial Set (2v) 1.70 1.70 (#1/5)",,2
-h,6110s1150,price3,SS6,FDC18,,1166,,"Partial Set (2v) 1.70 1.70 (#2/5)",,2
-h,6110s1150,price3,SS6,FDC18,,1166,,"Partial Set (2v) 1.70 1.70 (#3/5)",,2
-h,6110s1150,price3,SS6,FDC18,,1167,,"Partial Set (2v) 1.70 1.70 (#4/5)",,2
-h,6110s1150,price3,SS6,FDC18,,1167,,"Partial Set (2v) 1.70 1.70 (#5/5)",,2
-h,6110s1162,price3,SS6,FDC18,,1168,,"Partial Set (2v) 2.60 2.60 (#1/2)",,2
-h,6110s1162,price3,SS6,FDC18,,1169,,"Partial Set (2v) 2.60 2.60 (#2/2)",,2
+h,6110s1150,price3,SS6,FDC18,,1165,,Partial Set (2v) 1.70 1.70 (#1/5),,2
+h,6110s1150,price3,SS6,FDC18,,1166,,Partial Set (2v) 1.70 1.70 (#2/5),,2
+h,6110s1150,price3,SS6,FDC18,,1166,,Partial Set (2v) 1.70 1.70 (#3/5),,2
+h,6110s1150,price3,SS6,FDC18,,1167,,Partial Set (2v) 1.70 1.70 (#4/5),,2
+h,6110s1150,price3,SS6,FDC18,,1167,,Partial Set (2v) 1.70 1.70 (#5/5),,2
+h,6110s1162,price3,SS6,FDC18,,1168,,Partial Set (2v) 2.60 2.60 (#1/2),,2
+h,6110s1162,price3,SS6,FDC18,,1169,,Partial Set (2v) 2.60 2.60 (#2/2),,2
 h,6110s1159,price3,SS6,FDC18,,1170,,,,2
 h,6110s1161,price3,SS6,FDC18,,1171,,,,2
-h,6110s1155,price3,SS6,FDC18,,1172,,"Partial Set (1v) 4.00",,2
-h,6110s1155,price3,SS6,FDC18,,1173,,"Partial Set (1v) 5.90",,2
+h,6110s1155,price3,SS6,FDC18,,1172,,Partial Set (1v) 4.00,,2
+h,6110s1155,price3,SS6,FDC18,,1173,,Partial Set (1v) 5.90,,2
 h,6110s1157,price3,SS6,FDC18,,1174,,,,2
 h,6110s1156,price3,SS6,FDC18,,1175,,,,2
 h,6110s1164,price3,SS6,FDC18,,1176,,,,2
 h,6110s1168,price3,SS6,FDC18,,1177,,,,2
 h,6110s1167,price3,SS6,FDC18,,1178,,,,2
 h,6110s1169,price3,SS6,FDC18,,1179,,,,2
-h,6110s1170,price3,SS6,FDC18,,1180,,"Partial Set (2v) 3.00 3.00 (#1/2)",,2
-h,6110s1170,price3,SS6,FDC18,,1181,,"Partial Set (2v) 3.00 3.00 (#2/2)",,2
-h,6110s1165,price3,SS6,FDC18,,1182,,"Partial Set (2v) 2.00 2.00 (#1/4)",,2
-h,6110s1165,price3,SS6,FDC18,,1183,,"Partial Set (2v) 2.00 2.00 (#2/4)",,2
-h,6110s1165,price3,SS6,FDC18,,1183,,"Partial Set (2v) 2.00 2.00 (#3/4)",,2
-h,6110s1165,price3,SS6,FDC18,,1184,,"Partial Set (2v) 2.00 2.00 (#4/4)",,2
+h,6110s1170,price3,SS6,FDC18,,1180,,Partial Set (2v) 3.00 3.00 (#1/2),,2
+h,6110s1170,price3,SS6,FDC18,,1181,,Partial Set (2v) 3.00 3.00 (#2/2),,2
+h,6110s1165,price3,SS6,FDC18,,1182,,Partial Set (2v) 2.00 2.00 (#1/4),,2
+h,6110s1165,price3,SS6,FDC18,,1183,,Partial Set (2v) 2.00 2.00 (#2/4),,2
+h,6110s1165,price3,SS6,FDC18,,1183,,Partial Set (2v) 2.00 2.00 (#3/4),,2
+h,6110s1165,price3,SS6,FDC18,,1184,,Partial Set (2v) 2.00 2.00 (#4/4),,2
 h,6110s1175,price3,SS6,FDC18,,1185,,,,2
-h,6110s1172,price3,SS6,FDC18,,1186,,"Partial Set (2v) 3.00 3.00 (#1/2)",,2
-h,6110s1172,price3,SS6,FDC18,,1187,,"Partial Set (2v) 3.00 3.00 (#2/2)",,2
+h,6110s1172,price3,SS6,FDC18,,1186,,Partial Set (2v) 3.00 3.00 (#1/2),,2
+h,6110s1172,price3,SS6,FDC18,,1187,,Partial Set (2v) 3.00 3.00 (#2/2),,2
 h,6110s1174,price3,SS6,FDC18,,1188,,,,2
 h,6110s1177,price3,SS6,FDC18,,1189,,,,2
 h,6110s1178,price3,SS6,FDC18,,1190,,,,2
@@ -2252,15 +2252,15 @@ h,6110s1207,price3,SS6,FDC19,,1210,,,,2
 h,6110s1208,price3,SS6,FDC19,,1211,,,,2
 h,6110s1210,price3,SS6,FDC19,,1212,,,,2
 h,6110s1213,price3,SS6,FDC19,,1213,,,,2
-h,6110s1211,price3,SS6,FDC19,,1214,,"Partial Set (2v) 2.00 2.00 (#1/5)",,2
-h,6110s1211,price3,SS6,FDC19,,1215,,"Partial Set (2v) 2.00 2.00 (#2/5)",,2
-h,6110s1211,price3,SS6,FDC19,,1215,,"Partial Set (2v) 2.00 2.00 (#3/5)",,2
-h,6110s1211,price3,SS6,FDC19,,1216,,"Partial Set (2v) 2.00 2.00 (#4/5)",,2
-h,6110s1211,price3,SS6,FDC19,,1216,,"Partial Set (2v) 2.00 2.00 (#5/5)",,2
+h,6110s1211,price3,SS6,FDC19,,1214,,Partial Set (2v) 2.00 2.00 (#1/5),,2
+h,6110s1211,price3,SS6,FDC19,,1215,,Partial Set (2v) 2.00 2.00 (#2/5),,2
+h,6110s1211,price3,SS6,FDC19,,1215,,Partial Set (2v) 2.00 2.00 (#3/5),,2
+h,6110s1211,price3,SS6,FDC19,,1216,,Partial Set (2v) 2.00 2.00 (#4/5),,2
+h,6110s1211,price3,SS6,FDC19,,1216,,Partial Set (2v) 2.00 2.00 (#5/5),,2
 h,6110e733,price1,SCH,ISRAEL03,Tab,173.1,,,,3
 h,6110e827,price1,SCH,ISRAEL03,Tab,196,,,,3
 h,6110e956,price1,SCH,ISRAEL04,Tab,220,,,,3
-h,6110e976,price1,SCH,ISRAEL04,Tab,226,,"bklt pane (half booklet) (3v)",,3
+h,6110e976,price1,SCH,ISRAEL04,Tab,226,,bklt pane (half booklet) (3v),,3
 h,6110b1,price1,SS6,BKLT01,,1,,,,3
 h,6110b2,price1,SS6,BKLT01,,2,,,,3
 h,6110b2a,price1,SS6,BKLT01,,3,,,,3
@@ -2311,7 +2311,7 @@ h,6110e537,price1,SS6,BKLT01,,23,,,,3
 w,6110e537A,price1,SS6,BKLT01,,23,,,,3
 h,6110e605,price1,SS6,BKLT01,,24,,,,3
 h,6110e625,price1,SS6,BKLT01,,24,,,,3
-h,6110e625,price2,SS6,BKLT01,,24,,"CTO not on cover",,3
+h,6110e625,price2,SS6,BKLT01,,24,,CTO not on cover,,3
 h,6110e536,price1,SS6,BKLT01,,25,,,,3
 h,6110e558,price1,SS6,BKLT01,,25,,,,3
 h,6110e536,price1,SS6,BKLT01,,25,,,,3
@@ -2330,7 +2330,7 @@ h,6110e634,price1,SS6,BKLT01,,29,,,,3
 h,6110e676,price1,SS6,BKLT01,,30,,,,3
 h,6110e688A,price1,SS6,BKLT01,,30,,,,3
 h,6110e688B,price1,SS6,BKLT01,,30,,,,3
-h,6110e676,price2,SS6,BKLT01,,30,,"CTO not on cover",,3
+h,6110e676,price2,SS6,BKLT01,,30,,CTO not on cover,,3
 h,6110e707,price1,SS6,BKLT01,,31,,,,3
 h,6110e718A,price1,SS6,BKLT01,,31,,,,3
 h,6110e707,price1,SS6,BKLT01,,31,,,,3
@@ -2339,8 +2339,8 @@ h,6110e761,price1,SS6,BKLT01,,32,,,,3
 w,6110e718C,price1,SS6,BKLT01,,32,,,,3
 h,6110e780,price1,SS6,BKLT01,,33,,,,3
 h,6110e800,price1,SS6,BKLT01,,33,,,,3
-h,6110e827,price2,SS6,BKLT01,,34,,"CTO not on cover",,3
-h,6110e827A,price2,SS6,BKLT01,,34,,"CTO not on cover",,3
+h,6110e827,price2,SS6,BKLT01,,34,,CTO not on cover,,3
+h,6110e827A,price2,SS6,BKLT01,,34,,CTO not on cover,,3
 h,6110e827,price1,SS6,BKLT01,,34,,,,3
 w,6110e827A,price1,SS6,BKLT01,,34,,,,3
 h,6110bPR1,price1,SS6,BKLT01,,35,,,,3
@@ -2354,8 +2354,8 @@ h,6110e1182,price1,SS6,BKLT01,,39,,,,3
 h,6110bs2,price1,SS6,BKLT02,PB,1,,,,3
 h,6110bs2,price1,SS6,BKLT02,PB,1,,,,3
 h,6110bs1,price1,SS6,BKLT02,PB,2,,,,3
-h,6110bs1,price2,SS6,BKLT02,PB,2,,"CTO not on cover",,3
-h,6110bs3,price1,SS6,BKLT02,PB,3,,,"autographed in Hebrew on front cover",3
+h,6110bs1,price2,SS6,BKLT02,PB,2,,CTO not on cover,,3
+h,6110bs3,price1,SS6,BKLT02,PB,3,,,autographed in Hebrew on front cover,3
 h,6110e733,price1,SS6,BKLT02,PB,7,,,,3
 h,6110e733,price1,SS6,BKLT02,PB,8,,,,3
 h,6110e733A,price1,SS6,BKLT02,PB,9,,,,3
@@ -2367,7 +2367,7 @@ h,6110e1029,price1,SS6,BKLT02,PB,14,,,,3
 h,6110e1028,price1,SS6,BKLT02,PB,15,,,,3
 h,6110e1120,price1,SS6,BKLT02,PB,16,,,,3
 h,6110e1176,price1,SS6,BKLT02,PB,17,,,,3
-w,6110e1026,price1,SS6,BKLT02,PB,18,,"Bale PB.3a variety (Land lottery sht w extra perfs on lower tab)",,3
+w,6110e1026,price1,SS6,BKLT02,PB,18,,Bale PB.3a variety (Land lottery sht w extra perfs on lower tab),,3
 h,6110e1018,price1,SS6,BKLT03,SA,1,,,,3
 h,6110e018A,price1,SS6,BKLT03,SA,1,,,,3
 h,6110e018B,price1,SS6,BKLT03,SA,2,,,,3
@@ -2379,11 +2379,11 @@ h,6110e018E,price1,SS6,BKLT03,SA,4,,,,3
 h,6110e018F,price1,SS6,BKLT03,SA,5,,,,3
 h,6110e1074,price1,SS6,BKLT03,SA,7,,,,3
 h,6110e074A,price1,SS6,BKLT03,SA,8,,,,3
-h,6110e074B,price1,SS6,BKLT03,SA,9,,,"variety also has missing Arabic on one stamp",3
+h,6110e074B,price1,SS6,BKLT03,SA,9,,,variety also has missing Arabic on one stamp,3
 h,6110e074C,price1,SS6,BKLT03,SA,11,,,,3
 h,6110e074D,price1,SS6,BKLT03,SA,12,,,,3
 h,6110e074E,price1,SS6,BKLT03,SA,13,,,,3
-h,6110e1074,price1,SS6,BKLT03,SA,10,,"variety error gap in phosphor",,3
+h,6110e1074,price1,SS6,BKLT03,SA,10,,variety error gap in phosphor,,3
 h,6110e1104,price1,SS6,BKLT03,SA,15,,,,3
 h,6110e1128,price1,SS6,BKLT03,SA,17,,,,3
 h,6110e128A,price1,SS6,BKLT03,SA,18,,,,3
@@ -2394,28 +2394,28 @@ h,6110e037B,price1,SS6,BKLT03,SA,26,,,,3
 h,6110e037D,price1,SS6,BKLT03,SA,27,,,,3
 h,6110e037E,price1,SS6,BKLT03,SA,28,,,,3
 h,6110e074F,price1,SS6,BKLT03,SA,14,,,,3
-h,ILrc7,price1,ENV,IRC01,,1,,"300pr (large) / 250pr /  45pr Violet Ovp",,12
-h,ILrc26,price2,ENV,IRC01,,1,,"55a regular Wmk2 (single large UPU) FD 1.9.66",,12
-h,ILrc27,price2,ENV,IRC01,,1,,"55a regular Wmk3 (multi small UPU horiz) LD 30.10.70",,12
-h,ILrc30,price2,ENV,IRC01,,1,,"60a/55a black ovp Wmk3 Hebrew before Agorot  FD 1.11.70",,12
-h,ILrc30,price1,ENV,IRC01,,1,,"60a/55a black ovp Wmk3 Hebrew before Agorot",,12
-h,ILrc29,price2,ENV,IRC01,,1,,"60a/55a black ovp Wmk3 Hebrew after Agorot FD 1.11.70",,12
-h,ILrc31,price1,ENV,IRC01,,1,,"60a regular Wmk3",,12
-h,ILrc31,price2,ENV,IRC01,,1,,"60a regular Wmk3 FD 5.2.71",,12
-h,ILrc32,price2,ENV,IRC01,,1,,"90a/60a black ovp Wmk3 FD 1.7.71",,12
-h,ILrc32,price2,ENV,IRC01,,1,,"90a/60a black ovp Wmk3 LD 30.9.71",smudged,12
-h,ILrc33,price2,ENV,IRC01,,1,,"90a regular Wmk3 FD 25.7.71",,12
-h,ILrc34,price2,ENV,IRC01,,1,,"100a/90a blackOvpWmk3 FD 1.10.71",,12
+h,ILrc7,price1,ENV,IRC01,,1,,300pr (large) / 250pr /  45pr Violet Ovp,,12
+h,ILrc26,price2,ENV,IRC01,,1,,55a regular Wmk2 (single large UPU) FD 1.9.66,,12
+h,ILrc27,price2,ENV,IRC01,,1,,55a regular Wmk3 (multi small UPU horiz) LD 30.10.70,,12
+h,ILrc30,price2,ENV,IRC01,,1,,60a/55a black ovp Wmk3 Hebrew before Agorot  FD 1.11.70,,12
+h,ILrc30,price1,ENV,IRC01,,1,,60a/55a black ovp Wmk3 Hebrew before Agorot,,12
+h,ILrc29,price2,ENV,IRC01,,1,,60a/55a black ovp Wmk3 Hebrew after Agorot FD 1.11.70,,12
+h,ILrc31,price1,ENV,IRC01,,1,,60a regular Wmk3,,12
+h,ILrc31,price2,ENV,IRC01,,1,,60a regular Wmk3 FD 5.2.71,,12
+h,ILrc32,price2,ENV,IRC01,,1,,90a/60a black ovp Wmk3 FD 1.7.71,,12
+h,ILrc32,price2,ENV,IRC01,,1,,90a/60a black ovp Wmk3 LD 30.9.71,smudged,12
+h,ILrc33,price2,ENV,IRC01,,1,,90a regular Wmk3 FD 25.7.71,,12
+h,ILrc34,price2,ENV,IRC01,,1,,100a/90a blackOvpWmk3 FD 1.10.71,,12
 h,ILrc35,price2,ENV,IRC01,,1,,,,12
 h,6110j693A,price1,SCH,ISRAEL03,Tab,165.2,,,,13
 h,6110j708,price1,SCH,ISRAEL04,S/S,51.1,,,,13
 w,6110d1,price1,SS10,MODCVR01,,1,,,,15
-w,6110d2,price1,SS10,MODCVR01,,2,,,,15
+h,6110d2,price1,SS10,MODCVR01,,2,,,,15
 w,6110d3,price1,SS10,MODCVR01,,3,,,,15
 w,6110d4,price1,SS10,MODCVR01,,4,,,,15
-w,6110d5,price1,SS10,MODCVR01,,5,,,,15
-w,6110d6,price1,SS10,MODCVR01,,6,,,,15
-w,6110d7,price1,SS10,MODCVR01,,7,,,,15
+h,6110d5,price1,SS10,MODCVR01,,5,,,,15
+h,6110d6,price1,SS10,MODCVR01,,6,,,,15
+h,6110d7,price1,SS10,MODCVR01,,7,,,,15
 h,6110d8,price1,SS10,MODCVR01,,8,,,,15
 h,6110d9,price1,SS10,MODCVR01,,9,,,,15
 h,6110d10,price1,SS10,MODCVR01,,10,,,,15
@@ -2442,43 +2442,43 @@ h,6110d30,price1,SS10,MODCVR01,,30,,,,15
 h,6110d31,price1,SS10,MODCVR01,,31,,,,15
 h,6110d32,price1,SS10,MODCVR01,,32,,,,15
 h,6110d33,price1,SS10,MODCVR01,,33,,,,15
-w,6110d34,price1,SS10,MODCVR01,,34,,,,15
-h,6110d34,price1,SS10,MODCVR01,,34.1,,"Cover w.no letter",,15
+h,6110d34,price1,SS10,MODCVR01,,34,,,,15
+h,6110d34,price1,SS10,MODCVR01,,34.1,,Cover w.no letter,,15
 h,6110d35,price1,SS10,MODCVR01,,35,,,,15
 h,6110d36,price1,SS10,MODCVR01,,36,,,,15
-h,6110d36,price1,SS10,MODCVR01,,36.1,,"Cover w.no letter",,15
+h,6110d36,price1,SS10,MODCVR01,,36.1,,Cover w.no letter,,15
 h,6110d37,price1,SS10,MODCVR01,,37,,,,15
 h,6110d38,price1,SS10,MODCVR01,,38,,,,15
 h,6110d39,price1,SS10,MODCVR01,,39,,,,15
 h,6110d40,price1,SS10,MODCVR01,,40,,,,15
 h,6110d41,price1,SS10,MODCVR01,,41,,,,15
-h,6110d41,price1,SS10,MODCVR01,,41.1,,"Cover w.no letter",,15
+h,6110d41,price1,SS10,MODCVR01,,41.1,,Cover w.no letter,,15
 h,6110d42,price1,SS10,MODCVR01,,42,,,,15
-w,6110d43,price1,SS10,MODCVR01,,43,,,,15
+h,6110d43,price1,SS10,MODCVR01,,43,,,,15
 h,6110d44,price1,SS10,MODCVR01,,44,,,,15
 h,6110d45,price1,SS10,MODCVR01,,45,,,,15
-h,6110d45,price1,SS10,MODCVR01,,45.1,,"Cover w.no letter",,15
+h,6110d45,price1,SS10,MODCVR01,,45.1,,Cover w.no letter,,15
 h,6110d46,price1,SS10,MODCVR01,,46,,,,15
 h,6110d47,price1,SS10,MODCVR01,,47,,,,15
 h,6110d48,price1,SS10,MODCVR01,,48,,,,15
 h,6110d49,price1,SS10,MODCVR01,,49,,,,15
-h,6110d49,price1,SS10,MODCVR01,,49.1,,"Cover w.no letter",,15
+h,6110d49,price1,SS10,MODCVR01,,49.1,,Cover w.no letter,,15
 h,6110d50,price1,SS10,MODCVR01,,50,,,,15
 h,6110d51,price1,SS10,MODCVR01,,51,,,,15
 h,6110d52,price1,SS10,MODCVR01,,52,,,,15
-w,6110d53,price1,SS10,MODCVR01,,53,,,,15
+h,6110d53,price1,SS10,MODCVR01,,53,,,,15
 h,6110d54,price1,SS10,MODCVR01,,54,,,,15
 h,6110d55,price1,SS10,MODCVR01,,55,,,,15
 h,6110d56,price1,SS10,MODCVR01,,56,,,,15
-w,6110d57,price1,SS10,MODCVR01,,57,,,,15
+h,6110d57,price1,SS10,MODCVR01,,57,,,,15
 h,6110d58,price1,SS10,MODCVR01,,58,,,,15
 h,6110d59,price1,SS10,MODCVR01,,59,,,,15
 h,6110d60,price1,SS10,MODCVR01,,60,,,,15
-w,6110d61,price1,SS10,MODCVR01,,61,,,,15
-w,6110d62,price1,SS10,MODCVR01,,62,,,,15
-w,6110d63,price1,SS10,MODCVR01,,63,,,,15
-w,6110d64,price1,SS10,MODCVR01,,64,,,,15
-w,6110d65,price1,SS10,MODCVR01,,65,,,,15
+h,6110d61,price1,SS10,MODCVR01,,61,,,,15
+h,6110d62,price1,SS10,MODCVR01,,62,,,,15
+h,6110d63,price1,SS10,MODCVR01,,63,,,,15
+h,6110d64,price1,SS10,MODCVR01,,64,,,,15
+h,6110d65,price1,SS10,MODCVR01,,65,,,,15
 w,6110d66,price1,SS10,MODCVR01,,66,,,,15
 h,6110n87,price1,SS6,NYCARDS01,,3,,,,16
 h,6110n88,price1,SS6,NYCARDS01,,4,,,,16
@@ -2522,7 +2522,7 @@ h,psIL5,price2,SS6,PLS01,ILS,5,,,,20
 w,psIL5,price1,SS6,PLS01,ILS,5,,,,20
 w,psIL6,price1,SS6,PLS01,ILS,6,,,,20
 h,psIL6,price2,SS6,PLS01,ILS,6,,,,20
-h,psIL6,price2,SS6,PLS01,ILS,7,,"Bale ILS.6a Rough print 5.2.63",,20
+h,psIL6,price2,SS6,PLS01,ILS,7,,Bale ILS.6a Rough print 5.2.63,,20
 w,psIL7,price1,SS6,PLS01,ILS,8,,,,20
 h,psIL7,price2,SS6,PLS01,ILS,8,,,,20
 h,psIL8,price1,SS6,PLS01,ILS,9,,,,20
@@ -2547,7 +2547,7 @@ h,psAL9,price1,SS6,PLS01,AS,9,,,,20
 h,psAL9,price2,SS6,PLS01,AS,9,,,,20
 h,psAL10,price1,SS6,PLS01,AS,10,,,,20
 h,psAL10,price2,SS6,PLS01,AS,10,,,,20
-h,psAL11,price1,SS6,PLS01,AS,11,,,"Toning spot",20
+h,psAL11,price1,SS6,PLS01,AS,11,,,Toning spot,20
 h,psAL11,price2,SS6,PLS01,AS,11,,,,20
 h,psAL12,price1,SS6,PLS01,AS,12,,,,20
 h,psAL12,price2,SS6,PLS01,AS,12,,,,20
@@ -2589,7 +2589,7 @@ h,psAL30,price1,SS6,PLS01,AS,31,,,,20
 h,psAL30,price2,SS6,PLS01,AS,31,,,,20
 h,psAL31,price1,SS6,PLS01,AS,32,,,,20
 w,psAL31,price2,SS6,PLS01,AS,32,,,,20
-h,psAL31,price1,SS6,PLS01,AS,32.1,,"Partially unopened (2x height)",,20
+h,psAL31,price1,SS6,PLS01,AS,32.1,,Partially unopened (2x height),,20
 h,psAL32,price1,SS6,PLS01,AS,33,,,,20
 h,psAL32,price2,SS6,PLS01,AS,33,,,,20
 h,psAL33,price1,SS6,PLS01,AS,34,,,,20
@@ -2614,17 +2614,17 @@ h,psPC6,price1,SS6,PPC01,PC,6,,,,20
 h,psPC7,price2,SS6,PPC01,PC,7,,,,20
 w,psPC7,price1,SS6,PPC01,PC,7,,,,20
 h,6110h105,price1,SS6,BKLT02,PB,6,,,,22
-h,6110e6,price1,SCH,ISRAEL01,Tab,2.1,,,"with plate numbers",24
+h,6110e6,price1,SCH,ISRAEL01,Tab,2.1,,,with plate numbers,24
 h,6110e7,price1,SCH,ISRAEL01,Tab,2.3,,,,24
 h,6110e14,price1,SCH,ISRAEL01,Tab,3.1,,,,24
 h,6110e17,price1,SCH,ISRAEL01,Tab,4.1,,,,24
-h,6110e24,price1,SCH,ISRAEL01,Tab,6.1,,"Values 5m 10m 15m",,24
-h,6110e24,price1,SCH,ISRAEL01,Tab,6.2,,"Values 20m 30m 45m",,24
+h,6110e24,price1,SCH,ISRAEL01,Tab,6.1,,Values 5m 10m 15m,,24
+h,6110e24,price1,SCH,ISRAEL01,Tab,6.2,,Values 20m 30m 45m,,24
 h,6110e129,price1,SCH,ISRAEL01,Tab,34.1,,,,24
 h,6110e130,price1,SCH,ISRAEL01,Tab,34.1,,,,24
-h,6110e131,price1,SCH,ISRAEL01,Tab,34.1,,,"with plate number",24
-h,6110e131,price1,SCH,ISRAEL01,Tab,34.1,,,"with tab (bottom selvage)",24
-h,6110e128,price1,SCH,ISRAEL01,Tab,34.1,,"bottom row of sheet (2 inverted tab + 2 tab)","with tabs (bottom selvage)",24
+h,6110e131,price1,SCH,ISRAEL01,Tab,34.1,,,with plate number,24
+h,6110e131,price1,SCH,ISRAEL01,Tab,34.1,,,with tab (bottom selvage),24
+h,6110e128,price1,SCH,ISRAEL01,Tab,34.1,,bottom row of sheet (2 inverted tab + 2 tab),with tabs (bottom selvage),24
 h,6110e134,price1,SCH,ISRAEL01,Tab,35.1,,,,24
 h,6110e324,price1,SCH,ISRAEL02,Tab,91,,,,24
 h,6110e375,price1,SCH,ISRAEL02,Tab,105.1,,,,24
@@ -2641,17 +2641,17 @@ h,6110e727,price1,SCH,ISRAEL03,Tab,170.2,,,,24
 h,6110e722,price1,SCH,ISRAEL03,Tab,171,,,,24
 h,6110e728,price1,SCH,ISRAEL03,Tab,171,,,,24
 h,6110e749,price1,SCH,ISRAEL03,Tab,175,,,,24
-h,6110e757,price1,SCH,ISRAEL03,Tab,176.1,,"Sheet 1 of 3",,24
-h,6110e757,price1,SCH,ISRAEL03,Tab,176.2,,"Sheet 2 of 3",,24
-h,6110e757,price1,SCH,ISRAEL03,Tab,176.3,,"Sheet 3 of 3",,24
+h,6110e757,price1,SCH,ISRAEL03,Tab,176.1,,Sheet 1 of 3,,24
+h,6110e757,price1,SCH,ISRAEL03,Tab,176.2,,Sheet 2 of 3,,24
+h,6110e757,price1,SCH,ISRAEL03,Tab,176.3,,Sheet 3 of 3,,24
 h,6110e754,price1,SCH,ISRAEL03,Tab,177.1,,,,24
-h,6110e771,price1,SCH,ISRAEL03,Tab,180.1,,"Sheet 1 of 3",,24
-h,6110e771,price1,SCH,ISRAEL03,Tab,180.2,,"Sheet 2 of 3",,24
-h,6110e771,price1,SCH,ISRAEL03,Tab,180.3,,"Sheet 3 of 3",,24
+h,6110e771,price1,SCH,ISRAEL03,Tab,180.1,,Sheet 1 of 3,,24
+h,6110e771,price1,SCH,ISRAEL03,Tab,180.2,,Sheet 2 of 3,,24
+h,6110e771,price1,SCH,ISRAEL03,Tab,180.3,,Sheet 3 of 3,,24
 h,6110e778,price1,SCH,ISRAEL03,Tab,181.1,,,,24
 h,6110e790,price1,SCH,ISRAEL03,Tab,183.1,,,,24
-h,6110e797,price1,SCH,ISRAEL03,Tab,184.1,,"Sheet 2 of 2 (final letters)",,24
-h,6110e797,price1,SCH,ISRAEL03,Tab,184,,"Sheet 1 of 2 (normal letters)",,24
+h,6110e797,price1,SCH,ISRAEL03,Tab,184.1,,Sheet 2 of 2 (final letters),,24
+h,6110e797,price1,SCH,ISRAEL03,Tab,184,,Sheet 1 of 2 (normal letters),,24
 h,6110e808A,price1,SCH,ISRAEL03,Tab,186.1,,,,24
 h,6110e826A,price1,SCH,ISRAEL03,Tab,191,,,,24
 h,6110e955,price1,SCH,ISRAEL04,S/S,52,,,,24
@@ -2659,7 +2659,7 @@ h,6110e951,price1,SCH,ISRAEL04,S/S,51.1,,,,24
 h,6110e526,price1,SCH,ISRAEL03,S/S,32,,,,24
 h,6110e564,price1,SCH,ISRAEL03,S/S,32,,,,24
 h,6110e647,price1,SCH,ISRAEL03,S/S,41.1,,,,24
-h,6110e526,price1,SCH,ISRAEL03,S/S,41.1,,"variety w Specimen ovpt",,24
+h,6110e526,price1,SCH,ISRAEL03,S/S,41.1,,variety w Specimen ovpt,,24
 h,6110e1055,price1,SCH,ISRAEL04,Tab,235,,,,24
 w,6110e1116,price1,SCH,ISRAEL04,Tab,246,,,,24
 h,6110e1132,price1,SCH,ISRAEL04,Tab,252,,,,24
@@ -2669,22 +2669,22 @@ h,6110e1150,price1,SCH,ISRAEL04,Tab,257,,,,24
 h,6110e1024,price1,SCH,ISRAEL04,S/S,57,,,,24
 h,6110e1101,price1,SCH,ISRAEL04,S/S,60,,,,24
 h,6110e1014,price1,SCH,ISRAEL04,S/S,55,,,,24
-h,6110e845A,price1,SS6,BKLT03,SA,29,,"Partial set (1v) 0.30 1st print (1 Menorah)",,24
-h,6110e845B,price1,SS6,BKLT03,SA,30,,"Partial set (1v) 0.50 1st print (1 Menorah)",,24
-h,6110e845C,price1,SS6,BKLT03,SA,31,,"Partial set (1v) 1.00 1st print (1 Menorah)",,24
-h,6110e845D,price1,SS6,BKLT03,SA,32,,"Partial set (1v) 0.40 1st print (1 Menorah)",,24
-h,6110e845E,price1,SS6,BKLT03,SA,33,,"Partial set (1v) 0.50 2nd print (2 Menorah)",,24
-h,6110e845F,price1,SS6,BKLT03,SA,34,,"Partial set (1v) 1.00 2nd print (2 Menorah)",,24
-h,6110e845H,price1,SS6,BKLT03,SA,35,,,,24
+h,6110e845A,price1,SS6,BKLT03,SA,29,,Partial set (1v) 0.30 1st print (1 Menorah),,24
+h,6110e845B,price1,SS6,BKLT03,SA,30,,Partial set (1v) 0.50 1st print (1 Menorah),,24
+h,6110e845C,price1,SS6,BKLT03,SA,31,,Partial set (1v) 1.00 1st print (1 Menorah),,24
+h,6110e845D,price1,SS6,BKLT03,SA,32,,Partial set (1v) 0.40 1st print (1 Menorah),,24
+h,6110e845E,price1,SS6,BKLT03,SA,33,,Partial set (1v) 0.50 2nd print (2 Menorah),,24
+h,6110e845F,price1,SS6,BKLT03,SA,34,,Partial set (1v) 1.00 2nd print (2 Menorah),,24
+w,6110e845H,price1,SS6,BKLT03,SA,35,,,,24
 h,6110e845I,price1,SS6,BKLT03,SA,36,,,,24
 h,6110e845J,price1,SS6,BKLT03,SA,37,,,,24
-h,6110e845K,price1,SS6,BKLT03,SA,38,,"Partial set (1v) 0.30 3rd print (3 Menorah)",,24
-h,6110e845L,price1,SS6,BKLT03,SA,39,,"Partial set (1v) 1.00 4th print (4 Menorah)",,24
-h,6110e845M,price1,SS6,BKLT03,SA,40,,"Partial set (1v) 0.40 2nd print (2 Menorah)",,24
-h,6110e845N,price1,SS6,BKLT03,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
-h,6110e845N,price1,SS6,BKLT03,SA,41,,"Partial set (1v) 0.50 4th print (4 Menorah)",,24
-h,6110e845O,price1,SS6,BKLT03,SA,42,,"Partial set (1v) 0.30 4th print (4 Menorah)",,24
-h,6110e845P,price1,SS6,BKLT03,SA,43,,"Partial set (1v) 1.00 5th print (5 Menorah)",,24
+h,6110e845K,price1,SS6,BKLT03,SA,38,,Partial set (1v) 0.30 3rd print (3 Menorah),,24
+h,6110e845L,price1,SS6,BKLT03,SA,39,,Partial set (1v) 1.00 4th print (4 Menorah),,24
+h,6110e845M,price1,SS6,BKLT03,SA,40,,Partial set (1v) 0.40 2nd print (2 Menorah),,24
+h,6110e845N,price1,SS6,BKLT03,SA,41,,Partial set (1v) 0.50 4th print (4 Menorah),,24
+h,6110e845N,price1,SS6,BKLT03,SA,41,,Partial set (1v) 0.50 4th print (4 Menorah),,24
+h,6110e845O,price1,SS6,BKLT03,SA,42,,Partial set (1v) 0.30 4th print (4 Menorah),,24
+h,6110e845P,price1,SS6,BKLT03,SA,43,,Partial set (1v) 1.00 5th print (5 Menorah),,24
 h,6110e845R,price1,SS6,BKLT03,SA,44,,,,24
 h,6110e564,price2,SS6,FDC10,,627,,,,24
 h,6110e732,price2,SS6,FDC12,,793,,"Partial set (1v) 3.00 (King Solomon's Temple, #1/2)",,24
@@ -2696,7 +2696,7 @@ h,6110e866,price2,SS6,FDC15,,936,,"Combo (2v) 1.20 1.20 w Generic Side Tabs (1 o
 h,6110e866,price2,SS6,FDC15,,937,,"Combo (2v) 1.20 1.20 w Generic Side Tabs (1 on left, 1 on right) (#4/4)",,24
 h,6110e1,price1,SCH,ISRAEL01,Tab,1.1,,,,25
 h,6110e2a,price1,SCH,ISRAEL01,Tab,1.1,,,,25
-h,6110e2b,price2,SCH,ISRAEL01,Tab,1.1,,"Only 3m value",,25
+h,6110e2b,price2,SCH,ISRAEL01,Tab,1.1,,Only 3m value,,25
 h,6110e3,price1,SCH,ISRAEL01,Tab,1.1,,,,25
 h,6110e7C,price1,SCH,ISRAEL01,Tab,2.2,,,,25
 h,6110e62,price1,SCH,ISRAEL01,Tab,16.1,,,,25
@@ -2707,34 +2707,34 @@ h,6110e217,price1,SCH,ISRAEL02,Tab,58,,,,25
 h,6110e286,price1,SCH,ISRAEL02,Tab,79,,,,25
 w,6110e234G,price1,SCH,ISRAEL02,Tab,89,,,,25
 w,6110e234H,price1,SCH,ISRAEL02,Tab,89,,,,25
-h,6110e234E,price1,SCH,ISRAEL02,Tab,64,,"1975-6 Values (2) 0.30 0.45",,25
-h,6110e234F,price1,SCH,ISRAEL02,Tab,64,,"1975 Values (1) 0.50",,25
-h,6110e234D,price1,SCH,ISRAEL02,Tab,64.1,,"1975-77 Values (1) 2.00",,25
-h,6110e234E,price1,SCH,ISRAEL02,Tab,64.1,,"1976-79 Values (3) 0.50 2.00 3.00",,25
-h,6110e234F,price1,SCH,ISRAEL02,Tab,64.1,,"1975-80 Values (1) 3.00",,25
-h,6110e234C,price1,SCH,ISRAEL02,Tab,71,,"1975 Values (1) 0.20",,25
-h,6110e234E,price1,SCH,ISRAEL02,Tab,71,,"1975-79 Values (3) 0.35 0.65 1.10",,25
-h,6110e234C,price1,SCH,ISRAEL02,Tab,74,,"1974-75 Values (1) 0.25",,25
-h,6110e234E,price1,SCH,ISRAEL02,Tab,74,,"1977-80 Values (2) 0.80 1.30",,25
-h,6110e234F,price1,SCH,ISRAEL02,Tab,74,,"1975 Values (1) 1.30",,25
-h,6110e234F,price1,SCH,ISRAEL02,Tab,80,,"1978-80 Values (1) 10.00",,25
+h,6110e234E,price1,SCH,ISRAEL02,Tab,64,,1975-6 Values (2) 0.30 0.45,,25
+h,6110e234F,price1,SCH,ISRAEL02,Tab,64,,1975 Values (1) 0.50,,25
+h,6110e234D,price1,SCH,ISRAEL02,Tab,64.1,,1975-77 Values (1) 2.00,,25
+h,6110e234E,price1,SCH,ISRAEL02,Tab,64.1,,1976-79 Values (3) 0.50 2.00 3.00,,25
+h,6110e234F,price1,SCH,ISRAEL02,Tab,64.1,,1975-80 Values (1) 3.00,,25
+h,6110e234C,price1,SCH,ISRAEL02,Tab,71,,1975 Values (1) 0.20,,25
+h,6110e234E,price1,SCH,ISRAEL02,Tab,71,,1975-79 Values (3) 0.35 0.65 1.10,,25
+h,6110e234C,price1,SCH,ISRAEL02,Tab,74,,1974-75 Values (1) 0.25,,25
+h,6110e234E,price1,SCH,ISRAEL02,Tab,74,,1977-80 Values (2) 0.80 1.30,,25
+h,6110e234F,price1,SCH,ISRAEL02,Tab,74,,1975 Values (1) 1.30,,25
+h,6110e234F,price1,SCH,ISRAEL02,Tab,80,,1978-80 Values (1) 10.00,,25
 h,6110e234I,price1,SCH,ISRAEL02,Tab,95,,,,25
-h,6110e344,price1,SCH,ISRAEL02,Tab,99,,"1980 value (1) 2.70 1PhR",,25
-w,6110e362,price1,SCH,ISRAEL02,Tab,112,,"1983 Values (3) 0.60/NoPh 1.00/1Ph 2.00/1Ph",,25
-h,6110e362,price1,SCH,ISRAEL02,Tab,112,,"1983 Values (1) 10.00/1PhR",,25
-h,6110e362,price1,SCH,ISRAEL02,Tab,118,,"1984 Values (4) 3.00/NoPh 4.00/NoPh 5.00/NoPh 10.00/2Ph",,25
-h,6110e392,price1,SCH,ISRAEL02,Tab,118,,"1984 Values (2) 15.00/1PhR 100.00/2Ph",,25
+h,6110e344,price1,SCH,ISRAEL02,Tab,99,,1980 value (1) 2.70 1PhR,,25
+w,6110e362,price1,SCH,ISRAEL02,Tab,112,,1983 Values (3) 0.60/NoPh 1.00/1Ph 2.00/1Ph,,25
+h,6110e362,price1,SCH,ISRAEL02,Tab,112,,1983 Values (1) 10.00/1PhR,,25
+h,6110e362,price1,SCH,ISRAEL02,Tab,118,,1984 Values (4) 3.00/NoPh 4.00/NoPh 5.00/NoPh 10.00/2Ph,,25
+h,6110e392,price1,SCH,ISRAEL02,Tab,118,,1984 Values (2) 15.00/1PhR 100.00/2Ph,,25
 h,6110e443K,price1,SCH,ISRAEL02,Tab,131,,,,25
-h,6110e388B,price1,SCH,ISRAEL02,Tab,131,,"1988 Value ND Orange w tab",,25
-w,6110e388B,price1,SCH,ISRAEL02,Tab,131,,"1988 Value ND Orange w tab",,25
+h,6110e388B,price1,SCH,ISRAEL02,Tab,131,,1988 Value ND Orange w tab,,25
+w,6110e388B,price1,SCH,ISRAEL02,Tab,131,,1988 Value ND Orange w tab,,25
 h,6110e443D,price1,SCH,ISRAEL02,Tab,132,,,,25
 h,6110e629A,price1,SCH,ISRAEL03,Tab,154,,,,25
 h,6110e629B,price1,SCH,ISRAEL03,Tab,154,,,,25
-h,6110e527,price1,SCH,ISRAEL03,Tab,156,,"1993 actually",,25
-h,6110e542,price1,SCH,ISRAEL03,Tab,164,,"1996 variety",,25
+h,6110e527,price1,SCH,ISRAEL03,Tab,156,,1993 actually,,25
+h,6110e542,price1,SCH,ISRAEL03,Tab,164,,1996 variety,,25
 h,6110e648,price1,SCH,ISRAEL03,Tab,168,,,,25
 h,6110e613,price1,SCH,ISRAEL03,Tab,168,,,,25
-h,6110e549,price1,SCH,ISRAEL03,Tab,168,,"1997 variety",,25
+h,6110e549,price1,SCH,ISRAEL03,Tab,168,,1997 variety,,25
 h,6110e711A,price1,SCH,ISRAEL03,Tab,169,,,,25
 h,6110e717B,price1,SCH,ISRAEL03,Tab,173,,,,25
 h,6110e542A,price1,SCH,ISRAEL03,Tab,178,,,,25
@@ -2765,7 +2765,7 @@ h,6110e1115,price4,SCH,ISRAEL04,Tab,249,,,,25
 h,6110e1112,price2,SCH,ISRAEL04,Tab,258,,,,25
 h,6110e1131,price2,SCH,ISRAEL04,Tab,258,,,,25
 w,6110e148A,price2,SCH,ISRAEL04,Tab,258,,,,25
-h,6110e742E,price3,SS6,FDC15,,941,,,"Stamp appears to be smudged in middle (long vertical streak).",25
+h,6110e742E,price3,SS6,FDC15,,941,,,Stamp appears to be smudged in middle (long vertical streak).,25
 h,6110k9202,price1,ENV,ATMFDHLD01,,1,,,,26
 h,6110k93E1,price1,ENV,ATMFDHLD01,,1,,,,26
 h,6110k9306,price1,ENV,ATMFDHLD01,,1,,,,26
@@ -2789,7 +2789,7 @@ h,6110k9810,price1,ENV,ATMFDHLD01,,1,,,,26
 h,6110k9807,price1,ENV,ATMFDHLD01,,1,,,,26
 h,6110k9808,price1,ENV,ATMFDHLD01,,1,,,,26
 h,6110k9502,price1,ENV,ATMFDHLD01,,1,,,,26
-h,6110k9306,price1,ENV,ATMFDHLD01,,1,,"variety with 'Via Bethlehem' label",,26
+h,6110k9306,price1,ENV,ATMFDHLD01,,1,,variety with 'Via Bethlehem' label,,26
 h,6110k0402,price1,SS6,ATMFDC01,SIMAFDC,1,,,,26
 h,6110k0602,price1,SS6,ATMFDC01,SIMAFDC,4,,,,26
 h,6110k0611,price1,SS6,ATMFDC01,SIMAFDC,5,,,,26
@@ -3307,11 +3307,11 @@ h,fe0154,price1,SS6,FDC05,,276,6110s250,,,29
 h,fe0153,price1,SS6,FDC05,,277,6110s249,,,29
 h,fe0155,price1,SS6,FDC05,,278,6110s251,,,29
 w,fe0155,price1,SS6,FDC05,,279,6110s251,,,29
-h,fe0156/0157A,price1,SS6,FDC05,,282,6110s256,,"North American version",29
+h,fe0156/0157A,price1,SS6,FDC05,,282,6110s256,,North American version,29
 h,fe0160,price1,SS6,FDC05,,286,6110s252,,,29
 h,fe0160,price1,SS6,FDC05,,287,6110s252,,,29
 h,fe0164,price1,SS6,FDC05,,290,6110s234,,,29
-h,fe0163,price1,SS6,FDC05,,291,6110s260,,"Writing across front page",29
+h,fe0163,price1,SS6,FDC05,,291,6110s260,,Writing across front page,29
 h,fe0165/0166A,price1,SS6,FDC05,,294,6110s261,,,29
 w,fe0167,price1,SS6,FDC05,,295,6110s262,,,29
 h,fe0167,price1,SS6,FDC05,,296,6110s262,,,29
@@ -3344,13 +3344,13 @@ h,fe0045,price1,SS6,FDC03,,134,6110s142,,,29
 h,fe0046,price1,SS6,FDC03,,136,6110s143,,,29
 h,fe0050,price1,SS6,FDC03,,137,6110s147,,,29
 h,fe0049,price1,SS6,FDC03,,138,6110s146,,,29
-h,fe0048,price1,SS6,FDC03,,139,6110s145,,"North American version",29
+h,fe0048,price1,SS6,FDC03,,139,6110s145,,North American version,29
 h,fe0051A,price1,SS6,FDC03,,141,6110s149,,,29
 h,fe0053,price1,SS6,FDC03,,144,6110s151,,,29
-h,fe0059,price1,SS6,FDC03,,147,6110s158,,"Front page discoloration on left edge",29
+h,fe0059,price1,SS6,FDC03,,147,6110s158,,Front page discoloration on left edge,29
 h,fe0055,price1,SS6,FDC03,,146,6110s154,,,29
 h,fe0058,price1,SS6,FDC03,,149,6110s157,,,29
-h,fe0060,price1,SS6,FDC03,,150,6110s159,,"Front page notch and tear on right edge",29
+h,fe0060,price1,SS6,FDC03,,150,6110s159,,Front page notch and tear on right edge,29
 h,fe0061,price1,SS6,FDC03,,151,6110s160,,,29
 h,fe0062/0063,price1,SS6,FDC03,,157,6110s161,,,29
 h,fe0081,price1,SS6,FDC03,,179,6110s178,,,29
@@ -3408,7 +3408,7 @@ h,fe0042,price1,SS6,FDC03,,131,6110s139,,,29
 h,fe0044,price1,SS6,FDC03,,133,6110s141,,,29
 h,fe0047,price1,SS6,FDC03,,135,6110s144,,,29
 h,fe0051,price1,SS6,FDC03,,140,6110s148,,,29
-h,fe0052,price1,SS6,FDC03,,142,6110s150,,"North American version",29
+h,fe0052,price1,SS6,FDC03,,142,6110s150,,North American version,29
 h,fe0054,price1,SS6,FDC03,,143,6110s152,,,29
 h,fe0056,price1,SS6,FDC03,,145,6110s155,,,29
 h,fe0057,price1,SS6,FDC03,,148,6110s156,,,29
@@ -3445,8 +3445,8 @@ h,fe0092,price1,SS6,FDC03,,190,6110s190,,,29
 h,fe0091,price1,SS6,FDC03,,191,6110s188,,,29
 h,fe0091,price1,SS6,FDC03,,192,6110s189,,,29
 h,fe0094,price1,SS6,FDC03,,193,6110s191,,,29
-h,fe0093,price1,SS6,FDC03,,195,6110s178,,"Folder also refers to 1.00 value",29
-h,fe0095,price1,SS6,FDC03,,197,6110s178,,"Folder does not refer to 1.00 value",29
+h,fe0093,price1,SS6,FDC03,,195,6110s178,,Folder also refers to 1.00 value,29
+h,fe0095,price1,SS6,FDC03,,197,6110s178,,Folder does not refer to 1.00 value,29
 h,fe0096,price1,SS6,FDC04,,201,6110s192,,,29
 h,fe0098,price1,SS6,FDC04,,202,6110s194,,,29
 h,fe0097,price1,SS6,FDC04,,203,6110s193,,,29
@@ -3489,7 +3489,7 @@ h,fe0127,price1,SS6,FDC04,,241,6110s224,,,29
 h,fe0128,price1,SS6,FDC04,,242,6110s225,,,29
 h,fe0129/0130,price1,SS6,FDC04,,243,6110s226,,,29
 h,fe0129/0130A,price1,SS6,FDC04,,244,6110s229,,,29
-h,fe0131,price1,SS6,FDC04,,246,6110s227,,"North American version",29
+h,fe0131,price1,SS6,FDC04,,246,6110s227,,North American version,29
 h,fe0131,price1,SS6,FDC04,,247,6110s228,,,29
 h,fe0132,price1,SS6,FDC04,,248,6110s230,,,29
 h,fe0133,price1,SS6,FDC04,,250,6110s232,,,29
@@ -3523,14 +3523,14 @@ h,fe0174,price1,SS6,FDC05,,308,6110s269,,,29
 h,fe0176,price1,SS6,FDC05,,309,6110s270,,,29
 h,fe0177,price1,SS6,FDC05,,311,6110s271,,,29
 h,fe0179,price1,SS6,FDC05,,312,6110s273,,,29
-h,fe0181/0182,price1,SS6,FDC05,,317,6110s277,,"Oversize FDC stored in SS10 album.",29
+h,fe0181/0182,price1,SS6,FDC05,,317,6110s277,,Oversize FDC stored in SS10 album.,29
 h,fe0181/0182A,price1,SS6,FDC05,,317,6110s278,,,29
-h,fe0183,price1,SS6,FDC05,,318,6110s276,,"Oversize FDC stored in SS10 album.",29
-h,fe0184,price1,SS6,FDC05,,318,6110s279,,"Oversize FDC stored in SS10 album.",29
-h,fe0187,price1,SS6,FDC05,,319,6110s281,,"Oversize FDC stored in SS10 album.",29
-h,fe0188,price1,SS6,FDC05,,319,6110s282,,"Oversize FDC stored in SS10 album.",29
-h,fe0189,price1,SS6,FDC05,,320,6110s283,,"Oversize FDC stored in SS10 album.",29
-h,fe0195,price1,SS6,FDC05,,320,6110s290,,"Oversize FDC stored in SS10 album.",29
+h,fe0183,price1,SS6,FDC05,,318,6110s276,,Oversize FDC stored in SS10 album.,29
+h,fe0184,price1,SS6,FDC05,,318,6110s279,,Oversize FDC stored in SS10 album.,29
+h,fe0187,price1,SS6,FDC05,,319,6110s281,,Oversize FDC stored in SS10 album.,29
+h,fe0188,price1,SS6,FDC05,,319,6110s282,,Oversize FDC stored in SS10 album.,29
+h,fe0189,price1,SS6,FDC05,,320,6110s283,,Oversize FDC stored in SS10 album.,29
+h,fe0195,price1,SS6,FDC05,,320,6110s290,,Oversize FDC stored in SS10 album.,29
 h,fe0190,price1,SS6,FDC05,,322,6110s285,,,29
 h,fe0191,price1,SS6,FDC05,,323,6110s284,,,29
 h,fe0192,price1,SS6,FDC05,,324,6110s286,,,29
@@ -3549,7 +3549,7 @@ h,fe0204,price1,SS6,FDC06,,338,6110s300,,,29
 h,fe0205,price1,SS6,FDC06,,339,6110s301,,,29
 w,fe0204,price1,SS6,FDC06,,340,6110s300,,,29
 h,fe0204,price1,SS6,FDC06,,341,6110s300,,,29
-h,fe0206,price1,SS6,FDC06,,342,6110s302,,"Contains additional notice slip in Hebrew",29
+h,fe0206,price1,SS6,FDC06,,342,6110s302,,Contains additional notice slip in Hebrew,29
 h,fe0207,price1,SS6,FDC06,,344,6110s303,,,29
 h,fe0209,price1,SS6,FDC06,,346,6110s305,,,29
 h,fe0209,price1,SS6,FDC06,,347,6110s305,,,29
@@ -4320,7 +4320,7 @@ h,bu181,price1,SS6,FDC03,,176.1,6110s178,,,30
 h,bu180,price1,SS6,FDC03,,177.1,6110s178,,,30
 h,bu180a,price1,SS6,FDC03,,179.1,6110s178,,,30
 h,bu183,price1,SS6,FDC03,,180.1,6110s179,,,30
-h,bu183,price1,SS6,FDC03,,178.1,6110s179,,"Alt. paper variety",30
+h,bu183,price1,SS6,FDC03,,178.1,6110s179,,Alt. paper variety,30
 h,bu185,price1,SS6,FDC03,,181.1,6110s182,,,30
 h,bu184,price1,SS6,FDC03,,182.1,6110s181,,,30
 h,bu186,price1,SS6,FDC03,,183.1,6110s183,,,30
@@ -4330,7 +4330,7 @@ h,bu188,price1,SS6,FDC03,,186.1,6110s185,,,30
 h,bu189,price1,SS6,FDC03,,187.1,6110s186,,,30
 h,bu190,price1,SS6,FDC03,,188.1,6110s187,,,30
 h,bu190a,price1,SS6,FDC03,,189.1,6110s187,,,30
-h,bu190a,price1,SS6,FDC03,,189.1,6110s187,,"Alt. paper variety",30
+h,bu190a,price1,SS6,FDC03,,189.1,6110s187,,Alt. paper variety,30
 h,bu192,price1,SS6,FDC03,,190.1,6110s190,,,30
 h,bu191,price1,SS6,FDC03,,191.1,6110s188,,,30
 h,bu191a,price1,SS6,FDC03,,192.1,6110s189,,,30
@@ -4379,10 +4379,10 @@ h,bu239,price1,SS6,FDC04,,255.1,6110s234,,,30
 h,bu240,price1,SS6,FDC04,,256.1,6110s235,,,30
 h,bu241,price1,SS6,FDC04,,258.1,6110s236,,,30
 h,bu241a,price1,SS6,FDC04,,259.1,6110s236,,,30
-h,bu223,price1,SS6,FDC04,,260.1,6110s197,,"Alt. paper variety",30
-h,bu224,price1,SS6,FDC04,,260.2,6110s219,,"Alt. paper variety",30
-h,bu225,price1,SS6,FDC04,,260.3,6110s220,,"Alt. paper variety",30
-h,bu225a,price1,SS6,FDC04,,260.4,6110s221,,"Alt. paper variety",30
+h,bu223,price1,SS6,FDC04,,260.1,6110s197,,Alt. paper variety,30
+h,bu224,price1,SS6,FDC04,,260.2,6110s219,,Alt. paper variety,30
+h,bu225,price1,SS6,FDC04,,260.3,6110s220,,Alt. paper variety,30
+h,bu225a,price1,SS6,FDC04,,260.4,6110s221,,Alt. paper variety,30
 h,bu243,price1,SS6,FDC05,,261.1,6110s238,,,30
 h,bu242,price1,SS6,FDC05,,262.1,6110s237,,,30
 h,bu245,price1,SS6,FDC05,,263.1,6110s240,,,30
@@ -4402,15 +4402,15 @@ h,bu260,price1,SS6,FDC05,,282.1,6110s256,,,30
 h,bu259,price1,SS6,FDC05,,283.1,6110s254,,,30
 h,bu259a,price1,SS6,FDC05,,284.1,6110s255,,,30
 h,bu261,price1,SS6,FDC05,,285.1,6110s257,,,30
-h,bu284,price1,SS6,FDC05,,317.1,6110s277,,"Oversize FDC stored in SS10 album.",30
-h,bu285,price1,SS6,FDC05,,317.1,6110s278,,"Oversize FDC stored in SS10 album.",30
-h,bu286,price1,SS6,FDC05,,318.1,6110s276,,"Oversize FDC stored in SS10 album.",30
-h,bu287,price1,SS6,FDC05,,318.1,6110s279,,"Oversize FDC stored in SS10 album.",30
-h,bu290,price1,SS6,FDC05,,319.1,6110s281,,"Oversize FDC stored in SS10 album.",30
-h,bu291,price1,SS6,FDC05,,319.1,6110s282,,"Oversize FDC stored in SS10 album.",30
-h,bu292,price1,SS6,FDC05,,320.1,6110s283,,"Oversize FDC stored in SS10 album.",30
-h,bu299,price1,SS6,FDC05,,320.1,6110s290,,"Oversize FDC stored in SS10 album.",30
-h,bu299a,price1,SS6,FDC05,,320.1,6110s291,,"Oversize FDC stored in SS10 album.",30
+h,bu284,price1,SS6,FDC05,,317.1,6110s277,,Oversize FDC stored in SS10 album.,30
+h,bu285,price1,SS6,FDC05,,317.1,6110s278,,Oversize FDC stored in SS10 album.,30
+h,bu286,price1,SS6,FDC05,,318.1,6110s276,,Oversize FDC stored in SS10 album.,30
+h,bu287,price1,SS6,FDC05,,318.1,6110s279,,Oversize FDC stored in SS10 album.,30
+h,bu290,price1,SS6,FDC05,,319.1,6110s281,,Oversize FDC stored in SS10 album.,30
+h,bu291,price1,SS6,FDC05,,319.1,6110s282,,Oversize FDC stored in SS10 album.,30
+h,bu292,price1,SS6,FDC05,,320.1,6110s283,,Oversize FDC stored in SS10 album.,30
+h,bu299,price1,SS6,FDC05,,320.1,6110s290,,Oversize FDC stored in SS10 album.,30
+h,bu299a,price1,SS6,FDC05,,320.1,6110s291,,Oversize FDC stored in SS10 album.,30
 h,bu289,price1,SS6,FDC05,,321.1,6110s234,,,30
 h,bu288,price1,SS6,FDC05,,321.1,6110s280,,,30
 h,bu294,price1,SS6,FDC05,,322.1,6110s285,,,30
@@ -4581,10 +4581,10 @@ h,6110j595xTB,price1,SS6,JOINT01,JPOLAND,2,6110j595,,,13
 h,6110l125,price1,SS6,JOINT01,JPOLAND,3,6110j595,,,23
 h,6110j595xFJFDC,price1,SS6,JOINT01,JPOLAND,4,6110j595,,,13
 h,6110j595,price2,SS6,JOINT01,JPOLAND,5,6110s595,,,13
-h,6110j595xFSF,price1,SS6,JOINT01,JPOLAND,6,6110j595,,"item has dark marks and a white blotch (paper removed) on front cover",13
+h,6110j595xFSF,price1,SS6,JOINT01,JPOLAND,6,6110j595,,item has dark marks and a white blotch (paper removed) on front cover,13
 w,6110j595xJFDC,price1,SS6,JOINT01,JPOLAND,7,6110j595,,,13
 h,6110l242,price1,SS6,JOINT01,JUSA,1,6110j682,,,23
-h,6110j682,price1,SS6,JOINT01,JUSA,2,6110s682,,"single has sheet selvage of plate position 'tab'",13
+h,6110j682,price1,SS6,JOINT01,JUSA,2,6110s682,,single has sheet selvage of plate position 'tab',13
 h,6110j682xJFDC,price1,SS6,JOINT01,JUSA,2,6110j682,,,13
 w,6110j682xFS,price1,SS6,JOINT01,JUSA,2,6110j682,,,13
 w,6110j682xFS2,price1,SS6,JOINT01,JUSA,2,6110j682,,,13
@@ -4593,9 +4593,9 @@ h,6110j682,price2,SS6,JOINT01,JUSA,3,6110s682,,,13
 h,6110j682xFS,price2,SS6,JOINT01,JUSA,3,6110j682,,,13
 h,6110j682xFS2,price2,SS6,JOINT01,JUSA,4,6110j682,,,13
 h,6110j682xFS3,price2,SS6,JOINT01,JUSA,4,6110j682,,,13
-h,6110j693,price2,SS6,JOINT01,JCZECH,1,6110s693,"Partial Set (1v) 8kc",,13
-h,6110j693,price2,SS6,JOINT01,JCZECH,2,6110s693,"Partial Set (1v) 10kc",,13
-h,6110j693,price1,SS6,JOINT01,JCZECH,3,6110s693,,"includes corner sheet selvage",13
+h,6110j693,price2,SS6,JOINT01,JCZECH,1,6110s693,Partial Set (1v) 8kc,,13
+h,6110j693,price2,SS6,JOINT01,JCZECH,2,6110s693,Partial Set (1v) 10kc,,13
+h,6110j693,price1,SS6,JOINT01,JCZECH,3,6110s693,,includes corner sheet selvage,13
 h,6110j693xJFDC,price2,SS6,JOINT01,JCZECH,3,6110j693,,,13
 h,6110l268,price1,SS6,JOINT01,JCZECH,4,6110j693,,,23
 h,6110j708,price2,SS6,JOINT01,JRUSSIA,1,6110s708,,,13
@@ -4610,7 +4610,7 @@ h,6110l333,price1,SS6,JOINT01,JBELGIUM,4,6110j752,,,23
 h,6110j762,price2,SS6,JOINT01,JSLOVAKIA,1,6110s762,,,13
 h,6110s762,price3,SS6,JOINT01,JSLOVAKIA,1,,,,2
 h,6110l349,price1,SS6,JOINT01,JSLOVAKIA,2,6110j762,,,23
-h,6110j762,price1,SS6,JOINT01,JSLOVAKIA,3,6110s762,,"stamps with empty white sheet selvage",13
+h,6110j762,price1,SS6,JOINT01,JSLOVAKIA,3,6110s762,,stamps with empty white sheet selvage,13
 h,6110j762xFSP,price1,SS6,JOINT01,JSLOVAKIA,3,6110j762,,,13
 h,6110j762A,price1,SS6,JOINT01,JSLOVAKIA,3,6110j762,,,13
 h,6110j786xJFDC,price2,SS6,JOINT01,JHUNGARY,1,6110j786,,,13
@@ -4653,7 +4653,7 @@ h,6110j935xFSL,price2,SS6,JOINT01,JGERMANY,1,6110j935,,,13
 h,6110l516,price1,SS6,JOINT01,JGERMANY,2,6110j935,,,23
 h,6110j935xJFDC,price2,SS6,JOINT01,JGERMANY,3,6110j935,,,13
 h,6110s935,price3,SS6,JOINT01,JGERMANY,3,,,,2
-h,6110j935,price1,SS6,JOINT01,JGERMANY,4,6110s935,,"stamp with colored sheet corner selvage",13
+h,6110j935,price1,SS6,JOINT01,JGERMANY,4,6110s935,,stamp with colored sheet corner selvage,13
 w,6110h935xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j935,,,22
 h,6110j004A,price2,SS6,JOINT01,JUN_NGV,1,6110j1004,,,13
 h,6110l549,price1,SS6,JOINT01,JUN_NGV,2,6110j1004,,,23
@@ -4670,7 +4670,7 @@ h,6110j1038xJFDC,price2,SS6,JOINT01,JFRANCE,2,6110j1038,,,13
 h,6110j1038xJFDC2,price2,SS6,JOINT01,JFRANCE,2,6110j1038,,,13
 h,6110j1038,price1,SS6,JOINT01,JFRANCE,3,6110s1038,,,13
 h,6110j1038xPJFDC,price2,SS6,JOINT01,JFRANCE,4,6110j1038,,,13
-h,6110j1054,price2,SS6,JOINT01,JPOLAND2,1,6110s1054,,"S/S on FDC with Polish cachet design",13
+h,6110j1054,price2,SS6,JOINT01,JPOLAND2,1,6110s1054,,S/S on FDC with Polish cachet design,13
 h,6110l577,price1,SS6,JOINT01,JPOLAND2,2,6110j1054,,,23
 h,6110j1054xJFDC2,price2,SS6,JOINT01,JPOLAND2,3,6110j1054,,,13
 h,6110s1054,price3,SS6,JOINT01,JPOLAND2,4,,,,2
@@ -4679,12 +4679,12 @@ h,6110h16,price1,BOX,SVFOLDERS01,JOINT,1,6110j1054,,,22
 h,6110j1054xFSS,price2,SS6,JOINT01,JPOLAND2,3,6110j1054,,,13
 h,6110l587,price1,SS6,JOINT01,JROMANIA,1,6110j1070,,,23
 h,6110h1070xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1070,,,22
-h,6110j070B,price2,SS6,JOINT01,JROMANIA,2,6110j1070,,"Romanian S/S on FDC w official Israeli cachet",13
+h,6110j070B,price2,SS6,JOINT01,JROMANIA,2,6110j1070,,Romanian S/S on FDC w official Israeli cachet,13
 h,6110j070B,price1,SS6,JOINT01,JROMANIA,3,6110j1070,,,13
 h,6110s1070,price3,SS6,JOINT01,JROMANIA,4,,,,2
 h,6110j1070xJFDC,price2,SS6,JOINT01,JROMANIA,4,6110j1070,,"Israeli is left tab, Romanian is right tab",13
-h,6110j1070,price1,SS6,JOINT01,JROMANIA,5,6110s1070,"mint single w right tab and selvage",,13
-w,6110j1070,price1,SS6,JOINT01,JROMANIA,5,6110s1070,"mint single w left tab and selvage",,13
+h,6110j1070,price1,SS6,JOINT01,JROMANIA,5,6110s1070,mint single w right tab and selvage,,13
+w,6110j1070,price1,SS6,JOINT01,JROMANIA,5,6110s1070,mint single w left tab and selvage,,13
 h,6110j1085xFMC,price2,SS6,JOINT01,JCANADA,1,6110j1085,,,13
 h,6110j1085xFJFDC,price2,SS6,JOINT01,JCANADA,2,6110j1085,,,13
 h,6110j1085,price1,SS6,JOINT01,JCANADA,4,6110s1085,,,13
@@ -4695,8 +4695,8 @@ w,6110h27,price1,BOX,SVFOLDERS01,JOINT,1,6110j1085,,,22
 h,6110j1085xFS,price2,SS6,JOINT01,JCANADA,3,6110j1085,,,13
 h,6110l599,price1,SS6,JOINT01,JAUSTRIA,1,6110j1089,,,23
 h,6110h1089xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1089,,,22
-h,6110j1089xFS,price2,SS6,JOINT01,JAUSTRIA,2,6110j1089,"cachet of country map",,13
-h,6110j1089xFS,price2,SS6,JOINT01,JAUSTRIA,3,6110j1089,"cachet of Simon Wiesenthal",,13
+h,6110j1089xFS,price2,SS6,JOINT01,JAUSTRIA,2,6110j1089,cachet of country map,,13
+h,6110j1089xFS,price2,SS6,JOINT01,JAUSTRIA,3,6110j1089,cachet of Simon Wiesenthal,,13
 h,6110j1089xDP,price1,SS6,JOINT01,JAUSTRIA,4,6110j1089,,,13
 h,6110s1089,price3,SS6,JOINT01,JAUSTRIA,4,,,,2
 w,6110j1089xFS,price1,SS6,JOINT01,JAUSTRIA,4,6110j1089,,,13
@@ -4706,7 +4706,7 @@ h,6110l608,price1,SS6,JOINT01,JVATICAN,2,6110j1107,,,23
 h,6110h1107xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1107,,,22
 h,6110j1107xFS,price1,SS6,JOINT01,JVATICAN,3,6110j1107,,,13
 h,6110j1107xFS,price2,SS6,JOINT01,JVATICAN,4,6110j1107,"stamps have no tabs, ""FDC"" was CTO by Vatican PO",,13
-h,6110j1164,price2,SS6,JOINT01,JCHINA,1,6110s1164,"both stamps w/o tabs on FDC w official Chinese cachet",,13
+h,6110j1164,price2,SS6,JOINT01,JCHINA,1,6110s1164,both stamps w/o tabs on FDC w official Chinese cachet,,13
 h,6110j1164,price1,SS6,JOINT01,JCHINA,2,6110s1164,,,13
 h,6110s1164,price3,SS6,JOINT01,JCHINA,2,,,,2
 h,6110l623,price1,SS6,JOINT01,JCHINA,3,6110j1164,,,23
@@ -4715,9 +4715,9 @@ h,6110j1164xFSF,price2,SS6,JOINT01,JCHINA,4,6110j1164,,,13
 h,6110l628,price1,SS6,JOINT01,JNEPAL,1,6110j1179,,,23
 h,6110h1179xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1179,,,22
 h,6110s1179,price3,SS6,JOINT01,JNEPAL,2,,,,2
-h,6110j1179,price2,SS6,JOINT01,JNEPAL,3,6110s1179,"foreign stamp on FDC with official Israeli cachet",,13
+h,6110j1179,price2,SS6,JOINT01,JNEPAL,3,6110s1179,foreign stamp on FDC with official Israeli cachet,,13
 h,6110j1179xJFDC,price2,SS6,JOINT01,JNEPAL,3,6110j1179,,,13
-h,6110j1179,price1,SS6,JOINT01,JNEPAL,4,6110s1179,,"stamp has attached sheet selvage with writing",13
+h,6110j1179,price1,SS6,JOINT01,JNEPAL,4,6110s1179,,stamp has attached sheet selvage with writing,13
 h,6110j1179xFSS,price1,SS6,JOINT01,JNEPAL,4,6110j1179,,,13
 h,6110j1179xFSS,price2,SS6,JOINT01,JNEPAL,5,6110j1179,,,13
 h,6110j1179xFSS,price2,SS6,JOINT01,JNEPAL,5,6110j1179,,,13
@@ -4728,28 +4728,28 @@ h,6110l632,price1,SS6,JOINT01,JINDIA,2,6110j1185,,,23
 h,6110h1185xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1185,,,22
 h,6110j1185xFIF,price2,SS6,JOINT01,JINDIA,3,6110j1185,,,13
 w,6110j1185xFIF,price1,SS6,JOINT01,JINDIA,3,6110j1185,,,13
-h,6110j1185xFSP,price2,SS6,JOINT01,JINDIA,4,6110j1185,"both stamps w/o tabs on FDC w official India cachet",,13
-h,6110j1206,price1,SS6,JOINT01,JAUSTRALIA,2,6110s1206,"set (2v) 0.60 2.60 AUD",,13
+h,6110j1185xFSP,price2,SS6,JOINT01,JINDIA,4,6110j1185,both stamps w/o tabs on FDC w official India cachet,,13
+h,6110j1206,price1,SS6,JOINT01,JAUSTRALIA,2,6110s1206,set (2v) 0.60 2.60 AUD,,13
 h,6110j1206xFMC,price2,SS6,JOINT01,JAUSTRALIA,3,6110j1206,,,13
 h,6110j1206xFMC2,price2,SS6,JOINT01,JAUSTRALIA,3,6110j1206,,,13
 h,6110j1206xFJSF,price2,SS6,JOINT01,JAUSTRALIA,4,6110j1206,,,13
 h,6110j1206xFSF,price2,SS6,JOINT01,JAUSTRALIA,4,6110j1206,,,13
 h,6110j1206xFCE,price1,SS6,JOINT01,JAUSTRALIA,5,6110j1206,,,13
 h,6110j1206xFJFDC,price2,SS6,JOINT01,JAUSTRALIA,7,6110j1206,,,13
-h,6110j1206xFSHC,price1,SS6,JOINT01,JAUSTRALIA,8,6110j1206,"Partial set (1v) 10x 0.60 AUD",,13
-h,6110j1206xFSHC,price1,SS6,JOINT01,JAUSTRALIA,9,6110j1206,"Partial set (1v) 10x 2.60 AUD",,13
+h,6110j1206xFSHC,price1,SS6,JOINT01,JAUSTRALIA,8,6110j1206,Partial set (1v) 10x 0.60 AUD,,13
+h,6110j1206xFSHC,price1,SS6,JOINT01,JAUSTRALIA,9,6110j1206,Partial set (1v) 10x 2.60 AUD,,13
 h,6110lne2,price1,SS6,JOINT01,JAUSTRALIA,1,6110j1206,,,23
 h,6110h1206xFLD,price1,BOX,SVFOLDERS01,JOINT,1,6110j1206,,,22
-h,6110j1206,price2,SS6,JOINT01,JAUSTRALIA,6,6110s1206,"both Australian stamps on official FDC",,13
+h,6110j1206,price2,SS6,JOINT01,JAUSTRALIA,6,6110s1206,both Australian stamps on official FDC,,13
 h,6110j1206xFIF,price1,SS6,JOINT01,JAUSTRALIA,10,6110j1206,,,13
 h,6110e1214,price1,SS6,BKLT02,PB,19,,,,3
 h,6110e128A,price1,SS6,BKLT03,SA,19,,,,3
 h,6110e128B,price1,SS6,BKLT03,SA,20,,,,3
 h,6110e144B,price1,SS6,BKLT03,SA,23,,,,3
-h,6110e845S,price1,SS6,BKLT03,SA,45,,"Partial set (1v) 0.50 5th print (5 Menorah)",,24
-h,6110e845T,price1,SS6,BKLT03,SA,46,,"Partial set (1v) 1.00 6th print (6 Menorah)",,24
-h,6110e845U,price1,SS6,BKLT03,SA,47,,"Partial set (1v) 0.30 5th print (5 Menorah)",,24
-h,6110e845V,price1,SS6,BKLT03,SA,48,,"Partial set (1v) 0.40 4th print (4 Menorah)",,24
+h,6110e845S,price1,SS6,BKLT03,SA,45,,Partial set (1v) 0.50 5th print (5 Menorah),,24
+w,6110e845T,price1,SS6,BKLT03,SA,46,,Partial set (1v) 1.00 6th print (6 Menorah),,24
+h,6110e845U,price1,SS6,BKLT03,SA,47,,Partial set (1v) 0.30 5th print (5 Menorah),,24
+h,6110e845V,price1,SS6,BKLT03,SA,48,,Partial set (1v) 0.40 4th print (4 Menorah),,24
 h,6110e191A,price1,SS6,BKLT03,SA,49,,,,24
 h,6110e191B,price1,SS6,BKLT03,SA,50,,,,24
 h,6110t28,price1,SS10,SHEETS01,SER1948,1,6110s28,,,31
@@ -4836,9 +4836,9 @@ w,6110t71,price1,SS10,SHEETS01,SER1948,84,6110s71,perf.variety,,31
 h,6110t72,price1,SS10,SHEETS01,SER1948,85,6110s72,,,31
 h,6110t72,price1,SS10,SHEETS01,SER1948,86,6110s72,perf.variety,,31
 h,6110t75,price1,SS10,SHEETS01,SER1948,87,6110s75,,,31
-h,6110t70_01,price1,SS10,SHEETS01,SER1948,88,6110s70,,"folded in half to fit album page (when purchased)",31
-h,6110t70_02,price1,SS10,SHEETS01,SER1948,89,6110s70,,"folded in half to fit album page (when purchased)",31
-h,6110t70_03,price1,SS10,SHEETS01,SER1948,90,6110s70,,"folded in half to fit album page (when purchased)",31
+h,6110t70_01,price1,SS10,SHEETS01,SER1948,88,6110s70,,folded in half to fit album page (when purchased),31
+h,6110t70_02,price1,SS10,SHEETS01,SER1948,89,6110s70,,folded in half to fit album page (when purchased),31
+h,6110t70_03,price1,SS10,SHEETS01,SER1948,90,6110s70,,folded in half to fit album page (when purchased),31
 h,6110t73_01,price1,SS10,SHEETS01,SER1948,91,6110s73,,,31
 h,6110t73_02,price1,SS10,SHEETS01,SER1948,92,6110s73,,,31
 h,6110t73_03,price1,SS10,SHEETS01,SER1948,93,6110s73,,,31
@@ -4883,16 +4883,16 @@ h,fe0041,price1,SS6,FDC02,,130,6110s138,,,29
 w,fe0060,price1,SS6,FDC03,,150,6110s159,,,29
 h,fe0052,price1,SS6,FDC03,,142,6110s150,,,29
 w,fe0059,price1,SS6,FDC03,,147,6110s158,,,29
-h,fe0077,price1,SS6,FDC03,,174,6110s175,,"North American version",29
+h,fe0077,price1,SS6,FDC03,,174,6110s175,,North American version,29
 w,fe0048,price1,SS6,FDC03,,139,6110s145,,,29
-h,fe0129/0130,price1,SS6,FDC04,,243,6110s226,,"North American version",29
-h,fe0159,price1,SS6,FDC05,,285,6110s257,,"North American version",29
-h,fe0163,price1,SS6,FDC05,,291,6110s260,,"North American version",29
+h,fe0129/0130,price1,SS6,FDC04,,243,6110s226,,North American version,29
+h,fe0159,price1,SS6,FDC05,,285,6110s257,,North American version,29
+h,fe0163,price1,SS6,FDC05,,291,6110s260,,North American version,29
 w,fe0163,price1,SS6,FDC05,,291,6110s260,,,29
-h,fe0177,price1,SS6,FDC05,,311,6110s271,,"North American version",29
+h,fe0177,price1,SS6,FDC05,,311,6110s271,,North American version,29
 h,fe0206,price1,SS6,FDC06,,343,6110s302,,,29
-h,fe0272,price1,SS6,FDC07,,427,6110s367,,"North American version",29
-h,fe0375,price1,SS6,FDC09,,579,6110s496,"Shows unissued 0.35 value",,29
+h,fe0272,price1,SS6,FDC07,,427,6110s367,,North American version,29
+h,fe0375,price1,SS6,FDC09,,579,6110s496,Shows unissued 0.35 value,,29
 h,bu080,price1,SS6,FDC02,,76.1,6110s81,,,30
 h,bu081,price1,SS6,FDC02,,77.1,6110s82,,,30
 h,bu082,price1,SS6,FDC02,,78.1,6110s83,,,30
@@ -4930,25 +4930,25 @@ h,bu169,price1,SS6,FDC03,,165.1,6110s168,,,30
 h,bu168,price1,SS6,FDC03,,164.1,6110s167,,,30
 h,bu171,price1,SS6,FDC03,,167.1,6110s169,,,30
 h,bu172,price1,SS6,FDC03,,168.1,6110s170,,,30
-h,bu195,price1,SS6,FDC03,,197.1,6110s178,,"Alt. paper variety",30
-h,bu181,price1,SS6,FDC03,,176.1,6110s178,,"Alt. paper variety",30
-h,bu180,price1,SS6,FDC03,,177.1,6110s178,,"Alt. paper variety",30
-h,bu180a,price1,SS6,FDC03,,179.1,6110s178,,"Alt. paper variety",30
-h,bu185,price1,SS6,FDC03,,181.1,6110s182,,"Alt. paper variety",30
-h,bu184,price1,SS6,FDC03,,182.1,6110s181,,"Alt. paper variety",30
-h,bu186,price1,SS6,FDC03,,183.1,6110s183,,"Alt. paper variety",30
-h,bu182,price1,SS6,FDC03,,184.1,6110s180,,"Alt. paper variety",30
-h,bu187,price1,SS6,FDC03,,185.1,6110s184,,"Alt. paper variety",30
-h,bu188,price1,SS6,FDC03,,186.1,6110s185,,"Alt. paper variety",30
-h,bu189,price1,SS6,FDC03,,187.1,6110s186,,"Alt. paper variety",30
-h,bu190,price1,SS6,FDC03,,188.1,6110s187,,"Alt. paper variety",30
-h,bu192,price1,SS6,FDC03,,190.1,6110s190,,"Alt. paper variety",30
-h,bu191,price1,SS6,FDC03,,191.1,6110s188,,"Alt. paper variety",30
-h,bu191a,price1,SS6,FDC03,,192.1,6110s189,,"Alt. paper variety",30
-h,bu194,price1,SS6,FDC03,,193.1,6110s191,,"Alt. paper variety",30
-h,bu193,price1,SS6,FDC03,,194.1,6110s178,,"Alt. paper variety",30
-h,bu193a,price1,SS6,FDC03,,195.1,6110s178,,"Alt. paper variety",30
-h,bu183,price1,SS6,FDC03,,180.1,6110s179,,"Alt. paper variety",30
+h,bu195,price1,SS6,FDC03,,197.1,6110s178,,Alt. paper variety,30
+h,bu181,price1,SS6,FDC03,,176.1,6110s178,,Alt. paper variety,30
+h,bu180,price1,SS6,FDC03,,177.1,6110s178,,Alt. paper variety,30
+h,bu180a,price1,SS6,FDC03,,179.1,6110s178,,Alt. paper variety,30
+h,bu185,price1,SS6,FDC03,,181.1,6110s182,,Alt. paper variety,30
+h,bu184,price1,SS6,FDC03,,182.1,6110s181,,Alt. paper variety,30
+h,bu186,price1,SS6,FDC03,,183.1,6110s183,,Alt. paper variety,30
+h,bu182,price1,SS6,FDC03,,184.1,6110s180,,Alt. paper variety,30
+h,bu187,price1,SS6,FDC03,,185.1,6110s184,,Alt. paper variety,30
+h,bu188,price1,SS6,FDC03,,186.1,6110s185,,Alt. paper variety,30
+h,bu189,price1,SS6,FDC03,,187.1,6110s186,,Alt. paper variety,30
+h,bu190,price1,SS6,FDC03,,188.1,6110s187,,Alt. paper variety,30
+h,bu192,price1,SS6,FDC03,,190.1,6110s190,,Alt. paper variety,30
+h,bu191,price1,SS6,FDC03,,191.1,6110s188,,Alt. paper variety,30
+h,bu191a,price1,SS6,FDC03,,192.1,6110s189,,Alt. paper variety,30
+h,bu194,price1,SS6,FDC03,,193.1,6110s191,,Alt. paper variety,30
+h,bu193,price1,SS6,FDC03,,194.1,6110s178,,Alt. paper variety,30
+h,bu193a,price1,SS6,FDC03,,195.1,6110s178,,Alt. paper variety,30
+h,bu183,price1,SS6,FDC03,,180.1,6110s179,,Alt. paper variety,30
 h,6110s1155,price1,SCH,ISRAEL04,Tab,259,,,,2
 h,6110s1156,price1,SCH,ISRAEL04,Tab,259,,,,2
 h,6110s1157,price1,SCH,ISRAEL04,Tab,259,,,,2
@@ -4973,14 +4973,14 @@ h,6110s1189,price1,SCH,ISRAEL04,Tab,264,,,,2
 h,6110s1184,price1,SCH,ISRAEL04,Tab,265,,,,2
 h,6110s1185,price1,SCH,ISRAEL04,Tab,265,,,,2
 h,6110s1188,price1,SCH,ISRAEL04,Tab,265,,,,2
-h,6110s1186,price1,SCH,ISRAEL04,Tab,265,,"se-tenant tab row (3v)",,2
+h,6110s1186,price1,SCH,ISRAEL04,Tab,265,,se-tenant tab row (3v),,2
 h,6110s1190,price1,SCH,ISRAEL04,S/S,61,,,,2
 h,6110s1215,price3,SS6,FDC19,,1217,,,,2
 h,fe0927,price1,SS6,FDC19,,1217,6110s1215,,,29
-h,6110s1216,price3,SS6,FDC19,,1218,,"Partial Set (4v) 2.00 2.00 2.00 2.00 (#1/3)",,2
+h,6110s1216,price3,SS6,FDC19,,1218,,Partial Set (4v) 2.00 2.00 2.00 2.00 (#1/3),,2
 h,fe0928,price1,SS6,FDC19,,1218,6110s1216,,,29
-h,6110s1216,price3,SS6,FDC19,,1219,,"Partial Set (4v) 2.00 2.00 2.00 2.00 (#2/3)",,2
-h,6110s1216,price3,SS6,FDC19,,1219,,"Partial Set (4v) 2.00 2.00 2.00 2.00 (#3/3)",,2
+h,6110s1216,price3,SS6,FDC19,,1219,,Partial Set (4v) 2.00 2.00 2.00 2.00 (#2/3),,2
+h,6110s1216,price3,SS6,FDC19,,1219,,Partial Set (4v) 2.00 2.00 2.00 2.00 (#3/3),,2
 h,6110s1217,price3,SS6,FDC19,,1220,,,,2
 h,fe0929,price1,SS6,FDC19,,1220,6110s1217,,,29
 h,6110s1218,price3,SS6,FDC19,,1221,,,,2
@@ -5031,10 +5031,10 @@ h,6110s1229,price3,SS6,FDC19,,1230,,,,2
 h,fe0939,price1,SS6,FDC19,,1230,6110s1229,,,29
 h,6110s1233,price3,SS6,FDC19,,1231,,,,2
 h,fe0941,price1,SS6,FDC19,,1231,6110s1233,,,29
-h,6110s1231,price3,SS6,FDC19,,1232,,"Partial Set (2v) 2.0(blue) 2.0(grn)",,2
+h,6110s1231,price3,SS6,FDC19,,1232,,Partial Set (2v) 2.0(blue) 2.0(grn),,2
 h,fe0940,price1,SS6,FDC19,,1232,6110s1231,,,29
 h,fe0940,price1,SS6,FDC19,,1233,6110s1231,,,29
-h,6110s1231,price3,SS6,FDC19,,1233,,"Partial Set (3v) 2.0(yel) 2.0(purp) 2.0(red)",,2
+h,6110s1231,price3,SS6,FDC19,,1233,,Partial Set (3v) 2.0(yel) 2.0(purp) 2.0(red),,2
 h,6110s1234,price3,SS6,FDC19,,1234,,,,2
 h,fe0942,price1,SS6,FDC19,,1234,6110s1234,,,29
 h,6110s1236,price3,SS6,FDC19,,1235,,,,2
@@ -5051,13 +5051,13 @@ h,6110s1243,price3,SS6,FDC19,,1240,,,,2
 h,fe0948,price1,SS6,FDC19,,1240,6110s1243,,,29
 h,6110s1246,price3,SS6,FDC19,,1241,,,,2
 h,fe0949,price1,SS6,FDC19,,1241,6110s1246,,,29
-h,6110s1247,price3,SS6,FDC19,,1242,,"Partial set (1v): 6.0 Sara Levi-Tanai (#1/2)",,2
+h,6110s1247,price3,SS6,FDC19,,1242,,Partial set (1v): 6.0 Sara Levi-Tanai (#1/2),,2
 h,fe0950,price1,SS6,FDC19,,1242,6110s1247,,,29
-h,6110s1247,price3,SS6,FDC19,,1243,,"Partial set (1v): 10.0 Esther Raab (#2/2)",,2
+h,6110s1247,price3,SS6,FDC19,,1243,,Partial set (1v): 10.0 Esther Raab (#2/2),,2
 w,fe0950,price1,SS6,FDC19,,1243,6110s1247,,,29
-h,6110s1248,price3,SS6,FDC19,,1244,,"Partial set (2v): 2.0 Pelobates syriacus 2.0 Salamandra infraimmaculata (#1/2)",,2
+h,6110s1248,price3,SS6,FDC19,,1244,,Partial set (2v): 2.0 Pelobates syriacus 2.0 Salamandra infraimmaculata (#1/2),,2
 h,fe0951,price1,SS6,FDC19,,1244,6110s1248,,,29
-h,6110s1248,price3,SS6,FDC19,,1245,,"Partial set (2v): 2.0 Ommatotriton vittatus 2.0 Latonia nigriventer (#2/2)",,2
+h,6110s1248,price3,SS6,FDC19,,1245,,Partial set (2v): 2.0 Ommatotriton vittatus 2.0 Latonia nigriventer (#2/2),,2
 w,fe0951,price1,SS6,FDC19,,1245,6110s1248,,,29
 h,6110s1250,price3,SS6,FDC19,,1246,,,,2
 h,fe0952,price1,SS6,FDC19,,1246,6110s1250,,,29
@@ -5071,9 +5071,9 @@ h,6110s1257,price3,SS6,FDC19,,1250,,,,2
 h,fe0957,price1,SS6,FDC19,,1250,6110s1257,,,29
 h,6110s1258,price3,SS6,FDC19,,1251,,,,2
 h,fe0953,price1,SS6,FDC19,,1251,6110s1258,,,29
-h,6110s1264,price3,SS6,FDC19,,1252,,"Partial set (2v): 3.80 Standard Carmel 1936 4.00 Sabra Sport 1961 (#1/2)",,2
+h,6110s1264,price3,SS6,FDC19,,1252,,Partial set (2v): 3.80 Standard Carmel 1936 4.00 Sabra Sport 1961 (#1/2),,2
 h,fe0961,price1,SS6,FDC19,,1252,6110s1264,,,29
-h,6110s1264,price3,SS6,FDC19,,1253,,"Partial set (2v): 4.10 Kaiser Manhattan 1951 8.30 Sufa Jeep 1992 (#2/2)",,2
+h,6110s1264,price3,SS6,FDC19,,1253,,Partial set (2v): 4.10 Kaiser Manhattan 1951 8.30 Sufa Jeep 1992 (#2/2),,2
 h,fe0961,price1,SS6,FDC19,,1253,6110s1264,,,29
 h,6110s1260,price3,SS6,FDC19,,1254,,,,2
 h,fe0958,price1,SS6,FDC19,,1254,6110s1260,,,29
@@ -5129,25 +5129,25 @@ h,6110s1294,price3,SS6,FDC20,,1279,,,,2
 h,fe0984,price1,SS6,FDC20,,1279,6110s1294,,,29
 h,6110s1296,price3,SS6,FDC20,,1280,,,,2
 h,fe0986,price1,SS6,FDC20,,1280,6110s1296,,,29
-h,6110s1295,price3,SS6,FDC20,,1281,,"Partial set (1v): 2.30 Sefi Rivlin (#1/2)",,2
+h,6110s1295,price3,SS6,FDC20,,1281,,Partial set (1v): 2.30 Sefi Rivlin (#1/2),,2
 h,fe0985,price1,SS6,FDC20,,1281,6110s1295,,,29
-h,6110s1295,price3,SS6,FDC20,,1282,,"Partial set (1v): 4.10 Channa Marron (#2/2)",,2
+h,6110s1295,price3,SS6,FDC20,,1282,,Partial set (1v): 4.10 Channa Marron (#2/2),,2
 h,fe0985,price1,SS6,FDC20,,1282,6110s1295,,,29
 h,6110s1297,price3,SS6,FDC20,,1283,,,,2
 h,fe0987,price1,SS6,FDC20,,1283,6110s1297,,,29
 h,6110s1304,price3,SS6,FDC20,,1284,,,,2
 h,fe0992,price1,SS6,FDC20,,1284,6110s1304,,,29
-h,6110s1301,price3,SS6,FDC20,,1285,,"Partial set (1v): 2.30 Nehama Pohatchevsky (#1/2)",,2
+h,6110s1301,price3,SS6,FDC20,,1285,,Partial set (1v): 2.30 Nehama Pohatchevsky (#1/2),,2
 h,fe0990,price1,SS6,FDC20,,1285,6110s1301,,,29
-h,6110s1301,price3,SS6,FDC20,,1286,,"Partial set (1v): 5.00 Zelda (#2/2)",,2
+h,6110s1301,price3,SS6,FDC20,,1286,,Partial set (1v): 5.00 Zelda (#2/2),,2
 h,fe0990,price1,SS6,FDC20,,1286,6110s1301,,,29
 h,6110s1299,price3,SS6,FDC20,,1287,,,,2
 h,fe0988,price1,SS6,FDC20,,1287,6110s1299,,,29
 h,6110s1300,price3,SS6,FDC20,,1288,,,,2
 h,fe0989,price1,SS6,FDC20,,1288,6110s1300,,,29
-h,6110s1302,price3,SS6,FDC20,,1289,,"Partial set (2v): 2.30 Caretta caretta 2.30 Chelonia mydas (#1/2)",,2
+h,6110s1302,price3,SS6,FDC20,,1289,,Partial set (2v): 2.30 Caretta caretta 2.30 Chelonia mydas (#1/2),,2
 h,fe0991,price1,SS6,FDC20,,1289,6110s1302,,,29
-h,6110s1302,price3,SS6,FDC20,,1290,,"Partial set (2v): 2.30 Dermochelys coriacea 2.30 Eretmochelys imbricata (#2/2)",,2
+h,6110s1302,price3,SS6,FDC20,,1290,,Partial set (2v): 2.30 Dermochelys coriacea 2.30 Eretmochelys imbricata (#2/2),,2
 h,fe0991,price1,SS6,FDC20,,1290,6110s1302,,,29
 h,6110s1305,price3,SS6,FDC20,,1291,,,,2
 h,fe0993,price1,SS6,FDC20,,1291,6110s1305,,,29
@@ -5185,9 +5185,9 @@ h,6110s1326,price3,SS6,FDC20,,1307,,,,2
 h,fe1009,price1,SS6,FDC20,,1307,6110s1326,,,29
 h,6110s1331,price3,SS6,FDC20,,1308,,,,2
 h,fe1011,price1,SS6,FDC20,,1308,6110s1331,,,29
-h,6110s1328,price3,SS6,FDC20,,1309,,"Partial set (3v): 2.40 Ramparts Promenade 2.40 Jaffa Road 2.40 Via Dolorosa (#1/2)",,2
+h,6110s1328,price3,SS6,FDC20,,1309,,Partial set (3v): 2.40 Ramparts Promenade 2.40 Jaffa Road 2.40 Via Dolorosa (#1/2),,2
 h,fe1010,price1,SS6,FDC20,,1309,6110s1328,,,29
-h,6110s1328,price3,SS6,FDC20,,1310,,"Partial set (2v): 2.40 First Train Station 2.40 Biblical Zoo (#2/2)",,2
+h,6110s1328,price3,SS6,FDC20,,1310,,Partial set (2v): 2.40 First Train Station 2.40 Biblical Zoo (#2/2),,2
 h,fe1010,price1,SS6,FDC20,,1310,6110s1328,,,29
 h,6110s1332,price3,SS6,FDC20,,1311,,,,2
 h,fe1012,price1,SS6,FDC20,,1311,6110s1332,,,29
@@ -5205,10 +5205,10 @@ h,6110s1341,price3,SS6,FDC21,,1317,,,,2
 h,fe1018,price1,SS6,FDC21,,1317,6110s1341,,,29
 h,6110s1343,price3,SS6,FDC21,,1318,,,,2
 h,fe1019,price1,SS6,FDC21,,1318,6110s1343,,,29
-h,6110s1347,price3,SS6,FDC21,,1319,,"Partial set (1v): 2.40 The Golan (#1/3)",,2
+h,6110s1347,price3,SS6,FDC21,,1319,,Partial set (1v): 2.40 The Golan (#1/3),,2
 h,fe1021,price1,SS6,FDC21,,1319,6110s1347,,,29
-h,6110s1347,price3,SS6,FDC21,,1320,,"Partial set (1v): 2.40 Judea and Samaria (#2/3)",,2
-h,6110s1347,price3,SS6,FDC21,,1320,,"Partial set (1v): 2.40 Jordan Valley (#3/3)",,2
+h,6110s1347,price3,SS6,FDC21,,1320,,Partial set (1v): 2.40 Judea and Samaria (#2/3),,2
+h,6110s1347,price3,SS6,FDC21,,1320,,Partial set (1v): 2.40 Jordan Valley (#3/3),,2
 h,6110s1345,price3,SS6,FDC21,,1321,,,,2
 h,fe1020,price1,SS6,FDC21,,1321,6110s1345,,,29
 h,6110s1349,price3,SS6,FDC21,,1322,,,,2
@@ -5217,10 +5217,10 @@ h,6110s1350,price3,SS6,FDC21,,1323,,,,2
 h,fe1023,price1,SS6,FDC21,,1323,6110s1350,,,29
 h,6110s1351,price3,SS6,FDC21,,1324,,,,2
 h,fe1024,price1,SS6,FDC21,,1324,6110s1351,,,29
-h,6110s1353,price3,SS6,FDC21,,1325,,"Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#1/3)",,2
+h,6110s1353,price3,SS6,FDC21,,1325,,Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#1/3),,2
 h,fe1025,price1,SS6,FDC21,,1325,6110s1353,,,29
-h,6110s1353,price3,SS6,FDC21,,1326,,"Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#2/3)",,2
-h,6110s1353,price3,SS6,FDC21,,1326,,"Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#3/3)",,2
+h,6110s1353,price3,SS6,FDC21,,1326,,Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#2/3),,2
+h,6110s1353,price3,SS6,FDC21,,1326,,Partial set (4v): 2.40 multi 2.40 multi 2.40 multi 2.40 multi (#3/3),,2
 h,6110s1356,price3,SS6,FDC21,,1327,,,,2
 h,fe1026,price1,SS6,FDC21,,1327,6110s1356,,,29
 h,6110s1357,price3,SS6,FDC21,,1328,,,,2
@@ -5381,11 +5381,230 @@ h,6110s1215,price1,SCH,ISRAEL04,S/S,62,,,,2
 h,6110s1287,price1,SCH,ISRAEL04,S/S,63,,,,2
 h,6110s1325,price1,SCH,ISRAEL04,S/S,64,,,,2
 h,6110s1332,price1,SCH,ISRAEL04,S/S,64,,,,2
-h,6110e871,price1,SS6,BKLT01,,34,,,,3
-h,6110e956,price1,SS6,BKLT01,,38,,,,3
-h,6110e1227,price1,SS6,BKLT01,,40,,,,3
-h,6110e1254,price1,SS6,BKLT01,,40,,,,3
-h,6110e1292,price1,SS6,BKLT01,,41,,,,3
-h,6110e1321,price1,SS6,BKLT01,,41,,,,3
-h,6110e1355,price1,SS6,BKLT01,,42,,,,3
-h,6110e1330,price1,SS6,BKLT02,PB,20,,,,3
+h,6110n13,price1,SS6,NYCARDS01,,29,,,,16
+h,6110n14,price1,SS6,NYCARDS01,,30,,,,16
+h,6110n15,price1,SS6,NYCARDS01,,31,,,,16
+h,6110n16,price1,SS6,NYCARDS01,,32,,,,16
+h,6110n17,price1,SS6,NYCARDS01,,33,,,,16
+h,6110s1335,price1,SCH,ISRAEL04,Tab,294,,,,2
+h,6110s1336,price1,SCH,ISRAEL04,Tab,294,,,,2
+h,6110s1338,price1,SCH,ISRAEL04,Tab,294,,,,2
+h,6110s1340,price1,SCH,ISRAEL04,Tab,294,,,,2
+h,6110s1343,price1,SCH,ISRAEL04,Tab,294,,,,2
+h,6110s1347,price1,SCH,ISRAEL04,Tab,295,,,,2
+h,6110s1334,price1,SCH,ISRAEL04,Tab,295,,,,2
+h,6110s1341,price1,SCH,ISRAEL04,Tab,295,,,,2
+h,6110s1345,price1,SCH,ISRAEL04,Tab,296,,,,2
+h,6110s1350,price1,SCH,ISRAEL04,Tab,296,,,,2
+h,6110s1351,price1,SCH,ISRAEL04,Tab,296,,,,2
+h,6110s1356,price1,SCH,ISRAEL04,Tab,296,,,,2
+h,6110e1354,price1,SCH,ISRAEL04,Tab,297,,,,24
+h,6110s1361,price1,SCH,ISRAEL04,Tab,298,,,,2
+h,6110s1360,price1,SCH,ISRAEL04,Tab,298,,,,2
+h,6110s1357,price1,SCH,ISRAEL04,Tab,298,,,,2
+h,6110s1363,price1,SCH,ISRAEL04,Tab,298,,,,2
+h,6110s1358,price1,SCH,ISRAEL04,Tab,299,,,,2
+h,6110s1364,price1,SCH,ISRAEL04,Tab,299,,,,2
+h,6110s1365,price1,SCH,ISRAEL04,Tab,299,,,,2
+h,6110s1367,price1,SCH,ISRAEL04,Tab,300,,,,2
+h,6110s1368,price1,SCH,ISRAEL04,Tab,300,,,,2
+h,6110s1349,price1,SCH,ISRAEL04,S/S,65,,,,2
+h,6110k1301,price1,LIN,SIMA04,,148,,,,26
+h,6110k1301bl,price1,LIN,SIMA04,,148,,,,26
+h,6110k1301m004,price1,LIN,SIMA04,,148,,,,26
+h,6110k1301m006,price1,LIN,SIMA04,,149,,,,26
+h,6110k1301m008,price1,LIN,SIMA04,,149,,,,26
+h,6110k1301m010,price1,LIN,SIMA04,,150,,,,26
+h,6110k1301m011,price1,LIN,SIMA04,,150,,,,26
+h,6110k1301m012,price1,LIN,SIMA04,,151,,,,26
+h,6110k1301m015,price1,LIN,SIMA04,,151,,,,26
+h,6110k1301m018,price1,LIN,SIMA04,,152,,,,26
+h,6110k1303,price1,LIN,SIMA04,,153,,,,26
+h,6110k1303m012,price1,LIN,SIMA04,,153,,,,26
+h,6110k1305,price1,LIN,SIMA04,,154,,,,26
+w,6110k1305bl,price1,LIN,SIMA04,,154,,,,26
+h,6110k1305m004,price1,LIN,SIMA04,,154,,,,26
+w,6110k1303bl,price1,LIN,SIMA04,,153,,,,26
+h,6110k1309,price1,LIN,SIMA04,,155,,,,26
+h,6110k1309m065,price1,LIN,SIMA04,,155,,,,26
+h,6110k1309bl,price1,LIN,SIMA04,,155,,,,26
+h,6110k1307,price1,LIN,SIMA04,,156,,,,26
+h,6110k1307bl,price1,LIN,SIMA04,,156,,,,26
+h,6110k1307m011,price1,LIN,SIMA04,,156,,,,26
+w,6110k1301RC2m001,price1,LIN,SIMA04,,157,,,,26
+h,6110k1301RC2m008,price1,LIN,SIMA04,,157,,,,26
+h,6110k1301RC2m010,price1,LIN,SIMA04,,158,,,,26
+h,6110k1301RC2m015,price1,LIN,SIMA04,,158,,,,26
+h,6110k1301RC2m018,price1,LIN,SIMA04,,159,,,,26
+h,6110k1301RC2m006,price1,LIN,SIMA04,,159,,,,26
+w,6110k1303RC2m001,price1,LIN,SIMA04,,160,,,,26
+h,6110k1303RC2m012,price1,LIN,SIMA04,,160,,,,26
+w,6110k1305RC2m001,price1,LIN,SIMA04,,161,,,,26
+h,6110k1305RC2m004,price1,LIN,SIMA04,,161,,,,26
+w,6110k1307RC2m001,price1,LIN,SIMA04,,162,,,,26
+h,6110k1307RC2m011,price1,LIN,SIMA04,,162,,,,26
+h,6110k1313,price1,LIN,SIMA04,,163,,,,26
+w,6110k1313bl,price1,LIN,SIMA04,,163,,,,26
+h,6110k1313m006,price1,LIN,SIMA04,,163,,,,26
+h,6110k1315,price1,LIN,SIMA04,,164,,,,26
+h,6110k1315bl,price1,LIN,SIMA04,,164,,,,26
+h,6110k1315m010,price1,LIN,SIMA04,,164,,,,26
+h,6110k1315m015,price1,LIN,SIMA04,,165,,,,26
+h,6110k1401,price1,LIN,SIMA05,,166,,,,26
+h,6110k1401bl,price1,LIN,SIMA05,,166,,,,26
+h,6110k1401m004,price1,LIN,SIMA05,,166,,,,26
+h,6110k1401m006,price1,LIN,SIMA05,,167,,,,26
+h,6110k1401m010,price1,LIN,SIMA05,,167,,,,26
+h,6110k1401m011,price1,LIN,SIMA05,,168,,,,26
+h,6110k1401m012,price1,LIN,SIMA05,,168,,,,26
+h,6110k1401m015,price1,LIN,SIMA05,,169,,,,26
+h,6110k1401m018,price1,LIN,SIMA05,,169,,,,26
+h,6110k1401m020,price1,LIN,SIMA05,,170,,,,26
+h,6110k1403,price1,LIN,SIMA05,,171,,,,26
+w,6110k1403bl,price1,LIN,SIMA05,,171,,,,26
+h,6110k1403m008,price1,LIN,SIMA05,,171,,,,26
+h,6110k1403m010,price1,LIN,SIMA05,,172,,,,26
+h,6110k1403m020,price1,LIN,SIMA05,,172,,,,26
+h,6110k1405,price1,LIN,SIMA05,,173,,,,26
+w,6110k1405bl,price1,LIN,SIMA05,,173,,,,26
+h,6110k1405m004,price1,LIN,SIMA05,,173,,,,26
+h,6110k1409,price1,LIN,SIMA05,,174,,,,26
+w,6110k1409bl,price1,LIN,SIMA05,,174,,,,26
+h,6110k1409m011,price1,LIN,SIMA05,,174,,,,26
+h,6110k1407,price1,LIN,SIMA05,,175,,,,26
+h,6110k1407bl,price1,LIN,SIMA05,,175,,,,26
+h,6110k1407m020,price1,LIN,SIMA05,,175,,,,26
+h,6110k1411,price1,LIN,SIMA05,,176,,,,26
+w,6110k1411m015,price1,LIN,SIMA05,,176,,,,26
+w,6110k1411bl,price1,LIN,SIMA05,,176,,,,26
+h,6110k1401RCm001,price1,LIN,SIMA05,,177,,,,26
+w,6110k1401RCm004,price1,LIN,SIMA05,,177,,,,26
+w,6110k1401RCm006,price1,LIN,SIMA05,,178,,,,26
+w,6110k1401RCm011,price1,LIN,SIMA05,,178,,,,26
+w,6110k1401RCm012,price1,LIN,SIMA05,,179,,,,26
+h,6110k1401RCm015,price1,LIN,SIMA05,,179,,,,26
+w,6110k1401RCm018,price1,LIN,SIMA05,,180,,,,26
+h,6110k1401RCm020,price1,LIN,SIMA05,,180,,,,26
+h,6110k1403RCm001,price1,LIN,SIMA05,,181,,,,26
+h,6110k1403RCm008,price1,LIN,SIMA05,,181,,,,26
+h,6110k1405RCm001,price1,LIN,SIMA05,,182,,,,26
+h,6110k1405RCm004,price1,LIN,SIMA05,,182,,,,26
+h,6110k1409RCm001,price1,LIN,SIMA05,,183,,,,26
+h,6110k1409RCm011,price1,LIN,SIMA05,,183,,,,26
+h,6110k1401RC2m001,price1,LIN,SIMA05,,184,,,,26
+w,6110k1401RC2m004,price1,LIN,SIMA05,,184,,,,26
+w,6110k1401RC2m006,price1,LIN,SIMA05,,185,,,,26
+w,6110k1401RC2m011,price1,LIN,SIMA05,,185,,,,26
+w,6110k1401RC2m012,price1,LIN,SIMA05,,186,,,,26
+w,6110k1401RC2m015,price1,LIN,SIMA05,,186,,,,26
+h,6110k1401RC2m018,price1,LIN,SIMA05,,187,,,,26
+h,6110k1401RC2m020,price1,LIN,SIMA05,,187,,,,26
+h,6110k1403RC2m001,price1,LIN,SIMA05,,188,,,,26
+h,6110k1403RC2m008,price1,LIN,SIMA05,,188,,,,26
+h,6110k1405RC2m001,price1,LIN,SIMA05,,189,,,,26
+h,6110k1405RC2m004,price1,LIN,SIMA05,,189,,,,26
+h,6110k1409RC2m001,price1,LIN,SIMA05,,190,,,,26
+h,6110k1409RC2m011,price1,LIN,SIMA05,,190,,,,26
+h,6110k1411RC2m001,price1,LIN,SIMA05,,191,,,,26
+h,6110k1411RC2m015,price1,LIN,SIMA05,,191,,,,26
+h,6110k1413,price1,LIN,SIMA05,,192,,,,26
+h,6110k1413bl,price1,LIN,SIMA05,,192,,,,26
+h,6110k1413m015,price1,LIN,SIMA05,,192,,,,26
+h,6110k1413m020,price1,LIN,SIMA05,,193,,,,26
+h,6110k1501,price1,LIN,SIMA05,,194,,,,26
+h,6110k1501m004,price1,LIN,SIMA05,,194,,,,26
+w,6110k1501bl,price1,LIN,SIMA05,,194,,,,26
+h,6110k1501m008,price1,LIN,SIMA05,,195,,,,26
+h,6110k1501m011,price1,LIN,SIMA05,,195,,,,26
+h,6110k1501m015,price1,LIN,SIMA05,,196,,,,26
+h,6110k1501m020,price1,LIN,SIMA05,,196,,,,26
+h,6110k1503,price1,LIN,SIMA05,,197,,,,26
+h,6110k1503m004,price1,LIN,SIMA05,,197,,,,26
+w,6110k1503bl,price1,LIN,SIMA05,,197,,,,26
+h,6110k1505,price1,LIN,SIMA05,,198,,,,26
+h,6110k1505m101,price1,LIN,SIMA05,,198,,,,26
+w,6110k1505bl,price1,LIN,SIMA05,,198,,,,26
+h,6110k1505m220,price1,LIN,SIMA05,,199,,,,26
+h,6110k1505m300,price1,LIN,SIMA05,,199,,,,26
+h,6110k1505m636,price1,LIN,SIMA05,,200,,,,26
+h,6110k1505m714,price1,LIN,SIMA05,,200,,,,26
+h,6110k1505m900,price1,LIN,SIMA05,,201,,,,26
+h,6110k1505m987,price1,LIN,SIMA05,,201,,,,26
+h,6110k1507,price1,LIN,SIMA05,,202,,,,26
+h,6110k1507m300,price1,LIN,SIMA05,,202,,,,26
+w,6110k1507bl,price1,LIN,SIMA05,,202,,,,26
+h,6110k1509,price1,LIN,SIMA05,,203,,,,26
+h,6110k1509m900,price1,LIN,SIMA05,,203,,,,26
+w,6110k1509bl,price1,LIN,SIMA05,,203,,,,26
+h,6110k1513,price1,LIN,SIMA05,,204,,,,26
+h,6110k1513m220,price1,LIN,SIMA05,,204,,,,26
+w,6110k1513bl,price1,LIN,SIMA05,,204,,,,26
+h,6110k1511,price1,LIN,SIMA05,,205,,,,26
+h,6110k1511m101,price1,LIN,SIMA05,,205,,,,26
+w,6110k1511bl,price1,LIN,SIMA05,,205,,,,26
+h,6110k1511m987,price1,LIN,SIMA05,,206,,,,26
+h,6110k1505m326,price1,LIN,SIMA05,,207,,,,26
+h,6110k1505m450,price1,LIN,SIMA05,,207,,,,26
+h,6110k1505m920,price1,LIN,SIMA05,,208,,,,26
+h,6110k1601,price1,LIN,SIMA05,,209,,,,26
+h,6110k1601m101,price1,LIN,SIMA05,,209,,,,26
+w,6110k1601bl,price1,LIN,SIMA05,,209,,,,26
+h,6110k1601m220,price1,LIN,SIMA05,,210,,,,26
+h,6110k1601m300,price1,LIN,SIMA05,,210,,,,26
+h,6110k1601m326,price1,LIN,SIMA05,,211,,,,26
+h,6110k1601m450,price1,LIN,SIMA05,,211,,,,26
+h,6110k1601m636,price1,LIN,SIMA05,,212,,,,26
+h,6110k1601m714,price1,LIN,SIMA05,,212,,,,26
+h,6110k1601m900,price1,LIN,SIMA05,,213,,,,26
+h,6110k1601m920,price1,LIN,SIMA05,,213,,,,26
+h,6110k1601m987,price1,LIN,SIMA05,,214,,,,26
+h,6110k1601m1603,price1,LIN,SIMA05,,214,,,,26
+h,6110k1603,price1,LIN,SIMA05,,215,,,,26
+h,6110k1603m220,price1,LIN,SIMA05,,215,,,,26
+w,6110k1603bl,price1,LIN,SIMA05,,215,,,,26
+h,6110k1605,price1,LIN,SIMA05,,216,,,,26
+h,6110k1605m450,price1,LIN,SIMA05,,216,,,,26
+w,6110k1605bl,price1,LIN,SIMA05,,216,,,,26
+h,6110k1607,price1,LIN,SIMA05,,217,,,,26
+h,6110k1607m101,price1,LIN,SIMA05,,217,,,,26
+w,6110k1607bl,price1,LIN,SIMA05,,217,,,,26
+h,6110k1609,price1,LIN,SIMA05,,218,,,,26
+h,6110k1609m714,price1,LIN,SIMA05,,218,,,,26
+w,6110k1609bl,price1,LIN,SIMA05,,218,,,,26
+h,6110k1613,price1,LIN,SIMA05,,219,,,,26
+h,6110k1613m1601,price1,LIN,SIMA05,,219,,,,26
+w,6110k1613bl,price1,LIN,SIMA05,,219,,,,26
+h,6110k1611,price1,LIN,SIMA05,,220,,,,26
+h,6110k1611m101,price1,LIN,SIMA05,,220,,,,26
+w,6110k1611bl,price1,LIN,SIMA05,,220,,,,26
+h,6110k1611m987,price1,LIN,SIMA05,,221,,,,26
+h,6110k1611m1602,price1,LIN,SIMA05,,221,,,,26
+h,6110k1701,price1,LIN,SIMA06,,222,,,,26
+h,6110k1701m101,price1,LIN,SIMA06,,222,,,,26
+w,6110k1701bl,price1,LIN,SIMA06,,222,,,,26
+h,6110k1701m220,price1,LIN,SIMA06,,223,,,,26
+h,6110k1701m300,price1,LIN,SIMA06,,223,,,,26
+h,6110k1701m326,price1,LIN,SIMA06,,224,,,,26
+h,6110k1701m450,price1,LIN,SIMA06,,224,,,,26
+h,6110k1701m636,price1,LIN,SIMA06,,225,,,,26
+h,6110k1701m714,price1,LIN,SIMA06,,225,,,,26
+h,6110k1701m900,price1,LIN,SIMA06,,226,,,,26
+h,6110k1701m920,price1,LIN,SIMA06,,226,,,,26
+h,6110k1701m987,price1,LIN,SIMA06,,227,,,,26
+h,6110k1701m900,price1,LIN,SIMA06,,227,,,,26
+h,6110k1703,price1,LIN,SIMA06,,228,,,,26
+h,6110k1703m300,price1,LIN,SIMA06,,228,,,,26
+w,6110k1703bl,price1,LIN,SIMA06,,228,,,,26
+h,6110k1705,price1,LIN,SIMA06,,229,,,,26
+h,6110k1705m326,price1,LIN,SIMA06,,229,,,,26
+w,6110k1705bl,price1,LIN,SIMA06,,229,,,,26
+h,6110k1707,price1,LIN,SIMA06,,230,,,,26
+h,6110k1707m636,price1,LIN,SIMA06,,230,,,,26
+w,6110k1707bl,price1,LIN,SIMA06,,230,,,,26
+h,6110k1709,price1,LIN,SIMA06,,231,,,,26
+h,6110k1709m900,price1,LIN,SIMA06,,231,,,,26
+w,6110k1709bl,price1,LIN,SIMA06,,231,,,,26
+h,6110k1711,price1,LIN,SIMA06,,232,,,,26
+h,6110k1711m101,price1,LIN,SIMA06,,232,,,,26
+w,6110k1711bl,price1,LIN,SIMA06,,232,,,,26
+h,6110k1711m987,price1,LIN,SIMA06,,233,,,,26
