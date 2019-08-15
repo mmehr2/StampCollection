@@ -92,7 +92,7 @@ class AlbumFamilyNavigator {
             }
         }
         if !found {
-            print("Cannot find album index \(page.section.ref.code) for page \(page.code)")
+            print("Cannot find album index \(page.section.ref.code ?? "?section.ref.code?") for page \(page.code ?? "?code?")")
             return nil
         }
         //print("Initpage1/3 \(currentIndex) of \(maxIndex)")
@@ -105,7 +105,7 @@ class AlbumFamilyNavigator {
             }
         }
         if !found {
-            print("Cannot find section index \(page.section.code) for page \(page.code)")
+            print("Cannot find section index \(page.section.code ?? "?section.code?") for page \(page.code ?? "?code?")")
             return nil
         }
         //print("Initpage2/3 \(currentIndex) of \(maxIndex)")
@@ -118,7 +118,7 @@ class AlbumFamilyNavigator {
             }
         }
         if !found {
-            print("Cannot find page index for page \(page.code)")
+            print("Cannot find page index for page \(page.code ?? "?code?")")
             return nil
         }
         //print("Initpage3/3 \(currentIndex) of \(maxIndex)")

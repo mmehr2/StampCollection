@@ -196,7 +196,7 @@ class InfoItemsTableViewController: UITableViewController {
                         self.tableView.reloadRows(at: [path], with: .automatic)
                     }
                     //  (action is to call the function that would assign the base item to this ID)
-                    menuBoxWithTitle("Reassign Base to \(invitem.desc)", andBody: menu, forController: self)
+                    menuBoxWithTitle("Reassign Base to \( (invitem.desc ?? "?desc?") )", andBody: menu, forController: self)
                 }),
             ]
             menuBoxWithTitle("Choose action for selected item", andBody: menuItems, forController: self)
