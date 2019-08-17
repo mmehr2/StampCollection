@@ -125,6 +125,13 @@ func formatBTDetail(_ item: BTDealerItem) -> String {
     return output
 }
 
+extension BTDealerItem/*: CustomDebugStringConvertible*/ {
+    override var description: String { return debugDescription }
+    override var debugDescription: String {
+        return formatBTDetail(self)
+    }
+}
+
 func formatDealerDetail(_ item: DealerItem) -> String {
     let itemid = item.id ?? ""
     var text = "\(itemid)(#\(item.exOrder))"
@@ -165,6 +172,13 @@ func formatDealerDetail(_ item: DealerItem) -> String {
         output += "; REF:\(sumstr)"
     }
     return output
+}
+
+extension DealerItem/*: CustomDebugStringConvertible*/ {
+    override var description: String { return debugDescription }
+    override var debugDescription: String {
+        return formatDealerDetail(self)
+    }
 }
 
 func histogram<T>(_ items: [T]) -> [T:Int] where T: Hashable {
@@ -341,6 +355,19 @@ func getTitlesForInventoryItem(_ item: InventoryItem) -> (top:String, bottom:Str
     let line2 = "\(infoItem.descriptionX ?? "") \(idesc) \(inotes)"
    return (line1, line2)
 }
+
+extension InventoryItem/*: CustomStringConvertible*/ {
+    override var description: String {
+        return formatInventoryMain(self)
+    }
+}
+
+extension InventoryItem/*: CustomDebugStringConvertible*/ {
+    override var debugDescription: String {
+        return formatInventoryMain(self) + "\n" + formatInventoryDetail(self)
+    }
+}
+
 
 // MARK: Parsing the ID code field for sorting
 // NOTES ON CODE PARSING SPECIAL CASES BY CATEGORY
