@@ -256,40 +256,51 @@ class AlbumFamilyNavigator {
         return mark
     }
     
+    func clamp( _ inx: Int, low: Int, hi: Int) -> Int {
+        var data = inx
+        if data < low { data = low }
+        if data > hi  { data = hi }
+        return data
+    }
+    
     func gotoMarker( _ marker: AlbumMarker ) {
         // there is always an album, a section (possibly unnamed), and at least one page defined in every family
         // resolve this in top-down fashion from album thru section to page (property observers would otherwise interfere)
         // NOTE: this is rather inefficient if all bits are set, or both first and last (last will take precedence)
         // first snapshot the current state
-        var newAlbumIndex = currentAlbumIndex
-        var newSectionIndex = currentSectionIndex
-        var newPageIndex = currentPageIndex
-        // now make intended changes
+        var data = AlbumIndex(ref: currentAlbumIndex, section: currentSectionIndex, page: currentPageIndex)
+        // clamp to appropriate limits for each component
+        // NOTE: these values in index are ordinal (0 is first item in list of albums/sections/pages, up to N-1 for last)
+        let albumCount = currentAlbum.family.theRefs.count // #albums in series/family
+        var albumNum = clamp(data.ref, low: 0, hi: albumCount - 1)
         if marker.contains(AlbumMarker.FirstAlbum) {
-            newAlbumIndex = 0
+            albumNum = 0
         }
         if marker.contains(AlbumMarker.LastAlbum) {
-            newAlbumIndex = maxAlbumIndex - 1
+            albumNum = albumCount - 1
         }
-        currentAlbumIndex = newAlbumIndex // may change CSI and CPI, as well as maxSIIA indirectly
-        
+        let album = currentAlbum.family.theRefs[albumNum]
+        let sectionCount = album.theSections.count // #sections in that album
+        var sectNum = clamp(data.section, low: 0, hi: sectionCount - 1)
         if marker.contains(AlbumMarker.FirstSection) {
-            newSectionIndex = 0
+            sectNum = 0
         }
         if marker.contains(AlbumMarker.LastSection) {
-            newSectionIndex = maxSectionIndexInAlbum - 1 // depends (?) on currentAlbum being up to date
+            sectNum = sectionCount - 1
         }
-        currentSectionIndex = newSectionIndex // may change CPI again, as well as maxPIIS indirectly
-        
+        let section = album.theSections[sectNum]
+        let pageCount = section.thePages.count // #pages in that section
+        var pageNum = clamp(data.page, low: 0, hi: pageCount - 1)
         if marker.contains(AlbumMarker.FirstPage) {
-            newPageIndex = 0
+            pageNum = 0
         }
         if marker.contains(AlbumMarker.LastPage) {
-            newPageIndex = maxPageIndexInSection - 1 // depends on currentSection being up to date
+            pageNum = pageCount - 1
         }
-        currentPageIndex = newPageIndex
-        
-        print("\(currentIndex) of \(maxIndex)")
+        data = AlbumIndex(ref: albumNum, section: sectNum, page: pageNum)
+        currentAlbumIndex = data.ref // may change CSI and CPI, as well as maxSIIA indirectly
+        currentSectionIndex = data.section // may change CPI again, as well as maxPIIS indirectly
+        currentPageIndex = data.page
     }
     
     // MARK: navigating the album hierarchy by pages
