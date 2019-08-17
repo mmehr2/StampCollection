@@ -40,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // trigger UI here on VCs that depend on model data
         forEachTopLevelVC() { top in
             // find the one VC that will kickstart the UI (for use by init completion block)
-            if top.responds(to: Selector(("startUI:"))) {
-                top.perform(Selector(("startUI:")), with: self.dataModel)
+            if top.responds(to: #selector(AlbumCollectionViewController.startUI(_:))) {
+                top.perform(#selector(AlbumCollectionViewController.startUI(_:)), with: self.dataModel)
                 print("Started UI for VC @ \(top)")
             }
         }
@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // dynamically make sure all top-level VC objects know about the data model
         forEachTopLevelVC() { top in
             // if a top level VC has a property named 'model', this will set it to the data model object we just initialized
-            if top.responds(to: Selector(("setModel:"))) {
-                top.perform(Selector(("setModel:")), with: self.dataModel)
+            if top.responds(to: #selector(setter: AlbumCollectionViewController.model)) {
+                top.perform(#selector(setter: AlbumCollectionViewController.model), with: self.dataModel)
                 print("Set VC's model @ \(top)")
             }
         }

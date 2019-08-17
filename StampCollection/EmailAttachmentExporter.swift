@@ -167,6 +167,9 @@ class EmailAttachmentExporter: NSObject, MFMailComposeViewControllerDelegate {
             break
         //default:
         //    break
+        @unknown default:
+            print("Email failed due to unknown error \(error!.localizedDescription)")
+            break
         }
         
         // dismiss the VC

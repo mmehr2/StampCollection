@@ -220,7 +220,8 @@ class UpdatesTableViewController: UITableViewController {
         case .removedItem(let dlritemID):
             let cell = tableView.dequeueReusableCell(withIdentifier: "Update Comparison Single Cell", for: indexPath) 
             let dlritem = model.fetchInfoItemByID(dlritemID)!
-            cell.textLabel?.text = "\(actionString) \(dlritem.descriptionX)"
+            let dlrdesc = dlritem.descriptionX ?? "no description"
+            cell.textLabel?.text = "\(actionString) \(dlrdesc)"
             cell.detailTextLabel?.text = formatDealerDetail(dlritem)
             cell.backgroundColor = actionColor
             return cell

@@ -49,7 +49,8 @@ class InfoParserDelegate: NSObject, CHCSVParserDelegate {
     }
     
     @nonobjc func parser(_ parser: CHCSVParser!, didFailWithError error: NSError!) {
-        print("Failed parsing \(name) with error \(error)")
+        let errDesc = error?.localizedDescription ?? "?unknown parser error?"
+        print("Failed parsing \(name) with error \(errDesc)")
     }
 
     func parserDidBeginDocument(_ parser: CHCSVParser!) {

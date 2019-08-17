@@ -123,7 +123,11 @@ class InfoItemsTableViewController: UITableViewController {
             let apos = item.descriptionX.index(item.descriptionX.startIndex, offsetBy: 16)
             let title = item.id + ":" + item.descriptionX[apos...]
             menuItems.append( (title, { x in
-                print("Assigning new base item=\(item.id): \(item.descriptionX) \nto INV\(invItem.baseItem): \(invItem.desc).")
+                let itemID = item.id ?? "?id?"
+                let itemDescriptionX = item.descriptionX ?? "?desc?"
+                let invItemBaseItem = invItem.baseItem ?? "?baseid?"
+                let invItemDesc = invItem.desc ?? "?invDesc?"
+                print("Assigning new base item=\(itemID): \(itemDescriptionX) \nto INV\(invItemBaseItem): \(invItemDesc).")
                 invItem.updateBaseItem(item)
                 if let completion = completion {
                     completion()

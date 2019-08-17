@@ -343,16 +343,17 @@ class UpdateComparisonTable {
 
     fileprivate func checkItemForRemoval( _ item: DealerItem ) -> Bool {
         var result = true
+        let id = item.id!
         // initially, this should say NO if item has any inventory or referrals
         // ultimataely, it might be able to deal with transferring the inventory or referring items to unremoved objects
         if let arr = Array(item.inventoryItems) as? [InventoryItem] , arr.count > 0 {
             let items = arr.map{ $0.baseItem }.joined(separator: ", ")
-            print("Item \(item.id) cannot be removed due to inventory items \(items).")
+            print("Item \(id) cannot be removed due to inventory items \(items).")
             result = false
         }
         if let arr = Array(item.referringItems) as? [InventoryItem] , arr.count > 0 {
             let items = arr.map{ $0.refItem }.joined(separator: ", ")
-            print("Item \(item.id) cannot be removed due to referring items \(items).")
+            print("Item \(id) cannot be removed due to referring items \(items).")
             result = false
         }
         return result
@@ -364,8 +365,9 @@ class UpdateComparisonTable {
             let oldRecs = getDealerItemsForUpdate(category)
             for item in oldRecs {
                 let id = item.id!
+                let cname = category.name ?? "?noname?"
                 if oldRecsCache[id] != nil {
-                    print("Cache hit: Duplicate ID \(id) found in category \(category.name)")
+                    print("Cache hit: Duplicate ID \(id) found in category \(cname)")
                 }
                 oldRecsCache[id] = item
             }
@@ -654,8 +656,9 @@ class UpdateComparisonTable {
         var oldIndex : [String:DealerItem] = [:]
         for oldObj in oldRecs {
             // detect old data integrity (ID uniqueness) here, making sure the entry is nil before we add it
+            let oldid = oldObj.id ?? "?id?"
             if let violationRow = oldIndex[oldObj.id] {
-                print("Integrity violation (OLD) ID=\(oldObj.id) already appears in old data at row \(violationRow)")
+                print("Integrity violation (OLD) ID=\(oldid) already appears in old data at row \(violationRow)")
             } else {
                 oldIndex[oldObj.id] = oldObj
             }
