@@ -6714,3 +6714,79 @@ h,6110t760_01,price1,SS10,SHEETS07,SER1986,306,,,,31
 h,6110t760_02,price1,SS10,SHEETS07,SER1986,307,,,,31
 h,6110t760_03,price1,SS10,SHEETS07,SER1986,308,,,,31
 h,6110t760_04,price1,SS10,SHEETS07,SER1986,309,,,,31
+h,AUI001,price1,LIN,ATJUDTAB01,,1,,,,28
+h,AUI001,price1,LIN,ATJUDTAB01,,1,,,,28
+h,AUI001,price2,LIN,ATJUDTAB01,,2,,,,28
+h,AUI002,price1,LIN,ATJUDTAB01,,3,,,,28
+h,AUI002,price1,LIN,ATJUDTAB01,,3,,,,28
+h,AUI003,price1,LIN,ATJUDTAB01,,4,,,,28
+h,AUI003,price2,LIN,ATJUDTAB01,,5,,,,28
+h,AUI004,price1,LIN,ATJUDTAB01,,6,,,,28
+h,AUI004,price1,LIN,ATJUDTAB01,,6,,,,28
+h,AUI001,price1,LIN,ATJUDTAB01,,1,,,,28
+h,AUI005,price1,LIN,ATJUDTAB01,,7,,,,28
+h,AUI005,price1,LIN,ATJUDTAB01,,7,,,,28
+h,AUI005,price1,LIN,ATJUDTAB01,,7,,,,28
+h,AUI005,price1,LIN,ATJUDTAB01,,7,,,,28
+h,AUI006,price1,LIN,ATJUDTAB01,,8,,,,28
+h,AUI007,price1,LIN,ATJUDTAB01,,9,,,,28
+h,AUI008,price1,LIN,ATJUDTAB01,,10,,,,28
+h,AUI008,price1,LIN,ATJUDTAB01,,10,,,,28
+h,AUI008,price1,LIN,ATJUDTAB01,,10,,,,28
+h,AUI008,price1,LIN,ATJUDTAB01,,10,,,,28
+h,AUI008,price1,LIN,ATJUDTAB01,,10,,,,28
+h,AUI010,price1,LIN,ATJUDTAB01,,11,,,,28
+h,AUI010,price1,LIN,ATJUDTAB01,,11,,,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,Partial set (1v): 3.00s blue UT extra value (#1/2),,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,Partial set (1v): 3.50s yellow UT extra value,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,Partial set (1v): 50g gray URCT,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,12,,Partial set (3v): 50g gray UT 6s pink UT 6.50s teal UT (#1/2),,28
+h,AUI011,price1,LIN,ATJUDTAB01,,13,,Partial set (3v): 3.50s multi RST 4s multi RST 4.50s multi RST (#2/2),,28
+h,AUI012,price2,LIN,ATJUDTAB01,,13,,,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,14,,Partial set (3v): 3.50s multi URCT 4s multi URCT 4.50s multi URCT,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,14,,Partial set (2v): 4s multi LRCT 4.50s multi LRCT,,28
+h,AUI011,price1,LIN,ATJUDTAB01,,14,,Partial set (2v): 5s multi URCT 6s multi LRCT,,28
+h,AUI010,price1,LIN,ATJUDTAB01,,11,,Partial set (1v): 3.00s blue UT extra value,,28
+h,AUI012,price1,LIN,ATJUDTAB01,,15,,,,28
+h,AUI012,price1,LIN,ATJUDTAB01,,15,,Partial set (4v): 2s bluish gray LT (extra value) 3.50s yellow LT (extra value) 6.00s pink LT (extra value) 6.50s teal LT (extra value),,28
+h,AUI012,price1,LIN,ATJUDTAB01,,15,,Partial set (1v): 7.50s plum LT (extra value),,28
+h,AUI012,price1,LIN,ATJUDTAB01,,16,,Partial set (1v): 50g gray LRCT,,28
+h,AUI013,price1,LIN,ATJUDTAB01,,17,,,,28
+h,AUI015,price1,LIN,ATJUDTAB01,,18,,,,28
+h,AUI014,price1,LIN,ATJUDTAB01,,18,,,,28
+h,AUI014,price1,LIN,ATJUDTAB01,,18,,Partial set (1v): 3.00s blue URCT,,28
+h,AUI015,price1,LIN,ATJUDTAB01,,19,,,,28
+h,AUI016,price1,LIN,ATJUDTAB01,,19,,,,28
+h,AUI015,price1,LIN,ATJUDTAB01,,19,,Partial set (1v): 2.00s bluish gray ULCT,,28
+h,AUI017,price1,LIN,ATJUDTAB01,,20,,,,28
+h,AUI018,price1,LIN,ATJUDTAB01,,21,,,,28
+h,AUI019,price1,LIN,ATJUDTAB01,,22,,,,28
+h,AUI020,price1,LIN,ATJUDTAB01,,23,,,,28
+h,AUI021,price1,LIN,ATJUDTAB01,,24,,,,28
+h,AUI021.1,price1,LIN,ATJUDTAB01,,24,,,,28
+h,AUI021.1,price1,LIN,ATJUDTAB01,,24,,Partial set (1v): 50g gray LLCT (green ink),,28
+h,AUI021,price1,LIN,ATJUDTAB01,,24,,Partial set (1v): 20.00s ochre LLCT (extra high denom),,28
+h,AUI021.1,price2,LIN,ATJUDTAB01,,25,,,,28
+h,AUI022,price1,LIN,ATJUDTAB01,,26,,,,28
+h,AUI022,price1,LIN,ATJUDTAB01,,26,,Partial set (1v): 50g gray LLCT,,28
+h,AUI022,price1,LIN,ATJUDTAB01,,26,,Partial set (1v): 3.00s blue LLCT,,28
+h,AUI023,price1,LIN,ATJUDTAB01,,27,,,,28
+h,AUI023,price1,LIN,ATJUDTAB01,,27,,Partial set (1v): 3.00s blue LT (extra value),,28
+h,AUI023,price1,LIN,ATJUDTAB01,,27,,Partial set (1v): 50g gray LRCT w single and pl.nr.),,28
+h,AUI024,price1,LIN,ATJUDTAB01,,28,,,,28
+h,AUI024,price1,LIN,ATJUDTAB01,,28,,Partial set (1v): 20.00s ochre LLCT,,28
+h,AUI025,price1,LIN,ATJUDTAB01,,29,,,,28
+h,AUI025,price1,LIN,ATJUDTAB01,,29,,Partial set (1v): 5.50s lilac LRCT,,28
+h,AUI026,price1,LIN,ATJUDTAB01,,30,,,,28
+h,AUI027,price1,LIN,ATJUDTAB01,,31,,,,28
+h,AUI028,price1,LIN,ATJUDTAB01,,32,,,,28
+h,AUI028,price1,LIN,ATJUDTAB01,,32,,"Partial set (1v): 50g gray LT (design of 3.00s, extra denom)",,28
+h,AUI028,price1,LIN,ATJUDTAB01,,32,,Partial set (1v): 5.50s lilac LLCT,,28
+h,AUI029,price1,LIN,ATJUDTAB01,,33,,,,28
+h,AUI029,price1,LIN,ATJUDTAB01,,33,,Partial set (1v): 50g gray LRCT,,28
+h,AUI030,price1,LIN,ATJUDTAB01,,34,,,,28
+h,AUI031,price1,LIN,ATJUDTAB01,,35,,,,28
+h,AUI032,price1,LIN,ATJUDTAB01,,36,,,,28
