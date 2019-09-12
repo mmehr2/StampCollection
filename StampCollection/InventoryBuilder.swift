@@ -90,22 +90,36 @@ class InventoryBuilder {
         // empty entries ("") are ignored, except N and M which get defaults as follows:
         let n = Int(values[0]) ?? 1
         let m = Int(values[1]) ?? 0
+        // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
+        let useVar = values[0].lowercased().hasPrefix("v")
+        // UPDATE: special handling for Notes field: if values[i][0]=="n",append that value verbatim to notes field
         var vals = [String]()
+        var notes = [String]()
         for val in values[2..<values.count] {
             if !val.isEmpty {
-                vals.append(val)
+                if (val.lowercased().hasPrefix("n")) {
+                    notes.append(String(val.dropFirst()))
+                } else {
+                    vals.append(val)
+                }
             }
         }
         let valstrs = vals.joined(separator: " ")
+        let notestrs = notes.joined(separator: " ")
         let ofstr:String
         if m>0 && n>1 {
             ofstr = " (#\(m)/\(n))"
         } else {
             ofstr = ""
         }
-        let desc = "Partial set (\(vals.count)v): \(valstrs)\(ofstr)"
+        let titlestr = !useVar ? "Partial set" : "Variety"
+        let desc = "\(titlestr) (\(vals.count)v): \(valstrs)\(ofstr)"
         print("Setting desc field to \(desc)")
         data["desc"] = desc
+        if (!notestrs.isEmpty) {
+            print("Setting notes field to \(notestrs)")
+            data["notes"] = notestrs;
+        }
     }
     
     func addLocation(_ pageRef: AlbumPage) -> Bool {
