@@ -10,7 +10,7 @@ import UIKit
 //import CoreData
 
 // This class manages the Import/Export process for data using CSV files from the PHP project.
-// NOTE: Sample files are included with the bundle (collection as of late 2014), but this should probably become able to take an arbitrary file triplet, such as from email attachments or AirDrop.
+// NOTE: Sample files are included with the bundle, but this object is now able to take an arbitrary file triplet, such as from email attachments or AirDrop.
 // Persistence is provided by CoreData when variable persistentStoreCoordinator is set (this is set by the AppDelegate if no errors occurred)
 //
 // The files are kept in the user's Documents directory. They are:
@@ -21,7 +21,7 @@ import UIKit
 // TBD: In actual practice, the description field of INV has also accumulated much info about sheets that truly belongs in the catalog. Plus the INFO has cached category names that should probably be left out of the object model schema. Etc. This is a rough first pass effort.
 
 /*
-NOTE: The files as imported from the PHP processing website have an anomaly or two (not sure why).
+NOTE (but see UPDATE 2019 below): The files as imported from the PHP processing website have an anomaly or two (not sure why).
 All the line endings in the INFO and INVENTORY files are composed of double newlines ("\n\n")
 I used the following bash commands to prep the files for inclusion here:
     cat info.csv | tr -s "\n" "\n" > info2.csv
@@ -36,6 +36,10 @@ I also had to modify the source code of the 3rd party CHCSVWriter in CHCSVParser
 There was still a single instance of double-newline at the end of the file that I had to correct in XCODE with manual editing in Hex mode (right click file name on left and Open As -> Hex).
 
 All this should be handled automatically when processing the local website files in the future, OR I could improve things on the website to use these new/better files.
+
+UPDATE NOTE (2019): Historical file anomalies of the CSV files have been removed by the simple procedure of only bundling output of the Email Export process. As long as the
+ CHCSVParser is bidirectional and my methods calling it work symmetrically, we should be fine.
+ It should be mentioned that BAITCFG.CSV is really CATEGORIES.CSV in actual runtime usage. The name is historical, and remains in the bundle.
 */
 
 /// protocol for any import/export usage
@@ -84,19 +88,33 @@ class ImportExport: CSVDataSink {
 
     fileprivate var bundleCategoryURL: URL { return  bundleURL.appendingPathComponent("baitcfg.csv") }
     
-    fileprivate var infoURL : URL {
+    // to prevent warnings from the MainThreadChecker, put the use of the AppDelegate into a function that should be called from the main UI thread
+    // prepAppDocsFolderPath() will set this as needed when starting any import/export app
+    // NOTE: this is sort of a manual lazy-load mechanism
+    fileprivate var appDocsDirectory: URL?
+    
+    fileprivate func prepAppDocsFolderPath() {
+        if !Thread.isMainThread {
+            // how to tell whether the current dispatch queue is the main one? well, see if we are on the main thread...
+            print("ERROR_ USE OF APP DELEGATE ON BACKGROUND QUEUE!!!\n")
+        }
         let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("info.csv")
+        appDocsDirectory = ad.applicationDocumentsDirectory
+    }
+    
+    fileprivate var infoURL : URL {
+        let ADD = appDocsDirectory ?? bundleURL
+        return ADD.appendingPathComponent("info.csv")
     }
     
     fileprivate var inventoryURL : URL {
-        let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("inventory.csv")
+        let ADD = appDocsDirectory ?? bundleURL
+        return ADD.appendingPathComponent("inventory.csv")
     }
     
     fileprivate var categoryURL : URL {
-        let ad = UIApplication.shared.delegate! as! AppDelegate
-        return ad.applicationDocumentsDirectory.appendingPathComponent("category.csv")
+        let ADD = appDocsDirectory ?? bundleURL
+        return ADD.appendingPathComponent("category.csv")
     }
 
     // MARK: - CSVDataSink protocol implementation (internal link to 3rd party CSV file parser)
@@ -260,6 +278,7 @@ class ImportExport: CSVDataSink {
         let progress = Progress() // create a progress object to report progress
         if true { //let dataModel = self.dataModel {
             self.dataModel = dataModel // save this for use by protocol functions
+            prepAppDocsFolderPath() // prepare file URLs for lazy use (must be called on UI thread, uses AppDelegate)
             // set the context token for this thread
             let token = dataModel.prepareStorageContext(forExport: false)
             let catPD = InfoParserDelegate(name: "CATEGORY", progress: progress)
@@ -326,6 +345,7 @@ class ImportExport: CSVDataSink {
         let progress = Progress()
         if true { //let dataSource = self.dataSource {
             self.dataSource = dataSource // save the data object for use by protocols
+            prepAppDocsFolderPath() // prepare file URLs for lazy use (must be called on UI thread, uses AppDelegate)
             // set the context token for this thread
             let token = dataSource.prepareStorageContext(forExport: true)
             progress.totalUnitCount += Int64(dataSource.numberOfItemsOfDataType(.categories, withContext: token))

@@ -14,9 +14,29 @@ private let categoryName = "BTCATS"
 private let nameOfCategoryFile = "\(categoryName).CSV"
 private let nameOfInfoFile = "\(infoName).CSV"
 
-private func getFile(_ name: String) -> URL {
+private var bundleURL: URL { return Bundle.main.bundleURL }
+
+// to prevent warnings from the MainThreadChecker, put the use of the AppDelegate into a function that should be called from the main UI thread
+// prepAppDocsFolderPath() will set this as needed when starting any import/export app
+// NOTE: this is sort of a manual lazy-load mechanism
+private var appDocsDirectory: URL?
+
+private func prepAppDocsFolderPath() {
+    if !Thread.isMainThread {
+        // how to tell whether the current dispatch queue is the main one? well, see if we are on the main thread...
+        print("ERROR_ USE OF APP DELEGATE ON BACKGROUND QUEUE!!!\n")
+    }
     let ad = UIApplication.shared.delegate! as! AppDelegate
-    return ad.applicationDocumentsDirectory.appendingPathComponent(name)
+    appDocsDirectory = ad.applicationDocumentsDirectory
+}
+
+private func getFile(_ name: String) -> URL {
+    let addir = appDocsDirectory ?? bundleURL
+    return addir.appendingPathComponent(name)
+}
+
+private func getBundleFile(_ name: String) -> URL {
+    return bundleURL.appendingPathComponent(name)
 }
 
 // MARK: data import
@@ -84,6 +104,8 @@ class BTImporter: CSVDataSink {
     {
         // do this on a background thread
         let progress = Progress()
+        //prepAppDocsFolderPath() // prepare file URLs for lazy use (must be called on UI thread, uses AppDelegate)
+        // NOTE> by not calling this here and only on Export, we import first from the bundled files, allowing default store values to be set
         let catsPD = InfoParserDelegate(name: categoryParserName, progress: progress)
         let infoPD = InfoParserDelegate(name: infoParserName, progress: progress)
         OperationQueue().addOperation({
@@ -168,6 +190,7 @@ class BTExporter {
         let progress = Progress()
         progress.totalUnitCount += data.reduce(0) { total, item in return total + 1 }
         progress.totalUnitCount += data.reduce(0) { total, item in return total + Int64(item.dataItemCount) }
+        prepAppDocsFolderPath() // prepare file URLs for lazy use (must be called on UI thread, uses AppDelegate)
         let fileCats = getFile(nameOfCategoryFile)
         let fileInfo = getFile(nameOfInfoFile)
         let tempfileCats = getFile(nameOfCategoryFile + ".tmp")
