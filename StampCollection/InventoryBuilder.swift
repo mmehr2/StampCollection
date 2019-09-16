@@ -92,30 +92,35 @@ class InventoryBuilder {
         let m = Int(values[1]) ?? 0
         // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
+        // UPDATE: if m is the character "n", desc will not be generated, just notes
+        let useOnlyNotes = values[0].lowercased().hasPrefix("n")
+        let useDesc = !useOnlyNotes
         // UPDATE: special handling for Notes field: if values[i][0]=="n",append that value verbatim to notes field
         var vals = [String]()
         var notes = [String]()
         for val in values[2..<values.count] {
             if !val.isEmpty {
-                if (val.lowercased().hasPrefix("n")) {
+                if (useDesc && val.lowercased().hasPrefix("n")) {
                     notes.append(String(val.dropFirst()))
                 } else {
                     vals.append(val)
                 }
             }
         }
-        let valstrs = vals.joined(separator: " ")
-        let notestrs = notes.joined(separator: " ")
-        let ofstr:String
-        if m>0 && n>1 {
-            ofstr = " (#\(m)/\(n))"
-        } else {
-            ofstr = ""
+        if (useDesc) {
+            let valstrs = vals.joined(separator: " ")
+            let ofstr:String
+            if m>0 && n>1 {
+                ofstr = " (#\(m)/\(n))"
+            } else {
+                ofstr = ""
+            }
+            let titlestr = useVar ? "Variety" : "Partial set"
+            let desc = "\(titlestr) (\(vals.count)v): \(valstrs)\(ofstr)"
+            print("Setting desc field to \(desc)")
+            data["desc"] = desc
         }
-        let titlestr = !useVar ? "Partial set" : "Variety"
-        let desc = "\(titlestr) (\(vals.count)v): \(valstrs)\(ofstr)"
-        print("Setting desc field to \(desc)")
-        data["desc"] = desc
+        let notestrs = (useOnlyNotes ? vals : notes).joined(separator: " ")
         if (!notestrs.isEmpty) {
             print("Setting notes field to \(notestrs)")
             data["notes"] = notestrs;

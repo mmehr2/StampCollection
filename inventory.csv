@@ -6801,18 +6801,18 @@ h,AUI033,price1,LIN,ATJUDTAB02,,37,,Partial set (1v): 50g gray LRCT,,28
 h,AUI033,price1,LIN,ATJUDTAB02,,37,,Partial set (1v): 2.00s bluish gray LLCT,,28
 h,AUI034,price1,LIN,ATJUDTAB02,,38,,,,28
 h,AUI034,price1,LIN,ATJUDTAB02,,38,,Partial set (1v): 20.00s ochre LRCT,,28
-h,AUI035,price1,LIN,ATJUDTAB02,,39,,,,28
+h,AUI035,price1,LIN,ATJUDTAB02,,39,,,Tab value differs from pic 160.00,28
 h,AUI035,price1,LIN,ATJUDTAB02,,39,,Partial set (1v): 2.00s bluish gray URCT,,28
 h,AUI036,price1,LIN,ATJUDTAB02,,40,,,,28
-h,AUI036,price1,LIN,ATJUDTAB02,,40,,Variety (1v): 3.00s blue LLCT,,28
+h,AUI036,price1,LIN,ATJUDTAB02,,40,,Partial set (1v): 3.00s blue LLCT,,28
 h,AUI036,price1,LIN,ATJUDTAB02,,40,,Partial set (1v): 3.00s blue LLCT,,28
 h,AUI036,price1,LIN,ATJUDTAB02,,40,,Partial set (1v): 3.00s blue LT,(blurry tab printing),28
-h,AUI036,price1,LIN,ATJUDTAB02,,41,,Variety (1v): 50g gray LLCT,,28
+h,AUI036,price1,LIN,ATJUDTAB02,,41,,Variety (1v): 50g gray LLCT,design of 2s,28
 h,AUI036,price1,LIN,ATJUDTAB02,,41,,Partial set (1v): 2.00s bluish gray LLCT,,28
 h,AUI036,price1,LIN,ATJUDTAB02,,41,,Partial set (1v): 20.00s ochre LLCT,,28
-h,AUI037,price1,LIN,ATJUDTAB02,,42,,,,28
-h,AUI037,price1,LIN,ATJUDTAB02,,42,,Partial set (1v): 2.00s bluish gray URCT,,28
-h,AUI037,price1,LIN,ATJUDTAB02,,42,,Partial set (1v): 3.00s blue URCT,light writing on tab,28
+h,AUI037,price1,LIN,ATJUDTAB02,,42,,,Tab values differ from pic 100.00 180.00,28
+h,AUI037,price1,LIN,ATJUDTAB02,,42,,Partial set (1v): 2.00s bluish gray URCT,Tab value differs from pic 200.00,28
+h,AUI037,price1,LIN,ATJUDTAB02,,42,,Partial set (1v): 3.00s blue URCT,Tab value differs from pic 300.00 (also light writing on tab),28
 h,AUI037,price1,LIN,ATJUDTAB02,,42,,Variety (1v): 50g gray UT,,28
 h,AUI038,price1,LIN,ATJUDTAB02,,43,,,,28
 h,AUI038,price1,LIN,ATJUDTAB02,,43,,Variety (1v): 20g lilac LT,,28
@@ -6822,9 +6822,9 @@ h,AUI040,price1,LIN,ATJUDTAB02,,45,,,,28
 h,AUI040,price1,LIN,ATJUDTAB02,,45,,Variety (1v): 4.20s gray LT,design of 3s,28
 h,AUI041,price1,LIN,ATJUDTAB02,,46,,,,28
 h,AUI041,price1,LIN,ATJUDTAB02,,46,,Variety (1v): 3.00s gray LT,design of 1.5s,28
-h,AUI041,price1,LIN,ATJUDTAB02,,46,,Variety (1v): 5.60s green LT,tab design of 1.5s,28
-h,AUI041,price1,LIN,ATJUDTAB02,,46,,Variety (1v): 50g multi,design of 3s half tab only,28
-h,AUI042,price1,LIN,ATJUDTAB02,,47,,Partial set (0v): ,values differ from pic 105.00 90.00 840.00,28
+h,AUI041,price1,LIN,ATJUDTAB02,,46,,Variety (1v): 5.60s green LT,design of 1.5s,28
+h,AUI041,price1,LIN,ATJUDTAB02,,46,,Variety (1v): 50g multi,"design of 3s; half tab only",28
+h,AUI042,price1,LIN,ATJUDTAB02,,47,,,Tab values differ from pic 105.00 90.00 840.00,28
 h,AUI042,price1,LIN,ATJUDTAB02,,47,,Variety (1v): 20g lilac UT,,28
 h,AUI042,price1,LIN,ATJUDTAB02,,47,,Variety (1v): 4.20s lilac UT,,28
 h,AUI042,price2,LIN,ATJUDTAB02,,48,,,,28
@@ -6848,7 +6848,8 @@ h,AUI049,price1,LIN,ATJUDTAB02,,56,,,,28
 h,AUI050,price1,LIN,ATJUDTAB02,,57,,,,28
 h,AUI051,price1,LIN,ATJUDTAB02,,58,,,,28
 h,AUI052,price1,LIN,ATJUDTAB02,,59,,,,28
-h,AUI053,price1,LIN,ATJUDTAB02,,60,,Partial set (2v): 2.00s gray LLCT 3.00s blue LLCT,,28
+h,AUI053,price1,LIN,ATJUDTAB02,,60,,Partial set (1v): 2.00s gray LLCT,,28
+h,AUI053,price1,LIN,ATJUDTAB02,,60,,Partial set (1v): 3.00s blue LLCT,,28
 h,AUI053,price2,LIN,ATJUDTAB02,,61,,,,28
 h,AUI054,price1,LIN,ATJUDTAB02,,62,,,,28
 h,AUI054,price2,LIN,ATJUDTAB02,,63,,,,28
