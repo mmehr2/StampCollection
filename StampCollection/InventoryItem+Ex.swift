@@ -31,6 +31,10 @@ extension InventoryItem:  SortTypeSortableEx {
         return dealerItem.normalizedDate
     }
     
+    var plateNumber: Int {
+        return dealerItem.plateNumber
+    }
+
     var wanted: Bool {
         return self.wantHave == "w"
     }

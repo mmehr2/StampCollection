@@ -55,6 +55,23 @@ func endDayOfMonth(_ mm: Int) -> Int {
     return monthEnds[mm-1]
 }
 
+func extractPlateNumberFromSheetDescription( _ descr: String ) -> (Int?) {
+    var result: Int?
+    // Possibilities are a single number or "--", meaning no number; numers from 1 to 9999 should suffice for now
+    // 1. "1989 Tourism- Full sheet (#1/4) [Pl.No.71 (1986+), Format=(3x5)] Design:O.E. Schwarz"
+    // 2. "1986 Stand-By - New Shekel - Herzl (8)- Full sheet (#8/8) [Pl.No.-- (1986+), Format=(5x10)] Design:Z. Narkiss"
+    if let match = descr.range(of: "\\[Pl\\.No\\.[0-9]+ ", options: .regularExpression) {
+        let found = String(descr[match])
+        let pnr = found.components(separatedBy: ".")
+        if let pnum = pnr.last?.dropLast(1) { // drop the space
+            if (pnr.count == 3 && pnr.first == "[Pl" && pnr[1] == "No" && pnum != "--") {
+                result = Int(String(pnum))
+            }
+        }
+    }
+    return result
+}
+
 func extractDateRangesFromDescription( _ descr: String ) -> (Int, ClosedRange<Date>) {
     // NOTE: these defaults are picked to prevent a crash if no date exists in the input descr
     var fmtFound = 0

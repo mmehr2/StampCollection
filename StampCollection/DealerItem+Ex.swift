@@ -21,7 +21,8 @@ class InfoDependentVars {
     var _exNormalizedDate: String?
     var _exStartDate: Date?
     var _exEndDate: Date?
-    
+    var _exSheetPlateNumber: Int?
+
     init(descr: String = "", id: String = "", cat: Int16 = (-1)) {
         update(descr, id: id, cat: cat)
     }
@@ -49,6 +50,7 @@ class InfoDependentVars {
             _exNormalizedStartDate = normalizedStringFromDate(_exStartDate!)
             _exNormalizedEndDate = normalizedStringFromDate(_exEndDate!)
             _exNormalizedDate = _exNormalizedStartDate! + "-" + _exNormalizedEndDate!
+            _exSheetPlateNumber = extractPlateNumberFromSheetDescription(value);
         } else if keyPath == "id" {
             // Update _normalizedCode from id (NOTE: requires date range to be set 1st!)
             var postE1K = false
@@ -96,6 +98,11 @@ extension DealerItem: SortTypeSortable {
             return id.hasPrefix("AUI")
         }
         return false
+    }
+    
+    var plateNumber: Int {
+        if _transientVars == nil { updateDependentVars() }
+        return _transientVars!._exSheetPlateNumber ?? 0
     }
     
     var picPageURL: URL? {

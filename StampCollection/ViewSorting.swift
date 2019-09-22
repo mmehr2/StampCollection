@@ -15,6 +15,7 @@ enum SortType {
     case byCatThenCode(Bool) // needs to know Ascending or Descending
     case byPrice(Int, Bool) // needs to know which price to sort INFO by (INV should use Value sorting)
     case byDate(Bool) // needs to know Ascending or Descending
+    case byPlateNumber(Bool) // needs to know Ascending or Descending
     // INV ONLY
     case byAlbum(Bool) // needs to know Ascending or Descending
     case byValue(Bool) // needs to know Ascending or Descending
@@ -29,6 +30,7 @@ extension SortType: CustomStringConvertible {
         case .byCatThenCode(let asc): return decide(asc, name: "Cat:Code")
         case .byPrice(let num, let asc): return decide(asc, name: "Price"+num.description)
         case .byDate(let asc): return decide(asc, name: "Date")
+        case .byPlateNumber(let asc): return decide(asc, name: "PlateNumber")
         case .byAlbum(let asc): return decide(asc, name: "INV:Album")
         case .byValue(let asc): return decide(asc, name: "INV:Value")
         }
@@ -57,6 +59,11 @@ protocol DateSortable {
     var normalizedDate: String { get }
 }
 
+protocol PlateNumberSortable {
+    // compare added property called plateNumber (useful for Full Sheets category)
+    var plateNumber: Int { get }
+}
+
 protocol AlbumSortable {
     // compare existing properties for album location
     var albumType: String! { get }
@@ -65,7 +72,7 @@ protocol AlbumSortable {
     var albumPage: String! { get }
 }
 
-protocol SortTypeSortable : CodeSortable, DateSortable, ImportSortable { }
+protocol SortTypeSortable : CodeSortable, DateSortable, ImportSortable, PlateNumberSortable { }
 protocol SortTypeSortableEx : SortTypeSortable, AlbumSortable { }
 
 func sortCollection<T: SortTypeSortable>( _ coll: [T], byType type: SortType) -> [T] {
@@ -87,6 +94,12 @@ func sortCollection<T: SortTypeSortable>( _ coll: [T], byType type: SortType) ->
             return coll.sorted{ $0.normalizedDate < $1.normalizedDate }
         } else {
             return coll.sorted{ $1.normalizedDate < $0.normalizedDate }
+        }
+    case .byPlateNumber(let asc):
+        if asc {
+            return coll.sorted{ $0.plateNumber < $1.plateNumber }
+        } else {
+            return coll.sorted{ $1.plateNumber < $0.plateNumber }
         }
     default: break
     }

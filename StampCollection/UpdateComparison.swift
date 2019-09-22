@@ -250,6 +250,7 @@ class UpdateComparisonTable {
             var result: UpdateComparisonResult
             var normalizedDate: String { return exVars._exNormalizedDate! }
             var normalizedCode: String { return exVars._normalizedCode! }
+            var plateNumber: Int { return exVars._exSheetPlateNumber ?? 0 }
             init(_ res: UpdateComparisonResult, os: UpdateComparisonTable) {
                 outerSelf = os
                 result = res

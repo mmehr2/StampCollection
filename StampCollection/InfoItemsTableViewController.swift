@@ -310,6 +310,10 @@ class InfoItemsTableViewController: UITableViewController {
         addSortAction(.byImport(false), forDataType: ftype, toController: ac)
         addSortAction(.byDate(true), forDataType: ftype, toController: ac)
         addSortAction(.byDate(false), forDataType: ftype, toController: ac)
+        if category == CATEG_SHEETS {
+            addSortAction(.byPlateNumber(true), forDataType: ftype, toController: ac)
+            addSortAction(.byPlateNumber(false), forDataType: ftype, toController: ac)
+        }
         if ftype == .inventory {
             addSortAction(.byAlbum(true), forDataType: ftype, toController: ac)
             addSortAction(.byAlbum(false), forDataType: ftype, toController: ac)
