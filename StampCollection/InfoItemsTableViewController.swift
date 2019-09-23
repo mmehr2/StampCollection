@@ -8,6 +8,24 @@
 
 import UIKit
 
+struct SearchSettings {
+    let startYear : Int
+    let endYear : Int
+    let keywords : [String]
+    let useAllKeywords : Bool
+    let IDPattern : String
+    
+    init( fromYr: Int, toYr: Int, kwords : [String], useAll : Bool, idPattern: String ) {
+        startYear = fromYr
+        endYear = toYr
+        keywords = kwords
+        useAllKeywords = useAll
+        IDPattern = idPattern
+    }
+}
+
+private var allSearchSettingsByCategory : [Int16:SearchSettings] = [:]
+
 class InfoItemsTableViewController: UITableViewController {
     
     var model: CollectionStore!
@@ -22,6 +40,22 @@ class InfoItemsTableViewController: UITableViewController {
     var keywords : [String] = []
     var useAllKeywords = false
     var IDPattern = ""
+    
+    private func saveSearchSettings() {
+        let sset = SearchSettings(fromYr: startYear, toYr: endYear, kwords: keywords, useAll: useAllKeywords, idPattern: IDPattern)
+        allSearchSettingsByCategory[category] = sset
+    }
+    
+    private func restoreSearchSettings() {
+        guard let sset = allSearchSettingsByCategory[category] else {
+            return
+        }
+        startYear = sset.startYear
+        endYear = sset.endYear
+        keywords = sset.keywords
+        useAllKeywords = sset.useAllKeywords
+        IDPattern = sset.IDPattern
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +65,9 @@ class InfoItemsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Restore search settings from copy associated with category, if any
+        restoreSearchSettings()
         
         // fetch the items under consideration
         refetchData()
@@ -326,6 +363,7 @@ class InfoItemsTableViewController: UITableViewController {
     }
     
     func refetchData(_ modifier: (() -> Void)? = nil) {
+        saveSearchSettings() // make sure we can get this search back when we revisit this category
         model.fetchType(ftype, category: category, searching: getSearchingArray()) {
             if let modifier = modifier {
                 modifier()
