@@ -55,6 +55,12 @@ class InventoryBuilder {
         return dealerItem.catgDisplayNum == CATEG_SETS && priceType == pufdc.ptype.ptype
     }
     
+    private var addingSheet: Bool {
+        // detects if we are adding a sheet (some cat.24 or any cat.31)
+        // NOTE: this cannot use the Album* data since it will be used in Phase 1 before Phase 2 sets it
+        return dealerItem.catgDisplayNum == 24 || dealerItem.catgDisplayNum == CATEG_SHEETS
+    }
+
     var navigatorForNewPage: AlbumFamilyNavigator? {
         guard let page = albumLoc else { return nil }
         return AlbumFamilyNavigator(page: page)
@@ -88,24 +94,10 @@ class InventoryBuilder {
         // Partial set (2v): 2.00(blue) 5.00(red) (#1/3)
         // input is assumed to be in order [N, M, val1, val2, ...]
         // empty entries ("") are ignored, except N and M which get defaults as follows:
-        let n : Int
-        let m : Int
-        // UPDATE: if m is the character "s", the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
-        let useSheet = values[0].lowercased().hasPrefix("s")
-        if useSheet {
-            let xx = values[1].components(separatedBy: " ")
-            if xx.count > 1 {
-                n = Int(xx[0]) ?? 1
-                m = Int(xx[1]) ?? 0
-            } else {
-                n = 1
-                m = 0
-            }
-            
-        } else {
-            n = Int(values[0]) ?? 1
-            m = Int(values[1]) ?? 0
-        }
+        let n = Int(values[0]) ?? 1
+        let m = Int(values[1]) ?? 0
+        // UPDATE: if we are adding a sheet, the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
+        let useSheet = addingSheet
         // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
         // UPDATE: if m is the character "n", desc will not be generated, just notes

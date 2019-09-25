@@ -37,6 +37,7 @@
 		A63965F01BED528E00308F2F /* InventoryItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63965EF1BED528E00308F2F /* InventoryItemView.xib */; };
 		A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */; };
 		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
+		A65D8571233BCAAF00E5BC74 /* ItemClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65D8570233BCAAF00E5BC74 /* ItemClassification.swift */; };
 		A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */ = {isa = PBXBuildFile; fileRef = A662C1C21AFDFD520067792F /* inventory.corrupt.csv */; };
 		A662C1CB1AFEAB010067792F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662C1CA1AFEAB010067792F /* Category.swift */; };
 		A662C1CF1AFEAB020067792F /* DealerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662C1CE1AFEAB020067792F /* DealerItem.swift */; };
@@ -161,6 +162,7 @@
 		A63965EF1BED528E00308F2F /* InventoryItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryItemView.xib; sourceTree = "<group>"; };
 		A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTableViewDoubleCell.swift; sourceTree = "<group>"; };
 		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
+		A65D8570233BCAAF00E5BC74 /* ItemClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemClassification.swift; sourceTree = "<group>"; };
 		A662C1C21AFDFD520067792F /* inventory.corrupt.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inventory.corrupt.csv; sourceTree = "<group>"; };
 		A662C1CA1AFEAB010067792F /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A662C1CE1AFEAB020067792F /* DealerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealerItem.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				A632CBB61AF2E96F00565686 /* Filtering.swift */,
 				A6856E6B1B0ADBE9004B506E /* UpdateComparison.swift */,
 				A632CBBA1AF538FD00565686 /* InfoUtilities.swift */,
+				A65D8570233BCAAF00E5BC74 /* ItemClassification.swift */,
 				A66348141B236FDA00A4D225 /* Regex.swift */,
 				A632CBB11AEFE8F800565686 /* Basics.swift */,
 			);
@@ -784,6 +787,7 @@
 				A69C30121BE780E900A9D39D /* AlbumSectionHeaderView.swift in Sources */,
 				A67977E11BB11994007F298D /* AlbumFamily+CoreDataProperties.swift in Sources */,
 				A6856E6A1B071691004B506E /* AlbumRef.swift in Sources */,
+				A65D8571233BCAAF00E5BC74 /* ItemClassification.swift in Sources */,
 				A66FD2971BEAC45000C7A2FD /* AlbumFamilyNavigator.swift in Sources */,
 				A6856E661B070D56004B506E /* AlbumPage.swift in Sources */,
 				A6E198791AD7A42D0090FDB1 /* InfoParserDelegate.swift in Sources */,
