@@ -88,8 +88,24 @@ class InventoryBuilder {
         // Partial set (2v): 2.00(blue) 5.00(red) (#1/3)
         // input is assumed to be in order [N, M, val1, val2, ...]
         // empty entries ("") are ignored, except N and M which get defaults as follows:
-        let n = Int(values[0]) ?? 1
-        let m = Int(values[1]) ?? 0
+        let n : Int
+        let m : Int
+        // UPDATE: if m is the character "s", the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
+        let useSheet = values[0].lowercased().hasPrefix("s")
+        if useSheet {
+            let xx = values[1].components(separatedBy: " ")
+            if xx.count > 1 {
+                n = Int(xx[0]) ?? 1
+                m = Int(xx[1]) ?? 0
+            } else {
+                n = 1
+                m = 0
+            }
+            
+        } else {
+            n = Int(values[0]) ?? 1
+            m = Int(values[1]) ?? 0
+        }
         // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
         // UPDATE: if m is the character "n", desc will not be generated, just notes
@@ -103,7 +119,8 @@ class InventoryBuilder {
                 if (useDesc && val.lowercased().hasPrefix("n")) {
                     notes.append(String(val.dropFirst()))
                 } else {
-                    vals.append(val)
+                    let val_ = useSheet ? "Pl.No." + val : val
+                    vals.append(val_)
                 }
             }
         }
@@ -116,7 +133,8 @@ class InventoryBuilder {
                 ofstr = ""
             }
             let titlestr = useVar ? "Variety" : "Partial set"
-            let desc = "\(titlestr) (\(vals.count)v): \(valstrs)\(ofstr)"
+            let vnumstr = useSheet ? "sh" : "v"
+            let desc = "\(titlestr) (\(vals.count)\(vnumstr)): \(valstrs)\(ofstr)"
             print("Setting desc field to \(desc)")
             data["desc"] = desc
         }
