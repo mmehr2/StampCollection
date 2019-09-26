@@ -988,14 +988,14 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1157,2012 In Memory,In Stock,6110s1157,0,"Sets, SS, FDC",C 2264,,0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
 6110s1159,2012 Rabbi Shneur Zalman,In Stock,6110s1159,0,"Sets, SS, FDC",C 2265,,0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
 6110s1161,2012 Justice,In Stock,6110s1161,0,"Sets, SS, FDC",C 2270,,5.00,4.00,5.50,4.50,1,1,1,1,,,,,2
-6110s1162,2012 Breastlate I,In Stock,6110s1162,0,"Sets, SS, FDC",C 2266-69,,5.75,4.60,6.35,5.00,1,1,1,1,,,,,2
+6110s1162,2012 Breastplate I,In Stock,6110s1162,0,"Sets, SS, FDC",C 2266-69,,5.75,4.60,6.35,5.00,1,1,1,1,,,,,2
 6110s1164,2012 Peace Symbols - China Joint Issue,In Stock,6110s1164,0,"Sets, SS, FDC",C 2271-72,,2.80,2.25,3.35,2.45,1,1,1,1,,,,,2
 6110s1165,2012 Children's Books,In Stock,6110s1165,0,"Sets, SS, FDC",C 2282-85,,8.90,7.10,11.00,7.80,1,1,1,1,,,,,2
 6110s1167,2012 Western Wall,In Stock,6110s1167,0,"Sets, SS, FDC",C 2274,,5.10,4.10,5.70,4.50,1,1,1,1,,,,,2
 6110s1168,2012 Jewish Seamanship,In Stock,6110s1168,0,"Sets, SS, FDC",C 2275-77,,5.00,4.00,5.50,4.40,1,1,1,1,,,,,2
 6110s1169,2012 Memorial Day,In Stock,6110s1169,0,"Sets, SS, FDC",C 2273,,0.95,0.75,1.50,0.83,1,1,1,1,,,,,2
-6110s1170,2012 Breastlate II,In Stock,6110s1170,0,"Sets, SS, FDC",C 2278-81,,6.50,5.30,7.20,5.85,1,1,1,1,,,,,2
-6110s1172,2012 Breastlate III,In Stock,6110s1172,0,"Sets, SS, FDC",C 2293-96,,6.50,5.30,7.20,5.85,1,1,1,1,,,,,2
+6110s1170,2012 Breastplate II,In Stock,6110s1170,0,"Sets, SS, FDC",C 2278-81,,6.50,5.30,7.20,5.85,1,1,1,1,,,,,2
+6110s1172,2012 Breastplate III,In Stock,6110s1172,0,"Sets, SS, FDC",C 2293-96,,6.50,5.30,7.20,5.85,1,1,1,1,,,,,2
 6110s1174,2012 Olympiad London,In Stock,6110s1174,0,"Sets, SS, FDC",C 2290-92,,4.70,3.75,5.20,4.00,1,1,1,1,,,,,2
 6110s1175,2012 Teddy Kollek,In Stock,6110s1175,0,"Sets, SS, FDC",C 2297,,5.00,4.00,5.60,4.40,1,1,1,1,,,,,2
 6110s1177,2012 IPA,In Stock,6110s1177,0,"Sets, SS, FDC",C 2306,,2.30,1.85,2.85,2.00,1,1,1,1,,,,,2
@@ -1042,7 +1042,7 @@ id,description,status,pictid,pictype,group,cat1,cat2,price1,price2,price3,price4
 6110s1234,2014 Craters,In Stock,6110s1234,0,"Sets, SS, FDC",,,5.00,4.10,5.60,4.50,1,1,1,1,,,,,2
 6110s1236,2014 Mateh Yehuda,In Stock,6110s1236,0,"Sets, SS, FDC",,,1.70,1.35,2.25,1.50,1,1,1,1,,,,,2
 6110s1237,2014 Memorial Day,In Stock,6110s1237,0,"Sets, SS, FDC",,,1.10,0.90,1.70,1.00,1,1,1,1,,,,,2
-6110s1238,2014 Spotrs,In Stock,6110s1238,0,"Sets, SS, FDC",,,8.00,6.50,8.50,7.00,1,1,1,1,,,,,2
+6110s1238,2014 Sports,In Stock,6110s1238,0,"Sets, SS, FDC",,,8.00,6.50,8.50,7.00,1,1,1,1,,,,,2
 6110s1239,2014 Violins,In Stock,6110s1239,0,"Sets, SS, FDC",,,5.30,4.20,5.90,4.70,1,1,1,1,,,,,2
 6110s1241,2014 Mazal Tov,In Stock,6110s1241,0,"Sets, SS, FDC",,,1.10,0.90,1.70,1.00,1,1,1,1,,,,,2
 6110s1243,2014 Sign Language,In Stock,6110s1243,0,"Sets, SS, FDC",,,5.50,4.40,6.10,4.85,1,1,1,1,,,,,2
@@ -2566,7 +2566,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110e1047,"17.02.09 Tel Aviv Centennial Full 3 Sheets of 8 stamps, decorated margins",In Stock,6110e1047,0,Special Sheets-Sheetlets-Combination,,S 1761-63 full,34.50,42.50,,,1,1,0,0,,,,,24
 6110e1050,17.02.09 Fruits of our Land full se-tenant Sheet,In Stock,6110e1050,0,Special Sheets-Sheetlets-Combination,,S 1767 full,22.50,27.00,,,1,1,0,0,,,,,24
 6110e1052,22.04.09 Astronomy - Full Decorated Margins 3 Sheets (36),In Stock,6110e1052,0,Special Sheets-Sheetlets-Combination,,S 1769-71 full,88.00,100.00,,,1,1,0,0,,,,,24
-6110e1055,22.04.09 Music Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue),1 In Stock,6110e1055,0,Special Sheets-Sheetlets-Combination,,S 1773,10.50,16.50,,,1,1,0,0,,,,,24
+6110e1055,22.04.09 Music Full se-tenant Sheetlet of 12 stamps (FDC is differ from regular issue),1 In Stock,6110e1055,0,Special Sheets-Sheetlets-Combination,,S 1773,10.50,16.50,,,1,1,0,0,,,,,24
 6110eMEJ,"01.06.09 Mejujaim - 'My Own Stamp' Set of Eight, stamps are Rouletted self Adhesive and no Phosphor Bands",Sold Out,6110eMEJ,0,Special Sheets-Sheetlets-Combination,,M 9-16,300.00,,,,0,1,0,0,,,,,24
 6110e1058,30.06.09 Environment full se-tenant Sheet,In Stock,6110e1058,0,Special Sheets-Sheetlets-Combination,,S 1778 full,11.00,14.50,,,1,1,0,0,,,,,24
 6110e1062,30.06.09 Love - 'My Own Stamp' Full Generic sheet (12v),Available,6110e1062,0,Special Sheets-Sheetlets-Combination,,S --,20.00,31.00,,,1,1,0,0,,,,,24
@@ -2598,15 +2598,15 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110e1138,12.04.11 Visitors Center - 'My Own Stamp' Full small Generic sheet (3v),1 In Stock,6110e1138,0,Special Sheets-Sheetlets-Combination,,S --,6.80,10.00,,,1,1,0,0,,,,,24
 6110e845J,19.06.11 Menorah 0.50 self Adhesive Full Sheet (3rd print - three menorah),Available,6110e845J,0,Special Sheets-Sheetlets-Combination,,S --,6.50,10.00,,,1,1,0,0,,,,,24
 6110e1143,27.06.11 Beaches - full se-tenant Sheet (10) (FDC is differ from regular issue),1 In Stock,6110e1143,0,Special Sheets-Sheetlets-Combination,,S 1897,9.40,13.80,,,1,1,0,0,,,,,24
-6110e1146,13.09.11 Music Albums Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue),1 In Stock,6110e1146,0,Special Sheets-Sheetlets-Combination,,S 1908,11.00,16.50,,,1,1,0,0,,,,,24
+6110e1146,13.09.11 Music Albums Full se-tenant Sheetlet of 12 stamps (FDC is differ from regular issue),1 In Stock,6110e1146,0,Special Sheets-Sheetlets-Combination,,S 1908,11.00,16.50,,,1,1,0,0,,,,,24
 6110e1148,13.09.11 Children's Games Full 3 Sheets of 12 stamps,Available,6110e1148,0,Special Sheets-Sheetlets-Combination,,S 1902-04 full,45.00,60.00,,,1,1,0,0,,,,,24
-6110e1150,06.12.11 Football Legends Full se-tenabt Sheet of 10 stamps (FDC is differ from regular issue),1 In Stock,6110e1150,0,Special Sheets-Sheetlets-Combination,,S 1912,9.40,14.00,,,1,1,0,0,,,,,24
+6110e1150,06.12.11 Football Legends Full se-tenant Sheet of 10 stamps (FDC is differ from regular issue),1 In Stock,6110e1150,0,Special Sheets-Sheetlets-Combination,,S 1912,9.40,14.00,,,1,1,0,0,,,,,24
 6110e1154,"06.12.11 The Valley Railway Full Sheet of 10 stamps, decorated margins",1 In Stock,6110e1154,0,Special Sheets-Sheetlets-Combination,,S 1909 full,14.50,21.00,,,1,1,0,0,,,,,24
 6110e148B,"01.01.12 Children's Games - Full 3 Sheets imperforated, 1499x3 exist (36)",1 In Stock,6110e148B,0,Special Sheets-Sheetlets-Combination,,S --,100.00,125.00,,,1,1,0,0,,,,,24
 6110e1158,07.02.12 In Memory - 'My Own Stamp' Full Generic sheet (12v),1 In Stock,6110e1158,0,Special Sheets-Sheetlets-Combination,,S --,12.50,21.50,,,1,1,0,0,,,,,24
 6110e1160,"07.02.12 Rabbi Shneur Zalman Full Sheet of 10 stamps, decorated margins",1 In Stock,6110e1160,0,Special Sheets-Sheetlets-Combination,,,9.00,14.00,,,1,1,0,0,,,,,24
 6110e1163,07.02.12 Breastplate I Full 4 Sheets of 10 stamps,1 In Stock,6110e1163,0,Special Sheets-Sheetlets-Combination,,,47.00,67.00,,,1,1,0,0,,,,,24
-6110e1166,17.04.12 Children's Books Full se-tenabt Sheetlet of 8 stamps (FDC is differ from regular issue),In Stock,6110e1166,0,Special Sheets-Sheetlets-Combination,,,8.00,12.50,,,1,1,0,0,,,,,24
+6110e1166,17.04.12 Children's Books Full se-tenant Sheetlet of 8 stamps (FDC is differ from regular issue),In Stock,6110e1166,0,Special Sheets-Sheetlets-Combination,,,8.00,12.50,,,1,1,0,0,,,,,24
 6110e1168,17.04.12 Jewish Seamanship Full 3 Sheets of 12 stamps,1 In Stock,6110e1168,0,Special Sheets-Sheetlets-Combination,,,55.00,75.00,,,1,1,0,0,,,,,24
 6110e1171,17.04.12 Breastplate II Full 4 Sheets of 10 stamps,1 In Stock,6110e1171,0,Special Sheets-Sheetlets-Combination,,,52.00,70.00,,,1,1,0,0,,,,,24
 6110e845R,03.06.12 Menorah 0.40 self Adhesive Full Sheet (3rd print - three menorah),1 In Stock,6110e845R,0,Special Sheets-Sheetlets-Combination,,,5.00,8.00,,,1,1,0,0,,,,,24
@@ -2625,7 +2625,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110e1204,01.05.13 Love - 'My Own Stamp' Full Generic sheet (9v),1 In Stock,6110e1204,0,Special Sheets-Sheetlets-Combination,,,15.00,25.00,,,1,1,0,0,,,,,24
 6110e1205,01.05.13 Happy Holidays - 'My Own Stamp' Full Generic sheet (9v),1 In Stock,6110e1205,0,Special Sheets-Sheetlets-Combination,,,15.00,25.00,,,1,1,0,0,,,,,24
 6110e1209,26.05.13 Postal Vehicles imperforated numbered Souvenir Sheet (5000 exist),1 In Stock,6110e1209,0,Special Sheets-Sheetlets-Combination,,,44.00,55.00,,,1,1,0,0,,,,,24
-6110e1212,26.05.13 Israel National Trail Full se-tenabt Sheetlet of 10 stamps (FDC is differ from regular issue),In Stock,6110e1212,0,Special Sheets-Sheetlets-Combination,,,10.00,14.00,,,1,1,0,0,,,,,24
+6110e1212,26.05.13 Israel National Trail Full se-tenant Sheetlet of 10 stamps (FDC is differ from regular issue),In Stock,6110e1212,0,Special Sheets-Sheetlets-Combination,,,10.00,14.00,,,1,1,0,0,,,,,24
 6110eJET,10.03.08 Jetix - 'My Own Stamp' full Sheet (12v),1 In Stock,6110eJET,0,Special Sheets-Sheetlets-Combination,,M 1,30.00,45.00,,,1,1,0,0,,,,,24
 6110eSUR1,14.05.08 Survivor - 'My Own Stamp' full Sheet (12v),Available,6110eSUR1,0,Special Sheets-Sheetlets-Combination,,M 2,62.00,85.00,,,1,1,0,0,,,,,24
 6110eSUR2,2008 Survivor - 'My Own Stamp' full Sheet (12v) date up weak colors,Unavailable,6110eSUR2,0,Special Sheets-Sheetlets-Combination,,M --,80.00,----,,,0,0,0,0,,,,,24
@@ -2669,7 +2669,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110eTEL,"26.05.13 I Love Tel Aviv - 'My Own Stamp' full Sheet (9v), numbered 2999 exist",1 In Stock,6110eTEL,0,Special Sheets-Sheetlets-Combination,,,25.00,38.00,,,1,1,0,0,,,,,24
 6110e191D,03.07.13 Gerbera 1.00 self Adhesive Full Sheet (2nd print - two menorah),1 In Stock,6110e191D,0,Special Sheets-Sheetlets-Combination,,,9.00,13.50,,,1,1,0,0,,,,,24
 6110e199A,"03.07.13 Vultures - Full 3 Sheets imperforated, 999x3 exist (24)",1 In Stock,6110e199A,0,Special Sheets-Sheetlets-Combination,,,50.00,75.00,,,1,1,0,0,,,,,24
-6110e1216,26.08.13 Children's Songs Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue),In Stock,6110e1216,0,Special Sheets-Sheetlets-Combination,,,13.50,18.00,,,1,1,0,0,,,,,24
+6110e1216,26.08.13 Children's Songs Full se-tenant Sheetlet of 12 stamps (FDC is differ from regular issue),In Stock,6110e1216,0,Special Sheets-Sheetlets-Combination,,,13.50,18.00,,,1,1,0,0,,,,,24
 6110eDIS4,"18.06.13 Disney - 'My Own Stamp', Pixar films full Sheet (9v)",Available,6110eDIS4,0,Special Sheets-Sheetlets-Combination,,,25.00,38.00,,,1,1,0,0,,,,,24
 6110eFES4,06.08.13 Festivals - 'My Own Stamp' full Sheet (9v),Available,6110eFES4,0,Special Sheets-Sheetlets-Combination,,,17.50,30.00,,,1,1,0,0,,,,,24
 6110e191C,01.05.13 Gerbera 0.50 self Adhesive Full Sheet (1st print - one menorah),Available,6110e191C,0,Special Sheets-Sheetlets-Combination,,,5.00,6.50,,,1,1,0,0,,,,,24
@@ -2708,7 +2708,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110e1240,"08.04.14 Violins Full Sheet of 10 stamps, decorated margins",Available,6110e1240,0,Special Sheets-Sheetlets-Combination,,,45.00,62.00,,,1,1,0,0,,,,,24
 6110e1242,08.04.14 Mazal Tov - 'My Own Stamp' Full Generic sheet (12v),Available,6110e1242,0,Special Sheets-Sheetlets-Combination,,,13.50,23.00,,,1,1,0,0,,,,,24
 6110e1244,08.04.14 Sign Language - Full tete-beche Sheetlet (10v),Available,6110e1244,0,Special Sheets-Sheetlets-Combination,,,8.80,12.50,,,1,1,0,0,,,,,24
-6110e1249,23.06.14 Amphibians Full se-tenabt Sheetlet of 8 stamps,1 In Stock,6110e1249,0,Special Sheets-Sheetlets-Combination,,,6.50,9.50,,,1,1,0,0,,,,,24
+6110e1249,23.06.14 Amphibians Full se-tenant Sheetlet of 8 stamps,1 In Stock,6110e1249,0,Special Sheets-Sheetlets-Combination,,,6.50,9.50,,,1,1,0,0,,,,,24
 6110e1253,09.09.14 Fiddler on the Roof Full 3 Sheets of 8 stamps,Available,6110e1253,0,Special Sheets-Sheetlets-Combination,,,36.00,52.00,,,1,1,0,0,,,,,24
 6110e253A,"09.09.14 Fiddler on the Roof - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e253A,0,Special Sheets-Sheetlets-Combination,,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e1256,"09.09.14 Tel Aviv Full Sheet of 10 stamps, decorated margins",Available,6110e1256,0,Special Sheets-Sheetlets-Combination,,,20.00,30.00,,,1,1,0,0,,,,,24
@@ -2746,7 +2746,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110e310A,"19.04.16 Markets - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e310A,0,Special Sheets-Sheetlets-Combination,,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e320A,"15.01.17 Sages Parables - Full 3 Sheets imperforated, 999x3 exist (24)",Available,6110e320A,0,Special Sheets-Sheetlets-Combination,,,68.00,88.00,,,1,1,0,0,,,,,24
 6110e1298,08.12.15 Israeli Nostalgia Full se-tenant Sheetlet of 6 stamps,1 In Stock,6110e1298,0,Special Sheets-Sheetlets-Combination,,,6.20,9.00,,,1,1,0,0,,,,,24
-6110e1303,09.02.16 Turtles Full se-tenabt Sheetlet of 8 stamps,1 In Stock,6110e1303,0,Special Sheets-Sheetlets-Combination,,,7.00,13.00,,,1,1,0,0,,,,,24
+6110e1303,09.02.16 Turtles Full se-tenant Sheetlet of 8 stamps,1 In Stock,6110e1303,0,Special Sheets-Sheetlets-Combination,,,7.00,13.00,,,1,1,0,0,,,,,24
 6110e1310,19.04.16 Markets Full 3 Sheets of 8 stamps,Available,6110e1310,0,Special Sheets-Sheetlets-Combination,,,49.00,67.00,,,1,1,0,0,,,,,24
 6110e1313,21.06.16 Olympic Games Rio Full 3 Sheets of 10 stamps,Available,6110e1313,0,Special Sheets-Sheetlets-Combination,,,55.00,75.00,,,1,1,0,0,,,,,24
 6110e1320,13.09.16 Sages Parables Full 3 Sheets of 8 stamps,Available,6110e1320,0,Special Sheets-Sheetlets-Combination,,,49.00,67.00,,,1,1,0,0,,,,,24
@@ -2768,7 +2768,7 @@ psIE42,02.10.17 Envelope no denomination (16.00 NIS) - Dove 11x23cm Express Inla
 6110ePES9,10.03.17 Passover - 'My Own Stamp' full Sheet (9v),Available,6110ePES9,0,Special Sheets-Sheetlets-Combination,,,17.50,30.00,,,1,1,0,0,,,,,24
 6110eTRUM,"28.05.17 Trump Visits - 'My Own Stamp' full Sheet (9v), numbered 1499 exist",Available,6110eTRUM,0,Special Sheets-Sheetlets-Combination,,,22.50,37.00,,,1,1,0,0,,,,,24
 6110e1352,13.06.17 20th Maccabiah Full Sheet of 10 stamps,Available,6110e1352,0,Special Sheets-Sheetlets-Combination,,,10.00,14.00,,,1,1,0,0,,,,,24
-6110e1354,13.06.17 Music Love Songs Full se-tenabt Sheetlet of 12 stamps (FDC is differ from regular issue),Available,6110e1354,0,Special Sheets-Sheetlets-Combination,,,15.50,22.00,,,1,1,0,0,,,,,24
+6110e1354,13.06.17 Music Love Songs Full se-tenant Sheetlet of 12 stamps (FDC is differ from regular issue),Available,6110e1354,0,Special Sheets-Sheetlets-Combination,,,15.50,22.00,,,1,1,0,0,,,,,24
 6110eMAC,"27.08.17 Maccabiah 2017 - 'My Own Stamp' full Sheet (9v), numbered 1499 exist",Available,6110eMAC,0,Special Sheets-Sheetlets-Combination,,,22.50,37.00,,,1,1,0,0,,,,,24
 6110e70KT,"29.11.17 29th November 1947 - 'My Own Stamp' full four Sheets (36v), numbered 1499 exist",Available,6110e70KT,0,Special Sheets-Sheetlets-Combination,,,90.00,150.00,,,1,1,0,0,,,,,24
 6110e191U,22.10.17 Gerbera 1.00 self Adhesive Full Sheet (8th print - eight menorah),Available,6110e191U,0,Special Sheets-Sheetlets-Combination,,,8.00,15.00,,,1,1,0,0,,,,,24
@@ -4684,14 +4684,14 @@ fe0887,2012 Technion FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Fo
 fe0888,2012 In Memory FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Folders,B ND 67,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0889,2012 Rabbi Shneur Zalman FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Folders,B 1862,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0890,2012 Justice FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Folders,B 1865,,0.65,0.00,,,1,0,0,0,,,,,29
-fe0891,2012 Breastlate I FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Folders,B 1866-9,,0.65,0.00,,,1,0,0,0,,,,,29
+fe0891,2012 Breastplate I FMT=[G3]  2012.02.07,In Stock,feuillet2,0,(X)Information Folders,B 1866-9,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0892,2012 Peace Symbols - China Joint Issue FMT=[G3]  2012.03.20,In Stock,feuillet2,0,(X)Information Folders,B 1878-9,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0893,2012 Children's Books FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B MS 129,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0894,2012 Western Wall FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B 1880,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0895,2012 Jewish Seamanship FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B 1881-3,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0896,2012 Memorial Day FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B 1884,,0.65,0.00,,,1,0,0,0,,,,,29
-fe0897,2012 Breastlate II FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B 1870-3,,0.65,0.00,,,1,0,0,0,,,,,29
-fe0898,2012 Breastlate III FMT=[G3]  2012.06.26,In Stock,feuillet2,0,(X)Information Folders,B 1874-7,,0.65,0.00,,,1,0,0,0,,,,,29
+fe0897,2012 Breastplate II FMT=[G3]  2012.04.17,In Stock,feuillet2,0,(X)Information Folders,B 1870-3,,0.65,0.00,,,1,0,0,0,,,,,29
+fe0898,2012 Breastplate III FMT=[G3]  2012.06.26,In Stock,feuillet2,0,(X)Information Folders,B 1874-7,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0899,2012 Olympiad London FMT=[G3]  2012.06.26,In Stock,feuillet2,0,(X)Information Folders,B 1885-7,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0900,2012 Teddy Kollek FMT=[G3]  2012.06.26,In Stock,feuillet2,0,(X)Information Folders,B 1888,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0901,2012 IPA FMT=[G3]  2012.09.04,In Stock,feuillet2,0,(X)Information Folders,B 1889,,0.65,0.00,,,1,0,0,0,,,,,29
@@ -4738,7 +4738,7 @@ fe0941,2014 Resistance Radio,Unavailable,feuillet2,0,(X)Information Folders,,,0.
 fe0942,2014 Craters,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0943,2014 Mateh Yehuda,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0944,2014 Memorial Day,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
-fe0945,2014 Spotrs,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
+fe0945,2014 Sports,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0946,2014 Violins,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0947,2014 Mazal Tov,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
 fe0948,2014 Sign Language,Unavailable,feuillet2,0,(X)Information Folders,,,0.65,0.00,,,1,0,0,0,,,,,29
@@ -7121,30 +7121,30 @@ bu501,1988 New Year FMT=[E]  1988.09.01,Unavailable,bul501,0,(X)Information Bull
 6110t1153,"2011 Philately - Valley Railway- Full sheet [Pl.No.849 (1986+), Format=(2x5)] Design:Ronen Goldberg, Tuvia Kurz",Catalog,6110s1153,0,(X)Full Sheets,C 2260,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1155_01,"2012 Pioneering Women I- Full sheet (#1/2) [Pl.No.857 (1986+), Format=(3x5)] Design:Rutie El Hanan",Catalog,6110s1155,0,(X)Full Sheets,C 2261,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1155_02,"2012 Pioneering Women I- Full sheet (#2/2) [Pl.No.858 (1986+), Format=(3x5)] Design:Rutie El Hanan",Catalog,6110s1155,0,(X)Full Sheets,C 2262,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1156,"2012 Technion- Full sheet [Pl.No.855 (1986+), Format=(3x5)] Design:David Ben-Hador",Catalog,6110s1156,0,(X)Full Sheets,C 2263,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1156,"2012 Technion- Full sheet [Pl.No.854 (1986+), Format=(3x5)] Design:David Ben-Hador",Catalog,6110s1156,0,(X)Full Sheets,C 2263,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1157,"2012 In Memory- Full sheet [Pl.No.856 (1986+), Format=(5x5)] Design:Zvika Roitman",Catalog,6110s1157,0,(X)Full Sheets,C 2264,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1159,"2012 Rabbi Shneur Zalman- Full sheet [Pl.No.855 (1986+), Format=(2x5)] Design:Aharon Shevo",Catalog,6110s1159,0,(X)Full Sheets,C 2265,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1161,"2012 Justice- Full sheet [Pl.No.853 (1986+), Format=(3x5)] Design:Ilat Dessau",Catalog,6110s1161,0,(X)Full Sheets,C 2270,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1162_01,"2012 Breastlate I- Full sheet (#1/4) [Pl.No.859 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2266,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1162_02,"2012 Breastlate I- Full sheet (#2/4) [Pl.No.860 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2267,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1162_03,"2012 Breastlate I- Full sheet (#3/4) [Pl.No.861 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2268,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1162_04,"2012 Breastlate I- Full sheet (#4/4) [Pl.No.862 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2269,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1162_01,"2012 Breastplate I- Full sheet (#1/4) [Pl.No.859 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2266,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1162_02,"2012 Breastplate I- Full sheet (#2/4) [Pl.No.860 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2267,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1162_03,"2012 Breastplate I- Full sheet (#3/4) [Pl.No.861 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2268,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1162_04,"2012 Breastplate I- Full sheet (#4/4) [Pl.No.862 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1162,0,(X)Full Sheets,C 2269,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1164_01,"2012 Peace Symbols - China Joint Issue- Full sheet (#1/2) [Pl.No.877 (1986+), Format=(3x5)] Design:Chen Shaohua",Catalog,6110s1164,0,(X)Full Sheets,C 2271,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1164_02,"2012 Peace Symbols - China Joint Issue- Full sheet (#2/2) [Pl.No.878 (1986+), Format=(3x5)] Design:Chen Shaohua",Catalog,6110s1164,0,(X)Full Sheets,C 2272,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1165,"2012 Children's Books- Full sheet [Pl.No.876 (1986+), Format=(1x8)] Design:Miri Nistor",Catalog,6110s1165,0,(X)Full Sheets,C 2282,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1167,"2012 Western Wall- Full sheet [Pl.No.894 (1986+), Format=(3x5)] Design:Meir Eshel",Catalog,6110s1167,0,(X)Full Sheets,C 2274,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1167,"2012 Western Wall- Full sheet [Pl.No.875 (1986+), Format=(3x5)] Design:Meir Eshel",Catalog,6110s1167,0,(X)Full Sheets,C 2274,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1168_01,"2012 Jewish Seamanship- Full sheet (#1/3) [Pl.No.872 (1986+), Format=(3x4)] Design:Ronen Goldberg, Tuvia Kurtz",Catalog,6110s1168,0,(X)Full Sheets,C 2275,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1168_02,"2012 Jewish Seamanship- Full sheet (#2/3) [Pl.No.873 (1986+), Format=(3x4)] Design:Ronen Goldberg, Tuvia Kurtz",Catalog,6110s1168,0,(X)Full Sheets,C 2276,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1168_03,"2012 Jewish Seamanship- Full sheet (#3/3) [Pl.No.874 (1986+), Format=(3x4)] Design:Ronen Goldberg, Tuvia Kurtz",Catalog,6110s1168,0,(X)Full Sheets,C 2277,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1169,"2012 Memorial Day- Full sheet [Pl.No.871 (1986+), Format=(3x5)] Design:Igal Gabay",Catalog,6110s1169,0,(X)Full Sheets,C 2273,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1170_01,"2012 Breastlate II- Full sheet (#1/4) [Pl.No.863 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2278,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1170_02,"2012 Breastlate II- Full sheet (#2/4) [Pl.No.864 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2279,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1170_03,"2012 Breastlate II- Full sheet (#3/4) [Pl.No.865 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2280,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1170_04,"2012 Breastlate II- Full sheet (#4/4) [Pl.No.866 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2281,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1172_01,"2012 Breastlate III- Full sheet (#1/4) [Pl.No.867 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2293,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1172_02,"2012 Breastlate III- Full sheet (#2/4) [Pl.No.868 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2294,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1172_03,"2012 Breastlate III- Full sheet (#3/4) [Pl.No.869 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2295,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1172_04,"2012 Breastlate III- Full sheet (#4/4) [Pl.No.870 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2296,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1170_01,"2012 Breastplate II- Full sheet (#1/4) [Pl.No.863 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2278,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1170_02,"2012 Breastplate II- Full sheet (#2/4) [Pl.No.864 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2279,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1170_03,"2012 Breastplate II- Full sheet (#3/4) [Pl.No.865 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2280,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1170_04,"2012 Breastplate II- Full sheet (#4/4) [Pl.No.866 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1170,0,(X)Full Sheets,C 2281,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1172_01,"2012 Breastplate III- Full sheet (#1/4) [Pl.No.867 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2293,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1172_02,"2012 Breastplate III- Full sheet (#2/4) [Pl.No.868 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2294,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1172_03,"2012 Breastplate III- Full sheet (#3/4) [Pl.No.869 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2295,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1172_04,"2012 Breastplate III- Full sheet (#4/4) [Pl.No.870 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1172,0,(X)Full Sheets,C 2296,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1174_01,"2012 Olympiad London- Full sheet (#1/3) [Pl.No.881 (1986+), Format=(3x5)] Design:Moshe Pereg",Catalog,6110s1174,0,(X)Full Sheets,C 2290,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1174_02,"2012 Olympiad London- Full sheet (#2/3) [Pl.No.882 (1986+), Format=(3x5)] Design:Moshe Pereg",Catalog,6110s1174,0,(X)Full Sheets,C 2291,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1174_03,"2012 Olympiad London- Full sheet (#3/3) [Pl.No.883 (1986+), Format=(3x5)] Design:Moshe Pereg",Catalog,6110s1174,0,(X)Full Sheets,C 2292,,10.00,,20.00,,0,0,0,0,,,,,31
@@ -7159,7 +7159,8 @@ bu501,1988 New Year FMT=[E]  1988.09.01,Unavailable,bul501,0,(X)Information Bull
 6110t1183_02,"2012 Festivals 5773 (Tishrei Feasts)- Full sheet (#2/3) [Pl.No.885 (1986+), Format=(3x5)] Design:Aharon Shevo",Catalog,6110s1183,0,(X)Full Sheets,C 2299,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1183_03,"2012 Festivals 5773 (Tishrei Feasts)- Full sheet (#3/3) [Pl.No.886 (1986+), Format=(3x5)] Design:Aharon Shevo",Catalog,6110s1183,0,(X)Full Sheets,C 2300,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1184,"2012 Hadassah Women- Full sheet [Pl.No.889 (1986+), Format=(3x5)] Design:Zvika Roitman",Catalog,6110s1184,0,(X)Full Sheets,C 2307,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1185,"2012 Festivals of Lights - India Joint Issue- Full sheet [Pl.No.893 (1986+), Format=(3x5)] Design:Ronen Goldberg & Elka Sharma",Catalog,6110s1185,0,(X)Full Sheets,C 2308,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1185_01,"2012 Festivals of Lights - India Joint Issue- Full sheet (#1/2) [Pl.No.893 (1986+), Format=(3x5)] Design:Ronen Goldberg & Elka Sharma",Catalog,6110s1185,0,(X)Full Sheets,C 2308,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1185_02,"2012 Festivals of Lights - India Joint Issue- Full sheet (#2/2) [Pl.No.894 (1986+), Format=(3x5)] Design:Ronen Goldberg & Elka Sharma",Catalog,6110s1185,0,(X)Full Sheets,C 2309,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1186,"2012 Wildlife Conservation- Full sheet [Pl.No.897 (1986+), Format=(1x6)] Design:Igal Gabai & Tuvia Kurtz",Catalog,6110s1186,0,(X)Full Sheets,C 2311,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1188,"2012 Koren Bible- Full sheet [Pl.No.895 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110s1188,0,(X)Full Sheets,C 2314,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1189,"2012 Energy Resources- Full sheet [Pl.No.896 (1986+), Format=(3x5)] Design:Ronen Goldberg & Tuvia Kurtz",Catalog,6110s1189,0,(X)Full Sheets,C 2310,,10.00,,20.00,,0,0,0,0,,,,,31
@@ -7205,9 +7206,9 @@ bu501,1988 New Year FMT=[E]  1988.09.01,Unavailable,bul501,0,(X)Information Bull
 6110t1234_03,"2014 Craters- Full sheet (#3/3) [Pl.No.936 (1986+), Format=(2x4)] Design:Tuvia Kurtz & Meir Eshel",Catalog,6110s1234,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1236,"2014 Mateh Yehuda- Full sheet [Pl.No.939 (1986+), Format=(3x5)] Design:Osnat Eshel",Catalog,6110s1236,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1237,"2014 Memorial Day- Full sheet [Pl.No.938 (1986+), Format=(3x5)] Design:Rinat Gilboa",Catalog,6110s1237,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1238_01,"2014 Spotrs- Full sheet (#1/3) [Pl.No.943 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1238_02,"2014 Spotrs- Full sheet (#2/3) [Pl.No.944 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1238_03,"2014 Spotrs- Full sheet (#3/3) [Pl.No.945 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1238_01,"2014 Sports- Full sheet (#1/3) [Pl.No.943 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1238_02,"2014 Sports- Full sheet (#2/3) [Pl.No.944 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1238_03,"2014 Sports- Full sheet (#3/3) [Pl.No.945 (1986+), Format=(3x5)] Design:Tal Hoover",Catalog,6110s1238,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1239,"2014 Violins- Full sheet [Pl.No.940 (1986+), Format=(2x5)] Design:David Ben-Hador",Catalog,6110s1239,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1241,"2014 Mazal Tov- Full sheet [Pl.No.941 (1986+), Format=(5x5)] Design:Renat Abudraham Dadon",Catalog,6110s1241,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1243,"2014 Sign Language- Full sheet [Pl.No.942 (1986+), Format=(1x10)] Design:Miri Nistor",Catalog,6110s1243,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
@@ -7221,9 +7222,9 @@ bu501,1988 New Year FMT=[E]  1988.09.01,Unavailable,bul501,0,(X)Information Bull
 6110t1252_02,"2014 Fiddler on the Roof- Full sheet (#2/3) [Pl.No.958 (1986+), Format=(2x4)] Design:Chaim Topol",Catalog,6110s1252,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1252_03,"2014 Fiddler on the Roof- Full sheet (#3/3) [Pl.No.959 (1986+), Format=(2x4)] Design:Chaim Topol",Catalog,6110s1252,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1255,"2014 Tel Aviv- Full sheet [Pl.No.954 (1986+), Format=(2x5)] Design:Baruch Nae",Catalog,6110s1255,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1257_01,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#1/3) [Pl.No.919 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1257_02,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#2/3) [Pl.No.920 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
-6110t1257_03,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#3/3) [Pl.No.921 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1257_01,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#1/3) [Pl.No.951 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1257_02,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#2/3) [Pl.No.952 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
+6110t1257_03,"2014 Festivals 5775 (Simchat Torah Flags)- Full sheet (#3/3) [Pl.No.953 (1986+), Format=(3x5)] Design:Limor Perez-Samia",Catalog,6110s1257,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1258,"2014 Rabbi Ovadia Yosef- Full sheet [Pl.No.955 (1986+), Format=(3x3)] Design:Meir Eshel",Catalog,6110s1258,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1260,"2014 Arik Einstein- Full sheet [Pl.No.968 (1986+), Format=(3x3)] Design:Miri Nistor",Catalog,6110s1260,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
 6110t1262_01,"2014 Sundials- Full sheet (#1/3) [Pl.No.960 (1986+), Format=(3x5)] Design:David Ben-Hador",Catalog,6110s1262,0,(X)Full Sheets,,,10.00,,20.00,,0,0,0,0,,,,,31
