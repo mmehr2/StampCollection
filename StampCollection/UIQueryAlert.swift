@@ -27,6 +27,7 @@ enum UIQueryFieldDesignator {
     , invPartSetM
     , invPartSetOfN
     , invPartSetVal(String)
+    , notes
 }
 
 struct UIQueryFieldConfiguration {
@@ -38,6 +39,11 @@ struct UIQueryFieldConfiguration {
     init( type des: UIQueryFieldDesignator) {
         designator = des
         switch des {
+        case .notes:
+            // set up the single text field config
+            //placeholder = ""
+            type = .text
+            break
         case .keywordList:
             // set up the single text field config
             placeholder = "Space-separated key words"
@@ -93,6 +99,7 @@ enum UIQueryAlertType {
     , invAskAlbum(String) // include existing album names to avoid
     , invAskSectionAndAlbum(String,String) // include both the above
     , invAskPartialSetValues
+    , invAskNotes
 }
 
 struct UIQueryAlertConfiguration {
@@ -173,6 +180,13 @@ struct UIQueryAlertConfiguration {
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("2 (OPT)")))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("3 (OPT)")))
             fieldConfigs.append(UIQueryFieldConfiguration(type: .invPartSetVal("4 (OPT)")))
+            break
+        case .invAskNotes:
+            // set up the single text field config
+            title = "Inventory Notes"
+            body = "Enter notes about any distinguishing characteristics of the item.\n" +
+            "This description of the item will be added to the Inventory Item pending its location."
+            fieldConfigs.append(UIQueryFieldConfiguration(type: .notes))
             break
         }
     }
@@ -277,6 +291,15 @@ class UIQueryAlert: NSObject, UITextFieldDelegate {
                     // the values are packed into a keyword array
                     // by convention, N and M are first; defaults are "" if not entered
                     var results:[String] = []
+                    for field in self.fields {
+                        results.append(field.text ?? "")
+                    }
+                    result = SearchType.keyWordListAny(results)
+                    handler(result)
+                case .invAskNotes:
+                    // the values are packed into a keyword array
+                    // by convention, N and M are first; defaults are "" if not entered
+                    var results:[String] = ["n", ""]
                     for field in self.fields {
                         results.append(field.text ?? "")
                     }

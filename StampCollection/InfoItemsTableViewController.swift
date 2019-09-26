@@ -193,33 +193,43 @@ class InfoItemsTableViewController: UITableViewController {
                         ]
                     menuBoxWithTitle("Remove selected item from database", andBody: delMenuItems, forController: self)
                 }),
-                ("Modify Add Action", { x in
-                    // second selection: run a box to select options on the inventory builder
-                    let ibMenuItems : [MenuBoxEntry] = [
-                        ("Disable FDC Folder", {x in
-                            // code that will disable the invBuilder's folder additions
+                ("Adding: Disable FDC Folder", {x in
+                    // code that will disable the invBuilder's folder additions
+                    if let ivb = self.model.invBuilder {
+                        ivb.allowRelatedFolder = false
+                    }
+                }),
+                ("Adding: Split Set in Parts", {x in
+                    // code that will setup Partial Set description in invBuilder
+                    let kwc = UIQueryAlert(type: .invAskPartialSetValues) { srchType in
+                        // put the related data into the master VC's variables
+                        switch srchType {
+                        case .keyWordListAny(let values):
                             if let ivb = self.model.invBuilder {
-                                ivb.allowRelatedFolder = false
+                                ivb.setPartialSetInfo(values)
                             }
-                        }),
-                        ("Split Set in Parts", {x in
-                            // code that will setup Partial Set description in invBuilder
-                            let kwc = UIQueryAlert(type: .invAskPartialSetValues) { srchType in
-                                // put the related data into the master VC's variables
-                                switch srchType {
-                                case .keyWordListAny(let values):
-                                    if let ivb = self.model.invBuilder {
-                                        ivb.setPartialSetInfo(values)
-                                    }
-                                    break
-                                default:
-                                    break
-                                }
+                            break
+                        default:
+                            break
+                        }
+                    }
+                    kwc.RunWithViewController(self)
+                }),
+                ("Adding: Additional Notes", {x in
+                    // code that will setup Partial Set description in invBuilder
+                    let kwc = UIQueryAlert(type: .invAskNotes) { srchType in
+                        // put the related data into the master VC's variables
+                        switch srchType {
+                        case .keyWordListAny(let values):
+                            if let ivb = self.model.invBuilder {
+                                ivb.setPartialSetInfo(values)
                             }
-                            kwc.RunWithViewController(self)
-                        }),
-                        ]
-                    menuBoxWithTitle("Modify Add Action", andBody: ibMenuItems, forController: self)
+                            break
+                        default:
+                            break
+                        }
+                    }
+                    kwc.RunWithViewController(self)
                 }),
                 ]
             menuBoxWithTitle("Info Tools", andBody: masterMenuItems, forController: self)

@@ -96,13 +96,13 @@ class InventoryBuilder {
         // empty entries ("") are ignored, except N and M which get defaults as follows:
         let n = Int(values[0]) ?? 1
         let m = Int(values[1]) ?? 0
-        // UPDATE: if we are adding a sheet, the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
-        let useSheet = addingSheet
         // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
         // UPDATE: if m is the character "n", desc will not be generated, just notes
         let useOnlyNotes = values[0].lowercased().hasPrefix("n")
         let useDesc = !useOnlyNotes
+        // UPDATE: if we are splitting a sheet set, the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
+        let useSheet = addingSheet && useDesc
         // UPDATE: special handling for Notes field: if values[i][0]=="n",append that value verbatim to notes field
         var vals = [String]()
         var notes = [String]()
