@@ -75,7 +75,7 @@ class BTItemsMessageProcessor: BTMessageProcessor {
             var headersInternal : [String] = []
             var data : [BTSiteData] = []
             if let mainTable = try doc.select("body > table").array().first {
-                var tables = try mainTable.select("td > table").array()
+                let tables = try mainTable.select("td > table").array()
                 if tables.count > 3 {
                     var isFirst = true
                     // ignore 1st 2 tables (HEADER1,2), process 3rd for NOTES, 4th and beyond for headers (4th only) and data, ignore last (FOOTER)

@@ -90,7 +90,7 @@ Gradient View: Thanks to code from raywenderlich.com (Ray Wenderlich @rwenderlic
             return imageView.image
         }
         set {
-            imageView.image = image
+            imageView.image = newValue
         }
     }
     
