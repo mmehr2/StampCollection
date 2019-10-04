@@ -130,11 +130,13 @@ func getPicRefURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
         switch type {
         case .btRef, .dlRef:
             output = URLComponents(string: "http://www.bait-tov.com/store")
+            output = URLComponents(string: "http://isrstamps.azuresults.com/store") // new local site mirror
             storeName = output.path
             pathName = "pic.php"
             queryName = "ID"
         case .jsRef, .dljsRef: // TBD: add .DLJSRef support with table lookup from ajtX.jpg file ref to 17XXX index
             output = URLComponents(string: "http://www.judaicasales.com/judaica")
+            output = URLComponents(string: "http://judaica.azuresults.com/judaica") // new local site mirror
             storeName = output.path
             pathName = "austrian_pic_detail.asp"
             queryName = "index"
