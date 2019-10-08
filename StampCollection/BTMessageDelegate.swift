@@ -46,7 +46,8 @@ protocol BTMessageProcessor {
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
-let BTBaseURL = "http://www.bait-tov.com/store/"
+//let BTBaseURL = "http://isrstamps.azuresults.com/store/" //= "http://www.bait-tov.com/store/"
+let BTBaseURL = "http://192.168.1.118.xip.io/BaitTov/bait-tov.com/store/" //= "http://www.bait-tov.com/store/"
 
 class BTMessageDelegate: NSObject {
     
@@ -99,7 +100,7 @@ class BTMessageDelegate: NSObject {
     }
     
     func configToLoadCategoriesFromWeb() {
-        url = URL(string:"http://www.bait-tov.com/store/viewcat.php?ID=8")
+        url = URL(string:BTBaseURL + "viewcat.php?ID=8")
         categoryNumber = BTCategoryAll
         // set up to deal with the main Categories page load
         htmlHandler = BTCategoryMessageProcessor(self)

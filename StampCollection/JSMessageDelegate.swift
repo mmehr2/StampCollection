@@ -18,6 +18,9 @@ protocol JSMessageProtocol {
     func messageHandler( _ handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
+//let JSBaseURL = "http://judaica.azuresults.com" //http://www.judaicasales.com"
+let JSBaseURL = "http://192.168.1.118.xip.io/JudaicaSales/judaicasales.com" //http://www.judaicasales.com"
+
 class JSMessageDelegate: NSObject, WKScriptMessageHandler {
     
     var delegate: JSMessageProtocol?
@@ -30,7 +33,7 @@ class JSMessageDelegate: NSObject, WKScriptMessageHandler {
     fileprivate let itemsJSMessage = "getJSItems" // process non-BT site
     
     func configToLoadItemsFromWeb() {
-        url = URL(string:"http://www.judaicasales.com/judaica/austrian.asp?on_load=1")
+        url = URL(string:JSBaseURL + "/judaica/austrian.asp?on_load=1")
         //    categoryNumber = JSCategory;
         let config = WKWebViewConfiguration()
         let scriptURL = Bundle.main.path(forResource: "getJSItems", ofType: "js")

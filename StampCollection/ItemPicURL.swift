@@ -129,14 +129,12 @@ func getPicRefURL( _ picref: String, refType type: PicRefURLType ) -> URL? {
         var queryName = ""
         switch type {
         case .btRef, .dlRef:
-            output = URLComponents(string: "http://www.bait-tov.com/store")
-            output = URLComponents(string: "http://isrstamps.azuresults.com/store") // new local site mirror
+            output = URLComponents(string: BTBaseURL) // new local site mirror
             storeName = output.path
             pathName = "pic.php"
             queryName = "ID"
         case .jsRef, .dljsRef: // TBD: add .DLJSRef support with table lookup from ajtX.jpg file ref to 17XXX index
-            output = URLComponents(string: "http://www.judaicasales.com/judaica")
-            output = URLComponents(string: "http://judaica.azuresults.com/judaica") // new local site mirror
+            output = URLComponents(string: JSBaseURL + "/judaica") // new local site mirror
             storeName = output.path
             pathName = "austrian_pic_detail.asp"
             queryName = "index"
@@ -217,8 +215,8 @@ private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase
 func getPicFileRemoteURL( _ picref: String, refType type: PicRefURLType, category cat: Int = 0 ) -> URL? {
     // BT style: "http://www.bait-tov.com/store/products/" plus the file name (pictid/picref such as "6110s4" + ".jpg" file extension)
     // JS style: "http://www.judaicasales.com/pics/judaica_austriantabs/" plus the file name ("ajt" + picref + ".jpg", where "5" is the picref)
-    let btURLBase = URL(string: "http://www.bait-tov.com")
-    let jsURLBase = URL(string: "http://www.judaicasales.com")
+    let btURLBase = URL(string: "http://isrstamps.azuresults.com")
+    let jsURLBase = URL(string: JSBaseURL)
     let btURLPath = "/store/products/"
     let jsURLPath = "/pics/judaica_austriantabs/"
     return getPicURLFromBaseURL(type, picref: picref, btBase: btURLBase!, btPath: btURLPath, jsBase: jsURLBase!, jsPath: jsURLPath, catnum: cat)
