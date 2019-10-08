@@ -80,7 +80,7 @@ class AlbumPageViewController: UICollectionViewController {
     fileprivate func setAddButtonStates() {
         // decide if the add-page buttons are active and set them accordingly
         var activePageAdds = false
-        if let invBuilder = model.invBuilder {
+        if let invBuilder = model?.invBuilder {
             activePageAdds = invBuilder.isItemAddable(to: navigator!)
         }
         addToNewNextPageButton.isEnabled = activePageAdds
