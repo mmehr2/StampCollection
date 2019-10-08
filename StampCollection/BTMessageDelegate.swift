@@ -46,8 +46,12 @@ protocol BTMessageProcessor {
 let BTCategoryAll = -1
 let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL when none is actually needed
 
-//let BTBaseURL = "http://isrstamps.azuresults.com/store/" //= "http://www.bait-tov.com/store/"
-let BTBaseURL = "http://192.168.1.118.xip.io/BaitTov/bait-tov.com/store/" //= "http://www.bait-tov.com/store/"
+fileprivate var useLocalSite = false
+var BTBaseURL : String {
+    let BTBaseURL0 = "http://www.bait-tov.com/store/" //original site (non-expandable)
+    let BTBaseURL1 = "http://192.168.1.118.xip.io/BaitTov/bait-tov.com/store/" //= "http://isrstamps.azuresults.com/store/" // in-house site (expandable, not accessible from external locations)
+    return useLocalSite ? BTBaseURL1 : BTBaseURL0
+}
 
 class BTMessageDelegate: NSObject {
     

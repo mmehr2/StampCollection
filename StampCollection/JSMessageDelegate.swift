@@ -18,8 +18,12 @@ protocol JSMessageProtocol {
     func messageHandler( _ handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
-//let JSBaseURL = "http://judaica.azuresults.com" //http://www.judaicasales.com"
-let JSBaseURL = "http://192.168.1.118.xip.io/JudaicaSales/judaicasales.com" //http://www.judaicasales.com"
+fileprivate var useLocalSite = false
+var JSBaseURL : String {
+    let JSBaseURL0 = "http://www.judaicasales.com"  //original site (non-expandable)
+    let JSBaseURL1 = "http://192.168.1.118.xip.io/JudaicaSales/judaicasales.com" //http://judaica.azuresults.com" // in-house site (expandable, not accessible from external locations)
+    return useLocalSite ? JSBaseURL1 : JSBaseURL0
+}
 
 class JSMessageDelegate: NSObject, WKScriptMessageHandler {
     
