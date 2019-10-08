@@ -215,9 +215,9 @@ private func getPicURLFromBaseURL( _ type: PicRefURLType, picref: String, btBase
 func getPicFileRemoteURL( _ picref: String, refType type: PicRefURLType, category cat: Int = 0 ) -> URL? {
     // BT style: "http://www.bait-tov.com/store/products/" plus the file name (pictid/picref such as "6110s4" + ".jpg" file extension)
     // JS style: "http://www.judaicasales.com/pics/judaica_austriantabs/" plus the file name ("ajt" + picref + ".jpg", where "5" is the picref)
-    let btURLBase = URL(string: "http://isrstamps.azuresults.com")
+    let btURLBase = URL(string: BTBaseURL) // this already contains "/store/"
     let jsURLBase = URL(string: JSBaseURL)
-    let btURLPath = "/store/products/"
+    let btURLPath = "products/"
     let jsURLPath = "/pics/judaica_austriantabs/"
     return getPicURLFromBaseURL(type, picref: picref, btBase: btURLBase!, btPath: btURLPath, jsBase: jsURLBase!, jsPath: jsURLPath, catnum: cat)
 }
