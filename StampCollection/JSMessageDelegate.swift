@@ -18,7 +18,7 @@ protocol JSMessageProtocol {
     func messageHandler( _ handler: JSMessageDelegate, receivedUpdate data: BTCategory, forCategory category: Int)
 }
 
-fileprivate var useLocalSite = false
+fileprivate var useLocalSite = true
 var JSBaseURL : String {
     let JSBaseURL0 = "http://www.judaicasales.com"  //original site (non-expandable)
     let JSBaseURL1 = "http://192.168.1.118.xip.io/JudaicaSales/judaicasales.com" //http://judaica.azuresults.com" // in-house site (expandable, not accessible from external locations)
