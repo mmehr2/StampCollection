@@ -7660,3 +7660,220 @@ h,6110t1368_03,price1,SS10,SHEETS12,SER1986,961,,,,31
 h,6110e1369,price1,SS10,SHEETS12,SER1986,959,,"Partial set (1sh): Pl.No.1071 (#1/3)",,24
 h,6110e1369,price1,SS10,SHEETS12,SER1986,960,,"Partial set (1sh): Pl.No.1072 (#2/3)",,24
 h,6110e1369,price1,SS10,SHEETS12,SER1986,961,,"Partial set (1sh): Pl.No.1073 (#3/3)",,24
+h,psAL27,price1,SS6,PLS01,AS,29.1,,,"not folded vertically",20
+h,psAL27,price2,SS6,PLS01,AS,29.2,,,"not folded vertically",20
+h,psAL28,price1,SS6,PLS01,AS,29.3,,,"not folded vertically",20
+h,psAL28,price2,SS6,PLS01,AS,29.4,,,"not folded vertically",20
+h,psAL31,price1,SS6,PLS01,AS,31.1,,,"not folded vertically",20
+h,psIL7,price1,SS6,PLS01,ILS,8.1,,,"not folded vertically",20
+h,psIL7,price2,SS6,PLS01,ILS,8.2,,,"not folded vertically",20
+h,psIL8,price1,SS6,PLS01,ILS,8.3,,,"not folded top flap",20
+h,psIL8,price2,SS6,PLS01,ILS,8.4,,,"not folded top flap",20
+h,psAL6,price1,SS6,PLS01,AS,6,,,"w creases, wear",20
+h,psAL8,price1,SS6,PLS01,AS,8,,,"w toning spots",20
+h,psAL15,price1,SS6,PLS01,AS,15,,,"w washed out colors",20
+h,psPC6,price2,SS6,PPC01,PC,6,,,,20
+h,psPC8,price1,SS6,PPC01,PC,8,,,,20
+h,psPC8,price2,SS6,PPC01,PC,8,,,,20
+h,psPC7,price1,SS6,PPC01,PC,7,,,,20
+h,psPC6,price2,SS6,PPC01,PC,9,,,"alt FD loc Hof Asql",20
+h,psPC8,price2,SS6,PPC01,PC,9,,,"alt FD loc Rhovot",20
+h,psPC9,price2,SS6,PPC01,PC,10,,,"alt FD loc Yavne and Gdera",20
+h,psPC10,price2,SS6,PPC01,PC,10,,,"alt FD loc Yavne and Ber Seva",20
+h,psPC9,price1,SS6,PPC01,PC,11,,,,20
+h,psPC9,price2,SS6,PPC01,PC,11,,,,20
+h,psPC10,price1,SS6,PPC01,PC,12,,,,20
+h,psPC10,price2,SS6,PPC01,PC,12,,,,20
+h,psPC11,price1,SS6,PPC01,PC,13,,,,20
+h,psPC11,price2,SS6,PPC01,PC,13,,,,20
+h,psPC12,price1,SS6,PPC01,PC,14,,,,20
+h,psPC12,price2,SS6,PPC01,PC,14,,,,20
+h,psPC13,price1,SS6,PPC01,PC,15,,,,20
+h,psPC13,price2,SS6,PPC01,PC,15,,,,20
+h,psPC14,price1,SS6,PPC01,PC,16,,,,20
+h,psPC14,price2,SS6,PPC01,PC,16,,,,20
+h,psPC15,price1,SS6,PPC01,PC,17,,,,20
+h,psPC15,price2,SS6,PPC01,PC,17,,,,20
+h,psPC16,price1,SS6,PPC01,PC,18,,,,20
+h,psPC16,price2,SS6,PPC01,PC,18,,,,20
+h,psPC17,price1,SS6,PPC01,PC,19,,,,20
+h,psPC17,price2,SS6,PPC01,PC,19,,,,20
+h,psPC18,price1,SS6,PPC01,PC,20,,,,20
+h,psPC18,price2,SS6,PPC01,PC,20,,,,20
+h,psPC20,price1,SS6,PPC01,PC,21,,,,20
+h,psPC20,price2,SS6,PPC01,PC,21,,,,20
+h,psPC21,price1,SS6,PPC01,PC,22,,,,20
+h,psPC21,price2,SS6,PPC01,PC,22,,,,20
+h,psPC22,price1,SS6,PPC01,PC,23,,,,20
+h,psPC22,price2,SS6,PPC01,PC,23,,,,20
+h,psPC23,price1,SS6,PPC01,PC,24,,,,20
+h,psPC23,price2,SS6,PPC01,PC,24,,,,20
+h,psPC24,price1,SS6,PPC01,PC,24,,,,20
+h,psPC24,price2,SS6,PPC01,PC,24,,,,20
+h,psPC24bk,price1,SS6,PPC01,PC,25,,,"single booklet pane of 2",20
+h,psPC24bk,price1,SS6,PPC01,PC,26,,,,20
+h,psPC25,price1,SS6,PPC01,PC,27,,,,20
+h,psPC25,price2,SS6,PPC01,PC,27,,,,20
+h,psPC26,price1,SS6,PPC01,PC,28,,,,20
+h,psPC26,price2,SS6,PPC01,PC,28,,,,20
+h,psPC27,price1,SS6,PPC01,PC,29,,,,20
+h,psPC27,price2,SS6,PPC01,PC,29,,,,20
+h,psPC23,price1,SS6,PPC01,PC,30,,,,20
+h,psPC23,price2,SS6,PPC01,PC,30,,,,20
+h,psPC30,price1,SS6,PPC01,PC,31,,,,20
+h,psPC30,price2,SS6,PPC01,PC,31,,,,20
+h,psPC31,price1,SS6,PPC01,PC,32,,,,20
+h,psPC31,price2,SS6,PPC01,PC,32,,,,20
+h,psPC31a,price1,SS6,PPC01,PC,33,,,,20
+h,psPC32a,price1,SS6,PPC01,PC,33,,,,20
+h,psPC32,price1,SS6,PPC01,PC,34,,,,20
+h,psPC32,price2,SS6,PPC01,PC,34,,,,20
+h,psPC33,price1,SS6,PPC01,PC,35,,,,20
+h,psPC33,price2,SS6,PPC01,PC,35,,,,20
+h,psPC34,price1,SS6,PPC01,PC,36,,,,20
+h,psPC34,price2,SS6,PPC01,PC,36,,,,20
+h,psPC28,price1,SS6,PPC01,PC,30.1,,,,20
+h,psPC28,price2,SS6,PPC01,PC,30.1,,,,20
+h,psPC29,price1,SS6,PPC01,PC,30.2,,,,20
+h,psPC29,price2,SS6,PPC01,PC,30.2,,,,20
+h,psPC35,price1,SS6,PPC01,PC,37,,,,20
+h,psPC35,price2,SS6,PPC01,PC,37,,,,20
+h,psPC36,price1,SS6,PPC01,PC,38,,,,20
+h,psPC36,price2,SS6,PPC01,PC,38,,,,20
+h,psPC37,price1,SS6,PPC01,PC,39,,,,20
+h,psPC37,price2,SS6,PPC01,PC,39,,,,20
+h,psPC38,price1,SS6,PPC01,PC,40,,,,20
+h,psPC38,price2,SS6,PPC01,PC,40,,,,20
+h,psPC39,price1,SS6,PPC01,PC,41,,,,20
+h,psPC39,price2,SS6,PPC01,PC,41,,,,20
+h,psPC40,price1,SS6,PPC01,PC,42,,,,20
+h,psPC40,price2,SS6,PPC01,PC,42,,,,20
+h,psPC41,price1,SS6,PPC01,PC,43,,,,20
+h,psPC41,price2,SS6,PPC01,PC,43,,,,20
+h,psPC42,price1,SS6,PPC01,PC,44,,,,20
+h,psPC42,price2,SS6,PPC01,PC,44,,,,20
+h,psPC43,price1,SS6,PPC01,PC,45,,,,20
+h,psPC43,price2,SS6,PPC01,PC,45,,,,20
+h,psPC43,price2,SS6,PPC01,PC,46,,,"alt FD loc Jerusalem",20
+h,psPC44,price1,SS6,PPC01,PC,47,,,,20
+h,psPC44,price2,SS6,PPC01,PC,47,,,,20
+h,psPC45,price1,SS6,PPC01,PC,48,,,,20
+h,psPC45,price2,SS6,PPC01,PC,48,,,,20
+h,psPC46,price1,SS6,PPC01,PC,49,,,,20
+h,psPC46,price2,SS6,PPC01,PC,49,,,,20
+h,psPC47,price1,SS6,PPC01,PC,50,,,,20
+h,psPC47,price2,SS6,PPC01,PC,50,,,,20
+h,psPC48,price1,SS6,PPC01,PC,51,,,,20
+h,psPC48,price2,SS6,PPC01,PC,51,,,,20
+h,psPC49,price1,SS6,PPC01,PC,52,,,,20
+h,psPC49,price2,SS6,PPC01,PC,52,,,,20
+h,psPC50,price1,SS6,PPC01,PC,53,,,,20
+h,psPC50,price2,SS6,PPC01,PC,53,,,,20
+h,psPC51,price1,SS6,PPC01,PC,54,,,,20
+h,psPC51,price2,SS6,PPC01,PC,54,,,,20
+h,psPC52,price1,SS6,PPC01,PC,55,,,,20
+h,psPC52,price2,SS6,PPC01,PC,55,,,,20
+h,psPC53,price1,SS6,PPC01,PC,56,,,,20
+h,psPC53,price2,SS6,PPC01,PC,56,,,,20
+h,psPC54,price1,SS6,PPC01,PC,57,,,,20
+h,psPC54,price2,SS6,PPC01,PC,57,,,,20
+h,psPC55,price1,SS6,PPC01,PC,58,,,,20
+h,psPC55,price2,SS6,PPC01,PC,58,,,,20
+h,psPC56,price1,SS6,PPC01,PC,59,,,,20
+h,psPC56,price2,SS6,PPC01,PC,59,,,,20
+h,psPC57,price1,SS6,PPC01,PC,60,,,,20
+h,psPC57,price2,SS6,PPC01,PC,60,,,,20
+h,psPC58,price1,SS6,PPC01,PC,61,,,,20
+h,psPC58,price2,SS6,PPC01,PC,61,,,,20
+h,psPC59,price1,SS6,PPC01,PC,62,,,,20
+h,psPC59,price2,SS6,PPC01,PC,62,,,,20
+h,psPC60,price1,SS6,PPC01,PC,63,,,,20
+h,psPC60,price2,SS6,PPC01,PC,63,,,,20
+h,psPC61,price1,SS6,PPC01,PC,64,,,,20
+h,psPC61,price2,SS6,PPC01,PC,64,,,,20
+h,psPC62,price1,SS6,PPC01,PC,65,,,,20
+h,psPC62,price2,SS6,PPC01,PC,65,,,,20
+h,psPC63,price1,SS6,PPC01,PC,66,,,,20
+h,psPC63,price2,SS6,PPC01,PC,66,,,,20
+h,psPC64,price1,SS6,PPC01,PC,67,,,,20
+h,psPC67,price1,SS6,PPC01,PC,68,,,,20
+h,psPC67,price2,SS6,PPC01,PC,68,,,,20
+h,psPC66,price1,SS6,PPC01,PC,69,,,,20
+h,psPC66,price2,SS6,PPC01,PC,69,,,,20
+h,psPC65,price1,SS6,PPC01,PC,70,,,,20
+h,psPC65,price2,SS6,PPC01,PC,70,,,,20
+w,psPC70,price1,SS6,PPC01,PC,71,,,,20
+h,psPC70,price2,SS6,PPC01,PC,71,,,,20
+w,psPC68,price1,SS6,PPC01,PC,72,,,,20
+h,psPC68,price2,SS6,PPC01,PC,72,,,,20
+w,psPC71,price1,SS6,PPC01,PC,73,,,,20
+h,psPC71,price2,SS6,PPC01,PC,73,,,,20
+w,psPC69,price1,SS6,PPC01,PC,74,,,,20
+h,psPC69,price2,SS6,PPC01,PC,74,,,,20
+h,psPC72,price1,SS6,PPC01,PC,75,,,,20
+h,psPC72,price2,SS6,PPC01,PC,75,,,,20
+h,psPC74,price1,SS6,PPC01,PC,76,,,,20
+h,psPC74,price2,SS6,PPC01,PC,76,,,,20
+h,psPC73,price1,SS6,PPC01,PC,77,,,,20
+h,psPC73,price2,SS6,PPC01,PC,77,,,,20
+h,psPC78,price1,SS6,PPC01,PC,78,,,,20
+h,psPC78,price2,SS6,PPC01,PC,78,,,,20
+h,psPC75,price1,SS6,PPC01,PC,79,,,,20
+h,psPC75,price2,SS6,PPC01,PC,79,,,,20
+h,psPC76,price1,SS6,PPC01,PC,80,,,,20
+h,psPC76,price2,SS6,PPC01,PC,80,,,,20
+h,psPC77,price1,SS6,PPC01,PC,81,,,,20
+h,psPC77,price2,SS6,PPC01,PC,81,,,,20
+h,psPC79,price1,SS6,PPC01,PC,82,,,,20
+h,psPC79,price2,SS6,PPC01,PC,82,,,,20
+h,psPC80,price1,SS6,PPC01,PC,83,,,,20
+h,psPC80,price2,SS6,PPC01,PC,83,,,,20
+h,psPC81,price1,SS6,PPC01,PC,84,,,,20
+h,psPC81,price2,SS6,PPC01,PC,84,,,,20
+h,psPC82,price1,SS6,PPC01,PC,85,,,,20
+h,psPC82,price2,SS6,PPC01,PC,85,,,,20
+h,psPC83,price1,SS6,PPC01,PC,86,,,,20
+h,psPC83,price2,SS6,PPC01,PC,86,,,,20
+h,psPC85,price1,SS6,PPC01,PC,87,,,,20
+h,psPC85,price2,SS6,PPC01,PC,87,,,,20
+h,psPC84,price1,SS6,PPC01,PC,88,,,,20
+h,psPC84,price2,SS6,PPC01,PC,88,,,,20
+w,psPC86,price1,SS6,PPC01,PC,89,,,,20
+h,psPC86,price2,SS6,PPC01,PC,89,,,,20
+w,psPC88,price1,SS6,PPC01,PC,90,,,,20
+h,psPC88,price2,SS6,PPC01,PC,90,,,,20
+w,psPC87,price1,SS6,PPC01,PC,91,,,,20
+h,psPC87,price2,SS6,PPC01,PC,91,,,,20
+h,psPC89,price1,SS6,PPC01,PC,92,,,,20
+h,psPC89,price2,SS6,PPC01,PC,92,,,,20
+h,psPC91,price1,SS6,PPC01,PC,93,,,,20
+h,psPC91,price2,SS6,PPC01,PC,93,,,,20
+h,psPC90,price1,SS6,PPC01,PC,94,,,,20
+h,psPC90,price2,SS6,PPC01,PC,94,,,,20
+h,psPC92,price1,SS6,PPC01,PC,95,,,,20
+h,psPC92,price2,SS6,PPC01,PC,95,,,,20
+h,psPC93,price1,SS6,PPC01,PC,96,,,,20
+h,psPC93,price2,SS6,PPC01,PC,96,,,,20
+h,psPC94,price1,SS6,PPC01,PC,97,,,,20
+w,psPC94,price2,SS6,PPC01,PC,97,,,,20
+h,psIE1,price1,SS6,PPC01,IE,1,,,,20
+h,psIE1,price2,SS6,PPC01,IE,1,,,,20
+h,psIE1,price2,SS6,PPC01,IE,1.1,,,"w alt event cancel Haifa",20
+h,psIE2,price1,SS6,PPC01,IE,2,,,,20
+h,psIE2,price2,SS6,PPC01,IE,2,,,,20
+h,psIE3,price1,SS6,PPC01,IE,3,,,,20
+h,psIE3,price2,SS6,PPC01,IE,3,,,,20
+h,psIE4,price1,SS6,PPC01,IE,4,,,,20
+h,psIE4,price2,SS6,PPC01,IE,4,,,,20
+h,psIE5,price1,SS6,PPC01,IE,5,,,,20
+h,psIE5,price2,SS6,PPC01,IE,5,,,,20
+h,psIE6,price1,SS6,PPC01,IE,6,,,,20
+h,psIE6,price2,SS6,PPC01,IE,6,,,,20
+h,psIE29,price1,SS6,PPC01,IE,7,,,,20
+w,psIE29,price2,SS6,PPC01,IE,8,,,,20
+h,psIE28,price1,SS6,PPC01,IE,9,,,,20
+w,psIE28,price2,SS6,PPC01,IE,10,,,,20
+h,psIE35,price1,SS6,PPC01,IE,11,,,"plc holder 9.9.14 diff cachet",20
+h,psIE35,price2,SS6,PPC01,IE,11,,,"plc holder 9.9.14 diff cachet",20
+w,psIE35,price1,SS6,PPC01,IE,12,,,,20
+w,psIE35,price2,SS6,PPC01,IE,12,,,,20
