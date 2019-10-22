@@ -610,7 +610,7 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
         NSMutableCharacterSet *illegalCharacters = [[NSCharacterSet newlineCharacterSet] mutableCopy];
         [illegalCharacters addCharactersInString:delimiterString];
         [illegalCharacters addCharactersInString:@"\""];
-        [illegalCharacters addCharactersInString:@" "]; // MLM-added 4/23/2015
+        //[illegalCharacters addCharactersInString:@" "]; // MLM-added 4/23/2015// removed 10/21/2019 - why did I do this? Excel? it works fine without it
         _illegalCharacters = [illegalCharacters copy];
         
         _firstLineKeys = [NSMutableArray array];

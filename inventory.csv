@@ -7669,7 +7669,7 @@ h,psIL7,price1,SS6,PLS01,ILS,8.1,,,not folded vertically,20
 h,psIL7,price2,SS6,PLS01,ILS,8.2,,,not folded vertically,20
 h,psIL8,price1,SS6,PLS01,ILS,8.3,,,not folded top flap,20
 h,psIL8,price2,SS6,PLS01,ILS,8.4,,,not folded top flap,20
-h,psAL6,price1,SS6,PLS01,AS,6,,,w creases, wear,20
+h,psAL6,price1,SS6,PLS01,AS,6,,,"w creases, wear",20
 h,psAL8,price1,SS6,PLS01,AS,8,,,w toning spots,20
 h,psAL15,price1,SS6,PLS01,AS,15,,,w washed out colors,20
 h,psPC6,price2,SS6,PPC01,PC,6,,,,20
