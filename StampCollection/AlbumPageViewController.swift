@@ -110,14 +110,12 @@ class AlbumPageViewController: UICollectionViewController {
     }
     
     @IBAction func swipeTwoRightDetected(_ sender: AnyObject) {
-        //navigator?.movePageRelative(.forward, byCount: 10)
-        moveToSectionMarker(.forward)
+        navigator?.moveToSectionMarker(.forward)
         updateUI()
     }
     
     @IBAction func swipeTwoLeftDetected(_ sender: AnyObject) {
-        //navigator?.movePageRelative(.reverse, byCount: 10)
-        moveToSectionMarker(.reverse)
+        navigator?.moveToSectionMarker(.reverse)
         updateUI()
     }
     
@@ -364,25 +362,6 @@ class AlbumPageViewController: UICollectionViewController {
     }
     
     // MARK: - Navigation
-    
-    func moveToSectionMarker(_ dir: AlbumNavigationDirection) {
-        guard let nav = navigator else { return }
-        // determine if we are at first or last page of section (marker)
-        let marker = nav.currentMarker
-        if dir == .forward {
-            if marker.contains(.LastPage) {
-                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
-            } else {
-                nav.gotoMarker(.LastPage)
-            }
-        } else if dir == .reverse {
-            if marker.contains(.FirstPage) {
-                nav.gotoMarkerAcrossVolumes([.FirstAlbum, .FirstPage])
-            } else {
-                nav.gotoMarker(.FirstPage)
-            }
-        }
-    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

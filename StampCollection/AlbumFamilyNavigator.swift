@@ -161,6 +161,45 @@ class AlbumFamilyNavigator {
         method = oldMethod
     }
     
+    func moveToSectionMarker(_ dir: AlbumNavigationDirection) {
+        // determine if we are at first or last page of section (marker)
+        let marker = currentMarker
+        var markerDest = marker
+        var useAV = false
+        if dir == .forward {
+            if marker.contains([.LastSection, .LastPage]) {
+                print("NAV/Fwd(Section): Last section, Last pg -> Last album, Last section, Last page")
+                useAV = true
+                markerDest = [.LastAlbum, .LastSection, .LastPage]
+            } else
+            if marker.contains(.LastPage) {
+                print("NAV/Fwd(Section): Last pg -> Last section, Last page")
+                markerDest = [.LastSection, .LastPage]
+            } else {
+                print("NAV/Fwd(Section): Any pg -> Last page")
+                markerDest = .LastPage
+            }
+        } else if dir == .reverse {
+            if marker.contains([.FirstSection, .FirstPage]) {
+                print("NAV/Fwd(Section): First section, First pg -> First album, First section, First page")
+                useAV = true
+                markerDest = [.FirstAlbum, .FirstSection, .FirstPage]
+            } else
+            if marker.contains(.FirstPage) {
+                print("NAV/Rev(Section): First pg -> First section, First page")
+                markerDest = [.FirstSection, .FirstPage]
+            } else {
+                print("NAV/Rev(Section): Any pg -> First page")
+                markerDest = .FirstPage
+            }
+        }
+        if useAV {
+            gotoMarkerAcrossVolumes(markerDest)
+        } else {
+            gotoMarker(markerDest)
+        }
+    }
+
     func getRefAsData() -> [String:String] {
         var data: [String:String] = [:]
         data["albumPage"] = "\(currentPage.code!)"
