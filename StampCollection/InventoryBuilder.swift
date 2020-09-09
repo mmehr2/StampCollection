@@ -257,9 +257,20 @@ class InventoryBuilder {
         return result
     }
     
+    // utility function to remove certain markers in INFO descriptions inserted by the website
+    fileprivate func removeDescriptionSuffixes( _ input: String ) -> String {
+        // new version using Regex
+        // step 1 - remove souvenir sheet marker
+        let temp = input.replace(" \\- Souvenir Sheet", withTemplate: "")
+        // step 2 - remove joint issue marker
+        let temp2 = temp.replace(" \\- .* Joint Issue", withTemplate: "")
+        return temp2
+    }
+
     func findRelatedFolder(in model: CollectionStore) {
         // look up the Info Folder item, if any, with the same description as the base DealerItem we are building
-        let descWords = dealerItem.descriptionX!.components(separatedBy: " ").filter() { $0.count > 5 }
+        let baseDesc = removeDescriptionSuffixes(dealerItem.descriptionX!)
+        let descWords = baseDesc.components(separatedBy: " ").filter() { $0.count > 5 }
         let search = SearchType.keyWordListAll(descWords)
         let fitems = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [search], andSorting: .byCode(false))
         if fitems.count == 0 {
@@ -267,7 +278,7 @@ class InventoryBuilder {
         } else {
             print("Examining \(fitems.count) related folders for exact match to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
             for fldr in fitems {
-                if fldr.descriptionX! == dealerItem.descriptionX! {
+                if fldr.descriptionX! == baseDesc {
                     relatedFolder = fldr
                     print("Found related folder #\(fldr.id!): \(fldr.descriptionX!)")
                 }
