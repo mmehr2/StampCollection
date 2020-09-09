@@ -272,7 +272,8 @@ class InventoryBuilder {
 
     func findRelatedFolder(in model: CollectionStore) {
         // look up the Info Folder item, if any, with the same description as the base DealerItem we are building
-        let baseDesc = removeDescriptionSuffixes(dealerItem.descriptionX!)
+        let fullDesc = dealerItem.descriptionX!
+        let baseDesc = removeDescriptionSuffixes(fullDesc)
         let descWords = baseDesc.components(separatedBy: " ").filter() { $0.count > 5 }
         let search = SearchType.keyWordListAll(descWords)
         let fitems = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [search], andSorting: .byCode(false))
@@ -281,7 +282,8 @@ class InventoryBuilder {
         } else {
             print("Examining \(fitems.count) related folders for exact match to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
             for fldr in fitems {
-                if fldr.descriptionX! == baseDesc {
+                let testDesc = fldr.descriptionX!
+                if  testDesc == baseDesc || testDesc == fullDesc {
                     relatedFolder = fldr
                     print("Found related folder #\(fldr.id!): \(fldr.descriptionX!)")
                 }
