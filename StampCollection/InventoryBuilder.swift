@@ -96,19 +96,19 @@ class InventoryBuilder {
         // empty entries ("") are ignored, except N and M which get defaults as follows:
         let n = Int(values[0]) ?? 1
         let m = Int(values[1]) ?? 0
-        // UPDATE: if m is the character "v", the "Partial set" desc becomes a "Variety" instead
+        // UPDATE: if N starts with the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
-        // UPDATE: if m is the character "n", desc will not be generated, just notes
+        // UPDATE: if N starts with the character "n", desc will not be generated, just notes
         let useOnlyNotes = values[0].lowercased().hasPrefix("n")
         let useDesc = !useOnlyNotes
-        // UPDATE: if we are splitting a sheet set, the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to be plate numbers
+        // UPDATE: if we are splitting a sheet set, the "Partial set" desc refers to sheets (as "sh"), and vals are assumed to start with plate numbers
         let useSheet = addingSheet && useDesc
-        // UPDATE: special handling for Notes field: if values[i][0]=="n",append that value verbatim to notes field
+        // UPDATE: special handling for Notes field: if values[i][0] starts with "nn",append that value verbatim to notes field
         var vals = [String]()
         var notes = [String]()
         for val in values[2..<values.count] {
             if !val.isEmpty {
-                if (useDesc && val.lowercased().hasPrefix("n")) {
+                if (useDesc && val.lowercased().hasPrefix("nn")) {
                     notes.append(String(val.dropFirst()))
                 } else {
                     let val_ = useSheet ? "Pl.No." + val : val
@@ -119,12 +119,15 @@ class InventoryBuilder {
         if (useDesc) {
             let valstrs = vals.joined(separator: " ")
             let ofstr:String
+            let setstr:String
             if m>0 && n>1 {
                 ofstr = " (#\(m)/\(n))"
+                setstr = "Partial set"
             } else {
                 ofstr = ""
+                setstr = "Complete set"
             }
-            let titlestr = useVar ? "Variety" : "Partial set"
+            let titlestr = useVar ? "Variety" : setstr
             let vnumstr = useSheet ? "sh" : "v"
             let desc = "\(titlestr) (\(vals.count)\(vnumstr)): \(valstrs)\(ofstr)"
             print("Setting desc field to \(desc)")
