@@ -302,6 +302,13 @@ class AlbumFamilyNavigator {
         return data
     }
     
+    func gotoIndex( _ data: AlbumIndex) {
+        // when changing more than one currentXXXIndex, they must be done in this order
+        currentAlbumIndex = data.ref // may change CSI and CPI, as well as maxSIIA indirectly
+        currentSectionIndex = data.section // may change CPI again, as well as maxPIIS indirectly
+        currentPageIndex = data.page
+    }
+    
     func gotoMarker( _ marker: AlbumMarker ) {
         // there is always an album, a section (possibly unnamed), and at least one page defined in every family
         // resolve this in top-down fashion from album thru section to page (property observers would otherwise interfere)
@@ -337,11 +344,38 @@ class AlbumFamilyNavigator {
             pageNum = pageCount - 1
         }
         data = AlbumIndex(ref: albumNum, section: sectNum, page: pageNum)
-        currentAlbumIndex = data.ref // may change CSI and CPI, as well as maxSIIA indirectly
-        currentSectionIndex = data.section // may change CPI again, as well as maxPIIS indirectly
-        currentPageIndex = data.page
+        gotoIndex(data)
     }
     
+    func gotoEndOfSectionAcrossVolumes() {
+        // Unlike gotoMarker(), this function needs to cross marker boundaries and volume boundaries, but keep the same section name as is currently set
+        let albumCount = currentAlbum.family.theRefs.count // #albums in series/family
+        let albumNum0 = clamp(currentAlbumIndex, low: 0, hi: albumCount - 1) // but why is this needed?
+        let secName0 = currentSection.code!
+        var albumNumSaved = albumNum0
+        var secNumSaved = currentSectionIndex
+        for albumNum in albumNum0+1..<albumCount {
+            // check existence of section in each subsequent album
+            let album = currentAlbum.family.theRefs[albumNum]
+            let secMax = album.theSections.count
+            // search for current section name in album's list of sections
+            for secNum in 0..<secMax {
+                let sectionName = album.theSections[secNum].code!
+                // if found (album has this section), save it and try the next
+                // at end, we'll have the last successful search
+                if sectionName == secName0 {
+                    albumNumSaved = albumNum
+                    secNumSaved = secNum
+                }
+            }
+        }
+        // go to first page of identified album and section
+        let data = AlbumIndex(ref: albumNumSaved, section: secNumSaved, page: 0)
+        gotoIndex(data)
+        // then go to last page of that album section
+        gotoMarker(.LastPage)
+    }
+
     // MARK: navigating the album hierarchy by pages
     // This type of nav is extended to go thru section and ref boundaries as if browsing one big book
     fileprivate func gotoNextPage(_ by: Int = 1) {

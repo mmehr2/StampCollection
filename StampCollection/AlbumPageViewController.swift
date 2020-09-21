@@ -280,7 +280,7 @@ class AlbumPageViewController: UICollectionViewController {
             case .NextPage:
                 description += "the next page of the current section of the current album group."
                 // must be at end of section (across all albums in family)
-                nav.gotoMarkerAcrossVolumes([.LastAlbum, .LastPage])
+                nav.gotoEndOfSectionAcrossVolumes()
                 pageDataOrg = nav.getRefAsData()
                 pageData = offsetAlbumPageInData(pageDataOrg)
             case .NextAlbum:
