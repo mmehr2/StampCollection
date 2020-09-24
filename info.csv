@@ -7531,16 +7531,42 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110d69,"2020 Memorial Day - Facsimile signed by Naftali Bennett",Catalog,6110d69,0,"Ministry of Defense Covers",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,15
 6110n18,"2018 A Happy New Year 5779 Card",Catalog,6110n18,0,"New Year Greeting Cards",,,8.00,0.00,0.00,0.00,0,0,0,0,,,,,16
 6110n19,"2019 A Happy New Year 5780 Card",Catalog,6110n19,0,"New Year Greeting Cards",,,12.00,0.00,0.00,0.00,0,0,0,0,,,,,16
-6110h29,"2018 Litwinski House - Estonia Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h29,0,"Souvenir Folders",,,19.00,0.00,0.00,0.00,0,0,0,0,,,,,22
-6110h30,"2018 Independence Years - Poland Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h30,0,"Souvenir Folders",,,17.00,0.00,0.00,0.00,0,0,0,0,,,,,22
-6110h31,"2018 Happy Hanukkah - United States Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h31,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
-6110h32,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 4 stamps",Catalog,6110h32,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
-6110h33,"2019 Bilateral Relations 25 years - Vatican Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h33,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
-6110lne21,"2018 Litwinski House - Estonia Joint Issue",Catalog,6110lne21,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
-6110lne22,"2018 Independence Years - Poland Joint Issue",Catalog,6110lne22,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
-6110lne23,"2018 Happy Hanukkah - United States Joint Issue",Catalog,6110lne23,0,"Souvenir Leaves",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,23
-6110lne24,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue",Catalog,6110lne24,0,"Souvenir Leaves",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,23
-6110lne25,"2019 Bilateral Relations 25 years - Vatican Joint Issue",Catalog,6110lne25,0,"Souvenir Leaves",,,18.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110h682xFLD,"1996 Hanukkah '96 - United States Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1215xFLD,"2013 Arctic Endangered Species - Greenland Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h1215xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1220xFLD,"2013 'The Annunciation of Sarah' - Uruguay Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1220xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1228xFLD,"2014 Hospitallers - Malta Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1228xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1246xFLD,"2014 Friendship - Thailand Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1246xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1266xFLD,"2015 Jews Rescue - Phillippines Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1266xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1279xFLD,"2015 Relations - Germany Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1279xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1287xFLD,"2015 Sepulchre Church - Vatican Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h1287xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1300xFLD,"2016 Diplomatic Relations - Greece Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1300xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1311xFLD,"2016 Bridge of Strings - Spain Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1311xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1318xFLD,"2016 Bird Migration - Bulgaria Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1318xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1343xFLD,"2017 Dolphin Research - Portugal Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1343xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1356xFLD,"2017 Flowers - Croatia Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1356xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1363xFLD,"2017 Gorny Convent - Russia Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1363xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1396xFLD,"2018 Litwinski House - Estonia Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1396xFLD,0,"Souvenir Folders",,,19.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1401xFLD,"2018 Independence Years - Poland Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1401xFLD,0,"Souvenir Folders",,,17.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1403xFLD,"2018 Happy Hanukkah - United States Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1403xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1423xFLD,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 4 stamps",Catalog,6110h1423xFLD,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1437xFLD,"2019 Bilateral Relations 25 years - Vatican Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h1437xFLD,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1465xFLD,"2020 From Jaffa to Tel-Aviv and From Olinda to Recife - Brazil Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1465xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h682xFLD,"1996 Hanukkah '96 - United States Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h682xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110l1266x,"2015 Jews Rescue - Phillippines Joint Issue",Catalog,6110l1266x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1279x,"2015 Relations - Germany Joint Issue",Catalog,6110l1279x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1287x,"2015 Sepulchre Church - Vatican Joint Issue",Catalog,6110l1287x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1300x,"2016 Diplomatic Relations - Greece Joint Issue",Catalog,6110l1300x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1311x,"2016 Bridge of Strings - Spain Joint Issue",Catalog,6110l1311x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1318x,"2016 Bird Migration - Bulgaria Joint Issue",Catalog,6110l1318x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1343x,"2017 Dolphin Research - Portugal Joint Issue",Catalog,6110l1343x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1356x,"2017 Flowers - Croatia Joint Issue",Catalog,6110l1356x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1363x,"2017 Gorny Convent - Russia Joint Issue",Catalog,6110l1363x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1396x,"2018 Litwinski House - Estonia Joint Issue",Catalog,6110l1396x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1401x,"2018 Independence Years - Poland Joint Issue",Catalog,6110l1401x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1403x,"2018 Happy Hanukkah - United States Joint Issue",Catalog,6110l1403x,0,"Souvenir Leaves",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1423x,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue",Catalog,6110l1423x,0,"Souvenir Leaves",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1437x,"2019 Bilateral Relations 25 years - Vatican Joint Issue",Catalog,6110l1437x,0,"Souvenir Leaves",,,18.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1465x,"2020 From Jaffa to Tel-Aviv and From Olinda to Recife - Brazil Joint Issue",Catalog,6110l1465x,0,"Souvenir Leaves",,,12.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110e1191V,"08.07.18 Gerbera 1.00 Self Adhesive Sheet (9th print, 9 menorahs) (20v)",Catalog,6110e1191V,0,"Special Sheets-Sheetlets-Combination",,,9.00,13.50,0.00,0.00,0,0,0,0,,,,,24
 6110e1191W,"08.01.19 Gerbera 0.20 Self Adhesive Sheet (4th print, 4 menorahs) (20v)",Catalog,6110e1191W,0,"Special Sheets-Sheetlets-Combination",,,2.00,6.50,0.00,0.00,0,0,0,0,,,,,24
 6110e1191X,"20.01.19 Gerbera 0.50 Self Adhesive Sheet (5th print, 5 menorahs) (20v)",Catalog,6110e1191X,0,"Special Sheets-Sheetlets-Combination",,,5.00,6.50,0.00,0.00,0,0,0,0,,,,,24
