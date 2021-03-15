@@ -274,19 +274,38 @@ class InventoryBuilder {
         // look up the Info Folder item, if any, with the same description as the base DealerItem we are building
         let fullDesc = dealerItem.descriptionX!
         let baseDesc = removeDescriptionSuffixes(fullDesc)
-        let descWords = baseDesc.components(separatedBy: " ").filter() { $0.count > 5 }
+        let descWords = baseDesc.components(separatedBy: " ").filter() { $0.count >= 5 }
         let search = SearchType.keyWordListAll(descWords)
         let fitems = model.fetchInfoInCategory(CATEG_INFOLDERS, withSearching: [search], andSorting: .byCode(false))
         if fitems.count == 0 {
             print("Could not find folder related to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
         } else {
             print("Examining \(fitems.count) related folders for exact match to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
+            var partMatchFolder :DealerItem?
+            var fullMatchFolder :DealerItem?
             for fldr in fitems {
                 let testDesc = fldr.descriptionX!
-                if  testDesc == baseDesc || testDesc == fullDesc {
-                    relatedFolder = fldr
+                if  testDesc == baseDesc {
+                    partMatchFolder = fldr
                     print("Found related folder #\(fldr.id!): \(fldr.descriptionX!)")
                 }
+                if  testDesc == fullDesc {
+                    fullMatchFolder = fldr
+                    print("Found related folder #\(fldr.id!): \(fldr.descriptionX!)")
+                }
+            }
+            // determine selection in case of both partial and full matches (or neither)
+            if let fldr = fullMatchFolder {
+                relatedFolder = fldr
+                print("Chose related folder (full match) #\(fldr.id!): \(fldr.descriptionX!)")
+            } else if let fldr = partMatchFolder {
+                relatedFolder = fldr
+                print("Chose related folder (partial match) #\(fldr.id!): \(fldr.descriptionX!)")
+            } else {
+                print("Could not match folder related to item \(dealerItem.id!): \(dealerItem.descriptionX!)")
+                let fldr = fitems.first!
+                relatedFolder = fldr
+                print("Chose related folder (first match) #\(fldr.id!): \(fldr.descriptionX!)")
             }
         }
     }
