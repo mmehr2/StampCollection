@@ -1591,7 +1591,7 @@ h,6110s443,price3,SS6,FDC09,,523,,Partial Set (4v) 0.01 0.02 0.03 0.50,,2
 h,6110s443,price3,SS6,FDC09,,524,,Partial Set (4v) 0.05 0.10 0.20 0.30,,2
 h,6110s444,price3,SS6,FDC09,,525,,,,2
 h,6110s445,price3,SS6,FDC09,,526,,,,2
-w,6110s446,price3,SS6,FDC09,,527,,,,2
+h,6110s446,price3,SS6,FDC09,,527,,,,2
 h,6110s447,price3,SS6,FDC09,,528,,,,2
 h,6110s450,price3,SS6,FDC09,,529,,Partial set (1v) 0.50 (#1/3),,2
 h,6110s450,price3,SS6,FDC09,,530,,Partial set (1v) 0.50 (#2/3),,2
@@ -1602,7 +1602,7 @@ h,6110s449,price3,SS6,FDC09,,534,,,,2
 h,6110s454,price3,SS6,FDC09,,535,,,,2
 h,6110s455,price3,SS6,FDC09,,536,,,,2
 h,6110s453,price3,SS6,FDC09,,537,,,,2
-w,6110s452,price3,SS6,FDC09,,538,,,,2
+h,6110s452,price3,SS6,FDC09,,538,,,,2
 h,6110s456,price3,SS6,FDC09,,539,,,,2
 h,6110s457,price3,SS6,FDC09,,540,,,,2
 h,6110s458,price3,SS6,FDC09,,541,,,,2
@@ -1661,7 +1661,7 @@ h,6110s512,price3,SS6,FDC10,,594,,,,2
 h,6110s514,price3,SS6,FDC10,,595,,,,2
 h,6110s516,price3,SS6,FDC10,,596,,,,2
 h,6110s517,price3,SS6,FDC10,,597,,,,2
-w,6110s519,price3,SS6,FDC10,,598,,,,2
+h,6110s519,price3,SS6,FDC10,,598,,,,2
 h,6110s518,price3,SS6,FDC10,,599,,,,2
 h,6110s522,price3,SS6,FDC10,,600,,,,2
 h,6110s521,price3,SS6,FDC10,,601,,,,2
@@ -1669,14 +1669,14 @@ h,6110s520,price3,SS6,FDC10,,602,,,,2
 h,6110s523,price3,SS6,FDC10,,603,,,,2
 h,6110s527,price3,SS6,FDC10,,604,,,,2
 h,6110s524,price3,SS6,FDC10,,605,,,,2
-w,6110s525,price3,SS6,FDC10,,606,,,,2
+h,6110s525,price3,SS6,FDC10,,606,,,,2
 h,6110s530,price3,SS6,FDC10,,607,,,,2
 h,6110s529,price3,SS6,FDC10,,608,,,,2
 h,6110s533,price3,SS6,FDC10,,609,,,,2
 h,6110s528,price3,SS6,FDC10,,610,,,,2
 h,6110s535,price3,SS6,FDC10,,612,,,,2
 h,6110s538,price3,SS6,FDC10,,613,,,,2
-w,6110s539,price3,SS6,FDC10,,614,,,,2
+h,6110s539,price3,SS6,FDC10,,614,,,,2
 h,6110s534,price3,SS6,FDC10,,615,,,,2
 h,6110s540,price3,SS6,FDC10,,616,,,,2
 h,6110s542,price3,SS6,FDC10,,617,,,,2
@@ -1707,7 +1707,7 @@ h,6110s570,price3,SS6,FDC10,,646,,,,2
 h,6110s571,price3,SS6,FDC10,,647,,,,2
 h,6110s568,price3,SS6,FDC10,,648,,,,2
 h,6110s573,price3,SS6,FDC10,,649,,,,2
-w,6110s576,price3,SS6,FDC10,,650,,,,2
+h,6110s576,price3,SS6,FDC10,,650,,,,2
 h,6110s575,price3,SS6,FDC10,,651,,,,2
 h,6110s577,price3,SS6,FDC10,,652,,,,2
 h,6110s578,price3,SS6,FDC10,,653,,,,2
@@ -1736,7 +1736,7 @@ h,6110s601,price3,SS6,FDC11,,679,,,,2
 h,6110s600,price3,SS6,FDC11,,680,,,,2
 h,6110s602,price3,SS6,FDC11,,681,,,,2
 h,6110s603,price3,SS6,FDC11,,682,,,,2
-w,6110s610,price3,SS6,FDC11,,683,,,,2
+w,6110s610,price3,SS6,FDC11,,683,,,plc.holder - cvr is in oversize album,2
 h,6110s606,price3,SS6,FDC11,,684,,,,2
 h,6110s608,price3,SS6,FDC11,,685,,,,2
 h,6110s609,price3,SS6,FDC11,,686,,,,2
@@ -1748,7 +1748,7 @@ h,6110s614,price3,SS6,FDC11,,691,,,,2
 h,6110s616,price3,SS6,FDC11,,692,,Partial Set (2v) 0.85 0.85 (#1/2),,2
 h,6110s616,price3,SS6,FDC11,,693,,Partial Set (2v) 0.85 0.85 (#2/2),,2
 h,6110s618,price3,SS6,FDC11,,694,,,,2
-w,6110s615,price3,SS6,FDC11,,695,,,,2
+h,6110s615,price3,SS6,FDC11,,695,,,,2
 h,6110s623,price3,SS6,FDC11,,696,,,,2
 h,6110s619,price3,SS6,FDC11,,697,,,,2
 h,6110s622,price3,SS6,FDC11,,698,,,,2
@@ -2000,7 +2000,7 @@ h,6110s891,price3,SS6,FDC15,,956,,,,2
 h,6110s895,price3,SS6,FDC15,,957,,,,2
 h,6110s892,price3,SS6,FDC15,,958,,Partial Set (2v) 1.30 1.30 (#1/2),,2
 h,6110s892,price3,SS6,FDC15,,959,,Partial Set (2v) 1.30 1.30 (#2/2),,2
-w,6110s898,price3,SS6,FDC15,,960,,,,2
+h,6110s898,price3,SS6,FDC15,,960,,,,2
 h,6110s896,price3,SS6,FDC15,,961,,,,2
 h,6110s897,price3,SS6,FDC15,,962,,,,2
 h,6110s900,price3,SS6,FDC15,,963,,,,2
@@ -2037,32 +2037,32 @@ h,6110s938,price3,SS6,FDC15,,993,,Partial Set (2v) 2.20 2.20,,2
 h,6110s938,price3,SS6,FDC15,,994,,Partial Set (2v) 6.20 6.20,,2
 h,6110s939,price3,SS6,FDC15,,995,,,,2
 h,6110s940,price3,SS6,FDC15,,996,,,,2
-w,6110s941,price3,SS6,FDC15,,997,,,,2
-w,6110s947,price3,SS6,FDC16,,999,,,,2
-w,6110s945,price3,SS6,FDC16,,1000,,,,2
-w,6110s942,price3,SS6,FDC16,,1001,,,,2
-w,6110s943,price3,SS6,FDC16,,1002,,Partial Set (2v) 1.50 2.40,,2
-w,6110s943,price3,SS6,FDC16,,1003,,Partial Set (2v) 3.60 7.40,,2
-w,6110s948,price3,SS6,FDC16,,1004,,,,2
-w,6110s950,price3,SS6,FDC16,,1005,,,,2
-w,6110s952,price3,SS6,FDC16,,1006,,,,2
-w,6110s949,price3,SS6,FDC16,,1007,,,,2
-w,6110s954,price3,SS6,FDC16,,1008,,Partial Set (3v) 2.50 2.50 2.50 (#1/2),,2
-w,6110s954,price3,SS6,FDC16,,1009,,Partial Set (3v) 2.50 2.50 2.50 (#2/2),,2
-w,6110s957,price3,SS6,FDC16,,1010,,,,2
-w,6110s958,price3,SS6,FDC16,,1011,,,,2
-w,6110s961,price3,SS6,FDC16,,1012,,,,2
-w,6110s959,price3,SS6,FDC16,,1013,,,,2
-w,6110s960,price3,SS6,FDC16,,1014,,,,2
-w,6110s966,price3,SS6,FDC16,,1015,,,,2
-w,6110s963,price3,SS6,FDC16,,1016,,,,2
-w,6110s964,price3,SS6,FDC16,,1017,,,,2
-w,6110s968,price3,SS6,FDC16,,1018,,Partial Set (3v) 2.50 2.50 (#1/2),,2
-w,6110s968,price3,SS6,FDC16,,1019,,Partial Set (3v) 2.50 2.50 (#2/2),,2
-w,6110s971,price3,SS6,FDC16,,1022,,,,2
-w,6110s970,price3,SS6,FDC16,,1023,,,,2
-w,6110s967,price3,SS6,FDC16,,1020,,Partial Set (2v) 1.50 2.50,,2
-w,6110s967,price3,SS6,FDC16,,1021,,Partial Set (2v) 3.30 7.30,,2
+h,6110s941,price3,SS6,FDC15,,997,,,,2
+h,6110s947,price3,SS6,FDC16,,999,,,,2
+h,6110s945,price3,SS6,FDC16,,1000,,,,2
+h,6110s942,price3,SS6,FDC16,,1001,,,,2
+h,6110s943,price3,SS6,FDC16,,1002,,Partial Set (2v) 1.50 2.40,,2
+h,6110s943,price3,SS6,FDC16,,1003,,Partial Set (2v) 3.60 7.40,,2
+h,6110s948,price3,SS6,FDC16,,1004,,,,2
+h,6110s950,price3,SS6,FDC16,,1005,,,,2
+h,6110s952,price3,SS6,FDC16,,1006,,,,2
+h,6110s949,price3,SS6,FDC16,,1007,,,,2
+h,6110s954,price3,SS6,FDC16,,1008,,Partial Set (3v) 2.50 2.50 2.50 (#1/2),,2
+h,6110s954,price3,SS6,FDC16,,1009,,Partial Set (3v) 2.50 2.50 2.50 (#2/2),,2
+h,6110s957,price3,SS6,FDC16,,1010,,,,2
+h,6110s958,price3,SS6,FDC16,,1011,,,,2
+h,6110s961,price3,SS6,FDC16,,1012,,,,2
+h,6110s959,price3,SS6,FDC16,,1013,,,,2
+h,6110s960,price3,SS6,FDC16,,1014,,,,2
+h,6110s966,price3,SS6,FDC16,,1015,,,,2
+h,6110s963,price3,SS6,FDC16,,1016,,,,2
+h,6110s964,price3,SS6,FDC16,,1017,,,,2
+h,6110s968,price3,SS6,FDC16,,1018,,Partial Set (3v) 2.50 2.50 (#1/2),,2
+h,6110s968,price3,SS6,FDC16,,1019,,Partial Set (3v) 2.50 2.50 (#2/2),,2
+h,6110s971,price3,SS6,FDC16,,1022,,,,2
+h,6110s970,price3,SS6,FDC16,,1023,,,,2
+h,6110s967,price3,SS6,FDC16,,1020,,Partial Set (2v) 1.50 2.50,,2
+h,6110s967,price3,SS6,FDC16,,1021,,Partial Set (2v) 3.30 7.30,,2
 h,6110s973,price3,SS6,FDC16,,1024,,,,2
 h,6110s974,price3,SS6,FDC16,,1025,,,,2
 h,6110s972,price3,SS6,FDC16,,1026,,Partial Set (1v) 2.50,,2
@@ -2112,7 +2112,7 @@ h,6110s1030,price3,SS6,FDC17,,1069,,,,2
 h,6110s1031,price3,SS6,FDC17,,1070,,Partial Set (2v) 1.55 1.55,,2
 h,6110s1031,price3,SS6,FDC17,,1071,,Partial Set (2v) 2.25 2.25,,2
 h,6110s1032,price3,SS6,FDC17,,1072,,,,2
-w,6110s1034,price3,SS6,FDC17,,1073,,,,2
+h,6110s1034,price3,SS6,FDC17,,1073,,,,2
 h,6110s1036,price3,SS6,FDC17,,1074,,,,2
 h,6110s1035,price3,SS6,FDC17,,1075,,,,2
 h,6110s1038,price3,SS6,FDC17,,1076,,,,2
