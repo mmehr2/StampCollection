@@ -8795,3 +8795,9 @@ h,psIE24,price1,LINOVS,OVERSIZE01,,92,,,,20
 h,psIE24,price2,LINOVS,OVERSIZE01,,93,,,,20
 h,psIE22,price1,LINOVS,OVERSIZE01,,94,,,,20
 w,psIE22,price2,LINOVS,OVERSIZE01,,95,,,,20
+h,6110eAIR,price1,LINOVS,OVERSIZE02,,96,,Partial set (1sh): Pl.No.804 (UL) (#1/4),,24
+h,6110eAIR,price1,LINOVS,OVERSIZE02,,97,,Partial set (1sh): Pl.No.804 (UR) (#2/4),,24
+h,6110eAIR,price1,LINOVS,OVERSIZE02,,98,,Partial set (1sh): Pl.No.804 (LL) (#3/4),,24
+h,6110eAIR,price1,LINOVS,OVERSIZE02,,99,,Partial set (1sh): Pl.No.804 (LR) (#4/4),,24
+h,6110eNAH,price2,LINLRG,LARGESIZE01,,1,,,,24
+
