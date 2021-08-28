@@ -7504,6 +7504,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110s1452,"2020 CMYK Color Printing",Catalog,6110s1452,0,"Sets, SS, FDC",,,7.00,0.00,7.50,0.00,0,0,0,0,,,,,2
 6110s1454,"2020 Ben Gurion University of the Negev - 50 years",Catalog,6110s1454,0,"Sets, SS, FDC",,,2.25,0.00,3.00,0.00,0,0,0,0,,,,,2
 6110s1456,"2020 Bees in Israel",Catalog,6110s1456,0,"Sets, SS, FDC",,,6.00,0.00,7.00,0.00,0,0,0,0,,,,,2
+6110s1458,"2020 Transportation in Eretz Yisrael - Souvenir Sheet",Catalog,6110s1458,0,"Sets, SS, FDC",,,60.00,0.00,70.00,0.00,0,0,0,0,,,,,2
 6110s1459,"2020 Memorial Day - Souvenir Sheet",Catalog,6110s1459,0,"Sets, SS, FDC",,,7.00,0.00,8.00,0.00,0,0,0,0,,,,,2
 6110s1460,"2020 Concentration Camps Liberation - 75 years",Catalog,6110s1460,0,"Sets, SS, FDC",,,4.00,0.00,4.50,0.00,0,0,0,0,,,,,2
 6110s1461,"2020 Good Luck",Catalog,6110s1461,0,"Sets, SS, FDC",,,2.00,0.00,2.50,0.00,0,0,0,0,,,,,2
@@ -7525,6 +7526,14 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110s1486,"2021 Blessing of the House (Souvenir Sheet) - Souvenir Sheet",Catalog,6110s1486,0,"Sets, SS, FDC",,,10.00,0.00,11.00,0.00,0,0,0,0,,,,,2
 6110s1487,"2021 Memorial Day",Catalog,6110s1487,0,"Sets, SS, FDC",,,1.70,0.00,3.00,0.00,0,0,0,0,,,,,2
 6110s1488,"2021 Bank Hapoalim Centennial",Catalog,6110s1488,0,"Sets, SS, FDC",,,5.00,0.00,7.00,0.00,0,0,0,0,,,,,2
+6110s1489,"2021 Tokyo Olympics",Catalog,6110s1489,0,"Sets, SS, FDC",,,8.00,0.00,8.00,0.00,0,0,0,0,,,,,2
+6110s1490,"2021 Manufacturers Association",Catalog,6110s1490,0,"Sets, SS, FDC",,,3.50,0.00,3.50,0.00,0,0,0,0,,,,,2
+6110s1491,"2021 Tu B'Av",Catalog,6110s1491,0,"Sets, SS, FDC",,,8.00,0.00,10.00,0.00,0,0,0,0,,,,,2
+6110s1493,"2021 Police Orchestra Centennial",Catalog,6110s1493,0,"Sets, SS, FDC",,,7.00,0.00,9.00,0.00,0,0,0,0,,,,,2
+6110s1494,"2021 Shmuel Agnon Nobel Prize",Catalog,6110s1494,0,"Sets, SS, FDC",,,3.00,0.00,4.00,0.00,0,0,0,0,,,,,2
+6110s1496,"2021 Rabbi Yitzhak Nissim",Catalog,6110s1496,0,"Sets, SS, FDC",,,5.00,0.00,5.50,0.00,0,0,0,0,,,,,2
+6110s1497,"2021 Festivals - Ecclesiastes",Catalog,6110s1497,0,"Sets, SS, FDC",,,8.50,0.00,10.00,0.00,0,0,0,0,,,,,2
+6110s1499,"2021 Space Observatories",Catalog,6110s1499,0,"Sets, SS, FDC",,,8.00,0.00,9.00,0.00,0,0,0,0,,,,,2
 6110e1037L,"12.08.18 Medical Herbs and Spices 'DOAR 24' Booklet (11th print, 11 menorahs) (12v)",Catalog,6110e1037L,0,Booklets,,,20.00,27.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1037M,"18.06.19 Medical Herbs and Spices 'DOAR 24' Booklet (12th print, 12 menorahs) (12v)",Catalog,6110e1037M,0,Booklets,,,20.00,27.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1144F,"16.04.19 Butterflies Booklet (7th print, 7 menorahs) (20v)",Catalog,6110e1144F,0,Booklets,,,20.00,30.00,0.00,0.00,0,0,0,0,,,,,3
@@ -7690,6 +7699,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110n18,"2018 A Happy New Year 5779 Card",Catalog,6110n18,0,"New Year Greeting Cards",,,8.00,0.00,0.00,0.00,0,0,0,0,,,,,16
 6110n19,"2019 A Happy New Year 5780 Card",Catalog,6110n19,0,"New Year Greeting Cards",,,12.00,0.00,0.00,0.00,0,0,0,0,,,,,16
 6110n20,"2020 A Happy New Year 5781 Card",Catalog,6110n20,0,"New Year Greeting Cards",,,5.00,0.00,0.00,0.00,0,0,0,0,,,,,16
+6110n21,"2021 A Happy New Year 5782 Card",Catalog,6110n21,0,"New Year Greeting Cards",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,16
 6110h1215xFLD,"2013 Arctic Endangered Species - Greenland Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h1215xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
 6110h1220xFLD,"2013 'The Annunciation of Sarah' - Uruguay Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1220xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
 6110h1228xFLD,"2014 Hospitallers - Malta Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1228xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
@@ -7709,6 +7719,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110h1423xFLD,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 4 stamps",Catalog,6110h1423xFLD,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
 6110h1437xFLD,"2019 Bilateral Relations 25 years - Vatican Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 souvenir sheets",Catalog,6110h1437xFLD,0,"Souvenir Folders",,,30.00,0.00,0.00,0.00,0,0,0,0,,,,,22
 6110h1465xFLD,"2020 From Jaffa to Tel-Aviv and From Olinda to Recife - Brazil Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1465xFLD,0,"Souvenir Folders",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,22
+6110h1494xFLD,"2021 Shmuel Agnon Nobel Prize - Ukraine Joint Issue; this folder contains the Souvenir Leaf, Leaflet, and 2 stamps",Catalog,6110h1494xFLD,0,"Souvenir Folders",,,25.00,0.00,0.00,0.00,0,0,0,0,,,,,22
 6110l1266x,"2015 Jews Rescue - Phillippines Joint Issue",Catalog,6110l1266x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110l1279x,"2015 Relations - Germany Joint Issue",Catalog,6110l1279x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110l1287x,"2015 Sepulchre Church - Vatican Joint Issue",Catalog,6110l1287x,0,"Souvenir Leaves",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,23
@@ -7724,6 +7735,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110l1423x,"2019 50 Years of Diplomatic Relations - Singapore Joint Issue",Catalog,6110l1423x,0,"Souvenir Leaves",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110l1437x,"2019 Bilateral Relations 25 years - Vatican Joint Issue",Catalog,6110l1437x,0,"Souvenir Leaves",,,18.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110l1465x,"2020 From Jaffa to Tel-Aviv and From Olinda to Recife - Brazil Joint Issue",Catalog,6110l1465x,0,"Souvenir Leaves",,,12.00,0.00,0.00,0.00,0,0,0,0,,,,,23
+6110l1494x,"2021 Shmuel Agnon Nobel Prize - Ukraine Joint Issue",Catalog,6110l1494x,0,"Souvenir Leaves",,,12.00,0.00,0.00,0.00,0,0,0,0,,,,,23
 6110e1191V,"08.07.18 Gerbera 1.00 Self Adhesive Sheet (9th print, 9 menorahs) (20v)",Catalog,6110e1191V,0,"Special Sheets-Sheetlets-Combination",,,9.00,13.50,0.00,0.00,0,0,0,0,,,,,24
 6110e1191W,"08.01.19 Gerbera 0.20 Self Adhesive Sheet (4th print, 4 menorahs) (20v)",Catalog,6110e1191W,0,"Special Sheets-Sheetlets-Combination",,,2.00,6.50,0.00,0.00,0,0,0,0,,,,,24
 6110e1191X,"20.01.19 Gerbera 0.50 Self Adhesive Sheet (5th print, 5 menorahs) (20v)",Catalog,6110e1191X,0,"Special Sheets-Sheetlets-Combination",,,5.00,6.50,0.00,0.00,0,0,0,0,,,,,24
@@ -7764,9 +7776,14 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110e1480,"09.02.21 Remote-Sensing Satellites Full Small se-tenant Sheet of 9 stamps",Catalog,6110e1480,0,"Special Sheets-Sheetlets-Combination",,,19.00,24.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1482,"06.04.21 Rescue by Jews During the Holocaust Full Small Sheet of 9 stamps",Catalog,6110e1482,0,"Special Sheets-Sheetlets-Combination",,,38.00,50.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1484,"06.04.21 Nostalgia Professions Full Small Decorated SeTenant TeteBeche Sheet of 6 stamps",Catalog,6110e1484,0,"Special Sheets-Sheetlets-Combination",,,15.00,24.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1492,"29.06.21 Tu B'Av Full Small Decorated SeTenant Sheet of 8 stamps",Catalog,6110e1492,0,"Special Sheets-Sheetlets-Combination",,,20.00,25.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1495,"01.08.21 Shmuel Agnon Nobel Prize - Ukraine Joint Issue Full Small Sheet of 12 stamps",Catalog,6110e1495,0,"Special Sheets-Sheetlets-Combination",,,35.00,0.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1498,"01.08.21 Festivals - Ecclesiastes Full 3 Small Decorated Sheets of 8 stamps",Catalog,6110e1498,0,"Special Sheets-Sheetlets-Combination",,,62.00,0.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1500,"01.08.21 Space Observatories Full Small Decorated SeTenant Sheet of 9 stamps",Catalog,6110e1500,0,"Special Sheets-Sheetlets-Combination",,,18.50,0.00,0.00,0.00,0,0,0,0,,,,,24
 6110eAIR,"09.02.21 Israeli Air Force Aircraft (cutouts of printers sheet) - 'My Own Stamp' Full 4 Sheets",Catalog,6110eAIR,0,"Special Sheets-Sheetlets-Combination",,,125.00,175.00,0.00,0.00,0,0,0,0,,,,,24
 6110eAPOL,"21.07.19 Apollo 11 Moon Landing 50 years - 'My Own Stamp' Full Sheet",Catalog,6110eAPOL,0,"Special Sheets-Sheetlets-Combination",,,17.50,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110eEUR,"05.05.19 Eurovision Song Contest - 'My Own Stamp' Full Sheet",Catalog,6110eEUR,0,"Special Sheets-Sheetlets-Combination",,,10.00,15.00,0.00,0.00,0,0,0,0,,,,,24
+6110eGAGA,"12.04.21 60th Manned Space Flight Y.Gagarin - 'My Own Stamp' Full Sheet",Catalog,6110eGAGA,0,"Special Sheets-Sheetlets-Combination",,,30.00,35.00,0.00,0.00,0,0,0,0,,,,,24
 6110eHAN7,"01.11.18 Hanukkah - 'My Own Stamp' Full Sheet",Catalog,6110eHAN7,0,"Special Sheets-Sheetlets-Combination",,,22.00,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110eHAN8,"26.11.19 Hanukkah - 'My Own Stamp' Full Sheet",Catalog,6110eHAN8,0,"Special Sheets-Sheetlets-Combination",,,15.00,20.00,0.00,0.00,0,0,0,0,,,,,24
 6110eIBN,"17.08.18 Israeli Bank Notes 70 years - 'My Own Stamp' Full Sheet",Catalog,6110eIBN,0,"Special Sheets-Sheetlets-Combination",,,20.00,25.00,0.00,0.00,0,0,0,0,,,,,24
@@ -7916,6 +7933,22 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110k2109bl,"01.04.21 'Inbar 52' Fire Services - Fighting Fires in Fields and Woods, blanco label",Catalog,6110k2109bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
 6110k2109_m714,"01.04.21 'Inbar 52' Fire Services - Fighting Fires in Fields and Woods, full set of 6 values, Haifa machine (714) - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2109_m714,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
 6110k2110,"01.04.21 'Inbar 52' Fire Services - Fighting Fires in Fields and Woods, FDC inland 2.50 value",Catalog,6110k2110,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2111,"29.06.21 'Inbar 53' Police Marine Rescue, full set of 6 values - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2111,0,"Vending Machine Labels",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2111bl,"29.06.21 'Inbar 53' Police Marine Rescue, blanco label",Catalog,6110k2111bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2111_m300,"29.06.21 'Inbar 53' Police Marine Rescue, full set of 6 values, Ashdod machine (300) - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2111_m300,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2112,"29.06.21 'Inbar 53' Police Marine Rescue, FDC inland 2.50 value",Catalog,6110k2112,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2113,"29.06.21 'Inbar 54' Police Bomb Disposal Expert, full set of 6 values - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2113,0,"Vending Machine Labels",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2113bl,"29.06.21 'Inbar 54' Police Bomb Disposal Expert, blanco label",Catalog,6110k2113bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2113_m101,"29.06.21 'Inbar 54' Police Bomb Disposal Expert, full set of 6 values, Jerusalem machine (101) - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2113_m101,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2114,"29.06.21 'Inbar 54' Police Bomb Disposal Expert, FDC inland 2.50 value",Catalog,6110k2114,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2115,"24.08.21 'Inbar 55' Home Front Command Search and Rescue Brigade, full set of 6 values - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2115,0,"Vending Machine Labels",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2115bl,"24.08.21 'Inbar 55' Home Front Command Search and Rescue Brigade, blanco label",Catalog,6110k2115bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2115_m220,"24.08.21 'Inbar 55' Home Front Command Search and Rescue Brigade, full set of 6 values, Beer Sheva machine (220) - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2115_m220,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2116,"24.08.21 'Inbar 55' Home Front Command Search and Rescue Brigade, FDC inland 2.50 value",Catalog,6110k2116,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2117,"01.08.21 'Inbar 56' Police Volunteer Rescue Teams, full set of 6 values - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2117,0,"Vending Machine Labels",,,16.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2117bl,"01.08.21 'Inbar 56' Police Volunteer Rescue Teams, blanco label",Catalog,6110k2117bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2117_m900,"01.08.21 'Inbar 56' Police Volunteer Rescue Teams, full set of 6 values, Tiberias machine (900) - 2.50/4.10/6.50/7.40/8.30/9.00",Catalog,6110k2117_m900,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2118,"24.08.21 'Inbar 56' Police Volunteer Rescue Teams, FDC inland 2.50 value",Catalog,6110k2118,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
 fe1051,"2018 Litwinski House",Catalog,fe1051,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1052,"2018 Pioneering Women - Recha Freier and Ada Sereni",Catalog,fe1052,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1053,"2018 Archeozoology in Eretz Israel",Catalog,fe1053,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
@@ -7977,6 +8010,14 @@ fe1108,"2021 Nostalgia Professions",Catalog,fe1108,0,"(X)Information Folders",,,
 fe1109,"2021 Blessing of the House (Souvenir Sheet)",Catalog,fe1109,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1110,"2021 Memorial Day",Catalog,fe1110,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1111,"2021 Bank Hapoalim Centennial",Catalog,fe1111,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1112,"2021 Tokyo Olympics",Catalog,fe1112,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1113,"2021 Manufacturers Association",Catalog,fe1113,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1114,"2021 Tu B'Av",Catalog,fe1114,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1115,"2021 Police Orchestra Centennial",Catalog,fe1115,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1116,"2021 Shmuel Agnon Nobel Prize",Catalog,fe1116,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1117,"2021 Rabbi Yitzhak Nissim",Catalog,fe1117,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1118,"2021 Festivals - Ecclesiastes",Catalog,fe1118,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1119,"2021 Space Observatories",Catalog,fe1119,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 6110t1396,"2018 Litwinski House - Estonia Joint Issue- Full sheet [Pl.No.1098 (1986+), Format=(3x5)] Design:Renat Abudraham Dadon",Catalog,6110t1396,0,"(X)Full Sheets",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1399_01,"2018 Archeozoology in Eretz Israel- Full sheet (#1/2) [Pl.No.1096 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110t1399_01,0,"(X)Full Sheets",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1399_02,"2018 Archeozoology in Eretz Israel- Full sheet (#2/2) [Pl.No.1097 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110t1399_02,0,"(X)Full Sheets",,,25.00,0.00,0.00,0.00,0,0,0,0,,,,,31
@@ -8027,3 +8068,9 @@ fe1111,"2021 Bank Hapoalim Centennial",Catalog,fe1111,0,"(X)Information Folders"
 6110t1478,"2021 JNF 120th Anniversary- Full sheet [Pl.No.1176 (1986+), Format=(3x5)] Design:Osnat Eshel",Catalog,6110t1478,0,"(X)Full Sheets",,,75.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1487,"2021 Memorial Day- Full sheet [Pl.No.1177 (1986+), Format=(3x5)] Design:Osnat Eshel",Catalog,6110t1487,0,"(X)Full Sheets",,,18.00,28.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1488,"2021 Bank Hapoalim Centennial- Full sheet [Pl.No.1179 (1986+), Format=(3x5)] Design:Miri Nistor Sofer",Catalog,6110t1488,0,"(X)Full Sheets",,,75.00,85.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1489_01,"2021 Tokyo Olympics- Full sheet (#1/3) [Pl.No.1157 (1986+), Format=(3x5)] Design:Baruch Nae (Anat)",Catalog,6110t1489_01,0,"(X)Full Sheets",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1489_02,"2021 Tokyo Olympics- Full sheet (#2/3) [Pl.No.1158 (1986+), Format=(3x5)] Design:Baruch Nae (Anat)",Catalog,6110t1489_02,0,"(X)Full Sheets",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1489_03,"2021 Tokyo Olympics- Full sheet (#3/3) [Pl.No.1159 (1986+), Format=(3x5)] Design:Baruch Nae (Anat)",Catalog,6110t1489_03,0,"(X)Full Sheets",,,40.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1490,"2021 Manufacturers Association- Full sheet [Pl.No.1182 (1986+), Format=(3x5)] Design:unknown",Catalog,6110t1490,0,"(X)Full Sheets",,,35.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1493,"2021 Police Orchestra Centennial- Full sheet [Pl.No.1183 (1986+), Format=(3x5)] Design:Kfir Weizman",Catalog,6110t1493,0,"(X)Full Sheets",,,70.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1496,"2021 Rabbi Yitzhak Nissim- Full sheet [Pl.No.1188 (1986+), Format=(3x5)] Design:D Ben Hador",Catalog,6110t1496,0,"(X)Full Sheets",,,75.00,0.00,0.00,0.00,0,0,0,0,,,,,31
