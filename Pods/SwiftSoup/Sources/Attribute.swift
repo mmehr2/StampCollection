@@ -13,10 +13,10 @@ open class Attribute {
     /// key-value pair.
 
     static let booleanAttributes: [String] = [
-        "allowfullscreen", "async", "autofocus", "checked", "compact", "declare", "default", "defer", "disabled",
-        "formnovalidate", "hidden", "inert", "ismap", "itemscope", "multiple", "muted", "nohref", "noresize",
-        "noshade", "novalidate", "nowrap", "open", "readonly", "required", "reversed", "seamless", "selected",
-        "sortable", "truespeed", "typemustmatch"
+        "allowfullscreen", "async", "autofocus", "checked", "compact", "controls", "declare", "default", "defer",
+        "disabled", "formnovalidate", "hidden", "inert", "ismap", "itemscope", "multiple", "muted", "nohref",
+        "noresize", "noshade", "novalidate", "nowrap", "open", "readonly", "required", "reversed", "seamless",
+        "selected", "sortable", "truespeed", "typemustmatch"
     ]
 
     var key: String
@@ -119,7 +119,7 @@ open class Attribute {
     }
 
     public func isBooleanAttribute() -> Bool {
-        return Attribute.booleanAttributes.contains(key)
+        return Attribute.booleanAttributes.contains(key.lowercased())
     }
 
     public func hashCode() -> Int {
