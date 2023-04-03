@@ -21,7 +21,7 @@ protocol JSMessageProtocol {
 fileprivate var useLocalSite = true
 var JSBaseURL : String {
     let JSBaseURL0 = "http://www.judaicasales.com"  //original site (non-expandable)
-    let JSBaseURL1 = "http://192.168.1.118.nip.io/JudaicaSales/judaicasales.com" //http://judaica.azuresults.com" // in-house site (expandable, not accessible from external locations)
+    let JSBaseURL1 = "http://192.168.1.165.nip.io/JudaicaSales/judaicasales.com" //http://judaica.azuresults.com" // in-house site (expandable, not accessible from external locations)
     return useLocalSite ? JSBaseURL1 : JSBaseURL0
 }
 
