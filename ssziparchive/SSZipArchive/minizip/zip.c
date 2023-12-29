@@ -186,7 +186,8 @@ typedef struct
 #include "crypt.h"
 #endif
 
-local linkedlist_datablock_internal* allocate_new_datablock()
+
+local linkedlist_datablock_internal* allocate_new_datablock(void)
 {
     linkedlist_datablock_internal* ldi;
     ldi = (linkedlist_datablock_internal*)
@@ -199,6 +200,7 @@ local linkedlist_datablock_internal* allocate_new_datablock()
     }
     return ldi;
 }
+
 
 local void free_datablock(linkedlist_datablock_internal* ldi)
 {
