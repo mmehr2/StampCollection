@@ -7,141 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DACCE1138ED83EBFDC488CC319150EA /* Pods-StampCollection-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 78203C3C62C656490A70A8CD7BEA30EF /* Pods-StampCollection-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26A322C66D1EEB4CBE7BFFEAF339C353 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		2EF1B5480988612A21410E2AE16385AD /* TMMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EE486AD7C421F30B5435655D53AE459C /* TMMemoryCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		4869C0BC175585BF137A6A6D22E492BB /* Pods-StampCollection-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB03AB9930A7C1A0A5389987483B3B9 /* Pods-StampCollection-dummy.m */; };
-		4D7F97F705471AD7EF1C2B67B5DA0E9D /* TMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA6172E21477B8BCCDA53433C98E19C /* TMCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		563FB6BD884FA6B090A08883E25D0191 /* CHCSVParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0922638E8D9C41B90110252A337255 /* CHCSVParser-dummy.m */; };
-		5CA5EE93DD6AB53469B65FBB1DA2F85C /* CHCSVParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 71F7B46EDE3AD2BB1263796445032400 /* CHCSVParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6865019C9D11CA31921B3C68085AFF0B /* TMCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B044F7E88398434FAE4E5F83D5C91B /* TMCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		79B297AACF3BC27B50DACA73AA69B53D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		7AC6054E3475CF178CFE96D586841FFC /* CHCSVParser-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 368B348FD586054D583C4690CED47457 /* CHCSVParser-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F029D9B80C37F601E98ABFED99C30A6 /* TMCache-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 72ED0A1688C0A67EF81D545D3AD05E2D /* TMCache-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		83DAD3F3CDDC76AAF3B60151C00598B3 /* TMMemoryCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 301DE102BDE5A5329A63F635F4795553 /* TMMemoryCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92A3EA0AA13A4DF4E633FB8E2C574D33 /* TMCache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A08D167305B020B65607EF5690B3306E /* TMCache-dummy.m */; };
-		A17373E517CF2F9068857A1822FE0BA7 /* TMDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 296B7E39A6F6297AA1FF7364DB7F7F7B /* TMDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB43D698BC9127B1F36F7D92789E693D /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC5C45692E26C8CA114959ABDADB565 /* CHCSVParser.m */; };
-		BB4D85FE3EBCE00152E0F227378E0D6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		EA10800F4E4CF30A755201F5E73D9CB8 /* TMDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3763C144AD4BF0E3EEB3453C3A09801A /* TMDiskCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F2FEBACA7A01A10CC7A3E9A9C99ACCDA /* TMCacheBackgroundTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E37CF557CF2F0C3B791C92A9A3119E81 /* TMCacheBackgroundTaskManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2940F1FFE67C4C712E1DAC51D5E454AD /* Pods-StampCollection-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB03AB9930A7C1A0A5389987483B3B9 /* Pods-StampCollection-dummy.m */; };
+		3B0DED9B4889EE12DBD37E110E4B0C1D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		FAF7AAE1272B0196FF9577F4CE9A86B8 /* Pods-StampCollection-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 78203C3C62C656490A70A8CD7BEA30EF /* Pods-StampCollection-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		01795D028A91E855E9D4EE605DA1ACDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F506817897761782FA49CE576B208282;
-			remoteInfo = TMCache;
-		};
-		A8A0C13FF898957BC16893306F2D06EF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D6BE8E566909E61AC3F867A2441E9E17;
-			remoteInfo = CHCSVParser;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		160CA8DDC98E8D6C8AFF8F1868FE6B96 /* TMCache */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TMCache; path = TMCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DFE0E6E1DE080B978E11A7ADEA06376 /* TMCache-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TMCache-Info.plist"; sourceTree = "<group>"; };
-		296B7E39A6F6297AA1FF7364DB7F7F7B /* TMDiskCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMDiskCache.h; path = TMCache/TMDiskCache.h; sourceTree = "<group>"; };
-		2981FC8A89EBC4F31981E71AEDA839E1 /* TMCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TMCache-prefix.pch"; sourceTree = "<group>"; };
-		2F2CC842FF6A6DE7CB45D85C14294F48 /* TMCache.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TMCache.release.xcconfig; sourceTree = "<group>"; };
-		301DE102BDE5A5329A63F635F4795553 /* TMMemoryCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMMemoryCache.h; path = TMCache/TMMemoryCache.h; sourceTree = "<group>"; };
-		368B348FD586054D583C4690CED47457 /* CHCSVParser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CHCSVParser-umbrella.h"; sourceTree = "<group>"; };
-		3763C144AD4BF0E3EEB3453C3A09801A /* TMDiskCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMDiskCache.m; path = TMCache/TMDiskCache.m; sourceTree = "<group>"; };
 		4FB03AB9930A7C1A0A5389987483B3B9 /* Pods-StampCollection-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StampCollection-dummy.m"; sourceTree = "<group>"; };
-		5B0922638E8D9C41B90110252A337255 /* CHCSVParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CHCSVParser-dummy.m"; sourceTree = "<group>"; };
-		63FD3DD96278D74A4694B14C210CF778 /* CHCSVParser.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CHCSVParser.modulemap; sourceTree = "<group>"; };
-		697CF9F08739F6831E058E12C7FD1050 /* CHCSVParser-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CHCSVParser-Info.plist"; sourceTree = "<group>"; };
-		70B2039E7A99436B298AD081F2985C10 /* CHCSVParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CHCSVParser.release.xcconfig; sourceTree = "<group>"; };
-		71F7B46EDE3AD2BB1263796445032400 /* CHCSVParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CHCSVParser.h; path = CHCSVParser/CHCSVParser/CHCSVParser.h; sourceTree = "<group>"; };
-		72ED0A1688C0A67EF81D545D3AD05E2D /* TMCache-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TMCache-umbrella.h"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		78203C3C62C656490A70A8CD7BEA30EF /* Pods-StampCollection-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StampCollection-umbrella.h"; sourceTree = "<group>"; };
 		9ADB9E65195666FBB71BDA6E81A2AB03 /* Pods-StampCollection-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StampCollection-acknowledgements.plist"; sourceTree = "<group>"; };
 		9B680D6FD4ECC6EA110F6BE043732206 /* Pods-StampCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StampCollection.release.xcconfig"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9FAC9A4BCDF3824BEFA51DAB94D54AA4 /* CHCSVParser */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CHCSVParser; path = CHCSVParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A08D167305B020B65607EF5690B3306E /* TMCache-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TMCache-dummy.m"; sourceTree = "<group>"; };
 		A7102E0EB59B1061EA65B42749AC8BF4 /* Pods-StampCollection */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-StampCollection"; path = Pods_StampCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADB50F9BC1B699C3A522692A00BF995B /* CHCSVParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CHCSVParser.debug.xcconfig; sourceTree = "<group>"; };
-		B1B044F7E88398434FAE4E5F83D5C91B /* TMCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMCache.h; path = TMCache/TMCache.h; sourceTree = "<group>"; };
-		B292B0B85D8FB9318A0B3BA0FBCC03E9 /* TMCache.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TMCache.modulemap; sourceTree = "<group>"; };
 		BD1879F0FDF725EE7DFCA10CE7E84281 /* Pods-StampCollection-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StampCollection-Info.plist"; sourceTree = "<group>"; };
 		C45968FB2D478B5B092E272866C42F69 /* Pods-StampCollection-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StampCollection-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CCA6172E21477B8BCCDA53433C98E19C /* TMCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMCache.m; path = TMCache/TMCache.m; sourceTree = "<group>"; };
 		DBF39526E1C09D71FC6727FB6D89EF0C /* Pods-StampCollection.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StampCollection.modulemap"; sourceTree = "<group>"; };
-		E37CF557CF2F0C3B791C92A9A3119E81 /* TMCacheBackgroundTaskManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMCacheBackgroundTaskManager.h; path = TMCache/TMCacheBackgroundTaskManager.h; sourceTree = "<group>"; };
-		ECC5C45692E26C8CA114959ABDADB565 /* CHCSVParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CHCSVParser.m; path = CHCSVParser/CHCSVParser/CHCSVParser.m; sourceTree = "<group>"; };
-		ECD29F8CB2195EA3E033161BAF31700A /* CHCSVParser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CHCSVParser-prefix.pch"; sourceTree = "<group>"; };
-		EE486AD7C421F30B5435655D53AE459C /* TMMemoryCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMMemoryCache.m; path = TMCache/TMMemoryCache.m; sourceTree = "<group>"; };
-		F223C443156F069EF5BEDF55950314B8 /* TMCache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TMCache.debug.xcconfig; sourceTree = "<group>"; };
 		F2B54DDE10099EC07DD7829F4FF5F946 /* Pods-StampCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StampCollection.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A8E738473D46544BB21F89270B61092D /* Frameworks */ = {
+		B6F623A667D91DC2356DE16E917C86DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26A322C66D1EEB4CBE7BFFEAF339C353 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB1905F406713FE9801CDA0B2C39909F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79B297AACF3BC27B50DACA73AA69B53D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FEEADBCD33518E5D00EC95276A2C55A9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BB4D85FE3EBCE00152E0F227378E0D6A /* Foundation.framework in Frameworks */,
+				3B0DED9B4889EE12DBD37E110E4B0C1D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A34E3A73B2881A6C37C8C5EA0963F0E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9FAC9A4BCDF3824BEFA51DAB94D54AA4 /* CHCSVParser */,
-				A7102E0EB59B1061EA65B42749AC8BF4 /* Pods-StampCollection */,
-				160CA8DDC98E8D6C8AFF8F1868FE6B96 /* TMCache */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		57F7D4A9DAC07CF481D027AA30708DB4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B292B0B85D8FB9318A0B3BA0FBCC03E9 /* TMCache.modulemap */,
-				A08D167305B020B65607EF5690B3306E /* TMCache-dummy.m */,
-				1DFE0E6E1DE080B978E11A7ADEA06376 /* TMCache-Info.plist */,
-				2981FC8A89EBC4F31981E71AEDA839E1 /* TMCache-prefix.pch */,
-				72ED0A1688C0A67EF81D545D3AD05E2D /* TMCache-umbrella.h */,
-				F223C443156F069EF5BEDF55950314B8 /* TMCache.debug.xcconfig */,
-				2F2CC842FF6A6DE7CB45D85C14294F48 /* TMCache.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/TMCache";
 			sourceTree = "<group>";
 		};
 		7D69584449CE59ACA141E3D21F477FFA /* Pods-StampCollection */ = {
@@ -160,15 +62,12 @@
 			path = "Target Support Files/Pods-StampCollection";
 			sourceTree = "<group>";
 		};
-		8B40740C9E5C61F80E10A13E2E91956C /* CHCSVParser */ = {
+		AE2580AA7067E041D95D36DAA6C2AF63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71F7B46EDE3AD2BB1263796445032400 /* CHCSVParser.h */,
-				ECC5C45692E26C8CA114959ABDADB565 /* CHCSVParser.m */,
-				E362565F608ADCA1D87E2B74053BA527 /* Support Files */,
+				A7102E0EB59B1061EA65B42749AC8BF4 /* Pods-StampCollection */,
 			);
-			name = CHCSVParser;
-			path = CHCSVParser;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -176,8 +75,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				E933CC7E420634010D2EA00FF39A2D36 /* Pods */,
-				3A34E3A73B2881A6C37C8C5EA0963F0E /* Products */,
+				AE2580AA7067E041D95D36DAA6C2AF63 /* Products */,
 				F89F68E8E64DF3E3DCCDAB3405C4B9B2 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -188,46 +86,6 @@
 				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E069BCDFA1F16E73963B75240DBDE156 /* TMCache */ = {
-			isa = PBXGroup;
-			children = (
-				B1B044F7E88398434FAE4E5F83D5C91B /* TMCache.h */,
-				CCA6172E21477B8BCCDA53433C98E19C /* TMCache.m */,
-				E37CF557CF2F0C3B791C92A9A3119E81 /* TMCacheBackgroundTaskManager.h */,
-				296B7E39A6F6297AA1FF7364DB7F7F7B /* TMDiskCache.h */,
-				3763C144AD4BF0E3EEB3453C3A09801A /* TMDiskCache.m */,
-				301DE102BDE5A5329A63F635F4795553 /* TMMemoryCache.h */,
-				EE486AD7C421F30B5435655D53AE459C /* TMMemoryCache.m */,
-				57F7D4A9DAC07CF481D027AA30708DB4 /* Support Files */,
-			);
-			name = TMCache;
-			path = TMCache;
-			sourceTree = "<group>";
-		};
-		E362565F608ADCA1D87E2B74053BA527 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				63FD3DD96278D74A4694B14C210CF778 /* CHCSVParser.modulemap */,
-				5B0922638E8D9C41B90110252A337255 /* CHCSVParser-dummy.m */,
-				697CF9F08739F6831E058E12C7FD1050 /* CHCSVParser-Info.plist */,
-				ECD29F8CB2195EA3E033161BAF31700A /* CHCSVParser-prefix.pch */,
-				368B348FD586054D583C4690CED47457 /* CHCSVParser-umbrella.h */,
-				ADB50F9BC1B699C3A522692A00BF995B /* CHCSVParser.debug.xcconfig */,
-				70B2039E7A99436B298AD081F2985C10 /* CHCSVParser.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/CHCSVParser";
-			sourceTree = "<group>";
-		};
-		E933CC7E420634010D2EA00FF39A2D36 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8B40740C9E5C61F80E10A13E2E91956C /* CHCSVParser */,
-				E069BCDFA1F16E73963B75240DBDE156 /* TMCache */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		F89F68E8E64DF3E3DCCDAB3405C4B9B2 /* Targets Support Files */ = {
@@ -241,32 +99,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		28638A75D5EE5F3EE774C9D5ECE101A8 /* Headers */ = {
+		F88CC5248570A35121184AAFBCBADA83 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CA5EE93DD6AB53469B65FBB1DA2F85C /* CHCSVParser.h in Headers */,
-				7AC6054E3475CF178CFE96D586841FFC /* CHCSVParser-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		377B127F446D1A073AA6BC3D40A3A804 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6865019C9D11CA31921B3C68085AFF0B /* TMCache.h in Headers */,
-				7F029D9B80C37F601E98ABFED99C30A6 /* TMCache-umbrella.h in Headers */,
-				F2FEBACA7A01A10CC7A3E9A9C99ACCDA /* TMCacheBackgroundTaskManager.h in Headers */,
-				A17373E517CF2F9068857A1822FE0BA7 /* TMDiskCache.h in Headers */,
-				83DAD3F3CDDC76AAF3B60151C00598B3 /* TMMemoryCache.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74DB7B679062ED6B251186F3B836F97C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0DACCE1138ED83EBFDC488CC319150EA /* Pods-StampCollection-umbrella.h in Headers */,
+				FAF7AAE1272B0196FF9577F4CE9A86B8 /* Pods-StampCollection-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,58 +112,20 @@
 /* Begin PBXNativeTarget section */
 		A7A57735FFC1C6D52731B6BB0270E71C /* Pods-StampCollection */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BEBB23DDCB8FA2A30D31C125456E69A5 /* Build configuration list for PBXNativeTarget "Pods-StampCollection" */;
+			buildConfigurationList = 0F587855396F3D9844F8782B64048BC7 /* Build configuration list for PBXNativeTarget "Pods-StampCollection" */;
 			buildPhases = (
-				74DB7B679062ED6B251186F3B836F97C /* Headers */,
-				E7B2832EA2DAE92053CC50E978F33630 /* Sources */,
-				FEEADBCD33518E5D00EC95276A2C55A9 /* Frameworks */,
-				7140702FF220632BFE4D861CB09B5634 /* Resources */,
+				F88CC5248570A35121184AAFBCBADA83 /* Headers */,
+				5BFF174F9CFE8222F5C2822E217F9674 /* Sources */,
+				B6F623A667D91DC2356DE16E917C86DD /* Frameworks */,
+				E47AB5F0E5A780D4F561F92B4A845F45 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9740C9246E73186AAC31542A6ADD5614 /* PBXTargetDependency */,
-				6655F1649379DF2089111DDD8934A71C /* PBXTargetDependency */,
 			);
 			name = "Pods-StampCollection";
 			productName = Pods_StampCollection;
 			productReference = A7102E0EB59B1061EA65B42749AC8BF4 /* Pods-StampCollection */;
-			productType = "com.apple.product-type.framework";
-		};
-		D6BE8E566909E61AC3F867A2441E9E17 /* CHCSVParser */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 631B677AC79B6C9F7BD5FF06F68A78D4 /* Build configuration list for PBXNativeTarget "CHCSVParser" */;
-			buildPhases = (
-				28638A75D5EE5F3EE774C9D5ECE101A8 /* Headers */,
-				CFD6569EC748A7FC60F8D422ABB27A4D /* Sources */,
-				DB1905F406713FE9801CDA0B2C39909F /* Frameworks */,
-				853F6539A997D03CD649332DCCF6EDF6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CHCSVParser;
-			productName = CHCSVParser;
-			productReference = 9FAC9A4BCDF3824BEFA51DAB94D54AA4 /* CHCSVParser */;
-			productType = "com.apple.product-type.framework";
-		};
-		F506817897761782FA49CE576B208282 /* TMCache */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C51768E0452DDFC3E77ADBC58B9F102 /* Build configuration list for PBXNativeTarget "TMCache" */;
-			buildPhases = (
-				377B127F446D1A073AA6BC3D40A3A804 /* Headers */,
-				6865927F4AF04AD275F5EE1DBC7A2BED /* Sources */,
-				A8E738473D46544BB21F89270B61092D /* Frameworks */,
-				773BC8D3254BB747327A83879C8DF44D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TMCache;
-			productName = TMCache;
-			productReference = 160CA8DDC98E8D6C8AFF8F1868FE6B96 /* TMCache */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -347,33 +146,17 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 3A34E3A73B2881A6C37C8C5EA0963F0E /* Products */;
+			productRefGroup = AE2580AA7067E041D95D36DAA6C2AF63 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D6BE8E566909E61AC3F867A2441E9E17 /* CHCSVParser */,
 				A7A57735FFC1C6D52731B6BB0270E71C /* Pods-StampCollection */,
-				F506817897761782FA49CE576B208282 /* TMCache */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7140702FF220632BFE4D861CB09B5634 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		773BC8D3254BB747327A83879C8DF44D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		853F6539A997D03CD649332DCCF6EDF6 /* Resources */ = {
+		E47AB5F0E5A780D4F561F92B4A845F45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -383,50 +166,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6865927F4AF04AD275F5EE1DBC7A2BED /* Sources */ = {
+		5BFF174F9CFE8222F5C2822E217F9674 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D7F97F705471AD7EF1C2B67B5DA0E9D /* TMCache.m in Sources */,
-				92A3EA0AA13A4DF4E633FB8E2C574D33 /* TMCache-dummy.m in Sources */,
-				EA10800F4E4CF30A755201F5E73D9CB8 /* TMDiskCache.m in Sources */,
-				2EF1B5480988612A21410E2AE16385AD /* TMMemoryCache.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CFD6569EC748A7FC60F8D422ABB27A4D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BB43D698BC9127B1F36F7D92789E693D /* CHCSVParser.m in Sources */,
-				563FB6BD884FA6B090A08883E25D0191 /* CHCSVParser-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E7B2832EA2DAE92053CC50E978F33630 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4869C0BC175585BF137A6A6D22E492BB /* Pods-StampCollection-dummy.m in Sources */,
+				2940F1FFE67C4C712E1DAC51D5E454AD /* Pods-StampCollection-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6655F1649379DF2089111DDD8934A71C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TMCache;
-			target = F506817897761782FA49CE576B208282 /* TMCache */;
-			targetProxy = 01795D028A91E855E9D4EE605DA1ACDD /* PBXContainerItemProxy */;
-		};
-		9740C9246E73186AAC31542A6ADD5614 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CHCSVParser;
-			target = D6BE8E566909E61AC3F867A2441E9E17 /* CHCSVParser */;
-			targetProxy = A8A0C13FF898957BC16893306F2D06EF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
@@ -495,42 +243,6 @@
 			};
 			name = Debug;
 		};
-		4DD6012E5C9ADB65F4B816E088659465 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F2CC842FF6A6DE7CB45D85C14294F48 /* TMCache.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TMCache/TMCache-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TMCache/TMCache-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/TMCache/TMCache.modulemap";
-				PRODUCT_MODULE_NAME = TMCache;
-				PRODUCT_NAME = TMCache;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -593,115 +305,7 @@
 			};
 			name = Release;
 		};
-		7678FB4B2DCE55F6962DEF3A4182A4C3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2B54DDE10099EC07DD7829F4FF5F946 /* Pods-StampCollection.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-StampCollection/Pods-StampCollection-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StampCollection/Pods-StampCollection.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8B9E41D907216899A8996823FFC9EE4D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70B2039E7A99436B298AD081F2985C10 /* CHCSVParser.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CHCSVParser/CHCSVParser-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/CHCSVParser/CHCSVParser.modulemap";
-				PRODUCT_MODULE_NAME = CHCSVParser;
-				PRODUCT_NAME = CHCSVParser;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DA10DF28F6E8C45D4D3587AE9DEC190E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADB50F9BC1B699C3A522692A00BF995B /* CHCSVParser.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CHCSVParser/CHCSVParser-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/CHCSVParser/CHCSVParser.modulemap";
-				PRODUCT_MODULE_NAME = CHCSVParser;
-				PRODUCT_NAME = CHCSVParser;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		DA8AAAE13B8D12F54CA6C5746936F425 /* Release */ = {
+		8EC917B23B301FEC0AB56DAAED2ACB8C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B680D6FD4ECC6EA110F6BE043732206 /* Pods-StampCollection.release.xcconfig */;
 			buildSettings = {
@@ -717,7 +321,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-StampCollection/Pods-StampCollection-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -739,10 +343,12 @@
 			};
 			name = Release;
 		};
-		DC22FA5953D6A21D604B22A367F0EF42 /* Debug */ = {
+		C56CB90A9549A2A03786A7B968BFB380 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F223C443156F069EF5BEDF55950314B8 /* TMCache.debug.xcconfig */;
+			baseConfigurationReference = F2B54DDE10099EC07DD7829F4FF5F946 /* Pods-StampCollection.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -751,23 +357,23 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TMCache/TMCache-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TMCache/TMCache-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-StampCollection/Pods-StampCollection-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = "12ß.0";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/TMCache/TMCache.modulemap";
-				PRODUCT_MODULE_NAME = TMCache;
-				PRODUCT_NAME = TMCache;
+				MODULEMAP_FILE = "Target Support Files/Pods-StampCollection/Pods-StampCollection.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -777,11 +383,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C51768E0452DDFC3E77ADBC58B9F102 /* Build configuration list for PBXNativeTarget "TMCache" */ = {
+		0F587855396F3D9844F8782B64048BC7 /* Build configuration list for PBXNativeTarget "Pods-StampCollection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DC22FA5953D6A21D604B22A367F0EF42 /* Debug */,
-				4DD6012E5C9ADB65F4B816E088659465 /* Release */,
+				C56CB90A9549A2A03786A7B968BFB380 /* Debug */,
+				8EC917B23B301FEC0AB56DAAED2ACB8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -791,24 +397,6 @@
 			buildConfigurations = (
 				2B9E26EAE2CD392AD762421F663075A1 /* Debug */,
 				63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		631B677AC79B6C9F7BD5FF06F68A78D4 /* Build configuration list for PBXNativeTarget "CHCSVParser" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DA10DF28F6E8C45D4D3587AE9DEC190E /* Debug */,
-				8B9E41D907216899A8996823FFC9EE4D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BEBB23DDCB8FA2A30D31C125456E69A5 /* Build configuration list for PBXNativeTarget "Pods-StampCollection" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7678FB4B2DCE55F6962DEF3A4182A4C3 /* Debug */,
-				DA8AAAE13B8D12F54CA6C5746936F425 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
