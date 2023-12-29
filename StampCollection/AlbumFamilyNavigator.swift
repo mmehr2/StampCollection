@@ -133,7 +133,8 @@ class AlbumFamilyNavigator {
         let sectioncode = currentSection.code ?? ""
         let pagenum = currentPage.code ?? ""
         let optionalSection = sectioncode == "" ? "" : "[\(sectioncode)] "
-        let title = "\(albumcode) \(optionalSection)Page \(pagenum) - \(numItems) items"
+        let totalPrice = currentPage.theTotalPrice
+        let title = "\(albumcode) \(optionalSection)Page \(pagenum) - \(numItems) (\(totalPrice))"
         return title
     }
     

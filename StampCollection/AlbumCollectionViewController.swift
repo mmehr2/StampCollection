@@ -102,7 +102,7 @@ class AlbumCollectionViewController: UICollectionViewController {
         let albumTitle = album.code ?? ""
         let actualTitle = AlbumRef.getFamily(fromRef: albumTitle)
         let type = family.type.code ?? ""
-        sectionHeaderView.title = "\(actualTitle) (\(type))"
+        sectionHeaderView.title = "\(actualTitle) (\(type)) - (\(family.theTotalPrice))"
         
         return sectionHeaderView
     }

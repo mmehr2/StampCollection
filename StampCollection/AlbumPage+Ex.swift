@@ -46,4 +46,12 @@ extension AlbumPage {
         }
         return Array(items) as! [InventoryItem]
     }
+    
+    var theTotalPrice: String {
+        // will return the total price of theItems array
+        let total = theItems.reduce(0.0, {
+            $0 + ($1.wanted ? 0.0 : ($1.itemPrice.toFloat() ?? 0.0))
+        })
+        return String(format: "%.2f", total)
+    }
 }

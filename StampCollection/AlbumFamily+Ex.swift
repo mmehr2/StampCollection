@@ -111,4 +111,12 @@ extension AlbumFamily {
         }
         return Array(refs) as! [AlbumRef]
     }
+    
+    var theTotalPrice: String {
+        // will return the total price of theRefs array
+        let total = theRefs.reduce(0.0, {
+            $0 + ($1.theTotalPrice.toFloat() ?? 0.0)
+        })
+        return String(format: "%.2f", total)
+    }
 }
