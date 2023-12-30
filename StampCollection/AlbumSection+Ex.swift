@@ -103,7 +103,7 @@ extension AlbumSection {
     var theTotalPrice: String {
         // will return the total price of thePages array
         let total = thePages.reduce(0.0, {
-            $0 + ($1.theTotalPrice.toFloat() ?? 0.0)
+            $0 + ($1.theTotalPrice.toDouble() ?? 0.0)
         })
         return String(format: "%.2f", total)
     }

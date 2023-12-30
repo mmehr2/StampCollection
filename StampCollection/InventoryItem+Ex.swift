@@ -39,6 +39,32 @@ extension InventoryItem:  SortTypeSortableEx {
         return self.wantHave == "w"
     }
 
+    var nonPartial: Bool {
+        // a member of a partial set could have a non-empty desc field
+        return self.desc.isEmpty
+    }
+
+    var firstPartial: Bool {
+        return self.desc.contains("#1/")
+    }
+
+    var anyPartial: Bool {
+        return self.desc.contains("Partial")
+    }
+
+    var nthPartial: Bool {
+        if #available(iOS 16.0, *) {
+            return self.desc.contains(/#[2-9]\//)
+        } else {
+            // Fallback on earlier versions
+            return self.desc.contains("#2/") || self.desc.contains("#3/") || self.desc.contains("#4/") || self.desc.contains("#5/") || self.desc.contains("#6/") || self.desc.contains("#7/") || self.desc.contains("#8/") || self.desc.contains("#9/")
+        }
+    }
+
+    var canShowPrice: Bool {
+        return self.nonPartial || self.firstPartial || !self.nthPartial
+    }
+
     var itemCondition: String {
         let prices = self.category.prices!
         let conds: [String:String]

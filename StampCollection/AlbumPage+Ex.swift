@@ -48,9 +48,13 @@ extension AlbumPage {
     }
     
     var theTotalPrice: String {
-        // will return the total price of theItems array
-        let total = theItems.reduce(0.0, {
-            $0 + ($1.wanted ? 0.0 : ($1.itemPrice.toFloat() ?? 0.0))
+        // will return the total price of theItems array which meet certain conditions
+        // !wanted means they are in the existing inventory
+        // canShowPrice is designed to only show the first price of a partial set, or an entire set
+        let total = theItems.compactMap({
+            !$0.wanted && $0.canShowPrice ? $0 : nil
+        }).reduce(0.0, {
+            $0 + ($1.itemPrice.toDouble() ?? 0.0)
         })
         return String(format: "%.2f", total)
     }

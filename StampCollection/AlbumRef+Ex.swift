@@ -146,7 +146,7 @@ extension AlbumRef {
     var theTotalPrice: String {
         // will return the total price of theSections array
         let total = theSections.reduce(0.0, {
-            $0 + ($1.theTotalPrice.toFloat() ?? 0.0)
+            $0 + ($1.theTotalPrice.toDouble() ?? 0.0)
         })
         return String(format: "%.2f", total)
     }
