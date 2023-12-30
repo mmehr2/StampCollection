@@ -925,8 +925,8 @@ h,6110s1008,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1009,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1013,price1,SCH,ISRAEL04,Tab,227,,,,2
 h,6110s1015,price1,SCH,ISRAEL04,Tab,227,,,,2
-h,6110s1006,price1,SCH,ISRAEL04,Tab,227,,Partial set (1v) 2.25,,2
-h,6110s1006,price1,SCH,ISRAEL04,Tab,227.1,,Partial set (1v) 3.40,,2
+h,6110s1006,price1,SCH,ISRAEL04,Tab,227,,Partial set (1v) 2.25 (#1/2),,2
+h,6110s1006,price1,SCH,ISRAEL04,Tab,227.1,,Partial set (1v) 3.40 (#2/2),,2
 h,6110s1010,price1,SCH,ISRAEL04,Tab,227.1,,,,2
 h,6110s1011,price1,SCH,ISRAEL04,Tab,227.1,,,,2
 h,6110s1016,price1,SCH,ISRAEL04,Tab,228,,,,2
@@ -1026,8 +1026,10 @@ h,6110s1054,price1,SCH,ISRAEL04,S/S,58,,,,2
 h,6110s1086,price1,SCH,ISRAEL04,S/S,59,,,,2
 h,6110s1087,price1,SCH,ISRAEL04,S/S,59,,,,2
 h,6110s1118,price1,SCH,ISRAEL04,S/S,60,,,,2
-h,6110s2,price3,SS6,FDC01,,1,,actually has #1-9 on tabless cover,,2
+h,6110s2,price3,SS6,FDC01,,1,,has #1-9 tabless on nr.10 cover,,2
+h,6110s2,price3,SS6,FDC01,,2,,has #1-9 tabless on nr.10 cover with red logo,,2
 h,6110s5,price3,SS6,FDC01,,3,,,,2
+h,6110s1,price3,SS6,FDC01,,3,,has #1-6 P/N singles on cover,,2
 h,6110s8,price3,SS6,FDC01,,4,,C=Jerusalem,,2
 h,6110s9,price3,SS6,FDC01,,5,,,,2
 h,6110s11,price3,SS6,FDC01,,6,,,,2
@@ -1065,23 +1067,23 @@ h,6110s40,price3,SS6,FDC01,,32,,tabbed,,2
 h,6110s44,price3,SS6,FDC01,,34,,,,2
 h,6110s42,price3,SS6,FDC01,,35,,,,2
 h,6110s42,price3,SS6,FDC01,,35,,"tabbed, registered cvr",,2
-h,6110s48,price3,SS6,FDC01,,36,,02.03.54 10pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,36,,02.03.54 10pr (1v) tabbed,,2
-h,6110s48,price3,SS6,FDC01,,37,,"02.03.54 100pr (1v) tabbed, registered cvr",,2
-h,6110s48,price3,SS6,FDC01,,37,,02.03.54 100pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,38,,02.03.54 500pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,38,,02.03.54 500pr (1v) tabbed,,2
-h,6110s48,price3,SS6,FDC01,,39,,06.04.54 70pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,39,,06.04.54 70pr (1v) tabbed,,2
-h,6110s48,price3,SS6,FDC01,,40,,06.04.54 150pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,40,,06.04.54 150pr (1v) tabbed,,2
-h,6110s48,price3,SS6,FDC01,,41,,06.04.54 350pr (1v),,2
-h,6110s48,price3,SS6,FDC01,,41,,06.04.54 350pr (1v) tabbed,,2
+h,6110s48,price3,SS6,FDC01,,36,,Partial set 02.03.54 10pr (1v) (#1/6),,2
+h,6110s48,price3,SS6,FDC01,,36,,Partial set 02.03.54 10pr (1v) (#1/6) tabbed,,2
+h,6110s48,price3,SS6,FDC01,,37,,"Partial set 02.03.54 100pr (1v) (#2/6) tabbed, registered cvr",,2
+h,6110s48,price3,SS6,FDC01,,37,,Partial set 02.03.54 100pr (1v) (#2/6),,2
+h,6110s48,price3,SS6,FDC01,,38,,Partial set 02.03.54 500pr (1v) (#3/6),,2
+h,6110s48,price3,SS6,FDC01,,38,,Partial set 02.03.54 500pr (1v) (#3/6) tabbed,,2
+h,6110s48,price3,SS6,FDC01,,39,,Partial set 06.04.54 70pr (1v) (#4/6),,2
+h,6110s48,price3,SS6,FDC01,,39,,Partial set 06.04.54 70pr (1v) (#4/6) tabbed,,2
+h,6110s48,price3,SS6,FDC01,,40,,Partial set 06.04.54 150pr (1v) (#5/6),,2
+h,6110s48,price3,SS6,FDC01,,40,,Partial set 06.04.54 150pr (1v) (#5/6) tabbed,,2
+h,6110s48,price3,SS6,FDC01,,41,,Partial set 06.04.54 350pr (1v) (#6/6),,2
+h,6110s48,price3,SS6,FDC01,,41,,Partial set 06.04.54 350pr (1v) (#6/6) tabbed,,2
 h,6110s43,price3,SS6,FDC01,,42,,,,2
 h,6110s43,price3,SS6,FDC01,,42,,tabbed,,2
 h,6110s45,price3,SS6,FDC01,,43,,,,2
 h,6110s46,price3,SS6,FDC01,,44,,w.event cancel,,2
-h,6110s46,price3,SS6,FDC01,,44,,"w.triangular militarycancel, tabbed",,2
+h,6110s46,price3,SS6,FDC01,,44,,"w.triangular military cancel, tabbed",,2
 h,6110s47,price3,SS6,FDC01,,45,,,,2
 h,6110s47,price3,SS6,FDC01,,45,,"tabbed, registered cvr",,2
 h,6110s49,price3,SS6,FDC01,,46,,,,2
@@ -1104,12 +1106,12 @@ h,6110s59,price3,SS6,FDC01,,55,,,,2
 h,6110s59,price3,SS6,FDC01,,55,,"tabbed, registered cvr",,2
 h,6110s60,price3,SS6,FDC01,,56,,tabbed,,2
 h,6110s60,price3,SS6,FDC01,,56,,,,2
-h,6110s61,price3,SS6,FDC01,,57,,10/30/60/100pr (4v),,2
-h,6110s61,price3,SS6,FDC01,,57,,10/30/60/100pr (4v) tabbed,,2
-h,6110s61,price3,SS6,FDC01,,58,,20/40/80/180pr (4v) tabbed,,2
-h,6110s61,price3,SS6,FDC01,,58,,20/40/80/180pr (4v),,2
-h,6110s61,price3,SS6,FDC01,,59,,50/120/200/250pr (4v),,2
-h,6110s61,price3,SS6,FDC01,,59,,50/120/200/250pr (4v) tabbed,,2
+h,6110s61,price3,SS6,FDC01,,57,,Partial set 10/30/60/100pr (4v) (#1/3),,2
+h,6110s61,price3,SS6,FDC01,,57,,Partial set 10/30/60/100pr (4v) (#1/3) tabbed,,2
+h,6110s61,price3,SS6,FDC01,,58,,Partial set 20/40/80/180pr (4v) (#2/3) tabbed,,2
+h,6110s61,price3,SS6,FDC01,,58,,Partial set 20/40/80/180pr (4v) (#2/3),,2
+h,6110s61,price3,SS6,FDC01,,59,,Partial set 50/120/200/250pr (4v) (#3/3),,2
+h,6110s61,price3,SS6,FDC01,,59,,Partial set 50/120/200/250pr (4v) (#3/3) tabbed,,2
 h,6110s64,price3,SS6,FDC01,,60,,,,2
 h,6110s64,price3,SS6,FDC01,,60,,"tabbed, registered cvr",,2
 h,6110s63,price3,SS6,FDC01,,61,,tabbed,,2
@@ -1141,8 +1143,8 @@ h,6110s86,price3,SS6,FDC02,,82,,,,2
 h,6110s88,price3,SS6,FDC02,,83,,,,2
 h,6110s89,price3,SS6,FDC02,,84,,,,2
 h,6110s90,price3,SS6,FDC02,,85,,,,2
-h,6110s91,price3,SS6,FDC02,,86,,06.07.60 0.07a only (1v),,2
-h,6110s93,price3,SS6,FDC02,,87,,1960 values 0.15 0.20 0.65,,2
+h,6110s91,price3,SS6,FDC02,,86,,Partial set 06.07.60 0.07a only (1v),,2
+h,6110s93,price3,SS6,FDC02,,87,,Partial set 1960 values 0.15 0.20 0.65 (3v) (#1/3),,2
 h,6110s95,price3,SS6,FDC02,,88,,,,2
 h,6110s96,price3,SS6,FDC02,,89,,,,2
 h,6110s97,price3,SS6,FDC02,,90,,,,2
@@ -1151,16 +1153,16 @@ h,6110s98,price3,SS6,FDC02,,92,,,,2
 h,6110s100,price3,SS6,FDC02,,93,,,,2
 h,6110s102,price3,SS6,FDC02,,94,,,,2
 h,6110s103,price3,SS6,FDC02,,95,,,,2
-h,6110s104,price3,SS6,FDC02,,96,,Values 0.01 0.02 0.06 0.07 0.08 0.10 (6v),,2
-h,6110s104,price3,SS6,FDC02,,97,,Values 0.12 0.18 0.20 0.25 0.32 0.50 (6v),,2
-h,6110s104,price3,SS6,FDC02,,98,,Value 1.00 (1v),,2
+h,6110s104,price3,SS6,FDC02,,96,,Partial set Values 0.01 0.02 0.06 0.07 0.08 0.10 (6v) (#1/3),,2
+h,6110s104,price3,SS6,FDC02,,97,,Partial set Values 0.12 0.18 0.20 0.25 0.32 0.50 (6v) (#2/3),,2
+h,6110s104,price3,SS6,FDC02,,98,,Partial set Value 1.00 (1v) (#3/3),,2
 h,6110s106,price3,SS6,FDC02,,99,,,,2
 h,6110s107,price3,SS6,FDC02,,100,,,,2
 h,6110s108,price3,SS6,FDC02,,101,,,,2
-h,6110s93,price3,SS6,FDC02,,102,,1961 values 0.25 0.30 0.35,,2
+h,6110s93,price3,SS6,FDC02,,102,,Partial set 1961 values 0.25 0.30 0.35 (3v) (#2/3),,2
 h,6110s109,price3,SS6,FDC02,,103,,,,2
 h,6110s110,price3,SS6,FDC02,,104,,,,2
-h,6110s93,price3,SS6,FDC02,,105,,1961 values 0.40 0.50 1.00,,2
+h,6110s93,price3,SS6,FDC02,,105,,Partial set 1961 values 0.40 0.50 1.00 (3v) (#3/3),,2
 h,6110s111,price3,SS6,FDC02,,106,,,,2
 h,6110s112,price3,SS6,FDC02,,107,,,,2
 h,6110s94,price3,SS6,FDC02,,108,,21.2.62 3.00 (1v),,2
@@ -1174,16 +1176,16 @@ h,6110s119,price3,SS6,FDC02,,115,,,,2
 h,6110s120,price3,SS6,FDC02,,116,,,,2
 h,6110s123,price3,SS6,FDC02,,117,,,,2
 h,6110s124,price3,SS6,FDC02,,118,,,,2
-h,6110s125,price3,SS6,FDC02,,119,,13.02.63 Values 0.55 0.70 1.00 (3v),,2
+h,6110s125,price3,SS6,FDC02,,119,,Partial set 13.02.63 Values 0.55 0.70 1.00 (3v) (#1/3),,2
 h,6110s126,price3,SS6,FDC02,,120,,,,2
 h,6110s127,price3,SS6,FDC02,,121,,,,2
-h,6110s125,price3,SS6,FDC02,,122,,25.04.63 Values 0.05 0.20 0.28 (3v),,2
+h,6110s125,price3,SS6,FDC02,,122,,Partial set 25.04.63 Values 0.05 0.20 0.28 (3v) (#2/4),,2
 h,6110s132,price3,SS6,FDC02,,123,,,,2
 h,6110s133,price3,SS6,FDC02,,124,,,,2
-h,6110s125,price3,SS6,FDC02,,125,,19.06.63 Values 0.30 0.40 0.45 (3v),,2
+h,6110s125,price3,SS6,FDC02,,125,,Partial set 19.06.63 Values 0.30 0.40 0.45 (3v) (#3/4),,2
 h,6110s136,price3,SS6,FDC02,,126,,,,2
 h,6110s135,price3,SS6,FDC02,,127,,,,2
-h,6110s125,price3,SS6,FDC02,,128,,23.10.63 Value 3.00 (1v),,2
+h,6110s125,price3,SS6,FDC02,,128,,Partial set 23.10.63 Value 3.00 (1v) (#4/4),,2
 h,6110s137,price3,SS6,FDC02,,129,,,,2
 h,6110s139,price3,SS6,FDC03,,131,,,,2
 h,6110s140,price3,SS6,FDC03,,132,,,,2
@@ -1197,7 +1199,7 @@ h,6110s145,price3,SS6,FDC03,,139,,,,2
 h,6110s148,price3,SS6,FDC03,,140,,,,2
 h,6110s149,price3,SS6,FDC03,,141,,,,2
 h,6110s150,price3,SS6,FDC03,,142,,,,2
-h,6110s152,price3,SS6,FDC03,,143,,24.03.65 Values (4v) 0.15 0.20 0.25 0.30,,2
+h,6110s152,price3,SS6,FDC03,,143,,Partial set 24.03.65 Values (4v) 0.15 0.20 0.25 0.30 (#1/7),,2
 h,6110s151,price3,SS6,FDC03,,144,,,,2
 h,6110s155,price3,SS6,FDC03,,145,,,,2
 h,6110s154,price3,SS6,FDC03,,146,,,,2
@@ -1222,21 +1224,21 @@ h,6110s156,price3,SS6,FDC03,,148,,,,2
 h,6110s157,price3,SS6,FDC03,,149,,,,2
 h,6110s159,price3,SS6,FDC03,,150,,,,2
 h,6110s160,price3,SS6,FDC03,,151,,,,2
-h,6110s152,price3,SS6,FDC03,,152,,15.12.65 Values (1v) 1.00,,2
-h,6110s152,price3,SS6,FDC03,,153,,02.02.66 Values (3v) 0.12 0.37 0.50,,2
-h,6110s152,price3,SS6,FDC03,,154,,02.02.66 Values (6v) 0.01 0.02 0.05 0. 06 0.08 0.10,,2
-h,6110s152,price3,SS6,FDC03,,155,,02.02.66 Values (1v) 0.70,,2
-h,6110s152,price3,SS6,FDC03,,156,,14.03.66 Values (1v) 3.00,,2
+h,6110s152,price3,SS6,FDC03,,152,,Partial set 15.12.65 Values (1v) 1.00 (#2/7),,2
+h,6110s152,price3,SS6,FDC03,,153,,Partial set 02.02.66 Values (3v) 0.12 0.37 0.50 (#3/7),,2
+h,6110s152,price3,SS6,FDC03,,154,,Partial set 02.02.66 Values (6v) 0.01 0.02 0.05 0. 06 0.08 0.10 (#4/7),,2
+h,6110s152,price3,SS6,FDC03,,155,,Partial set 02.02.66 Values (1v) 0.70 (#5/7),,2
+h,6110s152,price3,SS6,FDC03,,156,,Partial set 14.03.66 Values (1v) 3.00 (#6/7),,2
 h,6110s161,price3,SS6,FDC03,,157,,,,2
 h,6110s162,price3,SS6,FDC03,,158,,,,2
 h,6110s163,price3,SS6,FDC03,,159,,,,2
 h,6110s164,price3,SS6,FDC03,,160,,,,2
 h,6110s165,price3,SS6,FDC03,,161,,,,2
-h,6110s166,price3,SS6,FDC03,,162,,Partial set (2v) 0.55 0.80,,2
-h,6110s166,price3,SS6,FDC03,,163,,Partial set (1v) 1.15,,2
+h,6110s166,price3,SS6,FDC03,,162,,Partial set (2v) 0.55 0.80 (#1/2),,2
+h,6110s166,price3,SS6,FDC03,,163,,Partial set (1v) 1.15 (#2/2),,2
 h,6110s167,price3,SS6,FDC03,,164,,,,2
 h,6110s168,price3,SS6,FDC03,,165,,,,2
-h,6110s152,price3,SS6,FDC03,,166,,08.02.67 Values (3v) 0.40 0.55 0.80,,2
+h,6110s152,price3,SS6,FDC03,,166,,Partial set 08.02.67 Values (3v) 0.40 0.55 0.80 (#7/7),,2
 h,6110s169,price3,SS6,FDC03,,167,,,,2
 h,6110s170,price3,SS6,FDC03,,168,,,,2
 h,6110s172,price3,SS6,FDC03,,169,,,,2
@@ -1246,9 +1248,9 @@ h,6110s174,price3,SS6,FDC03,,172,,,,2
 h,6110s176,price3,SS6,FDC03,,173,,,,2
 h,6110s175,price3,SS6,FDC03,,174,,,,2
 h,6110s177,price3,SS6,FDC03,,175,,,,2
-h,6110s178,price3,SS6,FDC03,,176,,07.02.68 Values (1v) 3.00,,2
-h,6110s178,price3,SS6,FDC03,,177,,11.03.68 Values (2v) 0.10 0.30,,2
-h,6110s178,price3,SS6,FDC03,,179,,11.03.68 Values (2v) 0.40 0.50,,2
+h,6110s178,price3,SS6,FDC03,,176,,Partial set 07.02.68 Values (1v) 3.00 (#1/6),,2
+h,6110s178,price3,SS6,FDC03,,177,,Partial set 11.03.68 Values (2v) 0.10 0.30 (#2/7),,2
+h,6110s178,price3,SS6,FDC03,,179,,Partial set 11.03.68 Values (2v) 0.40 0.50 (#3/7),,2
 h,6110s179,price3,SS6,FDC03,,180,,,,2
 h,6110s182,price3,SS6,FDC03,,181,,,,2
 h,6110s181,price3,SS6,FDC03,,182,,,,2
@@ -1257,19 +1259,19 @@ h,6110s180,price3,SS6,FDC03,,184,,,,2
 h,6110s184,price3,SS6,FDC03,,185,,,,2
 h,6110s185,price3,SS6,FDC03,,186,,,,2
 h,6110s186,price3,SS6,FDC03,,187,,,,2
-h,6110s187,price3,SS6,FDC03,,188,,Partial set (3v) 0.12 0.15 0.35,,2
-h,6110s187,price3,SS6,FDC03,,189,,Partial set (2v) 0.40 0.60,,2
+h,6110s187,price3,SS6,FDC03,,188,,Partial set (3v) 0.12 0.15 0.35 (#1/2),,2
+h,6110s187,price3,SS6,FDC03,,189,,Partial set (2v) 0.40 0.60 (#2/2),,2
 h,6110s190,price3,SS6,FDC03,,190,,,,2
 h,6110s188,price3,SS6,FDC03,,191,,,,2
 h,6110s189,price3,SS6,FDC03,,192,,,,2
 h,6110s191,price3,SS6,FDC03,,193,,,,2
-h,6110s178,price3,SS6,FDC03,,194,,06.11.68 Values (2v) 0.55 0.60,,2
-h,6110s178,price3,SS6,FDC03,,195,,06.11.68 Values (1v) 1.00,,2
-h,6110s178,price3,SS6,FDC03,,196,,23.12.68 Values (1v) 0.80,,2
-h,6110s178,price3,SS6,FDC03,,197,,23.12.68 Values (1v) 1.50,,2
-h,6110s192,price3,SS6,FDC04,,199,,Partial set (1v) 0.30,,2
-h,6110s192,price3,SS6,FDC04,,200,,Partial set (1v) 0.60,,2
-h,6110s192,price3,SS6,FDC04,,201,,Partial set (1v) 1.00,,2
+h,6110s178,price3,SS6,FDC03,,194,,Partial set 06.11.68 Values (2v) 0.55 0.60 (#4/7),,2
+h,6110s178,price3,SS6,FDC03,,195,,Partial set 06.11.68 Values (1v) 1.00 (#5/7),,2
+h,6110s178,price3,SS6,FDC03,,196,,Partial set 23.12.68 Values (1v) 0.80 (#6/7),,2
+h,6110s178,price3,SS6,FDC03,,197,,Partial set 23.12.68 Values (1v) 1.50 (#7/7),,2
+h,6110s192,price3,SS6,FDC04,,199,,Partial set (1v) 0.30 (#1/3),,2
+h,6110s192,price3,SS6,FDC04,,200,,Partial set (1v) 0.60 (#2/3),,2
+h,6110s192,price3,SS6,FDC04,,201,,Partial set (1v) 1.00 (#3/3),,2
 h,6110s194,price3,SS6,FDC04,,202,,,,2
 h,6110s193,price3,SS6,FDC04,,203,,,,2
 h,6110s195,price3,SS6,FDC04,,204,,,,2
