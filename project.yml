@@ -1,0 +1,11 @@
+name: StampCollection
+options:
+  bundleIdPrefix: com.azuresults
+  createIntermediateGroups: true
+targets:
+  StampCollection:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0”
+    sources:
+      - StampCollection
