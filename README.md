@@ -119,3 +119,17 @@ I need to figure out the following data design issues still:
 
 Mike Mehr, July 15, 2017
 
+### Update Dec 2023
+The original BT website was removed shortly after the proprietor retired in mid-2018.
+I was able to download a working copy of the website using HTTrack and have been basing my ongoing usage on that database.
+
+My current architecture is as follows:
+- Swift StampCollection app for iOS (this app)
+- Webserver app (MySQL, Apache, PHP) to serve the data for the app (now that live access to BT is gone), accessed using nip.io/xip.io
+- I have developed a companion website that I serve locally to support adding new data for the system in all the categories which I collect, in the style set by the original site.
+-- This admin app (called SIS for Stamp Info System) is separately archived here on Github.
+- The creation of ongoing data to augment the original dataset is placed into a separate HTTrack project, and is being adapted to work with the original data in use here.
+- The dual database and web server are maintained on a separate computer from the Admin app, explaining the somewhat arcane methods of updating that I currently employ.
+So far it is working reasonably well for me, but this is probably not for the faint of heart, however.
+
+Mike Mehr, December 30, 2023
