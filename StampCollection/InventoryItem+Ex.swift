@@ -39,30 +39,67 @@ extension InventoryItem:  SortTypeSortableEx {
         return self.wantHave == "w"
     }
 
-    var nonPartial: Bool {
-        // a member of a partial set could have a non-empty desc field
-        return self.desc.isEmpty
-    }
-
-    var firstPartial: Bool {
-        return self.desc.contains("#1/")
-    }
-
-    var anyPartial: Bool {
-        return self.desc.contains("Partial")
-    }
-
-    var nthPartial: Bool {
+    // This code was designed to check both description fields (INV and INFO), but then I rediscovered that
+    //  the 6110t category has already created prices for each partial set entry, so this is no longer needed. Oops.
+    // The real utility of this test is to prevent duplication of prices in partial sets derived from Zvi's site, esp.cat 24 (Special Sheets)
+    //   where he was selling the entire sheet set as one entity with one overall price. The same issue would appear in the Sets category (2)
+    //   when sets would be split over multiple pages (for example, Town Emblems I and II).
+    //   Manual price splitting by inventory entries would duplicate these full-set prices unless this code weeded them out.
+    // Basically, a designated Partial set will only show prices for the 1st partial, not the others (I limited testing to #2-9).
+    private func isDescPartial(desc str: String, nth: Bool, useWord: Bool) -> Bool
+    {
+        var result = true
+        var debug = "Partial[\(str)]?="
+        var res = false
+        if useWord {
+            res = str.contains("Partial")
+            debug += " Word(\(res))"
+            result = result && res
+        }
         if #available(iOS 16.0, *) {
-            return self.desc.contains(/#[2-9]\//)
+            if !nth {
+                res = str.contains("#1/")
+                debug += " #1(\(res))"
+                result = result && res
+            }
+            else
+            {
+                res = str.contains(/#[2-9]\//) // Regex
+                debug += " #N(\(res))"
+                result = result && res
+            }
         } else {
             // Fallback on earlier versions
-            return self.desc.contains("#2/") || self.desc.contains("#3/") || self.desc.contains("#4/") || self.desc.contains("#5/") || self.desc.contains("#6/") || self.desc.contains("#7/") || self.desc.contains("#8/") || self.desc.contains("#9/")
+            if (!nth) {
+                result = result && str.contains("#1/")
+            }
+            else
+            {
+                result = result && str.contains("#2/") || str.contains("#3/") || str.contains("#4/") || str.contains("#5/") || str.contains("#6/") || str.contains("#7/") || str.contains("#8/") || str.contains("#9/")
+            }
         }
+        //print(debug)
+        return result
+    }
+    
+    private var firstPartial: Bool {
+        //if self.desc.isEmpty
+        //{
+        //    return isDescPartial(desc: self.dealerItem.descriptionX, nth: false, useWord: false)
+        //}
+        return isDescPartial(desc: self.desc, nth: false, useWord: true)
+    }
+
+    private var nthPartial: Bool {
+        //if self.desc.isEmpty
+        //{
+        //    return isDescPartial(desc: self.dealerItem.descriptionX, nth: true, useWord: false)
+        //}
+        return isDescPartial(desc: self.desc, nth: true, useWord: true)
     }
 
     var canShowPrice: Bool {
-        return self.nonPartial || self.firstPartial || !self.nthPartial
+        return self.firstPartial || !self.nthPartial
     }
 
     var itemCondition: String {
