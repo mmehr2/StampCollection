@@ -99,7 +99,7 @@ extension InventoryItem:  SortTypeSortableEx {
     }
 
     var canShowPrice: Bool {
-        return self.firstPartial || !self.nthPartial
+        return self.desc.isEmpty || self.firstPartial || !self.nthPartial
     }
 
     var itemCondition: String {
