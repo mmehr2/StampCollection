@@ -14,13 +14,19 @@ struct SearchSettings {
     let keywords : [String]
     let useAllKeywords : Bool
     let IDPattern : String
-    
-    init( fromYr: Int, toYr: Int, kwords : [String], useAll : Bool, idPattern: String ) {
+    let Ftype : CollectionStore.DataType
+    let Itype : WantHaveType
+    let LastSortType : SortType
+
+    init( fromYr: Int, toYr: Int, kwords : [String], useAll : Bool, idPattern: String, ftype : CollectionStore.DataType, itype : WantHaveType, lastsort: SortType ) {
         startYear = fromYr
         endYear = toYr
         keywords = kwords
         useAllKeywords = useAll
         IDPattern = idPattern
+        Ftype = ftype
+        Itype = itype
+        LastSortType = lastsort
     }
 }
 
@@ -35,6 +41,7 @@ class InfoItemsTableViewController: UITableViewController {
     
     var ftype : CollectionStore.DataType = .info
     var itype : WantHaveType = .all
+    var lastSortType : SortType = .none
     var startYear = 0
     var endYear = 0
     var keywords : [String] = []
@@ -42,7 +49,7 @@ class InfoItemsTableViewController: UITableViewController {
     var IDPattern = ""
     
     private func saveSearchSettings() {
-        let sset = SearchSettings(fromYr: startYear, toYr: endYear, kwords: keywords, useAll: useAllKeywords, idPattern: IDPattern)
+        let sset = SearchSettings(fromYr: startYear, toYr: endYear, kwords: keywords, useAll: useAllKeywords, idPattern: IDPattern, ftype: ftype, itype: itype, lastsort: lastSortType)
         allSearchSettingsByCategory[category] = sset
     }
     
@@ -55,6 +62,9 @@ class InfoItemsTableViewController: UITableViewController {
         keywords = sset.keywords
         useAllKeywords = sset.useAllKeywords
         IDPattern = sset.IDPattern
+        ftype = sset.Ftype
+        itype = sset.Itype
+        lastSortType = sset.LastSortType
     }
 
     override func viewDidLoad() {
@@ -69,9 +79,9 @@ class InfoItemsTableViewController: UITableViewController {
         // Restore search settings from copy associated with category, if any
         restoreSearchSettings()
         
-        // fetch the items under consideration
-        refetchData()
-        updateUI() // prelim version
+        // fetch and sort the items under consideration
+        fetchAndSortData()
+        updateUI()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -82,6 +92,14 @@ class InfoItemsTableViewController: UITableViewController {
     
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
         refetchData()
+    }
+
+    fileprivate func fetchAndSortData() {
+        // fetch the items under consideration
+        refetchData()
+        // sort them
+        sortData(lastSortType, forDataType: ftype)
+        refreshData()
     }
     
     fileprivate func getSearchingArray() -> [SearchType] {
@@ -129,7 +147,7 @@ class InfoItemsTableViewController: UITableViewController {
     @IBOutlet weak var infoButtonItem: UIBarButtonItem!
     @IBAction func infoButtonPressed(_ sender: UIBarButtonItem) {
         (ftype, itype) = getNextInvState()
-        refetchData()
+        fetchAndSortData()
     }
     
     @IBAction func picButtonPressed(_ sender: UIBarButtonItem) {
@@ -320,22 +338,32 @@ class InfoItemsTableViewController: UITableViewController {
         present(ac, animated: true, completion: nil)
     }
 
+    fileprivate func sortData( _ type: SortType, forDataType dataType: CollectionStore.DataType )
+    {
+        let typeName = dataType == .info ? "INFO" : "INVENTORY"
+        if type.isNone() {
+            print("Reverting to Unsorted data")
+            return
+        }
+        print("Sorting \(typeName) by \(type)")
+        if dataType == .info {
+            let temp = sortCollection(self.model.info, byType: type)
+            self.model.info = temp
+        } else {
+            let temp = sortCollectionEx(self.model.inventory, byType: type)
+            self.model.inventory = temp
+        }
+        print("Completed sorting \(typeName) by \(type)")
+    }
+    
     fileprivate func addSortAction( _ type: SortType, forDataType dataType: CollectionStore.DataType, toController ac: UIAlertController ) {
-        let typeName = ftype == .info ? "INFO" : "INVENTORY"
-        //let title = ""
         let act = UIAlertAction(title: "Sort by \(type)", style: .default) { x in
             // resort current info data by id code (depends on category being shown)
-            print("Sorting \(typeName) by \(type)")
-            if dataType == .info {
-                let temp = sortCollection(self.model.info, byType: type)
-                self.model.info = temp
-            } else {
-                let temp = sortCollectionEx(self.model.inventory, byType: type)
-                self.model.inventory = temp
-            }
+            self.lastSortType = type
+            self.saveSearchSettings()
+            self.sortData(type, forDataType: dataType)
             self.refreshData()
             self.updateUI()
-            print("Completed sorting \(typeName) by \(type)")
         }
         ac.addAction(act)
     }
@@ -345,6 +373,7 @@ class InfoItemsTableViewController: UITableViewController {
         let ac = UIAlertController(title: "Choose Info Sort Method", message: nil, preferredStyle: .alert)
         var act = UIAlertAction(title: "Unsorted", style: .default) { x in
             // TBD resort current info data by exOrder (or category+exOrder if showing ALL)
+            self.lastSortType = .none
             print("Reverting to Unsorted data")
             self.refetchData()
 //            println("First of \(self.model.info.count): \(self.model.info.first?.normalizedCode)")

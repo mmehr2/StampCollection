@@ -19,6 +19,13 @@ enum SortType {
     // INV ONLY
     case byAlbum(Bool) // needs to know Ascending or Descending
     case byValue(Bool) // needs to know Ascending or Descending
+    
+    func isNone() -> Bool {
+        switch self {
+        case .none: return true
+        default: return false
+        }
+    }
 }
 
 extension SortType: CustomStringConvertible {
