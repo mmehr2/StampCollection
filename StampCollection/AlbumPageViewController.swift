@@ -332,9 +332,13 @@ class AlbumPageViewController: UICollectionViewController {
                 print("About to add item on page: \(invBuilder)")
                 if invBuilder.createItem(for: model) {
                     if let newnav = invBuilder.navigatorForNewPage {
-                        print("Added item OK, updated page navigator and removing \(invBuilder)")
+                        print("Added item OK, updated page navigator")
                         navigator = newnav
-                        model.invBuilder = nil
+                        // multiple descriptions will be buffered for multiple partial set entry
+                        if (invBuilder.nextMultiDescription() == false) {
+                            print("No multi-descriptions, removing \(invBuilder)")
+                            model.invBuilder = nil
+                        }
                     } else {
                         print("Unable to update page navigator for \(invBuilder)")
                     }

@@ -31,6 +31,8 @@ class InventoryBuilder {
     
     var allowRelatedFolder: Bool
     
+    private var multiDescriptions: [String]
+    
     private var hasPage: Bool {
         return albumLoc != nil
     }
@@ -81,6 +83,7 @@ class InventoryBuilder {
         relations["category"] = category
         data["catgDisplayNum"] = "\(category.number)"
         allowRelatedFolder = true
+        multiDescriptions = []
         //relations[""] = ""
     }
 
@@ -89,13 +92,32 @@ class InventoryBuilder {
         relations["referredItem"] = item
     }
     
+    func nextMultiDescription() -> Bool {
+        let numLeft = multiDescriptions.count
+        if numLeft == 0 {
+            return false
+        }
+        let desc = multiDescriptions.removeFirst()
+        data["desc"] = desc
+        print("Using desc with \(numLeft-1) more = \(desc)")
+        // also need to advance current page / albumLoc
+        albumLoc = nil
+        let result = numLeft > 0
+        return result
+    }
+    
     func setPartialSetInfo(_ values:[String]) {
         // sets the desc field to the form:
         // Partial set (2v): 2.00(blue) 5.00(red) (#1/3)
         // input is assumed to be in order [N, M, val1, val2, ...]
         // empty entries ("") are ignored, except N and M which get defaults as follows:
-        let n = Int(values[0]) ?? 1
-        let m = Int(values[1]) ?? 0
+        var n = Int(values[0]) ?? 1
+        var m = Int(values[1]) ?? 0
+        // UPDATE: if N starts with the character "m", this signals the start of a multiple partial set
+        let useMultiSet = values[1].isEmpty && n>1
+        if useMultiSet {
+            m = 1
+        }
         // UPDATE: if N starts with the character "v", the "Partial set" desc becomes a "Variety" instead
         let useVar = values[0].lowercased().hasPrefix("v")
         // UPDATE: if N starts with the character "n", desc will not be generated, just notes
@@ -117,27 +139,44 @@ class InventoryBuilder {
             }
         }
         if (useDesc) {
-            let valstrs = vals.joined(separator: " ")
-            let ofstr:String
-            let setstr:String
-            if m>0 && n>1 {
-                ofstr = " (#\(m)/\(n))"
-                setstr = "Partial set"
-            } else {
-                ofstr = ""
-                setstr = "Complete set"
-            }
-            let titlestr = useVar ? "Variety" : setstr
-            let vnumstr = useSheet ? "sh" : "v"
-            let desc = "\(titlestr) (\(vals.count)\(vnumstr)): \(valstrs)\(ofstr)"
+            var valnum = Int(values[2]) ?? 0
+            var desc = createDescription(m: m, n: n, vals: vals, useVar: useVar, useSheet: useSheet)
             print("Setting desc field to \(desc)")
             data["desc"] = desc
+            if (useMultiSet) {
+                for m in 2...n {
+                    valnum += 1
+                    vals = [String]()
+                    let val_ = useSheet ? "Pl.No." + String(valnum) : String(valnum)
+                    vals.append(val_)
+                    desc = createDescription(m: m, n: n, vals: vals, useVar: useVar, useSheet: useSheet)
+                    print("Pre-creating desc field \(m) = \(desc)")
+                    multiDescriptions.append( desc )
+                }
+            }
         }
         let notestrs = (useOnlyNotes ? vals : notes).joined(separator: " ")
         if (!notestrs.isEmpty) {
             print("Setting notes field to \(notestrs)")
             data["notes"] = notestrs;
         }
+    }
+
+    fileprivate func createDescription(m: Int, n: Int, vals:[String], useVar: Bool, useSheet: Bool) -> String {
+        let valstrs = vals.joined(separator: " ")
+        let ofstr:String
+        let setstr:String
+        if m>0 && n>1 {
+            ofstr = " (#\(m)/\(n))"
+            setstr = "Partial set"
+        } else {
+            ofstr = ""
+            setstr = "Complete set"
+        }
+        let titlestr = useVar ? "Variety" : setstr
+        let vnumstr = useSheet ? "sh" : "v"
+        let desc = "\(titlestr) (\(vals.count)\(vnumstr)): \(valstrs)\(ofstr)"
+        return desc
     }
     
     func addLocation(_ pageRef: AlbumPage) -> Bool {
