@@ -99,7 +99,7 @@ class InventoryBuilder {
         }
         let desc = multiDescriptions.removeFirst()
         data["desc"] = desc
-        print("Using desc with \(numLeft-1) more = \(desc)")
+        print("Using next description in buffer (with \(numLeft-1) more) = \(desc)")
         // also need to advance current page / albumLoc
         albumLoc = nil
         let result = numLeft > 0
@@ -144,6 +144,7 @@ class InventoryBuilder {
             print("Setting desc field to \(desc)")
             data["desc"] = desc
             if (useMultiSet) {
+                multiDescriptions = [String]()
                 for m in 2...n {
                     valnum += 1
                     vals = [String]()
