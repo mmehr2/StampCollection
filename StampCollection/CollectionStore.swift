@@ -862,8 +862,7 @@ func fetch<T: NSManagedObject>( _ entity: String, inContext moc: NSManagedObject
     fetchRequest.predicate = filter
     fetchRequest.fetchBatchSize = 50 // supposedly double the typical number to be displayed is best here
     do {
-        let fetchResults = try moc.fetch(fetchRequest)
-        output = fromNSArray(fetchResults as NSArray)
+        output = try moc.fetch(fetchRequest)
     } catch {
         print("Fetch error:\(error)")
     }
