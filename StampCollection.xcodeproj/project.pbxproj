@@ -37,7 +37,6 @@
 		A642FC121B13220C00D4B971 /* UpdateTableViewDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */; };
 		A65232E61AF8261900A86FAC /* ViewSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65232E51AF8261900A86FAC /* ViewSorting.swift */; };
 		A65D8571233BCAAF00E5BC74 /* ItemClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65D8570233BCAAF00E5BC74 /* ItemClassification.swift */; };
-		A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */ = {isa = PBXBuildFile; fileRef = A662C1C21AFDFD520067792F /* inventory.corrupt.csv */; };
 		A662C1CB1AFEAB010067792F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662C1CA1AFEAB010067792F /* Category.swift */; };
 		A662C1CF1AFEAB020067792F /* DealerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662C1CE1AFEAB020067792F /* DealerItem.swift */; };
 		A662C1E31B049D600067792F /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = A662C1E21B049D600067792F /* SSZipArchive.m */; };
@@ -162,7 +161,6 @@
 		A642FC111B13220C00D4B971 /* UpdateTableViewDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTableViewDoubleCell.swift; sourceTree = "<group>"; };
 		A65232E51AF8261900A86FAC /* ViewSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSorting.swift; sourceTree = "<group>"; };
 		A65D8570233BCAAF00E5BC74 /* ItemClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemClassification.swift; sourceTree = "<group>"; };
-		A662C1C21AFDFD520067792F /* inventory.corrupt.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inventory.corrupt.csv; sourceTree = "<group>"; };
 		A662C1CA1AFEAB010067792F /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A662C1CE1AFEAB020067792F /* DealerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealerItem.swift; sourceTree = "<group>"; };
 		A662C1E11B049D600067792F /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 				A6A7400D22F8FB96002BF5D9 /* TMDiskCache.m */,
 				A6A7400F22F8FB97002BF5D9 /* TMMemoryCache.h */,
 				A6A7401122F8FB97002BF5D9 /* TMMemoryCache.m */,
-				A662C1C21AFDFD520067792F /* inventory.corrupt.csv */,
 				A6E198771AD7130A0090FDB1 /* StampCollection-Bridging-Header.h */,
 				A662C1E11B049D600067792F /* SSZipArchive.h */,
 				A662C1E21B049D600067792F /* SSZipArchive.m */,
@@ -644,7 +641,6 @@
 				A60DBCB81AE38C3400D4959D /* getItems.js in Resources */,
 				A632CBAC1AEEDBDD00565686 /* getJSItems.js in Resources */,
 				A6B34D011C671407001296F3 /* Stamp Diagram Y.txt in Resources */,
-				A662C1C31AFDFD520067792F /* inventory.corrupt.csv in Resources */,
 				A60DBC721ADBC13600D4959D /* inventory.csv in Resources */,
 				A66348131B21384B00A4D225 /* noimage.png in Resources */,
 				A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */,

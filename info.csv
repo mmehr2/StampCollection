@@ -8399,6 +8399,10 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110s1614,"2025 Herzliya Hebrew Gymnasium",Catalog,6110s1614,0,"Sets, SS, FDC",,,4.00,0.00,5.00,0.00,0,0,0,0,,,,,2
 6110s1615,"2025 Jewish Professions",Catalog,6110s1615,0,"Sets, SS, FDC",,,13.00,0.00,14.00,0.00,0,0,0,0,,,,,2
 6110s1616,"2025 Memorial for Fallen and Murdered Oct 7 2023",Catalog,6110s1616,0,"Sets, SS, FDC",,,8.75,0.00,9.90,0.00,0,0,0,0,,,,,2
+6110s1617,"2025 Rabbi Meir Mazuz",Catalog,6110s1617,0,"Sets, SS, FDC",,,7.00,0.00,9.00,0.00,0,0,0,0,,,,,2
+6110s1618,"2025 Philately",Catalog,6110s1618,0,"Sets, SS, FDC",,,6.50,0.00,8.90,0.00,0,0,0,0,,,,,2
+6110s1619,"2025 100 Years of the Hebrew University",Catalog,6110s1619,0,"Sets, SS, FDC",,,4.90,0.00,6.90,0.00,0,0,0,0,,,,,2
+6110s1620,"2025 New Fruit Varieties developed in Israel",Catalog,6110s1620,0,"Sets, SS, FDC",,,9.50,0.00,12.90,0.00,0,0,0,0,,,,,2
 6110e1037L,"12.08.18 Medical Herbs and Spices 'DOAR 24' Booklet (11th print, 11 menorahs) (12v)",Catalog,6110e1037L,0,Booklets,,,20.00,27.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1037M,"18.06.19 Medical Herbs and Spices 'DOAR 24' Booklet (12th print, 12 menorahs) (12v)",Catalog,6110e1037M,0,Booklets,,,20.00,27.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1144F,"16.04.19 Butterflies Booklet (7th print, 7 menorahs) (20v)",Catalog,6110e1144F,0,Booklets,,,20.00,30.00,0.00,0.00,0,0,0,0,,,,,3
@@ -8412,6 +8416,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110e1553,"11.07.23 Love 'DOAR 72' Booklet (1st print, 1 menorah) (18v)",Catalog,6110e1553,0,Booklets,,,30.00,38.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1554,"28.03.23 State of Israel - 75 Years Booklet (12v)",Catalog,6110e1554,0,Booklets,,,18.00,25.00,0.00,0.00,0,0,0,0,,,,,3
 6110e1595,"24.12.24 Ramat Gan Safari - Rhino Booklet (1st print, 1 menorah) (12v)",Catalog,6110e1595,0,Booklets,,,19.00,22.00,0.00,0.00,0,0,0,0,,,,,3
+6110e1622,"16.12.25 New Fruit Varieties developed in Israel (Definitive) Booklet (1st print, 1 menorah) (20v)",Catalog,6110e1622,0,Booklets,,,34.50,42.50,0.00,0.00,0,0,0,0,,,,,3
 6110j1038A,"2008 Israel France 60 Years of Friendship  - Joint Issue with France, Full 2 Sheets of 40 Stamps",Catalog,6110j1038A,0,"Joint Issues",,,80.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1038xJFDC,"2008 Israel France 60 Years of Friendship  - Joint Issue with France, Joint cover (Israeli design)",Catalog,6110j1038xJFDC,0,"Joint Issues",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1054xJFDC,"2009 Polish Year in Israel  - Joint Issue with Poland, Joint cover (Israeli design)",Catalog,6110j1054xJFDC,0,"Joint Issues",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,13
@@ -8569,7 +8574,9 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110j1576,"2024 Colorful Dances  - Joint Issue with Romania",Catalog,6110j1576,0,"Joint Issues",,,3.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1576A,"2024 Colorful Dances  - Joint Issue with Romania, Special Sheet",Catalog,6110j1576A,0,"Joint Issues",,,160.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1576B,"2024 Colorful Dances  - Joint Issue with Romania, Souvenir Sheet",Catalog,6110j1576B,0,"Joint Issues",,,25.00,0.00,0.00,0.00,0,0,0,0,,,,,13
+6110j1576xFFDC,"2024 Colorful Dances  - Joint Issue with Romania, Mixed cover (foreign stamp, Israeli design)",Catalog,6110j1576xFFDC,0,"Joint Issues",,,8.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1576xFJFDC,"2024 Colorful Dances  - Joint Issue with Romania, Joint cover (foreign design)",Catalog,6110j1576xFJFDC,0,"Joint Issues",,,23.00,0.00,0.00,0.00,0,0,0,0,,,,,13
+6110j1576xJFDC,"2024 Colorful Dances  - Joint Issue with Romania, Joint cover (Israeli design)",Catalog,6110j1576xJFDC,0,"Joint Issues",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1602,"2025 Colorful Festivals  - Joint Issue with India",Catalog,6110j1602,0,"Joint Issues",,,1.00,9.00,0.00,0.00,0,0,0,0,,,,,13
 6110j1602A,"2025 Colorful Festivals  - Joint Issue with India, Souvenir Sheet",Catalog,6110j1602A,0,"Joint Issues",,,10.00,15.00,0.00,0.00,0,0,0,0,,,,,13
 6110j595A,"1993 Ghettos Uprisings  - Joint Issue with Poland, Full Sheet of 15 Stamps",Catalog,6110j595A,0,"Joint Issues",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,13
@@ -8667,6 +8674,8 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110e1191ZD,"08.09.20 Gerbera 1.00 Self Adhesive Sheet (11th print, 11 menorahs) (20v)",Catalog,6110e1191ZD,0,"Special Sheets-Sheetlets-Combination",,,9.00,9.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1191ZE,"28.03.23 Gerbera 0.30 Self Adhesive Sheet (5th print, 5 menorahs) (20v)",Catalog,6110e1191ZE,0,"Special Sheets-Sheetlets-Combination",,,7.00,13.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1191ZF,"28.03.23 Gerbera 1.00 Self Adhesive Sheet (12th print, 12 menorahs) (20v)",Catalog,6110e1191ZF,0,"Special Sheets-Sheetlets-Combination",,,12.00,19.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1191ZG,"16.12.25 Gerbera 1.00 Self Adhesive Sheet (13th print, 13 menorahs) (20v)",Catalog,6110e1191ZG,0,"Special Sheets-Sheetlets-Combination",,,12.50,19.90,0.00,0.00,0,0,0,0,,,,,24
+6110e1191ZH,"16.12.25 Gerbera 0.50 Self Adhesive Sheet (7th print, 7 menorahs) (20v)",Catalog,6110e1191ZH,0,"Special Sheets-Sheetlets-Combination",,,7.50,16.90,0.00,0.00,0,0,0,0,,,,,24
 6110e1229C,"08.09.20 Gerbera 0.10 Self Adhesive Sheet (3rd print, 3 menorahs) (20v)",Catalog,6110e1229C,0,"Special Sheets-Sheetlets-Combination",,,3.00,3.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1398,"28.08.18 Pioneering Women - Recha Freier and Ada Sereni Full 2 Small Sheets of 10 stamps",Catalog,6110e1398,0,"Special Sheets-Sheetlets-Combination",,,20.00,30.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1402,"05.11.18 Independence Years - Poland Joint Issue Full Small Sheet of 10 stamps",Catalog,6110e1402,0,"Special Sheets-Sheetlets-Combination",,,28.00,35.00,0.00,0.00,0,0,0,0,,,,,24
@@ -8731,6 +8740,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110e1605,"22.04.25 Holocaust of Hungarian Jews Full Small Sheet of 10 stamps",Catalog,6110e1605,0,"Special Sheets-Sheetlets-Combination",,,19.00,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1610,"13.05.25 Synagogues in Jewish Quarter Jerusalem - The Hurva Full Small Sheet of 9 stamps",Catalog,6110e1610,0,"Special Sheets-Sheetlets-Combination",,,58.00,65.00,0.00,0.00,0,0,0,0,,,,,24
 6110e1612,"13.05.25 Wall Art in Jerusalem Full 3 Small Sheets of 8 stamps",Catalog,6110e1612,0,"Special Sheets-Sheetlets-Combination",,,80.00,95.00,0.00,0.00,0,0,0,0,,,,,24
+6110e1621,"16.12.25 New Fruit Varieties developed in Israel Full Small Decorated SeTenant TeteBeche Sheet of 10 stamps",Catalog,6110e1621,0,"Special Sheets-Sheetlets-Combination",,,16.90,23.90,0.00,0.00,0,0,0,0,,,,,24
 6110eAIR,"09.02.21 Israeli Air Force Aircraft (cutouts of printers sheet) - 'My Own Stamp' Full 4 Sheets",Catalog,6110eAIR,0,"Special Sheets-Sheetlets-Combination",,,125.00,175.00,0.00,0.00,0,0,0,0,,,,,24
 6110eAPOL,"21.07.19 Apollo 11 Moon Landing 50 years - 'My Own Stamp' Full Sheet",Catalog,6110eAPOL,0,"Special Sheets-Sheetlets-Combination",,,17.50,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110eBAH,"02.01.22 National Day of the Kingdom of Bahrain - 'My Own Stamp' Full Sheet",Catalog,6110eBAH,0,"Special Sheets-Sheetlets-Combination",,,30.00,38.00,0.00,0.00,0,0,0,0,,,,,24
@@ -8739,6 +8749,7 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110eGDE,"02.09.25 Gdera 140 Years - 'My Own Stamp' Full Sheet",Catalog,6110eGDE,0,"Special Sheets-Sheetlets-Combination",,,20.00,27.00,0.00,0.00,0,0,0,0,,,,,24
 6110eHAN7,"01.11.18 Hanukkah - 'My Own Stamp' Full Sheet",Catalog,6110eHAN7,0,"Special Sheets-Sheetlets-Combination",,,22.00,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110eHAN8,"26.11.19 Hanukkah - 'My Own Stamp' Full Sheet",Catalog,6110eHAN8,0,"Special Sheets-Sheetlets-Combination",,,15.00,20.00,0.00,0.00,0,0,0,0,,,,,24
+6110eHAN9,"16.12.25 Hanukkah - 'My Own Stamp' Full Sheet",Catalog,6110eHAN9,0,"Special Sheets-Sheetlets-Combination",,,20.00,26.00,0.00,0.00,0,0,0,0,,,,,24
 6110eHOS,"13.02.24 Youth Hostels - 'My Own Stamp' Full Sheet",Catalog,6110eHOS,0,"Special Sheets-Sheetlets-Combination",,,20.00,26.00,0.00,0.00,0,0,0,0,,,,,24
 6110eIBN,"17.08.18 Israeli Bank Notes 70 years - 'My Own Stamp' Full Sheet",Catalog,6110eIBN,0,"Special Sheets-Sheetlets-Combination",,,20.00,25.00,0.00,0.00,0,0,0,0,,,,,24
 6110eMAR,"04.11.19 Marine Life (cutouts of printer's sheet) - 'My Own Stamp' Full 4 Sheets",Catalog,6110eMAR,0,"Special Sheets-Sheetlets-Combination",,,85.00,100.00,0.00,0.00,0,0,0,0,,,,,24
@@ -9094,6 +9105,21 @@ fe1050,"2018 IDF Innovation",Unavailable,feuillet2,0,"(X)Information Folders",,,
 6110k2511,"02.09.25 'Inbar 91' Amygdalus ramonensis, full set of 6 values - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2511,0,"Vending Machine Labels",,,23.00,0.00,0.00,0.00,0,0,0,0,,,,,26
 6110k2511bl,"02.09.25 'Inbar 91' Amygdalus ramonensis, blanco label",Catalog,6110k2511bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
 6110k2512,"02.09.25 'Inbar 91' Amygdalus ramonensis, FDC inland 4.00 value",Catalog,6110k2512,0,"Vending Machine Labels",,,2.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2513,"24.11.25 'Inbar 92' Christmas 2025, full set of 6 values - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2513,0,"Vending Machine Labels",,,25.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2513bl,"24.11.25 'Inbar 92' Christmas 2025, blanco label",Catalog,6110k2513bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2513_m101,"24.11.25 'Inbar 92' Christmas 2025, full set of 6 values, Jerusalem machine (101) - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2513_m101,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2513_m987,"24.11.25 'Inbar 92' Christmas 2025, full set of 6 values, Nazareth machine (987) - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2513_m987,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2514,"24.11.25 'Inbar 92' Christmas 2025, FDC inland 4.00 value",Catalog,6110k2514,0,"Vending Machine Labels",,,6.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2515,"16.12.25 'Inbar 93' Narcissus tazetta, full set of 6 values - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2515,0,"Vending Machine Labels",,,24.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2515bl,"16.12.25 'Inbar 93' Narcissus tazetta, blanco label",Catalog,6110k2515bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2515_m714,"16.12.25 'Inbar 93' Narcissus tazetta, full set of 6 values, Haifa machine (714) - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2515_m714,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2516,"16.12.25 'Inbar 93' Narcissus tazetta, FDC inland 4.00 value",Catalog,6110k2516,0,"Vending Machine Labels",,,6.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2517,"16.12.25 'Inbar 94' Colchicum ritchii, full set of 6 values - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2517,0,"Vending Machine Labels",,,24.50,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2517bl,"16.12.25 'Inbar 94' Colchicum ritchii, blanco label",Catalog,6110k2517bl,0,"Vending Machine Labels",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2517_m900,"16.12.25 'Inbar 94' Colchicum ritchii, full set of 6 values, Tiberias machine (900) - 4.00/4.60/9.00/9.10/13.20/18.10",Catalog,6110k2517_m900,0,"Vending Machine Labels",,,45.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2518,"16.12.25 'Inbar 94' Colchicum ritchii, FDC inland 4.00 value",Catalog,6110k2518,0,"Vending Machine Labels",,,5.00,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2519,"16.12.25 'Maor 94' 38th Annual Philately Conference Tete-Beche Sheet tariff set of 10 values - 4.00",Catalog,6110k2519,0,"Vending Machine Labels",,,32.90,0.00,0.00,0.00,0,0,0,0,,,,,26
+6110k2520,"16.12.25 'Maor 94' 38th Annual Philately Conference, set of 5 FDC inland 4.00 value",Catalog,6110k2520,0,"Vending Machine Labels",,,44.90,0.00,0.00,0.00,0,0,0,0,,,,,26
 fe1051,"2018 Litwinski House",Catalog,fe1051,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1052,"2018 Pioneering Women - Recha Freier and Ada Sereni",Catalog,fe1052,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1053,"2018 Archeozoology in Eretz Israel",Catalog,fe1053,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
@@ -9240,6 +9266,10 @@ fe1193,"2025 Festivals - Three Pilgrimage Festivals",Catalog,fe1193,0,"(X)Inform
 fe1194,"2025 Herzliya Hebrew Gymnasium",Catalog,fe1194,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1195,"2025 Jewish Professions",Catalog,fe1195,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 fe1196,"2025 Memorial for Fallen and Murdered Oct 7 2023",Catalog,fe1196,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1197,"2025 Rabbi Meir Mazuz",Catalog,fe1197,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1198,"2025 Philately",Catalog,fe1198,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1199,"2025 100 Years of the Hebrew University",Catalog,fe1199,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
+fe1200,"2025 New Fruit Varieties developed in Israel",Catalog,fe1200,0,"(X)Information Folders",,,0.35,0.00,0.00,0.00,0,0,0,0,,,,,29
 6110t1396,"2018 Litwinski House - Estonia Joint Issue- Full sheet [Pl.No.1098 (1986+), Format=(3x5)] Design:Renat Abudraham Dadon",Catalog,6110t1396,0,"(X)Full Sheets",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1399_01,"2018 Archeozoology in Eretz Israel- Full sheet (#1/2) [Pl.No.1096 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110t1399_01,0,"(X)Full Sheets",,,10.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1399_02,"2018 Archeozoology in Eretz Israel- Full sheet (#2/2) [Pl.No.1097 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110t1399_02,0,"(X)Full Sheets",,,25.00,0.00,0.00,0.00,0,0,0,0,,,,,31
@@ -9364,3 +9394,8 @@ fe1196,"2025 Memorial for Fallen and Murdered Oct 7 2023",Catalog,fe1196,0,"(X)I
 6110t1615_02,"2025 Jewish Professions- Full sheet (#2/3) [Pl.No.1305 (1986+), Format=(3x5)] Design:Miri Nistor, Tuvia Kurtz",Catalog,6110t1615_02,0,"(X)Full Sheets",,,50.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1615_03,"2025 Jewish Professions- Full sheet (#3/3) [Pl.No.1306 (1986+), Format=(3x5)] Design:Miri Nistor, Tuvia Kurtz",Catalog,6110t1615_03,0,"(X)Full Sheets",,,75.00,0.00,0.00,0.00,0,0,0,0,,,,,31
 6110t1616,"2025 Memorial for Fallen and Murdered Oct 7 2023- Full sheet [Pl.No.1307 (1986+), Format=(3x5)] Design:Unknown",Catalog,6110t1616,0,"(X)Full Sheets",,,119.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1617,"2025 Rabbi Meir Mazuz- Full sheet [Pl.No.1311 (1986+), Format=(3x5)] Design:Ronen Goldberg",Catalog,6110t1617,0,"(X)Full Sheets",,,78.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1618_01,"2025 Philately- Full sheet (#1/3) [Pl.No.1308 (1986+), Format=(3x5)] Design:Miri Nistor, Tuvia Kurtz",Catalog,6110t1618_01,0,"(X)Full Sheets",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1618_02,"2025 Philately- Full sheet (#2/3) [Pl.No.1309 (1986+), Format=(3x5)] Design:Miri Nistor, Tuvia Kurtz",Catalog,6110t1618_02,0,"(X)Full Sheets",,,20.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1618_03,"2025 Philately- Full sheet (#3/3) [Pl.No.1310 (1986+), Format=(3x5)] Design:Miri Nistor, Tuvia Kurtz",Catalog,6110t1618_03,0,"(X)Full Sheets",,,36.00,0.00,0.00,0.00,0,0,0,0,,,,,31
+6110t1619,"2025 100 Years of the Hebrew University- Full sheet [Pl.No.1312 (1986+), Format=(3x5)] Design:Mench",Catalog,6110t1619,0,"(X)Full Sheets",,,60.00,0.00,0.00,0.00,0,0,0,0,,,,,31
