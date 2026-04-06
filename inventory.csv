@@ -10397,7 +10397,7 @@ h,6110t1629,price1,SS10,SHEETS14,SER1986,1199,,,,31
 h,6110t1627,price1,SS10,SHEETS14,SER1986,1200,,,,31
 h,6110s1623,price3,SS6,FDC24,,1514,,"Partial set (1v): yel, blue (#1/2)",,2
 h,fe1201,price1,SS6,FDC24,,1514,6110s1623,,,29
-h,6110s1623,price3,SS6,FDC24,,1515,,Partial set (1v): red, grn (#2/2),,2
+h,6110s1623,price3,SS6,FDC24,,1515,,"Partial set (1v): red, grn (#2/2)",,2
 h,fe1201,price1,SS6,FDC24,,1515,6110s1623,,,29
 h,6110s1625,price3,SS6,FDC24,,1516,,,,2
 h,fe1202,price1,SS6,FDC24,,1516,6110s1625,,,29
