@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A60CC6E42F8C19F1008BA874 /* info_fix.txt in Resources */ = {isa = PBXBuildFile; fileRef = A60CC6E32F8C19F1008BA874 /* info_fix.txt */; };
 		A60DBC711ADBC13600D4959D /* info.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC6F1ADBC13600D4959D /* info.csv */; };
 		A60DBC721ADBC13600D4959D /* inventory.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC701ADBC13600D4959D /* inventory.csv */; };
 		A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */ = {isa = PBXBuildFile; fileRef = A60DBC731ADC36D600D4959D /* baitcfg.csv */; };
@@ -131,6 +132,7 @@
 /* Begin PBXFileReference section */
 		21A9F902AA40F18FF8877EE2 /* Pods-StampCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StampCollection.debug.xcconfig"; path = "Target Support Files/Pods-StampCollection/Pods-StampCollection.debug.xcconfig"; sourceTree = "<group>"; };
 		97BB68126C84DA8846D4011B /* Pods-StampCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StampCollection.release.xcconfig"; path = "Target Support Files/Pods-StampCollection/Pods-StampCollection.release.xcconfig"; sourceTree = "<group>"; };
+		A60CC6E32F8C19F1008BA874 /* info_fix.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_fix.txt; sourceTree = "<group>"; };
 		A60DBC6F1ADBC13600D4959D /* info.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = info.csv; path = ../info.csv; sourceTree = "<group>"; };
 		A60DBC701ADBC13600D4959D /* inventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = inventory.csv; path = ../inventory.csv; sourceTree = "<group>"; };
 		A60DBC731ADC36D600D4959D /* baitcfg.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = baitcfg.csv; path = ../baitcfg.csv; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 		A6E198451AD6EEEC0090FDB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A60CC6E32F8C19F1008BA874 /* info_fix.txt */,
 				A68104071F101F310000272B /* getItemDetails.js */,
 				A6D6A97623300B6400D13963 /* BTCATS.CSV */,
 				A6D6A97723300B6500D13963 /* BTINFO.CSV */,
@@ -646,6 +649,7 @@
 				A60DBC741ADC36D600D4959D /* baitcfg.csv in Resources */,
 				A6E198501AD6EEEC0090FDB1 /* Main.storyboard in Resources */,
 				A6D6A97923300B6500D13963 /* BTINFO.CSV in Resources */,
+				A60CC6E42F8C19F1008BA874 /* info_fix.txt in Resources */,
 				A6B34D001C671407001296F3 /* Stamp Diagram X.txt in Resources */,
 				A60DBCB01AE19C3B00D4959D /* getCategories.js in Resources */,
 				A6E198551AD6EEEC0090FDB1 /* LaunchScreen.xib in Resources */,
