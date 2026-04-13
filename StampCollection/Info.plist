@@ -84,7 +84,7 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>192.168.1.165.nip.io</key>
+			<key>192.168.1.80.nip.io</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
