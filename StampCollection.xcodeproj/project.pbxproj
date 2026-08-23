@@ -133,6 +133,64 @@
 		21A9F902AA40F18FF8877EE2 /* Pods-StampCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StampCollection.debug.xcconfig"; path = "Target Support Files/Pods-StampCollection/Pods-StampCollection.debug.xcconfig"; sourceTree = "<group>"; };
 		97BB68126C84DA8846D4011B /* Pods-StampCollection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StampCollection.release.xcconfig"; path = "Target Support Files/Pods-StampCollection/Pods-StampCollection.release.xcconfig"; sourceTree = "<group>"; };
 		A60CC6E32F8C19F1008BA874 /* info_fix.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_fix.txt; sourceTree = "<group>"; };
+		A60CC6E72F920C79008BA874 /* Library.WebServer.Documents alias */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Library.WebServer.Documents alias"; sourceTree = "<group>"; };
+		A60CC6E82F920C79008BA874 /* old.config.inc.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = old.config.inc.php; sourceTree = "<group>"; };
+		A60CC6E92F920C79008BA874 /* Project Notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Project Notes.txt"; sourceTree = "<group>"; };
+		A60CC6EE2F920D06008BA874 /* org.eclipse.php.core.prefs */ = {isa = PBXFileReference; lastKnownFileType = text; path = org.eclipse.php.core.prefs; sourceTree = "<group>"; };
+		A60CC6F02F920D06008BA874 /* mikepc.httpd.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = mikepc.httpd.conf; sourceTree = "<group>"; };
+		A60CC6F12F920D06008BA874 /* mikepc.httpd-vhosts.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mikepc.httpd-vhosts.conf"; sourceTree = "<group>"; };
+		A60CC6F22F920D06008BA874 /* readme.system.old.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.system.old.txt; sourceTree = "<group>"; };
+		A60CC6F32F920D06008BA874 /* readme.webdesign.old.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.webdesign.old.txt; sourceTree = "<group>"; };
+		A60CC6F62F920D06008BA874 /* db_sis.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = db_sis.sql; sourceTree = "<group>"; };
+		A60CC6F72F920D06008BA874 /* dbsetup.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = dbsetup.sql; sourceTree = "<group>"; };
+		A60CC6F82F920D06008BA874 /* newinfo1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = newinfo1.txt; sourceTree = "<group>"; };
+		A60CC6FA2F920D06008BA874 /* info_update_data_01.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_update_data_01.csv; sourceTree = "<group>"; };
+		A60CC6FB2F920D06008BA874 /* info_update_data_01.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_update_data_01.txt; sourceTree = "<group>"; };
+		A60CC6FC2F920D06008BA874 /* info_update_data_02.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_update_data_02.csv; sourceTree = "<group>"; };
+		A60CC6FD2F920D06008BA874 /* info_update_data_02.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_update_data_02.txt; sourceTree = "<group>"; };
+		A60CC6FE2F920D06008BA874 /* info_update_data_03sheets.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = info_update_data_03sheets.csv; sourceTree = "<group>"; };
+		A60CC6FF2F920D06008BA874 /* infocat2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat2.txt; sourceTree = "<group>"; };
+		A60CC7002F920D06008BA874 /* infocat3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat3.txt; sourceTree = "<group>"; };
+		A60CC7012F920D06008BA874 /* infocat14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat14.txt; sourceTree = "<group>"; };
+		A60CC7022F920D06008BA874 /* infocat15.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat15.txt; sourceTree = "<group>"; };
+		A60CC7032F920D06008BA874 /* infocat16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat16.txt; sourceTree = "<group>"; };
+		A60CC7042F920D06008BA874 /* infocat17.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat17.txt; sourceTree = "<group>"; };
+		A60CC7052F920D06008BA874 /* infocat21.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat21.txt; sourceTree = "<group>"; };
+		A60CC7062F920D06008BA874 /* infocat23.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat23.txt; sourceTree = "<group>"; };
+		A60CC7072F920D06008BA874 /* infocat24.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat24.txt; sourceTree = "<group>"; };
+		A60CC7082F920D06008BA874 /* infocat25.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat25.txt; sourceTree = "<group>"; };
+		A60CC7092F920D06008BA874 /* infocat26.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat26.txt; sourceTree = "<group>"; };
+		A60CC70A2F920D06008BA874 /* infocat27.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = infocat27.txt; sourceTree = "<group>"; };
+		A60CC70B2F920D06008BA874 /* new.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = new.txt; sourceTree = "<group>"; };
+		A60CC70C2F920D06008BA874 /* new0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = new0.txt; sourceTree = "<group>"; };
+		A60CC70D2F920D06008BA874 /* newjs.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = newjs.txt; sourceTree = "<group>"; };
+		A60CC70E2F920D06008BA874 /* scrape.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = scrape.sql; sourceTree = "<group>"; };
+		A60CC7102F920D06008BA874 /* .buildpath */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = .buildpath; sourceTree = "<group>"; };
+		A60CC7112F920D06008BA874 /* .project */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = .project; sourceTree = "<group>"; };
+		A60CC7122F920D06008BA874 /* catrefs.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = catrefs.php; sourceTree = "<group>"; };
+		A60CC7132F920D06008BA874 /* cors.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = cors.php; sourceTree = "<group>"; };
+		A60CC7142F920D06008BA874 /* dbconnect.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = dbconnect.php; sourceTree = "<group>"; };
+		A60CC7152F920D06008BA874 /* dbconnect3.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = dbconnect3.php; sourceTree = "<group>"; };
+		A60CC7162F920D06008BA874 /* dbconnectjs.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = dbconnectjs.php; sourceTree = "<group>"; };
+		A60CC7172F920D06008BA874 /* dbg_log.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = dbg_log.php; sourceTree = "<group>"; };
+		A60CC7182F920D06008BA874 /* dbsetup.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = dbsetup.sql; sourceTree = "<group>"; };
+		A60CC7192F920D06008BA874 /* dbvars.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = dbvars.php; sourceTree = "<group>"; };
+		A60CC71A2F920D06008BA874 /* exectype.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = exectype.php; sourceTree = "<group>"; };
+		A60CC71B2F920D06008BA874 /* leaflets.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = leaflets.sql; sourceTree = "<group>"; };
+		A60CC71C2F920D06008BA874 /* picref_input.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = picref_input.php; sourceTree = "<group>"; };
+		A60CC71D2F920D06008BA874 /* readme.system.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.system.txt; sourceTree = "<group>"; };
+		A60CC71E2F920D06008BA874 /* readme.webdesign.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.webdesign.txt; sourceTree = "<group>"; };
+		A60CC71F2F920D06008BA874 /* utils.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = utils.php; sourceTree = "<group>"; };
+		A60CC7202F920D06008BA874 /* utilsjs.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = utilsjs.php; sourceTree = "<group>"; };
+		A60CC7512F920F5F008BA874 /* fix_hyphen_picrefs.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = fix_hyphen_picrefs.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/store/fix_hyphen_picrefs.php"; sourceTree = "<absolute>"; };
+		A60CC7522F920F5F008BA874 /* fixpicref.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = fixpicref.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/store/fixpicref.php"; sourceTree = "<absolute>"; };
+		A60CC7532F920F5F008BA874 /* pic.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = pic.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/store/pic.php"; sourceTree = "<absolute>"; };
+		A60CC7542F920F5F008BA874 /* products.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = products.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/store/products.php"; sourceTree = "<absolute>"; };
+		A60CC7562F920F5F008BA874 /* viewcat.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = viewcat.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/store/viewcat.php"; sourceTree = "<absolute>"; };
+		A60CC75D2F920FA7008BA874 /* incpath.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = incpath.php; path = "/Library/WebServer/Documents/BaitTov/bait-tov.com/incpath.php"; sourceTree = "<absolute>"; };
+		A60CC7602F9215A4008BA874 /* httpd.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = httpd.conf; path = /opt/homebrew/etc/httpd/httpd.conf; sourceTree = "<absolute>"; };
+		A60CC7612F9215A4008BA874 /* httpd-vhosts.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "httpd-vhosts.conf"; path = "/opt/homebrew/etc/httpd/extra/httpd-vhosts.conf"; sourceTree = "<absolute>"; };
+		A60CC7642F945EB2008BA874 /* php.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = php.ini; path = /opt/homebrew/etc/php/8.5/php.ini; sourceTree = "<absolute>"; };
 		A60DBC6F1ADBC13600D4959D /* info.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = info.csv; path = ../info.csv; sourceTree = "<group>"; };
 		A60DBC701ADBC13600D4959D /* inventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = inventory.csv; path = ../inventory.csv; sourceTree = "<group>"; };
 		A60DBC731ADC36D600D4959D /* baitcfg.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = baitcfg.csv; path = ../baitcfg.csv; sourceTree = "<group>"; };
@@ -292,6 +350,146 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A60CC6E62F920BE2008BA874 /* WebServer */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6EA2F920C79008BA874 /* Websites */,
+			);
+			path = WebServer;
+			sourceTree = "<group>";
+		};
+		A60CC6EA2F920C79008BA874 /* Websites */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6E72F920C79008BA874 /* Library.WebServer.Documents alias */,
+				A60CC7212F920D06008BA874 /* scripts */,
+				A60CC6E82F920C79008BA874 /* old.config.inc.php */,
+				A60CC6E92F920C79008BA874 /* Project Notes.txt */,
+			);
+			name = Websites;
+			path = ../Websites;
+			sourceTree = SOURCE_ROOT;
+		};
+		A60CC6EF2F920D06008BA874 /* .settings */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6EE2F920D06008BA874 /* org.eclipse.php.core.prefs */,
+			);
+			path = .settings;
+			sourceTree = "<group>";
+		};
+		A60CC6F42F920D06008BA874 /* conf-pc */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6F02F920D06008BA874 /* mikepc.httpd.conf */,
+				A60CC6F12F920D06008BA874 /* mikepc.httpd-vhosts.conf */,
+				A60CC6F22F920D06008BA874 /* readme.system.old.txt */,
+				A60CC6F32F920D06008BA874 /* readme.webdesign.old.txt */,
+			);
+			path = "conf-pc";
+			sourceTree = "<group>";
+		};
+		A60CC6F52F920D06008BA874 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = misc;
+			path = ../misc;
+			sourceTree = "<group>";
+		};
+		A60CC6F92F920D06008BA874 /* sitedata */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6F62F920D06008BA874 /* db_sis.sql */,
+				A60CC6F72F920D06008BA874 /* dbsetup.sql */,
+				A60CC6F82F920D06008BA874 /* newinfo1.txt */,
+			);
+			path = sitedata;
+			sourceTree = "<group>";
+		};
+		A60CC70F2F920D06008BA874 /* update_data */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC6F52F920D06008BA874 /* misc */,
+				A60CC6FA2F920D06008BA874 /* info_update_data_01.csv */,
+				A60CC6FB2F920D06008BA874 /* info_update_data_01.txt */,
+				A60CC6FC2F920D06008BA874 /* info_update_data_02.csv */,
+				A60CC6FD2F920D06008BA874 /* info_update_data_02.txt */,
+				A60CC6FE2F920D06008BA874 /* info_update_data_03sheets.csv */,
+				A60CC6FF2F920D06008BA874 /* infocat2.txt */,
+				A60CC7002F920D06008BA874 /* infocat3.txt */,
+				A60CC7012F920D06008BA874 /* infocat14.txt */,
+				A60CC7022F920D06008BA874 /* infocat15.txt */,
+				A60CC7032F920D06008BA874 /* infocat16.txt */,
+				A60CC7042F920D06008BA874 /* infocat17.txt */,
+				A60CC7052F920D06008BA874 /* infocat21.txt */,
+				A60CC7062F920D06008BA874 /* infocat23.txt */,
+				A60CC7072F920D06008BA874 /* infocat24.txt */,
+				A60CC7082F920D06008BA874 /* infocat25.txt */,
+				A60CC7092F920D06008BA874 /* infocat26.txt */,
+				A60CC70A2F920D06008BA874 /* infocat27.txt */,
+				A60CC70B2F920D06008BA874 /* new.txt */,
+				A60CC70C2F920D06008BA874 /* new0.txt */,
+				A60CC70D2F920D06008BA874 /* newjs.txt */,
+				A60CC70E2F920D06008BA874 /* scrape.sql */,
+			);
+			path = update_data;
+			sourceTree = "<group>";
+		};
+		A60CC7212F920D06008BA874 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC75F2F921428008BA874 /* conf-mac */,
+				A60CC7502F920EDD008BA874 /* store */,
+				A60CC6EF2F920D06008BA874 /* .settings */,
+				A60CC6F42F920D06008BA874 /* conf-pc */,
+				A60CC6F92F920D06008BA874 /* sitedata */,
+				A60CC70F2F920D06008BA874 /* update_data */,
+				A60CC7102F920D06008BA874 /* .buildpath */,
+				A60CC7112F920D06008BA874 /* .project */,
+				A60CC7122F920D06008BA874 /* catrefs.php */,
+				A60CC7132F920D06008BA874 /* cors.php */,
+				A60CC7142F920D06008BA874 /* dbconnect.php */,
+				A60CC7152F920D06008BA874 /* dbconnect3.php */,
+				A60CC7162F920D06008BA874 /* dbconnectjs.php */,
+				A60CC7172F920D06008BA874 /* dbg_log.php */,
+				A60CC7182F920D06008BA874 /* dbsetup.sql */,
+				A60CC7192F920D06008BA874 /* dbvars.php */,
+				A60CC71A2F920D06008BA874 /* exectype.php */,
+				A60CC71B2F920D06008BA874 /* leaflets.sql */,
+				A60CC71C2F920D06008BA874 /* picref_input.php */,
+				A60CC71D2F920D06008BA874 /* readme.system.txt */,
+				A60CC71E2F920D06008BA874 /* readme.webdesign.txt */,
+				A60CC71F2F920D06008BA874 /* utils.php */,
+				A60CC7202F920D06008BA874 /* utilsjs.php */,
+			);
+			name = scripts;
+			path = /Library/WebServer/Documents/scripts;
+			sourceTree = "<absolute>";
+		};
+		A60CC7502F920EDD008BA874 /* store */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC75D2F920FA7008BA874 /* incpath.php */,
+				A60CC7512F920F5F008BA874 /* fix_hyphen_picrefs.php */,
+				A60CC7522F920F5F008BA874 /* fixpicref.php */,
+				A60CC7532F920F5F008BA874 /* pic.php */,
+				A60CC7542F920F5F008BA874 /* products.php */,
+				A60CC7562F920F5F008BA874 /* viewcat.php */,
+			);
+			path = store;
+			sourceTree = "<group>";
+		};
+		A60CC75F2F921428008BA874 /* conf-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A60CC7642F945EB2008BA874 /* php.ini */,
+				A60CC7602F9215A4008BA874 /* httpd.conf */,
+				A60CC7612F9215A4008BA874 /* httpd-vhosts.conf */,
+			);
+			path = "conf-mac";
 			sourceTree = "<group>";
 		};
 		A60DBC751ADC459E00D4959D /* Model */ = {
@@ -461,6 +659,7 @@
 		A6E198391AD6EEEC0090FDB1 = {
 			isa = PBXGroup;
 			children = (
+				A60CC6E62F920BE2008BA874 /* WebServer */,
 				A6E198441AD6EEEC0090FDB1 /* StampCollection */,
 				A6E1985D1AD6EEEC0090FDB1 /* StampCollectionTests */,
 				A6E198431AD6EEEC0090FDB1 /* Products */,

@@ -1,0 +1,98 @@
+###
+### FOR USE ON SITE: https://www.websequencediagrams.com/
+###
+title GetItems Message
+# Michael L. Mehr, SwiftSummit prep 9/30/2015
+# Use with style "vs2010"
+
+participant Client as C
+participant Client delegate as D
+participant BTMessageDelegate as B
+participant WKWebView as W
+participant <web code> as w
+
+C->B: loadItemsFromWeb(N)
+activate B
+note right of C: saves completion closure
+
+B->W: dispatches urlSessionRequest
+activate W
+note left of W: includes script "getItems.js"
+
+W-->>w: HTTP request for url N
+deactivate W
+activate w
+
+B-->C: Async return
+deactivate B
+
+w-->>W: HTTP response for url N
+deactivate w
+activate W
+
+note right of W: script parses the DOM,\n sends data in body of\n "getItems" message
+
+W-->B: getItems message
+deactivate W
+activate B
+
+note right of B: "getItems" message\n handler begins,\n dispatches protocol messages\n to client delegate
+
+B->D: willLoadData(N)
+deactivate B
+activate D
+note left of D: prepare MOC, clear data\n array in category #N
+
+D-->B: 
+deactivate D
+activate B
+
+B->D: updateCategory(N)
+deactivate B
+activate D
+note left of D: save category #N\n extra info
+
+D-->B: 
+deactivate D
+activate B
+
+B->D: receivedData(N,i)
+deactivate B
+activate D
+note right of B: repeated for each\ndata item
+note left of D: save data item i\n for category #N
+
+D-->B: 
+deactivate D
+activate B
+
+B->D: didLoadData(N)
+deactivate B
+activate D
+note left of D: save CoreData MOC\n for category #N
+
+D->C: dispatch completion()
+activate C
+deactivate D
+
+C-->D: callback return
+activate D
+
+note left of C: runs client\n completion code\n on main thread
+
+D-->B: 
+deactivate D
+activate B
+
+note right of B: "getItems" message\n handler ends
+
+B-->W: 
+deactivate B
+activate W
+note right of W: final cleanup\n(internal)
+
+W->W:
+deactivate W
+
+C->C:
+deactivate C

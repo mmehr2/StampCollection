@@ -49,7 +49,7 @@ let BTURLPlaceHolder = "http://www.google.com" // can be used to specify a URL w
 fileprivate var useLocalSite = true
 var BTBaseURL : String {
     let BTBaseURL0 = "http://www.bait-tov.com/store/" //original site (non-expandable)
-    let BTBaseURL1 = "http://192.168.1.80.nip.io/BaitTov/bait-tov.com/store/" //= "http://isrstamps.azuresults.com/store/" // in-house site (expandable, not accessible from external locations)
+    let BTBaseURL1 = "http://192.168.1.82/store/" //= "http://isrstamps.azuresults.com/store/" // in-house site (expandable, not accessible from external locations)
     return useLocalSite ? BTBaseURL1 : BTBaseURL0
 }
 
@@ -157,48 +157,66 @@ class BTMessageDelegate: NSObject {
         }
         // setup and run a data task to load the URL
         // create a data task
-        let dataTask = BTMessageDelegate.session.dataTask(with: url) { data, response, error in
-            // this closure will run when a response is received by the task
+        var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1", forHTTPHeaderField: "User-Agent")
+        // MANUALLY set the Host header to match your Apache ServerName
+        // Change this string to switch between your vhosts
+        request.setValue("isrstamps.azuresults.com", forHTTPHeaderField: "Host")
+        //request.timeoutInterval = 30 // Overrides the session default for this specific call
+        //let task = BTMessageDelegate.session.dataTask(with: request) { ... }
+        let dataTask = BTMessageDelegate.session.dataTask(with: request) { data, response, error in
             let urlString = self.url.absoluteString
+            
+            // Use defer to ensure the task is removed regardless of which branch executes
+            defer {
+                BTMessageDelegate.activeTasks[urlString] = nil
+                self.handleCancellationState()
+            }
+
+            // 1. Handle Client-Side Errors
             if let error = error {
-                // accumulate error message
                 print("DataTask for \(urlString) got client-side error: \(error.localizedDescription)\n")
-            } else if let data = data,
-                let response = response as? HTTPURLResponse,
-                response.statusCode == 200 {
-                // parse the response HTML that is in the data buffer
-                if let html = String(data: data, encoding: .ascii) {
-                    // DEBUG: save the HTML in a data file
-                    if self.allowDebugOutput {
-                        self.processWebData(html)
-                    }
-                    // send html data to parser object
-                    if let htmlHandler = self.htmlHandler {
-                        htmlHandler.processWebData(html)
-                    }
-                }
-            } else {
-                print("DataTask for \(self.url.absoluteString) received null data or response, or code other than 200.")
+                return
             }
-            // in all cases, remove the saved task from the reference list
-            BTMessageDelegate.activeTasks[urlString] = nil
-            if BTMessageDelegate.cancelling {
-                // during cancellation, we just let the tasks delete themselves
-                // when the active task map is empty, we are done cancelling
-                if BTMessageDelegate.activeTasks.isEmpty {
-                    // okay to finally finish the cancellation process and run the UI completion handler
-                    BTMessageDelegate.cancelling = false
-                   // now it's okay to allow the user to call run() again to "resume" where we left off
-                    print("Cancellation of active BT site loader tasks complete.")
-                }
-            } else {
-                // increment to next thing to do?
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Redirect Location Header: \(httpResponse.allHeaderFields["Location"] ?? "None")")
             }
+
+            // 2. Validate Response and Data
+            guard let data = data,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200 else {
+                let code = (response as? HTTPURLResponse)?.statusCode ?? 0
+                print("DataTask for \(urlString) received null data or response, status code \(code).")
+                return
+            }
+
+            // 3. Handle HTML Processing
+            guard let html = String(data: data, encoding: .ascii) else { return }
+
+            if self.allowDebugOutput {
+                self.processWebData(html)
+            }
+
+            self.htmlHandler?.processWebData(html)
         }
         // save the data task object ref so it won't crash while loading
         BTMessageDelegate.activeTasks[url.absoluteString] = dataTask
         // resume the data task so it will run
         dataTask.resume()
+    }
+
+    // Local helper to clean up the cancellation logic
+    func handleCancellationState() {
+        guard BTMessageDelegate.cancelling else {
+            // increment to next thing to do?
+            return
+        }
+        
+        if BTMessageDelegate.activeTasks.isEmpty {
+            BTMessageDelegate.cancelling = false
+            print("Cancellation of active BT site loader tasks complete.")
+        }
     }
 
     // this is a convenience function for the use of the WebItem VC
