@@ -10,8 +10,8 @@ plan evolves. (For user-facing tracking, mirror items into GitHub issues.)
 |---|---|---|---|
 | `StampCollection` (iOS app) | github.com/mmehr2/StampCollection | Mac-Devin | on `main`, synced |
 | `azuresults-mac-webserver` (`/Library/WebServer/Documents`) | github.com/mmehr2/azuresults-mac-webserver | Mac-Devin | on `main`, synced, private |
-| SIS data-entry app (Laravel 7) | not yet on GitHub | Win-Devin | local to Windows |
-| Windows webserver copy (`C:\MyWebsites`) | not yet on GitHub | Win-Devin | local to Windows |
+| SIS data-entry app (Laravel 7) | github.com/mmehr2/SIS | Win-Devin | on `master`, synced (rename pending) |
+| Windows webserver copy (`C:\MyWebsites`) | github.com/mmehr2/MyWebSites | Win-Devin | on `master`, synced (rename pending) |
 
 Long term: both machines should be aware of all repos. When SIS and the
 Windows webserver come online, add them to this table.
@@ -32,13 +32,15 @@ Windows webserver come online, add them to this table.
 ## Operational notes for Win-Devin
 
 - `StampCollection` default branch renamed `master` → `main` on 2026-11-21.
-  Windows clone recovery (do NOT just `git pull`):
+  Recovery sequence (run per clone; do NOT just `git pull`):
   ```
-  git fetch stamps --prune
+  git fetch <remote> --prune        # <remote> = origin on Windows, stamps on Mac
   git branch -m master main
-  git branch -u stamps/main main
-  git remote set-head stamps -a
+  git branch -u <remote>/main main
+  git remote set-head <remote> -a
   ```
+  Status: Windows clone recovered 2026-11-21. SIS and MyWebSites renames still
+  pending — same sequence applies when done.
 - The Mac webserver repo default branch is `main`.
 - Credential refactor 2026-11-21: all `dbconnect*.php` now read
   `scripts/dbvars.php` — single source for host/user/pass/dbname.
