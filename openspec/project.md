@@ -9,7 +9,8 @@ three-repo system — see `SIS/openspec/project.md` for the full map.
 
 - **Swift / UIKit** (storyboard-era; `StampCollection.xcodeproj` +
   `.xcworkspace`)
-- **CocoaPods** (`Podfile`, `Pods/` — only stub files committed)
+- **Swift Package Manager** — SwiftSoup is the only dependency (CocoaPods
+  fully removed 2026-11-21; `Package.resolved` is committed)
 - **Core Data** — entities include `AlbumCollection`, `AlbumFamily`,
   `AlbumPage`, `AlbumRef`, `AlbumSection`, plus stamp/issue/dealer models
 - `StampCollectionTests/` — unit tests
@@ -36,6 +37,16 @@ Per `C:\MyWebsites\scripts\readme.system.txt` and `dbconnect.php`:
   `isrstamps` on Mac
 
 `WebItemViewController.swift` is the main web-facing component.
+
+## Data model truth (owner-confirmed 2026-11-22)
+
+- **`INFO.csv` is the catalog** — the "classes": ideal versions of items
+  and their prices. Unchangeable reference data.
+- **`INVENTORY.csv` is the owner's collection** — the "instances" of those
+  catalog items actually held.
+- These ship in the app bundle today via the `.sczp` → Xcode path; the
+  long-term direction (see shared repo `high-level-design.md`) is for the
+  app to fetch this data over HTTP like the site data, retiring `.sczp`.
 
 ## Notes
 
