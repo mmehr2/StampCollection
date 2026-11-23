@@ -100,13 +100,13 @@ Windows webserver come online, add them to this table.
 
 ### iOS app — Mac-Devin
 
-- [ ] Fix build: raise `IPHONEOS_DEPLOYMENT_TARGET` to 13.0+ (SwiftSoup
-      minimum); verify a simulator build succeeds.
-- [ ] Stale IP: `BTMessageDelegate.swift` hardcodes `192.168.1.82`; Mac is
+- [x] Fix build: raise `IPHONEOS_DEPLOYMENT_TARGET` to 13.0+ (SwiftSoup
+      minimum); verify a simulator build succeeds. (done in b3be613)
+- [x] Stale IP: `BTMessageDelegate.swift` hardcodes `192.168.1.82`; Mac is
       `.80`. Prefer the name-based vhost (`isrstamps.azuresults.com`) that's
-      already commented in the source — survives IP changes.
-- [ ] Remove dead CocoaPods remnants (`Podfile`, `Podfile.lock`, `Pods/`):
-      SPM is the live mechanism.
+      already commented in the source — survives IP changes. (done in b3be613)
+- [x] Remove dead CocoaPods remnants (`Podfile`, `Podfile.lock`, `Pods/`):
+      SPM is the live mechanism. (done in b3be613)
 
 ### Access layer / webserver — Mac-Devin
 
