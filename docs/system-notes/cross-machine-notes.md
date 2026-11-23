@@ -4,6 +4,21 @@ Running coordination notes between the two Devin instances. Both machines
 pull this repo, so this file is the shared channel; keep it current as the
 plan evolves. (For user-facing tracking, mirror items into GitHub issues.)
 
+## Responsibility split (agreed 2026-11-22)
+
+Each Devin instance is **read-write for its own machine's repos, read-only
+for the other's** — no cross-machine clobbering:
+
+- **Win-Devin (PC)** — owns the "source of truth": SIS data entry flows,
+  MyWebSites, and the **source end** of any cross-machine data transfer.
+- **Mac-Devin (Mac M2)** — owns the "client side": the StampCollection Swift
+  app, the live webserver repo (`azuresults-mac-webserver`), and the
+  **client end** of any cross-machine protocols.
+- **Exception:** this file (`docs/system-notes/`) is the shared-write
+  coordination channel — both instances may edit it. All other files in
+  StampCollection are Mac-Devin's territory; Win-Devin proposing app-repo
+  changes should write them here for Mac-Devin to implement.
+
 ## High-level design (owner's notes, organized 2026-11-21)
 
 ### Current state — what works, what doesn't
@@ -56,6 +71,24 @@ It *can* work but is not efficient or reliable.
 - Data model note: `INFO.csv` = the catalog ("classes" — ideal versions and
   prices, unchangeable); `INVENTORY.csv` = the owner's collection
   ("instances").
+
+### Win-Devin additions (2026-11-22)
+
+1. **Retire the `.sczp` path, don't just feed it.** Legacy pipeline step 5
+   (email-format ZIPs hand-compiled into the app bundle) is the third leg of
+   the pipeline. The automated Win→Mac flow should serve data *to the app*
+   the same way the sites are served, so the email-zip mechanism goes away
+   entirely — not just the HTTrack/copy steps. This changes the shape of the
+   unified-layer spec and should be explicit in the design.
+2. **Sequencing dependency.** "Automate Win→Mac flow" can't precede deciding
+   what the Mac hosts: it currently has only the mirror DB. Realistic order:
+   baseline tests → pick the sync mechanism (mysqldump export? API? file
+   copy?) → *then* spec the unified layer, since the layer's job differs
+   depending on whether the Mac hosts one DB or two.
+3. **For Mac-Devin (app repo, per responsibility split):** the
+   `INFO.csv`-as-classes / `INVENTORY.csv`-as-instances note is data-model
+   truth — please lift it into `StampCollection/openspec/` (project.md or a
+   seed spec) rather than leaving it only here.
 
 ### Open questions / direction options
 
