@@ -4,6 +4,73 @@ Running coordination notes between the two Devin instances. Both machines
 pull this repo, so this file is the shared channel; keep it current as the
 plan evolves. (For user-facing tracking, mirror items into GitHub issues.)
 
+## High-level design (owner's notes, organized 2026-11-21)
+
+### Current state — what works, what doesn't
+
+- The live website has been partially broken since the Apple Silicon
+  transition — "correct enough" to maintain collection data, but not right.
+- **Missing entirely**: serving pictures in a form the Swift app can display,
+  and the complete set of latest data + pics.
+- The **Swift app** has nearly all desired behavior — *if* it could reach
+  data reliably.
+- **SIS (Laravel 7)** works well for the data-update workflows.
+- The **Windows pic-file area** has grown steadily and kept pace with new
+  issues since 2018, in the desired style.
+- The **Windows webserver** proves the key pattern: a common layer over two
+  databases (legacy web-scraped site data + new data-entry data) presenting
+  unified category lists — old data on top, newer below. Porting that to the
+  Mac stalled in config details; AI assistance expected to unblock it.
+
+### The legacy pipeline (current, to be replaced)
+
+1. Data entry on PC → dynamic web pages on PC
+2. HTTrack web-scrape → static pages servable to the device
+3. Manual copy of pages + MySQL data PC → Mac
+4. Mac serves website for the Swift app
+5. Collection data via custom `.sczp` email-format ZIPs → hand-compiled into
+   the app bundle via Xcode → app rebuilds its SQLite store at runtime
+   (slower as data grows; uses INFO.CSV / INVENTORY.CSV et al.)
+
+Every step had problems: evolving components, clumsy manual interfacing.
+It *can* work but is not efficient or reliable.
+
+### Design principles
+
+- **Baseline first.** Partition the system into workable, testable sections
+  on the appropriate machine (Win vs Mac). Evolve the existing tests so they
+  *prove* behavior works — the arbiter of "working" is traceability to the
+  owner's actual flow, not abstract correctness. That proven set is the true
+  baseline.
+- **Live behavior is not untouchable.** Current versions are not assumed
+  proven or sacred.
+- **Every non-trivial change goes through OpenSpec.**
+- After the baseline: **automate the Win-dev → Mac-deploy flow** so the
+  Swift app (simulator or device) reaches fresh data + pictures.
+
+### App-level goals (post-baseline)
+
+- Serve pictures alongside data so the app can summarize, correlate, and
+  surface insights: replacement value ("value" for insurance), counts of
+  items held, etc.
+- Data model note: `INFO.csv` = the catalog ("classes" — ideal versions and
+  prices, unchangeable); `INVENTORY.csv` = the owner's collection
+  ("instances").
+
+### Open questions / direction options
+
+1. **Run everything on the Mac?** Owner's read was that Laravel/PHP felt
+   Mac-unfriendly in the Laravel 7 era. *(Mac-Devin note: that's dated —
+   modern Laravel runs fine on macOS via Homebrew PHP / `artisan serve` /
+   Herd. Platform is not the real constraint; the pipeline is.)*
+2. **Data entry stays on Windows** (workflows and comfort are
+   Windows-shaped) + a much less clumsy automated path for data AND pictures
+   PC → Mac for serving. **Owner is leaning this way.**
+3. **Some other arrangement** streamlining data entry from raw sources
+   (Israel press releases — increasingly rare — eBay auctions, online
+   catalogs). Volume is low (4–5×/year); two Israeli dealers maintain online
+   listings and a friend sources hard-to-find items.
+
 ## Repo ownership map (2026-11-21)
 
 | Repo | Remote | Responsible instance | Status |
